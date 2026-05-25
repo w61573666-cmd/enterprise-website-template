@@ -1,0 +1,17 @@
+{
+  "framework": "static",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "headers": [
+    {
+      "source": "**/*.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "_rebuild": "2026-04-29T06:20:00Z"
+}
