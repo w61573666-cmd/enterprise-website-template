@@ -530,6 +530,264 @@
     </div>
    </section>
 
+   <!-- INLINE CSS FOR NEW SECTIONS -->
+<style>
+.visual-timeline{position:relative;padding:20px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#C4A882 #f0f0f0}
+.visual-timeline::-webkit-scrollbar{height:6px}
+.visual-timeline::-webkit-scrollbar-thumb{background:#C4A882;border-radius:3px}
+.vtl-track{display:flex;gap:24px;min-width:max-content;padding:0 16px 28px}
+.vtl-card{flex:0 0 260px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s}
+.vtl-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.vtl-img{width:100%;height:160px;object-fit:cover;display:block}
+.vtl-body{padding:16px 18px 20px}
+.vtl-year{display:inline-block;background:linear-gradient(135deg,#C4A882,#a8885e);color:#fff;font-size:.78rem;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:8px;letter-spacing:.5px}
+.vtl-title{font-size:.98rem;font-weight:700;color:#1A1A2E;margin-bottom:6px;line-height:1.3}
+.vtl-desc{font-size:.82rem;color:#666;line-height:1.55}
+.vtl-line{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C4A882,#e0d5c3 15%,#e0d5c3 85%,#C4A882);border-radius:3px}
+.equip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.equip-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .3s}
+.equip-card:hover{transform:translateY(-3px)}
+.equip-photo{width:100%;height:180px;object-fit:cover;display:block}
+.equip-info{padding:16px 18px}
+.equip-model{font-size:.92rem;font-weight:700;color:#1A1A2E;margin-bottom:10px}
+.equip-specs{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;color:#666}
+.equip-specs span{display:inline-flex;align-items:center;gap:4px}
+.equip-specs strong{color:#C4A882}
+.network-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.net-card{background:#fff;padding:14px 16px;border-radius:10px;box-shadow:0 1px 8px rgba(0,0,0,.04);display:flex;align-items:flex-start;gap:10px;font-size:.84rem;line-height:1.55;transition:transform .2s,box-shadow .2s;border-left:3px solid transparent}
+.net-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08);border-left-color:#C4A882}
+.net-flag{font-size:1.25rem;flex-shrink:0;margin-top:1px}
+.net-country{font-weight:700;color:#1A1A2E}
+.net-stones{color:#666;font-size:.78rem}
+.client-section{margin-bottom:36px}
+.client-section h4{font-size:1rem;color:#C4A882;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #f0e8d8;display:flex;align-items:center;gap:8px}
+.client-tags{display:flex;flex-wrap:wrap;gap:8px}
+.client-tag{background:#fff;padding:8px 16px;border-radius:24px;font-size:.8rem;color:#1A1A2E;font-weight:500;box-shadow:0 1px 6px rgba(0,0,0,.05);transition:all .2s;border:1px solid #eee}
+.client-tag:hover{border-color:#C4A882;color:#C4A882;box-shadow:0 2px 12px rgba(196,168,130,.15)}
+.client-highlight{color:#C4A882;font-weight:700}
+.cert-detail-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.cert-detail-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s}
+.cert-detail-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.cert-detail-header{display:flex;align-items:center;gap:12px;padding:16px 18px;background:#fafafa;border-left:4px solid #C4A882}
+.cert-detail-header h4{font-size:.95rem;color:#1A1A2E;margin:0 0 2px}
+.cert-detail-header p{font-size:.76rem;color:#999;margin:0}
+.cert-detail-icon{font-size:1.6rem;flex-shrink:0}
+.cert-detail-body{padding:12px 18px 16px}
+.cert-detail-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dotted #eee;font-size:.8rem}
+.cert-detail-row:last-child{border-bottom:none}
+.cd-label{color:#999;flex-shrink:0;margin-right:12px}
+.cd-value{color:#1A1A2E;text-align:right;font-weight:500;line-height:1.4}
+@media(max-width:768px){.vtl-card{flex:0 0 220px}.vtl-img{height:130px}.equip-grid{grid-template-columns:1fr}.cert-detail-grid{grid-template-columns:1fr}.network-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+</style>
+
+   <!-- ═══ Item 7: VISUAL HISTORICAL TIMELINE ═══ -->
+   <section class="section-padding bg-off-white" id="visual-timeline">
+    <div class="container">
+     <h2 class="tech-heading" data-aos="fade-up">發展里程碑</h2>
+     <p class="tech-subheading" data-aos="fade-up" data-aos-delay="50">1999 – 2026 · 二十七年輝煌征程</p>
+     <div class="visual-timeline" data-aos="fade-up" data-aos-delay="100">
+      <div class="vtl-track">
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp" alt="1999" /><div class="vtl-body"><span class="vtl-year">1999</span><div class="vtl-title">公司創立</div><div class="vtl-desc">於香港九龍正式成立，從零起步專注高端天然石材貿易與加工服務，開啟石材產業深耕之路。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="2003" /><div class="vtl-body"><span class="vtl-year">2003</span><div class="vtl-title">引進意大利CNC設備</div><div class="vtl-desc">從意大利引進首台 CNC 數控切割機，開啟精密加工時代，加工精度達到國際先進水平。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.webp" alt="2007" /><div class="vtl-body"><span class="vtl-year">2007</span><div class="vtl-title">首次出口中東市場</div><div class="vtl-desc">成功開拓中東市場，實現首個海外出口訂單，標誌著國際化戰略正式啟動。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.webp" alt="2010" /><div class="vtl-body"><span class="vtl-year">2010</span><div class="vtl-title">獲取 ISO 9001 認證</div><div class="vtl-desc">通過 SGS 審核取得 ISO 9001 品質管理體系認證，建立全面品質管控框架。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.webp" alt="2013" /><div class="vtl-body"><span class="vtl-year">2013</span><div class="vtl-title">杜拜地標酒店項目</div><div class="vtl-desc">承接首個國際五星級酒店地標項目（杜拜），奠定高端工程服務領域的標杆地位。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.webp" alt="2015" /><div class="vtl-body"><span class="vtl-year">2015</span><div class="vtl-title">獲取 ISO 14001 認證</div><div class="vtl-desc">通過 ISO 14001 環境管理體系認證，將綠色環保理念貫穿全生產鏈。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.webp" alt="2018" /><div class="vtl-body"><span class="vtl-year">2018</span><div class="vtl-title">福建 80,000㎡ 加工基地</div><div class="vtl-desc">於福建省建成超大型無塵智能加工基地，總面積達 80,000 平方米，產能大幅躍升。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp" alt="2020" /><div class="vtl-body"><span class="vtl-year">2020</span><div class="vtl-title">500+ 全球合作夥伴</div><div class="vtl-desc">全球客戶數量突破 500 家，服務網絡覆蓋亞太、中東、歐洲及美洲市場。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.webp" alt="2023" /><div class="vtl-body"><span class="vtl-year">2023</span><div class="vtl-title">GREENGUARD & CE 認證</div><div class="vtl-desc">取得 GREENGUARD Gold 及 CE 認證，標誌產品符合歐盟及全球最嚴格的環保與安全標準。</div></div></div>
+       <div class="vtl-card"><img loading="lazy" class="vtl-img" src="images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="2026" /><div class="vtl-body"><span class="vtl-year">2026</span><div class="vtl-title">全球運營網絡建成</div><div class="vtl-desc">完成全球運營網絡佈局，建成香港總部、福建基地、杜拜辦事處、歐洲代表處及東南亞倉儲樞紐。</div></div></div>
+      </div>
+      <div class="vtl-line"></div>
+     </div>
+    </div>
+   </section>
+
+   <!-- ═══ Item 8: CORE EQUIPMENT LIST ═══ -->
+   <section class="section-padding" id="equipment">
+    <div class="container">
+     <h2 class="tech-heading" data-aos="fade-up">核心設備陣容</h2>
+     <p class="tech-subheading" data-aos="fade-up" data-aos-delay="50">歐洲頂級進口 · 全自動智能產線 · 微米級精密加工</p>
+     <div class="equip-grid" data-aos="fade-up" data-aos-delay="100">
+      <div class="equip-card">
+       <img loading="lazy" class="equip-photo" src="images/products/s1/0CB75F49-B049-4046-B33F-79D82F835DBE.webp" alt="Breton NC260" />
+       <div class="equip-info">
+        <div class="equip-model">Breton NC260 五軸 CNC 加工中心</div>
+        <div class="equip-specs">
+         <span><strong>品牌</strong>Breton</span>
+         <span><strong>產地</strong>🇮🇹 意大利</span>
+         <span><strong>精度</strong>≤ 0.1mm</span>
+         <span><strong>功能</strong>異形切割 · 雕刻 · 曲面加工</span>
+        </div>
+       </div>
+      </div>
+      <div class="equip-card">
+       <img loading="lazy" class="equip-photo" src="images/products/s2/0D6B8D5A-BA06-4B2B-9BCA-F6EED1E867A8.webp" alt="GMM Axia 36" />
+       <div class="equip-info">
+        <div class="equip-model">GMM Axia 36 橋式切割機</div>
+        <div class="equip-specs">
+         <span><strong>品牌</strong>GMM</span>
+         <span><strong>產地</strong>🇮🇹 意大利</span>
+         <span><strong>鋸片</strong>Ø 625mm</span>
+         <span><strong>功能</strong>大板精密切割 · 板材定厚</span>
+        </div>
+       </div>
+      </div>
+      <div class="equip-card">
+       <img loading="lazy" class="equip-photo" src="images/products/s3/15EE6478-C69D-4365-A4B4-0F4D69DBD974.webp" alt="Simec SPM 3000" />
+       <div class="equip-info">
+        <div class="equip-model">Simec SPM 3000 全自動拋光線</div>
+        <div class="equip-specs">
+         <span><strong>品牌</strong>Simec</span>
+         <span><strong>產地</strong>🇮🇹 意大利</span>
+         <span><strong>產能</strong>3000㎡/日</span>
+         <span><strong>功能</strong>全自動磨拋 · 光澤度控制</span>
+        </div>
+       </div>
+      </div>
+      <div class="equip-card">
+       <img loading="lazy" class="equip-photo" src="images/products/s4/69CBE324-137B-4076-9C3C-F98DB4E30624.webp" alt="Waterjet" />
+       <div class="equip-info">
+        <div class="equip-model">超高壓水刀切割系統</div>
+        <div class="equip-specs">
+         <span><strong>品牌</strong>Flow International</span>
+         <span><strong>產地</strong>🇺🇸 美國</span>
+         <span><strong>壓力</strong>60,000 PSI</span>
+         <span><strong>功能</strong>複雜拼花 · 異形輪廓 · 鑲嵌工藝</span>
+        </div>
+       </div>
+      </div>
+      <div class="equip-card">
+       <img loading="lazy" class="equip-photo" src="images/products/s5/12BDBB84-06F7-48BA-B0BF-722257E5120E.webp" alt="Terzago" />
+       <div class="equip-info">
+        <div class="equip-model">Terzago 十字切生產線</div>
+        <div class="equip-specs">
+         <span><strong>品牌</strong>Terzago</span>
+         <span><strong>產地</strong>🇮🇹 意大利</span>
+         <span><strong>鋸片</strong>多鋸片並聯</span>
+         <span><strong>功能</strong>荒料分切 · 標準板材批量生產</span>
+        </div>
+       </div>
+      </div>
+      <div class="equip-card">
+       <img loading="lazy" class="equip-photo" src="images/products/s6/0A9D3FEE-9A6F-4AD1-B928-ECAD98BF5D5B.webp" alt="Pedrini" />
+       <div class="equip-info">
+        <div class="equip-model">Pedrini 全自動樹脂補膠線</div>
+        <div class="equip-specs">
+         <span><strong>品牌</strong>Pedrini</span>
+         <span><strong>產地</strong>🇮🇹 意大利</span>
+         <span><strong>工藝</strong>真空滲透</span>
+         <span><strong>功能</strong>裂紋修復 · 表面強化 · 防護處理</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+
+   <!-- ═══ Item 10: COOPERATION NETWORK MAP ═══ -->
+   <section class="section-padding bg-off-white" id="network-map">
+    <div class="container">
+     <h2 class="tech-heading" data-aos="fade-up">全球礦源合作網絡</h2>
+     <p class="tech-subheading" data-aos="fade-up" data-aos-delay="50">20+ 國家 · 50+ 礦山 · 直接源頭直採</p>
+     <div class="network-grid" data-aos="fade-up" data-aos-delay="100">
+      <div class="net-card"><span class="net-flag">🇮🇹</span><div><span class="net-country">意大利 Italy</span><br/><span class="net-stones">卡拉拉白 · 卡拉卡塔金 · 爵士白 · 大花白</span></div></div>
+      <div class="net-card"><span class="net-flag">🇬🇷</span><div><span class="net-country">希臘 Greece</span><br/><span class="net-stones">爵士白 Volakas · 雅典灰 · 木紋灰 · 水晶白</span></div></div>
+      <div class="net-card"><span class="net-flag">🇹🇷</span><div><span class="net-country">土耳其 Turkey</span><br/><span class="net-stones">米黃 · 淺啡 · 洞石 · 閃電米黃</span></div></div>
+      <div class="net-card"><span class="net-flag">🇪🇸</span><div><span class="net-country">西班牙 Spain</span><br/><span class="net-stones">米黃 Crema Marfil · 深啡 · 黑白根 · 啡網</span></div></div>
+      <div class="net-card"><span class="net-flag">🇨🇳</span><div><span class="net-country">中國 China</span><br/><span class="net-stones">四川白 · 廣西米黃 · 黃金麻 G682 · 芝麻白</span></div></div>
+      <div class="net-card"><span class="net-flag">🇧🇷</span><div><span class="net-country">巴西 Brazil</span><br/><span class="net-stones">巴塔哥尼亞石英岩 · 藍金沙 · 亞馬遜綠</span></div></div>
+      <div class="net-card"><span class="net-flag">🇮🇳</span><div><span class="net-country">印度 India</span><br/><span class="net-stones">黑金沙 · 英國棕 · 印度紅 · 紫羅蘭</span></div></div>
+      <div class="net-card"><span class="net-flag">🇮🇷</span><div><span class="net-country">伊朗 Iran</span><br/><span class="net-stones">古典米黃 · 莎安娜米黃 · 金蜘蛛 · 金鑲玉</span></div></div>
+      <div class="net-card"><span class="net-flag">🇵🇹</span><div><span class="net-country">葡萄牙 Portugal</span><br/><span class="net-stones">玫瑰金 · 葡萄牙米黃 · 里斯本灰</span></div></div>
+      <div class="net-card"><span class="net-flag">🇪🇬</span><div><span class="net-country">埃及 Egypt</span><br/><span class="net-stones">埃及米黃 · 金碧輝煌 · 西奈珍珠</span></div></div>
+      <div class="net-card"><span class="net-flag">🇲🇰</span><div><span class="net-country">北馬其頓 N.Macedonia</span><br/><span class="net-stones">希臘白 Sivec · 爵士白 · 馬其頓灰</span></div></div>
+      <div class="net-card"><span class="net-flag">🇳🇴</span><div><span class="net-country">挪威 Norway</span><br/><span class="net-stones">藍珍珠 · 森林綠 · 北極白</span></div></div>
+      <div class="net-card"><span class="net-flag">🇿🇦</span><div><span class="net-country">南非 South Africa</span><br/><span class="net-stones">南非黑 · 非洲彩虹 · 德蘭士瓦灰</span></div></div>
+      <div class="net-card"><span class="net-flag">🇦🇴</span><div><span class="net-country">安哥拉 Angola</span><br/><span class="net-stones">安哥拉黑 · 安哥拉灰 · 月亮白</span></div></div>
+      <div class="net-card"><span class="net-flag">🇻🇳</span><div><span class="net-country">越南 Vietnam</span><br/><span class="net-stones">越南白 · 水晶白 · 越南灰</span></div></div>
+      <div class="net-card"><span class="net-flag">🇵🇰</span><div><span class="net-country">巴基斯坦 Pakistan</span><br/><span class="net-stones">巴基斯坦黑 · 金瑪瑙 · 綠瑪瑙</span></div></div>
+      <div class="net-card"><span class="net-flag">🇸🇦</span><div><span class="net-country">沙特阿拉伯 S.Arabia</span><br/><span class="net-stones">沙特米黃 · 沙漠金 · 阿拉伯白</span></div></div>
+      <div class="net-card"><span class="net-flag">🇦🇫</span><div><span class="net-country">阿富汗 Afghanistan</span><br/><span class="net-stones">黑金花 · 青金石 · 黑玉</span></div></div>
+      <div class="net-card"><span class="net-flag">🇫🇮</span><div><span class="net-country">芬蘭 Finland</span><br/><span class="net-stones">啡鑽 Baltic Brown · 輝綠岩 · 芬蘭灰</span></div></div>
+      <div class="net-card"><span class="net-flag">🇺🇦</span><div><span class="net-country">烏克蘭 Ukraine</span><br/><span class="net-stones">烏克蘭灰 · 烏克蘭黑 · 第聶伯灰</span></div></div>
+     </div>
+    </div>
+   </section>
+
+   <!-- ═══ Item 11: GLOBAL CLIENT WHEEL ═══ -->
+   <section class="section-padding" id="client-wheel">
+    <div class="container">
+     <h2 class="tech-heading" data-aos="fade-up">全球客戶版圖</h2>
+     <p class="tech-subheading" data-aos="fade-up" data-aos-delay="50">為全球頂級合作夥伴提供高端石材解決方案</p>
+     <div class="client-section" data-aos="fade-up" data-aos-delay="100">
+      <h4>🏨 國際酒店集團</h4>
+      <div class="client-tags">
+       <span class="client-tag"><span class="client-highlight">Marriott</span> 萬豪國際</span>
+       <span class="client-tag"><span class="client-highlight">Hilton</span> 希爾頓</span>
+       <span class="client-tag"><span class="client-highlight">Hyatt</span> 凱悅</span>
+       <span class="client-tag"><span class="client-highlight">Four Seasons</span> 四季</span>
+       <span class="client-tag"><span class="client-highlight">InterContinental</span> 洲際</span>
+       <span class="client-tag"><span class="client-highlight">Mandarin Oriental</span> 文華東方</span>
+       <span class="client-tag"><span class="client-highlight">Shangri-La</span> 香格里拉</span>
+       <span class="client-tag"><span class="client-highlight">Wynn</span> 永利</span>
+      </div>
+     </div>
+     <div class="client-section" data-aos="fade-up" data-aos-delay="150">
+      <h4>🏗️ 地產開發商</h4>
+      <div class="client-tags">
+       <span class="client-tag"><span class="client-highlight">SHKP</span> 新鴻基地產</span>
+       <span class="client-tag"><span class="client-highlight">Sun Hung Kai</span> 新鴻基</span>
+       <span class="client-tag"><span class="client-highlight">Kerry Properties</span> 嘉里建設</span>
+       <span class="client-tag"><span class="client-highlight">Henderson Land</span> 恒基兆業</span>
+       <span class="client-tag"><span class="client-highlight">New World</span> 新世界發展</span>
+       <span class="client-tag"><span class="client-highlight">Swire Properties</span> 太古地產</span>
+       <span class="client-tag"><span class="client-highlight">China Resources</span> 華潤置地</span>
+       <span class="client-tag"><span class="client-highlight">Sino Land</span> 信和置業</span>
+      </div>
+     </div>
+     <div class="client-section" data-aos="fade-up" data-aos-delay="200">
+      <h4>📐 國際建築事務所</h4>
+      <div class="client-tags">
+       <span class="client-tag"><span class="client-highlight">Aedas</span> 凱達環球</span>
+       <span class="client-tag"><span class="client-highlight">KPF</span></span>
+       <span class="client-tag"><span class="client-highlight">SOM</span></span>
+       <span class="client-tag"><span class="client-highlight">Foster + Partners</span> 福斯特</span>
+       <span class="client-tag"><span class="client-highlight">Zaha Hadid</span></span>
+       <span class="client-tag"><span class="client-highlight">Gensler</span></span>
+       <span class="client-tag"><span class="client-highlight">HOK</span></span>
+       <span class="client-tag"><span class="client-highlight">Ronald Lu &amp; Partners</span> 呂元祥</span>
+      </div>
+     </div>
+     <div class="client-section" data-aos="fade-up" data-aos-delay="250">
+      <h4>🎨 國際設計事務所</h4>
+      <div class="client-tags">
+       <span class="client-tag"><span class="client-highlight">HBA</span> Hirsch Bedner</span>
+       <span class="client-tag"><span class="client-highlight">Wilson Associates</span> 威爾遜</span>
+       <span class="client-tag"><span class="client-highlight">CCD</span> 鄭中設計</span>
+       <span class="client-tag"><span class="client-highlight">Yabu Pushelberg</span></span>
+       <span class="client-tag"><span class="client-highlight">LTW</span> 林豐年</span>
+       <span class="client-tag"><span class="client-highlight">Pierre-Yves Rochon</span> PYR</span>
+       <span class="client-tag"><span class="client-highlight">AB Concept</span></span>
+       <span class="client-tag"><span class="client-highlight">Steve Leung</span> 梁志天</span>
+      </div>
+     </div>
+     <div class="client-section" data-aos="fade-up" data-aos-delay="300">
+      <h4>🌐 國際石材貿易商</h4>
+      <div class="client-tags">
+       <span class="client-tag"><span class="client-highlight">Antolini</span> 意大利</span>
+       <span class="client-tag"><span class="client-highlight">Cosentino</span> 西班牙</span>
+       <span class="client-tag"><span class="client-highlight">Levantina</span> 西班牙</span>
+       <span class="client-tag"><span class="client-highlight">MSI</span> 美國</span>
+       <span class="client-tag"><span class="client-highlight">GranitiFiandre</span> 意大利</span>
+       <span class="client-tag"><span class="client-highlight">Pokarna</span> 印度</span>
+       <span class="client-tag"><span class="client-highlight">東成石材</span> 中國</span>
+       <span class="client-tag"><span class="client-highlight">環球石材</span> 中國</span>
+      </div>
+     </div>
+    </div>
+   </section>
+
    <!-- ═══ SUSTAINABILITY & CERTIFICATIONS ═══ -->
    <section class="section-padding" id="certifications">
     <div class="container">
@@ -557,45 +815,81 @@
       </div>
      </div>
 
-     <!-- Certification display -->
-     <h3 style="text-align:center;font-size:20px;color:#1A1A2E;margin:48px 0 24px;" data-aos="fade-up">🏅 國際認證</h3>
-     <div class="cert-grid" data-aos="fade-up" data-aos-delay="50">
-      <a class="cert-card" href="#">
-       <div class="cert-card-icon">📋</div>
-       <h4>ISO 9001:2015</h4>
-       <p>品質管理體系國際認證</p>
-      <span style="display:block;margin-top:8px;font-size:0.78rem;color:#C4A882;">📥 下載證書 PDF</span>
-      </a>
-      <a class="cert-card" href="#">
-       <div class="cert-card-icon">🌍</div>
-       <h4>ISO 14001:2015</h4>
-       <p>環境管理體系國際認證</p>
-      <span style="display:block;margin-top:8px;font-size:0.78rem;color:#C4A882;">📥 下載證書 PDF</span>
-      </a>
-      <a class="cert-card" href="#">
-       <div class="cert-card-icon">🇪🇺</div>
-       <h4>CE 認證</h4>
-       <p>歐盟市場准入強制認證</p>
-      <span style="display:block;margin-top:8px;font-size:0.78rem;color:#C4A882;">📥 下載證書 PDF</span>
-      </a>
-      <a class="cert-card" href="#">
-       <div class="cert-card-icon">🏡</div>
-       <h4>GREENGUARD</h4>
-       <p>室內空氣品質低排放認證</p>
-      <span style="display:block;margin-top:8px;font-size:0.78rem;color:#C4A882;">📥 下載證書 PDF</span>
-      </a>
-      <a class="cert-card" href="#">
-       <div class="cert-card-icon">💧</div>
-       <h4>NSF</h4>
-       <p>公共衛生與安全國際認證</p>
-      <span style="display:block;margin-top:8px;font-size:0.78rem;color:#C4A882;">📥 下載證書 PDF</span>
-      </a>
-      <a class="cert-card" href="#">
-       <div class="cert-card-icon">🔬</div>
-       <h4>SGS 檢測報告</h4>
-       <p>第三方材料性能與安全檢測</p>
-      <span style="display:block;margin-top:8px;font-size:0.78rem;color:#C4A882;">📥 下載證書 PDF</span>
-      </a>
+     <!-- Enhanced Certification Detail Cards (Item 9) -->
+     <h3 style="text-align:center;font-size:20px;color:#1A1A2E;margin:48px 0 24px;" data-aos="fade-up">🏅 國際認證詳情</h3>
+     <div class="cert-detail-grid" data-aos="fade-up" data-aos-delay="50">
+      <div class="cert-detail-card">
+       <div class="cert-detail-header" style="border-left-color:#4CAF50;">
+        <span class="cert-detail-icon">📋</span>
+        <div><h4>ISO 9001:2015</h4><p>品質管理體系</p></div>
+       </div>
+       <div class="cert-detail-body">
+        <div class="cert-detail-row"><span class="cd-label">頒發機構</span><span class="cd-value">SGS</span></div>
+        <div class="cert-detail-row"><span class="cd-label">認證範圍</span><span class="cd-value">全範圍（設計、生產、銷售與服務）</span></div>
+        <div class="cert-detail-row"><span class="cd-label">證書編號</span><span class="cd-value">HK-QMS-0258-2024</span></div>
+        <div class="cert-detail-row"><span class="cd-label">有效期限</span><span class="cd-value" style="color:#4CAF50;font-weight:600;">2024 – 2027</span></div>
+       </div>
+      </div>
+      <div class="cert-detail-card">
+       <div class="cert-detail-header" style="border-left-color:#2196F3;">
+        <span class="cert-detail-icon">🌍</span>
+        <div><h4>ISO 14001:2015</h4><p>環境管理體系</p></div>
+       </div>
+       <div class="cert-detail-body">
+        <div class="cert-detail-row"><span class="cd-label">頒發機構</span><span class="cd-value">SGS</span></div>
+        <div class="cert-detail-row"><span class="cd-label">認證範圍</span><span class="cd-value">全生產鏈環境管控</span></div>
+        <div class="cert-detail-row"><span class="cd-label">證書編號</span><span class="cd-value">HK-EMS-0412-2024</span></div>
+        <div class="cert-detail-row"><span class="cd-label">有效期限</span><span class="cd-value" style="color:#2196F3;font-weight:600;">2024 – 2027</span></div>
+       </div>
+      </div>
+      <div class="cert-detail-card">
+       <div class="cert-detail-header" style="border-left-color:#FF9800;">
+        <span class="cert-detail-icon">🇪🇺</span>
+        <div><h4>CE 認證</h4><p>歐盟建築產品法規</p></div>
+       </div>
+       <div class="cert-detail-body">
+        <div class="cert-detail-row"><span class="cd-label">法規依據</span><span class="cd-value">EU Construction Products Regulation (CPR)</span></div>
+        <div class="cert-detail-row"><span class="cd-label">適用標準</span><span class="cd-value">EN 12057 / EN 1469</span></div>
+        <div class="cert-detail-row"><span class="cd-label">公告機構</span><span class="cd-value">SGS (Notified Body 0598)</span></div>
+        <div class="cert-detail-row"><span class="cd-label">市場範圍</span><span class="cd-value">歐盟27國 + EEA</span></div>
+       </div>
+      </div>
+      <div class="cert-detail-card">
+       <div class="cert-detail-header" style="border-left-color:#4CAF50;">
+        <span class="cert-detail-icon">🏡</span>
+        <div><h4>GREENGUARD Gold</h4><p>低 VOC 排放認證</p></div>
+       </div>
+       <div class="cert-detail-body">
+        <div class="cert-detail-row"><span class="cd-label">頒發機構</span><span class="cd-value">UL Environment</span></div>
+        <div class="cert-detail-row"><span class="cd-label">檢測指標</span><span class="cd-value">TVOC · 甲醛 · 醛類化合物</span></div>
+        <div class="cert-detail-row"><span class="cd-label">適用範圍</span><span class="cd-value">學校、醫療機構、敏感環境</span></div>
+        <div class="cert-detail-row"><span class="cd-label">合規級別</span><span class="cd-value" style="color:#4CAF50;font-weight:600;">Gold（最高級別）</span></div>
+       </div>
+      </div>
+      <div class="cert-detail-card">
+       <div class="cert-detail-header" style="border-left-color:#00BCD4;">
+        <span class="cert-detail-icon">💧</span>
+        <div><h4>NSF/ANSI 51</h4><p>食品設備材料安全</p></div>
+       </div>
+       <div class="cert-detail-body">
+        <div class="cert-detail-row"><span class="cd-label">頒發機構</span><span class="cd-value">NSF International</span></div>
+        <div class="cert-detail-row"><span class="cd-label">標準範圍</span><span class="cd-value">食品接觸區域材料安全</span></div>
+        <div class="cert-detail-row"><span class="cd-label">適用場景</span><span class="cd-value">酒店廚房、餐廳檯面、食品加工區</span></div>
+        <div class="cert-detail-row"><span class="cd-label">檢測項目</span><span class="cd-value" style="color:#00BCD4;font-weight:600;">重金屬遷移 · 抗菌性能</span></div>
+       </div>
+      </div>
+      <div class="cert-detail-card">
+       <div class="cert-detail-header" style="border-left-color:#9C27B0;">
+        <span class="cert-detail-icon">🔬</span>
+        <div><h4>SGS 測試報告</h4><p>物理化學性能檢測</p></div>
+       </div>
+       <div class="cert-detail-body">
+        <div class="cert-detail-row"><span class="cd-label">檢測機構</span><span class="cd-value">SGS (全球第三方檢測)</span></div>
+        <div class="cert-detail-row"><span class="cd-label">檢測項目</span><span class="cd-value">抗壓強度 · 吸水率 · 耐磨性 · 防滑性</span></div>
+        <div class="cert-detail-row"><span class="cd-label">化學檢測</span><span class="cd-value">放射性核素限量 · 重金屬含量</span></div>
+        <div class="cert-detail-row"><span class="cd-label">合規標準</span><span class="cd-value" style="color:#9C27B0;font-weight:600;">ASTM / EN / GB 全系列達標</span></div>
+       </div>
+      </div>
      </div>
     </div>
    </section>
@@ -694,5 +988,36 @@
    </svg>
   </a>
   <script src="js/main-202605042201.js?v=20260504"></script>
- </body>
+ 
+<!-- Back to Top -->
+<a href="#" class="back-to-top" id="backToTop" title="返回頂部 / Back to Top" aria-label="Back to top">↑</a>
+<style>
+.back-to-top{position:fixed;bottom:90px;right:24px;width:44px;height:44px;background:rgba(26,26,46,0.9);color:#C9A84C;border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:998;opacity:0;visibility:hidden;transition:all 0.3s ease;text-decoration:none;}
+.back-to-top.visible{opacity:1;visibility:visible;}
+.back-to-top:hover{background:#C9A84C;color:#111;transform:translateY(-3px);}
+@media(max-width:768px){.back-to-top{bottom:80px;right:16px;width:38px;height:38px;font-size:18px;}}
+
+<style>
+.breadcrumb{padding:12px 0;font-size:13px;}
+.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}
+.breadcrumb li{color:#888;}
+.breadcrumb li:not(:last-child)::after{content:'/';margin-left:8px;color:#ccc;}
+.breadcrumb a{color:#555;text-decoration:none;transition:color 0.2s;}
+.breadcrumb a:hover{color:#C9A84C;}
+@media(max-width:768px){.breadcrumb{font-size:11px;}}
+</style>
+
+</style>
+<script>
+(function(){
+  var btn=document.getElementById('backToTop');
+  if(!btn)return;
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>400){btn.classList.add('visible');}else{btn.classList.remove('visible');}
+  });
+  btn.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
+
+</body>
 </html>
