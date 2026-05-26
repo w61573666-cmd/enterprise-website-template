@@ -40,6 +40,22 @@
   </script>
   <link href="https://www.hsst.hk/index.html" rel="canonical"/>
   <meta content="https://www.hsst.hk/images/logo.png" property="og:image"/>
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"HENGSHENG MARBLE S&T CO. LIMITED",
+  "alternateName":"恒生石材科技有限公司",
+  "url":"https://www.hsst.hk",
+  "logo":"https://www.hsst.hk/images/logo.png",
+  "description":"Professional high-end marble, granite and natural stone supplier. Serving global landmark projects with precision processing and international engineering services since 1999.",
+  "foundingDate":"1999",
+  "address":{"@type":"PostalAddress","streetAddress":"FLAT/RM 1405B 14/F THE BELGIAN BANK BUILDING, NOS 721-725 NATHAN ROAD","addressLocality":"Kowloon","addressRegion":"Hong Kong","addressCountry":"HK"},
+  "telephone":"+85255380525",
+  "sameAs":[]
+}
+</script>
 </head>
  <body>
   <!-- Navigation -->
@@ -1170,6 +1186,13 @@
          聯繫我們
         </a>
        </li>
+      
+       <li>
+        <a href="faq.html">常見問題</a>
+       </li>
+       <li>
+        <a href="privacy.html">私隱政策</a>
+       </li>
       </ul>
      </div>
      <div class="footer-col">
@@ -1373,5 +1396,14 @@
 })();
 </script>
 
+<!-- Cookie Consent -->
+<div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:rgba(26,26,46,0.97);color:#fff;padding:16px 24px;z-index:1000;display:none;border-top:1px solid rgba(201,168,76,0.3);">
+<div class="container" style="max-width:1200px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+<p style="font-size:13px;color:rgba(255,255,255,0.7);margin:0;flex:1;min-width:200px;">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="/privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
+<div style="display:flex;gap:10px;flex-shrink:0;">
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" style="padding:8px 20px;background:#C9A84C;color:#111;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Accept</button>
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" style="padding:8px 20px;background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:13px;cursor:pointer;">Decline</button>
+</div></div></div>
+<script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 </body>
 </html>

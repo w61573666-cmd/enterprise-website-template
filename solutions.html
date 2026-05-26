@@ -32,7 +32,23 @@
   }
 }
   </script>
- </head>
+ <!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"HENGSHENG MARBLE S&T CO. LIMITED",
+  "alternateName":"恒生石材科技有限公司",
+  "url":"https://www.hsst.hk",
+  "logo":"https://www.hsst.hk/images/logo.png",
+  "description":"Professional high-end marble, granite and natural stone supplier. Serving global landmark projects with precision processing and international engineering services since 1999.",
+  "foundingDate":"1999",
+  "address":{"@type":"PostalAddress","streetAddress":"FLAT/RM 1405B 14/F THE BELGIAN BANK BUILDING, NOS 721-725 NATHAN ROAD","addressLocality":"Kowloon","addressRegion":"Hong Kong","addressCountry":"HK"},
+  "telephone":"+85255380525",
+  "sameAs":[]
+}
+</script>
+</head>
  <body class="inner-page">
   <nav class="navbar">
    <div class="container">
@@ -588,6 +604,34 @@
     </div>
    </section>
 
+   <!-- Quick Navigation Cards -->
+   <section class="section-padding" style="padding-top:0;">
+    <div class="container">
+     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+      <a href="solutions/architect.html" style="text-decoration:none;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px 20px;text-align:center;transition:all 0.3s ease;border:1px solid rgba(201,168,76,0.2);">
+       <div style="font-size:2rem;margin-bottom:12px;">🎨</div>
+       <h4 style="color:#fff;font-size:1rem;margin-bottom:6px;">建築師與設計師</h4>
+       <p style="color:#999;font-size:0.8rem;line-height:1.5;">選材顧問 · BIM建模 · 定制紋理</p>
+      </a>
+      <a href="solutions/developer.html" style="text-decoration:none;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px 20px;text-align:center;transition:all 0.3s ease;border:1px solid rgba(201,168,76,0.2);">
+       <div style="font-size:2rem;margin-bottom:12px;">🏗️</div>
+       <h4 style="color:#fff;font-size:1rem;margin-bottom:6px;">開發商</h4>
+       <p style="color:#999;font-size:0.8rem;line-height:1.5;">大宗直採 · 成本優化 · 全週期</p>
+      </a>
+      <a href="solutions/contractor.html" style="text-decoration:none;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px 20px;text-align:center;transition:all 0.3s ease;border:1px solid rgba(201,168,76,0.2);">
+       <div style="font-size:2rem;margin-bottom:12px;">🔧</div>
+       <h4 style="color:#fff;font-size:1rem;margin-bottom:6px;">承包商與施工方</h4>
+       <p style="color:#999;font-size:0.8rem;line-height:1.5;">技術交底 · 駐場指導 · 安裝標準</p>
+      </a>
+      <a href="solutions/trader.html" style="text-decoration:none;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px 20px;text-align:center;transition:all 0.3s ease;border:1px solid rgba(201,168,76,0.2);">
+       <div style="font-size:2rem;margin-bottom:12px;">🌍</div>
+       <h4 style="color:#fff;font-size:1rem;margin-bottom:6px;">經銷商與貿易商</h4>
+       <p style="color:#999;font-size:0.8rem;line-height:1.5;">批發供應 · 礦區直聯 · 全球物流</p>
+      </a>
+     </div>
+    </div>
+   </section>
+
    <!-- ===== Designer / Architect ===== -->
    <section class="section-padding bg-off-white" id="designer">
     <div class="container">
@@ -775,6 +819,13 @@
          聯繫我們
         </a>
        </li>
+      
+       <li>
+        <a href="faq.html">常見問題</a>
+       </li>
+       <li>
+        <a href="privacy.html">私隱政策</a>
+       </li>
       </ul>
      </div>
      <div class="footer-col">
@@ -938,5 +989,14 @@
 })();
 </script>
 
+<!-- Cookie Consent -->
+<div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:rgba(26,26,46,0.97);color:#fff;padding:16px 24px;z-index:1000;display:none;border-top:1px solid rgba(201,168,76,0.3);">
+<div class="container" style="max-width:1200px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+<p style="font-size:13px;color:rgba(255,255,255,0.7);margin:0;flex:1;min-width:200px;">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="/privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
+<div style="display:flex;gap:10px;flex-shrink:0;">
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" style="padding:8px 20px;background:#C9A84C;color:#111;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Accept</button>
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" style="padding:8px 20px;background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:13px;cursor:pointer;">Decline</button>
+</div></div></div>
+<script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 </body>
 </html>
