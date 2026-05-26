@@ -83,6 +83,16 @@
 .filter-tag:hover{background:#e8e0d0;color:#C9A84C;}
 .filter-tag.active{background:#C9A84C;color:#111;font-weight:600;border-color:#C9A84C;}
 
+/* Compare & Sample buttons in overlay */
+.cmp-btn{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:600;border-radius:5px;cursor:pointer;transition:all 0.3s ease;background:rgba(201,168,76,0.5);color:#fff;border:none;}
+.cmp-btn:hover{background:rgba(201,168,76,0.85);transform:scale(1.03);}
+.cmp-btn.cmp-selected{background:rgba(76,175,80,0.7);}
+.sample-req{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:600;border-radius:5px;text-decoration:none;transition:all 0.3s ease;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);}
+.sample-req:hover{background:rgba(201,168,76,0.2);border-color:#C9A84C;color:#C9A84C;transform:scale(1.03);}
+
+/* Compare panel inner label */
+.compare-panel-label{font-size:13px;color:rgba(255,255,255,0.6);white-space:nowrap;}
+
 /* Product Series Grid */
 .product-series-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;padding:40px 0;}
 .product-series-card{position:relative;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;cursor:pointer;}
@@ -232,6 +242,18 @@
     <div class="products-banner-btns">
      <a class="btn-gold" href="#series">瀏覽全部石材</a>
      <a class="btn-outline-white" href="#download-brochure">下載電子畫冊</a>
+     <div class="filter-group">
+      <div class="filter-group-label">应用场景</div>
+      <div class="filter-tags" data-filter="app">
+       <span class="filter-tag active" data-val="all">全部</span>
+       <span class="filter-tag" data-val="lobby">酒店大堂</span>
+       <span class="filter-tag" data-val="bathroom">卫浴</span>
+       <span class="filter-tag" data-val="facade">外立面</span>
+       <span class="filter-tag" data-val="floor">地面</span>
+       <span class="filter-tag" data-val="countertop">台面</span>
+       <span class="filter-tag" data-val="wall">装饰墙</span>
+      </div>
+     </div>
     </div>
    </div>
   </section>
@@ -282,55 +304,55 @@
   <section>
    <div class="container" style="max-width:1200px;">
     <div class="product-series-grid" id="productSeriesGridZh">
-     <div class="product-series-card" data-cat="white,italy,wall,villa">
+     <div class="product-series-card" data-cat="white,italy,wall,villa" data-filter="lobby,wall">
       <div class="product-series-img"><img src="images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp" alt="白色系臻選" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">白色系臻選</div><div class="product-series-meta-en">White Marble</div></div>
-      <div class="product-series-overlay"><a href="#s1">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/white-marble.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="beige,turkey,floor">
+     <div class="product-series-card" data-cat="beige,turkey,floor" data-filter="lobby,floor">
       <div class="product-series-img"><img src="images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="米黃系臻選" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">米黃系臻選</div><div class="product-series-meta-en">Beige Marble</div></div>
-      <div class="product-series-overlay"><a href="#s2">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/beige-marble.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="grey,greece,counter">
+     <div class="product-series-card" data-cat="grey,greece,counter" data-filter="bathroom,countertop">
       <div class="product-series-img"><img src="images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.webp" alt="灰色系臻選" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">灰色系臻選</div><div class="product-series-meta-en">Grey Marble</div></div>
-      <div class="product-series-overlay"><a href="#s3">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/grey-marble.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="black,iran,wall,villa">
+     <div class="product-series-card" data-cat="black,iran,wall,villa" data-filter="wall,countertop">
       <div class="product-series-img"><img src="images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.webp" alt="黑色系臻選" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">黑色系臻選</div><div class="product-series-meta-en">Black Marble</div></div>
-      <div class="product-series-overlay"><a href="#s4">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/black-marble.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="multi,brazil,commercial,floor">
+     <div class="product-series-card" data-cat="multi,brazil,commercial,floor" data-filter="facade,floor">
       <div class="product-series-img"><img src="images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.webp" alt="精品花崗岩" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">精品花崗岩系列</div><div class="product-series-meta-en">Granite Collection</div></div>
-      <div class="product-series-overlay"><a href="#s5">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/luxury-stone.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="white,brazil,counter,commercial">
+     <div class="product-series-card" data-cat="white,brazil,counter,commercial" data-filter="facade,countertop">
       <div class="product-series-img"><img src="images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.webp" alt="白麻花崗岩" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">白麻花崗岩</div><div class="product-series-meta-en">White Granite</div></div>
-      <div class="product-series-overlay"><a href="#s6">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/travertine.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="grey,brazil,floor,commercial">
+     <div class="product-series-card" data-cat="grey,brazil,floor,commercial" data-filter="facade,floor">
       <div class="product-series-img"><img src="images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.webp" alt="灰色花崗岩" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">灰色花崗岩</div><div class="product-series-meta-en">Grey Granite</div></div>
-      <div class="product-series-overlay"><a href="#s7">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/granite.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="multi,brazil,wall,villa">
+     <div class="product-series-card" data-cat="multi,brazil,wall,villa" data-filter="lobby,wall">
       <div class="product-series-img"><img src="images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp" alt="奢石典藏" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">奢石典藏系列</div><div class="product-series-meta-en">Luxury Stone</div></div>
-      <div class="product-series-overlay"><a href="#s8">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/custom-craft.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="beige,iran,wall,villa,floor">
+     <div class="product-series-card" data-cat="beige,iran,wall,villa,floor" data-filter="facade,wall,floor">
       <div class="product-series-img"><img src="images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.webp" alt="洞石砂岩" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">洞石砂岩</div><div class="product-series-meta-en">Travertine & Sandstone</div></div>
-      <div class="product-series-overlay"><a href="#s9">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/new-arrivals.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
-     <div class="product-series-card" data-cat="multi,italy,commercial">
+     <div class="product-series-card" data-cat="multi,italy,commercial" data-filter="wall,countertop">
       <div class="product-series-img"><img src="images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="異形定製" loading="lazy"/><div class="hsst-wm">HSST</div></div>
       <div class="product-series-meta"><div class="product-series-meta-zh">異形定製</div><div class="product-series-meta-en">Custom Craft</div></div>
-      <div class="product-series-overlay"><a href="#s10">查看詳情</a><a href="contact.html">立即諮詢</a></div>
+      <div class="product-series-overlay"><a href="products/project-stone.html">查看詳情</a><a href="contact.html">立即諮詢</a><a class="sample-req" href="contact.html#sample">索取样板</a><button class="cmp-btn" type="button">🔲 加入对比</button></div>
      </div>
     </div>
    </div>
@@ -353,7 +375,7 @@
       </p>
      </div>
      <div class="series-overview-grid">
-      <a class="series-card-link" href="#s1">
+      <a class="series-card-link" href="products/white-marble.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          01
@@ -369,7 +391,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s2">
+      <a class="series-card-link" href="products/beige-marble.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          02
@@ -385,7 +407,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s3">
+      <a class="series-card-link" href="products/grey-marble.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          03
@@ -401,7 +423,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s4">
+      <a class="series-card-link" href="products/black-marble.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          04
@@ -417,7 +439,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s5">
+      <a class="series-card-link" href="products/luxury-stone.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          05
@@ -433,7 +455,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s6">
+      <a class="series-card-link" href="products/travertine.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          06
@@ -449,7 +471,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s7">
+      <a class="series-card-link" href="products/granite.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          07
@@ -465,7 +487,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s8">
+      <a class="series-card-link" href="products/custom-craft.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          08
@@ -481,7 +503,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s9">
+      <a class="series-card-link" href="products/new-arrivals.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          09
@@ -497,7 +519,7 @@
         </div>
        </div>
       </a>
-      <a class="series-card-link" href="#s10">
+      <a class="series-card-link" href="products/project-stone.html">
        <div class="series-overview-card" data-color="#1A1A2E">
         <div class="soc-number">
          10
@@ -2233,52 +2255,52 @@
       </h4>
       <ul>
        <li>
-        <a href="#s1">
+        <a href="products/white-marble.html">
          白色系大理石
         </a>
        </li>
        <li>
-        <a href="#s2">
+        <a href="products/beige-marble.html">
          米黃系大理石
         </a>
        </li>
        <li>
-        <a href="#s3">
+        <a href="products/grey-marble.html">
          灰色系大理石
         </a>
        </li>
        <li>
-        <a href="#s4">
+        <a href="products/black-marble.html">
          黑色系大理石
         </a>
        </li>
        <li>
-        <a href="#s5">
+        <a href="products/luxury-stone.html">
          黃金麻花崗岩
         </a>
        </li>
        <li>
-        <a href="#s6">
+        <a href="products/travertine.html">
          白麻花崗岩
         </a>
        </li>
        <li>
-        <a href="#s7">
+        <a href="products/granite.html">
          芝麻灰花崗岩
         </a>
        </li>
        <li>
-        <a href="#s8">
+        <a href="products/custom-craft.html">
          奢石/稀有石材
         </a>
        </li>
        <li>
-        <a href="#s9">
+        <a href="products/new-arrivals.html">
          洞石/砂岩
         </a>
        </li>
        <li>
-        <a href="#s10">
+        <a href="products/project-stone.html">
          異形工藝石材
         </a>
        </li>
@@ -2446,8 +2468,122 @@
     if(mc){mc.addEventListener('click',function(){mb.classList.remove('open')});}
     mb.addEventListener('click',function(e){if(e.target===mb)mb.classList.remove('open')});
   }
+
+  // --- Comparison Feature ---
+  var cmpSelected = {};
+  var __cmpPanel = document.getElementById('comparePanelZh');
+  var __cmpList = document.getElementById('cmpListZh');
+  var cmpBtns = document.querySelectorAll('.cmp-btn');
+  cmpBtns.forEach(function(btn, idx){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var card = btn.closest('.product-series-card');
+      var nameEl = card.querySelector('.product-series-meta-zh');
+      var name = nameEl ? nameEl.textContent.trim() : ('Product ' + (idx+1));
+      if (cmpSelected[name]) {
+        delete cmpSelected[name];
+        btn.textContent = '🔲 加入对比';
+        btn.classList.remove('cmp-selected');
+      } else {
+        cmpSelected[name] = true;
+        btn.textContent = '✅ 已加入';
+        btn.classList.add('cmp-selected');
+      }
+      updateCmpPanel();
+    });
+  });
+  function updateCmpPanel(){
+    var names = Object.keys(cmpSelected);
+    __cmpList.innerHTML = names.map(function(n){
+      return '<span class="compare-panel-item">' + n + '<span class="remove-compare" data-name="' + n + '">×</span></span>';
+    }).join('');
+    if (names.length > 0) {
+      __cmpPanel.classList.add('show');
+    } else {
+      __cmpPanel.classList.remove('show');
+    }
+  }
+  document.getElementById('cmpClearZh').addEventListener('click', function(){
+    cmpSelected = {};
+    cmpBtns.forEach(function(b){ b.textContent = '🔲 加入对比'; b.classList.remove('cmp-selected'); });
+    updateCmpPanel();
+  });
+  document.getElementById('cmpStartZh').addEventListener('click', function(){
+    var names = Object.keys(cmpSelected);
+    if (names.length < 2) {
+      alert('请至少选择2款产品进行对比');
+      return;
+    }
+    alert('对比产品：' + names.join(', '));
+  });
+
+    // Remove individual items from compare panel
+  __cmpList.addEventListener('click', function(e){
+    if (e.target.classList.contains('remove-compare')) {
+      var name = e.target.getAttribute('data-name');
+      delete cmpSelected[name];
+      cmpBtns.forEach(function(b){
+        var card = b.closest('.product-series-card');
+        var nameEl = card.querySelector('.product-series-meta-zh');
+        var cardName = nameEl ? nameEl.textContent.trim() : '';
+        if (cardName === name) {
+          b.textContent = '🔲 加入对比';
+          b.classList.remove('cmp-selected');
+        }
+      });
+      updateCmpPanel();
+    }
+  });
+
+  // --- Application filter integration ---
+  var appTags = document.querySelectorAll('.filter-tags[data-filter="app"] .filter-tag');
+  appTags.forEach(function(t){
+    t.addEventListener('click', function(){
+      var g = t.closest('.filter-tags');
+      var cat = g.getAttribute('data-filter');
+      var v = t.getAttribute('data-val');
+      if (t.classList.contains('all-tag')) {
+        g.querySelectorAll('.filter-tag').forEach(function(x){ x.classList.remove('active'); });
+        t.classList.add('active');
+        delete state[cat];
+      } else {
+        g.querySelector('.all-tag').classList.remove('active');
+        t.classList.toggle('active');
+        var active = g.querySelectorAll('.filter-tag:not(.all-tag).active');
+        if (active.length === 0) {
+          g.querySelector('.all-tag').classList.add('active');
+          delete state[cat];
+        } else {
+          state[cat] = Array.from(active).map(function(x){ return x.getAttribute('data-val'); });
+        }
+      }
+      cards.forEach(function(c){
+        var dc = c.getAttribute('data-filter') || '';
+        var show = true;
+        for (var k in state) {
+          if (k === 'app') {
+            if (!state[k].some(function(vv){ return dc.indexOf(vv) >= 0; })) { show = false; break; }
+          } else {
+            var dcFull = c.getAttribute('data-cat') || '';
+            if (!state[k].some(function(vv){ return dcFull.indexOf(vv) >= 0; })) { show = false; break; }
+          }
+        }
+        c.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
 })();
 </script>
+
+
+<!-- Compare Panel -->
+<div class="compare-panel" id="comparePanelZh">
+  <span class="compare-panel-label">已选产品:</span>
+  <div class="compare-panel-items" id="cmpListZh"></div>
+  <button class="compare-panel-btn" id="cmpStartZh" type="button">开始对比</button>
+  <button class="compare-panel-clear" id="cmpClearZh" type="button">清除</button>
+</div>
 
 </body>
 </html>
