@@ -30,38 +30,38 @@
 .sample-hero{position:relative;padding:160px 0 60px;text-align:center;background:linear-gradient(180deg,var(--dark1) 0%,var(--dark2) 100%);overflow:hidden}
 .sample-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 70%)}
 .sample-hero h1{font-size:clamp(28px,4vw,48px);color:#fff;margin-bottom:12px;position:relative;z-index:1}
-.sample-hero p{color:var(--text-muted);max-width:650px;margin:0 auto;font-size:16px;line-height:1.8;position:relative;z-index:1}
+.sample-hero p{color:rgba(255,255,255,0.75);max-width:650px;margin:0 auto;font-size:16px;line-height:1.8;position:relative;z-index:1}
 .sample-form-section{padding:60px 0 100px;background:var(--dark1)}
-.sample-form-container{max-width:900px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);border-radius:16px;padding:48px 52px}
+.sample-form-container{max-width:900px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:48px 52px}
 .sample-form-container h2{font-size:22px;color:#C9A84C;margin-bottom:8px;font-family:'Playfair Display',serif;letter-spacing:1px}
-.sample-form-container .form-subtitle{color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:32px}
+.sample-form-container .form-subtitle{color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:32px}
 .sample-form-section-title{font-size:15px;color:#C9A84C;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:28px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;gap:10px}
 .sample-form-section-title::before{content:'';width:4px;height:18px;background:#C9A84C;border-radius:2px}
 .sample-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:6px}
 .sample-form-row.three-col{grid-template-columns:1fr 1fr 1fr}
 .sample-form-group{display:flex;flex-direction:column;gap:5px}
 .sample-form-group.full{grid-column:1/-1}
-.sample-form-label{font-size:13px;color:rgba(255,255,255,0.7)}
+.sample-form-label{font-size:13px;color:#eee}
 .sample-form-label .required{color:#e74c3c}
-.sample-form-input,.sample-form-select{padding:10px 14px;height:44px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;font-size:14px;font-family:inherit;width:100%;box-sizing:border-box;transition:border-color 0.2s}
+.sample-form-input,.sample-form-select{padding:10px 14px;height:44px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.25);border-radius:8px;color:#fff;font-size:14px;font-family:inherit;width:100%;box-sizing:border-box;transition:border-color 0.2s}
 .sample-form-input:focus,.sample-form-select:focus{border-color:#C9A84C;outline:none;background:rgba(255,255,255,0.08)}
-.sample-form-input::placeholder{color:rgba(255,255,255,0.3)}
+.sample-form-input::placeholder{color:rgba(255,255,255,0.5)}
 .sample-form-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23C9A84C' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 .sample-form-select option{background:#1a1a2e;color:#fff}
 .stone-checkbox-group{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.stone-checkbox-item label{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.8);transition:all 0.25s;user-select:none}
+.stone-checkbox-item label{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.25);border-radius:8px;cursor:pointer;font-size:13px;color:#eee;transition:all 0.25s;user-select:none}
 .stone-checkbox-item label:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.06)}
 .stone-checkbox-item input{accent-color:#C9A84C;width:16px;height:16px}
 .stone-checkbox-item input:checked+span{color:#C9A84C}
 .stone-checkbox-item:has(input:checked) label{border-color:#C9A84C;background:rgba(201,168,76,0.1)}
 .radio-group{display:flex;gap:20px;flex-wrap:wrap}
-.radio-item label{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.8)}
+.radio-item label{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:#eee}
 .radio-item input{accent-color:#C9A84C;width:16px;height:16px}
 .sample-form-textarea{min-height:100px;resize:vertical;font-family:inherit;padding:12px 14px}
 .sample-submit-row{text-align:center;margin-top:36px}
 .sample-submit-btn{padding:14px 52px;background:#C9A84C;color:#111;font-size:16px;font-weight:700;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s;letter-spacing:1px}
 .sample-submit-btn:hover{background:#D4AF37;transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,0.3)}
-.sample-form-privacy{text-align:center;color:rgba(255,255,255,0.35);font-size:12px;margin-top:14px}
+.sample-form-privacy{text-align:center;color:rgba(255,255,255,0.55);font-size:12px;margin-top:14px}
 .sample-form-success{display:none;text-align:center;padding:48px 24px}
 .sample-form-success-icon{font-size:48px;margin-bottom:16px}
 .sample-form-success h3{color:#C9A84C;font-size:20px;margin-bottom:8px;font-family:'Playfair Display',serif}
