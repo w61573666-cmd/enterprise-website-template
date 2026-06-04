@@ -35,25 +35,7 @@
 
 <!-- Product Center Styles (inline, no other pages affected) -->
 <style>
-/* mega-panel-v2 — pure CSS hover fallback */
-.mega-panel-v2{position:absolute;top:100%;left:0;width:100vw;margin-left:0;background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(201,168,76,0.2);padding:36px 0 28px;display:none;z-index:999;}
-
-.mega-panel-v2-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;padding:0 40px;}
-.mega-module-title{font-size:12px;letter-spacing:2px;color:#C9A84C;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.25);text-transform:uppercase;}
-.mega-module-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;}
-.mega-module-link{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:6px;transition:all 0.3s ease;text-decoration:none;color:#CCC;}
-.mega-module-link:hover{background:rgba(201,168,76,0.08);color:#C9A84C;transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.15);}
-.mega-module-thumb{width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#1a1a1a;}
-.mega-module-thumb img{width:100%;height:100%;object-fit:cover;}
-.mega-module-meta{display:flex;flex-direction:column;gap:1px;}
-.mega-module-link-title{font-size:13.5px;font-weight:600;color:inherit;}
-.mega-module-link-sub{font-size:11px;color:#666;}
-/* dropdown-panel — pure CSS hover fallback */
-.nav-dropdown:hover .dropdown-panel{display:block !important;}
-.dropdown-panel{position:absolute;top:100%;left:0;min-width:220px;background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);border-top:1px solid rgba(201,168,76,0.2);border-radius:0 0 8px 8px;padding:10px 0;display:none;z-index:999;}
-
-.dropdown-link{display:block;padding:10px 24px;color:#CCC;font-size:13.5px;text-decoration:none;transition:all 0.3s ease;white-space:nowrap;}
-.dropdown-link:hover{color:#C9A84C;background:rgba(201,168,76,0.08);}
+/* Products Banner */
 .products-banner{position:relative;width:100%;height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .products-banner-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.55);}
 .products-banner-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.35));}
@@ -65,81 +47,61 @@
 .btn-gold:hover{background:#D4AF37;transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,168,76,0.3);}
 .btn-outline-white{display:inline-block;padding:13px 38px;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.55);font-size:14.5px;font-weight:500;border-radius:6px;cursor:pointer;text-decoration:none;transition:all 0.3s ease;}
 .btn-outline-white:hover{border-color:#C9A84C;color:#C9A84C;background:rgba(201,168,76,0.08);}
-.filter-section{background:#fafafa;border-bottom:1px solid #eee;padding:18px 0;}
-.filter-section .container{max-width:1200px;margin:0 auto;padding:0 24px;}
-.filter-toggle-btn{display:none;background:none;border:1.5px solid #C9A84C;color:#C9A84C;padding:9px 22px;border-radius:6px;cursor:pointer;font-size:14px;}
-.filter-body{display:flex;gap:40px;flex-wrap:wrap;}
-.filter-group{display:flex;align-items:center;gap:12px;}
-.filter-group-label{font-size:13px;color:#888;white-space:nowrap;font-weight:500;}
-.filter-tags{display:flex;gap:8px;flex-wrap:wrap;}
-.filter-tag{display:inline-block;padding:6px 16px;font-size:12.5px;color:#555;background:#f0f0f0;border-radius:20px;cursor:pointer;transition:all 0.3s ease;border:1px solid transparent;user-select:none;}
-.filter-tag:hover{background:#e8e0d0;color:#C9A84C;}
-.filter-tag.active{background:#C9A84C;color:#111;font-weight:600;border-color:#C9A84C;}
 
-/* Compare & Sample buttons in overlay */
-.cmp-btn{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:600;border-radius:5px;cursor:pointer;transition:all 0.3s ease;background:rgba(201,168,76,0.5);color:#fff;border:none;}
-.cmp-btn:hover{background:rgba(201,168,76,0.85);transform:scale(1.03);}
-.cmp-btn.cmp-selected{background:rgba(76,175,80,0.7);}
-.sample-req{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:600;border-radius:5px;text-decoration:none;transition:all 0.3s ease;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);}
-.sample-req:hover{background:rgba(201,168,76,0.2);border-color:#C9A84C;color:#C9A84C;transform:scale(1.03);}
-
-/* Compare panel inner label */
-.compare-panel-label{font-size:13px;color:rgba(255,255,255,0.6);white-space:nowrap;}
-.product-series-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;padding:40px 0;}
-.product-series-card{position:relative;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;cursor:pointer;}
-.product-series-card:hover{transform:translateY(-4px);box-shadow:0 10px 25px -5px rgba(0,0,0,0.1);}
-.product-series-img{position:relative;width:100%;padding-top:120%;overflow:hidden;background:#f5f5f5;}
-.product-series-img img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform 0.3s ease;}
-.product-series-card:hover .product-series-img img{transform:scale(1.02);}
-.hsst-wm{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.45);color:rgba(255,255,255,0.6);font-size:9px;padding:3px 7px;border-radius:3px;letter-spacing:1.5px;pointer-events:none;}
-.product-series-meta{padding:14px 14px 12px;}
-.product-series-meta-zh{font-size:14.5px;font-weight:600;color:#1a1a1a;margin-bottom:2px;}
-.product-series-meta-en{font-size:11.5px;color:#888;}
-.product-series-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.75),transparent);padding:40px 14px 14px;display:flex;gap:10px;opacity:0;transition:opacity 0.3s ease;}
-.product-series-card:hover .product-series-overlay{opacity:1;}
-.product-series-overlay a{flex:1;text-align:center;padding:8px 0;font-size:12.5px;font-weight:600;border-radius:5px;text-decoration:none;transition:all 0.3s ease;}
-.product-series-overlay a:first-child{background:rgba(201,168,76,0.85);color:#111;}
-.product-series-overlay a:last-child{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);}
-.product-series-overlay a:hover{transform:scale(1.03);}
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
-.modal-overlay.open{opacity:1;pointer-events:auto;}
-.modal-content{background:#fff;border-radius:12px;padding:36px 32px;max-width:440px;width:90%;position:relative;transform:translateY(20px);transition:transform 0.3s ease;}
-.modal-overlay.open .modal-content{transform:translateY(0);}
-.modal-close{position:absolute;top:12px;right:16px;font-size:26px;cursor:pointer;color:#999;}
-.modal-close:hover{color:#333;}
-.modal-content h3{font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:8px;}
-.modal-content p{font-size:13.5px;color:#666;margin-bottom:20px;}
-.modal-content form{display:flex;flex-direction:column;gap:12px;}
-.modal-content input{height:42px;padding:0 14px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
-.modal-content input:focus{border-color:#C9A84C;outline:none;}
-.modal-content button{height:42px;background:#C9A84C;color:#111;font-size:14.5px;font-weight:600;border:none;border-radius:6px;cursor:pointer;transition:all 0.3s ease;}
-.modal-content button:hover{background:#D4AF37;}
+/* Products CTA */
 .products-cta{background:linear-gradient(135deg,#1a1a1a 0%,#111 100%);padding:64px 0;color:#fff;text-align:center;}
 .products-cta h2{font-size:28px;font-weight:700;margin-bottom:10px;letter-spacing:1.5px;}
 .products-cta>.container>p{color:rgba(255,255,255,0.6);font-size:14.5px;margin-bottom:36px;}
-.form-container-wide{max-width:1200px;margin:0 auto;padding:0 24px;}
-.form-container-wide .form-group{margin-bottom:16px;text-align:left;}
-.form-container-wide label{display:block;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:6px;}
-.form-container-wide input,.form-container-wide textarea{width:100%;height:42px;padding:0 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-size:14px;box-sizing:border-box;}
-.form-container-wide textarea{height:90px;padding:12px 14px;resize:vertical;}
-.form-container-wide input:focus,.form-container-wide textarea:focus{border-color:#C9A84C;outline:none;}
-.form-container-wide button{width:100%;height:46px;background:#C9A84C;color:#111;font-size:15px;font-weight:700;border:none;border-radius:6px;cursor:pointer;transition:all 0.3s ease;margin-top:6px;}
-.form-container-wide button:hover{background:#D4AF37;transform:translateY(-1px);}
-.form-trust-badges{display:flex;gap:18px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
-.form-trust-badge{font-size:12px;color:rgba(201,168,76,0.7);padding:6px 16px;border:1px solid rgba(201,168,76,0.2);border-radius:20px;}
-@media(max-width:768px){
-  .mega-panel-v2-inner{grid-template-columns:1fr;padding:0 20px;}
-  .mega-module-grid{grid-template-columns:1fr;}
+
+/* Catalog Filter Tabs */
+.catalog-filter{background:#fff;border-bottom:1px solid #eee;padding:24px 0 16px;}
+.catalog-filter .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+.catalog-filter-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.catalog-filter-row:last-child{margin-bottom:0;}
+.catalog-filter-label{font-size:13px;color:#888;font-weight:500;white-space:nowrap;padding-top:6px;min-width:48px;}
+.catalog-filter-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.catalog-filter-pill{display:inline-block;padding:5px 16px;font-size:12.5px;color:#555;background:#f5f5f5;border-radius:20px;cursor:pointer;transition:all 0.25s ease;border:1px solid transparent;user-select:none;}
+.catalog-filter-pill:hover{background:#e8e0d0;color:#C9A84C;}
+.catalog-filter-pill.active{background:#C9A84C;color:#111;font-weight:600;border-color:#C9A84C;}
+
+/* Catalog Meta Bar */
+.catalog-meta{display:flex;justify-content:space-between;align-items:center;padding:20px 0 8px;max-width:1200px;margin:0 auto;}
+.catalog-meta .container{max-width:1200px;margin:0 auto;padding:0 24px;width:100%;display:flex;justify-content:space-between;align-items:center;}
+.catalog-count{font-size:14px;color:#666;}
+.catalog-sort{font-size:13px;color:#888;cursor:pointer;user-select:none;}
+.catalog-sort::after{content:' ▾';font-size:11px;}
+
+/* Clean Catalog Grid */
+.catalog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1200px;margin:0 auto;padding:0 24px 16px;}
+.catalog-card{position:relative;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;cursor:pointer;text-decoration:none;display:block;color:inherit;}
+.catalog-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.12);}
+.catalog-card-img{position:relative;width:100%;padding-top:100%;overflow:hidden;background:#f5f5f5;}
+.catalog-card-img img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
+.catalog-card:hover .catalog-card-img img{transform:scale(1.03);}
+.catalog-card-body{padding:12px 14px;}
+.catalog-card-zh{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:2px;line-height:1.3;}
+.catalog-card-en{font-size:11.5px;color:#888;line-height:1.3;}
+
+/* Pagination */
+.catalog-pagination{display:flex;justify-content:center;align-items:center;gap:6px;padding:32px 0 24px;}
+.catalog-page-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;font-size:13px;color:#666;background:#f5f5f5;border-radius:6px;text-decoration:none;transition:all 0.25s ease;cursor:pointer;border:none;}
+.catalog-page-btn:hover{background:#e8e0d0;color:#C9A84C;}
+.catalog-page-btn.active{background:#C9A84C;color:#111;font-weight:600;}
+.catalog-page-btn.prev,.catalog-page-btn.next{font-size:11px;}
+
+/* Responsive */
+@media(max-width:1200px){.catalog-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){.catalog-grid{grid-template-columns:repeat(2,1fr);gap:16px;padding:0 16px 16px;}.catalog-card-body{padding:10px 12px;}.catalog-card-zh{font-size:13px;}.catalog-filter{padding:16px 0 12px;}.catalog-filter-label{padding-top:5px;font-size:12px;min-width:44px;}}
+
+/* Responsive */
+@media(max-width:900px){
   .products-banner{height:360px;}
   .products-banner-content h1{font-size:26px;}
-  .product-series-grid{grid-template-columns:1fr 1fr;gap:16px;}
-  .filter-toggle-btn{display:inline-block;}
-  .filter-body{flex-direction:column;gap:14px;display:none;}
-  .filter-body.open{display:flex;}
   .products-cta h2{font-size:22px;}
 }
 </style>
 <!-- End Product Center Styles -->
+
 
 <!-- Schema.org -->
 <script type="application/ld+json">
@@ -198,33 +160,89 @@
     <div class="nav-toggle"><span></span><span></span><span></span></div>
    </div>
   
- <div class="mega-panel-v2" id="megaPanel">
-       <div class="mega-panel-v2-inner">
-        <div class="mega-module">
-         <div class="mega-module-title">Classic Marble Collection</div>
-         <div class="mega-module-grid">
-          <a class="mega-module-link" href="products/white-marble.html"><div class="mega-module-thumb"><img src="../images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">White Marble</span><span class="mega-module-link-sub">Snow White / Carrara / Calacatta</span></div></a>
-          <a class="mega-module-link" href="products/beige-marble.html"><div class="mega-module-thumb"><img src="../images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Beige Marble</span><span class="mega-module-link-sub">Crema / Botticino / Emperador</span></div></a>
-          <a class="mega-module-link" href="products/grey-marble.html"><div class="mega-module-thumb"><img src="../images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Grey Marble</span><span class="mega-module-link-sub">Grigio / Pietra Grey / Euboea</span></div></a>
-          <a class="mega-module-link" href="products/black-marble.html"><div class="mega-module-thumb"><img src="../images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Black Marble</span><span class="mega-module-link-sub">Nero / Portoro / Black Marble</span></div></a>
+       <div class="mega-panel">
+       <div class="mega-panel-grid">
+        <a class="mega-panel-link" href="products/white-marble.html">
+         <div class="mega-panel-icon">
+          <img alt="White Marble" loading="lazy" src="../images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp"/>
          </div>
-        </div>
-        <div class="mega-module">
-         <div class="mega-module-title">Premium Rare Stone</div>
-         <div class="mega-module-grid">
-          <a class="mega-module-link" href="products/luxury-stone.html"><div class="mega-module-thumb"><img src="../images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Luxury Stone</span><span class="mega-module-link-sub">Luxury Stone / Blue Agate</span></div></a>
-          <a class="mega-module-link" href="products/travertine-sandstone.html"><div class="mega-module-thumb"><img src="../images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Travertine &amp; Sandstone</span><span class="mega-module-link-sub">Travertine / Sandstone</span></div></a>
-          <a class="mega-module-link" href="products/granite-collection.html"><div class="mega-module-thumb"><img src="../images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Granite Collection</span><span class="mega-module-link-sub">G682 / Golden Beige / Yellow Granite</span></div></a>
+         <div class="mega-panel-text">
+          <strong>White Marble</strong>
+          <span>Snow White / Carrara / Calacatta</span>
          </div>
-        </div>
-        <div class="mega-module">
-         <div class="mega-module-title">Custom &amp; New Arrivals</div>
-         <div class="mega-module-grid">
-          <a class="mega-module-link" href="products/custom-craft.html"><div class="mega-module-thumb"><img src="../images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Custom Craft</span><span class="mega-module-link-sub">Custom Carving / Special Shape</span></div></a>
-          <a class="mega-module-link" href="products/new-arrivals.html"><div class="mega-module-thumb"><img src="../images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">New Arrivals</span><span class="mega-module-link-sub">Latest Collections</span></div></a>
-          <a class="mega-module-link" href="products.html#series"><div class="mega-module-thumb"><img src="../images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.webp" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">Project Stone</span><span class="mega-module-link-sub">Bulk Project Supply</span></div></a>
+        </a>
+        <a class="mega-panel-link" href="products/beige-marble.html">
+         <div class="mega-panel-icon">
+          <img alt="Beige Marble" loading="lazy" src="../images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp"/>
          </div>
-        </div>
+         <div class="mega-panel-text">
+          <strong>Beige Marble</strong>
+          <span>Crema / Botticino / Emperador</span>
+         </div>
+        </a>
+        <a class="mega-panel-link" href="products/grey-marble.html">
+         <div class="mega-panel-icon">
+          <img alt="Grey Marble" loading="lazy" src="../images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.webp"/>
+         </div>
+         <div class="mega-panel-text">
+          <strong>Grey Marble</strong>
+          <span>Grigio / Pietra Grey / Euboea</span>
+         </div>
+        </a>
+        <a class="mega-panel-link" href="products/black-marble.html">
+         <div class="mega-panel-icon">
+          <img alt="Black Marble" loading="lazy" src="../images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.webp"/>
+         </div>
+         <div class="mega-panel-text">
+          <strong>Black Marble</strong>
+          <span>Nero / Portoro / Black Marble</span>
+         </div>
+        </a>
+        <a class="mega-panel-link" href="products/luxury-stone.html">
+         <div class="mega-panel-icon">
+          <img alt="Golden Beige Granite" loading="lazy" src="../images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.webp"/>
+         </div>
+         <div class="mega-panel-text">
+          <strong>Golden Beige Granite</strong>
+          <span>G682 / Yellow Granite</span>
+         </div>
+        </a>
+        <a class="mega-panel-link" href="products/travertine-sandstone.html">
+         <div class="mega-panel-icon">
+          <img alt="White Granite" loading="lazy" src="../images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.webp"/>
+         </div>
+         <div class="mega-panel-text">
+          <strong>White Granite</strong>
+          <span>Sesame White / White Granite</span>
+         </div>
+        </a>
+        <a class="mega-panel-link" href="products/granite-collection.html">
+         <div class="mega-panel-icon">
+          <img alt="Grey Granite" loading="lazy" src="../images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.webp"/>
+         </div>
+         <div class="mega-panel-text">
+          <strong>Grey Granite</strong>
+          <span>Sesame Grey / Grey Granite</span>
+         </div>
+        </a>
+        <a class="mega-panel-link" href="products/custom-craft.html">
+         <div class="mega-panel-icon">
+          <img alt="Luxury Stone" loading="lazy" src="../images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp"/>
+         </div>
+         <div class="mega-panel-text">
+          <strong>Luxury Stone</strong>
+          <span>Blue Agate / Semi-Precious</span>
+         </div>
+        </a>
+        <a class="mega-panel-link" href="products/new-arrivals.html">
+         <div class="mega-panel-icon">
+          <img alt="Travertine" loading="lazy" src="../images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.webp"/>
+         </div>
+         <div class="mega-panel-text">
+          <strong>Travertine</strong>
+          <span>Travertine / Sandstone</span>
+         </div>
+        </a>
        </div>
       </div>
 </nav>
@@ -239,7 +257,7 @@
     <h1>Global Premium Natural Marble &middot; Ten Exclusive Collections</h1>
     <p>Curated from the world's rarest quarries &middot; Customized for luxury commercial &amp; residential spaces</p>
     <div class="products-banner-btns">
-     <a class="btn-gold" href="#series">Browse All Stone</a>
+     <a class="btn-gold" href="#s1">Browse All Stone</a>
      <a class="btn-outline-white" href="#download-brochure">Download Brochure</a>
      <div class="filter-group">
       <div class="filter-group-label">Application</div>
@@ -258,276 +276,100 @@
   </section>
 
   <!-- Filter -->
-  <section class="filter-section">
+  <section 
+  <!-- Product Filter + Catalog Grid -->
+  <section class="catalog-filter">
    <div class="container">
-    <button class="filter-toggle-btn" id="filterToggleEn">Filter Stones &#9662;</button>
-    <div class="filter-body" id="filterBodyEn">
-     <div class="filter-group">
-      <div class="filter-group-label">Stone Color</div>
-      <div class="filter-tags" data-filter="color">
-       <span class="filter-tag all-tag active" data-val="all">All</span>
-       <span class="filter-tag" data-val="white">White</span>
-       <span class="filter-tag" data-val="beige">Beige</span>
-       <span class="filter-tag" data-val="grey">Grey</span>
-       <span class="filter-tag" data-val="black">Black</span>
-       <span class="filter-tag" data-val="multi">Multi-color Luxury</span>
-      </div>
+    <div class="catalog-filter-row">
+     <span class="catalog-filter-label">Material</span>
+     <div class="catalog-filter-tags">
+      <span class="catalog-filter-pill active">All</span>
+      <span class="catalog-filter-pill">Marble</span>
+      <span class="catalog-filter-pill">Granite</span>
+      <span class="catalog-filter-pill">Luxury</span>
+      <span class="catalog-filter-pill">Travertine</span>
+      <span class="catalog-filter-pill">Sandstone</span>
      </div>
-     <div class="filter-group">
-      <div class="filter-group-label">Quarry Origin</div>
-      <div class="filter-tags" data-filter="origin">
-       <span class="filter-tag all-tag active" data-val="all">All</span>
-       <span class="filter-tag" data-val="italy">Italy</span>
-       <span class="filter-tag" data-val="turkey">Turkey</span>
-       <span class="filter-tag" data-val="greece">Greece</span>
-       <span class="filter-tag" data-val="brazil">Brazil</span>
-       <span class="filter-tag" data-val="iran">Iran</span>
-      </div>
+    </div>
+    <div class="catalog-filter-row">
+     <span class="catalog-filter-label">Color</span>
+     <div class="catalog-filter-tags">
+      <span class="catalog-filter-pill active">All</span>
+      <span class="catalog-filter-pill">White</span>
+      <span class="catalog-filter-pill">Beige</span>
+      <span class="catalog-filter-pill">Grey</span>
+      <span class="catalog-filter-pill">Black</span>
+      <span class="catalog-filter-pill">Multi</span>
      </div>
-     <div class="filter-group">
-      <div class="filter-group-label">Application</div>
-      <div class="filter-tags" data-filter="scene">
-       <span class="filter-tag all-tag active" data-val="all">All</span>
-       <span class="filter-tag" data-val="wall">Feature Wall</span>
-       <span class="filter-tag" data-val="floor">Flooring</span>
-       <span class="filter-tag" data-val="counter">Countertop</span>
-       <span class="filter-tag" data-val="villa">Villa</span>
-       <span class="filter-tag" data-val="commercial">Commercial</span>
-      </div>
+    </div>
+    <div class="catalog-filter-row">
+     <span class="catalog-filter-label">Format</span>
+     <div class="catalog-filter-tags">
+      <span class="catalog-filter-pill active">All</span>
+      <span class="catalog-filter-pill">Slab</span>
+      <span class="catalog-filter-pill">Cut-to-Size</span>
+      <span class="catalog-filter-pill">Block</span>
+      <span class="catalog-filter-pill">Project</span>
      </div>
     </div>
    </div>
   </section>
-
-  <!-- 10 Series Card Grid -->
-  <section>
-   <div class="container" style="max-width:1200px;">
-    <div class="product-series-grid" id="productSeriesGridEn">
-     <div class="product-series-card" data-cat="white,italy,wall,villa" data-filter="lobby,wall">
-      <div class="product-series-img"><img src="../images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp" alt="White Marble" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">White Marble</div><div class="product-series-meta-en">Snow White / Carrara</div></div>
-      <div class="product-series-overlay"><a href="products/white-marble.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="beige,turkey,floor" data-filter="lobby,floor">
-      <div class="product-series-img"><img src="../images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="Beige Marble" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Beige Marble</div><div class="product-series-meta-en">Crema / Botticino</div></div>
-      <div class="product-series-overlay"><a href="products/beige-marble.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="grey,greece,counter" data-filter="bathroom,countertop">
-      <div class="product-series-img"><img src="../images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.webp" alt="Grey Marble" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Grey Marble</div><div class="product-series-meta-en">Grigio / Pietra Grey</div></div>
-      <div class="product-series-overlay"><a href="products/grey-marble.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="black,iran,wall,villa" data-filter="wall,countertop">
-      <div class="product-series-img"><img src="../images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.webp" alt="Black Marble" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Black Marble</div><div class="product-series-meta-en">Nero / Portoro</div></div>
-      <div class="product-series-overlay"><a href="products/black-marble.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="multi,brazil,commercial,floor" data-filter="facade,floor">
-      <div class="product-series-img"><img src="../images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.webp" alt="Granite" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Granite Collection</div><div class="product-series-meta-en">G682 / Golden Beige</div></div>
-      <div class="product-series-overlay"><a href="products/granite-collection.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="white,brazil,counter,commercial" data-filter="facade,countertop">
-      <div class="product-series-img"><img src="../images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.webp" alt="White Granite" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">White Granite</div><div class="product-series-meta-en">Sesame White</div></div>
-      <div class="product-series-overlay"><a href="products/new-arrivals.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="grey,brazil,floor,commercial" data-filter="facade,floor">
-      <div class="product-series-img"><img src="../images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.webp" alt="Grey Granite" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Grey Granite</div><div class="product-series-meta-en">Sesame Grey</div></div>
-      <div class="product-series-overlay"><a href="products/granite-collection.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="multi,brazil,wall,villa" data-filter="lobby,wall">
-      <div class="product-series-img"><img src="../images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp" alt="Luxury Stone" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Luxury Stone</div><div class="product-series-meta-en">Blue Agate / Onyx</div></div>
-      <div class="product-series-overlay"><a href="products/luxury-stone.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="beige,iran,wall,villa,floor" data-filter="facade,wall,floor">
-      <div class="product-series-img"><img src="../images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.webp" alt="Travertine" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Travertine & Sandstone</div><div class="product-series-meta-en">Natural Texture</div></div>
-      <div class="product-series-overlay"><a href="products/travertine-sandstone.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-     <div class="product-series-card" data-cat="multi,italy,commercial" data-filter="wall,countertop">
-      <div class="product-series-img"><img src="../images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="Custom Craft" loading="lazy"/><div class="hsst-wm">HSST</div></div>
-      <div class="product-series-meta"><div class="product-series-meta-zh">Custom Craft</div><div class="product-series-meta-en">Artistic Carving</div></div>
-      <div class="product-series-overlay"><a href="products/custom-craft.html">View Detail</a><a href="contact.html">Inquire Now</a><a class="sample-req" href="contact.html#sample">Request Sample</a><button class="cmp-btn" type="button">🔲 Compare</button></div>
-     </div>
-    </div>
+  <div class="catalog-meta">
+   <div class="container">
+    <span class="catalog-count">10 Series</span>
+    <span class="catalog-sort">Default</span>
    </div>
-  </section>
-<section class="series-overview-section" id="series">
-    <h2>
-     10 Major Stone Series
-    </h2>
-    <p class="series-subtitle-zh" style="font-size:0.95rem;color:var(--color-text-muted);margin:-0.5rem 0 1rem;">
-     精選石材系列
-    </p>
-    <div class="container">
-     <div class="series-overview-grid">
-      <a class="series-overview-card" href="products/white-marble.html">
-       <div class="series-overview-icon">
-        1
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         White Marble
-        </h3>
-        <p>
-         Italian Carrara, Jazz White, Statuario
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/beige-marble.html">
-       <div class="series-overview-icon">
-        2
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Beige Marble
-        </h3>
-        <p>
-         Spanish Crema, Portuguese Beige, Imperial Beige
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/grey-marble.html">
-       <div class="series-overview-icon">
-        3
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Grey Marble
-        </h3>
-        <p>
-         Italian Grey, Greek Silver, Yunnan Grey
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/black-marble.html">
-       <div class="series-overview-icon">
-        4
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Black Marble
-        </h3>
-        <p>
-         Nero Marquina, Absolute Black, Space Black
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/granite-collection.html">
-       <div class="series-overview-icon">
-        5
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Golden Granite
-        </h3>
-        <p>
-         Giallo Veneziano, Baltic Brown, Juperana Gold
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/new-arrivals.html">
-       <div class="series-overview-icon">
-        6
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         White Granite
-        </h3>
-        <p>
-         White Galaxy, Pearl White, G603
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/granite-collection.html">
-       <div class="series-overview-icon">
-        7
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Sesame Grey
-        </h3>
-        <p>
-         Sesame Grey, G623, China Grey
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/luxury-stone.html">
-       <div class="series-overview-icon">
-        8
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Luxury &amp; Rare
-        </h3>
-        <p>
-         Malachite, Blue Sapphire, Patagonia
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/travertine-sandstone.html">
-       <div class="series-overview-icon">
-        9
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Travertine
-        </h3>
-        <p>
-         Roman Travertine, Golden Travertine, Limestone
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-      <a class="series-overview-card" href="products/custom-craft.html">
-       <div class="series-overview-icon">
-        10
-       </div>
-       <div class="series-overview-text">
-        <h3>
-         Custom Crafted
-        </h3>
-        <p>
-         Fireplaces, Sculptures, Columns, Custom Crafts
-        </p>
-       </div>
-       <div class="series-overview-arrow">
-        ›
-       </div>
-      </a>
-     </div>
-    </div>
-   </section>
+  </div>
+  <div class="catalog-grid">
+   <a class="catalog-card" href="products/white-marble.html">
+    <div class="catalog-card-img"><img src="../images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp" alt="White Marble" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">White Marble</div><div class="catalog-card-en">白色系臻選</div></div>
+   </a>
+   <a class="catalog-card" href="products/beige-marble.html">
+    <div class="catalog-card-img"><img src="../images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="Beige Marble" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Beige Marble</div><div class="catalog-card-en">米黃系臻選</div></div>
+   </a>
+   <a class="catalog-card" href="products/grey-marble.html">
+    <div class="catalog-card-img"><img src="../images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.webp" alt="Grey Marble" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Grey Marble</div><div class="catalog-card-en">灰色系臻選</div></div>
+   </a>
+   <a class="catalog-card" href="products/black-marble.html">
+    <div class="catalog-card-img"><img src="../images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.webp" alt="Black Marble" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Black Marble</div><div class="catalog-card-en">黑色系臻選</div></div>
+   </a>
+   <a class="catalog-card" href="products/luxury-stone.html">
+    <div class="catalog-card-img"><img src="../images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.webp" alt="Granite Collection" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Granite Collection</div><div class="catalog-card-en">精品花崗岩系列</div></div>
+   </a>
+   <a class="catalog-card" href="products/travertine-sandstone.html">
+    <div class="catalog-card-img"><img src="../images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.webp" alt="White Granite" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">White Granite</div><div class="catalog-card-en">白麻花崗岩</div></div>
+   </a>
+   <a class="catalog-card" href="products/granite-collection.html">
+    <div class="catalog-card-img"><img src="../images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.webp" alt="Grey Granite" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Grey Granite</div><div class="catalog-card-en">灰色花崗岩</div></div>
+   </a>
+   <a class="catalog-card" href="products/custom-craft.html">
+    <div class="catalog-card-img"><img src="../images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp" alt="Luxury Stone" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Luxury Stone</div><div class="catalog-card-en">奢石典藏系列</div></div>
+   </a>
+   <a class="catalog-card" href="products/new-arrivals.html">
+    <div class="catalog-card-img"><img src="../images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.webp" alt="Travertine &amp; Sandstone" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Travertine &amp; Sandstone</div><div class="catalog-card-en">洞石砂岩</div></div>
+   </a>
+   <a class="catalog-card" href="products/project-stone.html">
+    <div class="catalog-card-img"><img src="../images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" alt="Custom Craft" loading="lazy"/></div>
+    <div class="catalog-card-body"><div class="catalog-card-zh">Custom Craft</div><div class="catalog-card-en">異形定製</div></div>
+   </a>
+  </div>
+  <div class="catalog-pagination">
+   <span class="catalog-page-btn prev">&lsaquo;</span>
+   <span class="catalog-page-btn active">1</span>
+   <span class="catalog-page-btn">2</span>
+   <span class="catalog-page-btn">3</span>
+   <span class="catalog-page-btn next">&rsaquo;</span>
+  </div>
+ 
    <section class="product-series-section" id="s1">
     <div class="series-section-header" style="background: linear-gradient(to bottom, #e8dfd4, #d4cdc2);">
      <div class="container">
@@ -2400,188 +2242,18 @@
 
 <script>
 (function(){
-
-  // --- mega-panel & dropdown hover (timeout 200ms) ---
-  var prodNav = document.querySelector('.nav-dropdown'); // Products
-  var megaPanel = document.getElementById('megaPanel');
-  var projDropdowns = document.querySelectorAll('.nav-dropdown');
-  var projNav = projDropdowns.length > 1 ? projDropdowns[1] : null;
-  var dropPanel = document.querySelector('.dropdown-panel');
-  var megaTimer = null, dropTimer = null;
-  if (prodNav && megaPanel) {
-    prodNav.addEventListener('mouseenter', function(){ clearTimeout(megaTimer); megaPanel.style.display='block'; });
-    prodNav.addEventListener('mouseleave', function(){ megaTimer=setTimeout(function(){ megaPanel.style.display='none'; },200); });
-    megaPanel.addEventListener('mouseenter', function(){ clearTimeout(megaTimer); megaPanel.style.display='block'; });
-    megaPanel.addEventListener('mouseleave', function(){ megaTimer=setTimeout(function(){ megaPanel.style.display='none'; },200); });
-  }
-  if (projNav && dropPanel) {
-    projNav.addEventListener('mouseenter', function(){ clearTimeout(dropTimer); dropPanel.style.display='block'; });
-    projNav.addEventListener('mouseleave', function(){ dropTimer=setTimeout(function(){ dropPanel.style.display='none'; },200); });
-    dropPanel.addEventListener('mouseenter', function(){ clearTimeout(dropTimer); dropPanel.style.display='block'; });
-    dropPanel.addEventListener('mouseleave', function(){ dropTimer=setTimeout(function(){ dropPanel.style.display='none'; },200); });
-  }
-  var tags=document.querySelectorAll('.filter-tag');
-  var cards=document.querySelectorAll('.product-series-card');
-  var state={};
-  tags.forEach(function(t){
-    t.addEventListener('click',function(){
-      var g=t.closest('.filter-tags');
-      var cat=g.getAttribute('data-filter');
-      var v=t.getAttribute('data-val');
-      if(t.classList.contains('all-tag')){
-        g.querySelectorAll('.filter-tag').forEach(function(x){x.classList.remove('active')});
-        t.classList.add('active');
-        delete state[cat];
-      }else{
-        g.querySelector('.all-tag').classList.remove('active');
-        t.classList.toggle('active');
-        var active=g.querySelectorAll('.filter-tag:not(.all-tag).active');
-        if(active.length===0){
-          g.querySelector('.all-tag').classList.add('active');
-          delete state[cat];
-        }else{
-          state[cat]=Array.from(active).map(function(x){return x.getAttribute('data-val')});
-        }
-      }
-      cards.forEach(function(c){
-        var dc=c.getAttribute('data-cat')||'';
-        var show=true;
-        for(var k in state){
-          if(!state[k].some(function(vv){return dc.indexOf(vv)>=0})){show=false;break;}
-        }
-        c.style.display=show?'':'none';
-      });
-    });
-  });
-  var ft=document.getElementById('filterToggleEn');
-  if(ft){ft.addEventListener('click',function(){
-    var fb=document.getElementById('filterBodyEn');
-    if(fb)fb.classList.toggle('open');
-  });}
+  // Brochure Modal
   var mb=document.getElementById('brochureModalEn');
   if(mb){
     var btn=document.querySelector('.btn-outline-white');
     if(btn){btn.addEventListener('click',function(e){e.preventDefault();mb.classList.add('open')});}
     var mc=document.getElementById('modalCloseEn');
     if(mc){mc.addEventListener('click',function(){mb.classList.remove('open')});}
-    mb.addEventListener('click',function(e){if(e.target===mb)mb.classList.remove('open')});
-  }
-
-  // --- Comparison Feature ---
-  var cmpSelected = {};
-  var __cmpPanel = document.getElementById('comparePanelEn');
-  var __cmpList = document.getElementById('cmpListEn');
-  var cmpBtns = document.querySelectorAll('.cmp-btn');
-  cmpBtns.forEach(function(btn, idx){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      var card = btn.closest('.product-series-card');
-      var nameEl = card.querySelector('.product-series-meta-zh');
-      var name = nameEl ? nameEl.textContent.trim() : ('Product ' + (idx+1));
-      if (cmpSelected[name]) {
-        delete cmpSelected[name];
-        btn.textContent = '🔲 Compare';
-        btn.classList.remove('cmp-selected');
-      } else {
-        cmpSelected[name] = true;
-        btn.textContent = '✅ Added';
-        btn.classList.add('cmp-selected');
-      }
-      updateCmpPanel();
-    });
-  });
-  function updateCmpPanel(){
-    var names = Object.keys(cmpSelected);
-    __cmpList.innerHTML = names.map(function(n){
-      return '<span class="compare-panel-item">' + n + '<span class="remove-compare" data-name="' + n + '">×</span></span>';
-    }).join('');
-    if (names.length > 0) {
-      __cmpPanel.classList.add('show');
-    } else {
-      __cmpPanel.classList.remove('show');
-    }
-  }
-  document.getElementById('cmpClearEn').addEventListener('click', function(){
-    cmpSelected = {};
-    cmpBtns.forEach(function(b){ b.textContent = '🔲 Compare'; b.classList.remove('cmp-selected'); });
-    updateCmpPanel();
-  });
-  document.getElementById('cmpStartEn').addEventListener('click', function(){
-    var names = Object.keys(cmpSelected);
-    if (names.length < 2) {
-      alert('Please select at least 2 products to compare');
-      return;
-    }
-    alert('Comparing: ' + names.join(', '));
-  });
-
-    // Remove individual items from compare panel
-  __cmpList.addEventListener('click', function(e){
-    if (e.target.classList.contains('remove-compare')) {
-      var name = e.target.getAttribute('data-name');
-      delete cmpSelected[name];
-      cmpBtns.forEach(function(b){
-        var card = b.closest('.product-series-card');
-        var nameEl = card.querySelector('.product-series-meta-zh');
-        var cardName = nameEl ? nameEl.textContent.trim() : '';
-        if (cardName === name) {
-          b.textContent = '🔲 Compare';
-          b.classList.remove('cmp-selected');
-        }
-      });
-      updateCmpPanel();
-    }
-  });
-
-  // --- Application filter integration ---
-  var appTags = document.querySelectorAll('.filter-tags[data-filter="app"] .filter-tag');
-  appTags.forEach(function(t){
-    t.addEventListener('click', function(){
-      var g = t.closest('.filter-tags');
-      var cat = g.getAttribute('data-filter');
-      var v = t.getAttribute('data-val');
-      if (t.classList.contains('all-tag')) {
-        g.querySelectorAll('.filter-tag').forEach(function(x){ x.classList.remove('active'); });
-        t.classList.add('active');
-        delete state[cat];
-      } else {
-        g.querySelector('.all-tag').classList.remove('active');
-        t.classList.toggle('active');
-        var active = g.querySelectorAll('.filter-tag:not(.all-tag).active');
-        if (active.length === 0) {
-          g.querySelector('.all-tag').classList.add('active');
-          delete state[cat];
-        } else {
-          state[cat] = Array.from(active).map(function(x){ return x.getAttribute('data-val'); });
-        }
-      }
-      cards.forEach(function(c){
-        var dc = c.getAttribute('data-filter') || '';
-        var show = true;
-        for (var k in state) {
-          if (k === 'app') {
-            if (!state[k].some(function(vv){ return dc.indexOf(vv) >= 0; })) { show = false; break; }
-          } else {
-            var dcFull = c.getAttribute('data-cat') || '';
-            if (!state[k].some(function(vv){ return dcFull.indexOf(vv) >= 0; })) { show = false; break; }
-          }
-        }
-        c.style.display = show ? '' : 'none';
-      });
-    });
-  });
-
+    mb.addEventListener('click',function(e){if(e.target===mb)mb.classList.remove('open')});}
 })();
 </script>
 
 
-<!-- Compare Panel -->
-<div class="compare-panel" id="comparePanelEn">
-  <span class="compare-panel-label">Selected:</span>
-  <div class="compare-panel-items" id="cmpListEn"></div>
-  <button class="compare-panel-btn" id="cmpStartEn" type="button">Start Compare</button>
-  <button class="compare-panel-clear" id="cmpClearEn" type="button">Clear</button>
-</div>
 
 
 <!-- Back to Top -->
@@ -2591,6 +2263,7 @@
 .back-to-top.visible{opacity:1;visibility:visible;}
 .back-to-top:hover{background:#C9A84C;color:#111;transform:translateY(-3px);}
 @media(max-width:768px){.back-to-top{bottom:80px;right:16px;width:38px;height:38px;font-size:18px;}}
+</style>
 
 <style>
 .breadcrumb{padding:12px 0;font-size:13px;}
@@ -2602,7 +2275,6 @@
 @media(max-width:768px){.breadcrumb{font-size:11px;}}
 </style>
 
-</style>
 <script>
 (function(){
   var btn=document.getElementById('backToTop');
