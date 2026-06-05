@@ -472,11 +472,42 @@
      </span>
     </div>
    </div>
-  </nav>    閱讀全文 →
-        </span>
-       </div>
-      </article>
-     <!-- 04 中东五星级酒店 -->
+  </nav>
+  
+  <!-- ═══ HERO ═══ -->
+  <section style="padding:160px 0 48px;background:linear-gradient(135deg,#1a1a2e,#2c2c3e);position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 50%,rgba(212,175,55,0.1) 0%,transparent 70%);"></div>
+    <div class="container" style="position:relative;z-index:1;text-align:center;">
+      <h1 style="color:#fff;font-family:var(--font-heading);font-size:clamp(2.2rem,4.5vw,3.5rem);margin-bottom:12px;letter-spacing:2px;">行業洞察與專業資訊</h1>
+      <p style="color:rgba(255,255,255,0.6);font-size:clamp(0.95rem,1.5vw,1.15rem);margin-bottom:20px;font-weight:300;">Industry Insights &amp; Professional Updates</p>
+      <nav class="breadcrumb" aria-label="breadcrumb" style="justify-content:center;">
+        <ol>
+          <li><a href="index.html">首頁</a></li>
+          <li>資訊動態</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══ FILTER BAR ═══ -->
+  <div style="padding:16px 0;background:#fff;border-bottom:1px solid #eaeaea;position:sticky;top:80px;z-index:99;">
+    <div class="container" style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+      <button class="filter-tag active" data-filter="all" style="padding:8px 24px;border:1.5px solid #1a1a2e;border-radius:24px;background:#1a1a2e;color:#fff;font-size:14px;cursor:pointer;transition:all 0.25s;">全部</button>
+      <button class="filter-tag" data-filter="company" style="padding:8px 24px;border:1.5px solid #ddd;border-radius:24px;background:#fff;color:#444;font-size:14px;cursor:pointer;transition:all 0.25s;">公司新聞</button>
+      <button class="filter-tag" data-filter="industry" style="padding:8px 24px;border:1.5px solid #ddd;border-radius:24px;background:#fff;color:#444;font-size:14px;cursor:pointer;transition:all 0.25s;">行業洞察</button>
+    </div>
+  </div>
+
+  <style>
+  .filter-tag.active { background:#1a1a2e!important;color:#fff!important;border-color:#1a1a2e!important; }
+  .filter-tag:hover:not(.active) { border-color:#C9A84C;color:#C9A84C; }
+  </style>
+
+  <!-- ═══ NEWS GRID ═══ -->
+  <section class="section-padding" style="padding-top:40px;">
+    <div class="container">
+      <div class="news-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;">
+<!-- 04 中东五星级酒店 -->
      <article class="news-card fade-in" data-category="company" onclick="openNewsModal('modal-04')">
        <div class="news-card-image">
         <div class="bg" style="background-image:url('images/products/s1/59C8213E-4617-4EE5-A602-6E0DE735F97C.webp');background-size:cover;background-position:center">
