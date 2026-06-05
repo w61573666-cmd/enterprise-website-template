@@ -169,6 +169,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  overflow: visible;
 }
 
 .navbar.scrolled {
@@ -3907,7 +3908,7 @@ section[id],
 
 
 
-/* ── News Modal ───────────────────────────────────────────────────── */
+/* ── News Modal ────────────────────────���──────────────────────────── */
 .news-modal-tpl { display: none !important; }
 
 .news-modal-overlay {
@@ -6276,7 +6277,7 @@ html {
 
 
 
-/* ====== About Page: Strength Grid (八大核心實力) ====== */
+/* ====== About Page: Strength Grid (八大核���實力) ====== */
 .strength-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
 .strength-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .strength-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
