@@ -4521,7 +4521,7 @@ html {
 
   /* Menu header with close button area */
   .nav-links::after {
-    content: 'MENU';
+    content: "☰ 菜單";
     position: absolute;
     top: 24px;
     left: 24px;
