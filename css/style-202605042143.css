@@ -38,7 +38,7 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   /* Layout — Responsive Width System */
-  --max-width-xxl: 1440px;  /* ≥1920px — spacious, no large empty areas */
+  --max-width-xxl: 1600px;  /* ≥1920px — spacious, no large empty areas */
   --max-width-xl: 1280px;   /* 1440~1919px — proportional */
   --max-width-lg: 1120px;   /* 1200~1439px — compact */
   --max-width: 100%;        /* <1200px — fluid, padding-based */
@@ -70,7 +70,8 @@ ul, ol { list-style: none; }
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; line-height: 1.3; }
 
 /* ---------- Utility ---------- */
-.container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding-left: var(--container-padding); padding-right: var(--container-padding); box-sizing: border-box; }@media (min-width: 1920px) { .container { max-width: var(--max-width-xxl); padding-left: 0; padding-right: 0; } }
+.container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding-left: var(--container-padding); padding-right: var(--container-padding); box-sizing: border-box; }
+@media (min-width: 1920px) { .container { max-width: var(--max-width-xxl); padding-left: 0; padding-right: 0; } }
 @media (min-width: 1440px) and (max-width: 1919px) { .container { max-width: var(--max-width-xl); padding-left: 0; padding-right: 0; } }
 @media (min-width: 1200px) and (max-width: 1439px) { .container { max-width: var(--max-width-lg); padding-left: 0; padding-right: 0; } }
 .section-padding { padding: 40px 0; }
@@ -6388,7 +6389,7 @@ html {
   font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
-/* 小屏幕缩小水印 */
+/* 小屏幕缩��水印 */
 @media (max-width: 768px) {
   .hsst-wm {
     font-size: 0.48rem;
@@ -7249,6 +7250,24 @@ html {
 }
 
 /* ── Global: no horizontal scrollbar ever ── */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* ── Full-width sections extend to screen edge at all widths ── */
+.hero, .hero-grid-video, .page-header,
+.about-hero-video-section, .contact-hero-section,
+[class*="-hero"], [class*="-banner"],
+.footer, .cta-section {
+  width: 100vw;
+  max-width: 100vw !important;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  position: relative;
+}
+
 /* ── Navigation: prevent item collapse at 900~1200px ── */
 @media (min-width: 901px) and (max-width: 1199px) {
   .nav-links {
@@ -7276,9 +7295,4 @@ html {
   .nav-logo-text small {
     font-size: 0.65rem;
   }
-}
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100vw;
 }
