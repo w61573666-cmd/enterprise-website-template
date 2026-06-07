@@ -6292,7 +6292,7 @@ html {
 .strength-card h4 { font-family: var(--font-heading); font-size: 1.05rem; color: var(--color-primary); margin-bottom: 12px; line-height: 1.4; }
 .strength-card p { font-size: 0.88rem; color: var(--color-mid-gray); line-height: 1.75; margin: 0; }
 
-/* ====== About Page: Team Grid (六層團隊架構) ====== */
+/* ====== About Page: Team Grid (六層團���架構) ====== */
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
 .team-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .team-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
@@ -7159,7 +7159,7 @@ html {
 /* Tier 5: <800px       → mobile restructure (column layout)  */
 /*                                                             */
 /* No horizontal scrollbars at any width.                      */
-/* ═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════��═══════════════ */
 
 /* ── Full-width sections (banner, hero, navbar, footer) ── */
 .hero, .hero-grid-video, .page-header, .navbar, .footer, .cta-section,
@@ -7249,6 +7249,34 @@ html {
 }
 
 /* ── Global: no horizontal scrollbar ever ── */
+/* ── Navigation: prevent item collapse at 900~1200px ── */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .nav-links {
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow: visible;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.3px;
+    padding: 4px 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .navbar .container {
+    flex-wrap: nowrap;
+  }
+  .nav-logo-text {
+    max-width: 140px;
+  }
+  .nav-logo-text strong {
+    font-size: 0.9rem;
+  }
+  .nav-logo-text small {
+    font-size: 0.65rem;
+  }
+}
 html, body {
   overflow-x: hidden;
   width: 100%;
