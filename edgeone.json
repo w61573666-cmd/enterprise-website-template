@@ -1,7 +1,7 @@
 {
   "framework": "static",
   "buildCommand": "",
-  "outputDirectory": ".",
+  "outputDirectory": "./",
   "headers": [
     {
       "source": "**/*.html",
@@ -26,6 +26,24 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "**/*.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "**/*.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
         }
       ]
     }
