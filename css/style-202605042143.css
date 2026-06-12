@@ -178,6 +178,10 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 2px 12px rgba(0,0,0,0.1);
   overflow: visible;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .navbar.scrolled {
@@ -289,12 +293,15 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   pointer-events: none;
   border: 1px solid rgba(0,0,0,0.04);
-  z-index: 1000;
+  z-index: 1001;
+  transform: translateX(-50%) translateY(8px) translateZ(0);
+  -webkit-transform: translateX(-50%) translateY(8px) translateZ(0);
 }
 .nav-dropdown:hover .mega-panel {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0) translateZ(0);
+  -webkit-transform: translateX(-50%) translateY(0) translateZ(0);
   pointer-events: auto; /* 父元素 hover 时面板可交互 */
 }
 .mega-panel:hover {
@@ -360,7 +367,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
+  transform: translateX(-50%) translateY(8px) translateZ(0);
+  -webkit-transform: translateX(-50%) translateY(8px) translateZ(0);
   min-width: 260px;
   background: #F5F0EB;
   border-radius: var(--radius-lg);
@@ -371,11 +379,13 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   pointer-events: none;
   border: 1px solid rgba(0,0,0,0.04);
+  z-index: 1001;
 }
 .nav-dropdown:hover .dropdown-panel {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0) translateZ(0);
+  -webkit-transform: translateX(-50%) translateY(0) translateZ(0);
   pointer-events: auto;
 }
 .dropdown-link {
