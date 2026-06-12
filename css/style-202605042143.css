@@ -360,21 +360,6 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .mega-panel-viewall a::after { display: none !important; }
 .mega-panel-viewall a:hover { color: var(--color-accent) !important; }
 
-/* Projects mega-panel: collapsed 3x3, expandable */
-.nav-dropdown-projects .mega-panel-grid .mega-panel-link:nth-child(n+10) {
-  display: none;
-}
-.nav-dropdown-projects .mega-panel-grid.expanded .mega-panel-link:nth-child(n+10) {
-  display: flex;
-}
-.nav-dropdown-projects .mega-panel-expand-toggle {
-  cursor: pointer;
-  user-select: none;
-}
-.nav-dropdown-projects .mega-panel-grid.expanded ~ .mega-panel-viewall .mega-panel-expand-toggle::after {
-  content: ' ▲';
-}
-
 /* Projects Dropdown */
 .dropdown-panel {
   position: absolute;

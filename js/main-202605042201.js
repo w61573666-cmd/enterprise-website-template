@@ -94,51 +94,67 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- Projects Mega-Panel 3×3 Collapse / Expand ----------
-  // Only for projects dropdown > 9 items (16 total).
-  // Products dropdown (10 items) also gets collapsed for consistency.
-  (function initProjectsCollapse() {
-    document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
-      var trigger = dd.querySelector(':scope > a');
-      if (!trigger) return;
-      var href = trigger.getAttribute('href') || '';
-      // Match both Chinese and English projects dropdown
-      var isProjects = /projects\.html/i.test(href);
-      if (!isProjects) return;
+  // ---------- Products & Projects Mega-Panel 3×3 Collapse / Expand ----------
+  // Both products and projects dropdowns: show 9 items (3×3), hide extras,
+  // click view-all link to expand.
+  // Handles: .mega-panel-link (flat grid) and .mega-module-link (grouped grid)
+  (function initMegaPanelCollapse() {
+    var isEn = /\/en\//.test(window.location.pathname);
 
-      // Mark this dropdown for CSS targeting
-      dd.classList.add('nav-dropdown-projects');
-
-      // Find view-all link and convert to expand toggle
-      var viewAll = dd.querySelector('.mega-panel-viewall a');
-      if (!viewAll) return;
-      viewAll.classList.add('mega-panel-expand-toggle');
-      viewAll.removeAttribute('href');
-      viewAll.style.cursor = 'pointer';
-      var grid = dd.querySelector('.mega-panel-grid');
+    function applyCollapse(dropdown, allLinks, viewAllA) {
+      if (allLinks.length <= 9) return;
+      // Hide items 10+ by display:none (avoids nth-child issues with grouped grids)
+      var hidden = [];
+      for (var i = 9; i < allLinks.length; i++) {
+        allLinks[i].style.display = 'none';
+        hidden.push(allLinks[i]);
+      }
+      if (!viewAllA) return;
+      viewAllA.removeAttribute('href');
+      viewAllA.style.cursor = 'pointer';
       var expanded = false;
-      var zhText = '瀏覽全部工程案例';
-      var zhClose = '收起工程案例 ▲';
-      var enText = 'View All Projects';
-      var enClose = 'Collapse ▲';
-      var isEn = /^\/en\//.test(window.location.pathname) || /\/en\//.test(href);
-      var openText = isEn ? ('→ ' + enText) : ('→ ' + zhText);
-      var closeText = isEn ? enClose : zhClose;
-      viewAll.textContent = openText;
-
-      viewAll.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+      var orig = (viewAllA.textContent || '').replace(/^\s*→\s*/, '').trim();
+      var openLabel = '→ ' + orig;
+      var closeLabel = isEn ? 'Collapse ▲' : (orig + ' ▲');
+      viewAllA.textContent = openLabel;
+      viewAllA.addEventListener('click', function(e) {
+        e.preventDefault(); e.stopPropagation();
         expanded = !expanded;
-        if (expanded) {
-          grid.classList.add('expanded');
-          viewAll.textContent = closeText;
-        } else {
-          grid.classList.remove('expanded');
-          viewAll.textContent = openText;
-        }
+        hidden.forEach(function(l) { l.style.display = expanded ? '' : 'none'; });
+        viewAllA.textContent = expanded ? closeLabel : openLabel;
       });
+    }
+
+    // --- Pattern A: .nav-dropdown > mega-panel > mega-panel-link (most pages) ---
+    document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+      var a = dd.querySelector(':scope > a');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      var isProducts = /products\.html/i.test(href);
+      var isProjects = /projects\.html/i.test(href);
+      if (!isProducts && !isProjects) return;
+      var links = dd.querySelectorAll('.mega-panel-link');
+      var viewAll = dd.querySelector('.mega-panel-viewall a');
+      applyCollapse(dd, links, viewAll);
     });
+
+    // --- Pattern B: mega-panel-v2 (products.html only) ---
+    var megaV2 = document.querySelector('.mega-panel-v2');
+    if (megaV2) {
+      var links = megaV2.querySelectorAll('.mega-module-link');
+      var viewAllRow = megaV2.querySelector('.mega-panel-viewall');
+      if (!viewAllRow && links.length > 9) {
+        viewAllRow = document.createElement('div');
+        viewAllRow.className = 'mega-panel-viewall';
+        viewAllRow.style.cssText = 'text-align:center;padding-top:16px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);';
+        var va = document.createElement('a');
+        va.href = '#';
+        va.textContent = isEn ? '→ View All Series' : '→ 瀏覽全部石材系列';
+        viewAllRow.appendChild(va);
+        megaV2.querySelector('.mega-panel-v2-inner').appendChild(viewAllRow);
+      }
+      applyCollapse(megaV2, links, viewAllRow ? viewAllRow.querySelector('a') : null);
+    }
   })();
 
   // ---------- Series Card Click Handler (All versions) ----------
