@@ -3483,15 +3483,8 @@ section[id],
   /* backdrop-filter removed to fix Chrome GPU compositing bug */
   border-top: 2px solid var(--color-accent);
   box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  max-height: calc(100vh - var(--nav-height) - 40px);
-  height: auto;
-  overflow-y: visible;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(212,175,55,0.4) transparent;
+  overflow: visible !important;
 }
-.mega-panel::-webkit-scrollbar { width: 4px; }
-.mega-panel::-webkit-scrollbar-track { background: transparent; }
-.mega-panel::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.4); border-radius: 4px; }
 .mega-panel-link { border-bottom: 1px solid rgba(0,0,0,0.06); }
 .mega-panel-link:hover { background: rgba(212,175,55,0.08); }
 .mega-panel-text strong { color: var(--color-primary) !important; }
@@ -3504,8 +3497,7 @@ section[id],
   /* backdrop-filter removed to fix Chrome GPU compositing bug */
   border-top: 2px solid var(--color-accent);
   box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  max-height: calc(100vh - var(--nav-height) - 16px);
-  overflow-y: visible;
+  overflow: visible !important;
 }
 .dropdown-item { color: var(--color-primary) !important; border-bottom: 1px solid rgba(0,0,0,0.06); }
 .dropdown-item:hover { background: rgba(212,175,55,0.1); color: var(--color-accent) !important; }
