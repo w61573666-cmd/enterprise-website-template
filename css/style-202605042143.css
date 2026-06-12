@@ -1,4 +1,4 @@
-@import url('https://unpkg.com/aos@2.3.4/dist/aos.css');
+﻿@import url('https://unpkg.com/aos@2.3.4/dist/aos.css');
 
 /* ============================================
    HENGSHENG MARBLE S&T - Premium Corporate Style
@@ -37,11 +37,11 @@
   --radius-md: 8px;
   --radius-lg: 16px;
   --radius-xl: 24px;
-  /* Layout — Responsive Width System */
-  --max-width-xxl: 1440px;  /* ≥1920px — navbar max 1440px per international spec */
-  --max-width-xl: 1280px;   /* 1440~1919px — proportional */
-  --max-width-lg: 1120px;   /* 1200~1439px — compact */
-  --max-width: 100%;        /* <1200px — fluid, padding-based */
+  /* Layout 鈥?Responsive Width System */
+  --max-width-xxl: 1440px;  /* 鈮?920px 鈥?navbar max 1440px per international spec */
+  --max-width-xl: 1280px;   /* 1440~1919px 鈥?proportional */
+  --max-width-lg: 1120px;   /* 1200~1439px 鈥?compact */
+  --max-width: 100%;        /* <1200px 鈥?fluid, padding-based */
   /* Container gutter */
   --container-padding: 24px;
   --nav-height: 56px;
@@ -55,13 +55,13 @@
 
 /* ---------- Reset & Base ---------- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: clip; }
 body {
   font-family: var(--font-body);
   color: var(--color-primary);
   background: #F5F0EB;
   line-height: 1.7;
-  overflow-x: hidden;
+  overflow: visible;
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; transition: var(--transition); }
@@ -175,8 +175,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   transition: var(--transition);
   background: rgba(245, 240, 235, 0.95);
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: visible;
 }
 
 .navbar.scrolled {
@@ -304,26 +303,26 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   transition-delay: 0.3s;
 }
 .mega-panel:hover {
-  pointer-events: auto !important; /* 鼠标在面板上时保持可交互 */
+  pointer-events: auto !important; /* 榧犳爣鍦ㄩ潰鏉夸笂鏃朵繚鎸佸彲浜や簰 */
 }
 .mega-panel-link {
-  pointer-events: auto !important; /* 链接始终可点击 */
+  pointer-events: auto !important; /* 閾炬帴濮嬬粓鍙偣鍑?*/
 }
 .mega-panel-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 12px;
 }
 .mega-panel-link {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
   transition: background 0.2s ease;
   text-decoration: none;
   color: var(--color-primary) !important;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0;
   text-transform: none;
@@ -368,11 +367,11 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   left: 0;
   transform: translateY(8px) translateZ(0);
   -webkit-transform: translateY(8px) translateZ(0);
-  min-width: 200px;
+  min-width: 360px;
   background: #F5F0EB;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 16px;
+  padding: 12px 16px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
@@ -380,6 +379,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   pointer-events: none;
   border: 1px solid rgba(0,0,0,0.04);
   z-index: 9999;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 12px;
 }
 .nav-dropdown:hover .dropdown-panel {
   opacity: 1;
@@ -391,10 +393,10 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 .dropdown-link {
   display: block;
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
   color: var(--color-primary) !important;
-  font-size: 0.85rem;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0;
   text-transform: none;
@@ -563,7 +565,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 
 /* ============================================
-   Hero Video Grid (2x2 四宫格布局)
+   Hero Video Grid (2x2 鍥涘鏍煎竷灞€)
    ============================================ */
 .hero-grid-video {
   min-height: auto;
@@ -575,7 +577,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   margin: 0 auto;
 }
 
-/* 四宫格容器 */
+/* 鍥涘鏍煎鍣?*/
 .hero-video-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -584,7 +586,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   width: 100%;
 }
 
-/* 单个视频格子 */
+/* 鍗曚釜瑙嗛鏍煎瓙 */
 .hero-grid-item {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -601,7 +603,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   display: block;
 }
 
-/* 视频标签 */
+/* 瑙嗛鏍囩 */
 .hero-grid-label {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -615,7 +617,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   z-index: 2;
 }
 
-/* 文字内容区 - 居中 */
+/* 鏂囧瓧鍐呭鍖?- 灞呬腑 */
 .hero-grid-video .hero-content {
   position: relative;
   color: var(--color-primary);
@@ -626,7 +628,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   margin: 0 auto;
 }
 
-/* 平板适配 */
+/* 骞虫澘閫傞厤 */
 @media (max-width: 900px) {
   .hero-grid-video {
     padding: 40px 0 30px;
@@ -641,7 +643,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   }
 }
 
-/* 手机适配 - 保持2列2行 */
+/* 鎵嬫満閫傞厤 - 淇濇寔2鍒?琛?*/
 @media (max-width: 600px) {
   .hero-grid-video {
     padding: 24px 0 16px;
@@ -1352,7 +1354,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 
 
-/* P2: 客户Logo墙 - 方块卡片式 */
+/* P2: 瀹㈡埛Logo澧?- 鏂瑰潡鍗＄墖寮?*/
 .client-logos-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1480,7 +1482,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   .nav-logo-text small { font-size: 0.6rem; }
   .nav-logo img { height: 34px !important; }
 }
-/* ---------- Tablet Navigation (≤900px) ---------- */
+/* ---------- Tablet Navigation (鈮?00px) ---------- */
 @media (max-width: 900px) {
   .nav-toggle { display: flex; }
   .nav-links {
@@ -1530,7 +1532,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   .nav-dropdown.mobile-open .mega-panel,
   .nav-dropdown.mobile-open .dropdown-panel {
     display: block;
-    /* Remove max-height limit — let content grow naturally with overflow-y: auto */
+    /* Remove max-height limit 鈥?let content grow naturally with overflow-y: auto */
     max-height: none;
     padding: 8px 0 8px 16px;
   }
@@ -1679,7 +1681,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   .nav-logo-text { display: none; }
   .whatsapp-float { bottom: 16px; right: 16px; width: 50px; height: 50px; }
   .whatsapp-float svg { width: 24px; height: 24px; }
-  /* 小屏手机：下拉菜单增大高度限制，确保产品中心/工程案例全部显示 */
+  /* 灏忓睆鎵嬫満锛氫笅鎷夎彍鍗曞澶ч珮搴﹂檺鍒讹紝纭繚浜у搧涓績/宸ョ▼妗堜緥鍏ㄩ儴鏄剧ず */
   .nav-links { height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
   .nav-dropdown.mobile-open .mega-panel,
   .nav-dropdown.mobile-open .dropdown-panel { max-height: none; }
@@ -2608,7 +2610,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 
 /* Fix any potential overflow */
 .section-padding {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 
@@ -2928,9 +2930,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 /* Product cat section alternating bg */
 .product-cat-section:nth-of-type(even) { background: var(--color-off-white); }
 
-/* ═══════════════════════════════════════════
-   10 SERIES PRODUCT LAYOUT
-═══════════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?   10 SERIES PRODUCT LAYOUT
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 
 /* Series Navigation Bar */
 .series-nav-bar {
@@ -3465,7 +3466,7 @@ section[id],
   .series-meta { flex-direction: column; gap: 8px; }
   .stone-cards-grid { grid-template-columns: 1fr; }
 }
-/* ── P1 Upgrade: Brand-wide color tokens & sticky glassmorphism ── */
+/* 鈹€鈹€ P1 Upgrade: Brand-wide color tokens & sticky glassmorphism 鈹€鈹€ */
 
 /* Navbar always visible with light background - scrolled state just adds slightly deeper shadow */
 
@@ -3861,7 +3862,7 @@ section[id],
 }
 
 /* ===== Navigation Active Enhancement ===== */
-/* 确保active链接在所有状态下都有明显的视觉效果 */
+/* 纭繚active閾炬帴鍦ㄦ墍鏈夌姸鎬佷笅閮芥湁鏄庢樉鐨勮瑙夋晥鏋?*/
 .navbar .nav-links > a.active,
 .navbar .nav-dropdown > a.active {
     color: var(--color-accent) !important;
@@ -3888,7 +3889,7 @@ section[id],
     font-weight: 600 !important;
 }
 
-/* 语言切换按钮增强 */
+/* 璇█鍒囨崲鎸夐挳澧炲己 */
 .lang-switch {
     display: flex;
     align-items: center;
@@ -3917,7 +3918,7 @@ section[id],
 
 
 
-/* ── News Modal ────────────────────────���──────────────────────────── */
+/* 鈹€鈹€ News Modal 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€锟斤拷锟解攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 .news-modal-tpl { display: none !important; }
 
 .news-modal-overlay {
@@ -4028,8 +4029,8 @@ section[id],
 /* Base Mobile Optimizations */
 @media (max-width: 768px) {
   /* Prevent horizontal scroll */
-  html, body {
-    overflow-x: hidden;
+  html {
+    overflow-x: clip;
     width: 100%;
     max-width: 100vw;
   }
@@ -4517,7 +4518,7 @@ html {
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 999;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-overflow-scrolling: touch;
     box-shadow: -8px 0 32px rgba(0,0,0,0.4);
     pointer-events: none;
@@ -4530,7 +4531,7 @@ html {
 
   /* Menu header with close button area */
   .nav-links::after {
-    content: "☰ 菜單";
+    content: "鈽?鑿滃柈";
     position: absolute;
     top: 24px;
     left: 24px;
@@ -4910,7 +4911,7 @@ html {
 }
 
 
-/* 三个视频区块:高度为五分之一(10vh),宽度与文字对齐 */
+/* 涓変釜瑙嗛鍖哄潡:楂樺害涓轰簲鍒嗕箣涓€(10vh),瀹藉害涓庢枃瀛楀榻?*/
 .about-hero-video-section {
   width: 100%;
   margin: 0 auto;
@@ -4933,7 +4934,7 @@ html {
   transform: none !important;
 }
 
-/* ==== 全屏视频 平板适配(≤1024px)==== */
+/* ==== 鍏ㄥ睆瑙嗛 骞虫澘閫傞厤(鈮?024px)==== */
 @media (max-width: 1024px) {
   .about-hero-video-section.hero-fullpage {
     height: 600px !important;
@@ -4945,7 +4946,7 @@ html {
   }
 }
 
-/* ==== 全屏视频 手机适配(≤768px)==== */
+/* ==== 鍏ㄥ睆瑙嗛 鎵嬫満閫傞厤(鈮?68px)==== */
 @media (max-width: 768px) {
   .about-hero-video-section.hero-fullpage {
     height: 300px !important;
@@ -4957,7 +4958,7 @@ html {
   }
 }
 
-/* ==== 全屏视频 小屏适配(≤480px)==== */
+/* ==== 鍏ㄥ睆瑙嗛 灏忓睆閫傞厤(鈮?80px)==== */
 @media (max-width: 480px) {
   .about-hero-video-section.hero-fullpage {
     height: 220px !important;
@@ -4969,14 +4970,14 @@ html {
   }
 }
 
-/* ==== 平板适配(≤900px)==== */
+/* ==== 骞虫澘閫傞厤(鈮?00px)==== */
 @media (max-width: 900px) {
   .about-hero-video-section:not(.hero-fullpage) {
     max-width: 100%;
   }
 }
 
-/* ==== 手机适配(≤768px)==== */
+/* ==== 鎵嬫満閫傞厤(鈮?68px)==== */
 @media (max-width: 768px) {
   .about-hero-video-section:not(.hero-fullpage) {
     max-width: 100%;
@@ -4987,7 +4988,7 @@ html {
   }
 }
 
-/* ==== 小屏手机(≤480px)==== */
+/* ==== 灏忓睆鎵嬫満(鈮?80px)==== */
 @media (max-width: 480px) {
   .about-hero-video-section:not(.hero-fullpage) {
     max-width: 100%;
@@ -5004,7 +5005,7 @@ html {
   width: 90%;
 }
 
-/* 视频之间文字区块:去掉大padding,紧贴视频 */
+/* 瑙嗛涔嬮棿鏂囧瓧鍖哄潡:鍘绘帀澶adding,绱ц创瑙嗛 */
 .tight-section {
   padding-top: 12px !important;
   padding-bottom: 12px !important;
@@ -5022,7 +5023,7 @@ html {
   margin-bottom: 16px !important;
 }
 
-/* 视频前面的section底部padding收紧 */
+/* 瑙嗛鍓嶉潰鐨剆ection搴曢儴padding鏀剁揣 */
 .section-padding:has(+ .about-hero-video-section) {
   padding-bottom: 12px !important;
 }
@@ -5031,7 +5032,7 @@ html {
   padding-bottom: 12px !important;
 }
 
-/* 视频section本身去掉多余空间 */
+/* 瑙嗛section鏈韩鍘绘帀澶氫綑绌洪棿 */
 .about-hero-video-section {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
@@ -5041,7 +5042,7 @@ html {
   padding: 8px 0 !important;
 }
 
-/* 视频前面的section:底部padding清零 */
+/* 瑙嗛鍓嶉潰鐨剆ection:搴曢儴padding娓呴浂 */
 .before-video {
   padding-bottom: 0 !important;
 }
@@ -5336,7 +5337,7 @@ html {
   }
 }
 
-/* ---- About Page Video Sections Mobile (非全屏视频) ---- */
+/* ---- About Page Video Sections Mobile (闈炲叏灞忚棰? ---- */
 @media (max-width: 768px) {
   .about-hero-video-section:not(.hero-fullpage) { height: 18vh; }
   .about-hero-video-section:not(.hero-fullpage) .about-video-wrap { height: 18vh !important; }
@@ -5619,7 +5620,7 @@ html {
     font-size: 0.85rem;
   }
 
-  /* Masonry → single column */
+  /* Masonry 鈫?single column */
   .projects-masonry {
     columns: 1;
   }
@@ -6153,7 +6154,7 @@ html {
   }
 }
 
-/* ---- iPhone SE / Small screens (≤375px) ---- */
+/* ---- iPhone SE / Small screens (鈮?75px) ---- */
 @media (max-width: 375px) {
   :root {
     --nav-height: 60px;
@@ -6233,7 +6234,7 @@ html {
     min-height: min(70vh, 70dvh);
   }
 
-  /* 只在移动端应用nav-links的100dvh高度 */
+  /* 鍙湪绉诲姩绔簲鐢╪av-links鐨?00dvh楂樺害 */
   @media (max-width: 900px) {
     .nav-links {
       height: 100dvh;
@@ -6243,8 +6244,8 @@ html {
 
 /* ---- Prevent horizontal overflow on all mobile ---- */
 @media (max-width: 900px) {
-  html, body {
-    overflow-x: hidden;
+  html {
+    overflow-x: clip;
     width: 100%;
   }
 
@@ -6285,7 +6286,7 @@ html {
 
 
 
-/* ====== About Page: Strength Grid (八大核���實力) ====== */
+/* ====== About Page: Strength Grid (鍏ぇ鏍革拷锟斤拷瀵﹀姏) ====== */
 .strength-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
 .strength-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .strength-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
@@ -6293,7 +6294,7 @@ html {
 .strength-card h4 { font-family: var(--font-heading); font-size: 1.05rem; color: var(--color-primary); margin-bottom: 12px; line-height: 1.4; }
 .strength-card p { font-size: 0.88rem; color: var(--color-mid-gray); line-height: 1.75; margin: 0; }
 
-/* ====== About Page: Team Grid (六層團���架構) ====== */
+/* ====== About Page: Team Grid (鍏堡鍦橈拷锟斤拷鏋舵) ====== */
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
 .team-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .team-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
@@ -6301,7 +6302,7 @@ html {
 .team-card h4 { font-family: var(--font-heading); font-size: 1.05rem; color: var(--color-primary); margin-bottom: 12px; line-height: 1.4; }
 .team-card p { font-size: 0.88rem; color: var(--color-mid-gray); line-height: 1.75; margin: 0; }
 
-/* ====== About Page: CSR Grid (四大責任支柱) ====== */
+/* ====== About Page: CSR Grid (鍥涘ぇ璨换鏀煴) ====== */
 .csr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
 .csr-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .csr-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
@@ -6389,7 +6390,7 @@ html {
   font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
-/* 小屏幕缩��水印 */
+/* 灏忓睆骞曠缉锟斤拷姘村嵃 */
 @media (max-width: 768px) {
   .hsst-wm {
     font-size: 0.48rem;
@@ -6423,7 +6424,7 @@ html {
 }
 
 /* ============================================================
-   NEW COMPONENTS — Site-wide V2 enhancements
+   NEW COMPONENTS 鈥?Site-wide V2 enhancements
    ============================================================ */
 
 /* ---- Role Entry Cards (Homepage) ---- */
@@ -7150,28 +7151,28 @@ html {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════ */
-/* === Responsive Layout System — 6-Tier Breakpoints ===      */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
+/* === Responsive Layout System 鈥?6-Tier Breakpoints ===      */
 /*                                                             */
-/* Tier 1: ≥1920px      → max-width: 1440px (spacious)        */
-/* Tier 2: 1440~1919px  → max-width: 1280px (proportional)    */
-/* Tier 3: 1200~1439px  → max-width: 1120px (compact)         */
-/* Tier 4: 800~1199px   → fluid + padding (smooth transition) */
-/* Tier 5: <800px       → mobile restructure (column layout)  */
+/* Tier 1: 鈮?920px      鈫?max-width: 1440px (spacious)        */
+/* Tier 2: 1440~1919px  鈫?max-width: 1280px (proportional)    */
+/* Tier 3: 1200~1439px  鈫?max-width: 1120px (compact)         */
+/* Tier 4: 800~1199px   鈫?fluid + padding (smooth transition) */
+/* Tier 5: <800px       鈫?mobile restructure (column layout)  */
 /*                                                             */
 /* No horizontal scrollbars at any width.                      */
-/* ═══════════════════════════════════════════════��═══════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愶拷锟解晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 
-/* ── Full-width sections (banner, hero, navbar, footer) ── */
+/* 鈹€鈹€ Full-width sections (banner, hero, navbar, footer) 鈹€鈹€ */
 .hero, .hero-grid-video, .page-header, .navbar, .footer, .cta-section,
 .about-hero-video-section, .contact-hero-section,
 [class*="-hero"], [class*="-banner"] {
   width: 100%;
   max-width: 100vw !important;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-/* ── Container: full-width sections ── */
+/* 鈹€鈹€ Container: full-width sections 鈹€鈹€ */
 .hero .container, .hero-grid-video .container, .page-header .container, 
 .navbar .container, .footer .container, .cta-section .container,
 .about-hero-video-section .container, .contact-hero-section .container {
@@ -7182,7 +7183,7 @@ html {
   box-sizing: border-box;
 }
 
-/* ── Breakpoint: ≥1920px ── */
+/* 鈹€鈹€ Breakpoint: 鈮?920px 鈹€鈹€ */
 @media (min-width: 1920px) {
   .hero .container, .hero-grid-video .container, .page-header .container,
   .navbar .container, .footer .container, .cta-section .container,
@@ -7198,7 +7199,7 @@ html {
   }
 }
 
-/* ── Breakpoint: 1440~1919px ── */
+/* 鈹€鈹€ Breakpoint: 1440~1919px 鈹€鈹€ */
 @media (min-width: 1440px) and (max-width: 1919px) {
   .hero .container, .hero-grid-video .container, .page-header .container,
   .navbar .container, .footer .container, .cta-section .container,
@@ -7214,7 +7215,7 @@ html {
   }
 }
 
-/* ── Breakpoint: 1200~1439px ── */
+/* 鈹€鈹€ Breakpoint: 1200~1439px 鈹€鈹€ */
 @media (min-width: 1200px) and (max-width: 1439px) {
   .hero .container, .hero-grid-video .container, .page-header .container,
   .navbar .container, .footer .container, .cta-section .container,
@@ -7230,9 +7231,9 @@ html {
   }
 }
 
-/* 800~1199px: fluid — handled by default .container (max-width:100% + padding) */
+/* 800~1199px: fluid 鈥?handled by default .container (max-width:100% + padding) */
 
-/* ── Override inline max-width styles ── */
+/* 鈹€鈹€ Override inline max-width styles 鈹€鈹€ */
 .container[style*="max-width:1200px"],
 .container[style*="max-width: 1440px"],
 .container[style*="max-width:1440px"] {
@@ -7249,14 +7250,14 @@ html {
   .container[style*="max-width"] { max-width: var(--max-width-lg) !important; }
 }
 
-/* ── Global: no horizontal scrollbar ever ── */
-html, body {
-  overflow-x: hidden;
+/* 鈹€鈹€ Global: no horizontal scrollbar ever 鈹€鈹€ */
+html {
+  overflow-x: clip;
   width: 100%;
   max-width: 100vw;
 }
 
-/* ── Full-width sections extend to screen edge at all widths ── */
+/* 鈹€鈹€ Full-width sections extend to screen edge at all widths 鈹€鈹€ */
 .hero, .hero-grid-video, .page-header,
 .about-hero-video-section, .contact-hero-section,
 [class*="-hero"], [class*="-banner"],
@@ -7268,7 +7269,7 @@ html, body {
   position: relative;
 }
 
-/* ── Navigation: prevent item collapse at 900~1200px ── */
+/* 鈹€鈹€ Navigation: prevent item collapse at 900~1200px 鈹€鈹€ */
 @media (min-width: 901px) and (max-width: 1199px) {
   .nav-links {
     flex-shrink: 0;
