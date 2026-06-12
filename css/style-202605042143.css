@@ -38,7 +38,7 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   /* Layout — Responsive Width System */
-  --max-width-xxl: 1600px;  /* ≥1920px — spacious, no large empty areas */
+  --max-width-xxl: 1440px;  /* ≥1920px — navbar max 1440px per international spec */
   --max-width-xl: 1280px;   /* 1440~1919px — proportional */
   --max-width-lg: 1120px;   /* 1200~1439px — compact */
   --max-width: 100%;        /* <1200px — fluid, padding-based */
@@ -175,7 +175,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   transition: var(--transition);
   background: rgba(245, 240, 235, 0.95);
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .navbar.scrolled {
@@ -196,6 +197,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   flex-shrink: 0;
   position: relative;
   z-index: 1002;
+  margin-right: 40px;
 }
 .nav-logo img {
   height: 42px;
@@ -285,10 +287,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   padding: 24px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   pointer-events: none;
   border: 1px solid rgba(0,0,0,0.04);
-  z-index: 1001;
+  z-index: 9999;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   transition-delay: 0s;
   transform: translateX(-50%) translateY(8px) translateZ(0);
@@ -309,9 +310,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   pointer-events: auto !important; /* 链接始终可点击 */
 }
 .mega-panel-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .mega-panel-link {
   display: flex;
@@ -367,7 +368,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   left: 0;
   transform: translateY(8px) translateZ(0);
   -webkit-transform: translateY(8px) translateZ(0);
-  min-width: 260px;
+  min-width: 200px;
   background: #F5F0EB;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -378,7 +379,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   transition-delay: 0s;
   pointer-events: none;
   border: 1px solid rgba(0,0,0,0.04);
-  z-index: 1001;
+  z-index: 9999;
 }
 .nav-dropdown:hover .dropdown-panel {
   opacity: 1;
