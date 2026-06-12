@@ -275,11 +275,13 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  min-width: 680px;
+  width: max-content;
+  min-width: 360px;
+  max-width: calc(100vw - 40px);
   background: #F5F0EB;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 32px;
+  padding: 24px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
@@ -4629,9 +4631,8 @@ html {
   .nav-dropdown.mobile-open .mega-panel,
   .nav-dropdown.mobile-open .dropdown-panel {
     display: block;
-    max-height: 70vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    max-height: none;
+    overflow: visible;
   }
 
   /* Mega panel grid layout */
