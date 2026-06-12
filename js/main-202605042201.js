@@ -94,6 +94,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ---------- Projects Mega-Panel 3×3 Collapse / Expand ----------
+  // Only for projects dropdown > 9 items (16 total).
+  // Products dropdown (10 items) also gets collapsed for consistency.
+  (function initProjectsCollapse() {
+    document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+      var trigger = dd.querySelector(':scope > a');
+      if (!trigger) return;
+      var href = trigger.getAttribute('href') || '';
+      // Match both Chinese and English projects dropdown
+      var isProjects = /projects\.html/i.test(href);
+      if (!isProjects) return;
+
+      // Mark this dropdown for CSS targeting
+      dd.classList.add('nav-dropdown-projects');
+
+      // Find view-all link and convert to expand toggle
+      var viewAll = dd.querySelector('.mega-panel-viewall a');
+      if (!viewAll) return;
+      viewAll.classList.add('mega-panel-expand-toggle');
+      viewAll.removeAttribute('href');
+      viewAll.style.cursor = 'pointer';
+      var grid = dd.querySelector('.mega-panel-grid');
+      var expanded = false;
+      var zhText = '瀏覽全部工程案例';
+      var zhClose = '收起工程案例 ▲';
+      var enText = 'View All Projects';
+      var enClose = 'Collapse ▲';
+      var isEn = /^\/en\//.test(window.location.pathname) || /\/en\//.test(href);
+      var openText = isEn ? ('→ ' + enText) : ('→ ' + zhText);
+      var closeText = isEn ? enClose : zhClose;
+      viewAll.textContent = openText;
+
+      viewAll.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        expanded = !expanded;
+        if (expanded) {
+          grid.classList.add('expanded');
+          viewAll.textContent = closeText;
+        } else {
+          grid.classList.remove('expanded');
+          viewAll.textContent = openText;
+        }
+      });
+    });
+  })();
+
   // ---------- Series Card Click Handler (All versions) ----------
   // Handles both Chinese (.series-card-link) and English (a.series-overview-card) cards
   // Capture phase to beat lightbox handler; CSS touch-action:manipulation removes 300ms delay
