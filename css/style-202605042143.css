@@ -229,9 +229,10 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
-  flex-shrink: 1;
-  min-width: 0;
+  gap: 24px;
+  flex-shrink: 0;
+  overflow: visible;
+  flex-wrap: nowrap;
 }
 .nav-links a {
   font-size: 0.85rem;
