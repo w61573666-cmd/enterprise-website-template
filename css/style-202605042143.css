@@ -194,6 +194,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   text-decoration: none;
   color: var(--color-primary);
   flex-shrink: 0;
+  position: relative;
+  z-index: 1002;
 }
 .nav-logo img {
   height: 42px;
@@ -218,7 +220,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 .nav-logo-text small {
   font-size: 0.62rem;
-  color: rgba(26,26,46,0.9),0.85);
+  color: rgba(26,26,46,0.85);
   font-weight: 500;
   letter-spacing: 0.3px;
 }
@@ -275,8 +277,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  width: max-content;
-  min-width: 360px;
+  min-width: 520px;
   max-width: calc(100vw - 40px);
   background: #F5F0EB;
   border-radius: var(--radius-lg);
