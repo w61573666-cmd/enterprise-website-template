@@ -44,7 +44,7 @@
   --max-width: 100%;        /* <1200px — fluid, padding-based */
   /* Container gutter */
   --container-padding: 24px;
-  --nav-height: 64px;
+  --nav-height: 56px;
   /* Mobile interaction enhancements */
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
@@ -227,16 +227,16 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
   flex-shrink: 0;
   overflow: visible;
   flex-wrap: nowrap;
 }
 .nav-links a {
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
   color: #1A1A2E;
   position: relative;
 }
@@ -277,7 +277,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  min-width: 520px;
+  min-width: 480px;
   max-width: calc(100vw - 40px);
   background: #F5F0EB;
   border-radius: var(--radius-lg);
@@ -289,6 +289,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   pointer-events: none;
   border: 1px solid rgba(0,0,0,0.04);
   z-index: 1001;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  transition-delay: 0s;
   transform: translateX(-50%) translateY(8px) translateZ(0);
   -webkit-transform: translateX(-50%) translateY(8px) translateZ(0);
 }
@@ -297,7 +299,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   visibility: visible;
   transform: translateX(-50%) translateY(0) translateZ(0);
   -webkit-transform: translateX(-50%) translateY(0) translateZ(0);
-  pointer-events: auto; /* 父元素 hover 时面板可交互 */
+  pointer-events: auto;
+  transition-delay: 0.3s;
 }
 .mega-panel:hover {
   pointer-events: auto !important; /* 鼠标在面板上时保持可交互 */
@@ -319,7 +322,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   transition: background 0.2s ease;
   text-decoration: none;
   color: var(--color-primary) !important;
-  font-size: 0.85rem;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0;
   text-transform: none;
@@ -361,9 +364,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .dropdown-panel {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(8px) translateZ(0);
-  -webkit-transform: translateX(-50%) translateY(8px) translateZ(0);
+  left: 0;
+  transform: translateY(8px) translateZ(0);
+  -webkit-transform: translateY(8px) translateZ(0);
   min-width: 260px;
   background: #F5F0EB;
   border-radius: var(--radius-lg);
@@ -372,6 +375,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  transition-delay: 0s;
   pointer-events: none;
   border: 1px solid rgba(0,0,0,0.04);
   z-index: 1001;
@@ -379,9 +383,10 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .nav-dropdown:hover .dropdown-panel {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0) translateZ(0);
-  -webkit-transform: translateX(-50%) translateY(0) translateZ(0);
+  transform: translateY(0) translateZ(0);
+  -webkit-transform: translateY(0) translateZ(0);
   pointer-events: auto;
+  transition-delay: 0.3s;
 }
 .dropdown-link {
   display: block;
@@ -405,9 +410,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: 12px;
-  padding-left: 16px;
-  border-left: 1px solid rgba(255,255,255,0.2);
+  margin-left: 40px;
+  padding-left: 0;
+  border-left: none;
 }
 .lang-switch a {
   font-size: 0.8rem;
@@ -416,7 +421,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   text-transform: uppercase;
   padding: 4px 8px;
   border-radius: var(--radius-sm);
-  color: rgba(26,26,46,0.9),0.6) !important;
+  color: rgba(26,26,46,0.6) !important;
 }
 .lang-switch a::after { display: none !important; }
 .lang-switch a.active {
@@ -425,7 +430,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 .lang-switch a:hover { color: var(--color-accent) !important; }
 .lang-divider {
-  color: rgba(26,26,46,0.9),0.3);
+  color: rgba(26,26,46,0.3);
   font-size: 0.75rem;
 }
 
