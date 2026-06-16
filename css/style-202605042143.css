@@ -1,4 +1,4 @@
-﻿@import url('https://unpkg.com/aos@2.3.4/dist/aos.css');
+@import url('https://unpkg.com/aos@2.3.4/dist/aos.css');
 
 /* ============================================
    HENGSHENG MARBLE S&T - Premium Corporate Style
@@ -38,12 +38,12 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   /* Layout 鈥?Responsive Width System */
-  --max-width-xxl: 1440px;  /* 鈮?920px 鈥?navbar max 1440px per international spec */
-  --max-width-xl: 1280px;   /* 1440~1919px 鈥?proportional */
-  --max-width-lg: 1120px;   /* 1200~1439px 鈥?compact */
+  --max-width-xxl: 100%;    /* 鈮?920px 鈥?full-width fluid layout */
+  --max-width-xl: 100%;     /* 1440~1919px 鈥?full-width fluid layout */
+  --max-width-lg: 100%;     /* 1200~1439px 鈥?full-width fluid layout */
   --max-width: 100%;        /* <1200px 鈥?fluid, padding-based */
-  /* Container gutter */
-  --container-padding: 24px;
+  /* Container gutter 鈥?wider for premium feel */
+  --container-padding: 48px;
   --nav-height: 56px;
   /* Mobile interaction enhancements */
   touch-action: manipulation;
@@ -71,20 +71,21 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
 
 /* ---------- Utility ---------- */
 .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding-left: var(--container-padding); padding-right: var(--container-padding); box-sizing: border-box; }
-@media (min-width: 1920px) { .container { max-width: var(--max-width-xxl); padding-left: 0; padding-right: 0; } }
-@media (min-width: 1440px) and (max-width: 1919px) { .container { max-width: var(--max-width-xl); padding-left: 0; padding-right: 0; } }
-@media (min-width: 1200px) and (max-width: 1439px) { .container { max-width: var(--max-width-lg); padding-left: 0; padding-right: 0; } }
-.section-padding { padding: 40px 0; }
+@media (min-width: 1920px) { .container { max-width: var(--max-width-xxl); padding-left: 64px; padding-right: 64px; } }
+@media (min-width: 1440px) and (max-width: 1919px) { .container { max-width: var(--max-width-xl); padding-left: 48px; padding-right: 48px; } }
+@media (min-width: 1200px) and (max-width: 1439px) { .container { max-width: var(--max-width-lg); padding-left: 40px; padding-right: 40px; } }
+.section-padding { padding: 80px 0; }
 
 /* Inner page text background for readability */
 .inner-page .section-padding {
-  background: #F5F0EB;
+  background: transparent;
 }
 .inner-page .section-padding .container {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Removed white card styling - content flows edge-to-edge for premium feel */
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 .inner-page .section-padding h2,
 .inner-page .section-padding h3 {
@@ -115,7 +116,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   display: block;
 }
 .section-title { margin-bottom: 1.5rem; }
-.section-desc { max-width: 600px; margin: 0 auto 3rem; }
+.section-desc { max-width: 900px; margin: 0 auto 3rem; }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -486,7 +487,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   z-index: 2;
   text-align: center;
   padding: 0 20px;
-  max-width: 1200px;
+  max-width: 100%;
 }
 .hero-badge { color: var(--color-primary);
   display: inline-block;
@@ -573,7 +574,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   background: linear-gradient(135deg, #F5F0EB 0%, #E8E4DF 50%, #D4CFC8 100%);
 }
 .hero-grid-video .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -624,7 +625,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   z-index: 2;
   text-align: center;
   padding: 0 20px;
-  max-width: 700px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -742,7 +743,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 80px;
   align-items: center;
 }
 .about-image {
@@ -1139,7 +1140,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 .form-group textarea { min-height: 140px; resize: vertical; }
 .form-container-wide {
-  max-width: 960px;
+  max-width: 100%;
   margin: 0 auto;
   text-align: left;
 }
@@ -1297,7 +1298,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .certificate-card {
@@ -1357,9 +1358,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 /* P2: 瀹㈡埛Logo澧?- 鏂瑰潡鍗＄墖寮?*/
 .client-logos-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 16px;
-  max-width: 1000px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -1562,9 +1563,14 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   .lang-switch a { color: rgba(26,26,46,0.6) !important; }
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  .container { padding-left: 32px; padding-right: 32px; }
+}
+
 @media (max-width: 768px) {
-  :root { --nav-height: 70px; }
-  .section-padding { padding: 30px 0; }
+  :root { --nav-height: 70px; --container-padding: 20px; }
+  .container { padding-left: 20px; padding-right: 20px; }
+  .section-padding { padding: 40px 0; }
   .nav-logo-text strong { font-size: 0.78rem; }
   .nav-logo-text small { font-size: 0.55rem; }
   .nav-logo img { height: 32px !important; }
@@ -2377,7 +2383,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   width: 100%;
   height: 100%;
   z-index: 0;
-  max-width: 1200px;
+  max-width: 100%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -2396,7 +2402,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   padding: 0;
 }
 .about-hero-video-section.hero-fullpage .about-video-wrap {
-  max-width: 1200px !important;
+  max-width: 100% !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
 }
@@ -2410,7 +2416,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .about-video-content {
   position: relative;
   z-index: 1;
-  max-width: 1000px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 80px 40px;
   text-align: left;
@@ -2448,7 +2454,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .about-core-section .section-desc,
 .about-team-section .section-desc,
 .about-csr-section .section-desc {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto 3rem;
   text-align: center;
 }
@@ -2475,13 +2481,13 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 
 .about-text-block {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 /* ---- About Page Tables ---- */
-.about-table-wrap { overflow-x:auto; margin:40px auto 24px; max-width:1200px; border-radius:10px; border:1px solid #e8e0d6; }
+.about-table-wrap { overflow-x:auto; margin:40px auto 24px; max-width:100%; border-radius:10px; border:1px solid #e8e0d6; }
 .about-table { width:100%; border-collapse:collapse; font-size:0.93rem; font-family:var(--font-sans,Inter,sans-serif); }
 .about-table thead th { background:var(--color-dark,#1a1a1a); color:#fff; padding:16px 20px; text-align:left; font-weight:600; font-size:0.86rem; letter-spacing:0.8px; text-transform:uppercase; white-space:nowrap; }
 .about-table tbody td { padding:14px 20px; border-bottom:1px solid #ece7df; color:var(--color-dark,#2a2a2a); line-height:1.6; vertical-align:top; }
@@ -2497,7 +2503,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 /* ========== HSST Unified Form Styles (migrated from inline <style> blocks) ========== */
 
 /* ---- hsst-form (index, about, projects, news + en/) ---- */
-.hsst-form{max-width:1200px;margin:32px auto 0;text-align:left;}
+.hsst-form{max-width:100%;margin:32px auto 0;text-align:left;}
 .hsst-form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:0;}
 .hsst-form-group{margin-bottom:22px;}
 .hsst-form-label{display:block;font-size:13px;font-weight:600;color:#1A1A2E !important;margin-bottom:8px;letter-spacing:0.4px;}
@@ -2555,7 +2561,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 
 /* ---- inquiry-form (contact, en/contact) ---- */
 .inquiry-form-section{background:#fff;}
-.inquiry-form{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.inquiry-form{max-width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .inquiry-form .form-full{grid-column:1/-1;}
 .inquiry-form label{display:block;font-size:0.85rem;font-weight:600;color:var(--color-dark,#1a1a1a);margin-bottom:6px;letter-spacing:0.5px;}
 .inquiry-form label .required{color:#c4a882;margin-left:2px;}
@@ -2569,7 +2575,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 @media(max-width:600px){.inquiry-form{grid-template-columns:1fr;}}
 
 /* ---- form-container-wide (products CTA, en/products CTA) ---- */
-.products-cta .form-container-wide{max-width:1200px;margin:0 auto;padding:0 24px;}
+.products-cta .form-container-wide{max-width:100%;margin:0 auto;padding:0 24px;}
 .products-cta .form-group{margin-bottom:16px;text-align:left;}
 .products-cta .form-group label{display:block;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:6px;}
 .products-cta .form-group input,.products-cta .form-group textarea{width:100%;height:42px;padding:0 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-size:14px;box-sizing:border-box;}
@@ -2616,12 +2622,13 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 
 
 /* ====== Stats Row (about.html) ====== */
+
 .stats-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 100%;
   width: 90%;
   margin: 48px auto 0;
   padding: 0;
@@ -2642,12 +2649,14 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 
 @media (max-width: 768px) {
-  .stats-row {
+  
+.stats-row {
     flex-wrap: wrap;
     gap: 24px;
   }
 
-  .stats-row { width: 40%; }
+  
+.stats-row { width: 40%; }
 }
 
   .stats-row .stat-number {
@@ -3151,9 +3160,10 @@ section[id],
 [id^="s"] {
   scroll-margin-top: 100px !important;
 }
+
 .series-section-header {
   padding: 18px 0 !important;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   border-bottom: 1px solid rgba(200,169,110,0.3);
   display: flex;
@@ -3597,7 +3607,7 @@ section[id],
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 48px 48px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -3734,7 +3744,7 @@ section[id],
   font-weight: 500;
 }
 .footer-bottom {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px 48px;
   display: flex;
@@ -3812,39 +3822,39 @@ section[id],
 
 /* Inner page product category section */
 .inner-page .product-cat-section {
-  background: #F5F0EB;
+  background: transparent;
 }
 .inner-page .product-cat-section .container {
-  background: rgba(255, 255, 255, 0.95);
+  background: transparent;
   border-radius: 0;
-  padding: 20px 40px;
+  padding: 0;
   box-shadow: none;
 }
 
 /* Inner page product series section */
 .inner-page .product-series-section {
-  background: #F5F0EB;
+  background: transparent;
   padding: 0 !important;
 }
 .inner-page .product-series-section > .container {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 /* Inner page series overview section */
 .inner-page .series-overview-section {
-  background: #F5F0EB;
+  background: transparent;
   padding: calc(var(--nav-height) + 20px) 0 60px 0;
   position: relative;
   z-index: 1;
 }
 .inner-page .series-overview-section .container {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 /* Footer Product Series: 2 columns x 5 rows */
@@ -4065,9 +4075,9 @@ section[id],
 
 /* iPhone Specific (max-width: 480px) */
 @media (max-width: 480px) {
-  :root { --nav-height: 64px; }
+  :root { --nav-height: 64px; --container-padding: 20px; }
 
-  .section-padding { padding: 48px 0; }
+  .section-padding { padding: 32px 0; }
 
   /* Further typography refinement */
   h1 { font-size: 1.75rem; letter-spacing: -0.01em; }
@@ -4113,7 +4123,7 @@ section[id],
 @media (max-width: 375px) {
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.25rem; }
-  .section-padding { padding: 40px 0; }
+  .section-padding { padding: 24px 0; }
 
   .trust-items { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .trust-item { padding: 16px 8px; }
@@ -4922,7 +4932,7 @@ html {
 /* Non-fullpage video sections: compact height, width aligned with text content (1200px) */
 .about-hero-video-section:not(.hero-fullpage) {
   height: 10vh;
-  max-width: 1200px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -5000,7 +5010,7 @@ html {
 }
 
 .about-hero-video-section .about-video-content {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   width: 90%;
 }
@@ -5309,12 +5319,12 @@ html {
 /* ---- Section Padding Mobile ---- */
 @media (max-width: 768px) {
   .section-padding {
-    padding: 24px 0;
+    padding: 40px 0;
   }
 
   .inner-page .section-padding .container {
-    padding: 20px 16px;
-    border-radius: 8px;
+    padding: 0;
+    border-radius: 0;
   }
 
   h2 {
@@ -5471,7 +5481,8 @@ html {
   }
 
   /* Series section header - stack vertically */
-  .series-section-header {
+  
+.series-section-header {
     padding: 14px 0 !important;
   }
 
@@ -6195,11 +6206,11 @@ html {
   }
 
   .section-padding {
-    padding: 20px 0;
+    padding: 24px 0;
   }
 
   .inner-page .section-padding .container {
-    padding: 16px 12px;
+    padding: 0;
   }
 
   .stat-number {
@@ -6287,7 +6298,7 @@ html {
 
 
 /* ====== About Page: Strength Grid (鍏ぇ鏍革拷锟斤拷瀵﹀姏) ====== */
-.strength-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+.strength-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 100%; margin: 0 auto; }
 .strength-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .strength-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
 .strength-card-icon { font-size: 2rem; font-weight: 700; color: #D4A373; font-family: var(--font-heading); margin-bottom: 16px; }
@@ -6295,7 +6306,7 @@ html {
 .strength-card p { font-size: 0.88rem; color: var(--color-mid-gray); line-height: 1.75; margin: 0; }
 
 /* ====== About Page: Team Grid (鍏堡鍦橈拷锟斤拷鏋舵) ====== */
-.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 100%; margin: 0 auto; }
 .team-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .team-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
 .team-card-num { font-size: 2rem; font-weight: 700; color: #D4A373; font-family: var(--font-heading); margin-bottom: 16px; }
@@ -6303,7 +6314,7 @@ html {
 .team-card p { font-size: 0.88rem; color: var(--color-mid-gray); line-height: 1.75; margin: 0; }
 
 /* ====== About Page: CSR Grid (鍥涘ぇ璨换鏀煴) ====== */
-.csr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+.csr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 100%; margin: 0 auto; }
 .csr-card { background: #fff; border-radius: 12px; padding: 32px 24px; border: 1px solid #E8E0D8; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s ease; }
 .csr-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: #D4A373; }
 .csr-card-icon { font-size: 2rem; margin-bottom: 16px; }
@@ -6452,7 +6463,7 @@ html {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .role-card {
@@ -6503,7 +6514,7 @@ html {
 /* ---- Timeline (About page) ---- */
 .timeline-section {
   padding: 64px 0;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .timeline-heading {
@@ -6567,7 +6578,7 @@ html {
 /* ---- Tech Cards (About page) ---- */
 .tech-section {
   padding: 64px 0;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .tech-heading {
@@ -6631,7 +6642,7 @@ html {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .cert-card {
@@ -6846,7 +6857,7 @@ html {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .scene-card {
@@ -6893,7 +6904,7 @@ html {
 /* ---- Sustainability Section (About) ---- */
 .sustainability-section {
   padding: 64px 0;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .sustainability-grid {
@@ -6926,7 +6937,7 @@ html {
 
 /* ---- Product Detail Page ---- */
 .product-detail {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 48px 24px;
 }
@@ -7189,13 +7200,13 @@ html {
   .navbar .container, .footer .container, .cta-section .container,
   .about-hero-video-section .container, .contact-hero-section .container {
     max-width: var(--max-width-xxl);
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 64px;
+    padding-right: 64px;
   }
   .container {
     max-width: var(--max-width-xxl);
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 64px;
+    padding-right: 64px;
   }
 }
 
@@ -7205,13 +7216,13 @@ html {
   .navbar .container, .footer .container, .cta-section .container,
   .about-hero-video-section .container, .contact-hero-section .container {
     max-width: var(--max-width-xl);
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 48px;
+    padding-right: 48px;
   }
   .container {
     max-width: var(--max-width-xl);
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 48px;
+    padding-right: 48px;
   }
 }
 
@@ -7221,13 +7232,13 @@ html {
   .navbar .container, .footer .container, .cta-section .container,
   .about-hero-video-section .container, .contact-hero-section .container {
     max-width: var(--max-width-lg);
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 40px;
+    padding-right: 40px;
   }
   .container {
     max-width: var(--max-width-lg);
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
 
@@ -7296,4 +7307,201 @@ html {
   .nav-logo-text small {
     font-size: 0.65rem;
   }
+}
+
+/* ============================================
+   LAYOUT OVERHAUL - Premium Full-Width Design
+   Apple/Tesla/LVMH Visual Standard
+   ============================================ */
+
+/* Full-width flow for all sections */
+.section-padding .container {
+  max-width: 100%;
+}
+
+/* Hero video grid - wider gaps for premium feel */
+.hero-video-grid {
+  gap: 20px;
+}
+
+/* Why-choose cards - enhanced spacing */
+.why-choose-grid {
+  gap: 40px;
+}
+
+.why-card {
+  padding: 48px 32px;
+}
+
+/* Scenarios grid - wider cards */
+.scenarios-grid {
+  gap: 32px;
+}
+
+/* Trust items - enhanced */
+.trust-item {
+  padding: 40px 24px;
+}
+
+.trust-number {
+  font-size: 2.6rem;
+}
+
+/* Category cards - wider gap */
+.categories-grid {
+  gap: 24px;
+}
+
+/* Section titles - larger for impact */
+.section-padding h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+/* Section subtitle - wider */
+.section-subtitle {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CTA section - full-width feel */
+.cta-section .container {
+  max-width: 100%;
+}
+
+/* Product grids - full width */
+.products-grid {
+  max-width: 100%;
+}
+
+/* Advantages grid - full width */
+.advantages-grid {
+  max-width: 100%;
+}
+
+/* Projects grid - full width */
+.featured-projects-grid {
+  max-width: 100%;
+}
+
+/* News grid - full width */
+.news-grid {
+  max-width: 100%;
+}
+
+/* Timeline - full width */
+.timeline {
+  max-width: 100%;
+}
+
+/* Footer bottom - full width padding */
+.footer-bottom {
+  padding: 24px 48px;
+}
+
+/* Contact grids - full width */
+.contact-info-grid,
+.contact-philosophy-grid,
+.contact-network-grid {
+  max-width: 100%;
+}
+
+/* Large screen: generous breathing room */
+@media (min-width: 1920px) {
+  .section-padding {
+    padding: 100px 0;
+  }
+  
+  .about-grid {
+    gap: 120px;
+  }
+  
+  .why-choose-grid {
+    gap: 48px;
+  }
+  
+  .scenarios-grid {
+    gap: 40px;
+  }
+  
+  .trust-item {
+    padding: 48px 32px;
+  }
+  
+  .trust-number {
+    font-size: 3rem;
+  }
+  
+  .section-padding h2 {
+    font-size: 3.2rem;
+  }
+}
+
+/* Medium-large screen optimization */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .section-padding {
+    padding: 90px 0;
+  }
+  
+  .about-grid {
+    gap: 100px;
+  }
+}
+
+/* Tablet landscape */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .section-padding {
+    padding: 80px 0;
+  }
+}
+
+/* Ensure hero sections breathe */
+.hero-grid-video {
+  padding: 80px 0 60px;
+}
+
+@media (min-width: 1920px) {
+  .hero-grid-video {
+    padding: 100px 0 80px;
+  }
+}
+
+/* Footer full-width enhancement */
+.footer .container {
+  max-width: 100%;
+}
+
+/* Product section grids full width */
+.stone-cards-grid {
+  max-width: 100%;
+}
+
+.series-overview-grid {
+  max-width: 100%;
+}
+
+/* Inner page: remove all restrictive containers */
+.inner-page .container {
+  max-width: 100%;
+}
+
+/* Gallery grid - full width */
+.gallery-grid {
+  max-width: 100%;
+}
+
+/* Scheme timeline - full width */
+.scheme-timeline {
+  max-width: 100%;
+}
+
+/* Tech service grid - full width */
+.tech-service-grid {
+  max-width: 100%;
+}
+
+/* Product quick nav - full width */
+.product-quick-nav {
+  max-width: 100%;
 }
