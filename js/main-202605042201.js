@@ -138,23 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       applyCollapse(dd, links, viewAll);
     });
 
-    // --- Pattern B: mega-panel-v2 (products.html only) ---
-    var megaV2 = document.querySelector('.mega-panel-v2');
-    if (megaV2) {
-      var links = megaV2.querySelectorAll('.mega-module-link');
-      var viewAllRow = megaV2.querySelector('.mega-panel-viewall');
-      if (!viewAllRow && links.length > 9) {
-        viewAllRow = document.createElement('div');
-        viewAllRow.className = 'mega-panel-viewall';
-        viewAllRow.style.cssText = 'text-align:center;padding-top:16px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);';
-        var va = document.createElement('a');
-        va.href = '#';
-        va.textContent = isEn ? '→ View All Series' : '→ 瀏覽全部石材系列';
-        viewAllRow.appendChild(va);
-        megaV2.querySelector('.mega-panel-v2-inner').appendChild(viewAllRow);
-      }
-      applyCollapse(megaV2, links, viewAllRow ? viewAllRow.querySelector('a') : null);
-    }
+    // mega-panel-v2 removed; all pages now use unified mega-panel pattern
   })();
 
   // ---------- Series Card Click Handler (All versions) ----------

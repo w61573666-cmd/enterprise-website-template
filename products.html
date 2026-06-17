@@ -50,20 +50,7 @@
  
 <!-- 产品中心新增样式 inline（不影响其他页面） -->
 <style>
-/* mega-panel-v2 三级下拉菜单 */
-/* mega-panel-v2 — 纯CSS hover 兜底（优先级高于 display:none） */
-.mega-panel-v2{position:absolute;top:100%;left:0;width:100vw;margin-left:0;background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(201,168,76,0.2);padding:36px 0 28px;display:none;z-index:999;}
 
-.mega-panel-v2-inner{max-width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;padding:0 40px;}
-.mega-module-title{font-size:12px;letter-spacing:2px;color:#C9A84C;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.25);text-transform:uppercase;}
-.mega-module-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 12px;}
-.mega-module-link{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:4px;transition:all 0.3s ease;text-decoration:none;color:#CCC;}
-.mega-module-link:hover{background:rgba(201,168,76,0.08);color:#C9A84C;transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.15);}
-.mega-module-thumb{width:32px;height:32px;border-radius:4px;overflow:hidden;flex-shrink:0;background:#1a1a1a;}
-.mega-module-thumb img{width:100%;height:100%;object-fit:cover;}
-.mega-module-meta{display:flex;flex-direction:column;gap:1px;}
-.mega-module-link-title{font-size:12px;font-weight:600;color:inherit;}
-.mega-module-link-sub{font-size:10px;color:#666;}
 
 /* dropdown-panel（工程案例简单下拉） */
 /* dropdown-panel — 纯CSS hover 兜底 */
@@ -158,9 +145,7 @@
 
 /* 响应式 */
 @media(max-width:768px){
-  .mega-panel-v2-inner{grid-template-columns:1fr;padding:0 20px;}
-  .mega-module-grid{grid-template-columns:1fr;}
-  .products-banner{height:360px;}
+      .products-banner{height:360px;}
   .products-banner-content h1{font-size:26px;}
   .product-series-grid{grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:16px;}
   .filter-toggle-btn{display:inline-block;}
@@ -204,7 +189,20 @@
      <a href="about.html">關於我們</a>
      <div class="nav-dropdown">
       <a class="active" href="products.html">產品中心</a>
-      
+      <div class="mega-panel">
+       <div class="mega-panel-grid">
+        <a class="mega-panel-link" href="products/white-marble.html"><div class="mega-panel-icon"><img alt="白色系大理石" loading="lazy" src="images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.jpg"/></div><div class="mega-panel-text"><strong>白色系大理石</strong><span>Snow White / Carrara / Calacatta</span></div></a>
+        <a class="mega-panel-link" href="products/beige-marble.html"><div class="mega-panel-icon"><img alt="米黃系大理石" loading="lazy" src="images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.jpg"/></div><div class="mega-panel-text"><strong>米黃系大理石</strong><span>Crema / Botticino / Emperador</span></div></a>
+        <a class="mega-panel-link" href="products/grey-marble.html"><div class="mega-panel-icon"><img alt="灰色系大理石" loading="lazy" src="images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.jpg"/></div><div class="mega-panel-text"><strong>灰色系大理石</strong><span>Grigio / Pietra Grey / Euboea</span></div></a>
+        <a class="mega-panel-link" href="products/black-marble.html"><div class="mega-panel-icon"><img alt="黑色系大理石" loading="lazy" src="images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.jpg"/></div><div class="mega-panel-text"><strong>黑色系大理石</strong><span>Nero / Portoro / Black Marble</span></div></a>
+        <a class="mega-panel-link" href="products/granite-collection.html"><div class="mega-panel-icon"><img alt="黃金麻花崗岩" loading="lazy" src="images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.jpg"/></div><div class="mega-panel-text"><strong>黃金麻花崗岩</strong><span>G682 / Golden Beige / Yellow Granite</span></div></a>
+        <a class="mega-panel-link" href="products/granite-collection.html"><div class="mega-panel-icon"><img alt="白麻花崗岩" loading="lazy" src="images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.jpg"/></div><div class="mega-panel-text"><strong>白麻/芝麻白</strong><span>White Granite / Sesame White</span></div></a>
+        <a class="mega-panel-link" href="products/granite-collection.html"><div class="mega-panel-icon"><img alt="芝麻灰花崗岩" loading="lazy" src="images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.jpg"/></div><div class="mega-panel-text"><strong>灰色花崗岩</strong><span>Sesame Grey / Grey Granite</span></div></a>
+        <a class="mega-panel-link" href="products/luxury-stone.html"><div class="mega-panel-icon"><img alt="奢石系列" loading="lazy" src="images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.jpg"/></div><div class="mega-panel-text"><strong>奢石/稀有石材</strong><span>Luxury Stone / Blue Agate</span></div></a>
+        <a class="mega-panel-link" href="products/travertine-sandstone.html"><div class="mega-panel-icon"><img alt="洞石砂岩" loading="lazy" src="images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.jpg"/></div><div class="mega-panel-text"><strong>洞石/砂岩</strong><span>Travertine / Sandstone</span></div></a>
+       </div>
+       <div class="mega-panel-viewall"><a href="products.html">→ 瀏覽全部石材系列</a></div>
+      </div>
      </div>
      <div class="nav-dropdown">
       <a href="projects.html">工程案例</a>
@@ -228,39 +226,6 @@
     </div>
     <div class="nav-toggle"><span></span><span></span><span></span></div>
    </div>
-  
- <div class="mega-panel-v2" id="megaPanel">
-       <div class="mega-panel-v2-inner">
-        <!-- Module 1 -->
-        <div class="mega-module">
-         <div class="mega-module-title">經典純色大理石系列</div>
-         <div class="mega-module-grid">
-          <a class="mega-module-link" href="products/white-marble.html"><div class="mega-module-thumb"><img src="images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">白色系臻選</span><span class="mega-module-link-sub">White Marble</span></div></a>
-          <a class="mega-module-link" href="products/beige-marble.html"><div class="mega-module-thumb"><img src="images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">米黃系臻選</span><span class="mega-module-link-sub">Beige Marble</span></div></a>
-          <a class="mega-module-link" href="products/grey-marble.html"><div class="mega-module-thumb"><img src="images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">灰色系臻選</span><span class="mega-module-link-sub">Grey Marble</span></div></a>
-          <a class="mega-module-link" href="products/black-marble.html"><div class="mega-module-thumb"><img src="images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">黑色系臻選</span><span class="mega-module-link-sub">Black Marble</span></div></a>
-         </div>
-        </div>
-        <!-- Module 2 -->
-        <div class="mega-module">
-         <div class="mega-module-title">高端稀缺石材系列</div>
-         <div class="mega-module-grid">
-          <a class="mega-module-link" href="products/luxury-stone.html"><div class="mega-module-thumb"><img src="images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">奢石典藏系列</span><span class="mega-module-link-sub">Luxury Stone</span></div></a>
-          <a class="mega-module-link" href="products/travertine-sandstone.html"><div class="mega-module-thumb"><img src="images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">天然洞石砂岩</span><span class="mega-module-link-sub">Travertine &amp; Sandstone</span></div></a>
-          <a class="mega-module-link" href="products/granite-collection.html"><div class="mega-module-thumb"><img src="images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">精品花崗岩系列</span><span class="mega-module-link-sub">Granite Collection</span></div></a>
-         </div>
-        </div>
-        <!-- Module 3 -->
-        <div class="mega-module">
-         <div class="mega-module-title">定製 &amp; 新品系列</div>
-         <div class="mega-module-grid">
-          <a class="mega-module-link" href="products/custom-craft.html"><div class="mega-module-thumb"><img src="images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">藝術異形定製</span><span class="mega-module-link-sub">Custom Craft</span></div></a>
-          <a class="mega-module-link" href="products/custom-craft.html"><div class="mega-module-thumb"><img src="images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">年度新品系列</span><span class="mega-module-link-sub">New Arrivals</span></div></a>
-          <a class="mega-module-link" href="products.html"><div class="mega-module-thumb"><img src="images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.jpg" alt=""/></div><div class="mega-module-meta"><span class="mega-module-link-title">工程專供系列</span><span class="mega-module-link-sub">Project Stone</span></div></a>
-         </div>
-        </div>
-       </div>
-      </div>
 </nav>
   <section id="main-content">
    
@@ -2440,18 +2405,12 @@
 (function(){
   
   // --- mega-panel & dropdown hover (timeout 200ms) ---
-  var prodNav = document.querySelector('.nav-dropdown'); // 產品中心
-  var megaPanel = document.getElementById('megaPanel');
+  // mega-panel now uses unified CSS hover pattern (no JS needed)
+  // dropdown-panel hover for Projects nav
   var projDropdowns = document.querySelectorAll('.nav-dropdown');
   var projNav = projDropdowns.length > 1 ? projDropdowns[1] : null;
   var dropPanel = document.querySelector('.dropdown-panel');
-  var megaTimer = null, dropTimer = null;
-  if (prodNav && megaPanel) {
-    prodNav.addEventListener('mouseenter', function(){ clearTimeout(megaTimer); megaPanel.style.display='block'; });
-    prodNav.addEventListener('mouseleave', function(){ megaTimer=setTimeout(function(){ megaPanel.style.display='none'; },200); });
-    megaPanel.addEventListener('mouseenter', function(){ clearTimeout(megaTimer); megaPanel.style.display='block'; });
-    megaPanel.addEventListener('mouseleave', function(){ megaTimer=setTimeout(function(){ megaPanel.style.display='none'; },200); });
-  }
+  var dropTimer = null;
   if (projNav && dropPanel) {
     projNav.addEventListener('mouseenter', function(){ clearTimeout(dropTimer); dropPanel.style.display='block'; });
     projNav.addEventListener('mouseleave', function(){ dropTimer=setTimeout(function(){ dropPanel.style.display='none'; },200); });
