@@ -1358,7 +1358,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .client-logos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 16px;
+  gap: 12px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -1848,6 +1848,12 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1px;
   background: rgba(212,175,55,0.15);
+}
+/* 5项在4列下会孤立，强制5列或3+2 */
+@media (min-width: 1025px) {
+  .trust-items {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 .trust-item {
   text-align: center;
@@ -2520,6 +2526,12 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   gap: 16px;
   justify-content: space-between;
 }
+/* 防止末行孤立项：10项在3列时最后一行1项孤立，改为5列或2行5列 */
+@media (min-width: 1025px) {
+  .info-cards {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
 .info-card {
   background: #fff;
   border-radius: var(--radius-md);
@@ -2635,6 +2647,12 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
   justify-content: space-between;
+}
+/* 5项在4列下会孤立末行1项，强制5列或3+2 */
+@media (min-width: 1025px) {
+  .advantage-cards {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 .advantage-card {
   background: #fff;
