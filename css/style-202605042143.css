@@ -39,8 +39,8 @@
   --radius-xl: 24px;
   /* Layout — Responsive Width System */
   --max-width: 1600px;
-  --gutter: 40px;
-  --section-padding: 40px;
+  --gutter: 32px;
+  --section-padding: 32px;
   /* Container gutter — wider for premium feel */
 
   --nav-height: 56px;
@@ -457,7 +457,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 /* ---------- Hero Section ---------- */
 .hero {
   position: relative;
-  min-height: 1000px;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1569,9 +1569,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 
 @media (max-width: 768px) {
-  :root { --nav-height: 70px; --gutter: 24px; }
+  :root { --nav-height: 70px; --gutter: 20px; }
   .container { padding-left: var(--gutter); padding-right: var(--gutter); }
-  .section-padding { padding: 24px 0; }
+  .section-padding { padding: 20px 0; }
   .nav-logo-text strong { font-size: 0.78rem; }
   .nav-logo-text small { font-size: 0.55rem; }
   .nav-logo img { height: 32px !important; }
@@ -4414,7 +4414,7 @@ section[id],
   }
 
   /* Section spacing reduction */
-  .section-padding { padding: 30px 0; }
+  .section-padding { padding: 20px 0; }
 
   /* Container adjustments */
   .container { width: 92%; }
@@ -4437,9 +4437,9 @@ section[id],
 
 /* iPhone Specific (max-width: 480px) */
 @media (max-width: 480px) {
-  :root { --nav-height: 64px; --gutter: 20px; }
+  :root { --nav-height: 64px; --gutter: 16px; }
 
-  .section-padding { padding: 24px 0; }
+  .section-padding { padding: 16px 0; }
 
   /* Further typography refinement */
   h1 { font-size: 1.75rem; letter-spacing: -0.01em; }
@@ -4485,7 +4485,7 @@ section[id],
 @media (max-width: 375px) {
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.25rem; }
-  .section-padding { padding: 24px 0; }
+  .section-padding { padding: 16px 0; }
 
   .trust-items { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .trust-item { padding: 16px 8px; }
@@ -5681,7 +5681,7 @@ html {
 /* ---- Section Padding Mobile ---- */
 @media (max-width: 768px) {
   .section-padding {
-    padding: 40px 0;
+    padding: 20px 0;
   }
 
   .inner-page .section-padding .container {
@@ -7735,7 +7735,7 @@ html {
 /* Large screen: generous breathing room */
 @media (min-width: 1920px) {
   .section-padding {
-    padding: 56px 0;
+    padding: 40px 0;
   }
   
   .about-grid {
@@ -7766,7 +7766,7 @@ html {
 /* Medium-large screen optimization */
 @media (min-width: 1440px) and (max-width: 1919px) {
   .section-padding {
-    padding: 52px 0;
+    padding: 36px 0;
   }
   
   .about-grid {
@@ -7777,7 +7777,7 @@ html {
 /* Tablet landscape */
 @media (min-width: 1200px) and (max-width: 1439px) {
   .section-padding {
-    padding: 48px 0;
+    padding: 32px 0;
   }
 }
 
