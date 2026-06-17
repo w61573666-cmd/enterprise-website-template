@@ -52,11 +52,6 @@
 <style>
 
 
-/* dropdown-panel（工程案例简单下拉） */
-/* dropdown-panel — 纯CSS hover 兜底 */
-.nav-dropdown:hover .dropdown-panel{display:grid !important;}
-.dropdown-panel{position:absolute;top:100%;left:0;min-width:360px;background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);border-top:1px solid rgba(201,168,76,0.2);border-radius:0 0 8px 8px;padding:12px 16px;display:none;z-index:999;grid-template-columns:repeat(3,1fr);gap:4px 12px;}
-
 .dropdown-link{display:block;padding:8px 14px;color:#CCC;font-size:12.5px;text-decoration:none;transition:all 0.3s ease;white-space:nowrap;border-radius:4px;}
 .dropdown-link:hover{color:#C9A84C;background:rgba(201,168,76,0.08);}
 
@@ -2404,19 +2399,7 @@
 <script>
 (function(){
   
-  // --- mega-panel & dropdown hover (timeout 200ms) ---
   // mega-panel now uses unified CSS hover pattern (no JS needed)
-  // dropdown-panel hover for Projects nav
-  var projDropdowns = document.querySelectorAll('.nav-dropdown');
-  var projNav = projDropdowns.length > 1 ? projDropdowns[1] : null;
-  var dropPanel = document.querySelector('.dropdown-panel');
-  var dropTimer = null;
-  if (projNav && dropPanel) {
-    projNav.addEventListener('mouseenter', function(){ clearTimeout(dropTimer); dropPanel.style.display='block'; });
-    projNav.addEventListener('mouseleave', function(){ dropTimer=setTimeout(function(){ dropPanel.style.display='none'; },200); });
-    dropPanel.addEventListener('mouseenter', function(){ clearTimeout(dropTimer); dropPanel.style.display='block'; });
-    dropPanel.addEventListener('mouseleave', function(){ dropTimer=setTimeout(function(){ dropPanel.style.display='none'; },200); });
-  }
   // 筛选逻辑
   var tags=document.querySelectorAll('.filter-tag');
   var cards=document.querySelectorAll('.product-series-card');
