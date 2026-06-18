@@ -46,7 +46,7 @@
 .sample-hero{position:relative;padding:48px 0 24px;text-align:center;background:#fff;overflow:hidden}
 .sample-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.06) 0%,transparent 70%)}
 .sample-hero h1{font-size:clamp(28px,4vw,48px);color:#111;margin-bottom:12px;position:relative;z-index:1}
-.sample-hero p{color:#555;max-width:650px;margin:0 auto;font-size:16px;line-height:1.8;position:relative;z-index:1}
+.sample-hero p{color:#555;max-width:100%;margin:0 auto;font-size:16px;line-height:1.8;position:relative;z-index:1}
 
 .sample-form-section{padding:56px 0;background:#fff}
 .sample-form-container{max-width:100%;margin:0 auto;background:#f8f8fa;border:1px solid #ddd;border-radius:16px;padding:48px 52px;box-shadow:0 4px 40px rgba(0,0,0,0.08)}
@@ -851,7 +851,7 @@
 
 <!-- Back to Top -->
 <a href="#" class="back-to-top" id="backToTop" title="返回頂部" aria-label="Back to top">↑</a>
-<style>.back-to-top{position:fixed;bottom:90px;right:24px;width:44px;height:44px;background:rgba(26,26,46,0.9);color:#C9A84C;border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:998;opacity:0;visibility:hidden;transition:all 0.3s ease;text-decoration:none}.back-to-top.visible{opacity:1;visibility:visible}.back-to-top:hover{background:#C9A84C;color:#111;transform:translateY(-3px)}@media(max-width:768px){.back-to-top{bottom:80px;right:16px;width:38px;height:38px;font-size:18px}}</style>
+<style>.back-to-top{position:fixed;bottom:90px;right:24px;width:44px;height:44px;background:rgba(26,26,46,0.9);color:#C9A84C;border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:998;opacity:0;visibility:hidden;transition:all 0.3s ease;text-decoration:none}.back-to-top.visible{opacity:1;visibility:visible}.back-to-top:hover{background:#C9A84C;color:#111;transform:translateY(-3px)}@media(max-width:768px){.back-to-top{bottom:20px;left:16px;right:auto;width:42px;height:42px;font-size:20px}}</style>
 <script>(function(){var btn=document.getElementById('backToTop');if(!btn)return;window.addEventListener('scroll',function(){if(window.scrollY>400){btn.classList.add('visible')}else{btn.classList.remove('visible')}});btn.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})})})()</script>
 
 <!-- Cookie Consent -->

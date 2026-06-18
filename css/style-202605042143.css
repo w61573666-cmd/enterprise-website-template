@@ -445,7 +445,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   cursor: pointer;
   z-index: 1001;
   padding: 8px;
-}
+; -webkit-user-select: none; user-select: none; }
 .nav-toggle span {
   width: 26px; height: 2px;
   background: var(--color-primary);
@@ -459,7 +459,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 /* ---------- Hero Section ---------- */
 .hero {
   position: relative;
-  min-height: 1000px;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1488,7 +1488,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   .nav-links {
     position: fixed;
     top: 0; right: -100%;
-    width: 300px; height: 1000px;
+    width: 300px; height: 100vh;
     background: #F5F0EB;
     flex-direction: column;
     align-items: flex-start;
@@ -1499,8 +1499,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     pointer-events: none;
-  }
-  .nav-links.open { right: 0; pointer-events: auto; }
+  ; will-change: right; }
+  .nav-links.open { right: 0; pointer-events: auto; padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
   .nav-links a {
     color: var(--color-primary) !important;
     padding: 14px 0;
@@ -1553,7 +1553,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   .dropdown-item { padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.06); color: rgba(26,26,46,0.88) !important; }
   .lang-switch {
     border: none;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(0,0,0,0.08);
     padding-top: 20px;
     margin-left: 0;
     margin-top: 16px;
@@ -1571,7 +1571,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
   .nav-links {
     position: fixed;
     top: 0; right: -100%;
-    width: 280px; height: 1000px;
+    width: 280px; height: 100vh;
     background: #F5F0EB;
     flex-direction: column;
     align-items: flex-start;
@@ -1753,7 +1753,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 .image-modal-content {
   position: relative;
   width: 100vw;
-  height: 1000px;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1761,7 +1761,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 .image-modal-content img {
   max-width: 100vw;
-  max-height: 1000px;
+  max-height: 100vh;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -2389,9 +2389,9 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.8; }
 }
 /* Hero Full-Page Video - Spans full width at bottom */
 .about-hero-video-section.hero-fullpage {
-  height: 1000px;
-  min-height: 1000px;
-  max-height: 1000px;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -4030,6 +4030,7 @@ section[id],
 @media (max-width: 768px) {
   /* Prevent horizontal scroll */
   html {
+    overscroll-behavior: none;
     overflow-x: clip;
     width: 100%;
     max-width: 100vw;
@@ -4508,7 +4509,7 @@ html {
     right: -100%;
     width: 320px;
     max-width: 85vw;
-    height: 1000px;
+    height: 100vh;
     height: 100dvh; /* Dynamic viewport height for mobile */
     background: linear-gradient(180deg, #F5F0EB 0%, #E8E4DF 100%);
     flex-direction: column;
@@ -5947,7 +5948,7 @@ html {
 /* ---- WhatsApp Float Mobile ---- */
 @media (max-width: 768px) {
   .whatsapp-float {
-    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     right: 16px;
     width: 52px;
     height: 52px;
@@ -7811,3 +7812,225 @@ html {
 }
 
 /* ============================================================ */
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-accent, #C9A84C);
+  outline-offset: 2px;
+}
+
+/* ===== Mobile Deep Optimization (2026-06-19) ===== */
+
+/* Prevent horizontal scroll globally */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better text rendering on mobile */
+@media (max-width: 768px) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Ensure all interactive elements have minimum touch target */
+  a, button, input[type="submit"], input[type="button"], .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Allow smaller touch targets for inline links in text */
+  p a, li a, .breadcrumb a, .footer-column a {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  /* Prevent iOS input zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Better spacing for section headings */
+  h2 { margin-bottom: 0.75rem; }
+  h3 { margin-bottom: 0.5rem; }
+
+  /* Container consistent padding */
+  .container {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+
+  /* Section padding optimization */
+  .section-padding { padding: 24px 0; }
+
+  /* Card hover effects disabled on touch */
+  .overview-card:hover,
+  .stone-card:hover,
+  .gallery-item:hover img {
+    transform: none;
+  }
+
+  /* Project hero responsive height */
+  .project-hero {
+    height: 50vh;
+    min-height: 260px;
+    max-height: 380px;
+  }
+
+  .project-hero-overlay {
+    padding: 0 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .project-hero-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .project-hero-title {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  .project-hero-tag {
+    font-size: 0.7rem;
+    padding: 4px 12px;
+  }
+
+  .project-hero-sub {
+    font-size: 0.85rem;
+  }
+
+  /* Project section spacing */
+  .project-section { padding: 24px 0; }
+
+  /* Stone cards 2-column on mobile */
+  .stone-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stone-card-img { height: 120px; }
+  .stone-card-body { padding: 12px; }
+  .stone-card-name { font-size: 0.9rem; }
+  .stone-card-origin { font-size: 0.72rem; }
+  .stone-card-desc { font-size: 0.75rem; }
+
+  /* Overview grid 2-column */
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .overview-card { padding: 16px; }
+  .overview-card-icon { font-size: 1.5rem; }
+  .overview-card-value { font-size: 1rem; }
+  .overview-card-label { font-size: 0.68rem; }
+
+  /* Gallery 2-column */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  /* Tech list */
+  .tech-item {
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .tech-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+
+  .tech-title { font-size: 0.9rem; }
+  .tech-solution { font-size: 0.82rem; line-height: 1.6; }
+
+  /* CTA section */
+  .cta-grid { grid-template-columns: 1fr; gap: 20px; }
+  .cta-info h3 { font-size: 1.2rem; }
+  .cta-info p { font-size: 0.88rem; }
+  .cta-buttons { gap: 10px; }
+  .btn-outline, .btn-filled {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Lightbox mobile */
+  .lightbox { padding: 16px; }
+  .lightbox-close { top: 12px; right: 12px; width: 44px; height: 44px; font-size: 1.5rem; }
+  .lightbox-prev, .lightbox-next { width: 44px; height: 44px; font-size: 1.5rem; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+
+  /* Breadcrumb */
+  .breadcrumb { font-size: 12px; }
+
+  /* Footer spacing */
+  .footer-grid { gap: 24px; padding: 0 16px; }
+  .footer-bottom { padding: 16px; }
+}
+
+/* Extra small screens (≤375px) */
+@media (max-width: 375px) {
+  .container { padding-left: 12px; padding-right: 12px; }
+  .section-padding { padding: 20px 0; }
+
+  .stone-grid { grid-template-columns: 1fr; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+
+  .project-hero { min-height: 220px; }
+  .project-hero-title { font-size: 1.2rem; }
+
+  .stone-card-img { height: 100px; }
+  .stone-card-body { padding: 10px; }
+  .stone-card-name { font-size: 0.82rem; }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 900px) and (orientation: landscape) {
+  .nav-links {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .project-hero {
+    height: 60vh;
+    min-height: 200px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  /* Hint: can be expanded for full dark mode */
+  .lightbox { background: rgba(0,0,0,0.98); }
+}
+
+/* Print optimization */
+@media print {
+  .navbar, .footer, .whatsapp-float, .back-to-top, .nav-toggle, .nav-overlay { display: none !important; }
+  body { color: #000; background: #fff; }
+  .container { max-width: 100% !important; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
