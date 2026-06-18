@@ -138,7 +138,23 @@ document.addEventListener('DOMContentLoaded', () => {
       applyCollapse(dd, links, viewAll);
     });
 
-    // mega-panel-v2 removed; all pages now use unified mega-panel pattern
+    // --- Pattern B: mega-panel-v2 (products.html only) ---
+    var megaV2 = document.querySelector('.mega-panel-v2');
+    if (megaV2) {
+      var links = megaV2.querySelectorAll('.mega-module-link');
+      var viewAllRow = megaV2.querySelector('.mega-panel-viewall');
+      if (!viewAllRow && links.length > 9) {
+        viewAllRow = document.createElement('div');
+        viewAllRow.className = 'mega-panel-viewall';
+        viewAllRow.style.cssText = 'text-align:center;padding-top:16px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);';
+        var va = document.createElement('a');
+        va.href = '#';
+        va.textContent = isEn ? '→ View All Series' : '→ 瀏覽全部石材系列';
+        viewAllRow.appendChild(va);
+        megaV2.querySelector('.mega-panel-v2-inner').appendChild(viewAllRow);
+      }
+      applyCollapse(megaV2, links, viewAllRow ? viewAllRow.querySelector('a') : null);
+    }
   })();
 
   // ---------- Series Card Click Handler (All versions) ----------
@@ -546,47 +562,53 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
     if (m) setTimeout(function () { openNewsModal(m); }, 150);
   });
 
-  /* Auto-fix language switcher links to stay on current page */
+  /* Language switcher links are pre-set in HTML; verify and fix only if missing */
   function fixLangSwitcherHrefs() {
     var switcher = document.querySelector('.lang-switch');
     if (!switcher) return;
     
     var links = switcher.querySelectorAll('a');
     var currentPath = window.location.pathname;
+    var isEnPage = currentPath.includes('/en/');
     
-    // Keep full path for proper detection (e.g., /en/about.html → en/about.html)
-    var pathParts = currentPath.split('/');
-    var pageName = pathParts.length > 2 ? pathParts.slice(-2).join('/') : (pathParts.pop() || 'index.html');
-    
-    // Detect current language from path
-    var isEnPage = currentPath.includes('/en/') || pageName.startsWith('en/') || pageName.includes('/en/');
+    // Determine page depth relative to site root
+    // Root pages: /about.html, /index.html → depth 0
+    // EN root pages: /en/about.html → depth 1 (inside en/)
+    // CN subdirectory: /projects/airport.html → depth 1 (inside projects/)
+    // EN subdirectory: /en/projects/airport.html → depth 2 (inside en/projects/)
+    var pathParts = currentPath.replace(/^\/+|\/+$/g, '').split('/');
+    var depth = pathParts.length - 1; // last element is the filename
     
     links.forEach(function(link) {
       var href = link.getAttribute('href');
       var text = link.textContent.trim().toUpperCase();
-      
       if (!href) return;
       
-      // If on EN page, determine correct TC target
-      if (isEnPage && text === 'TC') {
-        if (pageName.startsWith('en/')) {
-          var tcPage = pageName.replace(/^en\//, '');
-          // EN subdirectory page: prepend '../' to navigate to parent
-          // e.g., en/about.html → tcPage='about.html' → href='../about.html'
-          link.setAttribute('href', '../' + tcPage);
-        } else if (pageName.includes('/en/')) {
-          var tcPage = pageName.replace(/\/en\//, '/');
-          link.setAttribute('href', '../' + tcPage);
-        } else {
-          link.setAttribute('href', '../index.html');
-        }
-      }
-      // If on TC page, determine correct EN target
-      else if (!isEnPage && text === 'EN') {
-        if (pageName === 'index.html') {
-          link.setAttribute('href', 'en/index.html');
-        } else {
-          link.setAttribute('href', 'en/' + pageName);
+      // Only fix if the href looks wrong (points to index.html as fallback)
+      // Trust the HTML-provided hrefs which were manually verified
+      // This function now only acts as a safety net for missing hrefs
+      if (href === '' || href === '#' || href === 'index.html' || href === './index.html') {
+        // Rebuild from current path
+        var fileName = pathParts[pathParts.length - 1];
+        if (isEnPage && text === 'TC') {
+          // Go up from en/ to root
+          var upPrefix = depth === 1 ? '../' : '../../';
+          if (depth === 1) {
+            link.setAttribute('href', upPrefix + fileName);
+          } else {
+            // EN subdirectory: /en/projects/airport.html → TC = ../../projects/airport.html
+            var dir = pathParts[pathParts.length - 2];
+            link.setAttribute('href', upPrefix + dir + '/' + fileName);
+          }
+        } else if (!isEnPage && text === 'EN') {
+          // Go into en/ directory
+          if (depth === 0) {
+            link.setAttribute('href', 'en/' + fileName);
+          } else {
+            // CN subdirectory: /projects/airport.html → EN = ../en/projects/airport.html
+            var dir2 = pathParts[pathParts.length - 2];
+            link.setAttribute('href', '../en/' + dir2 + '/' + fileName);
+          }
         }
       }
     });
