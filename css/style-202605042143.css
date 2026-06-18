@@ -7406,3 +7406,408 @@ html {
     font-size: 0.65rem;
   }
 }
+
+/* ============================================================
+   LAYOUT CLASS RECOVERY PATCH — generated 2026-06-19
+   Restores missing CSS for classes discovered across 81 HTML files.
+   ============================================================ */
+
+/* ---------- Accessibility helper ---------- */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ---------- Product detail hero (products/*.html) ---------- */
+.detail-hero {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a2e;
+}
+.detail-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+@media (max-width: 768px) {
+  .detail-hero { height: 360px; }
+  .detail-hero h1 { font-size: 28px !important; }
+  .detail-hero p { font-size: 14px !important; }
+}
+
+/* ---------- Spec grid (products/*.html) ---------- */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.spec-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-color: #C9A84C;
+}
+.spec-item-left { flex: 1 1 auto; min-width: 0; }
+.spec-item-right { flex: 0 0 auto; text-align: right; margin-left: 16px; }
+.spec-item-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+.spec-item-name-en {
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.spec-item-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #C9A84C;
+  margin-bottom: 2px;
+}
+.spec-item-meta {
+  font-size: 11px;
+  color: #999;
+}
+@media (max-width: 768px) {
+  .spec-grid { grid-template-columns: 1fr; }
+  .spec-item { padding: 14px 16px; }
+  .spec-item-value { font-size: 14px; }
+}
+
+/* ---------- About page: info / service / contact card grids ---------- */
+.about-heading-pad { padding-top: 24px; }
+
+.info-card-grid,
+.service-card-grid,
+.contact-card-grid {
+  margin-top: 24px;
+}
+.info-card-grid-title,
+.service-card-grid-title,
+.contact-card-grid-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.info-cards,
+.service-cards,
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.info-card,
+.service-card,
+.contact-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 22px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.info-card:hover,
+.service-card:hover,
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  border-color: #C9A84C;
+}
+.info-card-icon,
+.service-card-icon,
+.contact-card-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+.info-card-label,
+.contact-card-label {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+.info-card-value,
+.contact-card-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+.service-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+.service-card-desc {
+  font-size: 13.5px;
+  color: #666;
+  line-height: 1.65;
+}
+.contact-card-body { margin-top: 4px; }
+.contact-card-value a { color: #C9A84C; text-decoration: none; }
+.contact-card-value a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .info-cards,
+  .service-cards,
+  .contact-cards { grid-template-columns: 1fr; }
+}
+
+/* About highlight / video overlay helpers */
+.highlight-text { color: #C9A84C; font-weight: 700; }
+.about-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,26,46,0.85), rgba(26,26,46,0.2));
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 32px;
+}
+
+/* ---------- FAQ ---------- */
+.faq-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+}
+.faq-q:hover { background: #fafafa; color: #C9A84C; }
+.faq-icon {
+  font-size: 20px;
+  font-weight: 300;
+  color: #C9A84C;
+  flex-shrink: 0;
+  margin-left: 12px;
+  transition: transform 0.2s;
+}
+.faq-q.active .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  background: #fff;
+}
+.faq-a p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.8;
+  padding: 16px 20px;
+  border-top: 1px solid #eee;
+  margin: 0;
+}
+
+/* ---------- News comparison cards ---------- */
+.compare-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.compare-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.compare-card-header {
+  padding: 14px 18px;
+  background: #fafafa;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a1a;
+  border-bottom: 1px solid #eee;
+}
+.compare-card-header.winner {
+  background: linear-gradient(135deg, #C9A84C, #b08d3c);
+  color: #111;
+}
+.compare-card-body { padding: 10px 18px 16px; }
+.compare-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dotted #eee;
+  font-size: 13.5px;
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-row-label { color: #666; }
+.compare-row-value { font-weight: 600; color: #1a1a1a; }
+.compare-row-value.highlight { color: #C9A84C; }
+
+/* News modal content spacing */
+.news-modal-content { padding: 24px; }
+.news-category-industry-talent { color: #C9A84C; font-weight: 600; }
+
+/* ---------- Home client logo section ---------- */
+.client-logo-section { padding: 80px 0; background: #fafafa; }
+@media (max-width: 768px) { .client-logo-section { padding: 48px 0; } }
+
+/* ---------- Project detail pages ---------- */
+.nav-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #666;
+}
+.nav-lang a {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-lang a:hover { color: #C9A84C; }
+.nav-lang .active { color: #C9A84C; font-weight: 700; }
+
+.info-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+.info-tag {
+  background: rgba(201,168,76,0.1);
+  color: #C9A84C;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Projects listing ---------- */
+.project-search-input {
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 18px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.project-search-input:focus {
+  outline: none;
+  border-color: #C9A84C;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+}
+
+/* ---------- News layout helpers ---------- */
+.news-filter-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: 24px;
+}
+.news-section-heading {
+  grid-column: 1 / -1;
+  margin: 32px 0 8px;
+}
+.news-section-heading h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #b8860b;
+  border-bottom: 2px solid #b8860b;
+  padding-bottom: 8px;
+}
+
+/* ---------- Contact page ---------- */
+.core-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.form-checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.form-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #444;
+  cursor: pointer;
+}
+.form-checkbox-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #C9A84C;
+  cursor: pointer;
+}
+
+/* ---------- Sample request page ---------- */
+.sample-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 0 24px;
+}
+
+/* ---------- Products filter all-tag (already styled via .filter-tag, explicit safety) ---------- */
+.filter-tag.all-tag {
+  background: #f0f0f0;
+  color: #555;
+}
+.filter-tag.all-tag.active {
+  background: #C9A84C;
+  color: #111;
+}
+
+/* ============================================================ */
