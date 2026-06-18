@@ -36,13 +36,13 @@
 .project-hero{position:relative;width:100%;height:500px;overflow:hidden;}
 .project-hero img{width:100%;height:100%;object-fit:cover;}
 .project-hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,0.7) 0%,rgba(10,10,10,0.15) 100%);display:flex;align-items:flex-end;padding:0 48px 48px;box-sizing:border-box;}
-.project-hero-content{max-width:var(--max-width);margin:0 auto;width:100%;}
+.project-hero-content{width:100%;max-width:var(--max-width);margin:0 auto;padding-left:var(--container-padding);padding-right:var(--container-padding);box-sizing:border-box;}@media(min-width:1920px){.project-hero-content{max-width:var(--max-width-xxl);padding-left:0;padding-right:0;}}@media(min-width:1440px) and (max-width:1919px){.project-hero-content{max-width:var(--max-width-xl);padding-left:0;padding-right:0;}}@media(min-width:1200px) and (max-width:1439px){.project-hero-content{max-width:var(--max-width-lg);padding-left:0;padding-right:0;}}
 .project-hero-tag{display:inline-block;background:rgba(212,175,55,0.9);color:#111;font-size:0.75rem;font-weight:700;padding:6px 16px;border-radius:50px;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;}
 .project-hero-title{font-family:'Playfair Display','Noto Serif TC',serif;font-size:2.8rem;font-weight:700;color:#FFF;margin:0;line-height:1.2;text-shadow:0 2px 12px rgba(0,0,0,0.4);}
 .project-hero-sub{font-size:1rem;color:rgba(255,255,255,0.8);margin-top:8px;font-weight:300;}
 .project-section{}
 .project-section-alt{background:#FAF8F5;}
-.project-container{max-width:var(--max-width);margin:0 auto;padding:0 var(--gutter);}
+.project-container{width:100%;max-width:var(--max-width);margin:0 auto;padding-left:var(--container-padding);padding-right:var(--container-padding);box-sizing:border-box;}@media(min-width:1920px){.project-container{max-width:var(--max-width-xxl);padding-left:0;padding-right:0;}}@media(min-width:1440px) and (max-width:1919px){.project-container{max-width:var(--max-width-xl);padding-left:0;padding-right:0;}}@media(min-width:1200px) and (max-width:1439px){.project-container{max-width:var(--max-width-lg);padding-left:0;padding-right:0;}}
 .project-section-title{font-family:'Playfair Display','Noto Serif TC',serif;font-size:2rem;font-weight:700;color:#1A1A2E;margin-bottom:12px;}
 .project-section-subtitle{font-size:0.85rem;color:#D4AF37;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-weight:600;}
 .project-section-desc{font-size:1rem;color:rgba(26,26,46,0.7);line-height:1.8;max-width:800px;margin-bottom:32px;}
@@ -99,7 +99,7 @@
 .project-hero{height:360px;}
 .project-hero-overlay{padding:0 20px 32px;}
 .project-hero-title{font-size:1.8rem;}
-.project-container{padding:0 24px;}
+.project-container{padding-left:24px;padding-right:24px;}
 .project-section{padding:40px 0;}
 .overview-grid{grid-template-columns:repeat(2,1fr);}
 .stone-grid{grid-template-columns:1fr;}
@@ -197,11 +197,11 @@
 <section class="project-hero"><img alt="Educational Institution Stone Projects" src="../../images/projects/cases/001.webp"/><div class="project-hero-overlay"><div class="project-hero-content"><span class="project-hero-tag">Education</span><h1 class="project-hero-title">Educational Institution Stone Projects</h1><p class="project-hero-sub">Safe, eco-friendly high-quality stone solutions for world-class universities and research institutions</p></div></div></section>
 
 <!-- Overview -->
-<section class="project-section"><div class="project-container"><span class="project-section-subtitle">Overview</span><h2 class="project-section-title">Project Overview</h2><p class="project-section-desc">HSST provides safe, durable, and eco-friendly stone solutions for educational institutions worldwide. From century-old university halls to modern research centers, our stone materials comply with international safety standards with anti-slip and antibacterial treatments.</p>
+<section class="project-section"><div class="container"><span class="project-section-subtitle">Overview</span><h2 class="project-section-title">Project Overview</h2><p class="project-section-desc">HSST provides safe, durable, and eco-friendly stone solutions for educational institutions worldwide. From century-old university halls to modern research centers, our stone materials comply with international safety standards with anti-slip and antibacterial treatments.</p>
 <div class="overview-grid"><div class="overview-card"><div class="overview-card-icon">🏫</div><div class="overview-card-label">Projects</div><div class="overview-card-value">35+</div></div><div class="overview-card"><div class="overview-card-icon">🌍</div><div class="overview-card-label">Countries</div><div class="overview-card-value">15</div></div><div class="overview-card"><div class="overview-card-icon">📐</div><div class="overview-card-label">Total Area</div><div class="overview-card-value">80,000㎡</div></div><div class="overview-card"><div class="overview-card-icon">⭐</div><div class="overview-card-label">Satisfaction</div><div class="overview-card-value">98%</div></div></div></div></section>
 
 <!-- Materials -->
-<section class="project-section project-section-alt"><div class="project-container"><span class="project-section-subtitle">Materials</span><h2 class="project-section-title">Stones Used</h2><p class="project-section-desc">Each stone underwent rigorous laboratory testing to ensure optimal performance.</p>
+<section class="project-section project-section-alt"><div class="container"><span class="project-section-subtitle">Materials</span><h2 class="project-section-title">Stones Used</h2><p class="project-section-desc">Each stone underwent rigorous laboratory testing to ensure optimal performance.</p>
 
 <div class="stone-grid">
 <a class="stone-card" href="../../products/white-marble.html"><div class="stone-card-img"><img alt="Marble" loading="lazy" src="../../images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp"/></div><div class="stone-card-body"><div class="stone-card-name">Statuario Venato</div><div class="stone-card-origin">🇮🇹 Italy · Carrara Quarry</div><div class="stone-card-desc">Premium white marble with elegant grey veining</div><span class="stone-card-link">View Details →</span></div></a>
@@ -210,7 +210,7 @@
 </div></div></section>
 
 <!-- Gallery -->
-<section class="project-section"><div class="project-container"><span class="project-section-subtitle">Gallery</span><h2 class="project-section-title">Project Gallery</h2>
+<section class="project-section"><div class="container"><span class="project-section-subtitle">Gallery</span><h2 class="project-section-title">Project Gallery</h2>
 <div class="gallery-grid">
       <div class="gallery-item" data-src="../../images/projects/cases/001.webp"><img alt="Gallery 1" loading="lazy" src="../../images/projects/cases/001.webp"/></div>
       <div class="gallery-item" data-src="../../images/projects/cases/002.png"><img alt="Gallery 2" loading="lazy" src="../../images/projects/cases/002.png"/></div>
@@ -229,7 +229,7 @@
       <div class="gallery-item" data-src="../../images/projects/cases/015.png"><img alt="Gallery 15" loading="lazy" src="../../images/projects/cases/015.png"/></div></div></div></section>
 
 <!-- Technical -->
-<section class="project-section project-section-alt"><div class="project-container"><span class="project-section-subtitle">Technical</span><h2 class="project-section-title">Technical Highlights</h2>
+<section class="project-section project-section-alt"><div class="container"><span class="project-section-subtitle">Technical</span><h2 class="project-section-title">Technical Highlights</h2>
 
 <div class="tech-list">
 <div class="tech-item"><div class="tech-icon">🛡️</div><div class="tech-body"><span class="tech-label">Safety</span><h4 class="tech-title">Fire & Seismic Safety Compliance</h4><p class="tech-solution">All stone materials tested to meet international fire safety and seismic resistance standards.</p></div></div>
@@ -239,7 +239,7 @@
 
 <!-- Construction Process -->
 <section class="project-section project-section-alt">
-  <div class="project-container">
+  <div class="container">
     <span class="project-section-subtitle">Construction Process</span>
     <h2 class="project-section-title">Construction Process</h2>
     <p class="project-section-desc">Below is the complete construction process record for the Education project, covering measurement, processing, and installation stages.</p>
@@ -253,7 +253,7 @@
 
 <!-- Installation Details -->
 <section class="project-section">
-  <div class="project-container">
+  <div class="container">
     <span class="project-section-subtitle">Installation Details</span>
     <h2 class="project-section-title">Installation Details</h2>
     <p class="project-section-desc">Close-up display of precision craftsmanship details in stone installation for the Education project.</p>
@@ -268,7 +268,7 @@
 
 <!-- Related Products -->
 <section class="project-section project-section-alt">
-  <div class="project-container">
+  <div class="container">
     <span class="project-section-subtitle">Related Products</span>
     <h2 class="project-section-title">Related Products</h2>
     <p class="project-section-desc">Stone products used in this project. Click to view detailed specifications.</p>
@@ -306,7 +306,7 @@
 
 <!-- Technical Highlights & Solutions -->
 <section class="project-section project-section-alt">
-  <div class="project-container">
+  <div class="container">
     <span class="project-section-subtitle">Technical</span>
     <h2 class="project-section-title">Technical Highlights & Solutions</h2>
     <p class="project-section-desc">Facing the unique challenges of the Education project, HSST overcame multiple technical difficulties with professional expertise.</p>
@@ -347,7 +347,7 @@
 
 <!-- CTA -->
 <section class="project-section">
-  <div class="project-container">
+  <div class="container">
     <span class="project-section-subtitle">Get Started</span>
     <h2 class="project-section-title">Build Your Premium Project</h2>
     <div class="cta-grid">
@@ -413,7 +413,7 @@
 
 <!-- Related Projects -->
 <section class="project-section project-section-alt">
-  <div class="project-container" style="text-align:center;">
+  <div class="container" style="text-align:center;">
     <span class="project-section-subtitle">More</span>
     <h2 class="project-section-title" style="margin-bottom:24px;">Explore More Projects</h2>
     <div class="cta-buttons" style="justify-content:center;">

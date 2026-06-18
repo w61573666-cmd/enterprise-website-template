@@ -36,13 +36,13 @@
   .project-hero{position:relative;width:100%;height:500px;overflow:hidden;}
   .project-hero img{width:100%;height:100%;object-fit:cover;}
   .project-hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,0.7) 0%,rgba(10,10,10,0.15) 100%);display:flex;align-items:flex-end;padding:0 48px 48px;box-sizing:border-box;}
-  .project-hero-content{max-width:var(--max-width);margin:0 auto;width:100%;}
+  .project-hero-content{width:100%;max-width:var(--max-width);margin:0 auto;padding-left:var(--container-padding);padding-right:var(--container-padding);box-sizing:border-box;}@media(min-width:1920px){.project-hero-content{max-width:var(--max-width-xxl);padding-left:0;padding-right:0;}}@media(min-width:1440px) and (max-width:1919px){.project-hero-content{max-width:var(--max-width-xl);padding-left:0;padding-right:0;}}@media(min-width:1200px) and (max-width:1439px){.project-hero-content{max-width:var(--max-width-lg);padding-left:0;padding-right:0;}}
   .project-hero-tag{display:inline-block;background:rgba(212,175,55,0.9);color:#111;font-size:0.75rem;font-weight:700;padding:6px 16px;border-radius:50px;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;}
   .project-hero-title{font-family:'Playfair Display','Noto Serif TC',serif;font-size:2.8rem;font-weight:700;color:#FFF;margin:0;line-height:1.2;text-shadow:0 2px 12px rgba(0,0,0,0.4);}
   .project-hero-sub{font-size:1rem;color:rgba(255,255,255,0.8);margin-top:8px;font-weight:300;}
   .project-section{}
   .project-section-alt{background:#FAF8F5;}
-  .project-container{max-width:var(--max-width);margin:0 auto;padding:0 var(--gutter);}
+  .project-container{width:100%;max-width:var(--max-width);margin:0 auto;padding-left:var(--container-padding);padding-right:var(--container-padding);box-sizing:border-box;}@media(min-width:1920px){.project-container{max-width:var(--max-width-xxl);padding-left:0;padding-right:0;}}@media(min-width:1440px) and (max-width:1919px){.project-container{max-width:var(--max-width-xl);padding-left:0;padding-right:0;}}@media(min-width:1200px) and (max-width:1439px){.project-container{max-width:var(--max-width-lg);padding-left:0;padding-right:0;}}
   .project-section-title{font-family:'Playfair Display','Noto Serif TC',serif;font-size:2rem;font-weight:700;color:#1A1A2E;margin-bottom:12px;}
   .project-section-subtitle{font-size:0.85rem;color:#D4AF37;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-weight:600;}
   .project-section-desc{font-size:1rem;color:rgba(26,26,46,0.7);line-height:1.8;max-width:800px;margin-bottom:32px;}
@@ -98,7 +98,7 @@
   .btn-filled:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,175,55,0.35);}
   @media(max-width:768px){
    .project-hero{height:360px;}.project-hero-overlay{padding:0 20px 32px;}.project-hero-title{font-size:1.8rem;}
-   .project-container{padding:0 24px;}.project-section{padding:40px 0;}
+   .project-container{padding-left:24px;padding-right:24px;}.project-section{padding:40px 0;}
    .overview-grid{grid-template-columns:repeat(2,1fr);}.stone-grid{grid-template-columns:1fr;}
    .gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
    .tech-item{flex-direction:column;gap:12px;}
@@ -201,7 +201,7 @@
 
 <!-- Project Info Panel Tags -->
 <section class="project-section" style="padding-bottom:0;">
- <div class="project-container">
+ <div class="container">
   <div class="info-tags" style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
    <span class="info-tag" style="background:#FAF8F5;border:1px solid #D4AF37;color:#8B7355;padding:8px 18px;border-radius:50px;font-size:0.85rem;font-weight:600;">🏬 Project Type：Commercial Space</span>
    <span class="info-tag" style="background:#FAF8F5;border:1px solid #D4AF37;color:#8B7355;padding:8px 18px;border-radius:50px;font-size:0.85rem;font-weight:600;">🪨 Stone Types：Crema Marfil / Grey Emperador / Bianco Carrara</span>
@@ -217,7 +217,7 @@
 
 <!-- Project Overview -->
 <section class="project-section">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Project Overview</span>
   <h2 class="project-section-title">Project Overview</h2>
   <p class="project-section-desc">Shanghai IFC Mall is a landmark high-end commercial complex in Shanghai's Lujiazui financial core, home to top global brands. HSST provided 50,000 square meters of premium commercial flooring and feature wall stone solutions, using Crema Marfil, Grey Emperador, and Bianco Carrara, backed by a 10-year quality warranty.</p>
@@ -231,7 +231,7 @@
 </section>
 
 <section class="project-section project-section-alt">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Materials</span>
   <h2 class="project-section-title">Stones Used</h2>
   <p class="project-section-desc">Commercial space stone requires both high durability and aesthetics. Our selected stones have passed strict wear, compression, and slip resistance tests, ensuring lasting quality in high-traffic environments.</p>
@@ -253,7 +253,7 @@
 </section>
 
 <section class="project-section">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Gallery</span>
   <h2 class="project-section-title">Project Gallery</h2>
   <p class="project-section-desc">Click images to enlarge and view details。Below are the completed stone finishes across various areas of Shanghai IFC Mall.</p>
@@ -276,7 +276,7 @@
 
 <!-- Construction Process -->
 <section class="project-section project-section-alt">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Construction Process</span>
   <h2 class="project-section-title">Construction Process</h2>
   <p class="project-section-desc">Below is the complete construction process record for the Shanghai IFC Mall project.</p>
@@ -290,7 +290,7 @@
 
 <!-- Installation Details -->
 <section class="project-section">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Installation Details</span>
   <h2 class="project-section-title">Installation Details</h2>
   <p class="project-section-desc">Close-up display of precision craftsmanship in commercial space stone installation.</p>
@@ -305,7 +305,7 @@
 
 <!-- Related Products -->
 <section class="project-section project-section-alt">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Related Products</span>
   <h2 class="project-section-title">Related Products</h2>
   <p class="project-section-desc">Stone products used in this project. Click to view detailed specifications.</p>
@@ -333,7 +333,7 @@
 <div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightboxClose">&times;</button><button class="lightbox-prev" id="lightboxPrev">&lsaquo;</button><img alt="" id="lightboxImg"/><button class="lightbox-next" id="lightboxNext">&rsaquo;</button></div>
 
 <section class="project-section project-section-alt">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Technical</span>
   <h2 class="project-section-title">Technical Highlights & Solutions</h2>
   <p class="project-section-desc">Large-scale commercial stone projects need to ensure aesthetics while meeting durability requirements for ultra-high foot traffic.</p>
@@ -367,7 +367,7 @@
 </section>
 
 <section class="project-section">
- <div class="project-container">
+ <div class="container">
   <span class="project-section-subtitle">Get Started</span>
   <h2 class="project-section-title">Empower Your Commercial Space</h2>
   <div class="cta-grid">
@@ -411,7 +411,7 @@
 </section>
 
 <section class="project-section project-section-alt">
- <div class="project-container" style="text-align:center;">
+ <div class="container" style="text-align:center;">
   <span class="project-section-subtitle">More</span>
   <h2 class="project-section-title" style="margin-bottom:24px;">Explore More Projects</h2>
   <div class="cta-buttons" style="justify-content:center;">
