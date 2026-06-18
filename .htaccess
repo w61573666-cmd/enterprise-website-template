@@ -1,0 +1,47 @@
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Non-www to www
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# Index redirect
+RewriteRule ^index\.html$ / [R=301,L]
+
+# EN page redirects (old/broken EN URLs)
+RewriteRule ^en/index\.htm$ /en/ [R=301,L]
+RewriteRule ^en/about\.htm$ /en/about.html [R=301,L]
+RewriteRule ^en/products\.htm$ /en/products.html [R=301,L]
+RewriteRule ^en/projects\.htm$ /en/projects.html [R=301,L]
+RewriteRule ^en/contact\.htm$ /en/contact.html [R=301,L]
+RewriteRule ^en/news\.htm$ /en/news.html [R=301,L]
+RewriteRule ^en/solutions\.htm$ /en/solutions.html [R=301,L]
+
+# Product detail pages (new)
+RewriteRule ^products/(.+)\.html$ /products/$1.html [L]
+RewriteRule ^en/products/(.+)\.html$ /en/products/$1.html [L]
+
+# Project detail pages (new)
+RewriteRule ^projects/(.+)\.html$ /projects/$1.html [L]
+RewriteRule ^en/projects/(.+)\.html$ /en/projects/$1.html [L]
+
+# 404 handling
+ErrorDocument 404 /404.html
+
+# Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
+</IfModule>
