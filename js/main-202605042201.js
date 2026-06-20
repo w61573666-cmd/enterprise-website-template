@@ -811,3 +811,37 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
     processAll();
   }
 })();
+
+// ---------- Mobile Video Lazy Load ----------
+// On mobile, defer hero video loading until visible (IntersectionObserver)
+// This prevents 4 videos loading simultaneously on slow connections
+(function() {
+  var isMobile = /Android|iPhone|iPad|iPod|Mobile|Safari/i.test(navigator.userAgent) && window.innerWidth < 768;
+  if (!isMobile) return;
+
+  var heroVideos = document.querySelectorAll('video[data-video-id^="hero-grid"]');
+  if (!heroVideos.length) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var v = entry.target;
+        var src = v.querySelector('source');
+        if (src && !v.dataset.loaded) {
+          v.dataset.loaded = '1';
+          v.preload = 'auto';
+          v.load();
+          v.play().catch(function() {});
+        }
+        io.unobserve(v);
+      }
+    });
+  }, { rootMargin: '50px' });
+
+  heroVideos.forEach(function(v) {
+    // Set preload to none on mobile initially
+    v.preload = 'none';
+    io.observe(v);
+  });
+})();
