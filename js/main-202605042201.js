@@ -505,7 +505,7 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href*="wa.me"], a[href*="web.whatsapp.com"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
-        var phone = '+85255380525';
+        var phone = '85255380525';
         if (isMobile) {
           link.href = 'https://wa.me/' + phone;
         } else {
