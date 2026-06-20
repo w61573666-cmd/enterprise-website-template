@@ -497,15 +497,19 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   itemObserver.observe(el);
 });
 
-// WhatsApp: unified click handler for reliable cross-platform chat
-// wa.me links work on both desktop (redirects to web.whatsapp.com) and mobile (deep link to app)
+// WhatsApp: platform-aware click handler
+// Desktop: web.whatsapp.com/send?phone= (opens WhatsApp Web in browser)
+// Mobile: wa.me/ deep link (opens WhatsApp app directly)
 (function() {
   var phone = '85255380525';
-  
+  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var waUrl = isMobile
+    ? 'https://wa.me/' + phone
+    : 'https://web.whatsapp.com/send?phone=' + phone;
+
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href*="wa.me"], a[href*="web.whatsapp.com"]').forEach(function(link) {
-      // Ensure all WhatsApp links use wa.me format (works everywhere)
-      link.setAttribute('href', 'https://wa.me/' + phone);
+      link.setAttribute('href', waUrl);
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
     });
