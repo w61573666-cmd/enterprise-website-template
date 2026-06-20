@@ -497,21 +497,17 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   itemObserver.observe(el);
 });
 
-// WhatsApp Dual Protocol - Desktop: web.whatsapp.com, Mobile: wa.me (deep link)
+// WhatsApp: unified click handler for reliable cross-platform chat
+// wa.me links work on both desktop (redirects to web.whatsapp.com) and mobile (deep link to app)
 (function() {
-  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || 
-                 ('ontouchstart' in window) || 
-                 (navigator.maxTouchPoints > 0);
+  var phone = '85255380525';
+  
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href*="wa.me"], a[href*="web.whatsapp.com"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        var phone = '85255380525';
-        if (isMobile) {
-          link.href = 'https://wa.me/' + phone;
-        } else {
-          link.href = 'https://web.whatsapp.com/send?phone=' + phone;
-        }
-      }, true);
+      // Ensure all WhatsApp links use wa.me format (works everywhere)
+      link.setAttribute('href', 'https://wa.me/' + phone);
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
     });
   });
 })();
@@ -643,22 +639,7 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
 })();
 
 
-// WhatsApp link fix: desktop uses web.whatsapp.com, mobile keeps wa.me
-(function() {
-  var isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  if (isMobile) return;
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
-      var href = link.getAttribute('href');
-      var phone = href.replace(/wa\.me\/|web\.whatsapp\.com\/send\?phone=/gi, '').replace(/[^0-9+]/g, '');
-      if (phone) {
-        link.setAttribute('href', 'https://web.whatsapp.com/send?phone=' + phone);
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
-      }
-    });
-  });
-})();
+// (Removed duplicate WhatsApp link fix - merged into unified IIFE above)
 
 
 // ===== HSST Watermark: add company name to all content images & videos =====
