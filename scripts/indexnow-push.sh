@@ -13,22 +13,30 @@ ENDPOINTS=(
   "https://search.seznam.cz/indexnow"
 )
 
-# 从 sitemap 提取所有 URL
-URLS=$(curl -s "$SITEMAP_URL" | grep -oP '(?<=<loc>)[^<]+' | grep -v 'sitemap' | sort -u)
+# 从 sitemap 提取所有 URL（macOS 兼容，不使用 grep -P）
+URLS=$(curl -s "$SITEMAP_URL" | python3 -c "
+import sys, re
+content = sys.stdin.read()
+# 从 sitemapindex 和 urlset 中提取所有非 sitemap 的 URL
+urls = re.findall(r'<loc>(.*?)</loc>', content)
+urls = [u.strip() for u in urls if 'sitemap' not in u.lower() and u.strip()]
+for u in sorted(set(urls)):
+    print(u)
+")
 URL_COUNT=$(echo "$URLS" | wc -l)
 echo "📋 Found $URL_COUNT URLs in sitemap"
 
 # 构建 JSON payload
-URL_JSON=$(echo "$URLS" | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))")
 PAYLOAD=$(python3 -c "
-import json
+import json, sys
+urls = [l.strip() for l in sys.stdin if l.strip()]
 print(json.dumps({
     'host': 'www.hsst.hk',
     'key': '$KEY',
     'keyLocation': '$KEY_LOCATION',
-    'urlList': $URL_JSON
+    'urlList': urls
 }))
-")
+" <<< "$URLS")
 
 # 推送到每个端点
 for endpoint in "${ENDPOINTS[@]}"; do
