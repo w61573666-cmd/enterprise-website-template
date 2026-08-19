@@ -8418,3 +8418,14 @@ html {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---- Series Section Content (replaces inline bg) ---- */
+.series-section-content {
+  background: #fff;
+  padding: 20px 0;
+}
+
+/* ---- Series Section Header gradient (replaces inline) ---- */
+.series-section-header {
+  background: linear-gradient(to bottom, #e8dfd4, #d4cdc2);
+}
