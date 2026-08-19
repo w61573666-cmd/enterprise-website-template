@@ -1,0 +1,43 @@
+User-agent: *
+Allow: /
+
+# 禁止爬取 404 页面
+Disallow: /404.html
+Disallow: /en/404.html
+
+# Sitemap
+Sitemap: https://www.hsst.hk/sitemap.xml
+
+# 允许所有搜索引擎
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Crawl delay
+Crawl-delay: 1

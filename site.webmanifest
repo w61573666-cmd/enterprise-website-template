@@ -1,0 +1,28 @@
+{
+  "name": "恆生石材科技有限公司 HENGSHENG MARBLE S&T CO. LIMITED",
+  "short_name": "恆生石材 HSST",
+  "description": "香港領先高端石材供應商，專業提供大理石、花崗岩及奢石批發、加工與工程服務。全球20+國家礦區直供，500+標桿項目經驗。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#c9a84c",
+  "lang": "zh-Hant",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
