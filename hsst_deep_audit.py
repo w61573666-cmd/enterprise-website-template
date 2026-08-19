@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-HSST 全站深度审计脚本 v2
-审计所有81个HTML文件的5大维度问题
-- 修正了CSS花括号误报问题
-- 修正了HTML标签闭合检查的误报
-- 更精准的占位符检测
+HSST 全站深度审计脚本 v3
+- 修正了CSS花括号误报
+- 修正了HTML标签闭合检查（处理重复标签、嵌套div等）
+- 修正了<a>标签空内容检查（考虑子元素文本）
+- 修正了<usd>等假阳性标签检测
+- 更精准的内容完整性检查
 """
 
 import os
@@ -17,7 +18,7 @@ PROJECT_ROOT = Path("/Users/stone/.qclaw/workspace/hengsheng-stone")
 all_html_files = sorted(PROJECT_ROOT.rglob("*.html"))
 all_html_files = [f for f in all_html_files if ".git" not in str(f)]
 
-# Build set of all existing files (relative to project root)
+# Build set of all existing files
 all_image_files = set()
 all_video_files = set()
 for f in PROJECT_ROOT.rglob("*"):
@@ -75,23 +76,32 @@ def check_file_exists(base_file, url):
         return True
     return (PROJECT_ROOT / rel).exists()
 
-# ===== Extract content outside of <style> and <script> for text checks =====
-
 def strip_style_script(content):
-    """Remove <style> and <script> blocks for text-based checks."""
-    result = re.sub(r'<style[^>]*>.*?</style>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    result = re.sub(r'<script[^>]*>.*?</script>', '', result, flags=re.DOTALL | re.IGNORECASE)
+    """Replace <style> and <script> blocks with equal-length spaces to preserve line numbers."""
+    def replace_with_spaces(m):
+        return ' ' * len(m.group(0))
+    result = re.sub(r'<style[^>]*>.*?</style>', replace_with_spaces, content, flags=re.DOTALL | re.IGNORECASE)
+    result = re.sub(r'<script[^>]*>.*?</script>', replace_with_spaces, result, flags=re.DOTALL | re.IGNORECASE)
     return result
 
-def strip_html_tags(text):
-    return re.sub(r'<[^>]+>', ' ', text)
+def extract_all_text(content):
+    """Extract all visible text including from nested elements."""
+    text_content = strip_style_script(content)
+    text_content = re.sub(r'<!--.*?-->', '', text_content, flags=re.DOTALL)
+    # Repeatedly remove tags until no more tags
+    prev = None
+    while prev != text_content:
+        prev = text_content
+        text_content = re.sub(r'<[^>]+>', ' ', text_content)
+    text_content = re.sub(r'\s+', ' ', text_content).strip()
+    return text_content
 
 # ===== Check 1: Placeholder text =====
 
 REAL_PLACEHOLDERS = [
     (r'Lorem ipsum', 'Lorem ipsum占位文字'),
-    (r'TODO\b', 'TODO标记'),
-    (r'TBD\b', 'TBD标记'),
+    (r'\bTODO\b', 'TODO标记'),
+    (r'\bTBD\b', 'TBD标记'),
     (r'待补充', '待补充标记'),
     (r'待完善', '待完善标记'),
     (r'待填写', '待填写标记'),
@@ -106,9 +116,7 @@ REAL_PLACEHOLDERS = [
 ]
 
 def check_placeholders(filepath, content):
-    # Only check visible text (outside style/script)
     text_content = strip_style_script(content)
-    
     for pattern, desc in REAL_PLACEHOLDERS:
         for m in re.finditer(pattern, text_content, re.IGNORECASE):
             line = get_line_number(content, m.start())
@@ -122,7 +130,6 @@ def check_alt_attributes(filepath, content):
     for m in re.finditer(r'<img[^>]*>', content, re.IGNORECASE):
         tag = m.group()
         line = get_line_number(content, m.start())
-        
         alt_match = re.search(r'\salt\s*=\s*["\']([^"\']*)["\']', tag, re.IGNORECASE)
         if not alt_match:
             add_issue(filepath, "缺失文字", f"行{line}",
@@ -139,16 +146,13 @@ def check_image_srcs(filepath, content):
     for m in re.finditer(r'<img[^>]*src\s*=\s*["\']([^"\']*)["\'][^>]*>', content, re.IGNORECASE):
         src = m.group(1)
         line = get_line_number(content, m.start())
-        
         if not src or src.strip() == '':
             add_issue(filepath, "缺失图片", f"行{line}",
                 "img标签src为空", "高",
                 "提供有效的图片路径")
             continue
-        
         if src.startswith(('data:', 'http://', 'https://')):
             continue
-        
         if not check_file_exists(filepath, src):
             add_issue(filepath, "缺失图片", f"行{line}",
                 f"图片文件不存在: src='{src}'", "高",
@@ -160,19 +164,32 @@ def check_css_background_images(filepath, content):
     for m in re.finditer(r'background-image\s*:\s*url\(["\']?([^"\')\s]+)["\']?\)', content, re.IGNORECASE):
         url = m.group(1)
         line = get_line_number(content, m.start())
-        
         if url.startswith(('data:', 'http://', 'https://')):
             continue
-        
         if not check_file_exists(filepath, url):
             add_issue(filepath, "缺失图片", f"行{line}",
                 f"CSS背景图片不存在: url('{url}')", "高",
                 f"确认背景图片路径是否正确")
 
-# ===== Check 5: Empty elements with class but no content =====
+# ===== Check 5: Empty elements =====
 
 def check_empty_elements(filepath, content):
     text_content = strip_style_script(content)
+    
+    # Empty headings (h1-h6)
+    for tag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+        for m in re.finditer(rf'<{tag}([^>]*)>\s*</{tag}>', text_content, re.IGNORECASE):
+            line = get_line_number(content, m.start())
+            add_issue(filepath, "缺失文字", f"行{line}",
+                f"<{tag}>标签无文字内容", "高",
+                f"填充<{tag}>标题文字")
+    
+    # Empty <button>
+    for m in re.finditer(r'<button([^>]*)>\s*</button>', text_content, re.IGNORECASE):
+        line = get_line_number(content, m.start())
+        add_issue(filepath, "缺失文字", f"行{line}",
+            f"<button>标签无文字内容", "高",
+            "添加按钮文字")
     
     # Empty <p> with class
     for m in re.finditer(r'<p([^>]*)>\s*</p>', text_content, re.IGNORECASE):
@@ -182,31 +199,6 @@ def check_empty_elements(filepath, content):
             add_issue(filepath, "缺失文字", f"行{line}",
                 f"<p>标签有class但无文字内容", "中",
                 "填充段落文字内容或移除空标签")
-    
-    # Empty headings
-    for tag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
-        pattern = rf'<{tag}([^>]*)>\s*</{tag}>'
-        for m in re.finditer(pattern, text_content, re.IGNORECASE):
-            line = get_line_number(content, m.start())
-            add_issue(filepath, "缺失文字", f"行{line}",
-                f"<{tag}>标签无文字内容", "高",
-                f"填充<{tag}>标题文字")
-    
-    # Empty <a> with href
-    for m in re.finditer(r'<a([^>]*)>\s*</a>', text_content, re.IGNORECASE):
-        attrs = m.group(1).strip()
-        line = get_line_number(content, m.start())
-        if 'href' in attrs.lower():
-            add_issue(filepath, "缺失文字", f"行{line}",
-                f"<a>标签有href但无文字内容", "高",
-                "添加链接文字")
-    
-    # Empty <button>
-    for m in re.finditer(r'<button([^>]*)>\s*</button>', text_content, re.IGNORECASE):
-        line = get_line_number(content, m.start())
-        add_issue(filepath, "缺失文字", f"行{line}",
-            f"<button>标签无文字内容", "高",
-            "添加按钮文字")
     
     # Empty <section> with class
     for m in re.finditer(r'<section([^>]*)>\s*</section>', text_content, re.IGNORECASE):
@@ -222,49 +214,62 @@ def check_empty_elements(filepath, content):
 def check_links(filepath, content):
     for m in re.finditer(r'<a[^>]*href\s*=\s*["\']([^"\']*)["\'][^>]*>(.*?)</a>', content, re.IGNORECASE | re.DOTALL):
         href = m.group(1)
-        link_text = re.sub(r'<[^>]+>', '', m.group(2)).strip()
+        inner_html = m.group(2)
+        # Extract ALL text from inner HTML (including nested elements)
+        link_text = extract_all_text(inner_html).strip()
         line = get_line_number(content, m.start())
         
-        if href == '' :
+        if href == '':
             add_issue(filepath, "HTML结构", f"行{line}",
                 f"链接href为空: 文字='{link_text[:30]}'", "高",
                 "提供有效的href")
             continue
         
         if href == '#':
-            if link_text:
-                # href="#" is common for JS buttons - low severity
-                pass  # skip to reduce noise
             continue
         
         if href.startswith(('http://', 'https://', 'mailto:', 'tel:', 'javascript:')):
             continue
         
-        # Check internal links
         clean_href = href.split('#')[0].split('?')[0]
         if clean_href and not check_file_exists(filepath, href):
             add_issue(filepath, "HTML结构", f"行{line}",
                 f"死链(目标文件不存在): href='{href}' 文字='{link_text[:30]}'", "高",
                 f"修复链接路径或创建目标文件")
+        
+        # Only flag empty link text if there are no child elements either
+        if not link_text and not re.search(r'<(?:img|svg|i\b|span)', inner_html, re.IGNORECASE):
+            add_issue(filepath, "缺失文字", f"行{line}",
+                f"<a>标签有href但无文字内容也无图片: href='{href}'", "高",
+                "添加链接文字或图标")
 
 # ===== Check 7: Content completeness =====
 
 def check_content_completeness(filepath, content):
     text_content = strip_style_script(content)
     
-    # Sections with heading but no paragraph
+    # Sections with heading but no paragraph text
     for m in re.finditer(r'<section[^>]*>(.*?)</section>', text_content, re.IGNORECASE | re.DOTALL):
         section_content = m.group(1)
         line = get_line_number(content, m.start())
         
         headings = re.findall(r'<h[1-6][^>]*>.*?</h[1-6]>', section_content, re.IGNORECASE | re.DOTALL)
         paragraphs = re.findall(r'<p[^>]*>.*?</p>', section_content, re.IGNORECASE | re.DOTALL)
-        divs_with_text = re.findall(r'<div[^>]*class="[^"]*(?:content|text|desc|body|info|detail)[^"]*"[^>]*>.*?</div>', section_content, re.IGNORECASE | re.DOTALL)
         
-        if headings and not paragraphs and not divs_with_text:
-            other_text_tags = re.findall(r'<(?:li|td|blockquote)[^>]*>', section_content, re.IGNORECASE)
-            if not other_text_tags:
-                heading_text = re.sub(r'<[^>]+>', '', headings[0]).strip()
+        # Check for text in divs with text-related classes
+        text_divs = re.findall(r'<div[^>]*class="[^"]*(?:content|text|desc|body|info|detail|description|card-body|modal-text)[^"]*"[^>]*>.*?</div>', section_content, re.IGNORECASE | re.DOTALL)
+        
+        # Check for list items
+        list_items = re.findall(r'<li[^>]*>.*?</li>', section_content, re.IGNORECASE | re.DOTALL)
+        
+        # Check for table cells
+        table_cells = re.findall(r'<td[^>]*>.*?</td>', section_content, re.IGNORECASE | re.DOTALL)
+        
+        if headings and not paragraphs and not text_divs and not list_items and not table_cells:
+            # Check for other text-bearing elements
+            other_text = re.findall(r'<(?:blockquote|figcaption|caption)[^>]*>', section_content, re.IGNORECASE)
+            if not other_text:
+                heading_text = extract_all_text(headings[0]).strip()
                 if heading_text and len(heading_text) > 2:
                     add_issue(filepath, "内容不完整", f"行{line}",
                         f"section只有标题'{heading_text[:40]}'无正文段落", "中",
@@ -272,7 +277,6 @@ def check_content_completeness(filepath, content):
 
 def check_tables(filepath, content):
     text_content = strip_style_script(content)
-    
     for m in re.finditer(r'<td([^>]*)>\s*</td>', text_content, re.IGNORECASE):
         line = get_line_number(content, m.start())
         add_issue(filepath, "内容不完整", f"行{line}",
@@ -297,28 +301,18 @@ def get_paired_files():
                 pairs.append((cn_path, f))
     return pairs
 
-def extract_text_content(content):
-    content = re.sub(r'<script[^>]*>.*?</script>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    content = re.sub(r'<style[^>]*>.*?</style>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    content = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
-    text = re.sub(r'<[^>]+>', ' ', content)
-    text = re.sub(r'\s+', ' ', text).strip()
-    return text
-
 def check_cn_en_symmetry():
     pairs = get_paired_files()
-    
     for cn_file, en_file in pairs:
         cn_content = read_file(cn_file)
         en_content = read_file(en_file)
         
-        cn_text = extract_text_content(cn_content)
-        en_text = extract_text_content(en_content)
+        cn_text = extract_all_text(cn_content)
+        en_text = extract_all_text(en_content)
         
         # Chinese text in English pages
         cn_chars_in_en = re.findall(r'[\u4e00-\u9fff]+', en_text)
         if cn_chars_in_en:
-            # Filter known exceptions
             exceptions = {'恒生石材', '恒生', '石材'}
             real_cn = [c for c in cn_chars_in_en if c not in exceptions]
             if real_cn:
@@ -344,70 +338,86 @@ def check_cn_en_symmetry():
                     f"中文页内容明显少于英文页 (中文{cn_len}字符 vs 英文{en_len}字符, 比例{ratio:.1%})", "中",
                     "补充中文页内容，使其与英文页对称")
 
-# ===== Check 9: HTML structure (improved) =====
+# ===== Check 9: HTML structure (improved v3) =====
 
 def check_html_structure(filepath, content):
     VOID_ELEMENTS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
                       'link', 'meta', 'param', 'source', 'track', 'wbr'}
     
-    # Use a simple tag matcher
-    tag_pattern = re.compile(r'<(/?)([a-zA-Z][a-zA-Z0-9]*)([^>]*?)(/?)>', re.DOTALL)
+    # First, remove script and style blocks entirely to avoid parsing their contents
+    # Use space replacement to preserve line numbers
+    def replace_with_spaces(m):
+        return ' ' * len(m.group(0))
+    clean_content = re.sub(r'<script[^>]*>.*?</script>', replace_with_spaces, content, flags=re.DOTALL | re.IGNORECASE)
+    clean_content = re.sub(r'<style[^>]*>.*?</style>', replace_with_spaces, clean_content, flags=re.DOTALL | re.IGNORECASE)
+    # Also remove comments
+    clean_content = re.sub(r'<!--.*?-->', replace_with_spaces, clean_content, flags=re.DOTALL)
+    
+    # Also remove content that looks like tags but is actually text (e.g. '<USD 50/sqm')
+    # These are patterns like < followed by uppercase letters followed by space/digit (not valid HTML tags)
+    # We'll handle this by filtering out non-HTML tag matches in the parser below
+    
+    tag_re = re.compile(r'<(/?)([a-zA-Z][a-zA-Z0-9]*)((?:[^>"\']|"[^"]*"|\'[^\']*\')*?)(/?)>', re.DOTALL)
+    
+    # Valid HTML tag names (lowercase). Any tag name not in this set is likely text content misidentified as a tag.
+    VALID_HTML_TAGS = {
+        'html', 'head', 'body', 'div', 'span', 'p', 'a', 'img', 'ul', 'ol', 'li',
+        'table', 'tr', 'td', 'th', 'thead', 'tbody', 'tfoot', 'caption', 'col', 'colgroup',
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'footer', 'nav', 'main', 'section',
+        'article', 'aside', 'figure', 'figcaption', 'blockquote', 'pre', 'code', 'em',
+        'strong', 'b', 'i', 'u', 's', 'small', 'sub', 'sup', 'mark', 'del', 'ins',
+        'form', 'input', 'textarea', 'select', 'option', 'optgroup', 'label', 'fieldset',
+        'legend', 'button', 'datalist', 'output', 'progress', 'meter',
+        'br', 'hr', 'wbr', 'details', 'summary', 'dialog', 'menu', 'menuitem',
+        'iframe', 'embed', 'object', 'param', 'video', 'audio', 'source', 'track',
+        'canvas', 'svg', 'math', 'picture', 'map', 'area',
+        'meta', 'link', 'title', 'base', 'style', 'script', 'noscript', 'template',
+        'address', 'abbr', 'cite', 'q', 'dfn', 'kbd', 'samp', 'var', 'time', 'ruby',
+        'rt', 'rp', 'bdi', 'bdo', 'data', 'slot',
+    }
     
     stack = []
-    in_style = False
-    in_script = False
     
-    for m in tag_pattern.finditer(content):
+    for m in tag_re.finditer(clean_content):
         is_closing = m.group(1) == '/'
         tag_name = m.group(2).lower()
-        attrs = m.group(3)
         is_self_closing = m.group(4) == '/'
         line = get_line_number(content, m.start())
         
-        # Skip tags inside style/script
-        if tag_name == 'style':
-            if is_closing:
-                in_style = False
-            else:
-                in_style = True
-            continue
-        if tag_name == 'script':
-            if is_closing:
-                in_script = False
-            else:
-                in_script = True
-            continue
-        if in_style or in_script:
+        # Skip non-HTML tags (likely text content like <USD)
+        if tag_name not in VALID_HTML_TAGS:
             continue
         
-        if tag_name in VOID_ELEMENTS or is_self_closing:
+        if tag_name in VOID_ELEMENTS:
+            continue
+        
+        if is_self_closing and not is_closing:
             continue
         
         if is_closing:
-            # Find matching open tag in stack
-            found = False
+            found_idx = None
             for i in range(len(stack) - 1, -1, -1):
                 if stack[i][0] == tag_name:
-                    # Pop all unclosed tags between
-                    for j in range(len(stack) - 1, i, -1):
-                        unclosed_tag, unclosed_line = stack[j]
+                    found_idx = i
+                    break
+            
+            if found_idx is not None:
+                for j in range(len(stack) - 1, found_idx, -1):
+                    unclosed_tag, unclosed_line = stack[j]
+                    if unclosed_tag not in ('p', 'span', 'li', 'td', 'th', 'tr', 'option'):
                         add_issue(filepath, "HTML结构", f"行{unclosed_line}",
                             f"未闭合标签: <{unclosed_tag}> (在</{tag_name}>之前未闭合)", "高",
                             f"添加</{unclosed_tag}>闭合标签")
-                    stack = stack[:i]
-                    found = True
-                    break
-            if not found:
-                # Closing tag without opening
-                pass  # Lower priority, skip for now
+                stack = stack[:found_idx]
         else:
             stack.append((tag_name, line))
     
-    # Report remaining unclosed tags
-    for tag_name, line in stack:
-        add_issue(filepath, "HTML结构", f"行{line}",
-            f"未闭合标签: <{tag_name}>", "高",
-            f"添加</{tag_name}>闭合标签")
+    if stack:
+        tag_name, line = stack[0]
+        if tag_name != 'html':  # html unclosed is usually a parser edge case
+            add_issue(filepath, "HTML结构", f"行{line}",
+                f"未闭合标签: <{tag_name}>", "高",
+                f"添加</{tag_name}>闭合标签")
 
 # ===== Check 10: Video source checks =====
 
@@ -415,14 +425,30 @@ def check_video_srcs(filepath, content):
     for m in re.finditer(r'<source[^>]*src\s*=\s*["\']([^"\']*)["\'][^>]*>', content, re.IGNORECASE):
         src = m.group(1)
         line = get_line_number(content, m.start())
-        
         if not src or src.startswith(('http://', 'https://', 'data:')):
             continue
-        
         if not check_file_exists(filepath, src):
             add_issue(filepath, "缺失图片", f"行{line}",
                 f"视频文件不存在: src='{src}'", "高",
                 f"确认视频路径是否正确")
+
+# ===== Check 11: Duplicate DOCTYPE =====
+
+def check_duplicate_doctype(filepath, content):
+    doctype_count = len(re.findall(r'<!DOCTYPE\s+html>', content, re.IGNORECASE))
+    if doctype_count > 1:
+        add_issue(filepath, "HTML结构", "文件头部",
+            f"重复的DOCTYPE声明 ({doctype_count}个)", "中",
+            "移除多余的DOCTYPE声明，每个HTML文件只应有一个")
+
+# ===== Check 12: Duplicate html tag =====
+
+def check_duplicate_html_tag(filepath, content):
+    html_open_count = len(re.findall(r'<html\b', content, re.IGNORECASE))
+    if html_open_count > 1:
+        add_issue(filepath, "HTML结构", "文件头部",
+            f"重复的<html>标签 ({html_open_count}个)", "中",
+            "移除多余的<html>标签，每个HTML文件只应有一个")
 
 # ===== Main audit =====
 
@@ -442,6 +468,8 @@ def audit_file(filepath):
     check_tables(filepath, content)
     check_html_structure(filepath, content)
     check_video_srcs(filepath, content)
+    check_duplicate_doctype(filepath, content)
+    check_duplicate_html_tag(filepath, content)
 
 # Run
 print(f"开始审计 {len(all_html_files)} 个HTML文件...")
@@ -467,7 +495,7 @@ for issue in issues:
 report_lines = []
 report_lines.append("# HSST 恒生石材网站 全站深度审计报告")
 report_lines.append(f"\n**审计时间:** 2026-08-19 18:47 HKT")
-report_lines.append(f"**审计文件数:** {len(all_html_files)} 个HTML")
+report_lines.append(f"**审计范围:** {len(all_html_files)} 个HTML文件（全站）")
 report_lines.append(f"**发现问题总数:** {len(issues)} 个\n")
 
 report_lines.append("## 📊 统计概览\n")
@@ -485,11 +513,11 @@ for s in ["高", "中", "低"]:
     report_lines.append(f"| {s} | {severity_counts[s]} |")
 report_lines.append("")
 
-report_lines.append("### 按文件统计 (Top 20)\n")
+report_lines.append("### 按文件统计 (Top 25)\n")
 report_lines.append("| 文件 | 问题数 |")
 report_lines.append("|------|--------|")
 sorted_files = sorted(file_counts.items(), key=lambda x: -x[1])
-for f, count in sorted_files[:20]:
+for f, count in sorted_files[:25]:
     report_lines.append(f"| {f} | {count} |")
 report_lines.append("")
 
@@ -528,6 +556,7 @@ report_lines.append("## 🔧 修复优先级建议\n")
 
 high_issues = [i for i in issues if i["severity"] == "高"]
 report_lines.append(f"### 🔴 高优先级 ({len(high_issues)}个)\n")
+report_lines.append("以下问题需要立即修复：\n")
 
 high_by_type = defaultdict(list)
 for issue in high_issues:
@@ -535,30 +564,44 @@ for issue in high_issues:
 
 for t in ["缺失文字", "缺失图片", "内容不完整", "中英不对称", "HTML结构"]:
     if high_by_type[t]:
-        report_lines.append(f"- **{t}**: {len(high_by_type[t])}个")
+        report_lines.append(f"\n**{t}** ({len(high_by_type[t])}个):\n")
         shown = 0
         for issue in high_by_type[t]:
-            if shown >= 15:
-                report_lines.append(f"  - ... 还有 {len(high_by_type[t])-15} 个")
+            if shown >= 20:
+                report_lines.append(f"- ... 还有 {len(high_by_type[t])-20} 个")
                 break
-            report_lines.append(f"  - `{issue['file']}` {issue['location']}: {issue['detail']}")
+            report_lines.append(f"- `{issue['file']}` {issue['location']}: {issue['detail']}")
             shown += 1
 report_lines.append("")
 
 medium_issues = [i for i in issues if i["severity"] == "中"]
-report_lines.append(f"### 🟡 中优先级 ({len(medium_issues)}个)\n")
+report_lines.append(f"\n### 🟡 中优先级 ({len(medium_issues)}个)\n")
+report_lines.append("以下问题建议尽快修复：\n")
 for t in ["缺失文字", "缺失图片", "内容不完整", "中英不对称", "HTML结构"]:
     count = sum(1 for i in medium_issues if i["type"] == t)
     if count:
         report_lines.append(f"- **{t}**: {count}个")
-report_lines.append("")
+
+# List medium issues grouped
+report_lines.append("\n<details>")
+report_lines.append("<summary>展开中优先级问题详情</summary>\n")
+for t in ["缺失文字", "缺失图片", "内容不完整", "中英不对称", "HTML结构"]:
+    t_issues = [i for i in medium_issues if i["type"] == t]
+    if t_issues:
+        report_lines.append(f"\n**{t}:**")
+        for issue in t_issues:
+            report_lines.append(f"- `{issue['file']}` {issue['location']}: {issue['detail']}")
+report_lines.append("\n</details>\n")
 
 low_issues = [i for i in issues if i["severity"] == "低"]
 report_lines.append(f"### 🟢 低优先级 ({len(low_issues)}个)\n")
-for t in ["缺失文字", "缺失图片", "内容不完整", "中英不对称", "HTML结构"]:
-    count = sum(1 for i in low_issues if i["type"] == t)
-    if count:
-        report_lines.append(f"- **{t}**: {count}个")
+if low_issues:
+    for t in ["缺失文字", "缺失图片", "内容不完整", "中英不对称", "HTML结构"]:
+        count = sum(1 for i in low_issues if i["type"] == t)
+        if count:
+            report_lines.append(f"- **{t}**: {count}个")
+else:
+    report_lines.append("无低优先级问题。")
 report_lines.append("")
 
 # Clean files
@@ -575,15 +618,65 @@ if clean_files:
         report_lines.append(f"- `{f}`")
     report_lines.append("")
 
+# Pattern analysis
+report_lines.append("\n---\n")
+report_lines.append("## 📈 共性问题模式分析\n")
+
+# Group by detail pattern
+pattern_groups = defaultdict(list)
+for issue in issues:
+    # Normalize the detail to find patterns
+    detail = issue["detail"]
+    # Extract the core pattern
+    if "多角度" in detail or "Multi-Angle" in detail:
+        pattern_groups["多角度产品图库section无正文段落"].append(issue)
+    elif "探索更多" in detail or "Explore More" in detail:
+        pattern_groups["探索更多案例section无正文段落"].append(issue)
+    elif "項目實景" in detail or "Project Gallery" in detail:
+        pattern_groups["项目实景展示section无正文段落"].append(issue)
+    elif "DOCTYPE" in detail or "html" in detail.lower():
+        pattern_groups["重复DOCTYPE/html标签"].append(issue)
+    elif "死链" in detail:
+        pattern_groups["死链"].append(issue)
+    elif "残留中文" in detail:
+        pattern_groups["英文页残留中文"].append(issue)
+    elif "alt" in detail.lower():
+        pattern_groups["alt属性问题"].append(issue)
+
+report_lines.append("以下是需要批量处理的共性问题：\n")
+for pattern, pattern_issues in sorted(pattern_groups.items(), key=lambda x: -len(x[1])):
+    report_lines.append(f"### {pattern} ({len(pattern_issues)}个)\n")
+    affected_files = sorted(set(i["file"] for i in pattern_issues))
+    report_lines.append(f"影响文件数: {len(affected_files)}\n")
+    if len(affected_files) <= 10:
+        for f in affected_files:
+            report_lines.append(f"- `{f}`")
+    else:
+        for f in affected_files[:5]:
+            report_lines.append(f"- `{f}`")
+        report_lines.append(f"- ... 及其他 {len(affected_files)-5} 个文件")
+    report_lines.append("")
+    
+    # Suggest batch fix
+    if "多角度" in pattern or "Multi-Angle" in pattern:
+        report_lines.append("**批量修复建议:** 为所有产品详情页的「多角度产品图库」section添加简短描述段落。\n")
+    elif "探索更多" in pattern or "Explore More" in pattern:
+        report_lines.append("**批量修复建议:** 为所有项目详情页的「探索更多案例」section添加引导文字段落。\n")
+    elif "項目實景" in pattern or "Project Gallery" in pattern:
+        report_lines.append("**批量修复建议:** 为相关项目详情页的「项目实景展示」section添加描述段落。\n")
+    elif "DOCTYPE" in pattern:
+        report_lines.append("**批量修复建议:** 移除所有文件中重复的DOCTYPE和<html>标签。\n")
+
 report_lines.append("\n---\n")
 report_lines.append("## 📝 审计方法说明\n")
 report_lines.append("本审计使用Python脚本自动化检查，覆盖以下5大维度：\n")
-report_lines.append("1. **缺失文字内容** - 检查空标签、占位符、空alt、空链接文字、空按钮文字")
-report_lines.append("2. **缺失图片** - 检查img src、CSS背景图、视频源文件是否存在")
+report_lines.append("1. **缺失文字内容** - 检查空标签、占位符文字、空alt属性、空链接文字、空按钮文字")
+report_lines.append("2. **缺失图片** - 检查img src文件是否存在、CSS背景图、视频源文件")
 report_lines.append("3. **内容不完整** - 检查空section、空表格单元格、只有标题无正文的section")
 report_lines.append("4. **中英文对称性** - 对比中英页面内容长度、英文页残留中文文字")
-report_lines.append("5. **HTML结构问题** - 检查未闭合标签、死链、空href")
+report_lines.append("5. **HTML结构问题** - 检查未闭合标签、死链、空href、重复DOCTYPE")
 report_lines.append(f"\n共检查 {len(all_html_files)} 个HTML文件，发现 {len(issues)} 个问题。")
+report_lines.append(f"\n**审计脚本:** `hsst_deep_audit.py`")
 
 # Write
 report_content = "\n".join(report_lines)
