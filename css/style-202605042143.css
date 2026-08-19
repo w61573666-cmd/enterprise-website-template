@@ -3005,6 +3005,18 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
 .form-note{grid-column:1/-1;font-size:0.8rem;color:#999;margin-top:-8px;}
 @media(max-width:600px){.inquiry-form{grid-template-columns:1fr;}}
 
+
+/* ---- Products CTA Section (dark background for inquiry form) ---- */
+.products-cta {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 60px 0;
+}
+.products-cta h2,
+.products-cta p {
+  color: #fff;
+}
+
 /* ---- form-container-wide (products CTA, en/products CTA) ---- */
 .products-cta .form-container-wide{max-width:100%;margin:0 auto;padding:0 24px;}
 .products-cta .form-group{margin-bottom:16px;text-align:left;}
