@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.hsst.hk/en/</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/"/>
@@ -12,7 +12,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/about.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/about.html"/>
@@ -20,26 +20,8 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
-    <loc>https://www.hsst.hk/en/products.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/projects.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
     <loc>https://www.hsst.hk/en/contact.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/contact.html"/>
@@ -47,26 +29,8 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
-    <loc>https://www.hsst.hk/en/news.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/news.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/news.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/solutions.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/solutions.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
     <loc>https://www.hsst.hk/en/faq.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/faq.html"/>
@@ -74,8 +38,17 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/news.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/news.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/news.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/privacy.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/privacy.html"/>
@@ -83,26 +56,17 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
-    <loc>https://www.hsst.hk/en/sample-request.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <loc>https://www.hsst.hk/en/products.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/sample-request.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/sample-request.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/products/white-marble.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/white-marble.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/white-marble.html"/>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
     <loc>https://www.hsst.hk/en/products/beige-marble.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/beige-marble.html"/>
@@ -110,17 +74,8 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
-    <loc>https://www.hsst.hk/en/products/grey-marble.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/grey-marble.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/grey-marble.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
     <loc>https://www.hsst.hk/en/products/black-marble.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/black-marble.html"/>
@@ -128,44 +83,8 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
-    <loc>https://www.hsst.hk/en/products/luxury-stone.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/luxury-stone.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/luxury-stone.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/products/granite-collection.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/granite-collection.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/granite-collection.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/products/travertine-sandstone.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/travertine-sandstone.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/travertine-sandstone.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/products/project-stone.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/project-stone.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/project-stone.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
     <loc>https://www.hsst.hk/en/products/custom-craft.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/custom-craft.html"/>
@@ -173,17 +92,80 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/products/granite-collection.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/granite-collection.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/granite-collection.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/grey-marble.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/grey-marble.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/grey-marble.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/luxury-stone.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/luxury-stone.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/luxury-stone.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/products/new-arrivals.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/new-arrivals.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/new-arrivals.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/products/project-stone.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/project-stone.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/project-stone.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/travertine-sandstone.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/travertine-sandstone.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/travertine-sandstone.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/white-marble.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/products/white-marble.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/products/white-marble.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/projects.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/projects/airport.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/airport.html"/>
@@ -192,7 +174,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/projects/bank.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/bank.html"/>
@@ -200,62 +182,8 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
-    <loc>https://www.hsst.hk/en/projects/hotel.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/hotel.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/hotel.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/projects/mall.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/mall.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/mall.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/projects/museum.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/museum.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/museum.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/projects/resort.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/resort.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/resort.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/projects/villa.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/villa.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/villa.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
-    <loc>https://www.hsst.hk/en/projects/medical.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/medical.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/medical.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
-  </url>
-  <url>
     <loc>https://www.hsst.hk/en/projects/commercial.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/commercial.html"/>
@@ -264,7 +192,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/projects/convention.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/convention.html"/>
@@ -273,7 +201,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/projects/education.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/education.html"/>
@@ -282,7 +210,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/projects/government.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/government.html"/>
@@ -290,17 +218,35 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
-    <loc>https://www.hsst.hk/en/projects/office.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <loc>https://www.hsst.hk/en/projects/hotel.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/office.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/office.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/hotel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/hotel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/projects/mall.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/mall.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/mall.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/projects/medical.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/medical.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/medical.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
     <loc>https://www.hsst.hk/en/projects/metro.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/metro.html"/>
@@ -308,8 +254,26 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/projects/museum.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/museum.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/museum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/projects/office.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/office.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/office.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/projects/residential.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/residential.html"/>
@@ -317,8 +281,17 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/projects/resort.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/resort.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/resort.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/projects/stadium.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/stadium.html"/>
@@ -326,8 +299,35 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/projects/villa.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/villa.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/villa.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/sample-request.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/sample-request.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/sample-request.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/solutions.html</loc>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/solutions/architect.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/architect.html"/>
@@ -336,7 +336,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/solutions/contractor.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/contractor.html"/>
@@ -345,7 +345,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/solutions/developer.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/developer.html"/>
@@ -354,7 +354,7 @@
   </url>
   <url>
     <loc>https://www.hsst.hk/en/solutions/trader.html</loc>
-    <lastmod>2026-08-20T02:20:00+08:00</lastmod>
+    <lastmod>2026-08-20T03:07:24+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/trader.html"/>
