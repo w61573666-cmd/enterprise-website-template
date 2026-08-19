@@ -3008,26 +3008,26 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
 
 /* ---- Products CTA Section (dark background for inquiry form) ---- */
 .products-cta {
-  background: #1a1a2e;
-  color: #fff;
+  background: #F5F0EB;
+  color: #1A1A2E;
   padding: 60px 0;
 }
 .products-cta h2,
 .products-cta p {
-  color: #fff;
+  color: #1A1A2E;
 }
 
 /* ---- form-container-wide (products CTA, en/products CTA) ---- */
 .products-cta .form-container-wide{max-width:100%;margin:0 auto;padding:0 24px;}
 .products-cta .form-group{margin-bottom:16px;text-align:left;}
-.products-cta .form-group label{display:block;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:6px;}
-.products-cta .form-group input,.products-cta .form-group textarea{width:100%;height:42px;padding:0 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-size:14px;box-sizing:border-box;}
+.products-cta .form-group label{display:block;font-size:13px;color:#1A1A2E;margin-bottom:6px;}
+.products-cta .form-group input,.products-cta .form-group textarea{width:100%;height:42px;padding:0 14px;background:#fff;border:1px solid #ddd;border-radius:6px;color:#1A1A2E;font-size:14px;box-sizing:border-box;}
 .products-cta .form-group textarea{height:90px;padding:12px 14px;resize:vertical;}
 .products-cta .form-group input:focus,.products-cta .form-group textarea:focus{border-color:#C9A84C;outline:none;}
 .products-cta button[type="submit"]{width:100%;height:46px;background:#C9A84C;color:#111;font-size:15px;font-weight:700;border:none;border-radius:6px;cursor:pointer;transition:all 0.3s ease;margin-top:6px;}
 .products-cta button[type="submit"]:hover{background:#D4AF37;transform:translateY(-1px);}
 .form-trust-badges{display:flex;gap:18px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
-.form-trust-badge{font-size:12px;color:rgba(201,168,76,0.7);padding:6px 16px;border:1px solid rgba(201,168,76,0.2);border-radius:20px;}
+.form-trust-badge{font-size:12px;color:#B8860B;padding:6px 16px;border:1px solid rgba(184,134,11,0.3);border-radius:20px;}
 @media(max-width:768px){.products-cta .form-container-wide{padding:0 16px;}}
 
 
