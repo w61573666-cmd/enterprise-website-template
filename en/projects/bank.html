@@ -27,7 +27,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-<link href="../../css/style-202605042143.css?v=20260819e" rel="stylesheet"/>
+<link href="../../css/style-202605042143.css?v=20260819f" rel="stylesheet"/>
 <meta content="Banking Stone Projects | HSST" property="og:title"/>
 <meta content="website" property="og:type"/>
 <meta content="https://www.hsst.hk/en/projects/bank.html" property="og:url"/>
@@ -347,7 +347,8 @@
         </div>
       </div>
       <div>
-        <form class="hsst-form" id="bankFormEn" action="https://formspree.io/f/xnjrjlzb" method="POST">
+        <form class="hsst-form" id="bankFormEn" action="https://api.web3forms.com/submit" method="POST">
+<input type="hidden" name="access_key" value="abc1985f211842eb9d23cfb6ea94d774"/>
           <input type="hidden" name="_subject" value="[Project-Bank & Financial] Project Inquiry"/>
           <div class="hsst-form-row">
             <div class="hsst-form-group">
@@ -546,7 +547,7 @@
     var orig = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Submitting...';
-    fetch(f.action, {method:'POST', body: new FormData(f)})
+    fetch(f.action, {method:'POST', body: new FormData(f), headers: {'Accept': 'application/json'}})
       .then(function(r){
         if(r.ok){
           f.style.display = 'none';
@@ -565,6 +566,6 @@
   });
 })();
 </script>
-  <script src="../../js/main-202605042201.js?v=20260819e"></script>
+  <script src="../../js/main-202605042201.js?v=20260819f"></script>
 </body>
 </html>
