@@ -1,6 +1,7 @@
 #!/bin/bash
 # IndexNow 自动推送脚本 - 每次部署后执行
 # 读取 sitemap 全部 URL，调用 IndexNow 协议推送
+# 支持 sitemapindex 格式（自动递归读取子 sitemap）
 
 KEY="763f4d076a057089b538afed0aa7fdab"
 KEY_LOCATION="https://www.hsst.hk/hsst2026indexnowkey.txt"
@@ -13,21 +14,47 @@ ENDPOINTS=(
   "https://search.seznam.cz/indexnow"
 )
 
-# 从 sitemap 提取所有 URL（macOS 兼容，不使用 grep -P）
-URLS=$(curl -s "$SITEMAP_URL" | python3 -c "
-import sys, re
-content = sys.stdin.read()
-# 从 sitemapindex 和 urlset 中提取所有非 sitemap 的 URL
-urls = re.findall(r'<loc>(.*?)</loc>', content)
-urls = [u.strip() for u in urls if 'sitemap' not in u.lower() and u.strip()]
-for u in sorted(set(urls)):
+# 从 sitemap 提取所有页面 URL（支持 sitemapindex 递归）
+# macOS 兼容：不使用 grep -P，用 python3 提取
+URLS=$(python3 -c "
+import sys, re, urllib.request
+
+def fetch_urls(sitemap_url):
+    try:
+        req = urllib.request.Request(sitemap_url, headers={'User-Agent': 'IndexNow-Push/1.0'})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            content = resp.read().decode('utf-8')
+    except Exception as e:
+        print(f'Error fetching {sitemap_url}: {e}', file=sys.stderr)
+        return []
+
+    locs = re.findall(r'<loc>(.*?)</loc>', content)
+
+    # 如果是 sitemapindex，递归读取子 sitemap
+    if '<sitemapindex' in content:
+        urls = []
+        for sub_url in locs:
+            urls.extend(fetch_urls(sub_url))
+        return urls
+    else:
+        # urlset，直接返回所有 loc
+        return [u.strip() for u in locs if u.strip()]
+
+all_urls = fetch_urls('$SITEMAP_URL')
+for u in sorted(set(all_urls)):
     print(u)
 ")
-URL_COUNT=$(echo "$URLS" | wc -l)
+
+URL_COUNT=$(echo "$URLS" | wc -l | tr -d ' ')
 echo "📋 Found $URL_COUNT URLs in sitemap"
 
+if [ "$URL_COUNT" -eq 0 ]; then
+  echo "❌ No URLs found, aborting."
+  exit 1
+fi
+
 # 构建 JSON payload
-PAYLOAD=$(python3 -c "
+PAYLOAD=$(echo "$URLS" | python3 -c "
 import json, sys
 urls = [l.strip() for l in sys.stdin if l.strip()]
 print(json.dumps({
@@ -36,7 +63,7 @@ print(json.dumps({
     'keyLocation': '$KEY_LOCATION',
     'urlList': urls
 }))
-" <<< "$URLS")
+")
 
 # 推送到每个端点
 for endpoint in "${ENDPOINTS[@]}"; do
