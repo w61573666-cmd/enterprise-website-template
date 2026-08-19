@@ -1,0 +1,20 @@
+/*
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:
+
+/sitemap.xml
+  Content-Type: application/xml
+
+/robots.txt
+  Content-Type: text/plain
+
+/site.webmanifest
+  Content-Type: application/manifest+json
+
+/*.xml
+  Content-Type: application/xml
+
+/*.webmanifest
+  Content-Type: application/manifest+json
+
+/*.svg
+  Content-Type: image/svg+xml
