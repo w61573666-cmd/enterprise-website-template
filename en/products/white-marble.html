@@ -65,7 +65,7 @@
 <nav class="navbar">
 <div class="container">
 <a class="nav-logo" href="../index.html">
-<img alt="HSST" loading="lazy" src="../../images/logo-hsst.jpg" style="height:42px;width:auto;border-radius:6px"/>
+<img alt="HSST" loading="lazy" src="../../images/logo-hsst.jpg" class="logo-img"/>
 <span class="nav-logo-text">
 <strong>Hengsheng Marble S&T Co. Limited</strong>
 <small>Hengsheng Marble S&amp;T Co. Limited</small>
@@ -432,7 +432,7 @@
 </section>
 
 <!-- Video Section -->
-<section class="section-padding product-content-section" style="border-top:1px solid #eee;">
+<section class="section-padding product-content-section" class="border-top-light">
  <div class="container">
   <div class="product-section-title">
    <span class="label">Product Videos</span>
@@ -540,7 +540,7 @@
 <div class="footer-grid">
 <div class="footer-brand">
 <a class="nav-logo" href="../../index.html">
-<img alt="HSST" loading="lazy" src="../../images/logo-hsst.jpg" style="height:42px;width:auto;border-radius:6px"/>
+<img alt="HSST" loading="lazy" src="../../images/logo-hsst.jpg" class="logo-img"/>
 <span class="nav-logo-text">
 <strong>Hengsheng Marble S&T Co. Limited</strong>
 <small>Hengsheng Marble S&amp;T Co. Limited</small>
@@ -656,12 +656,12 @@
 </script>
 
 <!-- Cookie Consent -->
-<div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:rgba(26,26,46,0.97);color:#fff;padding:16px 24px;z-index:1000;display:none;border-top:1px solid rgba(201,168,76,0.3);">
-<div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-<p style="font-size:13px;color:rgba(255,255,255,0.7);margin:0;flex:1;min-width:200px;">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="../privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
-<div style="display:flex;gap:10px;flex-shrink:0;">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" style="padding:8px 20px;background:#C9A84C;color:#111;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Accept</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" style="padding:8px 20px;background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:13px;cursor:pointer;">Decline</button>
+<div class="cookie-banner cookie-banner-bar" id="cookieBanner">
+<div class="container cookie-banner-inner">
+<p class="cookie-banner-text">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="../privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
+<div class="cookie-banner-btns">
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">Accept</button>
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 </body></html>

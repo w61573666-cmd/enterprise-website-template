@@ -90,12 +90,10 @@
 @media(max-width:768px){.sample-form-container{padding:32px 20px;border-radius:12px}.sample-form-row{grid-template-columns:1fr}.stone-checkbox-group{grid-template-columns:repeat(2,1fr)}.sample-submit-btn{width:100%}}
 </style>
 </head>
-<body>
-
-<nav class="navbar">
+<body class="inner-page"><nav class="navbar">
    <div class="container">
     <a class="nav-logo" href="index.html">
-     <img alt="HSST" src="../images/logo-hsst.jpg" style="height:42px;width:auto;border-radius:6px"/>
+     <img alt="HSST" src="../images/logo-hsst.jpg" class="logo-img"/>
      <span class="nav-logo-text">
       <strong>
        HENGSHENG MARBLE S&amp;T CO. LIMITED
@@ -524,7 +522,7 @@
   </nav>
 
 <section class="sample-hero">
-<div class="sample-hero-content" style="position:relative;z-index:1">
+<div class="sample-hero-content sample-hero-inner">
 <ol class="breadcrumb-ol">
 <li><a href="../index.html">Home</a></li>
 <li><a href="../products.html">Products</a></li>
@@ -583,7 +581,7 @@
 </div>
 
 <div class="sample-form-section-title">🪨 Sample Requirements</div>
-<div class="sample-form-group full" style="margin-bottom:12px">
+<div class="sample-form-group full sample-form-mb-sm">
 <label class="sample-form-label">Stone Type <span class="required">*</span></label>
 <div class="stone-checkbox-group">
 <div class="stone-checkbox-item"><label><input type="checkbox" name="stone_type" value="White Marble"/><span>White Marble</span></label></div>
@@ -599,7 +597,7 @@
 </div>
 </div>
 
-<div class="sample-form-group full" style="margin-bottom:14px">
+<div class="sample-form-group full sample-form-mb-md">
 <label class="sample-form-label">Specific Stone Name / Product Code (if known)</label>
 <input class="sample-form-input" type="text" name="stone_name" placeholder="e.g. Carrara White, Botticino Classico, Panda White; include product codes if available"/>
 </div>
@@ -745,7 +743,7 @@
 </div>
 </div>
 
-<div class="sample-form-group full" style="margin-bottom:14px">
+<div class="sample-form-group full sample-form-mb-md">
 <label class="sample-form-label">Shipping Address <span class="required">*</span></label>
 <input class="sample-form-input" type="text" name="shipping_address" placeholder="Full address (Street, City, State/Province, Postal Code, Country)" required/>
 <div class="sample-form-error">Please enter complete shipping address</div>
@@ -765,7 +763,7 @@
 </div>
 <div class="sample-form-group">
 <label class="sample-form-label">Urgent?</label>
-<div class="radio-group" style="padding-top:10px">
+<div class="radio-group sample-form-pt">
 <div class="radio-item"><label><input type="radio" name="urgent" value="No" checked/><span>No, standard processing</span></label></div>
 <div class="radio-item"><label><input type="radio" name="urgent" value="Yes"/><span>Yes, expedite please</span></label></div>
 </div>
@@ -816,7 +814,7 @@
 <style>.back-to-top{position:fixed;bottom:90px;right:24px;width:44px;height:44px;background:rgba(26,26,46,0.9);color:#C9A84C;border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:998;opacity:0;visibility:hidden;transition:all 0.3s ease;text-decoration:none}.back-to-top.visible{opacity:1;visibility:visible}.back-to-top:hover{background:#C9A84C;color:#111;transform:translateY(-3px)}@media(max-width:768px){.back-to-top{bottom:80px;right:16px;width:38px;height:38px;font-size:18px}}</style>
 <script>(function(){var btn=document.getElementById('backToTop');if(!btn)return;window.addEventListener('scroll',function(){if(window.scrollY>400){btn.classList.add('visible')}else{btn.classList.remove('visible')}});btn.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})})})()</script>
 
-<div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:rgba(26,26,46,0.97);color:#fff;padding:16px 24px;z-index:1000;display:none;border-top:1px solid rgba(201,168,76,0.3)"><div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"><p style="font-size:13px;color:rgba(255,255,255,0.7);margin:0;flex:1;min-width:200px">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="privacy.html" style="color:#C9A84C;text-decoration:underline">Privacy Policy</a>.</p><div style="display:flex;gap:10px;flex-shrink:0"><button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted')" style="padding:8px 20px;background:#C9A84C;color:#111;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Accept</button><button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined')" style="padding:8px 20px;background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:13px;cursor:pointer">Decline</button></div></div></div>
+<div class="cookie-banner cookie-banner-bar" id="cookieBanner"><div class="container cookie-banner-inner"><p class="cookie-banner-text">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="privacy.html" style="color:#C9A84C;text-decoration:underline">Privacy Policy</a>.</p><div class="cookie-banner-btns"><button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted')" class="cookie-btn-accept">Accept</button><button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined')" class="cookie-btn-decline">Decline</button></div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block'}})()</script>
 
 <script>
@@ -903,7 +901,7 @@
     <div class="footer-grid">
      <div class="footer-brand">
       <a class="nav-logo" href="index.html">
-       <img alt="HSST" loading="lazy" src="../images/logo-hsst.jpg" style="height:42px;width:auto;border-radius:6px"/>
+       <img alt="HSST" loading="lazy" src="../images/logo-hsst.jpg" class="logo-img"/>
        <span class="nav-logo-text">
         <strong>
          Hengsheng Marble S&amp;T Co. Ltd

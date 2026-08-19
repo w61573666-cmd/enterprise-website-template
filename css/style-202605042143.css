@@ -8454,3 +8454,468 @@ html {
 .series-section-header {
   background: linear-gradient(to bottom, #e8dfd4, #d4cdc2);
 }
+
+/* ============================================
+   Layout Unification Classes (about.html standard)
+   Added 2026-08-19 — extract inline styles to CSS classes
+   ============================================ */
+
+/* --- Section background/utility classes --- */
+.bg-light-gray { background: #fafafa; }
+.bg-light-cream { background: var(--color-light-bg, #faf8f5); }
+.bg-white { background: #fff; }
+
+/* --- Padding utilities --- */
+.pt-0 { padding-top: 0; }
+.pt-40 { padding-top: 40px; }
+.pb-0 { padding-bottom: 0; }
+.pb-24 { padding-bottom: 24px; }
+
+/* --- Border utilities --- */
+.border-top-light { border-top: 1px solid #eee; }
+
+/* --- Hero sections --- */
+.solution-hero {
+  background: linear-gradient(135deg, #1a1a1a, #111);
+  text-align: center;
+  color: #fff;
+}
+
+.cta-dark {
+  background: linear-gradient(135deg, #1a1a1a, #111);
+  text-align: center;
+  color: #fff;
+}
+
+.news-hero {
+  padding: 80px 0 28px;
+  background: linear-gradient(135deg, #1a1a2e, #2c2c3e);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-tag {
+  margin-top: 24px;
+  display: inline-block;
+  background: rgba(201, 168, 76, 0.15);
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #C9A84C;
+}
+
+/* --- Section header (centered) --- */
+.section-header-center {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.section-header-center .label {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  color: #C9A84C;
+}
+.section-header-center h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-top: 8px;
+}
+.section-header-center .sub {
+  font-size: 14px;
+  color: #888;
+}
+
+/* --- Pain point cards --- */
+.pain-point-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+.pain-point-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  border-left: 3px solid #C9A84C;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+.pain-point-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #C9A84C;
+  margin-bottom: 4px;
+}
+.pain-point-card p {
+  font-size: 13px;
+  color: #555;
+  margin: 0;
+}
+
+/* --- Service cards --- */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.service-card {
+  background: linear-gradient(135deg, #fafafa, #fff);
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 24px;
+}
+.service-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+.service-card p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- Flow steps --- */
+.flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  justify-content: center;
+  align-items: flex-start;
+}
+.flow-step {
+  flex: 1;
+  min-width: 110px;
+  text-align: center;
+  padding: 12px 6px;
+}
+.flow-step-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #C9A84C;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.flow-step h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+.flow-step p {
+  font-size: 10.5px;
+  color: #888;
+  line-height: 1.4;
+  margin: 0;
+}
+.flow-arrow {
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 24px;
+}
+.flow-arrow span {
+  color: #C9A84C;
+  font-size: 18px;
+}
+
+/* --- Solution CTA form (dark background) --- */
+.solution-cta {
+  background: linear-gradient(135deg, #1a1a1a, #111);
+  text-align: center;
+  color: #fff;
+}
+.solution-cta-form {
+  margin: 0 auto;
+}
+.solution-cta-input {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+}
+.solution-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.solution-cta-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 14px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+.solution-cta-btn {
+  width: 100%;
+  padding: 14px;
+  background: #C9A84C;
+  color: #111;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* --- FAQ accordion items --- */
+.faq-item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.faq-item-answer {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.8;
+  padding: 16px 0;
+  border-top: 1px solid #eee;
+}
+
+/* --- News filter bar --- */
+.news-filter-bar {
+  padding: 16px 0;
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+  position: sticky;
+  top: 80px;
+  z-index: 99;
+}
+.news-filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.news-filter-btn {
+  padding: 8px 24px;
+  border: 1.5px solid #ddd;
+  border-radius: 24px;
+  background: #fff;
+  color: #444;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.news-filter-btn.active {
+  border-color: #1a1a2e;
+  background: #1a1a2e;
+  color: #fff;
+}
+
+/* --- News hero overlay --- */
+.news-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+}
+.news-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* --- News list grid --- */
+.news-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: 24px;
+}
+
+/* --- News section heading --- */
+.news-section-heading-row {
+  grid-column: 1 / -1;
+  margin: 32px 0 8px;
+}
+
+/* --- Cookie banner (shared) --- */
+.cookie-banner-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(26, 26, 46, 0.97);
+  color: #fff;
+  padding: 16px 24px;
+  z-index: 1000;
+  display: none;
+  border-top: 1px solid rgba(201, 168, 76, 0.3);
+}
+.cookie-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cookie-banner-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+.cookie-banner-btns {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.cookie-btn-accept {
+  padding: 8px 20px;
+  background: #C9A84C;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cookie-btn-decline {
+  padding: 8px 20px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* --- WhatsApp float button --- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* --- Back to top button --- */
+.back-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  z-index: 998;
+}
+
+/* --- Logo image styling --- */
+.logo-img {
+  height: 42px;
+  width: auto;
+  border-radius: 6px;
+}
+
+/* --- Project search input --- */
+.project-search-input-styled {
+  padding: 10px 18px;
+  border: 2px solid #e2e2e2;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  min-width: 260px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+/* --- Project filter bar --- */
+.project-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 8px;
+}
+
+/* --- Privacy content styling --- */
+.privacy-content {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #444;
+}
+.privacy-section {
+  margin-bottom: 32px;
+}
+.privacy-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+.privacy-section p {
+  margin: 0;
+}
+.privacy-updated {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 32px;
+}
+
+/* --- Sample form margins --- */
+.sample-form-mb-sm { margin-bottom: 12px; }
+.sample-form-mb-md { margin-bottom: 14px; }
+.sample-form-pt { padding-top: 10px; }
+.sample-hero-inner { position: relative; z-index: 1; }
+
+/* --- Centered text utility --- */
+.text-center { text-align: center; }
+
+/* --- Project info tags --- */
+.info-tag {
+  background: #FAF8F5;
+  border: 1px solid #D4AF37;
+  color: #8B7355;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.info-tag-highlight {
+  background: #FFF8E1;
+  border: 1px solid #FFD700;
+  color: #B8860B;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.info-tags-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+/* --- Project section padding-bottom:0 --- */
+.project-section-pb-0 { padding-bottom: 0; }

@@ -72,7 +72,7 @@
   <nav class="navbar">
    <div class="container">
     <a class="nav-logo" href="index.html">
-     <img alt="HSST" src="images/logo-hsst.jpg" style="height:42px;width:auto;border-radius:6px"/>
+     <img alt="HSST" src="images/logo-hsst.jpg" class="logo-img"/>
      <span class="nav-logo-text">
       <strong>
        恆生石材科技有限公司
@@ -521,9 +521,9 @@
     </div>
    </section>
    <!-- Filter Bar -->
-   <section style="padding:0 0 24px;">
+   <section class="section-padding pb-24">
     <div class="container">
-     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 8px;">
+     <div class="project-filter-bar">
       <div class="filter-bar" id="project-filters">
        <button class="filter-tag active" data-filter="all">全部</button>
        <button class="filter-tag" data-filter="hotel">酒店</button>
@@ -532,7 +532,7 @@
        <button class="filter-tag" data-filter="government">公共建築</button>
        <button class="filter-tag" data-filter="infrastructure">基礎設施</button>
       </div>
-      <input type="text" id="project-search" class="project-search-input" placeholder="搜索項目名稱、地區或石材種類…" style="padding:10px 18px;border:2px solid #e2e2e2;border-radius:50px;font-size:0.95rem;min-width:260px;outline:none;font-family:inherit;transition:border-color 0.2s;" onfocus="this.style.borderColor='#D4AF37'" onblur="this.style.borderColor='#e2e2e2'"/>
+      <input type="text" id="project-search" class="project-search-input" placeholder="搜索項目名稱、地區或石材種類…" class="project-search-input-styled" onfocus="this.style.borderColor='#D4AF37'" onblur="this.style.borderColor='#e2e2e2'"/>
      </div>
     </div>
    </section>
@@ -1526,7 +1526,7 @@
        <label class="hsst-form-label">項目詳情 / 諮詢內容 <span class="required">*</span></label>
        <textarea name="message" class="hsst-form-textarea" placeholder="請簡述您的項目需求、預算範圍、工期要求等..." required></textarea>
       </div>
-      <div class="hsst-form-group" style="text-align:center;margin-top:28px;">
+      <div class="hsst-form-group text-center" style="margin-top:28px;">
        <button type="submit" class="hsst-form-btn">提交諮詢</button>
       </div>
       <p class="hsst-form-privacy">提交即表示您同意我們的隱私政策。我們將在24小時內與您聯繫。</p>
@@ -1547,7 +1547,7 @@
     <div class="footer-grid">
      <div class="footer-brand">
       <a class="nav-logo" href="index.html">
-       <img alt="HSST" loading="lazy" src="images/logo-hsst.jpg" style="height:42px;width:auto;border-radius:6px"/>
+       <img alt="HSST" loading="lazy" src="images/logo-hsst.jpg" class="logo-img"/>
        <span class="nav-logo-text">
         <strong>
          恆生石材科��有限公司
@@ -1799,12 +1799,12 @@
 </script>
 
 <!-- Cookie Consent -->
-<div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:rgba(26,26,46,0.97);color:#fff;padding:16px 24px;z-index:1000;display:none;border-top:1px solid rgba(201,168,76,0.3);">
-<div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-<p style="font-size:13px;color:rgba(255,255,255,0.7);margin:0;flex:1;min-width:200px;">我們使用Cookie以改善您的瀏覽體驗，繼續使用即表示您同意我們的 <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
-<div style="display:flex;gap:10px;flex-shrink:0;">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" style="padding:8px 20px;background:#C9A84C;color:#111;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" style="padding:8px 20px;background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:13px;cursor:pointer;">拒絕</button>
+<div class="cookie-banner cookie-banner-bar" id="cookieBanner">
+<div class="container cookie-banner-inner">
+<p class="cookie-banner-text">我們使用Cookie以改善您的瀏覽體驗，繼續使用即表示您同意我們的 <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
+<div class="cookie-banner-btns">
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 </div>
