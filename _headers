@@ -28,3 +28,7 @@
 
 /*.svg
   Content-Type: image/svg+xml
+
+/baidu_verify_codeva-CniNzYMxpl.html
+  Content-Type: text/plain
+  Cache-Control: public, max-age=0, must-revalidate
