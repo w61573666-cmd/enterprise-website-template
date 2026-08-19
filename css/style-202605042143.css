@@ -2111,9 +2111,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
 .product-cat-image img {
   cursor: zoom-in;
 }
-.stone-card-img {
-  cursor: zoom-in;
-}
+/* stone-card-img cursor merged into main definition */
 .product-cat-image img:first-child {
   grid-column: span 2;
   aspect-ratio: 16/9;
@@ -3282,6 +3280,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   overflow: hidden;
   position: relative;
   background: #f5f0eb;
+  cursor: zoom-in;
 }
 .stone-card-img img {
   width: 100%;
