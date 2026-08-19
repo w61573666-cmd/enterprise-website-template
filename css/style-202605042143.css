@@ -1465,6 +1465,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   justify-content: flex-start;
   opacity: 0;
   transition: opacity 0.3s ease;
+  color: #fff;
 }
 .modal-overlay.active { display: flex; opacity: 1; }
 .modal {
@@ -1491,7 +1492,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   z-index: 10;
   transition: var(--transition);
 }
-.modal-close:hover { background: var(--color-dark-gray); color: #1A1A2E !important; }
+.modal-close:hover { background: var(--color-dark-gray); color: #fff !important; }
 .modal-image {
   aspect-ratio: 16/10;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -1804,6 +1805,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.9);
+  color: #fff;
 }
 .image-modal-content {
   position: relative;
@@ -1828,7 +1830,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   right: 20px;
   background: rgba(0,0,0,0.5);
   border: none;
-  color: #1A1A2E !important;
+  color: #fff !important;
   font-size: 1.5rem;
   cursor: pointer;
   padding: 12px 16px;
@@ -2238,6 +2240,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  color: #fff;
 }
 .nav-overlay.active {
   opacity: 1;
@@ -3433,7 +3436,7 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
 }
 .series-nav-item:hover {
   background: var(--color-primary);
-  color: #1A1A2E !important;
+  color: #fff !important;
 }
 .series-nav-item:hover .sn-dot {
   transform: scale(1.2);
@@ -3785,6 +3788,7 @@ section[id],
   z-index: 1000;
   align-items: center;
   justify-content: flex-start;
+  color: #fff;
 }
 .stone-modal.active { display: flex; }
 .stone-modal-content {
@@ -3959,6 +3963,7 @@ section[id],
 .stone-modal-overlay {
   background: rgba(26,26,46,0.85);
   backdrop-filter: blur(8px);
+  color: #fff;
 }
 .stone-modal {
   background: #F5F0EB;
@@ -3969,6 +3974,7 @@ section[id],
 .stone-modal-header {
   background: var(--color-primary);
   border-radius: 12px 12px 0 0;
+  color: #fff;
 }
 .stone-modal-img-main { border-radius: 12px; }
 
@@ -4317,6 +4323,7 @@ section[id],
   justify-content: center;
   padding: 20px;
   overflow-y: auto;
+  color: #fff;
 }
 .news-modal-overlay.active { display: flex; }
 
@@ -4394,7 +4401,9 @@ section[id],
 }
 
 @media (max-width: 600px) {
-  .news-modal-overlay { padding: 0; align-items: flex-end; }
+  .news-modal-overlay { padding: 0; align-items: flex-end;
+  color: #fff;
+}
   .news-modal { border-radius: 16px 16px 0 0; max-height: 92vh; }
   .news-modal-body { padding: 20px 20px 28px; }
   .news-modal-title { font-size: 1.25rem; }
@@ -6328,7 +6337,8 @@ html {
     padding: 8px 16px !important;
     background: rgba(0,0,0,0.6) !important;
     border-radius: 20px !important;
-  }
+    color: #fff !important;
+}
 }
 
 /* ---- WhatsApp Float Mobile ---- */
@@ -6438,7 +6448,8 @@ html {
   .modal-overlay {
     align-items: flex-end;
     padding: 0;
-  }
+  color: #fff;
+}
 
   .modal {
     width: 100%;
@@ -7188,6 +7199,7 @@ html {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
+  color: #fff;
 }
 .sample-modal-overlay.show {
   opacity: 1;
@@ -8079,6 +8091,7 @@ html {
   background: #1a1a2e;
   padding: 60px 0;
   text-align: center;
+  color: #fff;
 }
 .product-video-section h2 {
   color: #fff;
@@ -8344,6 +8357,7 @@ html {
   width: 100%;
   padding-top: 56.25%;
   background: #1a1a1a;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
