@@ -4008,8 +4008,10 @@ section[id],
 }
 .footer-brand {
   grid-column: span 1;
+  text-align: left !important;
 }
 .footer-brand .nav-logo {
+  justify-content: flex-start !important;
   color: #1A1A2E !important;
   margin-bottom: 16px;
   display: flex;
