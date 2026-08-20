@@ -8964,3 +8964,69 @@ html {
 .img-thumb-md { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
 .img-thumb-md-mb { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 16px; }
 .img-hero { width: 100%; height: 320px; object-fit: cover; border-radius: 12px; }
+
+/* ============================================
+   Fixed Navbar Compensation — Added 2026-08-20
+   ============================================ */
+body {
+  padding-top: var(--nav-height);
+}
+/* All hero-type sections: compensate body padding to start from top */
+.hero,
+.hero-grid-video,
+.news-hero,
+.project-hero,
+.solution-hero {
+  margin-top: calc(-1 * var(--nav-height));
+}
+/* Non-hero first sections: add extra top padding for navbar clearance */
+/* Pages with #main-content wrapper */
+#main-content > section:first-child:not(.hero):not(.hero-grid-video):not(.news-hero):not(.project-hero):not(.solution-hero) {
+  padding-top: calc(var(--section-padding) + var(--nav-height));
+}
+/* Pages without #main-content: first section directly in body */
+.inner-page > section:first-child:not(.hero):not(.hero-grid-video):not(.news-hero):not(.project-hero):not(.solution-hero) {
+  padding-top: calc(var(--section-padding) + var(--nav-height));
+}
+/* Pages with breadcrumb before first section */
+.inner-page > .container:first-child {
+  padding-top: calc(var(--section-padding) * 0.75);
+}
+.inner-page > .container:first-child + section:not(.hero):not(.hero-grid-video):not(.news-hero):not(.project-hero):not(.solution-hero) {
+  padding-top: var(--section-padding);
+}
+/* project-hero and solution-hero already have margin-top compensation above */
+/* Products banner (non-hero but visually hero-like) */
+.products-banner {
+  margin-top: calc(-1 * var(--nav-height));
+}
+
+/* ============================================
+   Section Padding for Custom Sections
+   ============================================ */
+.project-section,
+.project-section-alt {
+  padding: var(--section-padding) 0;
+}
+.about-preview {
+  padding: var(--section-padding) 0;
+}
+.filter-section {
+  padding: calc(var(--section-padding) * 0.75) 0;
+}
+.inquiry-form-section {
+  padding: var(--section-padding) 0;
+}
+.sample-form-section {
+  padding: var(--section-padding) 0;
+}
+.client-logo-section {
+  padding: calc(var(--section-padding) * 0.6) 0;
+}
+/* Project containers get inner spacing */
+.project-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
