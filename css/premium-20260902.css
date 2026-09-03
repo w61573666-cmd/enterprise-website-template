@@ -1606,7 +1606,7 @@ body.premium .ft-brand .ft-brand-desc {
    34. 資訊中心訂閱表單雙欄重排（僅帶 .hsst-sub-grid 的表單生效）
    左欄＝基本資料，右欄＝訂閱偏好＋權益卡，下方補充說明＋按鈕通欄
    ============================================================ */
-body.premium .cta-section.cta-sub .hsst-form.hsst-sub-form { max-width: 920px !important; gap: 22px !important; }
+body.premium .cta-section.cta-sub .hsst-form.hsst-sub-form { max-width: 100% !important; gap: 22px !important; }
 body.premium .cta-section.cta-sub .hsst-sub-grid {
   grid-column: 1 / -1 !important; display: grid !important;
   grid-template-columns: 1.05fr 0.95fr !important; gap: 24px !important; align-items: start;
