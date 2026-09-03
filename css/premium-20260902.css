@@ -1,0 +1,1603 @@
+/* =============================================================
+   hsst.hk · 共享頂級視覺層 (Premium Visual Layer)
+   版本: 20260902f
+   載入: 所有頁面 (154+) 透過 <link> 加載，body 加 class="premium"
+   風格: Editorial 大地色 + 香檳金 + Playfair Display + Noto Serif TC
+   原則: 純視覺疊加，0 內容刪改；只升級共享視覺 DNA
+   ============================================================= */
+
+/* ---------- 設計 token ---------- */
+.premium { --pv-bg: #F6F3EE; --pv-ink: #14130F; --pv-muted: #5C574F; --pv-soft: #8A8176; --pv-gold: #C2A25E; --pv-hair: #DCD5CB; --pv-deep: #16150F; --pv-deep-2: #1E1C16; --pv-deep-text: #F4F1EA; --pv-deep-muted: #A7A091; --pv-warm: #E9E2D8; }
+
+/* ---------- 1. 內頁背景：大米色（覆蓋 inner-page 純白）---------- */
+body.premium.inner-page,
+body.premium { background: var(--pv-bg) !important; }
+
+/* ---------- 2. H1 / H2 / H3 升級（覆蓋 base 樣式）---------- */
+.premium h1, body.premium h1 {
+  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-weight: 500 !important;
+  color: var(--pv-ink) !important;
+  line-height: 1.18 !important;
+  letter-spacing: .01em !important;
+}
+.premium h2, body.premium h2 {
+  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-weight: 500 !important;
+  color: var(--pv-ink) !important;
+  line-height: 1.24 !important;
+  letter-spacing: .01em !important;
+  position: relative;
+  padding-top: 22px;
+}
+.premium h2::before, body.premium h2::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 36px; height: 1px; background: var(--pv-gold);
+}
+.premium h2.centered::before, body.premium h2.centered::before { left: 50%; transform: translateX(-50%); }
+.premium h3, body.premium h3 {
+  font-family: 'Noto Serif TC', 'Playfair Display', serif !important;
+  font-weight: 500 !important;
+  color: var(--pv-ink) !important;
+}
+.premium h1 span, .premium h2 span, body.premium h1 span, body.premium h2 span { color: var(--pv-gold) !important; }
+.premium h1 em, .premium h2 em, body.premium h1 em, body.premium h2 em { font-style: normal !important; color: var(--pv-gold) !important; }
+
+/* ---------- 3. Section title/subtitle (index/about/solutions/contact/faq 等通用)---------- */
+.premium .section-title, body.premium .section-title {
+  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-weight: 500 !important;
+  color: var(--pv-ink) !important;
+  font-size: clamp(28px, 3.2vw, 42px) !important;
+  line-height: 1.2 !important;
+  position: relative; padding-top: 22px; margin-bottom: 1rem !important;
+}
+.premium .section-title::before, body.premium .section-title::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 36px; height: 1px; background: var(--pv-gold);
+}
+.premium .section-subtitle, body.premium .section-subtitle {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic !important;
+  font-size: 14px !important;
+  color: var(--pv-gold) !important;
+  letter-spacing: .04em !important;
+  text-transform: none !important;
+  margin-bottom: 16px !important;
+}
+.premium .section-desc, body.premium .section-desc {
+  color: var(--pv-muted) !important;
+  font-size: 15.5px !important;
+  line-height: 1.85 !important;
+  max-width: 60ch !important;
+  margin: 0 auto 1.5rem !important;
+}
+
+/* ---------- 4. 頂級 kicker / 標籤 (class-based)---------- */
+.premium .kicker, body.premium .kicker {
+  display: inline-block !important;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  letter-spacing: .32em !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  color: var(--pv-gold) !important;
+  position: relative; padding-bottom: 8px; margin-bottom: 16px;
+}
+.premium .kicker::after, body.premium .kicker::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 36px; height: 1px; background: var(--pv-gold);
+}
+.premium .hero-badge, body.premium .hero-badge {
+  display: inline-block !important;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  letter-spacing: .32em !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  color: var(--pv-gold) !important;
+  border: 1px solid rgba(194,162,94,.4) !important;
+  border-radius: 999px !important;
+  padding: 8px 18px !important;
+  margin-bottom: 22px !important;
+}
+
+/* ---------- 5. 頂級按鈕 (全部 4 變體)---------- */
+.premium .btn, body.premium .btn {
+  display: inline-flex !important; align-items: center; gap: 10px;
+  padding: 14px 28px !important; border-radius: 2px !important;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-size: 14px !important; letter-spacing: .08em !important;
+  cursor: pointer;
+  transition: background .3s, color .3s, border-color .3s, transform .25s !important;
+  text-decoration: none !important;
+}
+.premium .btn-primary, body.premium .btn-primary {
+  background: var(--pv-ink) !important; color: #F4F1EA !important; border: 1px solid var(--pv-ink) !important;
+}
+.premium .btn-primary:hover, body.premium .btn-primary:hover { background: #2a2822 !important; border-color: #2a2822 !important; transform: translateY(-1px); }
+.premium .btn-gold, body.premium .btn-gold {
+  background: var(--pv-gold) !important; color: var(--pv-ink) !important; border: 1px solid var(--pv-gold) !important; font-weight: 600 !important;
+}
+.premium .btn-gold:hover, body.premium .btn-gold:hover { background: #cdb074 !important; border-color: #cdb074 !important; }
+.premium .btn-outline, body.premium .btn-outline {
+  background: transparent !important; color: var(--pv-ink) !important; border: 1px solid var(--pv-hair) !important;
+}
+.premium .btn-outline:hover, body.premium .btn-outline:hover { border-color: var(--pv-gold) !important; color: var(--pv-gold) !important; }
+.premium .btn-outline-light, body.premium .btn-outline-light {
+  background: transparent !important; color: #fff !important; border: 1px solid rgba(255,255,255,.4) !important;
+}
+.premium .btn-outline-light:hover, body.premium .btn-outline-light:hover { background: #fff !important; color: var(--pv-ink) !important; border-color: #fff !important; }
+.premium .btn-outline-white, body.premium .btn-outline-white {
+  background: transparent !important; color: #fff !important; border: 1px solid rgba(255,255,255,.4) !important;
+}
+.premium .btn-outline-white:hover, body.premium .btn-outline-white:hover { background: #fff !important; color: var(--pv-ink) !important; border-color: #fff !important; }
+
+/* ---------- 6. 頂級卡片（hover 浮起 + 金色描邊）---------- */
+.premium .card, body.premium .card,
+.premium .role-card, body.premium .role-card,
+.premium .scenario-card, body.premium .scenario-card,
+.premium .why-card, body.premium .why-card,
+.premium .info-card, body.premium .info-card,
+.premium .feature-card, body.premium .feature-card,
+.premium .series-card, body.premium .series-card,
+.premium .case-card, body.premium .case-card,
+.premium .news-card, body.premium .news-card,
+.premium .product-card, body.premium .product-card,
+.premium .certificate-card, body.premium .certificate-card,
+.premium .about-preview, body.premium .about-preview,
+.premium .stat-item, body.premium .stat-item,
+.premium .trust-item, body.premium .trust-item,
+.premium .client-logo-item, body.premium .client-logo-item {
+  background: #fff !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.02) !important;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease !important;
+  border: 1px solid rgba(220,213,203,.5) !important;
+}
+.premium .card:hover, body.premium .card:hover,
+.premium .role-card:hover, body.premium .role-card:hover,
+.premium .scenario-card:hover, body.premium .scenario-card:hover,
+.premium .why-card:hover, body.premium .why-card:hover,
+.premium .info-card:hover, body.premium .info-card:hover,
+.premium .feature-card:hover, body.premium .feature-card:hover,
+.premium .series-card:hover, body.premium .series-card:hover,
+.premium .case-card:hover, body.premium .case-card:hover,
+.premium .news-card:hover, body.premium .news-card:hover,
+.premium .product-card:hover, body.premium .product-card:hover,
+.premium .certificate-card:hover, body.premium .certificate-card:hover,
+.premium .about-preview:hover, body.premium .about-preview:hover,
+.premium .stat-item:hover, body.premium .stat-item:hover,
+.premium .trust-item:hover, body.premium .trust-item:hover,
+.premium .client-logo-item:hover, body.premium .client-logo-item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.04), 0 0 0 1px rgba(194,162,94,.22) !important;
+  border-color: rgba(194,162,94,.4) !important;
+}
+
+/* ---------- 7. Stats 排版（編輯式 data 區）---------- */
+.premium .stat-number, body.premium .stat-number,
+.premium .trust-number, body.premium .trust-number,
+.premium .about-stats .stat-num, body.premium .about-stats .stat-num {
+  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-weight: 600 !important;
+  font-size: clamp(28px, 3.4vw, 44px) !important;
+  color: var(--pv-ink) !important;
+  line-height: 1.1 !important;
+  display: block !important;
+}
+.premium .stat-label, body.premium .stat-label,
+.premium .trust-label, body.premium .trust-label,
+.premium .about-stats .stat-name, body.premium .about-stats .stat-name {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-size: 12px !important;
+  color: var(--pv-soft) !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+  margin-top: 6px !important;
+  display: block !important;
+}
+
+/* ---------- 8. Hero 文字（編輯式敘事）---------- */
+.premium .hero-content h1, body.premium .hero-content h1 { font-size: clamp(34px, 4.4vw, 64px) !important; }
+.premium .hero-content h1 span, body.premium .hero-content h1 span { color: var(--pv-gold) !important; }
+.premium .hero-subtitle, body.premium .hero-subtitle {
+  font-size: 15.5px !important;
+  line-height: 1.85 !important;
+  color: var(--pv-muted) !important;
+  max-width: 60ch !important;
+  margin: 22px 0 32px !important;
+}
+
+/* ---------- 9. Hairline divider 升級 ---------- */
+.premium hr, body.premium hr {
+  border: 0 !important; height: 1px !important;
+  background: var(--pv-hair) !important;
+  margin: clamp(32px, 4vw, 56px) 0 !important;
+}
+
+/* ---------- 10. Section 視覺節奏 (淺米→深色 切換)---------- */
+.premium .section-light, body.premium .section-light,
+.premium section.surface-light, body.premium section.surface-light { background: var(--pv-bg) !important; }
+.premium .section-warm, body.premium .section-warm,
+.premium section.surface-warm, body.premium section.surface-warm { background: var(--pv-warm) !important; }
+.premium .section-dark, body.premium .section-dark,
+.premium section.surface-dark, body.premium section.surface-dark {
+  background: var(--pv-deep) !important; color: var(--pv-deep-text) !important;
+}
+.premium .section-dark h1, .premium .section-dark h2, .premium .section-dark h3,
+body.premium .section-dark h1, body.premium .section-dark h2, body.premium .section-dark h3 { color: var(--pv-deep-text) !important; }
+.premium .section-dark p, body.premium .section-dark p { color: var(--pv-deep-muted) !important; }
+.premium .section-dark .kicker, .premium .section-dark .section-subtitle,
+body.premium .section-dark .kicker, body.premium .section-dark .section-subtitle { color: var(--pv-gold) !important; }
+.premium .section-dark .card,
+.premium .section-dark .role-card,
+.premium .section-dark .scenario-card,
+.premium .section-dark .why-card,
+.premium .section-dark .news-card,
+.premium .section-dark .info-card,
+body.premium .section-dark .card,
+body.premium .section-dark .role-card,
+body.premium .section-dark .scenario-card,
+body.premium .section-dark .why-card,
+body.premium .section-dark .news-card,
+body.premium .section-dark .info-card {
+  background: rgba(255,255,255,.04) !important;
+  color: var(--pv-deep-text) !important;
+  border-color: rgba(255,255,255,.08) !important;
+}
+.premium .section-dark .card:hover, body.premium .section-dark .card:hover { background: rgba(255,255,255,.07) !important; border-color: rgba(194,162,94,.4) !important; }
+.premium .section-dark .stat-number, .premium .section-dark .trust-number,
+body.premium .section-dark .stat-number, body.premium .section-dark .trust-number { color: var(--pv-deep-text) !important; }
+.premium .section-dark .stat-label, .premium .section-dark .trust-label,
+body.premium .section-dark .stat-label, body.premium .section-dark .trust-label { color: var(--pv-deep-muted) !important; }
+.premium .section-dark hr, body.premium .section-dark hr { background: rgba(255,255,255,.13) !important; }
+
+/* ---------- 11. CTA section 升級 ---------- */
+.premium .cta-section, body.premium .cta-section {
+  background: var(--pv-deep) !important;
+  color: var(--pv-deep-text) !important;
+  position: relative;
+  overflow: hidden;
+}
+.premium .cta-section h2, body.premium .cta-section h2 { color: var(--pv-deep-text) !important; }
+.premium .cta-section p, body.premium .cta-section p { color: var(--pv-deep-muted) !important; }
+.premium .cta-section::after, body.premium .cta-section::after {
+  content: ''; position: absolute; right: -100px; bottom: -100px;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(194,162,94,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------- 12. Form 輸入框升級 ---------- */
+.premium input[type="text"], .premium input[type="email"], .premium input[type="tel"],
+.premium textarea, .premium select, body.premium input[type="text"],
+body.premium input[type="email"], body.premium input[type="tel"],
+body.premium textarea, body.premium select {
+  border: 1px solid var(--pv-hair) !important;
+  border-radius: 2px !important;
+  padding: 12px 16px !important;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-size: 14px !important;
+  background: #fff !important;
+  transition: border-color .3s, box-shadow .3s !important;
+}
+.premium input[type="text"]:focus, .premium input[type="email"]:focus, .premium input[type="tel"]:focus,
+.premium textarea:focus, .premium select:focus,
+body.premium input[type="text"]:focus, body.premium input[type="email"]:focus, body.premium input[type="tel"]:focus,
+body.premium textarea:focus, body.premium select:focus {
+  border-color: var(--pv-gold) !important;
+  box-shadow: 0 0 0 3px rgba(194,162,94,.15) !important;
+  outline: none !important;
+}
+
+/* ---------- 13. 頂級 Link 樣式：底線金動畫 ---------- */
+.premium a, body.premium a { transition: color .25s ease; }
+.premium .text-link, body.premium .text-link {
+  color: var(--pv-ink) !important; text-decoration: none !important;
+  border-bottom: 1px solid rgba(194,162,94,.4) !important;
+  padding-bottom: 4px; transition: border-color .3s, color .3s !important;
+}
+.premium .text-link:hover, body.premium .text-link:hover { color: var(--pv-gold) !important; border-bottom-color: var(--pv-gold) !important; }
+
+/* ---------- 14. 頂級 列表（編輯式行格）---------- */
+.premium .editorial-list, .premium .v2-style-list, body.premium .editorial-list {
+  list-style: none !important; margin: 0 !important; padding: 0 !important;
+}
+.premium .editorial-list li, body.premium .editorial-list li {
+  display: grid !important; grid-template-columns: 60px 1.6fr 1fr 1fr 40px !important;
+  align-items: center !important; gap: 18px !important;
+  padding: 22px 6px !important; border-top: 1px solid var(--pv-hair) !important;
+  transition: background .3s !important;
+}
+.premium .editorial-list li:last-child, body.premium .editorial-list li:last-child { border-bottom: 1px solid var(--pv-hair) !important; }
+.premium .editorial-list li:hover, body.premium .editorial-list li:hover { background: rgba(194,162,94,.05) !important; }
+.premium .editorial-list li .no, body.premium .editorial-list li .no { font-family: 'Inter', sans-serif !important; font-size: 13px !important; color: var(--pv-gold) !important; letter-spacing: .08em !important; }
+.premium .editorial-list li .zh, body.premium .editorial-list li .zh { font-family: 'Noto Serif TC', serif !important; font-weight: 500 !important; font-size: 19px !important; color: var(--pv-ink) !important; }
+.premium .editorial-list li .en, body.premium .editorial-list li .en { font-family: 'Playfair Display', serif !important; font-style: italic !important; font-size: 14px !important; color: var(--pv-soft) !important; }
+.premium .editorial-list li .meta, body.premium .editorial-list li .meta { font-size: 13px !important; color: var(--pv-muted) !important; }
+.premium .editorial-list li .arrow, body.premium .editorial-list li .arrow { font-size: 20px !important; color: var(--pv-gold) !important; text-align: right !important; }
+
+.premium .section-dark .editorial-list li, body.premium .section-dark .editorial-list li { border-top-color: rgba(255,255,255,.13) !important; }
+.premium .section-dark .editorial-list li:last-child, body.premium .section-dark .editorial-list li:last-child { border-bottom-color: rgba(255,255,255,.13) !important; }
+.premium .section-dark .editorial-list li .zh, body.premium .section-dark .editorial-list li .zh { color: var(--pv-deep-text) !important; }
+.premium .section-dark .editorial-list li .en, .premium .section-dark .editorial-list li .meta,
+body.premium .section-dark .editorial-list li .en, body.premium .section-dark .editorial-list li .meta { color: var(--pv-deep-muted) !important; }
+
+/* ---------- 15. Footer 升級（v3 極致緊湊 · 20% 高度 · 單行佈局） ---------- */
+
+/* 15.1 頂部金線裝飾 + 深色基底 */
+body.premium .footer {
+  background: var(--pv-deep-2) !important;
+  color: var(--pv-deep-muted) !important;
+  border-top: none !important;
+  position: relative;
+  overflow: hidden;
+}
+body.premium .footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--pv-gold) 15%, var(--pv-gold) 85%, transparent 100%);
+  opacity: 0.55;
+}
+
+/* 15.2 極致緊湊：單行 flex 佈局 */
+body.premium .footer .container { padding-top: 0 !important; padding-bottom: 0 !important; }
+body.premium .footer-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px 28px !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 18px 0 !important;
+  border-bottom: none !important;
+}
+
+/* 重置舊的等高列/分隔線規則 */
+body.premium .footer-grid > * {
+  padding: 0 !important;
+  border-right: none !important;
+  align-self: center !important;
+}
+
+/* 15.3 隱藏冗餘導航列（頂部 mega menu 已涵蓋）；品牌簡介保留 */
+body.premium .footer-grid > .footer-col:not(.footer-contact-info) { display: none !important; }
+
+/* 15.4 品牌欄：logo 在上 + 公司簡介在下（簡介保留，小字緊湊） */
+body.premium .footer-brand {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  max-width: 560px !important;
+}
+body.premium .footer-brand .nav-logo {
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+body.premium .footer-brand .brand-intro {
+  display: block !important;
+  color: var(--pv-deep-muted) !important;
+  font-size: 0.72rem !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0.2px !important;
+  margin: 8px 0 0 !important;
+  max-width: 520px !important;
+  word-wrap: normal !important;
+  overflow: visible !important;
+}
+body.premium .footer-brand .nav-logo-text strong {
+  color: var(--pv-deep-text) !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.02em !important;
+}
+body.premium .footer-brand .nav-logo-text small {
+  color: var(--pv-deep-muted) !important;
+  font-size: 0.58rem !important;
+  letter-spacing: 1px !important;
+}
+
+/* 15.5 聯繫我們：隱藏標題，內聯緊湊排列 */
+body.premium .footer-contact-info h4 { display: none !important; }
+body.premium .footer-contact-info {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px 22px !important;
+  align-items: center !important;
+}
+body.premium .footer-contact-info p {
+  color: var(--pv-deep-muted) !important;
+  font-size: 0.76rem !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  gap: 6px !important;
+  align-items: center !important;
+}
+body.premium .footer-contact-info p .icon {
+  color: var(--pv-gold) !important;
+  width: 15px !important;
+  font-size: 0.82rem !important;
+}
+body.premium .footer-contact-info p a {
+  color: var(--pv-deep-muted) !important;
+  transition: color .25s ease !important;
+}
+body.premium .footer-contact-info p a:hover { color: var(--pv-gold) !important; }
+
+/* 15.6 Footer bottom：獨立底欄，居中顯示，不與上方欄位對齊 */
+body.premium .footer-bottom {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 12px 20px !important;
+  background: rgba(0,0,0,0.18) !important;
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+  color: var(--pv-deep-muted) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.4px !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+body.premium .footer-bottom p {
+  color: var(--pv-deep-muted) !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+/* 15.7 響應式 */
+@media (max-width: 768px) {
+  body.premium .footer-grid {
+    justify-content: flex-start !important;
+    gap: 10px 16px !important;
+    padding: 16px 0 !important;
+  }
+  body.premium .footer-contact-info { gap: 6px 14px !important; }
+  body.premium .footer-brand,
+  body.premium .footer-brand .brand-intro { max-width: 100% !important; }
+}
+
+/* ---------- 16. 修補 v2-products / v2-projects 內 section 寬度溢出（main-content 包覆）---------- */
+/* v2 hero 修复：全宽 + 文字不超出栅格单元 */
+body.premium.v2-products .v2-hero,
+body.premium.v2-products .v2-archive,
+body.premium.v2-products .v2-spotlight,
+body.premium.v2-products .v2-quote,
+body.premium.v2-products .v2-colours,
+body.premium.v2-projects .v2-hero,
+body.premium.v2-projects .v2-archive,
+body.premium.v2-projects .v2-spotlight,
+body.premium.v2-projects .v2-quote,
+body.premium.v2-projects .v2-colours {
+  position: relative !important;
+}
+/* 关键修复：base CSS 的 [class*="-hero"] 选择器误命中 v2-hero-text / v2-hero-media，
+   把它们强制 width:100vw 撑破栅格。这里强制 auto，让栅格生效 */
+body.premium.v2-products .v2-hero-text,
+body.premium.v2-products .v2-hero-media,
+body.premium.v2-projects .v2-hero-text,
+body.premium.v2-projects .v2-hero-media {
+  width: auto !important;
+  max-width: none !important;
+  margin-left: 0 !important; margin-right: 0 !important;
+}
+body.premium.v2-products .v2-hero .v2-hero-media,
+body.premium.v2-projects .v2-hero .v2-hero-media { min-height: 460px !important; }
+body.premium.v2-products, body.premium.v2-projects { background: #F6F3EE !important; }
+
+/* ---------- 17. 響應式 ---------- */
+@media (max-width: 900px) {
+  .premium h1, body.premium h1 { font-size: clamp(28px, 7vw, 40px) !important; }
+  .premium h2, body.premium h2 { font-size: clamp(22px, 5vw, 30px) !important; }
+  .premium .section-title, body.premium .section-title { font-size: clamp(22px, 5.4vw, 32px) !important; }
+  .premium .editorial-list li, body.premium .editorial-list li { grid-template-columns: 40px 1.4fr 1fr 30px !important; }
+  .premium .editorial-list li .meta, body.premium .editorial-list li .meta { display: none !important; }
+  body.premium.v2-products .v2-hero, body.premium.v2-projects .v2-hero { grid-template-columns: 1fr !important; }
+}
+
+/* ============================================================
+   18. 表单统一：宽度对齐页面 + 引导文字反色 + 视觉增强
+   ============================================================ */
+
+/* —— 18.1 统一表单宽度为页面内容宽度 —— */
+body.premium .hsst-form { max-width: 100% !important; }
+
+/* —— 18.2 引导文字反色：浅色输入框 → 深色引导文字 —— */
+body.premium .hsst-form-input::placeholder,
+body.premium .hsst-form-textarea::placeholder,
+body.premium .hsst-form-select::placeholder,
+body.premium .inquiry-form input::placeholder,
+body.premium .inquiry-form textarea::placeholder,
+body.premium .inquiry-form select::placeholder {
+  color: #5C574F !important; opacity: 1 !important;
+}
+
+/* —— 18.3 引导文字反色：深色输入框（解决方案页）→ 浅色引导文字 —— */
+body.premium .solution-cta-input::placeholder,
+body.premium .solution-cta-textarea::placeholder {
+  color: rgba(244,241,234,0.66) !important; opacity: 1 !important;
+}
+
+/* —— 18.4 视觉增强：输入框边框统一 + 聚焦香槟金发光 —— */
+body.premium .hsst-form-input,
+body.premium .hsst-form-textarea,
+body.premium .hsst-form-select,
+body.premium .inquiry-form input,
+body.premium .inquiry-form textarea,
+body.premium .inquiry-form select {
+  border-color: #DCD5CB !important;
+}
+body.premium .hsst-form-input:focus,
+body.premium .hsst-form-textarea:focus,
+body.premium .hsst-form-select:focus,
+body.premium .inquiry-form input:focus,
+body.premium .inquiry-form textarea:focus,
+body.premium .inquiry-form select:focus {
+  border-color: #C2A25E !important;
+  box-shadow: 0 0 0 3px rgba(194,162,94,0.18) !important;
+}
+
+/* —— 18.5 表单标签统一视觉 —— */
+body.premium .hsst-form-label { color: #14130F !important; letter-spacing: 0.02em; }
+
+/* ---------- 19. 產品視頻展示（石材實拍 / Stone Video Showcase）---------- */
+/* 讓 <video> 填滿 16:9 佔位容器，object-fit 裁剪呈現電影感構圖 */
+body.premium .product-video-el {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  background: #0b0a08 !important;
+  display: block !important;
+}
+body.premium .product-video-placeholder {
+  background: #0b0a08 !important;
+}
+/* 卡片懸浮微動效，強化視覺衝擊 */
+body.premium .product-video-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+}
+body.premium .product-video-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 40px rgba(20,19,15,0.16) !important;
+}
+
+/* ---------- 20. 產品系列頁 · 頂部操作條（雙 CTA 視覺升級）---------- */
+/* 場景：每個系列頁 Hero 之下的 .product-action-bar，含「索取樣板 / 立即諮詢」雙按鈕
+   設計語言：編輯式居中 CTA 帶 · 香檳金漸變 + 米白描邊 · 帶 arrow 動畫 + 光暈 */
+
+body.premium .product-action-bar {
+  background: linear-gradient(180deg, #FBF8F2 0%, #F2EEE6 100%) !important;
+  padding: 36px 0 40px !important;
+  border-bottom: 1px solid var(--pv-hair) !important;
+  position: relative;
+  overflow: hidden;
+}
+body.premium .product-action-bar::before {
+  content: '';
+  position: absolute; top: 0; left: 50%;
+  width: 80px; height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--pv-gold) 50%, transparent 100%);
+  transform: translateX(-50%);
+}
+body.premium .product-action-bar .container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+  max-width: var(--max-width) !important;
+}
+body.premium .product-action-bar .product-action-btn {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 220px;
+  padding: 16px 38px !important;
+  font-family: 'Inter', 'Noto Sans TC', 'Noto Serif TC', sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  border-radius: 2px !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all .35s cubic-bezier(.34,1.4,.64,1) !important;
+}
+/* 共用 ::after 箭頭（hover 時滑入） */
+body.premium .product-action-bar .product-action-btn::after {
+  content: '→';
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+body.premium .product-action-bar .product-action-btn:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* —— 索取樣板（次級 CTA）—— 米白底 + 金邊 + 懸停金填充 —— */
+body.premium .product-action-bar .product-action-btn.sample {
+  background: rgba(255,255,255,.92) !important;
+  color: var(--pv-ink) !important;
+  border: 1.5px solid var(--pv-gold) !important;
+  box-shadow: 0 2px 8px rgba(20,19,15,.06), 0 0 0 0 rgba(194,162,94,0) !important;
+}
+body.premium .product-action-bar .product-action-btn.sample:hover {
+  background: linear-gradient(135deg, #E5D3A6 0%, #C2A25E 100%) !important;
+  color: #14130F !important;
+  border-color: var(--pv-gold) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 24px rgba(194,162,94,.32), 0 0 0 4px rgba(194,162,94,.14) !important;
+}
+
+/* —— 立即諮詢（主 CTA）—— 金色漸變實底 + 光暈 + 懸停放大 —— */
+body.premium .product-action-bar .product-action-btn.inquire {
+  background: linear-gradient(135deg, #D4B47A 0%, #C2A25E 45%, #A8884A 100%) !important;
+  color: #14130F !important;
+  border: 1.5px solid #A8884A !important;
+  font-weight: 700 !important;
+  box-shadow:
+    0 4px 14px rgba(194,162,94,.32),
+    0 1px 0 rgba(255,255,255,.35) inset,
+    0 -1px 0 rgba(0,0,0,.08) inset,
+    0 0 0 0 rgba(194,162,94,0) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.25);
+}
+body.premium .product-action-bar .product-action-btn.inquire:hover {
+  background: linear-gradient(135deg, #E5CC8A 0%, #D4B47A 45%, #B89250 100%) !important;
+  border-color: #8C6D38 !important;
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow:
+    0 14px 32px rgba(194,162,94,.45),
+    0 2px 0 rgba(255,255,255,.4) inset,
+    0 0 0 6px rgba(194,162,94,.14) !important;
+}
+body.premium .product-action-bar .product-action-btn.inquire::after {
+  content: '→';
+  font-weight: 700;
+}
+
+/* —— 響應式：手機端按鈕拉寬並堆疊 —— */
+@media (max-width: 640px) {
+  body.premium .product-action-bar { padding: 24px 0 28px !important; }
+  body.premium .product-action-bar .product-action-btn {
+    min-width: 0 !important;
+    width: 100%;
+    padding: 14px 22px !important;
+    font-size: 14px !important;
+  }
+  body.premium .product-action-bar .product-action-btn::after { font-size: 16px; }
+}
+
+/* ============================================================
+   模块 21 · 全站卡片统一自适应 (v2, 2026-09-03)
+   Flex + 均分拉伸：行不满时卡片自动铺满整行（无右侧留白）；
+   列数档位由 main.js 按实卡数注入 --c(桌面)/--c-t(平板)：
+     4卡→桌面4/平板2 绝不出3列; 5卡→3(3+2,次行铺满)/2; 6卡→3/2; 3卡→整行3
+   特色区(v2错落画廊/视频墙/logo墙/资讯长列表/技术参数大卡)不在此列。
+   ============================================================ */
+body.premium :is(
+  .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
+  .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
+  .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+  .related-cases-grid, .related-products-grid, .product-video-grid,
+  .contact-core-grid,
+  .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
+) {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  column-gap: var(--gx, 24px) !important;
+  row-gap: var(--gy, 36px) !important;
+}
+
+body.premium :is(
+  .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
+  .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
+  .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+  .related-cases-grid, .related-products-grid, .product-video-grid,
+  .contact-core-grid,
+  .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
+) > * {
+  flex-grow: 1 !important;
+  flex-shrink: 0 !important;
+  flex-basis: calc((100% - (var(--c, 3) - 1) * var(--gx, 24px)) / var(--c, 3)) !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1023px) {
+  body.premium :is(
+    .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
+    .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
+    .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+    .related-cases-grid, .related-products-grid, .product-video-grid,
+    .contact-core-grid,
+    .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
+  ) > * {
+    flex-basis: calc((100% - (var(--c-t, 2) - 1) * var(--gx, 24px)) / var(--c-t, 2)) !important;
+  }
+}
+
+@media (max-width: 639px) {
+  body.premium :is(
+    .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
+    .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
+    .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+    .related-cases-grid, .related-products-grid, .product-video-grid,
+    .contact-core-grid,
+    .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
+  ) > * {
+    flex-basis: 100% !important;
+  }
+}
+
+/* 卡片内部横向溢出兜底 */
+body.premium :is(
+  .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
+  .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
+  .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+  .related-cases-grid, .related-products-grid, .product-video-grid,
+  .contact-core-grid,
+  .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
+) > * img {
+  max-width: 100% !important;
+  height: auto;
+}
+
+/* ============================================================
+   模块 22 · contact 页 联系/理念/到访/网络/生态 区块重排 (2026-09-03)
+   目标：消除无效留白、图文均衡方正、图文混合不套卡片网格
+   ============================================================ */
+/* --- 02 在线询盘区：表单 + 其他联系方式 并排双栏 --- */
+body.premium .contact-inquiry-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 440px !important;
+  gap: 26px !important;
+  align-items: stretch !important;
+}
+/* 右栏内部纵向铺满：卡片拉伸均分 */
+body.premium .contact-channel-col { justify-content: space-between; }
+body.premium .contact-channel-card { flex: 1 1 auto; }
+body.premium .contact-channel-card p { line-height: 1.7; }
+body.premium .contact-inquiry-form {
+  background: #fff;
+  border: 1px solid #eee6da;
+  border-radius: 16px;
+  padding: 28px;
+  box-sizing: border-box;
+}
+body.premium .contact-inquiry-form form {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 16px 20px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+body.premium .contact-inquiry-form .form-full { grid-column: 1 / -1 !important; }
+body.premium .contact-inquiry-form form > div { min-width: 0; }
+@media (max-width: 960px) {
+  body.premium .contact-inquiry-row { grid-template-columns: 1fr !important; }
+}
+
+/* --- 其他联系方式 侧栏卡组 --- */
+body.premium .contact-channel-col { display: flex !important; flex-direction: column; gap: 16px !important; }
+body.premium .contact-channel-card {
+  background: #fff;
+  border: 1px solid #eee6da;
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+body.premium .contact-channel-card .cc-icon {
+  width: 42px; height: 42px; flex-shrink: 0; border-radius: 10px;
+  background: linear-gradient(135deg, #E5D3A6, #C2A25E);
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+body.premium .contact-channel-card h5 { margin: 0 0 6px; font-size: 1rem; color: #14130F; font-weight: 600; }
+body.premium .contact-channel-card p { margin: 0; font-size: 0.85rem; line-height: 1.6; color: #5C574F; }
+body.premium .contact-channel-card a { color: #A8884A; font-weight: 600; }
+body.premium .contact-channel-note {
+  background: linear-gradient(135deg, #FBF8F2, #F2EEE6);
+  border: 1px dashed #D8CDB8;
+  border-radius: 14px; padding: 16px 20px;
+  font-size: 0.85rem; line-height: 1.7; color: #5C574F;
+}
+body.premium .contact-channel-note strong { color: #14130F; }
+
+/* --- 04 服务承诺：改为竖列四行（消除四窄列） --- */
+body.premium .contact-commitments {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 18px !important;
+}
+@media (max-width: 1023px) {
+  body.premium .contact-commitments { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 639px) {
+  body.premium .contact-commitments { grid-template-columns: minmax(0, 1fr) !important; }
+}
+body.premium .contact-commitment-item {
+  background: #fff !important;
+  padding: 14px 16px !important;
+  border: 1px solid #eee6da !important;
+  border-radius: 10px !important;
+  align-items: center !important;
+}
+body.premium .contact-commitment-text { color: #14130F !important; }
+body.premium .contact-commitment-text em { display: block; font-style: normal; font-size: 0.78rem; color: #8a8277; margin-top: 3px; line-height: 1.5; }
+
+/* --- 05/06/08：双栏等高铺满 --- */
+body.premium .contact-visit-grid,
+body.premium .contact-network-grid,
+body.premium .contact-eco-grid {
+  align-items: stretch !important;
+}
+body.premium .contact-visit-info,
+body.premium .contact-visit-map {
+  display: flex; flex-direction: column;
+}
+body.premium .contact-visit-info { box-sizing: border-box; }
+body.premium .contact-visit-map { box-sizing: border-box; }
+body.premium .contact-visit-grid { grid-template-columns: minmax(0, 46fr) minmax(0, 54fr) !important; }
+body.premium .contact-visit-map .v-map-top {
+  display: flex; gap: 16px; padding: 16px; align-items: center;
+  border-bottom: 1px solid #eee6da;
+}
+body.premium .contact-visit-map .v-map-top img { width: 34%; height: auto; min-width: 0; object-fit: cover; border-radius: 10px; display: block; }
+body.premium .contact-visit-map .v-addr { flex: 1; min-width: 0; }
+body.premium .contact-visit-map .v-addr strong { display: block; font-size: 0.95rem; color: #14130F; margin-bottom: 6px; }
+body.premium .contact-visit-map .v-addr span { display: block; font-size: 0.82rem; line-height: 1.6; color: #5C574F; margin-bottom: 8px; }
+body.premium .contact-visit-map .v-addr a { font-size: 0.8rem; color: #A8884A; font-weight: 600; }
+body.premium .contact-visit-map iframe {
+  flex: none !important; width: 100%; border: none;
+  height: 330px; min-height: 0 !important; background: #F2EDE6;
+}
+@media (max-width: 1023px) { body.premium .contact-visit-map iframe { height: 330px; } }
+body.premium .contact-visit-map .v-map-bar {
+  padding: 12px 16px; border-bottom: 1px solid #eee6da;
+}
+body.premium .contact-visit-map .v-map-bar div {
+  display: flex; gap: 8px; font-size: 0.84rem; line-height: 1.6; color: #4a443c;
+  padding: 3px 0;
+}
+body.premium .contact-visit-map .v-map-bar .ico { flex: none; }
+body.premium .contact-visit-grid { align-items: stretch !important; }
+body.premium .contact-visit-info { justify-content: space-between; }
+body.premium .contact-visit-map .v-map-top img { height: 165px; width: auto; max-width: 40%; }
+/* 到访信息条目加说明小字 */
+body.premium .contact-visit-item { flex-wrap: wrap; }
+body.premium .contact-visit-item .v-note {
+  width: 100%; margin-top: 2px; padding-left: 90px;
+  font-size: 0.82rem; color: #8a8277; line-height: 1.55;
+  box-sizing: border-box;
+}
+@media (max-width: 640px) { body.premium .contact-visit-item .v-note { padding-left: 0; } }
+/* 06 底部服务保障小卡 */
+body.premium .contact-network-perks {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  margin-top: 24px !important;
+}
+@media (max-width: 900px) { body.premium .contact-network-perks { grid-template-columns: 1fr !important; } }
+body.premium .contact-network-perks > div {
+  background: #FBF8F2; border: 1px solid #eee6da; border-radius: 12px;
+  padding: 16px 18px;
+}
+body.premium .contact-network-perks h5 { margin: 0 0 6px; font-size: 0.95rem; color: #14130F; }
+body.premium .contact-network-perks p { margin: 0; font-size: 0.82rem; line-height: 1.6; color: #5C574F; }
+/* 区域条目副说明 */
+body.premium .contact-region-item .r-sub { display: block; font-size: 0.78rem; color: #8a8277; margin-top: 2px; }
+body.premium .contact-region-item { align-items: flex-start; }
+/* 08 生态 扩充小样式 */
+body.premium .contact-eco-direction-item { align-items: flex-start; flex-wrap: wrap; }
+body.premium .contact-eco-direction-item .d-sub {
+  width: 100%; padding-left: 38px; font-size: 0.8rem; color: #8a8277; line-height: 1.55;
+  box-sizing: border-box;
+}
+body.premium .contact-eco-vision { justify-content: space-between; }
+body.premium .contact-eco-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+body.premium .contact-eco-tags span {
+  background: rgba(255,255,255,.85); border: 1px solid #E0D6C4; color: #5C574F;
+  border-radius: 999px; padding: 5px 12px; font-size: 0.78rem;
+}
+@media (max-width: 640px) {
+  body.premium .contact-eco-direction-item .d-sub { padding-left: 0; }
+  body.premium .contact-eco-tags span { font-size: 0.72rem; }
+}
+
+/* 模块22补充：04理念要点 / 区域副注 */
+body.premium .contact-principles { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+body.premium .contact-principles li { position: relative; padding-left: 16px; font-size: 0.9rem; line-height: 1.65; color: #4a443c; }
+body.premium .contact-principles li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: #C2A25E; }
+body.premium .contact-commitment-item { display: flex; align-items: flex-start !important; }
+body.premium .contact-region-card h4, body.premium .contact-eco-directions h4, body.premium .contact-visit-info h4 { letter-spacing: 0.02em; }
+body.premium .contact-eco-vision p { margin-bottom: 12px; }
+
+/* 模块22补充2：联系卡说明 / 合作流程步进 */
+body.premium .contact-core-card-desc { font-size: 0.78rem; line-height: 1.55; color: #8a8277; margin-top: 6px; font-weight: 400; }
+body.premium .contact-process-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  margin: 4px 0 24px !important;
+}
+@media (max-width: 1023px) { body.premium .contact-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 639px) { body.premium .contact-process-grid { grid-template-columns: minmax(0, 1fr) !important; } }
+body.premium .contact-process-step {
+  background: #FBF8F2; border: 1px solid #eee6da; border-radius: 12px;
+  padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; box-sizing: border-box;
+}
+body.premium .contact-process-step .ps-num {
+  width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%;
+  background: linear-gradient(135deg,#E5D3A6,#C2A25E); color:#14130F;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem;
+}
+body.premium .contact-process-step h5 { margin: 2px 0 6px; font-size: 0.98rem; color: #14130F; }
+body.premium .contact-process-step p { margin: 0; font-size: 0.82rem; line-height: 1.6; color: #5C574F; }
+
+/* 模块22补充3：map 顶栏 文字垂直排布微调 */
+body.premium .contact-visit-map { display: flex; flex-direction: column; }
+
+/* 模块22 到访·最终版：flex 等高 + 地图弹性填满（替换 grid stretch 方案） */
+body.premium .contact-visit-grid {
+  display: flex !important;
+  flex-wrap: nowrap;
+  align-items: stretch !important;
+  gap: 26px !important;
+}
+body.premium .contact-visit-info { flex: 0 0 46% !important; min-width: 0 !important; width: 46% !important; box-sizing: border-box; }
+body.premium .contact-visit-map {
+  flex: 1 1 auto !important; min-width: 0 !important; width: auto !important;
+  box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;
+}
+body.premium .contact-visit-map > * { min-width: 0; }
+body.premium .contact-visit-map iframe {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  width: 100%;
+  min-height: 220px !important;
+  border: none;
+  background: #F2EDE6;
+}
+@media (max-width: 900px) {
+  body.premium .contact-visit-grid { flex-direction: column !important; }
+  body.premium .contact-visit-info,
+  body.premium .contact-visit-map { flex-basis: auto !important; width: 100% !important; }
+}
+/* ============================================================
+   模块 23 · 全站页脚 v2：5 列均分网格（品牌/导航/产品矩阵/客户服务/联络渠道）
+   ============================================================ */
+body.premium .ft-grid5 {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 40px !important;
+  align-items: start !important;
+}
+body.premium .ft-grid5 > div { min-width: 0; }
+
+body.premium .ft-brand .nav-logo { margin-bottom: 2px; }
+body.premium .ft-brand .nav-logo img { max-height: 40px; width: auto; }
+body.premium .ft-brand p { margin: 10px 0 12px; font-size: 0.78rem; line-height: 1.75; color: rgba(255,255,255,.7); }
+body.premium .ft-brand .ft-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+body.premium .ft-brand .ft-tags span {
+  font-size: 0.66rem; color: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 2px 9px;
+  letter-spacing: .04em; white-space: nowrap;
+}
+
+body.premium .ft-h {
+  margin: 4px 0 15px !important;
+  font-size: 0.78rem; font-weight: 600; color: #D4B47A;
+  text-transform: uppercase; letter-spacing: .14em;
+}
+body.premium .ft-grid5 ul { list-style: none !important; margin: 0 !important; padding: 0 !important; display: grid; gap: 9px; }
+body.premium .ft-grid5 ul li { margin: 0 !important; line-height: 1.35; }
+body.premium .ft-grid5 ul a {
+  font-size: 0.8rem; color: rgba(255,255,255,.78);
+  text-decoration: none; display: inline-flex; align-items: baseline;
+}
+body.premium .ft-grid5 ul a:hover { color: #E5CC8A; }
+body.premium .ft-grid5 .ft-contact li a, body.premium .ft-grid5 .ft-contact li span { font-size: 0.78rem; }
+body.premium .ft-grid5 .ft-contact .ft-c-line { font-size: 0.8rem; color: rgba(255,255,255,.92); font-weight: 500; }
+body.premium .ft-grid5 .ft-contact .ft-c-note { font-size: 0.68rem; color: rgba(255,255,255,.45); line-height: 1.5; display: block; }
+
+body.premium .ft-bottom {
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+  margin-top: 34px !important; padding-top: 18px !important;
+  display: flex !important; flex-wrap: wrap; justify-content: space-between; align-items: center;
+  font-size: 0.76rem; color: rgba(255,255,255,.6);
+}
+body.premium .ft-bottom .ft-legal { display: flex; flex-wrap: wrap; gap: 20px; }
+body.premium .ft-bottom .ft-legal a { font-size: 0.74rem; color: rgba(255,255,255,.55); text-decoration: none; }
+body.premium .ft-bottom .ft-legal a:hover { color: #E5CC8A; }
+
+@media (max-width: 1180px) {
+  body.premium .ft-grid5 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; column-gap: 32px; row-gap: 32px; }
+}
+@media (max-width: 900px) {
+  body.premium .ft-grid5 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 28px; row-gap: 28px; }
+}
+@media (max-width: 700px) {
+  body.premium .ft-grid5 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 20px; row-gap: 24px; }
+  body.premium .ft-grid5 > div:first-child { grid-column: 1 / -1 !important; }
+  body.premium .ft-bottom { flex-direction: column; gap: 10px; text-align: center; }
+}
+/* 页脚版权行居中 */
+body.premium .ft-bottom { justify-content: center !important; text-align: center !important; }
+/* 页脚高度紧凑化 */
+body.premium .ft-grid5 ul { gap: 7px !important; }
+body.premium .ft-h { margin: 2px 0 12px !important; }
+body.premium .ft-brand p { display: -webkit-box !important; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: 8px 0 10px !important; }
+body.premium .ft-brand .nav-logo img { max-height: 34px; }
+body.premium .ft-bottom { margin-top: 26px !important; padding-top: 14px !important; }
+
+/* ============ 模块 24 · 产品中心十系列旗舰卡墙 ============ */
+body.premium .v2-series { padding: 84px 0 96px; background: #F5F1EA; }
+body.premium .v2-series .v2-series-title { font-size: clamp(28px, 3.2vw, 42px); margin: 6px 0 14px; color: #14130F; font-weight: 500; letter-spacing: .02em; }
+body.premium .v2-series .v2-series-lead { max-width: 640px; color: #5C574F; font-size: 15px; line-height: 1.85; margin: 0 0 42px; }
+body.premium .v2-series-grid { display: flex !important; flex-wrap: wrap; gap: 22px; }
+body.premium .v2-series-grid > * {
+  flex: 1 1 calc((100% - 66px) / 4); min-width: 0;
+  position: relative; border-radius: 16px; overflow: hidden;
+  background: #fff; box-shadow: 0 10px 30px rgba(17,16,15,.06);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s;
+  text-decoration: none; display: block; aspect-ratio: 3/2.2;
+}
+body.premium .v2-series-grid > *:hover { transform: translateY(-8px); box-shadow: 0 26px 60px rgba(17,16,15,.18); }
+body.premium .v2-series-card .vsc-img { position: absolute; inset: 0; overflow: hidden; }
+body.premium .v2-series-card .vsc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+body.premium .v2-series-card:hover .vsc-img img { transform: scale(1.09); }
+body.premium .v2-series-card .vsc-cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 52px 22px 20px;
+  background: linear-gradient(180deg, rgba(12,10,8,0) 0%, rgba(12,10,8,.55) 46%, rgba(12,10,8,.88) 100%);
+  color: #F4F1EA;
+}
+body.premium .v2-series-card .vsc-cap i { display: block; font-style: normal; font-size: 10px; letter-spacing: .22em; color: #D9C089; text-transform: uppercase; margin-bottom: 6px; }
+body.premium .v2-series-card .vsc-cap b { display: block; font-size: 22px; font-weight: 600; letter-spacing: .04em; }
+body.premium .v2-series-card .vsc-cap .vsc-d { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 13px; line-height: 1.6; color: rgba(244,241,234,.86); margin: 8px 0 10px; }
+body.premium .v2-series-card .vsc-go {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #E5CC8A; font-style: normal;
+  opacity: .0; transform: translateY(6px); transition: all .4s ease;
+}
+body.premium .v2-series-card:hover .vsc-go { opacity: 1; transform: translateY(0); }
+@media (max-width: 1180px) { body.premium .v2-series-grid > * { flex-basis: calc((100% - 22px) / 2); } }
+@media (max-width: 700px) { body.premium .v2-series-grid > * { flex-basis: 100%; aspect-ratio: 16/11; } }
+
+/* 模块 26 · products 下方 spotlight/quote 与全站 premium 统一(1200对齐/配色/层次) */
+body.premium .v2-spotlight { background: #F5F1EA !important; }
+body.premium .v2-spot-in {
+  max-width: 1200px !important; margin: 0 auto !important;
+  padding: 78px 24px !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
+  gap: 54px !important; align-items: center !important;
+}
+body.premium .v2-spot-media img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+  border-radius: 16px !important; box-shadow: 0 26px 60px rgba(17,16,15,.16);
+}
+body.premium .v2-spot-text .v2-kicker { justify-content: flex-start; }
+body.premium .v2-spot-text h2 { font-size: clamp(26px, 3vw, 38px) !important; color: #14130F; margin: 10px 0 16px; }
+body.premium .v2-spot-text p { color: #5C574F !important; font-size: 15px; line-height: 1.85; max-width: 46ch; }
+body.premium .v2-btn { border-radius: 2px !important; }
+body.premium .v2-btn.gold { background: linear-gradient(135deg,#D4B47A,#C2A25E 45%,#A8884A) !important; }
+body.premium .v2-quote { background: #111110 !important; }
+body.premium .v2-quote > * { max-width: 1200px; margin-left: auto !important; margin-right: auto !important; }
+body.premium .v2-quote .v2-kicker { color: #D9C089; }
+body.premium .v2-quote h2 { color: #F4F1EA !important; }
+body.premium .v2-quote p { color: rgba(244,241,234,.66) !important; }
+body.premium .v2-qbtns .v2-btn { border: 1px solid transparent; }
+body.premium .v2-qbtns .v2-btn:not(.gold) { background: transparent !important; border-color: rgba(244,241,234,.35) !important; color: #F4F1EA !important; }
+body.premium .v2-qbtns .v2-btn:not(.gold):hover { border-color: #C2A25E; color: #E5CC8A !important; background: rgba(194,162,94,.08) !important; }
+@media (max-width: 960px) {
+  body.premium .v2-spot-in { grid-template-columns: minmax(0,1fr) !important; padding: 56px 20px !important; gap: 26px !important; }
+  body.premium .v2-spot-media img { aspect-ratio: 16/10; }
+  body.premium .v2-spot-text p { max-width: none; }
+}
+
+/* 模块 28 · Let's Talk Stone CTA: 取消全屏深底, 白底墨字与全站一致, 内容1200 */
+body.premium .v2-quote { background: #F5F1EA !important; padding: 88px 24px !important; }
+body.premium .v2-quote .v2-kicker { color: #A8884A !important; }
+body.premium .v2-quote h2 { color: #14130F !important; }
+body.premium .v2-quote p { color: #5C574F !important; max-width: 56ch !important; }
+body.premium .v2-qbtns .v2-btn:not(.gold) {
+  background: transparent !important; border-color: #C7BFA9 !important; color: #14130F !important;
+}
+body.premium .v2-qbtns .v2-btn:not(.gold):hover { border-color: #C2A25E; color: #A8884A !important; background: rgba(194,162,94,.08) !important; }
+
+/* 模块 29 · 首页『開始合作』CTA: 取消全屏深底, 与上下同色浅米; 表单卡片化+合规间距+隐私同意(收口 .cta-home, 不影响他页) */
+body.premium .cta-section.cta-home { background: #F5F1EA !important; color: #14130F !important; padding-top: 84px !important; padding-bottom: 84px !important; }
+body.premium .cta-section.cta-home h2 { color: #14130F !important; }
+body.premium .cta-section.cta-home .section-desc { color: #5C574F !important; max-width: 620px; margin-left: auto; margin-right: auto; }
+body.premium .cta-section.cta-home .section-subtitle { color: var(--pv-gold) !important; }
+body.premium .cta-section.cta-home .form-scene-desc { color: #6b6358 !important; }
+body.premium .cta-section.cta-home .hsst-form-divider { display: none !important; }
+body.premium .cta-section.cta-home .hsst-form {
+  max-width: 720px !important; margin: 28px auto 0 !important;
+  background: #FFFFFF; border: 1px solid #ECE4D7; border-radius: 16px;
+  padding: 30px 30px 26px; box-shadow: 0 24px 60px rgba(17,16,15,.07);
+  display: grid !important; gap: 18px; text-align: left;
+}
+body.premium .cta-section.cta-home .hsst-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 0; }
+body.premium .cta-section.cta-home .hsst-form-group { margin-bottom: 0; }
+body.premium .cta-section.cta-home .hsst-form-group--full { grid-column: 1 / -1; }
+body.premium .cta-section.cta-home .hsst-form-label { color: #5C574F !important; font-size: .8rem; margin-bottom: 7px; }
+body.premium .cta-section.cta-home .hsst-form-input,
+body.premium .cta-section.cta-home .hsst-form-textarea,
+body.premium .cta-section.cta-home .hsst-form-select {
+  background: #FCFAF6 !important; border: 1px solid #E3D9C9 !important; border-radius: 8px !important; color: #14130F !important;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+body.premium .cta-section.cta-home .hsst-form-input:focus,
+body.premium .cta-section.cta-home .hsst-form-textarea:focus,
+body.premium .cta-section.cta-home .hsst-form-select:focus { border-color: #C2A25E !important; box-shadow: 0 0 0 3px rgba(194,162,94,.16) !important; background: #FFFFFF !important; }
+body.premium .cta-section.cta-home .hsst-form-btn { width: 100% !important; border-radius: 8px !important; margin-top: 4px; }
+body.premium .cta-section.cta-home .hsst-form-consent { display: flex; align-items: flex-start; gap: 10px; font-size: .82rem; color: #5C574F; line-height: 1.6; grid-column: 1 / -1; cursor: pointer; }
+body.premium .cta-section.cta-home .hsst-form-consent input { width: 16px; height: 16px; margin-top: 2px; accent-color: #C2A25E; flex: none; }
+body.premium .cta-section.cta-home .hsst-form-consent a { color: #A8884A; text-decoration: underline; }
+body.premium .cta-section.cta-home .hsst-form-error--consent { grid-column: 1 / -1; margin-top: -10px; }
+body.premium .cta-section.cta-home .hsst-form-privacy { display: flex; align-items: center; justify-content: center; gap: 6px; color: #8a8277 !important; margin-top: 2px; font-size: .76rem; }
+body.premium .cta-section.cta-home .hsst-form-privacy svg { width: 13px; height: 13px; flex: none; opacity: .85; }
+body.premium .cta-section.cta-home .hsst-form-success { background: #F4F1EA !important; border-color: #E3D9C9 !important; }
+body.premium .cta-section.cta-home .hsst-form-success-icon { color: #C2A25E; font-size: 1.6rem; font-weight: 700; }
+@media (max-width: 640px) {
+  body.premium .cta-section.cta-home .hsst-form-row { grid-template-columns: 1fr; }
+  body.premium .cta-section.cta-home .hsst-form { padding: 22px 18px; }
+}
+
+/* 模块 30 · 首页 cta 拆左右两栏: 表单(左)+認證與合作(右), 同高同宽不留白(收口 .cta-home) */
+body.premium .cta-section.cta-home .container { text-align: left; }
+body.premium .cta-section.cta-home .cta-home-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 28px; align-items: stretch; max-width: 1200px; margin: 10px auto 0; }
+body.premium .cta-section.cta-home .cta-form-col { display: flex; flex-direction: column; min-width: 0; }
+body.premium .cta-section.cta-home .cta-form-col .form-scene-desc { text-align: left; margin-bottom: 18px; }
+body.premium .cta-section.cta-home .hsst-form { max-width: 100% !important; margin: 0 !important; height: 100%; }
+body.premium .cta-section.cta-home .cta-cert-panel { background: #FFFFFF; border: 1px solid #ECE4D7; border-radius: 16px; padding: 30px; box-shadow: 0 24px 60px rgba(17,16,15,.07); display: flex; flex-direction: column; min-width: 0; }
+body.premium .cta-section.cta-home .cta-cert-kicker { display: inline-block; font-family: 'Inter Tight', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #A8884A; margin-bottom: 10px; }
+body.premium .cta-section.cta-home .cta-cert-head h3 { font-family: 'Noto Serif TC', serif; font-size: 1.35rem; color: #14130F; margin: 0 0 8px; }
+body.premium .cta-section.cta-home .cta-cert-head p { color: #5C574F; font-size: .86rem; line-height: 1.7; margin: 0; }
+body.premium .cta-section.cta-home .cta-cert-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; margin: 22px 0; }
+body.premium .cta-section.cta-home .cta-cert-item { display: flex; gap: 12px; align-items: flex-start; background: #FBF8F2; border: 1px solid #F0E9DC; border-radius: 12px; padding: 14px; min-width: 0; }
+body.premium .cta-section.cta-home .cta-cert-badge { flex: none; min-width: 76px; text-align: center; font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: .8rem; letter-spacing: .01em; color: #14130F; background: #fff; border: 1px solid #E3D9C9; border-radius: 8px; padding: 9px 6px; line-height: 1.2; }
+body.premium .cta-section.cta-home .cta-cert-txt strong { display: block; color: #14130F; font-size: .84rem; margin-bottom: 3px; }
+body.premium .cta-section.cta-home .cta-cert-txt p { margin: 0; color: #8a8277; font-size: .74rem; line-height: 1.5; overflow-wrap: anywhere; min-width: 0; }
+body.premium .cta-section.cta-home .cta-cert-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 18px 0; border-top: 1px solid #EDE6DA; border-bottom: 1px solid #EDE6DA; }
+body.premium .cta-section.cta-home .cta-cert-stats strong { display: block; font-family: 'Noto Serif TC', serif; font-size: 1.5rem; color: #A8884A; line-height: 1; }
+body.premium .cta-section.cta-home .cta-cert-stats span { display: block; margin-top: 6px; color: #5C574F; font-size: .74rem; }
+body.premium .cta-section.cta-home .cta-cert-link { margin-top: auto; align-self: flex-start; font-size: .82rem; font-weight: 600; color: #A8884A; text-decoration: none; padding-top: 8px; }
+body.premium .cta-section.cta-home .cta-cert-link:hover { color: #C2A25E; }
+@media (max-width: 960px) {
+  body.premium .cta-section.cta-home .cta-home-grid { grid-template-columns: 1fr; gap: 22px; }
+  body.premium .cta-section.cta-home .cta-cert-panel { padding: 24px 20px; }
+
+/* 模块 31 · 资讯动态『订阅资讯』CTA: 与首页同色浅米 + 紧凑双栏表单卡片 + 隐私同意(收口 .cta-sub, 不影响他页) */
+body.premium .cta-section.cta-sub { background: #F5F1EA !important; color: #14130F !important; padding-top: 72px !important; padding-bottom: 72px !important; }
+body.premium .cta-section.cta-sub h2 { color: #14130F !important; }
+body.premium .cta-section.cta-sub h2::before { left: 50% !important; transform: translateX(-50%) !important; }
+body.premium .cta-section.cta-sub .section-subtitle { color: var(--pv-gold) !important; }
+body.premium .cta-section.cta-sub .section-desc { color: #5C574F !important; max-width: 600px; margin: 0 auto; }
+body.premium .cta-section.cta-sub .hsst-form-divider { display: none !important; }
+body.premium .cta-section.cta-sub .hsst-form {
+  max-width: 760px !important; margin: 24px auto 0 !important;
+  background: #FFFFFF; border: 1px solid #ECE4D7; border-radius: 14px;
+  padding: 24px 28px 22px; box-shadow: 0 18px 44px rgba(17,16,15,.06);
+  display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 20px !important; text-align: left; align-items: start;
+}
+body.premium .cta-section.cta-sub .hsst-form-group { margin-bottom: 0; }
+body.premium .cta-section.cta-sub .hsst-form-group--full { grid-column: 1 / -1; }
+body.premium .cta-section.cta-sub .hsst-form-section-title { grid-column: 1 / -1; display: flex; align-items: center; gap: 9px; font-size: .82rem; font-weight: 600; letter-spacing: 1px; color: #A8884A; margin: 14px 0 4px; padding-bottom: 8px; border-bottom: 1px solid #ECE4D7; }
+body.premium .cta-section.cta-sub .hsst-form-section-title::before { content: ''; width: 4px; height: 15px; background: #C2A25E; border-radius: 2px; }
+body.premium .cta-section.cta-sub .hsst-form-label .required { color: #C0392B !important; }
+body.premium .cta-section.cta-sub .hsst-form-hint { font-size: .72rem; color: #9a9388; margin-top: 3px; line-height: 1.5; }
+body.premium .cta-section.cta-sub .hsst-form-label { color: #5C574F !important; font-size: .78rem; margin-bottom: 6px; font-weight: 500; }
+body.premium .cta-section.cta-sub .hsst-form-input,
+body.premium .cta-section.cta-sub .hsst-form-textarea,
+body.premium .cta-section.cta-sub .hsst-form-select {
+  width: 100%; background: #FCFAF6 !important; border: 1px solid #E3D9C9 !important; border-radius: 8px !important; color: #14130F !important;
+  padding: 11px 13px; font-size: .9rem; font-family: 'Noto Sans TC', 'Inter', sans-serif;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+body.premium .cta-section.cta-sub .hsst-form-input:focus,
+body.premium .cta-section.cta-sub .hsst-form-textarea:focus,
+body.premium .cta-section.cta-sub .hsst-form-select:focus { border-color: #C2A25E !important; box-shadow: 0 0 0 3px rgba(194,162,94,.16) !important; background: #FFFFFF !important; }
+body.premium .cta-section.cta-sub .hsst-form-textarea { min-height: 84px; resize: vertical; }
+body.premium .cta-section.cta-sub .hsst-form-btn { grid-column: auto; width: auto !important; min-width: 200px; justify-self: start; border-radius: 8px !important; margin-top: 6px; padding: 13px 28px; font-size: .95rem; }
+body.premium .cta-section.cta-sub .hsst-form-consent { grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 9px; font-size: .8rem; color: #5C574F; line-height: 1.55; cursor: pointer; margin-top: 2px; }
+body.premium .cta-section.cta-sub .hsst-form-consent input { width: 15px; height: 15px; margin-top: 2px; accent-color: #C2A25E; flex: none; }
+body.premium .cta-section.cta-sub .hsst-form-consent a { color: #A8884A; text-decoration: underline; }
+body.premium .cta-section.cta-sub .hsst-form-error--consent { grid-column: 1 / -1; margin-top: -8px; }
+body.premium .cta-section.cta-sub .hsst-form-privacy { grid-column: 1 / -1; text-align: center; color: #9a9388 !important; margin-top: 4px; font-size: .72rem; }
+body.premium .cta-section.cta-sub .hsst-form-privacy svg { display: none !important; }
+body.premium .cta-section.cta-sub .hsst-form-success { grid-column: 1 / -1; background: #F4F1EA !important; border-color: #E3D9C9 !important; }
+body.premium .cta-section.cta-sub .hsst-form-success-icon { color: #C2A25E; font-size: 1.5rem; font-weight: 700; }
+@media (max-width: 640px) {
+  body.premium .cta-section.cta-sub .hsst-form { grid-template-columns: 1fr; padding: 22px 18px; }
+}
+}
+
+/* ============================================================
+   32. 全站表單配色統一（表單區塊 = 頁面米黃底 + 黑字 + 米白輸入框）
+   僅作用於帶 .hsst-form-zone 的表單區塊，不影響頁面 hero 等其他區塊
+   ============================================================ */
+
+/* —— 32.1 表單區塊底色 → 頁面米黃 #F6F3EE —— */
+body.premium .hsst-form-zone {
+  background: #F6F3EE !important;
+  color: #14130F !important;
+}
+
+/* —— 32.2 區塊內標題／正文／標籤 → 黑 #14130F（保留金色小標籤與必填星號）—— */
+body.premium .hsst-form-zone h1,
+body.premium .hsst-form-zone h2,
+body.premium .hsst-form-zone h3,
+body.premium .hsst-form-zone h4,
+body.premium .hsst-form-zone p:not(.section-subtitle):not(.form-subtitle),
+body.premium .hsst-form-zone label,
+body.premium .hsst-form-zone li,
+body.premium .hsst-form-zone td {
+  color: #14130F !important;
+}
+
+/* —— 32.3 輸入框／文本域／下拉 → 米白 #FCFAF6 + 黑字
+       用 background-color 而非 background，避免清掉 select 的箭頭圖 —— */
+body.premium .hsst-form-zone input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.error),
+body.premium .hsst-form-zone textarea,
+body.premium .hsst-form-zone select {
+  background-color: #FCFAF6 !important;
+  color: #14130F !important;
+  border-color: #DED9D3 !important;
+}
+
+/* —— 32.4 引導文字（placeholder）—— */
+body.premium .hsst-form-zone input::placeholder,
+body.premium .hsst-form-zone textarea::placeholder,
+body.premium .hsst-form-zone select::placeholder {
+  color: #5C574F !important;
+  opacity: 1 !important;
+}
+
+/* —— 32.5 聚焦態：香檳金描邊 + 光暈 —— */
+body.premium .hsst-form-zone input:not([type="submit"]):not([type="button"]):focus,
+body.premium .hsst-form-zone textarea:focus,
+body.premium .hsst-form-zone select:focus {
+  border-color: #C2A25E !important;
+  box-shadow: 0 0 0 3px rgba(194,162,94,0.18) !important;
+  background-color: #FCFAF6 !important;
+}
+
+/* —— 32.6 下拉選項本體 —— */
+body.premium .hsst-form-zone select option {
+  background: #FCFAF6 !important;
+  color: #14130F !important;
+}
+
+/* —— 32.7 表單卡片本體（原白卡）→ 與頁面同色米黃 —— */
+body.premium .hsst-form-zone .hsst-form,
+body.premium .hsst-form-zone .sample-form-container,
+body.premium .hsst-form-zone .modal-content {
+  background: #F6F3EE !important;
+  color: #14130F !important;
+}
+
+/* —— 32.8 勾選／單選項的文字與底 —— */
+body.premium .hsst-form-zone .stone-checkbox-item label,
+body.premium .hsst-form-zone .radio-item label {
+  color: #14130F !important;
+}
+body.premium .hsst-form-zone .stone-checkbox-item label {
+  background: #FCFAF6 !important;
+  border-color: #DED9D3 !important;
+}
+
+/* —— 32.9 隱私說明／提示文字 → 副文灰 #5C574F —— */
+body.premium .hsst-form-zone .hsst-form-privacy,
+body.premium .hsst-form-zone .hsst-form-hint,
+body.premium .hsst-form-zone .sample-form-privacy,
+body.premium .hsst-form-zone .form-scene-desc,
+body.premium .hsst-form-zone .form-subtitle {
+  color: #5C574F !important;
+}
+
+/* —— 32.10 提交成功提示塊 —— */
+body.premium .hsst-form-zone .hsst-form-success {
+  background: #FCFAF6 !important;
+  border-color: #E3D9C9 !important;
+}
+body.premium .hsst-form-zone .hsst-form-success p,
+body.premium .hsst-form-zone .sample-form-success p {
+  color: #5C574F !important;
+}
+
+/* —— 32.11 提交按鈕維持品牌金底黑字 —— */
+body.premium .hsst-form-zone button[type="submit"],
+body.premium .hsst-form-zone .hsst-form-btn,
+body.premium .hsst-form-zone .sample-submit-btn,
+body.premium .hsst-form-zone .solution-cta-btn {
+  color: #14130F !important;
+}
+
+/* —— 32.12 錯誤態保留粉底，不覆蓋 —— */
+body.premium .hsst-form-zone input.error,
+body.premium .hsst-form-zone textarea.error {
+  background-color: #FEF5F5 !important;
+  border-color: #E74C3C !important;
+}
+
+/* ============================================================
+   33. 全站表單隱私條款勾選（.hsst-consent）
+   統一勾選框 + 條款鏈接樣式，適配各表單體系（hsst / solution / sample / inquiry / products / modal）
+   ============================================================ */
+body.premium .hsst-consent {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 16px 0 14px;
+  font-size: .82rem;
+  line-height: 1.6;
+  color: #5C574F;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  grid-column: 1 / -1;   /* 在 grid 表單（hsst-form / inquiry-form）中佔滿整行 */
+  box-sizing: border-box;
+}
+body.premium .hsst-consent input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  flex: none;
+  accent-color: #C2A25E;
+  cursor: pointer;
+}
+body.premium .hsst-consent a {
+  color: #A8884A;
+  text-decoration: underline;
+}
+body.premium .hsst-consent a:hover {
+  color: #C2A25E;
+}
+
+/* —— 33.2 未勾選錯誤提示（內聯紅字 + 紅框高亮）—— */
+body.premium .hsst-consent-error {
+  display: none;
+  color: #E74C3C !important;
+  font-size: 12px;
+  margin: 6px 0 10px;
+  line-height: 1.4;
+  grid-column: 1 / -1;
+  width: 100%;
+}
+body.premium .hsst-consent-error.show { display: block !important; }
+body.premium .hsst-consent input[type="checkbox"].error {
+  outline: 2px solid #E74C3C;
+  outline-offset: 1px;
+}
+
+/* ============================================================
+   34. 页脚品牌区文字版（公司名 + 英文名 + 描述，全站中英统一）
+   ============================================================ */
+body.premium .ft-brand .ft-brand-name {
+  display: block !important;
+  -webkit-line-clamp: unset;
+  margin: 0 0 4px !important;
+  font-size: 1.02rem !important;
+  line-height: 1.4 !important;
+  color: #F4F1EA !important;
+  font-weight: 600;
+}
+body.premium .ft-brand .ft-brand-name strong { font-weight: 600; letter-spacing: .01em; }
+body.premium .ft-brand .ft-brand-en {
+  display: block !important;
+  -webkit-line-clamp: unset;
+  margin: 0 0 12px !important;
+  font-size: 0.7rem !important;
+  line-height: 1.5 !important;
+  color: rgba(255,255,255,.55) !important;
+  letter-spacing: .05em;
+}
+body.premium .ft-brand .ft-brand-desc {
+  display: block !important;
+  -webkit-line-clamp: unset;
+  margin: 0 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.75 !important;
+  color: rgba(255,255,255,.7) !important;
+}
+
+/* ============================================================
+   35. 页脚五列：等宽均分 + 列内内容统一水平/垂直居中
+   （等宽 repeat(5,minmax(0,1fr)) 与统一 gap 由模块 16 保证，此处仅调对齐）
+   ============================================================ */
+body.premium .ft-grid5 {
+  align-items: stretch !important;
+}
+body.premium .ft-grid5 > div {
+  min-width: 0;
+  width: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+}
+body.premium .ft-grid5 .ft-h {
+  width: 100%;
+  text-align: center !important;
+}
+body.premium .ft-grid5 ul {
+  width: 100%;
+  text-align: center !important;
+}
+body.premium .ft-grid5 ul li {
+  text-align: center !important;
+}
+body.premium .ft-brand .ft-brand-name,
+body.premium .ft-brand .ft-brand-en,
+body.premium .ft-brand .ft-brand-desc {
+  width: 100%;
+  text-align: center !important;
+}
+
+/* ============================================================
+   36. PWA 独立全屏模式：导航栏固定完整显示（仅鼠标设备）
+   仅作用 display-mode:standalone + pointer:fine（桌面 PWA 独立窗口），
+   普通浏览器（browser）与手机/触屏 PWA（pointer:coarse）不受影响，
+   触屏继续走汉堡菜单，避免 hover 下拉在触屏上点不开
+   ============================================================ */
+@media (display-mode: standalone) and (pointer: fine) {
+  /* 隐藏汉堡按钮 */
+  body.premium .navbar .nav-toggle { display: none !important; }
+  /* 导航菜单恢复桌面端横向布局（覆盖 ≤900px 折叠抽屉） */
+  body.premium .navbar .nav-links {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 18px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+    z-index: auto !important;
+    transition: none !important;
+  }
+  body.premium .navbar .nav-links > a,
+  body.premium .navbar .nav-dropdown > a {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0 !important;
+    min-height: auto !important;
+  }
+  body.premium .navbar .nav-links a::after { display: block !important; }
+  /* 恢复下拉菜单（mega panel）hover 展开 */
+  body.premium .navbar .nav-dropdown { position: relative !important; }
+  body.premium .navbar .mega-panel,
+  body.premium .navbar .dropdown-panel {
+    display: block !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(8px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  body.premium .navbar .nav-dropdown:hover .mega-panel,
+  body.premium .navbar .nav-dropdown:hover .dropdown-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+}
+
+/* ============================================================
+   37. PWA 独立全屏：导航栏避开 iOS 刘海/状态栏安全区
+   （触屏手机 PWA 也生效，避免汉堡按钮被刘海遮挡导致点不到）
+   ============================================================ */
+@media (display-mode: standalone) {
+  body.premium .navbar {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  body.premium .navbar .nav-links.open {
+    padding-top: calc(80px + env(safe-area-inset-top, 0px));
+  }
+}
+
+/* ============================================================
+   38. PWA 安装按钮（添加到桌面 / 添加到主屏幕）
+   ============================================================ */
+.pwa-install-btn {
+  position: fixed;
+  left: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 9990;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: #16150F;
+  color: #F4F1EA;
+  border: 1px solid rgba(194,162,94,.55);
+  border-radius: 999px;
+  font-size: .84rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  font-family: 'Noto Sans SC','Sarasa Gothic SC',sans-serif;
+  transition: transform .2s, box-shadow .2s;
+}
+.pwa-install-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.36); }
+.pwa-install-btn.show { display: flex; }
+.pwa-install-btn svg { width: 18px; height: 18px; flex: none; }
+
+/* iOS 添加到主屏幕指引弹窗 */
+.pwa-guide-mask {
+  position: fixed; inset: 0;
+  z-index: 10010;
+  background: rgba(0,0,0,.56);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.pwa-guide-mask.show { display: flex; }
+.pwa-guide-card {
+  background: #fff;
+  border-radius: 18px;
+  max-width: 360px;
+  width: 100%;
+  padding: 30px 26px 24px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,.35);
+}
+.pwa-guide-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.pwa-guide-card h3 { margin: 0 0 8px; font-size: 1.1rem; color: #14130F; }
+.pwa-guide-card p { margin: 0 0 16px; font-size: .86rem; color: #5C574F; line-height: 1.7; }
+.pwa-guide-steps { text-align: left; margin: 0 0 20px; padding: 0; list-style: none; }
+.pwa-guide-steps li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .84rem; color: #14130F; line-height: 1.6;
+  padding: 8px 0; border-bottom: 1px solid #EFE9E0;
+}
+.pwa-guide-steps li:last-child { border-bottom: none; }
+.pwa-guide-num {
+  flex: none; width: 22px; height: 22px;
+  background: #C2A25E; color: #fff;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: .72rem; font-weight: 700;
+}
+.pwa-guide-close {
+  width: 100%; padding: 12px;
+  background: #16150F; color: #F4F1EA;
+  border: none; border-radius: 10px;
+  font-size: .9rem; font-weight: 600; cursor: pointer;
+  font-family: inherit;
+}

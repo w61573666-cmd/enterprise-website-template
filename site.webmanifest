@@ -1,0 +1,33 @@
+{
+  "name": "恒生石材科技有限公司 HENGSHENG MARBLE S&T CO. LIMITED",
+  "short_name": "恒生石材",
+  "description": "全球高端石材综合解决方案服务商，专注天然大理石、花岗岩的全球采购、精密加工与工程定制。",
+  "lang": "zh-Hant",
+  "dir": "ltr",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F6F3EE",
+  "theme_color": "#16150F",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

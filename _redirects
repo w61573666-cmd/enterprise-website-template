@@ -1,0 +1,11 @@
+# 根路徑語言入口改由 index.html 的客戶端邏輯處理（記憶用戶選擇 → 瀏覽器語言 → 預設英文）
+# 注意：不要在此處配置 / → /en/ 的服務端跳轉，否則會覆蓋用戶已保存的語言選擇
+
+# 旧URL跳转
+/en/index.htm  /en/  301
+/en/about.htm  /en/about.html  301
+/en/products.htm  /en/products.html  301
+/en/projects.htm  /en/projects.html  301
+/en/contact.htm  /en/contact.html  301
+/en/news.htm  /en/news.html  301
+/en/solutions.htm  /en/solutions.html  301
