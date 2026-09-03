@@ -1601,3 +1601,30 @@ body.premium .ft-brand .ft-brand-desc {
   font-size: .9rem; font-weight: 600; cursor: pointer;
   font-family: inherit;
 }
+
+/* ============================================================
+   34. 資訊中心訂閱表單雙欄重排（僅帶 .hsst-sub-grid 的表單生效）
+   左欄＝基本資料，右欄＝訂閱偏好＋權益卡，下方補充說明＋按鈕通欄
+   ============================================================ */
+body.premium .cta-section.cta-sub .hsst-form.hsst-sub-form { max-width: 920px !important; gap: 22px !important; }
+body.premium .cta-section.cta-sub .hsst-sub-grid {
+  grid-column: 1 / -1 !important; display: grid !important;
+  grid-template-columns: 1.05fr 0.95fr !important; gap: 24px !important; align-items: start;
+}
+body.premium .cta-section.cta-sub .hsst-sub-col {
+  min-width: 0; background: #FBF8F1; border: 1px solid #EFE5D4; border-radius: 12px; padding: 18px 20px 20px;
+}
+body.premium .cta-section.cta-sub .hsst-sub-col--accent { border-top: 3px solid #C2A25E; }
+body.premium .cta-section.cta-sub .hsst-sub-col .hsst-form-section-title { margin-top: 0; }
+body.premium .cta-section.cta-sub .hsst-sub-col .hsst-form-group { margin-bottom: 15px; }
+body.premium .cta-section.cta-sub .hsst-sub-col .hsst-form-group:last-child { margin-bottom: 0; }
+body.premium .cta-section.cta-sub .hsst-sub-perks { margin-top: 18px; padding-top: 16px; border-top: 1px dashed #E0D4BE; }
+body.premium .cta-section.cta-sub .hsst-sub-perks-title { font-size: .78rem; font-weight: 600; letter-spacing: 1px; color: #A8884A; margin-bottom: 9px; }
+body.premium .cta-section.cta-sub .hsst-sub-perks ul { list-style: none; margin: 0; padding: 0; }
+body.premium .cta-section.cta-sub .hsst-sub-perks li { position: relative; padding-left: 20px; font-size: .82rem; color: #5C574F; line-height: 1.6; margin-bottom: 7px; }
+body.premium .cta-section.cta-sub .hsst-sub-perks li::before { content: '✓'; position: absolute; left: 0; top: 0; color: #C2A25E; font-weight: 700; }
+body.premium .cta-section.cta-sub .hsst-form.hsst-sub-form .hsst-form-btn { justify-self: center; min-width: 260px; }
+@media (max-width: 760px) {
+  body.premium .cta-section.cta-sub .hsst-sub-grid { grid-template-columns: 1fr !important; }
+  body.premium .cta-section.cta-sub .hsst-form.hsst-sub-form .hsst-form-btn { width: 100%; }
+}
