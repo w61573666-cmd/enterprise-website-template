@@ -1332,6 +1332,18 @@ body.premium .hsst-form-zone .solution-cta-btn {
   color: #14130F !important;
 }
 
+/* —— 32.11a 表單提交按鈕：品牌金底黑字（修復 .inquiry-form 提交按鈕黑底黑字不可見）—— */
+body.premium .hsst-form-zone .inquiry-form button[type="submit"] {
+  background: #C9A84C !important;
+  color: #14130F !important;
+  border: none !important;
+  font-weight: 700 !important;
+  justify-self: start;
+}
+body.premium .hsst-form-zone .inquiry-form button[type="submit"]:hover {
+  background: #B8953C !important;
+}
+
 /* —— 32.12 錯誤態保留粉底，不覆蓋 —— */
 body.premium .hsst-form-zone input.error,
 body.premium .hsst-form-zone textarea.error {
