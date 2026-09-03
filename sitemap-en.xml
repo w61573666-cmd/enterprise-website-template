@@ -703,4 +703,40 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/terms.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
+  <url>
+    <loc>https://www.hsst.hk/en/solutions/sample-consultation.html</loc>
+    <lastmod>2026-09-04T06:55:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/sample-consultation.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/solutions/sample-consultation.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/solutions/bulk-procurement.html</loc>
+    <lastmod>2026-09-04T06:55:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/bulk-procurement.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/solutions/bulk-procurement.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/solutions/technical-support.html</loc>
+    <lastmod>2026-09-04T06:55:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/technical-support.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/solutions/technical-support.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/solutions/wholesale-quote.html</loc>
+    <lastmod>2026-09-04T06:55:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/solutions/wholesale-quote.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/solutions/wholesale-quote.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
 </urlset>
