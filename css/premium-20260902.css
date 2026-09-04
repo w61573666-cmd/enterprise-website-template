@@ -1655,3 +1655,32 @@ body.premium .certificate-card .cert-info h5 { font-size: .95rem; margin: 0 0 8p
 body.premium .certificate-card .cert-info p { font-size: .84rem; line-height: 1.75; color: #5C574F; margin: 0; }
 @media (max-width: 560px) { body.premium .certificates-grid { grid-template-columns: 1fr !important; } }
 @media (max-width: 640px) { body.premium .cta-section.cta-home .cta-cert-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   36. Hero「Since 1999 · Hong Kong」內容區重塑（2026-09-04）
+   三亮點支柱 + 發展時間線 + 按鈕對比度修復（淺底場景）
+   ============================================================ */
+body.premium .hero-grid-video .hero-content { max-width: 1080px !important; }
+body.premium .hero-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 980px; margin: 4px auto 0; text-align: left; }
+body.premium .hero-pillar { background: rgba(255,255,255,.72); border: 1px solid var(--pv-hair); border-radius: 10px; padding: 20px 22px 18px; transition: transform .25s, border-color .25s, box-shadow .25s; }
+body.premium .hero-pillar:hover { transform: translateY(-3px); border-color: var(--pv-gold); box-shadow: 0 10px 26px rgba(20,19,15,.07); }
+body.premium .hero-pillar .hp-icon { font-size: 22px; }
+body.premium .hero-pillar h3 { font-size: .98rem; font-weight: 600; margin: 10px 0 6px; letter-spacing: .04em; }
+body.premium .hero-pillar p { font-size: .82rem; color: var(--pv-muted); line-height: 1.75; margin: 0; }
+body.premium .hero-timeline { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 980px; margin: 24px auto 0; padding: 18px 8px 0; border-top: 1px solid var(--pv-hair); }
+body.premium .hero-timeline .ht-item { text-align: center; position: relative; padding: 0 10px; }
+body.premium .hero-timeline .ht-item::before { content: ''; position: absolute; top: -21.5px; left: 50%; transform: translateX(-50%); width: 7px; height: 7px; border-radius: 50%; background: var(--pv-gold); box-shadow: 0 0 0 3px rgba(194,162,94,.18); }
+body.premium .hero-timeline .ht-year { display: block; font-family: 'Playfair Display', 'Noto Serif TC', serif; font-size: 1.18rem; font-weight: 700; color: #A8884A; }
+body.premium .hero-timeline .ht-text { display: block; font-size: .76rem; color: var(--pv-muted); margin-top: 3px; letter-spacing: .02em; }
+/* 按鈕對比度修復：淺色 hero 底上 → 金底深字（主）+ 深墨底米字（副） */
+body.premium .hero-grid-video .hero-buttons .btn-primary { background: var(--pv-gold) !important; color: #1A160F !important; border-color: var(--pv-gold) !important; font-weight: 600 !important; box-shadow: 0 6px 18px rgba(194,162,94,.35); }
+body.premium .hero-grid-video .hero-buttons .btn-primary:hover { background: #AF8E4A !important; border-color: #AF8E4A !important; transform: translateY(-1px); }
+body.premium .hero-grid-video .hero-buttons .btn-outline-light { background: rgba(20,19,15,.88) !important; color: #F4F1EA !important; border: 1px solid rgba(20,19,15,.88) !important; }
+body.premium .hero-grid-video .hero-buttons .btn-outline-light:hover { background: #2A2822 !important; border-color: #2A2822 !important; color: #fff !important; transform: translateY(-1px); }
+@media (max-width: 860px) {
+  body.premium .hero-pillars { grid-template-columns: 1fr; max-width: 560px; }
+  body.premium .hero-timeline { grid-template-columns: repeat(2, 1fr); gap: 16px 0; border-top: 0; padding-top: 6px; }
+  body.premium .hero-timeline .ht-item::before { display: none; }
+  body.premium .hero-timeline .ht-item { padding: 10px 12px; background: rgba(255,255,255,.72); border: 1px solid var(--pv-hair); border-radius: 8px; margin: 0 5px; }
+}
+body.premium .hero-grid-video .hero-buttons { margin-top: 32px !important; }
