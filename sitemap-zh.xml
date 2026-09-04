@@ -793,4 +793,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/technology/quality-control.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
+  <url>
+    <loc>https://www.hsst.hk/partnerships.html</loc>
+    <lastmod>2026-09-04T08:20:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/partnerships.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/partnerships.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
+  </url>
 </urlset>
