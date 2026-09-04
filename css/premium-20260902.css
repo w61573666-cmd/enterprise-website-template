@@ -1654,3 +1654,4 @@ body.premium .certificate-card .cert-info { padding: 16px 18px 0; }
 body.premium .certificate-card .cert-info h5 { font-size: .95rem; margin: 0 0 8px; }
 body.premium .certificate-card .cert-info p { font-size: .84rem; line-height: 1.75; color: #5C574F; margin: 0; }
 @media (max-width: 560px) { body.premium .certificates-grid { grid-template-columns: 1fr !important; } }
+@media (max-width: 640px) { body.premium .cta-section.cta-home .cta-cert-grid { grid-template-columns: 1fr; } }
