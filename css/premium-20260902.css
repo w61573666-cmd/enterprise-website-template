@@ -1640,3 +1640,17 @@ body.premium .cta-section.cta-sub .hsst-form.hsst-sub-form .hsst-form-btn { just
   body.premium .cta-section.cta-sub .hsst-sub-grid { grid-template-columns: 1fr !important; }
   body.premium .cta-section.cta-sub .hsst-form.hsst-sub-form .hsst-form-btn { width: 100%; }
 }
+
+/* ============================================================
+   35. 首頁「國際品質認證」卡片重排（縱向緊湊卡 2026-09-04）
+   徽章置頂、說明文字居下，四卡一行，消除大面積留白
+   ============================================================ */
+body.premium .certificates-grid { grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)) !important; gap: 20px !important; }
+body.premium .certificate-card { flex-direction: column !important; align-items: stretch !important; gap: 0 !important; padding: 0 0 18px !important; overflow: hidden; }
+body.premium .certificate-card .cert-badge { width: 100% !important; height: auto !important; border-radius: 0 !important; padding: 18px 16px 14px; }
+body.premium .certificate-card .cert-badge h4 { font-size: 1.35rem; letter-spacing: .5px; }
+body.premium .certificate-card .cert-badge p { font-size: .72rem; margin-top: 4px; }
+body.premium .certificate-card .cert-info { padding: 16px 18px 0; }
+body.premium .certificate-card .cert-info h5 { font-size: .95rem; margin: 0 0 8px; }
+body.premium .certificate-card .cert-info p { font-size: .84rem; line-height: 1.75; color: #5C574F; margin: 0; }
+@media (max-width: 560px) { body.premium .certificates-grid { grid-template-columns: 1fr !important; } }
