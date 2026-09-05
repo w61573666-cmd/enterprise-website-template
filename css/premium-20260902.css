@@ -1684,3 +1684,6 @@ body.premium .hero-grid-video .hero-buttons .btn-outline-light:hover { backgroun
   body.premium .hero-timeline .ht-item { padding: 10px 12px; background: rgba(255,255,255,.72); border: 1px solid var(--pv-hair); border-radius: 8px; margin: 0 5px; }
 }
 body.premium .hero-grid-video .hero-buttons { margin-top: 32px !important; }
+
+/* section 37: 導航下拉系列縮略圖取景（避開圖內頂部文字區，顯示石材主體） */
+body.premium .mega-panel-icon img { object-position: center 72%; }
