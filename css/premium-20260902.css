@@ -1695,3 +1695,121 @@ body.premium .mega-panel-icon img { object-position: center 72%; }
 body.inner-page .hero { display: flex !important; align-items: center !important; }
 body.inner-page .hero > .container { width: 100% !important; }
 body.inner-page .hero .hero-content { width: 100% !important; }
+
+/* ============================================================
+   39. 全站布局补丁层——修复未定义类 + 收紧留白（2026-09-05）
+   ============================================================ */
+
+/* ---- Cookie 同意条（全站） ---- */
+.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:2000;display:none;background:rgba(26,26,46,0.96);border-top:1px solid rgba(201,168,76,0.35);box-shadow:0 -8px 24px rgba(0,0,0,0.18);}
+.cookie-banner-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 0;flex-wrap:wrap;}
+.cookie-banner-text{margin:0;color:#F5F0EB;font-size:0.85rem;line-height:1.6;}
+.cookie-banner-btns{display:flex;gap:10px;}
+.cookie-btn-accept,.cookie-btn-decline{border:1px solid #C9A84C;background:transparent;color:#C9A84C;border-radius:20px;padding:6px 18px;font-size:0.82rem;cursor:pointer;transition:all .2s;}
+.cookie-btn-accept:hover,.cookie-btn-decline:hover{background:#C9A84C;color:#fff;}
+
+/* ---- 浮动按钮（合规类页面） ---- */
+.wpp-float.whatsapp-float,.whatsapp-float{position:fixed;bottom:26px;right:22px;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);z-index:1500;transition:transform .3s ease,box-shadow .3s ease;text-decoration:none;}
+.whatsapp-float:hover{transform:scale(1.08);}
+.btt.back-to-top{position:fixed;bottom:92px;right:25px;width:44px;height:44px;background:rgba(26,26,46,0.9);color:#C9A84C;border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;text-decoration:none;z-index:1500;opacity:0;visibility:hidden;transition:all .3s ease;}
+.btt.back-to-top.visible{opacity:1;visibility:visible;}
+
+/* ---- FAQ 列表容器 ---- */
+.faq-item-list{max-width:920px;margin:0 auto;display:grid;gap:14px;}
+
+/* ---- 内页 hero 变体 ---- */
+.honors-hero{min-height:400px;}
+
+/* ---- 页脚变体（careers/honors/manufacturing/mines 等 12 页） ---- */
+.site-footer{background:#1A1A2E;color:#cfc9bd;padding:54px 0 0;}
+.site-footer a{color:#cfc9bd;text-decoration:none;}
+.site-footer a:hover{color:#C9A84C;}
+.site-footer .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:30px;padding-bottom:34px;}
+.site-footer h4{color:#C9A84C;font-size:0.98rem;margin:0 0 12px;letter-spacing:0.02em;}
+.site-footer ul{list-style:none;margin:0;padding:0;}
+.site-footer li{margin-bottom:8px;font-size:0.86rem;line-height:1.65;}
+.site-footer p{font-size:0.86rem;line-height:1.7;margin:0 0 8px;}
+.premium-footer{border-top:2px solid #C9A84C;}
+
+/* ---- 按钮排 / 信息标签 ---- */
+.cta-buttons{display:flex;flex-wrap:wrap;gap:14px;margin-top:22px;}
+.info-tags,.info-tags-flex{display:flex;flex-wrap:wrap;gap:10px;}
+.info-tag{background:#FAF8F5;border:1px solid rgba(26,26,46,0.12);border-radius:20px;padding:6px 14px;font-size:0.8rem;color:#4a443c;}
+.info-tag-highlight{background:#C9A84C;border-color:#C9A84C;color:#fff;}
+
+/* ---- 卡片网格通用 ---- */
+.why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,.jobs-grid,.region-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;}
+.why-card,.honor-card,.partner-card,.equip-card,.mine-region,.job-card,.region-card{background:#fff;border:1px solid rgba(26,26,46,0.10);border-radius:14px;padding:24px 24px 22px;box-shadow:0 4px 18px rgba(26,26,46,0.05);transition:transform .25s ease,box-shadow .25s ease;}
+.why-card:hover,.honor-card:hover,.partner-card:hover,.equip-card:hover,.mine-region:hover,.job-card:hover,.region-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,26,46,0.10);}
+.why-card h4,.honor-card h3,.partner-card h4,.mine-region h3,.region-card h4,.job-card h4{margin:0 0 10px;color:#1A1A2E;font-size:1.05rem;}
+.why-card p,.honor-card p,.partner-card p,.equip-card p,.mine-region p,.region-card p,.job-card p{margin:0;font-size:0.88rem;line-height:1.75;color:#5c574f;}
+.equip-icon{font-size:30px;line-height:1;margin-bottom:10px;}
+
+/* ---- 荣誉页专属 ---- */
+.honor-card-badge{display:inline-block;background:#C9A84C;color:#fff;font-weight:700;font-size:0.78rem;letter-spacing:0.05em;border-radius:16px;padding:4px 14px;margin-bottom:12px;}
+.honor-meta{list-style:none;margin:12px 0 0;padding:12px 0 0;border-top:1px dashed rgba(26,26,46,0.15);font-size:0.82rem;color:#6b6558;}
+.honor-meta li{margin-bottom:4px;}
+.media-list{list-style:none;padding:0;margin:0;display:grid;gap:12px;}
+.media-list li{background:#fff;border:1px solid rgba(26,26,46,0.08);border-left:3px solid #C9A84C;border-radius:0 10px 10px 0;padding:14px 18px;font-size:0.9rem;line-height:1.75;color:#4a443c;}
+
+/* ---- 制造基地页：质检漏斗 + 工艺分类 ---- */
+.qc-funnel{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+.qc-step{background:#fff;border:1px solid rgba(26,26,46,0.10);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;}
+.qc-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#C9A84C;line-height:1;}
+.qc-name{font-weight:700;color:#1A1A2E;font-size:0.92rem;}
+.qc-detail{font-size:0.8rem;color:#6b6558;line-height:1.6;}
+.craft-categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.craft-card{background:#fff;border:1px solid rgba(26,26,46,0.10);border-radius:14px;padding:22px;box-shadow:0 4px 18px rgba(26,26,46,0.05);}
+.craft-card h4{margin:0 0 8px;color:#1A1A2E;}
+.craft-card ul{list-style:none;padding:0;margin:10px 0 0;font-size:0.85rem;color:#5c574f;display:grid;gap:6px;}
+.craft-card ul li::before{content:'◆ ';color:#C9A84C;font-size:0.7em;}
+
+/* ---- 矿山页：ESG 数据 ---- */
+.esg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;}
+.esg-card{background:#1A1A2E;color:#fff;border-radius:14px;padding:22px 16px;text-align:center;transition:transform .25s ease;}
+.esg-card:hover{transform:translateY(-3px);}
+.esg-num{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:#C9A84C;line-height:1.2;}
+.esg-label{font-size:0.82rem;color:#cfc9bd;margin-top:6px;line-height:1.5;}
+
+/* ---- 招聘页：申请步骤 ---- */
+.apply-steps{list-style:none;counter-reset:step;padding:0;margin:0;display:grid;gap:14px;max-width:880px;}
+.apply-steps li{counter-increment:step;position:relative;padding:16px 18px 16px 62px;background:#fff;border:1px solid rgba(26,26,46,0.10);border-radius:12px;font-size:0.9rem;line-height:1.75;color:#5c574f;}
+.apply-steps li::before{content:counter(step,decimal-leading-zero);position:absolute;left:18px;top:16px;font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#C9A84C;}
+.job-loc{color:#B8860B;font-size:0.82rem;font-weight:600;margin:4px 0 10px;}
+
+/* ---- 联系表单：复选框组 ---- */
+.form-checkbox-group{display:flex;flex-wrap:wrap;gap:12px;}
+.form-checkbox-item{display:inline-flex;align-items:center;gap:6px;font-size:0.88rem;color:#4a443c;cursor:pointer;}
+
+/* ---- 新闻列表 ---- */
+.news-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
+
+/* ---- 产品对比条标签 ---- */
+.compare-panel-label{font-weight:700;color:#1A1A2E;font-size:0.9rem;}
+
+/* ---- 工程目录页：行业瓦片 + 区域卡 ---- */
+.industry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
+.industry-tile{display:flex;flex-direction:column;align-items:flex-start;gap:8px;background:#fff;border:1px solid rgba(26,26,46,0.10);border-radius:14px;padding:20px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease;}
+.industry-tile:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,26,46,0.10);}
+.industry-tile > span:first-child{font-size:26px;line-height:1;}
+.it-label{font-weight:700;color:#1A1A2E;font-size:0.95rem;}
+.it-num{color:#B8860B;font-weight:700;font-family:'Playfair Display',serif;}
+
+/* ---- 关于页：公司历程时间线 ---- */
+.timeline-container{position:relative;max-width:880px;margin:0 auto;padding-left:34px;}
+.timeline-container::before{content:'';position:absolute;left:10px;top:6px;bottom:6px;width:2px;background:rgba(201,168,76,0.4);}
+.timeline-item{position:relative;padding:0 0 26px 14px;}
+.timeline-item::before{content:'';position:absolute;left:-30px;top:5px;width:12px;height:12px;border-radius:50%;background:#C9A84C;border:2px solid #FAF8F3;box-shadow:0 0 0 2px rgba(201,168,76,0.35);}
+.timeline-year{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#B8860B;margin-bottom:4px;}
+.timeline-title{font-weight:700;color:#1A1A2E;margin-bottom:6px;}
+.timeline-desc{font-size:0.9rem;line-height:1.75;color:#5c574f;}
+.about-video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,26,46,0.25),rgba(26,26,46,0.65));}
+.highlight-text{background:#FAF8F3;border-left:3px solid #C9A84C;border-radius:0 10px 10px 0;padding:16px 20px;color:#4a443c;font-size:0.95rem;line-height:1.85;}
+.about-heading-pad{padding-top:6px;}
+
+/* ---- 索取样板 hero ---- */
+.sample-hero-content{max-width:900px;margin:0 auto;text-align:center;}
+
+/* ---- FAQ 页按钮 ---- */
+.hsst-btn{display:inline-flex;align-items:center;gap:8px;background:#C9A84C;color:#fff;border:none;border-radius:24px;padding:10px 26px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:background .2s;}
+.hsst-btn:hover{background:#B8860B;color:#fff;}
