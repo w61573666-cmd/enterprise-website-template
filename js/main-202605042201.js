@@ -427,18 +427,19 @@ document.addEventListener('DOMContentLoaded', function() {
 function animateCounter(el, target, suffix, duration) {
   if (el.dataset.animated) return;
   el.dataset.animated = 'true';
+  var fmt = function(n){ return String(Math.floor(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
   var start = 0;
   var step = target / (duration / 16);
   var tick = function() {
     start += step;
     if (start >= target) {
-      el.textContent = target + (suffix || '');
+      el.textContent = fmt(target) + (suffix || '');
       el.classList.remove('counting');
       el.classList.add('counted');
       var parent = el.closest('.stat-item, .trust-item');
       if (parent) parent.classList.add('counted');
     } else {
-      el.textContent = Math.floor(start) + (suffix || '');
+      el.textContent = fmt(start) + (suffix || '');
       requestAnimationFrame(tick);
     }
   };
@@ -452,8 +453,8 @@ var counterObserver = new IntersectionObserver(function(entries) {
     if (entry.isIntersecting) {
       var el = entry.target;
       var text = el.textContent.trim();
-      var suffix = text.replace(/[\d.-]/g, '');
-      var target = parseInt(text, 10);
+      var suffix = text.replace(/[\d.,\s-]/g, '');
+      var target = parseInt(text.replace(/[.,\s]/g, ''), 10);
       if (!isNaN(target)) animateCounter(el, target, suffix, 1800);
       counterObserver.unobserve(el);
     }

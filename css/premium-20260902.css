@@ -1687,3 +1687,11 @@ body.premium .hero-grid-video .hero-buttons { margin-top: 32px !important; }
 
 /* section 37: 導航下拉系列縮略圖取景（避開圖內頂部文字區，顯示石材主體） */
 body.premium .mega-panel-icon img { object-position: center 72%; }
+
+
+/* ============================================================
+   37. 內頁 Hero 垂直居中——消除 min-height 造成的底部留白（2026-09-05）
+   ============================================================ */
+body.inner-page .hero { display: flex !important; align-items: center !important; }
+body.inner-page .hero > .container { width: 100% !important; }
+body.inner-page .hero .hero-content { width: 100% !important; }
