@@ -807,7 +807,9 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
     '.service-grid', '.pain-point-grid', '.product-gallery-grid', '.application-grid',
     '.related-cases-grid', '.related-products-grid', '.product-video-grid',
     '.contact-core-grid', '.art-related-grid',
-    '.overview-grid', '.stone-grid', '.gallery-grid', '.network-grid'
+    '.overview-grid', '.stone-grid', '.gallery-grid', '.network-grid',
+    '.why-grid', '.honor-grid', '.partner-grid', '.manufacturing-grid', '.mines-grid',
+    '.esg-grid', '.industry-grid', '.jobs-grid', '.region-grid', '.strength-grid'
   ].join(',');
   function firstCol(n, list){ for(var i=0;i<list.length;i++){ var c=list[i]; if(n>=c && n%c!==1){ return c; } } return n<=4?n:2; }
   function cols(n, w){

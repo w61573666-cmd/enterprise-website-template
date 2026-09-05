@@ -1813,3 +1813,54 @@ body.inner-page .hero .hero-content { width: 100% !important; }
 /* ---- FAQ 页按钮 ---- */
 .hsst-btn{display:inline-flex;align-items:center;gap:8px;background:#C9A84C;color:#fff;border:none;border-radius:24px;padding:10px 26px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:background .2s;}
 .hsst-btn:hover{background:#B8860B;color:#fff;}
+
+/* ============================================================
+   模块 40 · 补丁层网格并入全站网格引擎 (2026-09-05)
+   问题：why/honor/partner/manufacturing/mines/jobs/region/strength
+   等网格原为 auto-fit 自适应，卡数与自动列数不匹配时末行出现
+   孤卡+右侧空槽（如实例：honors 六大国际认证 4+2、about 八大
+   核心实力 3+3+2），且各行卡宽不一致。
+   方案：并入模块 21「按实卡数定列」引擎——main.js 依据实卡数
+   注入 --c/--c-t（6卡→3列 3+3、8卡→4列 4+4、4卡→4列、5卡→3列
+   次行铺满），末行无孤卡、全行等宽，与全站布局规范一致。
+   ============================================================ */
+body.premium :is(
+  .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
+  .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
+){
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  column-gap: var(--gx, 22px) !important;
+  row-gap: var(--gy, 36px) !important;
+}
+body.premium :is(
+  .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
+  .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
+) > * {
+  flex-grow: 1 !important;
+  flex-shrink: 0 !important;
+  flex-basis: calc((100% - (var(--c, 3) - 1) * var(--gx, 22px)) / var(--c, 3)) !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  box-sizing: border-box;
+}
+@media (max-width: 1023px) {
+  body.premium :is(
+    .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
+    .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
+  ) > * {
+    flex-basis: calc((100% - (var(--c-t, 2) - 1) * var(--gx, 22px)) / var(--c-t, 2)) !important;
+  }
+}
+@media (max-width: 639px) {
+  body.premium :is(
+    .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
+    .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
+  ) > * {
+    flex-basis: 100% !important;
+  }
+}
