@@ -604,7 +604,246 @@
    </section>
 
    <!-- Library FAQ -->
-   <section class="tight-section bg-light-cream">
+   <style>
+/* ===== Stone Library Extended Sections ===== */
+.rs-timeline{position:relative;margin:32px 0 8px;padding-left:28px;border-left:2px solid rgba(201,168,76,0.35);}
+.rs-tl-item{position:relative;padding:0 0 26px 18px;}
+.rs-tl-item::before{content:'';position:absolute;left:-35px;top:4px;width:12px;height:12px;border-radius:50%;background:#C9A84C;border:2px solid #faf8f3;box-shadow:0 0 0 2px rgba(201,168,76,0.3);}
+.rs-tl-year{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#C9A84C;margin-bottom:4px;}
+.rs-tl-item h4{margin:0 0 6px;font-size:1.02rem;color:#22201a;}
+.rs-tl-item p{margin:0;font-size:0.92rem;line-height:1.8;color:#4a443c;}
+.rs-duo{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+@media(max-width:768px){.rs-duo{grid-template-columns:1fr;}}
+.rs-panel{background:#faf8f3;border:1px solid rgba(201,168,76,0.18);border-radius:14px;padding:24px 22px;}
+.rs-panel h3{margin:0 0 12px;font-size:1.08rem;color:#22201a;}
+.rs-panel p{margin:0;font-size:0.93rem;line-height:1.9;color:#4a443c;}
+.rs-imgstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 4px;}
+@media(max-width:640px){.rs-imgstrip{grid-template-columns:1fr;}}
+.rs-imgstrip figure{margin:0;}
+.rs-imgstrip img{width:100%;height:170px;object-fit:cover;border-radius:10px;border:1px solid rgba(201,168,76,0.2);display:block;}
+.rs-imgstrip figcaption{font-size:0.82rem;color:#6b6357;margin-top:8px;text-align:center;}
+.rs-family{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.rs-fam-card{background:#fff;border:1px solid rgba(201,168,76,0.22);border-radius:14px;padding:22px 20px;box-shadow:0 2px 10px rgba(34,32,26,0.04);}
+.rs-fam-card h4{margin:0 0 10px;font-size:1.02rem;color:#22201a;}
+.rs-fam-card h4 span{color:#C9A84C;font-weight:600;font-size:0.85rem;margin-left:6px;}
+.rs-fam-card p{margin:0 0 8px;font-size:0.9rem;line-height:1.8;color:#4a443c;}
+.rs-fam-card .rs-tag{display:inline-block;font-size:0.78rem;color:#8a6d1f;background:rgba(201,168,76,0.12);border-radius:20px;padding:2px 10px;margin:2px 4px 0 0;}
+.rs-table{width:100%;border-collapse:collapse;font-size:0.9rem;margin-top:20px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(34,32,26,0.05);}
+.rs-table th{background:#22201a;color:#C9A84C;padding:12px 14px;text-align:left;font-weight:600;white-space:nowrap;}
+.rs-table td{padding:11px 14px;border-bottom:1px solid #f0ece1;color:#4a443c;line-height:1.7;vertical-align:top;}
+.rs-table tr:last-child td{border-bottom:none;}
+.rs-table tr:nth-child(even) td{background:#faf8f3;}
+.rs-table .rs-hot{color:#C9A84C;font-weight:600;}
+.rs-gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px;}
+.rs-term{background:#faf8f3;border-left:3px solid #C9A84C;border-radius:0 10px 10px 0;padding:14px 16px;}
+.rs-term dt{font-weight:700;color:#22201a;font-size:0.93rem;margin:0 0 4px;}
+.rs-term dd{margin:0;font-size:0.86rem;line-height:1.75;color:#4a443c;}
+@media(max-width:768px){.rs-table{font-size:0.82rem;}.rs-table th,.rs-table td{padding:9px 10px;}}
+</style>
+
+   <!-- A Brief History of Stone Civilization -->
+   <section class="section-padding">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">Industry History · The World</span>
+      <h2 class="section-title">A Brief History of Stone: From the Pyramids to the Digital Quarry</h2>
+      <p class="section-desc">Mankind has worked natural stone for more than five thousand years. Understanding this timeline shows what stands behind every standard slab today — and HSST is proud to be the latest link in that chain.</p>
+     </div>
+     <div class="rs-timeline">
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">c. 2560 BC</div>
+       <h4>The Pyramids of Giza · Granite's First Large-Scale Deployment</h4>
+       <p>Quarrying granite from Aswan, the ancient Egyptians cut it with copper chisels and shipped it down the Nile — the first time in history mankind organised "long-haul quarry logistics + precision cutting + massive construction" as one supply chain.</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">447–432 BC</div>
+       <h4>The Parthenon · The Golden Standard of Marble Architecture</h4>
+       <p>Built from Mount Pentelic marble, the Parthenon established "white marble = eternity and the divine" — an aesthetic that still drives the enduring popularity of white marble today.</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">1st Century BC</div>
+       <h4>Rome · Carrara Quarrying and the Invention of Stone Veneer</h4>
+       <p>The Romans systematically quarried LUNA (today's Carrara) marble and invented "concrete structure + marble cladding" — the conceptual ancestor of today's ventilated stone curtain-wall systems.</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">1501–1504 AD</div>
+       <h4>The Renaissance · Michelangelo and David</h4>
+       <p>A Carrara block abandoned for 25 years — and already damaged by earlier chisels — became Michelangelo's David. Stone rose from building material to artistic language, and Carrara became the byword for white marble.</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">Late 19th Century</div>
+       <h4>Industrial Revolution · Steam Gang Saws Bring Marble to Mass Production</h4>
+       <p>Steam-powered gang saws and railways enabled Europe's first industrial-scale quarrying and cross-border trade — marble cladding swept through the banks and theatres of New York, London and Paris.</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">1970s–1990s</div>
+       <h4>The Diamond Tool Revolution · Frame Saws and Wire Saws</h4>
+       <p>Diamond frame saws replaced sand saws, and diamond wire technology transformed quarrying. Cutting efficiency jumped by an order of magnitude and slab costs fell — marble spread from mansions to commercial and residential spaces.</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">2000s</div>
+       <h4>The CNC Era · Five-Axis Machining and Waterjet</h4>
+       <p>Five-axis bridge saws and waterjet cutters made custom shapes, precision marquetry and thin-panel composites standard capabilities; "drawing direct to machine" digital production replaced manual templating.</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">Today</div>
+       <h4>Smart Quarries and Green Certification</h4>
+       <p>AI visual grading, slab scanning and digital book-match design are the hallmark of leading factories; EPD declarations and carbon accounting are the new threshold in international tenders — a five-thousand-year trade is being redefined.</p>
+      </div>
+     </div>
+    </div>
+   </section>
+
+   <!-- HSST Story -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">Industry History · Our Story</span>
+      <h2 class="section-title">The HSST Story: 27 Years of a Hong Kong Marble Workshop</h2>
+      <p class="section-desc">From a single marble workshop in Hong Kong in 1999 to direct supply from 180+ quarries across 60+ countries and 4,200+ delivered projects — every step of HSST's journey has landed on an industry turning point.</p>
+     </div>
+     <div class="rs-duo">
+      <div class="rs-panel fade-in">
+       <h3>Founding Years 1999–2007 · The Hong Kong Workshop Era</h3>
+       <p>HSST began in 1999 with residential and retail marble works across Hong Kong. Hand-ground thresholds and countertops for demanding local clients built our first base of loyal customers — and our DNA of "zero compromise on delivery and quality".</p>
+      </div>
+      <div class="rs-panel fade-in">
+       <h3>Rooted Growth 2008–2015 · Direct Quarry Supply and Our Own Base</h3>
+       <p>To remove middlemen we went straight to the quarries of Fujian and Shandong — a network that now spans 180+ mines worldwide — and built our own 80,000㎡ processing base in Shuitou, bringing bridge saws, waterjets and infrared positioning in-house. "Quarry to site, one company" was born.</p>
+      </div>
+      <div class="rs-panel fade-in">
+       <h3>Upgrading 2016–2021 · CNC Transformation and Certification</h3>
+       <p>Five-axis CNC lines and digital polishing arrived, accumulating 220+ proprietary processes; a 68-node quality control system was completed and certified under ISO 9001 / ISO 14001 — the workshop had become a factory.</p>
+      </div>
+      <div class="rs-panel fade-in">
+       <h3>Going Global 2022–Today · Stone Technology Worldwide</h3>
+       <p>AI inspection, slab scanning and digital book-matching went live; green manufacturing and EPD carbon management now align with international standards. With projects across the Middle East, Southeast Asia and Europe and 1,000+ hotel installations, HSST is a regular name on international developers' lists.</p>
+      </div>
+     </div>
+     <div class="rs-imgstrip fade-in">
+      <figure>
+       <img alt="Gang saw — the block-dressing workhorse of the industrial era" loading="lazy" src="../images/equipment/equip-gang-saw.jpg"/>
+       <figcaption>Gang saw bank: the core of block dressing</figcaption>
+      </figure>
+      <figure>
+       <img alt="Five-axis CNC bridge saw — the hub of custom fabrication" loading="lazy" src="../images/equipment/equip-cnc.jpg"/>
+       <figcaption>Five-axis CNC: precision for shapes and marquetry</figcaption>
+      </figure>
+      <figure>
+       <img alt="Digital polishing line — the final gate of surface quality" loading="lazy" src="../images/equipment/equip-polishing.jpg"/>
+       <figcaption>Polishing line: the final gate of mirror gloss</figcaption>
+      </figure>
+     </div>
+    </div>
+   </section>
+
+   <!-- Stone Families -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">Selection Encyclopedia</span>
+      <h2 class="section-title">Stone Families: A Quick Guide to Six Rock Types</h2>
+      <p class="section-desc">Commercially we say "stone"; geologically it belongs to three families — igneous, sedimentary and metamorphic. Knowing which family your project falls into answers half of the selection questions.</p>
+     </div>
+     <div class="rs-family">
+      <div class="rs-fam-card fade-in">
+       <h4>Marble<span>Metamorphic</span></h4>
+       <p>Recrystallised limestone (calcium carbonate) born of heat and pressure. Spectacular veining, excellent workability and mirror polish — but acid-sensitive. Ideal for interior walls and floors, vanities (keep acids away), feature walls and columns.</p>
+       <span class="rs-tag">Carrara</span><span class="rs-tag">Calacatta</span><span class="rs-tag">Nero Marquina</span><span class="rs-tag">Emperador</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>Granite<span>Igneous</span></h4>
+       <p>Crystallised from magma; quartz and feldspar give it extreme hardness, low absorption and acid resistance — the first choice for plazas, curtain walls, kitchen tops and heavy-traffic floors.</p>
+       <span class="rs-tag">G682</span><span class="rs-tag">G603</span><span class="rs-tag">Black Galaxy</span><span class="rs-tag">Shandong White</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>Limestone<span>Sedimentary</span></h4>
+       <p>Deposited on ancient seabeds; soft, even and warm in tone — a European architect's favourite for facades, interior walls and low-wear floors. Avoid strong acids.</p>
+       <span class="rs-tag">Portoro</span><span class="rs-tag">Jura</span><span class="rs-tag">Moleanos</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>Travertine<span>Chemical Sediment</span></h4>
+       <p>Formed by mineral springs, with natural pores and wavy banding — the stone of ancient Rome. After filling and polishing it gives malls and hotel lobbies a singular sense of history.</p>
+       <span class="rs-tag">Roman Classic</span><span class="rs-tag">Noce</span><span class="rs-tag">Silver</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>Sandstone<span>Sedimentary</span></h4>
+       <p>Cemented quartz sand with a matte feel, good slip resistance and warm hues — common in landscaping, facades and leisure spaces. Choose dense varieties to keep absorption low.</p>
+       <span class="rs-tag">Yellow Sandstone</span><span class="rs-tag">Teakwood</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>Slate &amp; Quartzite<span>Metamorphic</span></h4>
+       <p>Shale metamorphoses into cleavable slate for roofs and landscapes; sandstone becomes quartzite — near-granite hardness with marble-like veining, the dark horse of the countertop market.</p>
+       <span class="rs-tag">Rustic Slate</span><span class="rs-tag">White Macaubas</span>
+      </div>
+     </div>
+    </div>
+   </section>
+
+   <!-- Surface Finishes -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">Fabrication Encyclopedia</span>
+      <h2 class="section-title">Surface Finishes: 8 Common Textures Compared</h2>
+      <p class="section-desc">One block, many finishes — each with a different gloss, slip resistance and upkeep. This table is the quick-reference version of HSST's 220+ proprietary processes.</p>
+     </div>
+     <div style="overflow-x:auto;">
+      <table class="rs-table fade-in">
+       <thead>
+        <tr><th>Finish</th><th>Process</th><th>Look / Feel</th><th>Slip Resistance</th><th>Typical Use</th></tr>
+       </thead>
+       <tbody>
+        <tr><td class="rs-hot">Polished</td><td>Progressive diamond grinding to a mirror</td><td>Mirror gloss, boldest veining</td><td>Lower</td><td>Interior walls, lobby floors, tops</td></tr>
+        <tr><td class="rs-hot">Honed</td><td>Ground to a smooth matte, unpolished</td><td>Satin soft-light, silky touch</td><td>Moderate</td><td>Guestrooms, bathrooms, stairs</td></tr>
+        <tr><td>Flamed</td><td>High-temperature torch spalls the surface crystals</td><td>Granular rough texture</td><td>Excellent</td><td>Plazas, driveways, pool surrounds</td></tr>
+        <tr><td>Sandblasted</td><td>High-pressure sand evenly roughens the surface</td><td>Uniform fine matte grain</td><td>Excellent</td><td>Landscape, facades, walkways</td></tr>
+        <tr><td>Bush-hammered</td><td>Tip hammering creates dotted relief</td><td>Dotted texture, rustic and solid</td><td>Excellent</td><td>Rainscreen facades, garden paving</td></tr>
+        <tr><td>Leathered</td><td>Light grind + brushing keeps natural ridges</td><td>Leather-like touch, matte</td><td>Good</td><td>Premium tops, bars, furniture</td></tr>
+        <tr><td>Antiqued</td><td>Acid etching creates an aged soft sheen</td><td>Soft antique glow, gentle veining</td><td>Good</td><td>Classic interiors, art feature walls</td></tr>
+        <tr><td>Picked</td><td>Chisel strikes form regular grooves</td><td>Striped texture, bold and rugged</td><td>Excellent</td><td>Steps, landscape walls</td></tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </section>
+
+   <!-- Standards & Glossary -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">Standards Index</span>
+      <h2 class="section-title">Industry Standards and Key Terminology</h2>
+      <p class="section-desc">Reading standard numbers and parameters on a test report is the first step to talking shop with any supplier. These are the standards and figures most cited in HSST shipment reports.</p>
+     </div>
+     <div style="overflow-x:auto;">
+      <table class="rs-table fade-in">
+       <thead>
+        <tr><th>Standard</th><th>System</th><th>Scope</th><th>Key Content</th></tr>
+       </thead>
+       <tbody>
+        <tr><td class="rs-hot">EN 1341 / 1342 / 12058</td><td>European (CE)</td><td>Outdoor paving / kerbs / cladding &amp; flooring slabs</td><td>Tolerances, flexural strength, slip &amp; durability classes</td></tr>
+        <tr><td class="rs-hot">ASTM C503 / C615 / C629</td><td>American</td><td>Marble / granite / limestone specifications</td><td>Compressive strength, absorption and density thresholds</td></tr>
+        <tr><td>GB/T 19766 / GB/T 18601</td><td>Chinese National</td><td>Natural marble / granite building slabs</td><td>Dimensional tolerances, appearance quality, physical limits</td></tr>
+        <tr><td>JIS A5003</td><td>Japanese</td><td>General test methods for stone</td><td>Absorption, compressive and flexural test methods</td></tr>
+        <tr><td>EN 12004 / ANSI A118</td><td>European / American</td><td>Adhesive systems for stone</td><td>Bond-strength classes — the basis for choosing wet-set or ventilated fixing</td></tr>
+       </tbody>
+      </table>
+     </div>
+     <dl class="rs-gloss">
+      <div class="rs-term fade-in"><dt>Water Absorption</dt><dd>How much water the stone's pores take in — lower means denser and more stain-resistant. Marble ≤0.5% and granite ≤0.3% is excellent.</dd></div>
+      <div class="rs-term fade-in"><dt>Mohs Hardness</dt><dd>Scratch resistance on a 1–10 scale: granite ≈6–7, marble ≈3–4 — why you never cut directly on marble tops.</dd></div>
+      <div class="rs-term fade-in"><dt>Flexural Strength</dt><dd>The bending limit before fracture — the safety-critical figure for curtain-wall anchoring and long tops.</dd></div>
+      <div class="rs-term fade-in"><dt>Bulk Density</dt><dd>Weight per cubic metre (kg/m³), typically 2,500–2,800 — drives structural load calc and freight cost.</dd></div>
+      <div class="rs-term fade-in"><dt>Slip Rating: R-Value / DCOF</dt><dd>German R9–R13 and US DCOF ≥0.42 for wet areas — hard thresholds for public flooring.</dd></div>
+      <div class="rs-term fade-in"><dt>Book-match</dt><dd>Mirroring adjacent slabs so the veining unfolds symmetrically like an open book — the classic luxury-hotel technique.</dd></div>
+      <div class="rs-term fade-in"><dt>Slab Size</dt><dd>From 2,400×1,200mm upward; veining continuity and yield directly affect both cost and effect.</dd></div>
+      <div class="rs-term fade-in"><dt>EPD Declaration</dt><dd>An ISO 14025 life-cycle carbon document — an increasingly decisive plus in international green-building tenders.</dd></div>
+     </dl>
+    </div>
+   </section>
+
+<section class="tight-section bg-light-cream">
     <div class="container">
      <div class="text-left fade-in" data-aos="fade-up" style="margin-bottom:32px;">
       <span class="section-subtitle">FAQ</span>

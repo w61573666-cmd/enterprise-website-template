@@ -634,7 +634,246 @@
    </section>
 
    <!-- 文庫 FAQ（新增） -->
-   <section class="tight-section bg-light-cream">
+   <style>
+/* ===== 石材文库扩充板块样式 ===== */
+.rs-timeline{position:relative;margin:32px 0 8px;padding-left:28px;border-left:2px solid rgba(201,168,76,0.35);}
+.rs-tl-item{position:relative;padding:0 0 26px 18px;}
+.rs-tl-item::before{content:'';position:absolute;left:-35px;top:4px;width:12px;height:12px;border-radius:50%;background:#C9A84C;border:2px solid #faf8f3;box-shadow:0 0 0 2px rgba(201,168,76,0.3);}
+.rs-tl-year{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#C9A84C;margin-bottom:4px;}
+.rs-tl-item h4{margin:0 0 6px;font-size:1.02rem;color:#22201a;}
+.rs-tl-item p{margin:0;font-size:0.92rem;line-height:1.8;color:#4a443c;}
+.rs-duo{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+@media(max-width:768px){.rs-duo{grid-template-columns:1fr;}}
+.rs-panel{background:#faf8f3;border:1px solid rgba(201,168,76,0.18);border-radius:14px;padding:24px 22px;}
+.rs-panel h3{margin:0 0 12px;font-size:1.08rem;color:#22201a;}
+.rs-panel p{margin:0;font-size:0.93rem;line-height:1.9;color:#4a443c;}
+.rs-imgstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 4px;}
+@media(max-width:640px){.rs-imgstrip{grid-template-columns:1fr;}}
+.rs-imgstrip figure{margin:0;}
+.rs-imgstrip img{width:100%;height:170px;object-fit:cover;border-radius:10px;border:1px solid rgba(201,168,76,0.2);display:block;}
+.rs-imgstrip figcaption{font-size:0.82rem;color:#6b6357;margin-top:8px;text-align:center;}
+.rs-family{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.rs-fam-card{background:#fff;border:1px solid rgba(201,168,76,0.22);border-radius:14px;padding:22px 20px;box-shadow:0 2px 10px rgba(34,32,26,0.04);}
+.rs-fam-card h4{margin:0 0 10px;font-size:1.02rem;color:#22201a;}
+.rs-fam-card h4 span{color:#C9A84C;font-weight:600;font-size:0.85rem;margin-left:6px;}
+.rs-fam-card p{margin:0 0 8px;font-size:0.9rem;line-height:1.8;color:#4a443c;}
+.rs-fam-card .rs-tag{display:inline-block;font-size:0.78rem;color:#8a6d1f;background:rgba(201,168,76,0.12);border-radius:20px;padding:2px 10px;margin:2px 4px 0 0;}
+.rs-table{width:100%;border-collapse:collapse;font-size:0.9rem;margin-top:20px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(34,32,26,0.05);}
+.rs-table th{background:#22201a;color:#C9A84C;padding:12px 14px;text-align:left;font-weight:600;white-space:nowrap;}
+.rs-table td{padding:11px 14px;border-bottom:1px solid #f0ece1;color:#4a443c;line-height:1.7;vertical-align:top;}
+.rs-table tr:last-child td{border-bottom:none;}
+.rs-table tr:nth-child(even) td{background:#faf8f3;}
+.rs-table .rs-hot{color:#C9A84C;font-weight:600;}
+.rs-gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px;}
+.rs-term{background:#faf8f3;border-left:3px solid #C9A84C;border-radius:0 10px 10px 0;padding:14px 16px;}
+.rs-term dt{font-weight:700;color:#22201a;font-size:0.93rem;margin:0 0 4px;}
+.rs-term dd{margin:0;font-size:0.86rem;line-height:1.75;color:#4a443c;}
+@media(max-width:768px){.rs-table{font-size:0.82rem;}.rs-table th,.rs-table td{padding:9px 10px;}}
+</style>
+
+   <!-- 石材文明簡史 -->
+   <section class="section-padding">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">行業歷史 · 世界篇</span>
+      <h2 class="section-title">石材文明簡史：從金字塔到數位礦山</h2>
+      <p class="section-desc">人類使用天然石材的歷史超過五千年。理解這條時間線，您就會明白：今天一塊標準大板背後，是一部濃縮的技術演化史——而恆生石材正是站在這條鏈條的最新一環。</p>
+     </div>
+     <div class="rs-timeline">
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">約公元前 2560 年</div>
+       <h4>吉薩金字塔 · 花崗岩的第一次大規模應用</h4>
+       <p>古埃及人從阿斯旺採掘花崗岩，用銅鑿與木槓桿開採、尼羅河船運抵吉薩——人類第一次完成「礦山遠距離運輸 + 精密切割 + 大規模施工」的全鏈條組織。</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">公元前 447–432 年</div>
+       <h4>帕德嫩神廟 · 大理石建築的黃金標準</h4>
+       <p>雅典人以潘泰利山大理石建造帕德嫩神廟，確立了「白色大理石 = 永恆與神聖」的建築美學，這一審美傳統延續至今——也正是今天白色系大理石長盛不衰的源頭。</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">公元前 1 世紀</div>
+       <h4>羅馬 · Carrara 礦山開採與「石材貼面」發明</h4>
+       <p>羅馬人系統開採 LUNA（今 Carrara）白色大理石，並發明了「混凝土結構 + 大理石飾面」的建造方式——這正是現代石材幕牆乾掛體系的思想原型。</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">1501–1504 年</div>
+       <h4>文藝復興 · 米開朗基羅與《大衛》</h4>
+       <p>一塊被閒置 25 年、曾被鑿壞的 Carrara 巨型荒料，被米開朗基羅雕成《大衛》——石材從「建築材料」躍升為「藝術語言」，也讓 Carrara 成為世界白色大理石的代名詞。</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">19 世紀末</div>
+       <h4>工業革命 · 蒸汽砂鋸讓大理石進入量產</h4>
+       <p>蒸汽動力砂鋸與鐵路運輸出現，歐洲大理石首次實現規模化開採與跨國貿易，紐約、倫敦、巴黎的銀行與劇院掀起大理石飾面浪潮。</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">1970–1990 年</div>
+       <h4>金剛石工具革命 · 框架鋸與串珠鋸</h4>
+       <p>金剛石框架鋸取代砂鋸、金剛石串珠繩鋸用於礦山開採，切割效率提升一個數量級，板材成本大幅下降——大理石從豪宅專屬走向商業空間與住宅普及。</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">2000 年代</div>
+       <h4>數控時代 · 五軸 CNC 與水刀</h4>
+       <p>五軸數控橋切機與水刀切割機普及，異形加工、精準拼花、薄板複合成為標準能力；「設計圖紙直達機台」的數位化生產開始取代手工放樣。</p>
+      </div>
+      <div class="rs-tl-item fade-in">
+       <div class="rs-tl-year">今天</div>
+       <h4>智慧礦山與綠色認證</h4>
+       <p>AI 視覺分級、大板掃描建模、數位紋理拼花成為頭部工廠標配；EPD 環境產品聲明與碳足跡核算成為國際工程招標的新門檻——石材這門五千年的生意，正在被重新定義。</p>
+      </div>
+     </div>
+    </div>
+   </section>
+
+   <!-- 恆生發展史 -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">行業歷史 · 公司篇</span>
+      <h2 class="section-title">恆生石材發展史：一間香港雲石舖的 27 年</h2>
+      <p class="section-desc">從 1999 年香港的一間雲石工場，到今天輻射 60+ 個國家礦區直供、累計 4,200+ 工程項目的石材科技企業——恆生的每一步，都踩在行業變革的節點上。</p>
+     </div>
+     <div class="rs-duo">
+      <div class="rs-panel fade-in">
+       <h3>創業期 1999–2007 · 香港工場時代</h3>
+       <p>1999 年在香港創立，從本地住宅與商鋪的雲石工程做起。那時香港裝修行業講究「快、靚、正」，我們用一塊塊手工磨邊的門檻石與檯面，積累了第一批口碑客戶，也沉澱了對「交期與品質零妥協」的企業基因。</p>
+      </div>
+      <div class="rs-panel fade-in">
+       <h3>紮根期 2008–2015 · 礦山直供與自建基地</h3>
+       <p>為擺脫中間批發環節，我們直入福建、山東等礦區建立直供關係，如今已覆蓋 180+ 個海內外礦山；並在水頭自建 80,000㎡ 加工基地，把橋切、水刀、紅外線定位搬進自家廠房——「礦山到現場」一體化自此成型。</p>
+      </div>
+      <div class="rs-panel fade-in">
+       <h3>升級期 2016–2021 · 數控化與體系認證</h3>
+       <p>先後引入五軸 CNC 與數控拋光線，累計沉澱 220+ 道專屬加工工藝；建立 68 個品質檢測節點的全流程管控，並通過 ISO 9001 / ISO 14001 雙體系認證，從「工場」蛻變為「工廠」。</p>
+      </div>
+      <div class="rs-panel fade-in">
+       <h3>出海期 2022–今天 · 石材科技與全球工程</h3>
+       <p>AI 智能檢測、大板掃描與數位拼花上線，綠色製造與 EPD 碳足跡管理接軌國際；工程足跡遍佈中東、東南亞、歐洲，服務 1,000+ 星級酒店項目——「恆生石材」正在成為國際開發商名單上的常客。</p>
+      </div>
+     </div>
+     <div class="rs-imgstrip fade-in">
+      <figure>
+       <img alt="框架砂鋸——工業時代的開坯設備" loading="lazy" src="images/equipment/equip-gang-saw.jpg"/>
+       <figcaption>框架鋸組：荒料開坯的核心裝備</figcaption>
+      </figure>
+      <figure>
+       <img alt="五軸數控橋切機——異形加工中樞" loading="lazy" src="images/equipment/equip-cnc.jpg"/>
+       <figcaption>五軸 CNC：異形與拼花的精度保證</figcaption>
+      </figure>
+      <figure>
+       <img alt="數控拋光線——表面品質的最後一關" loading="lazy" src="images/equipment/equip-polishing.jpg"/>
+       <figcaption>數控拋光線：鏡面光澤的最後一關</figcaption>
+      </figure>
+     </div>
+    </div>
+   </section>
+
+   <!-- 石材家族百科 -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">選材百科</span>
+      <h2 class="section-title">石材家族百科：六大岩性速查</h2>
+      <p class="section-desc">商業上統稱的「石材」，在地質學上分屬三個家族：岩漿岩、沉積岩、變質岩。弄清您手上的項目屬於哪一族，一半的選材問題就有了答案。</p>
+     </div>
+     <div class="rs-family">
+      <div class="rs-fam-card fade-in">
+       <h4>大理石<span>Marble · 變質岩</span></h4>
+       <p>石灰岩經高溫高壓重結晶而成，主成分碳酸鈣。紋理華麗、可塑性好、鏡面效果出眾，但耐酸性弱——適合室內牆地面、檯面（慎接觸酸性液體）、背景牆與柱飾。</p>
+       <span class="rs-tag">Carrara</span><span class="rs-tag">Calacatta</span><span class="rs-tag">Nero Marquina</span><span class="rs-tag">Emperador</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>花崗岩<span>Granite · 岩漿岩</span></h4>
+       <p>岩漿冷凝結晶而成，石英與長石賦予它極高硬度與耐磨性，吸水率低、耐酸鹼——戶外廣場、幕牆、廚房檯面與高人流地面的首選。</p>
+       <span class="rs-tag">G682</span><span class="rs-tag">G603</span><span class="rs-tag">Black Galaxy</span><span class="rs-tag">山東白麻</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>石灰岩<span>Limestone · 沉積岩</span></h4>
+       <p>海底碳酸鈣沉積而成，質感溫潤均勻、色調柔和，歐洲建築師的最愛——適合外牆乾掛、室內牆面與低磨損地面，忌接觸強酸。</p>
+       <span class="rs-tag">Portoro</span><span class="rs-tag">Jura</span><span class="rs-tag">Moleanos</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>洞石<span>Travertine · 石灰華</span></h4>
+       <p>溫泉碳酸鈣沉澱形成，帶天然孔洞與波浪紋理，羅馬古城的地標材質——經補膠翻磨後用於商場、酒店大堂可營造獨一無二的歷史感。</p>
+       <span class="rs-tag">Roman Classic</span><span class="rs-tag">Noce</span><span class="rs-tag">Silver</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>砂岩<span>Sandstone · 沉積岩</span></h4>
+       <p>石英砂粒膠結而成，亞光質感、防滑性佳、色調溫暖——景觀工程、外牆與休閒空間常用，注意選擇緻密品種以降低吸水率。</p>
+       <span class="rs-tag">Yellow Sandstone</span><span class="rs-tag">Teakwood</span>
+      </div>
+      <div class="rs-fam-card fade-in">
+       <h4>板岩與石英岩<span>Slate / Quartzite · 變質岩</span></h4>
+       <p>頁岩變質成板岩可層片狀剝離，適合屋面與景觀；石英岩由砂岩變質而來，硬度接近花崗岩卻帶大理石般紋理，是近年檯面市場的黑馬。</p>
+       <span class="rs-tag">Rustic Slate</span><span class="rs-tag">White Macaubas</span>
+      </div>
+     </div>
+    </div>
+   </section>
+
+   <!-- 表面處理工藝 -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">加工百科</span>
+      <h2 class="section-title">表面處理工藝：8 種常見飾面對照</h2>
+      <p class="section-desc">同一塊荒料，不同表面工藝，呈現完全不同的光感、防滑性與維護成本。這張表是恆生 220+ 道專屬工藝中最常用的 8 種速查版。</p>
+     </div>
+     <div style="overflow-x:auto;">
+      <table class="rs-table fade-in">
+       <thead>
+        <tr><th>飾面工藝</th><th>工藝要點</th><th>視覺 / 觸感</th><th>防滑性</th><th>適用場景</th></tr>
+       </thead>
+       <tbody>
+        <tr><td class="rs-hot">拋光面 Polished</td><td>逐級金剛石磨頭精磨至鏡面</td><td>鏡面高光，紋理最鮮明</td><td>較低</td><td>室內牆面、大堂地面、檯面</td></tr>
+        <tr><td class="rs-hot">啞光面 Honed</td><td>磨至細膩啞光即止，不封釉</td><td>溫潤柔光，觸感如緞</td><td>中等</td><td>酒店客房、衛浴、樓梯</td></tr>
+        <tr><td>火燒面 Flamed</td><td>高溫火焰灼燒使表層晶體崩落</td><td>顆粒狀粗糙面</td><td>優秀</td><td>戶外廣場、車道、泳池邊</td></tr>
+        <tr><td>噴砂面 Sandblasted</td><td>高壓砂流均勻打毛表面</td><td>均勻細膩毛面</td><td>優秀</td><td>景觀、外牆、防滑步道</td></tr>
+        <tr><td>荔枝面 Bush-hammered</td><td>荔枝錘頭敲擊形成點狀凹凸</td><td>點狀肌理，古樸厚重</td><td>優秀</td><td>外牆乾掛、園林地鋪</td></tr>
+        <tr><td>皮革面 Leathered</td><td>輕磨 + 刷拋保留天然紋路起伏</td><td>類皮革觸感，啞光</td><td>良好</td><td>高端檯面、吧台、傢俬</td></tr>
+        <tr><td>酸洗面 Antiqued</td><td>酸蝕表面形成仿古柔光</td><td>仿古柔光，紋理柔和</td><td>良好</td><td>復古風格室內、藝術背景</td></tr>
+        <tr><td>斧剁面 Picked</td><td>斧刃剁擊形成規則溝槽</td><td>條狀肌理，粗獷</td><td>優秀</td><td>台階、景觀擋牆</td></tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </section>
+
+   <!-- 標準與術語 -->
+   <section class="section-padding pt-0">
+    <div class="container">
+     <div class="text-left fade-in" style="margin-bottom:10px;">
+      <span class="section-subtitle">標準索引</span>
+      <h2 class="section-title">行業標準體系與核心術語</h2>
+      <p class="section-desc">看懂檢測報告上的標準號與參數，是與供應商專業對話的第一步。以下為恆生出貨報告中最常引用的標準與參數速查。</p>
+     </div>
+     <div style="overflow-x:auto;">
+      <table class="rs-table fade-in">
+       <thead>
+        <tr><th>標準編號</th><th>體系</th><th>適用範圍</th><th>關鍵內容</th></tr>
+       </thead>
+       <tbody>
+        <tr><td class="rs-hot">EN 1341 / 1342 / 12058</td><td>歐盟 CE</td><td>室外地鋪石 / 路緣石 / 幕牆與地面板材</td><td>尺寸公差、抗折強度、防滑與耐久分級</td></tr>
+        <tr><td class="rs-hot">ASTM C503 / C615 / C629</td><td>美標</td><td>大理石 / 花崗岩 / 石灰岩規範</td><td>壓縮強度、吸水率、密度分級門檻</td></tr>
+        <tr><td>GB/T 19766 / GB/T 18601</td><td>國標</td><td>天然大理石 / 花崗岩建築板材</td><td>規格允許偏差、外觀質量、理化指標</td></tr>
+        <tr><td>JIS A5003</td><td>日標</td><td>石材一般試驗方法</td><td>吸水率、壓縮與彎曲試驗方法</td></tr>
+        <tr><td>EN 12004 / ANSI A118</td><td>歐盟 / 美標</td><td>石材膠粘劑配套</td><td>粘結強度分級，乾掛與濕貼選型依據</td></tr>
+       </tbody>
+      </table>
+     </div>
+     <dl class="rs-gloss">
+      <div class="rs-term fade-in"><dt>吸水率 Water Absorption</dt><dd>石材孔隙吸水能力，百分比越低越緻密耐污。一般大理石 ≤0.5%、花崗岩 ≤0.3% 為優。</dd></div>
+      <div class="rs-term fade-in"><dt>莫氏硬度 Mohs Hardness</dt><dd>抗刮擦能力 1–10 級。花崗岩約 6–7，大理石約 3–4——這解釋了為何大理石檯面忌直接切割。</dd></div>
+      <div class="rs-term fade-in"><dt>抗折強度 Flexural Strength</dt><dd>板材受彎不斷裂的極限，乾掛幕牆與長條檯面的安全核心指標。</dd></div>
+      <div class="rs-term fade-in"><dt>體積密度 Bulk Density</dt><dd>每立方米重量（kg/m³），影響結構荷載計算與運輸成本，一般 2,500–2,800。</dd></div>
+      <div class="rs-term fade-in"><dt>防滑值 R 值 / DCOF</dt><dd>德標 R9–R13 與美標 DCOF≥0.42（濕區）——公共空間地面選材的硬性門檻。</dd></div>
+      <div class="rs-term fade-in"><dt>追紋 / Book-match</dt><dd>將相鄰大板鏡像鋪開，紋理對稱如展開書頁，是奢華酒店的經典拼貼手法。</dd></div>
+      <div class="rs-term fade-in"><dt>大板規格 Slab Size</dt><dd>常規 2,400×1,200mm 起，紋理連貫性與出材率直接影響成本與效果。</dd></div>
+      <div class="rs-term fade-in"><dt>EPD 環境產品聲明</dt><dd>依 ISO 14025 發佈的生命週期碳足跡文件，國際綠建項目招標的加分門檻。</dd></div>
+     </dl>
+    </div>
+   </section>
+
+<section class="tight-section bg-light-cream">
     <div class="container">
      <div class="text-left fade-in" data-aos="fade-up" style="margin-bottom:32px;">
       <span class="section-subtitle">常見問題</span>
