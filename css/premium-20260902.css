@@ -686,7 +686,7 @@ body.premium .product-action-bar .product-action-btn.inquire::after {
 body.premium :is(
   .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
   .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
-  .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+  .service-grid, .pain-point-grid, .application-grid,
   .related-cases-grid, .related-products-grid, .product-video-grid,
   .contact-core-grid,
   .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
@@ -702,7 +702,7 @@ body.premium :is(
 body.premium :is(
   .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
   .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
-  .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+  .service-grid, .pain-point-grid, .application-grid,
   .related-cases-grid, .related-products-grid, .product-video-grid,
   .contact-core-grid,
   .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
@@ -721,7 +721,7 @@ body.premium :is(
   body.premium :is(
     .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
     .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
-    .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+    .service-grid, .pain-point-grid, .application-grid,
     .related-cases-grid, .related-products-grid, .product-video-grid,
     .contact-core-grid,
     .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
@@ -734,7 +734,7 @@ body.premium :is(
   body.premium :is(
     .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
     .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
-    .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+    .service-grid, .pain-point-grid, .application-grid,
     .related-cases-grid, .related-products-grid, .product-video-grid,
     .contact-core-grid,
     .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
@@ -747,7 +747,7 @@ body.premium :is(
 body.premium :is(
   .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
   .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
-  .service-grid, .pain-point-grid, .product-gallery-grid, .application-grid,
+  .service-grid, .pain-point-grid, .application-grid,
   .related-cases-grid, .related-products-grid, .product-video-grid,
   .contact-core-grid,
   .art-related-grid, .overview-grid, .stone-grid, .gallery-grid, .network-grid
@@ -1931,4 +1931,29 @@ body.premium .mega-panel-grid > .mega-panel-link {
 @media (max-width: 639px) {
   .faq-chip { flex: 1 1 100%; justify-content: flex-start; }
   .faq-cat-title { font-size: 1.06rem; }
+}
+
+/* ============================================================
+   模块 43 · 产品画廊网格：5 列桌面 / 2 列手机 (2026-09-05)
+   「石材鉴赏」12 子菜单已生成专属 11 张唯一高清大理石图，
+   桌面排成 5 列、小屏自动降为 2 列，整行等宽无右侧留白。
+   产品画廊不属于通用引擎（每页 11 张固定，主观设计 5×2），
+   故显式 grid-template-columns 覆写，不依赖 --c 注入。
+   ============================================================ */
+.product-gallery-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 18px !important;
+}
+.product-gallery-grid > .product-gallery-item {
+  margin: 0 !important;
+  width: auto !important;
+  flex: none !important;
+  flex-basis: auto !important;
+}
+@media (max-width: 1023px) {
+  .product-gallery-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 639px) {
+  .product-gallery-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
 }

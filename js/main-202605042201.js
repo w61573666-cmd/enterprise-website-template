@@ -804,7 +804,7 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   var SEL = [
     '.trust-items', '.why-choose-grid', '.about-stats', '.scenarios-grid', '.role-cards',
     '.certificates-grid', '.info-cards', '.service-cards', '.advantage-cards', '.solutions-grid',
-    '.service-grid', '.pain-point-grid', '.product-gallery-grid', '.application-grid',
+    '.service-grid', '.pain-point-grid', '.application-grid',
     '.related-cases-grid', '.related-products-grid', '.product-video-grid',
     '.contact-core-grid', '.art-related-grid',
     '.overview-grid', '.stone-grid', '.gallery-grid', '.network-grid',
