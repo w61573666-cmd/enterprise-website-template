@@ -1324,24 +1324,19 @@ body.premium .hsst-form-zone .sample-form-success p {
   color: #5C574F !important;
 }
 
-/* —— 32.11 提交按鈕維持品牌金底黑字 —— */
+/* —— 32.11 提交按鈕文字色統一為深墨黑 #1A1A2E（模組 48 白底黑字金框規範）—— */
 body.premium .hsst-form-zone button[type="submit"],
 body.premium .hsst-form-zone .hsst-form-btn,
 body.premium .hsst-form-zone .sample-submit-btn,
 body.premium .hsst-form-zone .solution-cta-btn {
-  color: #14130F !important;
+  color: #1A1A2E !important;
 }
 
-/* —— 32.11a 表單提交按鈕：品牌金底黑字（修復 .inquiry-form 提交按鈕黑底黑字不可見）—— */
+/* —— 32.11a 表單提交按鈕（背景/邊框已由模組 48 統一為白底金框，此處僅保留字重）—— */
 body.premium .hsst-form-zone .inquiry-form button[type="submit"] {
-  background: #C9A84C !important;
-  color: #14130F !important;
-  border: none !important;
+  color: #1A1A2E !important;
   font-weight: 700 !important;
   justify-self: start;
-}
-body.premium .hsst-form-zone .inquiry-form button[type="submit"]:hover {
-  background: #B8953C !important;
 }
 
 /* —— 32.12 錯誤態保留粉底，不覆蓋 —— */
@@ -2145,3 +2140,212 @@ body.premium .faqv2-hero h1,body.premium .faqv2-cta h2{color:#fff !important;}
    ═══════════════════════════════════════════════════════════ */
 .navbar .mega-panel-link.active .mega-panel-text strong{color:#C9A84C !important;}
 .navbar .mega-panel-link.active{opacity:1;}
+
+/* ═══════════════════════════════════════════════════════════
+   Module 48: 全站按钮统一 — 白底黑字黄框 (2026-09-06)
+   覆盖: .btn 系列 / .hsst-btn / .hsst-form-btn / .product-action-btn
+         .compare-panel-btn / .cookie-btn-* / 筛选按钮 / PWA 按钮
+         button[type=submit] / .back-to-top / .whatsapp-float
+   状态: hover 高亮(边框加粗+金影+浮起, 保持白底黑字黄框)
+         / active 按压 / focus-visible 双环焦点 / disabled 禁用。
+   注: .faq-q(手风琴行)、.nav-toggle(汉堡)、.image-modal-close/
+       prev/next(预览控件)为功能性控件, 非操作按钮, 不在统一范围。
+   ═══════════════════════════════════════════════════════════ */
+body.premium .btn, body.premium .btn-primary, body.premium .btn-gold, body.premium .btn-secondary,
+body.premium .btn-outline, body.premium .btn-outline-light, body.premium .btn-outline-white, body.premium .btn-white,
+body.premium .hsst-btn, body.premium .hsst-form-btn,
+body.premium .product-action-btn, body.premium .compare-panel-btn,
+body.premium .cookie-btn-accept, body.premium .cookie-btn-decline,
+body.premium .filter-btn, body.premium .news-filter-btn,
+body.premium .pwa-install-btn, body.premium .pwa-guide-close,
+body.premium button[type="submit"], body.premium input[type="submit"], body.premium input[type="button"],
+body.premium .back-to-top, body.premium .whatsapp-float,
+body.premium .hero-grid-video .hero-buttons .btn-primary,
+body.premium .hero-grid-video .hero-buttons .btn-outline-light,
+body.premium .hsst-form-zone .inquiry-form button[type="submit"],
+body.premium .products-cta button[type="submit"] {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border: 1.5px solid #C9A84C !important;
+  text-decoration: none !important;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+/* hover: 边框加粗(box-shadow 模拟, 不引起布局位移) + 金色投影 + 浮起 */
+body.premium .btn:hover, body.premium .btn-primary:hover, body.premium .btn-gold:hover, body.premium .btn-secondary:hover,
+body.premium .btn-outline:hover, body.premium .btn-outline-light:hover, body.premium .btn-outline-white:hover, body.premium .btn-white:hover,
+body.premium .hsst-btn:hover, body.premium .hsst-form-btn:hover,
+body.premium .product-action-btn:hover, body.premium .compare-panel-btn:hover,
+body.premium .cookie-btn-accept:hover, body.premium .cookie-btn-decline:hover,
+body.premium .filter-btn:hover, body.premium .news-filter-btn:hover,
+body.premium .pwa-install-btn:hover, body.premium .pwa-guide-close:hover,
+body.premium button[type="submit"]:hover, body.premium input[type="submit"]:hover, body.premium input[type="button"]:hover,
+body.premium .back-to-top:hover, body.premium .whatsapp-float:hover,
+body.premium .hero-grid-video .hero-buttons .btn-primary:hover,
+body.premium .hero-grid-video .hero-buttons .btn-outline-light:hover,
+body.premium .hsst-form-zone .inquiry-form button[type="submit"]:hover,
+body.premium .products-cta button[type="submit"]:hover {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  box-shadow: inset 0 0 0 1px #C9A84C, 0 8px 22px rgba(201, 168, 76, 0.35) !important;
+  transform: translateY(-2px) !important;
+}
+/* active: 明确按压反馈 — 回缩贴底, 保留加粗边框 */
+body.premium .btn:active, body.premium .btn-primary:active, body.premium .btn-gold:active,
+body.premium .btn-outline:active, body.premium .btn-outline-light:active, body.premium .btn-outline-white:active,
+body.premium .btn-white:active, body.premium .hsst-btn:active, body.premium .hsst-form-btn:active,
+body.premium .product-action-btn:active, body.premium .compare-panel-btn:active,
+body.premium .cookie-btn-accept:active, body.premium .cookie-btn-decline:active,
+body.premium .filter-btn:active, body.premium .news-filter-btn:active,
+body.premium .pwa-install-btn:active, body.premium .pwa-guide-close:active,
+body.premium button[type="submit"]:active, body.premium input[type="submit"]:active, body.premium input[type="button"]:active,
+body.premium .back-to-top:active, body.premium .whatsapp-float:active,
+body.premium .hero-grid-video .hero-buttons .btn-primary:active,
+body.premium .hero-grid-video .hero-buttons .btn-outline-light:active,
+body.premium .hsst-form-zone .inquiry-form button[type="submit"]:active,
+body.premium .products-cta button[type="submit"]:active {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  box-shadow: inset 0 0 0 1.5px #C9A84C !important;
+  transform: scale(0.96) !important;
+}
+/* focus-visible: 白色内环 + 金色外环, 焦点指示清晰 */
+body.premium .btn:focus-visible, body.premium .btn-primary:focus-visible, body.premium .btn-gold:focus-visible,
+body.premium .btn-outline:focus-visible, body.premium .btn-outline-light:focus-visible, body.premium .btn-outline-white:focus-visible,
+body.premium .btn-white:focus-visible, body.premium .hsst-btn:focus-visible, body.premium .hsst-form-btn:focus-visible,
+body.premium .product-action-btn:focus-visible, body.premium .compare-panel-btn:focus-visible,
+body.premium .cookie-btn-accept:focus-visible, body.premium .cookie-btn-decline:focus-visible,
+body.premium .filter-btn:focus-visible, body.premium .news-filter-btn:focus-visible,
+body.premium .pwa-install-btn:focus-visible, body.premium .pwa-guide-close:focus-visible,
+body.premium button[type="submit"]:focus-visible, body.premium input[type="submit"]:focus-visible, body.premium input[type="button"]:focus-visible,
+body.premium .back-to-top:focus-visible, body.premium .whatsapp-float:focus-visible,
+body.premium .hero-grid-video .hero-buttons .btn-primary:focus-visible,
+body.premium .hero-grid-video .hero-buttons .btn-outline-light:focus-visible,
+body.premium .hsst-form-zone .inquiry-form button[type="submit"]:focus-visible,
+body.premium .products-cta button[type="submit"]:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px #C9A84C !important;
+}
+/* disabled: 降低不透明度, 禁止交互反馈, 保持白底黑字黄框 */
+body.premium .btn:disabled, body.premium .btn-primary:disabled, body.premium .btn-gold:disabled,
+body.premium .btn-outline:disabled, body.premium .btn-outline-light:disabled, body.premium .btn-outline-white:disabled,
+body.premium .btn-white:disabled, body.premium .hsst-btn:disabled, body.premium .hsst-form-btn:disabled,
+body.premium .product-action-btn:disabled, body.premium .compare-panel-btn:disabled,
+body.premium .filter-btn:disabled, body.premium .news-filter-btn:disabled,
+body.premium .pwa-install-btn:disabled, body.premium .pwa-guide-close:disabled,
+body.premium button[type="submit"]:disabled, body.premium input[type="submit"]:disabled, body.premium input[type="button"]:disabled,
+body.premium .hero-grid-video .hero-buttons .btn-primary:disabled,
+body.premium .hsst-form-btn[disabled], body.premium button[disabled][type="submit"],
+body.premium input[disabled][type="submit"], body.premium input[disabled][type="button"],
+body.premium .hsst-form-zone .inquiry-form button[type="submit"]:disabled,
+body.premium .products-cta button[type="submit"]:disabled {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+/* .btn 扫光高亮层: 金色 → 淡金, 与新风格协调 */
+body.premium .btn::after { background: rgba(201,168,76,0.10) !important; }
+/* 浮动圆形按钮: 白底 + 黑色图标 + 黄色边框 */
+body.premium .back-to-top { color: #1A1A2E !important; }
+body.premium .back-to-top:hover { transform: translateY(-3px) !important; }
+body.premium .whatsapp-float { color: #1A1A2E !important; }
+body.premium .back-to-top svg, body.premium .whatsapp-float svg { fill: currentColor !important; }
+
+/* ── Module 48 补遗: 高优先级按钮家族 (v2-btn / product-action-bar) ── */
+body.premium .v2-btn, body.premium .v2-btn.gold, body.premium .v2-qbtns .v2-btn, body.premium .v2-qbtns .v2-btn:not(.gold),
+body.premium .product-action-bar .product-action-btn, body.premium .product-action-bar .product-action-btn.sample,
+body.premium .product-action-bar .product-action-btn.inquire, body.premium .product-action-bar .product-action-btn.compare {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border: 1.5px solid #C9A84C !important;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+body.premium .v2-btn:hover, body.premium .v2-btn.gold:hover, body.premium .v2-qbtns .v2-btn:hover, body.premium .v2-qbtns .v2-btn:not(.gold):hover,
+body.premium .product-action-bar .product-action-btn:hover, body.premium .product-action-bar .product-action-btn.sample:hover,
+body.premium .product-action-bar .product-action-btn.inquire:hover, body.premium .product-action-bar .product-action-btn.compare:hover {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  box-shadow: inset 0 0 0 1px #C9A84C, 0 8px 22px rgba(201, 168, 76, 0.35) !important;
+  transform: translateY(-2px) !important;
+}
+body.premium .v2-btn:active, body.premium .v2-btn.gold:active, body.premium .v2-qbtns .v2-btn:active,
+body.premium .product-action-bar .product-action-btn:active, body.premium .product-action-bar .product-action-btn.sample:active,
+body.premium .product-action-bar .product-action-btn.inquire:active, body.premium .product-action-bar .product-action-btn.compare:active {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  box-shadow: inset 0 0 0 1.5px #C9A84C !important;
+  transform: scale(0.96) !important;
+}
+body.premium .v2-btn:focus-visible, body.premium .v2-btn.gold:focus-visible, body.premium .v2-qbtns .v2-btn:focus-visible,
+body.premium .product-action-bar .product-action-btn:focus-visible, body.premium .product-action-bar .product-action-btn.sample:focus-visible,
+body.premium .product-action-bar .product-action-btn.inquire:focus-visible, body.premium .product-action-bar .product-action-btn.compare:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px #C9A84C !important;
+}
+body.premium .v2-btn:disabled, body.premium .v2-btn.gold:disabled,
+body.premium .product-action-bar .product-action-btn:disabled, body.premium .product-action-bar .product-action-btn.sample:disabled,
+body.premium .product-action-bar .product-action-btn.inquire:disabled, body.premium .product-action-bar .product-action-btn.compare:disabled {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+/* v2 页深色板块内的 action-bar 覆盖层(金色扫光)重置 */
+body.premium .product-action-bar .product-action-btn::after,
+body.premium .product-action-bar .product-action-btn.inquire::after { background: rgba(201,168,76,0.10) !important; }
+
+/* ── Module 48 补遗 2: 页内 style 定义的按钮家族 ── */
+body.premium .btn-filled, body.premium .btn-ghost,
+body.premium .filter-tag, body.premium .filter-tag.active,
+body.premium .compare-panel-clear,
+body.premium .cta-section.cta-home .hsst-form-btn, body.premium .hsst-form-zone .hsst-form-btn, body.premium .v2-quote .hsst-form-btn {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border: 1.5px solid #C9A84C !important;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+body.premium .btn-filled:hover, body.premium .btn-ghost:hover,
+body.premium .filter-tag:hover, body.premium .filter-tag.active:hover,
+body.premium .compare-panel-clear:hover,
+body.premium .cta-section.cta-home .hsst-form-btn:hover, body.premium .hsst-form-zone .hsst-form-btn:hover, body.premium .v2-quote .hsst-form-btn:hover {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  box-shadow: inset 0 0 0 1px #C9A84C, 0 8px 22px rgba(201, 168, 76, 0.35) !important;
+  transform: translateY(-2px) !important;
+}
+body.premium .btn-filled:active, body.premium .btn-ghost:active, body.premium .filter-tag:active, body.premium .filter-tag.active:active,
+body.premium .compare-panel-clear:active,
+body.premium .cta-section.cta-home .hsst-form-btn:active, body.premium .hsst-form-zone .hsst-form-btn:active, body.premium .v2-quote .hsst-form-btn:active {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  box-shadow: inset 0 0 0 1.5px #C9A84C !important;
+  transform: scale(0.96) !important;
+}
+body.premium .btn-filled:focus-visible, body.premium .btn-ghost:focus-visible, body.premium .filter-tag:focus-visible,
+body.premium .compare-panel-clear:focus-visible,
+body.premium .cta-section.cta-home .hsst-form-btn:focus-visible, body.premium .hsst-form-zone .hsst-form-btn:focus-visible, body.premium .v2-quote .hsst-form-btn:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px #C9A84C !important;
+}
+body.premium .btn-filled:disabled, body.premium .btn-ghost:disabled, body.premium .filter-tag:disabled,
+body.premium .cta-section.cta-home .hsst-form-btn:disabled, body.premium .hsst-form-zone .hsst-form-btn:disabled, body.premium .v2-quote .hsst-form-btn:disabled {
+  background: #fff !important;
+  color: #1A1A2E !important;
+  border-color: #C9A84C !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
