@@ -969,3 +969,49 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
     document.addEventListener('DOMContentLoaded', setup);
   } else { setup(); }
 })();
+
+/* ── 导航高亮（全局，基于路径判断，2026-09-06）────────────────
+   修复: 高亮与当前页面所属栏目不一致 / 多重高亮。
+   规则: 目录优先(news/products/projects/solutions/technology/about)，
+         其次按文件名映射；先清除全部顶级 active 再标记唯一正确项。 */
+(function () {
+  var segs = window.location.pathname.split('/').filter(Boolean);
+  var file = segs.length ? segs[segs.length - 1] : 'index.html';
+  var dir = segs.length >= 2 ? segs[segs.length - 2] : '';
+  var DIR_GROUP = { products: 'products', projects: 'projects', news: 'news', solutions: 'solutions', technology: 'about', about: 'about' };
+  var FILE_GROUP = {
+    'index.html': 'home', 'about.html': 'about', 'honors.html': 'about', 'careers.html': 'about',
+    'partnerships.html': 'about', 'technology.html': 'about',
+    'products.html': 'products', 'manufacturing.html': 'products', 'mines.html': 'products',
+    'projects.html': 'projects', 'news.html': 'news', 'resources.html': 'news', 'faq.html': 'news',
+    'solutions.html': 'solutions', 'contact.html': 'contact'
+  };
+  function groupOf(dirName, fileName) {
+    return DIR_GROUP[dirName] || FILE_GROUP[fileName] || (fileName === 'index.html' ? 'home' : null);
+  }
+  var group = groupOf(dir, file);
+  if (!group) return;
+
+  var topLinks = document.querySelectorAll('.navbar .nav-links > a, .navbar .nav-dropdown > a');
+  Array.prototype.forEach.call(topLinks, function (a) {
+    if (a.closest('.lang-switch')) return;
+    a.classList.remove('active');
+  });
+  Array.prototype.forEach.call(topLinks, function (a) {
+    var href = a.getAttribute('href') || '';
+    var parts = href.split('/').filter(Boolean);
+    var hf = parts.length ? parts[parts.length - 1] : 'index.html';
+    var hd = parts.length >= 2 ? parts[parts.length - 2] : '';
+    if (groupOf(hd, hf) === group) a.classList.add('active');
+  });
+
+  // 二级子菜单(mega-panel-link): 当前页对应条目高亮
+  var panelLinks = document.querySelectorAll('.mega-panel-link');
+  Array.prototype.forEach.call(panelLinks, function (a) {
+    var href = a.getAttribute('href') || '';
+    var parts = href.split('/').filter(Boolean);
+    var pf = parts.length ? parts[parts.length - 1] : 'index.html';
+    var pd = parts.length >= 2 ? parts[parts.length - 2] : '';
+    if (pf === file && groupOf(pd, pf) === group) a.classList.add('active');
+  });
+})();

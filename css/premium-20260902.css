@@ -2139,3 +2139,9 @@ body.premium .navbar.scrolled {
 .faqv2-hero h1{font-weight:800 !important;}
 /* Module 46 补丁2: 提升优先级压过 body.premium h1 */
 body.premium .faqv2-hero h1,body.premium .faqv2-cta h2{color:#fff !important;}
+
+/* ═══════════════════════════════════════════════════════════
+   Module 47: 导航高亮修正 (2026-09-06) — 子菜单当前页条目
+   ═══════════════════════════════════════════════════════════ */
+.navbar .mega-panel-link.active .mega-panel-text strong{color:#C9A84C !important;}
+.navbar .mega-panel-link.active{opacity:1;}
