@@ -802,4 +802,64 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/partnerships.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/"/>
   </url>
+  <url>
+    <loc>https://www.hsst.hk/en/honors.html</loc>
+    <lastmod>2026-09-05T12:00:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/honors.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/honors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/honors.html"/>
+  </url>
+
+  <url>
+    <loc>https://www.hsst.hk/en/manufacturing.html</loc>
+    <lastmod>2026-09-05T12:00:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/manufacturing.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/manufacturing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/manufacturing.html"/>
+  </url>
+
+  <url>
+    <loc>https://www.hsst.hk/en/mines.html</loc>
+    <lastmod>2026-09-05T12:00:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/mines.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/mines.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/mines.html"/>
+  </url>
+
+  <url>
+    <loc>https://www.hsst.hk/en/careers.html</loc>
+    <lastmod>2026-09-05T12:00:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/careers.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/careers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/careers.html"/>
+  </url>
+
+  <url>
+    <loc>https://www.hsst.hk/en/projects/catalog.html</loc>
+    <lastmod>2026-09-05T12:00:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/projects/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/projects/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/projects/catalog.html"/>
+  </url>
+
+  <url>
+    <loc>https://www.hsst.hk/en/resources.html</loc>
+    <lastmod>2026-09-05T12:00:00+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hsst.hk/resources.html"/>
+  </url>
 </urlset>
+
