@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
       trigger.addEventListener('click', function(e) {
         // Only intercept on mobile/tablet (when hamburger is visible)
-        if (window.innerWidth > 900) return;
+        if (window.innerWidth > 1160) return;
         e.preventDefault();
         e.stopPropagation();
         const dropdown = this.closest('.nav-dropdown');

@@ -1957,3 +1957,112 @@ body.premium .mega-panel-grid > .mega-panel-link {
 @media (max-width: 639px) {
   .product-gallery-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
 }
+
+/* ============================================================
+   45. 苹果式导航栏（Apple-like Navbar，2026-09-06）
+   - 顶部固定：毛玻璃背景 saturate+blur、发丝分割线、瘦条 48px
+   - 滚动时正确定位顶部，不挤占/不跳动，锚点滚动留出导航高度
+   - 桌面端（≥1161px）紧凑排版：窄窗口按 clamp 连续收缩，
+     配合 EN 菜单标准简称，任何宽度全部菜单项可见可点
+   - ≤1160px 启用右侧抽屉菜单（断点 900→1160，js/main 同步）
+   ============================================================ */
+html { scroll-padding-top: 64px; }
+body.premium .navbar {
+  height: 48px;
+  background: rgba(245, 241, 234, 0.78);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: none;
+  border-bottom: 1px solid rgba(26, 26, 46, 0.08);
+}
+body.premium .navbar.scrolled {
+  background: rgba(245, 241, 234, 0.92);
+  box-shadow: 0 1px 0 rgba(26, 26, 46, 0.06);
+}
+/* 桌面端：容器加宽 + 紧凑排版（12.5px 菜单字号，间距随视口收缩） */
+@media (min-width: 1161px) {
+  body.premium .navbar .container { max-width: 1400px; }
+  body.premium .nav-links { gap: clamp(12px, 1.6vw, 26px); }
+  body.premium .nav-links > a,
+  body.premium .nav-dropdown > a { font-size: 12.5px; }
+  body.premium .nav-logo { margin-right: 18px; gap: 8px; }
+  body.premium .nav-logo img { height: 32px; }
+  body.premium .nav-logo-text strong { font-size: 0.72rem; letter-spacing: 0.2px; }
+  body.premium .nav-logo-text small { font-size: 0.52rem; }
+  body.premium .nav-dropdown > a::after { font-size: 9px; }
+  body.premium .lang-switch { margin-left: 6px; }
+  body.premium .lang-switch a { font-size: 11.5px; }
+}
+/* ≤1160px：抽屉菜单（规则与原 900px 断点一致，断点提升） */
+@media (max-width: 1160px) {
+  body.premium .navbar .nav-toggle { display: flex !important; }
+  body.premium .navbar .nav-links {
+    position: fixed !important;
+    top: 0; right: -100% !important;
+    width: 300px; height: 100vh;
+    background: #F5F0EB;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 72px 24px 32px !important;
+    gap: 0 !important;
+    transition: right 0.4s ease;
+    z-index: 999;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    pointer-events: none;
+  }
+  body.premium .navbar .nav-links.open { right: 0 !important; pointer-events: auto !important; }
+  body.premium .navbar .nav-links a {
+    color: var(--color-primary) !important;
+    padding: 13px 0 !important;
+    font-size: 15px !important;
+    border-bottom: 1px solid rgba(26,26,46,0.08) !important;
+    width: 100% !important;
+  }
+  body.premium .navbar .nav-links a::after { display: none !important; }
+  body.premium .navbar .mega-panel,
+  body.premium .navbar .dropdown-panel {
+    display: none;
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background: rgba(0,0,0,0.02);
+    padding: 0 0 0 16px;
+    margin: 0;
+    min-width: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  body.premium .navbar .nav-dropdown.mobile-open .mega-panel,
+  body.premium .navbar .nav-dropdown.mobile-open .dropdown-panel {
+    display: block;
+    max-height: none;
+    padding: 8px 0 8px 16px;
+  }
+  body.premium .navbar .nav-dropdown > a::after {
+    display: inline-block !important;
+    transition: transform 0.3s ease;
+  }
+  body.premium .navbar .nav-dropdown.mobile-open > a::after { transform: rotate(180deg) !important; }
+  body.premium .navbar .mega-panel-grid { grid-template-columns: 1fr !important; gap: 0 !important; }
+  body.premium .navbar .mega-panel-link { padding: 10px 0 !important; border-bottom: 1px solid rgba(0,0,0,0.06) !important; width: 100% !important; font-size: 14px !important; }
+  body.premium .navbar .mega-panel-icon { width: 36px; height: 36px; }
+  body.premium .navbar .mega-panel-icon img { width: 36px; height: 36px; }
+  body.premium .navbar .mega-panel-text span { font-size: 0.7rem; }
+  body.premium .navbar .dropdown-item { padding: 10px 0 !important; border-bottom: 1px solid rgba(0,0,0,0.06) !important; width: 100% !important; }
+  body.premium .navbar .lang-switch {
+    border: none;
+    border-top: 1px solid rgba(26,26,46,0.1);
+    padding-top: 20px !important;
+    margin-left: 0 !important;
+    margin-top: 16px;
+  }
+  body.premium .navbar .lang-switch a { font-size: 14px !important; }
+}
