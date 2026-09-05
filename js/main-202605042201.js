@@ -261,9 +261,9 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.innerHTML =
       '<div class="image-modal-overlay"></div>' +
       '<div class="image-modal-content" style="max-width:92vw;max-height:90vh;">' +
-        '<button class="image-modal-prev" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:44px;height:44px;cursor:pointer;font-size:1.2rem;z-index:10;display:' + (allImgs.length > 1 ? 'flex' : 'none') + ';align-items:center;justify-content:center;">&#8592;</button>' +
-        '<button class="image-modal-next" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:44px;height:44px;cursor:pointer;font-size:1.2rem;z-index:10;display:' + (allImgs.length > 1 ? 'flex' : 'none') + ';align-items:center;justify-content:center;">&#8594;</button>' +
-        '<button class="image-modal-close" style="position:absolute;top:16px;right:16px;background:#fff;border:none;border-radius:50%;width:44px;height:44px;cursor:pointer;color:#1A1A2E;font-size:1.3rem;font-weight:700;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;">✕</button>' +
+        '<button class="image-modal-prev" type="button" aria-label="Previous image / 上一张" style="display:' + (allImgs.length > 1 ? 'flex' : 'none') + ';">&#8592;</button>' +
+        '<button class="image-modal-next" type="button" aria-label="Next image / 下一张" style="display:' + (allImgs.length > 1 ? 'flex' : 'none') + ';">&#8594;</button>' +
+        '<button class="image-modal-close" type="button" aria-label="Close preview / 关闭预览"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M5.5 5.5 L18.5 18.5 M18.5 5.5 L5.5 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button>' +
         '<img src="' + src + '" alt="' + alt + '" style="max-width:88vw;max-height:82vh;object-fit:contain;border-radius:8px;">' +
         '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:0.8rem;margin-top:8px;">' + alt + '</div>' +
       '</div>';

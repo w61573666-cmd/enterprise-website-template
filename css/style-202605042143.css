@@ -1840,17 +1840,37 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
 }
 .image-modal-close {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(0,0,0,0.5);
-  border: none;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: rgba(26,26,46,0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
   color: #fff !important;
-  font-size: 1.5rem;
   cursor: pointer;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  z-index: 2002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2004;
+  line-height: 1;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
+.image-modal-close svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+.image-modal-close:hover {
+  background: rgba(26,26,46,0.88);
+  transform: scale(1.08);
+}
+.image-modal-close:active { transform: scale(0.94); }
 
 
 /* Image Modal Mobile Optimization */
@@ -1864,15 +1884,10 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
     max-height: 90dvh;
   }
   .image-modal-close {
-    top: 12px;
+    top: calc(env(safe-area-inset-top, 0px) + 12px);
     right: 12px;
     width: 44px;
     height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    padding: 0;
   }
   .image-modal-prev,
   .image-modal-next {
@@ -1884,16 +1899,45 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   }
   .image-modal-prev { left: 24px !important; right: auto !important; }
   .image-modal-next { right: 24px !important; left: auto !important; }
+  .image-modal-prev:hover,
+  .image-modal-next:hover { transform: scale(1.08); }
+  .image-modal-prev:active,
+  .image-modal-next:active { transform: scale(0.94); }
 }
 
-/* Ensure prev/next buttons always have proper z-index */
+/* Prev/Next buttons — unified chip style (same family as .image-modal-close) */
 .image-modal-prev,
 .image-modal-next {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: rgba(26,26,46,0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
+  color: #fff !important;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 2003 !important;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
-.image-modal-prev:hover { transform: translateY(-50%) scale(1.1); }
-.image-modal-next:hover { transform: translateY(-50%) scale(1.1); }
+.image-modal-prev { left: 16px; transform: translateY(-50%); }
+.image-modal-next { right: 16px; transform: translateY(-50%); }
+.image-modal-prev:hover,
+.image-modal-next:hover {
+  background: rgba(26,26,46,0.88);
+  transform: translateY(-50%) scale(1.08);
+}
+.image-modal-prev:active,
+.image-modal-next:active { transform: translateY(-50%) scale(0.94); }
 
 /* ---------- Trust Bar ---------- */
 .trust-bar {
