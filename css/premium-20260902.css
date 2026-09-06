@@ -2411,3 +2411,39 @@ body.premium .cta-section.cta-home .hsst-form-btn:disabled, body.premium .hsst-f
   transform: none !important;
   box-shadow: none !important;
 }
+
+/* ============================================================
+   Module 49: Mega-Panel「瀏覽全部」链接统一 (2026-09-06)
+   - 修复：旧折叠逻辑曾删除 href 致无法跳转（JS 已移除，链接恢复）
+   - 统一中英文/桌面/移动样式：淡金底 pill、深金文字（对比度达标）、
+     hover 加深上浮、focus 金环，与全站视觉一致
+   ============================================================ */
+body.premium .navbar .mega-panel-viewall {
+  border-top: 1px solid rgba(26,26,46,0.08);
+}
+body.premium .navbar .mega-panel-viewall a {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px !important;
+  border-radius: 999px !important;
+  background: rgba(201,168,76,0.12) !important;
+  color: #A8863B !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+  text-transform: none !important;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+body.premium .navbar .mega-panel-viewall a:hover {
+  background: rgba(201,168,76,0.24) !important;
+  color: #8A6D2F !important;
+  transform: translateY(-1px);
+}
+body.premium .navbar .mega-panel-viewall a:active {
+  transform: scale(0.97);
+}
+body.premium .navbar .mega-panel-viewall a:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #C9A84C !important;
+}

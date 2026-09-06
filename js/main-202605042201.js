@@ -94,52 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- Products & Projects Mega-Panel 3×3 Collapse / Expand ----------
-  // Both products and projects dropdowns: show 9 items (3×3), hide extras,
-  // click view-all link to expand.
-  // Handles: .mega-panel-link (flat grid) and .mega-module-link (grouped grid)
-  (function initMegaPanelCollapse() {
-    var isEn = /\/en\//.test(window.location.pathname);
-
-    function applyCollapse(dropdown, allLinks, viewAllA) {
-      if (allLinks.length <= 9) return;
-      // Hide items 10+ by display:none (avoids nth-child issues with grouped grids)
-      var hidden = [];
-      for (var i = 9; i < allLinks.length; i++) {
-        allLinks[i].style.display = 'none';
-        hidden.push(allLinks[i]);
-      }
-      if (!viewAllA) return;
-      viewAllA.removeAttribute('href');
-      viewAllA.style.cursor = 'pointer';
-      var expanded = false;
-      var orig = (viewAllA.textContent || '').replace(/^\s*→\s*/, '').trim();
-      var openLabel = '→ ' + orig;
-      var closeLabel = isEn ? 'Collapse ▲' : (orig + ' ▲');
-      viewAllA.textContent = openLabel;
-      viewAllA.addEventListener('click', function(e) {
-        e.preventDefault(); e.stopPropagation();
-        expanded = !expanded;
-        hidden.forEach(function(l) { l.style.display = expanded ? '' : 'none'; });
-        viewAllA.textContent = expanded ? closeLabel : openLabel;
-      });
-    }
-
-    // --- Pattern A: .nav-dropdown > mega-panel > mega-panel-link (most pages) ---
-    document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
-      var a = dd.querySelector(':scope > a');
-      if (!a) return;
-      var href = a.getAttribute('href') || '';
-      var isProducts = /products\.html/i.test(href);
-      var isProjects = /projects\.html/i.test(href);
-      if (!isProducts && !isProjects) return;
-      var links = dd.querySelectorAll('.mega-panel-link');
-      var viewAll = dd.querySelector('.mega-panel-viewall a');
-      applyCollapse(dd, links, viewAll);
-    });
-
-    // mega-panel-v2 removed; all pages now use unified mega-panel pattern
-  })();
+  // ---------- Mega-Panel「瀏覽全部」链接 ----------
+  // 2026-09-06 修复：旧版 3×3 折叠逻辑会在子项 >9 时删除 viewall 的 href、
+  // 把它改成"展开/收起"开关并隐藏多余子项（产品中心藏 3 项、工程案例藏 8 项），
+  // 导致「瀏覽全部石材系列/工程案例」点击不跳转、文案错乱（显示异常）。
+  // 现已移除该折叠逻辑：viewall 恢复为真实导航链接，面板完整展示全部子项。
+  // mega-panel-v2 removed; all pages now use unified mega-panel pattern
 
   // ---------- Series Card Click Handler (All versions) ----------
   // Handles both Chinese (.series-card-link) and English (a.series-overview-card) cards
