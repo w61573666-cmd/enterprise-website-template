@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navLinks) navLinks.classList.remove('open');
     overlay.classList.remove('active');
     document.body.style.overflow = '';
+    document.body.classList.remove('drawer-open');
     // Collapse all expanded dropdowns
     if (navLinks) {
       navLinks.querySelectorAll('.nav-dropdown.mobile-open').forEach(dd => {
@@ -48,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navLinks) navLinks.classList.add('open');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    // 抽屉打开时隐藏 cookie 横幅等底部浮层：
+    // cookie-banner z-index 2000 高于抽屉(999)，固定底部高约 163px，
+    // 会拦截「瀏覽全部」等抽屉底部元素的点击（跳转失效的根因之一）
+    document.body.classList.add('drawer-open');
   }
 
   if (navToggle) {
@@ -77,6 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
           if (dd !== dropdown) dd.classList.remove('mobile-open');
         });
         dropdown.classList.toggle('mobile-open');
+        // 展开动画结束后，把整个子面板（含「瀏覽全部」）滚入抽屉可视区，
+        // 确保全部子项与 viewall 一屏内可见可点（修复移动端点击错位/跳转异常）
+        if (dropdown.classList.contains('mobile-open')) {
+          setTimeout(function () {
+            var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
+            if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 400);
+        }
       });
     });
 

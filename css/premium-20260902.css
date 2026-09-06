@@ -2447,3 +2447,57 @@ body.premium .navbar .mega-panel-viewall a:focus-visible {
   outline: none !important;
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px #C9A84C !important;
 }
+
+/* ============================================================
+   Module 50: 移动抽屉子菜单双列化 (2026-09-06)
+   - 修复：產品中心(12项)/工程案例(17项)单列展开后「瀏覽全部」被推出
+     视口，点击落空或错位（现象为跳转到错误页面）
+   - 双列紧凑网格使全部子项 + viewall 在一屏内完整可见、可点
+   - touch-action: manipulation 消除移动端点击延迟/缩放干扰
+   ============================================================ */
+@media (max-width: 1160px) {
+  body.premium .navbar .mega-panel-grid {
+    display: grid !important; /* 覆盖 base ≤900px 的 display:flex，否则双列模板无效 */
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0 10px !important;
+  }
+  body.premium .navbar .nav-links .mega-panel-link {
+    padding: 9px 10px !important;
+    width: auto !important;
+  }
+  body.premium .navbar .nav-links .mega-panel-icon,
+  body.premium .navbar .nav-links .mega-panel-icon img {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    border-radius: 8px;
+  }
+  body.premium .navbar .mega-panel-text { gap: 2px; }
+  body.premium .navbar .mega-panel-text strong { font-size: 0.82rem !important; }
+  body.premium .navbar .mega-panel-text span { font-size: 0.6rem !important; }
+  body.premium .navbar .nav-links .dropdown-item {
+    padding: 9px 10px !important;
+    width: auto !important;
+  }
+  /* 触摸优化：消除点击延迟，避免滚动/动画中的 tap 错位 */
+  body.premium .navbar .nav-links a,
+  body.premium .navbar .mega-panel-viewall a {
+    touch-action: manipulation;
+  }
+}
+
+/* ============================================================
+   Module 50.1: 抽屉打开时隐藏底部浮层 (2026-09-06)
+   - cookie-banner z-index 2000、pwa-install-btn 9990、whatsapp-float 1500
+     均高于抽屉(999)，固定在底部会拦截「瀏覽全部」等抽屉底部元素点击
+   - 抽屉打开期间统一隐藏，关闭后恢复
+   ============================================================ */
+body.drawer-open .cookie-banner,
+body.drawer-open .whatsapp-float,
+body.drawer-open .back-to-top,
+body.drawer-open .pwa-install-btn {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease;
+}
