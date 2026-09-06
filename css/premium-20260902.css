@@ -2060,6 +2060,68 @@ body.premium .navbar.scrolled {
     margin-top: 16px;
   }
   body.premium .navbar .lang-switch a { font-size: 14px !important; }
+
+  /* —— 45.1 移动抽屉修正（2026-09-06）：修复基础样式残留冲突 ——
+     问题1 乱码：base .nav-links::after content 已在源头删除，此处双保险封杀
+     问题2 对齐：base 将顶级 <a> 设为 flex 居中 + min-height 56px，
+          导致「首頁/解決方案/聯繫我們」居中、其余左对齐、行高不一
+     问题3 重叠：base .nav-links::before 自带黑幕与 .nav-overlay 遮罩双重叠加 */
+  body.premium .navbar .nav-links::before,
+  body.premium .navbar .nav-links::after { content: none !important; }
+
+  body.premium .navbar .nav-links > a,
+  body.premium .navbar .nav-links > .nav-dropdown > a {
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  /* active/hover 态统一：金色文字 + 左侧金条，去掉胶囊底色与居中金线 */
+  body.premium .navbar .nav-links > a.active,
+  body.premium .navbar .nav-links > a:hover,
+  body.premium .navbar .nav-links > .nav-dropdown > a.active,
+  body.premium .navbar .nav-links > .nav-dropdown:hover > a {
+    color: #C9A84C !important;
+    background: transparent !important;
+  }
+  body.premium .navbar .nav-links > a.active::before {
+    content: '' !important;
+    position: absolute !important;
+    left: -24px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 3px !important;
+    height: 22px !important;
+    background: #C9A84C !important;
+    border-radius: 0 2px 2px 0 !important;
+    bottom: auto !important;
+  }
+
+  /* 抽屉本体：dvh 适配移动端地址栏、限宽、轻阴影 */
+  body.premium .navbar .nav-links {
+    height: 100dvh;
+    max-width: 86vw;
+    box-shadow: -12px 0 40px rgba(26,26,46,0.18);
+  }
+
+  /* 语言切换：左对齐轻量文本式，替代 base 大药丸 */
+  body.premium .navbar .lang-switch {
+    justify-content: flex-start !important;
+    gap: 4px !important;
+    margin-left: 0 !important;
+    margin-right: 24px !important;
+  }
+  body.premium .navbar .lang-switch a {
+    min-width: 0 !important;
+    padding: 8px 14px !important;
+    border-radius: 999px !important;
+  }
+  body.premium .navbar .lang-switch a.active {
+    color: #1A1A2E !important;
+    background: rgba(201,168,76,0.18) !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════

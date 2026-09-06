@@ -4997,17 +4997,7 @@ html {
     pointer-events: auto;
   }
 
-  /* Menu header with close button area */
-  .nav-links::after {
-    content: "鈽?鑿滃柈";
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: rgba(26,26,46,0.4);
-  }
+  /* Menu header removed (was mojibake content, drawer uses navbar × to close) */
 
   /* Main menu items */
   .nav-links > a,
