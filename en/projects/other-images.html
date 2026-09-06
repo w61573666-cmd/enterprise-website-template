@@ -187,7 +187,10 @@ body.premium .arch-hero p{font-size:15px;line-height:1.9;color:rgba(255,255,255,
 .arch-card .meta{font-size:12.5px;color:#8a8794;line-height:1.8;margin:0;}
 .arch-note{max-width:1200px;margin:0 auto 72px;padding:0 24px;}
 .arch-note-in{background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.4);border-radius:14px;padding:22px 26px;font-size:13.5px;line-height:1.9;color:#6b5a2e;}
-@media (max-width:900px){.arch-rules-in{grid-template-columns:1fr;}.arch-grid{grid-template-columns:1fr;}}
+.arch-tile{display:block;border-radius:14px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 12px 34px rgba(26,26,46,.10);border:1px dashed rgba(201,168,76,.55);background:#eee;}
+.arch-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.arch-tile:hover img{transform:scale(1.05);}
+@media (max-width:900px){.arch-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body class="inner-page premium"><!-- Navigation -->
@@ -649,70 +652,20 @@ body.premium .arch-hero p{font-size:15px;line-height:1.9;color:rgba(255,255,255,
     </div>
 </div>
 </nav>
-
 <section class="arch-hero">
  <div class="arch-hero-in">
-  <span class="arch-tag">圖片存檔 · IMAGE ARCHIVE</span>
   <h1>Project Image Archive</h1>
-  <p>A dedicated archive for images replaced from our project case pages. Archived images are for record-keeping only and are not referenced by any other front-end page.</p>
- </div>
-</section>
-<section class="arch-rules">
- <div class="arch-rules-in">
-        <div class="arch-rule">
-         <span class="n">01</span>
-         <h3>Archive Only</h3>
-         <p>Images replaced from project case pages must be moved here — never deleted.</p>
-        </div>
-        <div class="arch-rule">
-         <span class="n">02</span>
-         <h3>Fully Migrated</h3>
-         <p>All previously replaced images have been migrated into this archive with nothing left behind.</p>
-        </div>
-        <div class="arch-rule">
-         <span class="n">03</span>
-         <h3>No Front-end Use</h3>
-         <p>Archived images are not referenced, called, or displayed by any other page or section.</p>
-        </div>
  </div>
 </section>
 <section class="arch-sec">
- <span class="arch-sec-sub">ARCHIVE LIST</span>
- <h2>Archived Images</h2>
- <p class="desc">Images below were replaced from their original project case pages and archived. Click to view the full-size file.</p>
  <div class="arch-grid">
-        <figure class="arch-card">
-         <a class="ph" href="../../images/archive/projects-cases/024.jpg" target="_blank" rel="noopener"><img src="../../images/archive/projects-cases/024.jpg" alt="原工程案例圖庫 · 編號 024（已歸檔）" loading="lazy"/></a>
-         <figcaption class="bd">
-          <span class="no">ARCHIVE · 024</span>
-          <h3>原工程案例圖庫 · 編號 024</h3>
-          <p class="meta">歸檔日期：2026-09-04<br/>狀態：僅作存檔，未被其他頁面引用</p>
-         </figcaption>
-        </figure>
-        <figure class="arch-card">
-         <a class="ph" href="../../images/archive/projects-cases/035.jpg" target="_blank" rel="noopener"><img src="../../images/archive/projects-cases/035.jpg" alt="原工程案例圖庫 · 編號 035（已歸檔）" loading="lazy"/></a>
-         <figcaption class="bd">
-          <span class="no">ARCHIVE · 035</span>
-          <h3>原工程案例圖庫 · 編號 035</h3>
-          <p class="meta">歸檔日期：2026-09-04<br/>狀態：僅作存檔，未被其他頁面引用</p>
-         </figcaption>
-        </figure>
-        <figure class="arch-card">
-         <a class="ph" href="../../images/archive/projects-cases/051.jpg" target="_blank" rel="noopener"><img src="../../images/archive/projects-cases/051.jpg" alt="原工程案例圖庫 · 編號 051（已歸檔）" loading="lazy"/></a>
-         <figcaption class="bd">
-          <span class="no">ARCHIVE · 051</span>
-          <h3>原工程案例圖庫 · 編號 051</h3>
-          <p class="meta">歸檔日期：2026-09-04<br/>狀態：僅作存檔，未被其他頁面引用</p>
-         </figcaption>
-        </figure>
+   <a class="arch-tile" href="../../images/archive/projects-cases/024.jpg" target="_blank" rel="noopener"><img src="../../images/archive/projects-cases/024.jpg" alt="Archived project image 024" loading="lazy"/></a>
+   <a class="arch-tile" href="../../images/archive/projects-cases/035.jpg" target="_blank" rel="noopener"><img src="../../images/archive/projects-cases/035.jpg" alt="Archived project image 035" loading="lazy"/></a>
+   <a class="arch-tile" href="../../images/archive/projects-cases/051.jpg" target="_blank" rel="noopener"><img src="../../images/archive/projects-cases/051.jpg" alt="Archived project image 051" loading="lazy"/></a>
  </div>
 </section>
-<div class="arch-note">
- <div class="arch-note-in">Note: images in this archive are for record-keeping only. When replacing images on project pages in the future, move the old files into images/archive/projects-cases/ and list them here instead of deleting them.</div>
-</div>
 
-
-  <footer class="footer">
+<footer class="footer">
 <div class="container">
     <div class="ft-grid5">
      <div class="ft-brand">

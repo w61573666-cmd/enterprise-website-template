@@ -187,7 +187,10 @@ body.premium .arch-hero p{font-size:15px;line-height:1.9;color:rgba(255,255,255,
 .arch-card .meta{font-size:12.5px;color:#8a8794;line-height:1.8;margin:0;}
 .arch-note{max-width:1200px;margin:0 auto 72px;padding:0 24px;}
 .arch-note-in{background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.4);border-radius:14px;padding:22px 26px;font-size:13.5px;line-height:1.9;color:#6b5a2e;}
-@media (max-width:900px){.arch-rules-in{grid-template-columns:1fr;}.arch-grid{grid-template-columns:1fr;}}
+.arch-tile{display:block;border-radius:14px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 12px 34px rgba(26,26,46,.10);border:1px dashed rgba(201,168,76,.55);background:#eee;}
+.arch-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.arch-tile:hover img{transform:scale(1.05);}
+@media (max-width:900px){.arch-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body class="inner-page premium"><!-- Navigation -->
@@ -649,70 +652,20 @@ body.premium .arch-hero p{font-size:15px;line-height:1.9;color:rgba(255,255,255,
     </div>
 </div>
 </nav>
-
 <section class="arch-hero">
  <div class="arch-hero-in">
-  <span class="arch-tag">圖片存檔 · IMAGE ARCHIVE</span>
   <h1>其它項目圖</h1>
-  <p>本欄目為「工程案例」各項目頁替換下來的歷史圖片統一歸檔庫。圖片僅作存檔用途，不作現役案例素材，亦不被任何其他前台頁面引用。</p>
- </div>
-</section>
-<section class="arch-rules">
- <div class="arch-rules-in">
-        <div class="arch-rule">
-         <span class="n">01</span>
-         <h3>只進不出</h3>
-         <p>凡從項目案例頁替換下來的圖片，一律移入本欄目歸檔，不得刪除。</p>
-        </div>
-        <div class="arch-rule">
-         <span class="n">02</span>
-         <h3>全部遷移</h3>
-         <p>此前已替換但未歸類的歷史圖片，已全數遷移至本欄目，確保無遺漏。</p>
-        </div>
-        <div class="arch-rule">
-         <span class="n">03</span>
-         <h3>僅作存檔</h3>
-         <p>本欄目圖片不被任何前台頁面或其他欄目引用、調用或展示。</p>
-        </div>
  </div>
 </section>
 <section class="arch-sec">
- <span class="arch-sec-sub">ARCHIVE LIST</span>
- <h2>已歸檔圖片</h2>
- <p class="desc">以下圖片已從原項目案例中替換並歸檔保存。點擊圖片可查看原圖。</p>
  <div class="arch-grid">
-        <figure class="arch-card">
-         <a class="ph" href="../images/archive/projects-cases/024.jpg" target="_blank" rel="noopener"><img src="../images/archive/projects-cases/024.jpg" alt="原工程案例圖庫 · 編號 024（已歸檔）" loading="lazy"/></a>
-         <figcaption class="bd">
-          <span class="no">ARCHIVE · 024</span>
-          <h3>原工程案例圖庫 · 編號 024</h3>
-          <p class="meta">歸檔日期：2026-09-04<br/>狀態：僅作存檔，未被其他頁面引用</p>
-         </figcaption>
-        </figure>
-        <figure class="arch-card">
-         <a class="ph" href="../images/archive/projects-cases/035.jpg" target="_blank" rel="noopener"><img src="../images/archive/projects-cases/035.jpg" alt="原工程案例圖庫 · 編號 035（已歸檔）" loading="lazy"/></a>
-         <figcaption class="bd">
-          <span class="no">ARCHIVE · 035</span>
-          <h3>原工程案例圖庫 · 編號 035</h3>
-          <p class="meta">歸檔日期：2026-09-04<br/>狀態：僅作存檔，未被其他頁面引用</p>
-         </figcaption>
-        </figure>
-        <figure class="arch-card">
-         <a class="ph" href="../images/archive/projects-cases/051.jpg" target="_blank" rel="noopener"><img src="../images/archive/projects-cases/051.jpg" alt="原工程案例圖庫 · 編號 051（已歸檔）" loading="lazy"/></a>
-         <figcaption class="bd">
-          <span class="no">ARCHIVE · 051</span>
-          <h3>原工程案例圖庫 · 編號 051</h3>
-          <p class="meta">歸檔日期：2026-09-04<br/>狀態：僅作存檔，未被其他頁面引用</p>
-         </figcaption>
-        </figure>
+   <a class="arch-tile" href="../images/archive/projects-cases/024.jpg" target="_blank" rel="noopener"><img src="../images/archive/projects-cases/024.jpg" alt="原工程案例圖 024（已歸檔）" loading="lazy"/></a>
+   <a class="arch-tile" href="../images/archive/projects-cases/035.jpg" target="_blank" rel="noopener"><img src="../images/archive/projects-cases/035.jpg" alt="原工程案例圖 035（已歸檔）" loading="lazy"/></a>
+   <a class="arch-tile" href="../images/archive/projects-cases/051.jpg" target="_blank" rel="noopener"><img src="../images/archive/projects-cases/051.jpg" alt="原工程案例圖 051（已歸檔）" loading="lazy"/></a>
  </div>
 </section>
-<div class="arch-note">
- <div class="arch-note-in">存檔說明：本欄目圖片僅供內部存檔查閱。後續從項目案例替換的圖片，請統一遷移至 images/archive/projects-cases/ 目錄並在本頁登記，嚴禁直接刪除。</div>
-</div>
 
-
-  <footer class="footer">
+<footer class="footer">
 <div class="container">
     <div class="ft-grid5">
      <div class="ft-brand">
