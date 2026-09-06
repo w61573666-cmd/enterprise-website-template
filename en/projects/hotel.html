@@ -1039,5 +1039,47 @@
 <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
+
+
+<!-- HSST Seal Watermark (bottom-right logo stamp on all content images) -->
+<style>
+.hsst-wm{display:none!important}
+.cs2-seal-wm{position:absolute!important;right:12px!important;bottom:12px!important;width:64px!important;height:auto!important;object-fit:contain!important;opacity:.85!important;pointer-events:none!important;z-index:9!important;filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));transition:none!important;transform:none!important}
+.cs2-gal:hover img.cs2-seal-wm{transform:none!important}
+@media (max-width:768px){.cs2-seal-wm{right:8px!important;bottom:8px!important;width:44px!important}}
+</style>
+<script>
+(function(){
+  var SEAL='../../images/logo-seal.png';
+  function rel(el){if(getComputedStyle(el).position==='static')el.style.position='relative';}
+  function skip(img){
+    if(img.classList.contains('cs2-seal-wm'))return true;
+    if(img.closest('.nav-logo,.footer-logo,.footer-brand,.footer-social,.nav-center-title,.whatsapp-float,.trust-bar,.mega-panel-icon'))return true;
+    if(img.getAttribute('alt')==='HSST')return true;
+    return false;
+  }
+  function add(img){
+    if(img.dataset.sealWm||skip(img))return;
+    img.dataset.sealWm='1';
+    var w=img.offsetWidth||img.naturalWidth||0,h=img.offsetHeight||img.naturalHeight||0;
+    if(w>0&&w<80)return;
+    if(h>0&&h<80)return;
+    var p=img.parentElement;if(!p)return;
+    rel(p);
+    if(p.querySelector(':scope > .cs2-seal-wm'))return;
+    var d=document.createElement('img');
+    d.src=SEAL;d.alt='';d.className='cs2-seal-wm';d.loading='lazy';
+    p.appendChild(d);
+  }
+  function run(){
+    document.querySelectorAll('img').forEach(function(img){
+      if(img.complete)add(img);
+      else img.addEventListener('load',function(){add(img);});
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}else{run();}
+})();
+</script>
+
 </body>
 </html>
