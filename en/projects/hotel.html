@@ -1041,43 +1041,94 @@
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 
 
-<!-- HSST Seal Watermark (bottom-right logo stamp on all content images) -->
+
+
+
+<!-- HSST Seal Lightbox (click-to-enlarge with company seal bottom-right) -->
 <style>
-.hsst-wm{display:none!important}
-.cs2-seal-wm{position:absolute!important;right:12px!important;bottom:12px!important;width:64px!important;height:auto!important;object-fit:contain!important;opacity:.85!important;pointer-events:none!important;z-index:9!important;filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));transition:none!important;transform:none!important}
-.cs2-gal:hover img.cs2-seal-wm{transform:none!important}
-@media (max-width:768px){.cs2-seal-wm{right:8px!important;bottom:8px!important;width:44px!important}}
+#cs2lb{position:fixed;inset:0;z-index:12000;display:none;align-items:center;justify-content:center;background:rgba(10,10,14,.93);}
+#cs2lb.show{display:flex;}
+#cs2lbWrap{position:relative;margin:0;display:flex;}
+#cs2lbImg{max-width:90vw;max-height:84vh;object-fit:contain;border-radius:4px;display:block;}
+#cs2lbSeal{position:absolute;right:12px;bottom:12px;width:64px;height:auto;opacity:.9;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));}
+.cs2lb-x{position:absolute;top:18px;right:22px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.6rem;cursor:pointer;transition:background .3s;}
+.cs2lb-x:hover{background:rgba(255,255,255,.25);}
+.cs2lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.8rem;cursor:pointer;transition:background .3s;}
+.cs2lb-nav:hover{background:rgba(255,255,255,.25);}
+.cs2lb-prev{left:16px;}
+.cs2lb-next{right:16px;}
+#cs2lbCount{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:.85rem;letter-spacing:.05em;}
+.cs2-gal,.cs2-proc .ph,.cs2-inst .ph,.cs2-mat-card .ph,.cs2-rel .ph,.project-hero{cursor:zoom-in;}
+@media (max-width:768px){
+  #cs2lbSeal{width:44px;right:8px;bottom:8px;}
+  .cs2lb-x{top:10px;right:10px;width:42px;height:42px;}
+  .cs2lb-prev{left:6px;}.cs2lb-next{right:6px;}
+  .cs2lb-nav{width:40px;height:40px;}
+  #cs2lbCount{bottom:-30px;font-size:.78rem;}
+}
 </style>
+<div id="cs2lb" role="dialog" aria-label="Image viewer">
+ <button class="cs2lb-x" type="button" aria-label="Close">&#10005;</button>
+ <button class="cs2lb-nav cs2lb-prev" type="button" aria-label="Previous">&#8249;</button>
+ <button class="cs2lb-nav cs2lb-next" type="button" aria-label="Next">&#8250;</button>
+ <figure id="cs2lbWrap"><img id="cs2lbImg" alt=""/><img id="cs2lbSeal" src="../../images/logo-seal.png" alt=""/><figcaption id="cs2lbCount"></figcaption></figure>
+</div>
 <script>
 (function(){
-  var SEAL='../../images/logo-seal.png';
-  function rel(el){if(getComputedStyle(el).position==='static')el.style.position='relative';}
-  function skip(img){
-    if(img.classList.contains('cs2-seal-wm'))return true;
-    if(img.closest('.nav-logo,.footer-logo,.footer-brand,.footer-social,.nav-center-title,.whatsapp-float,.trust-bar,.mega-panel-icon'))return true;
-    if(img.getAttribute('alt')==='HSST')return true;
-    return false;
+  var lb=document.getElementById('cs2lb');
+  var big=document.getElementById('cs2lbImg');
+  var cnt=document.getElementById('cs2lbCount');
+  var list=[],idx=0;
+  function contentImgs(){
+    return Array.prototype.slice.call(document.querySelectorAll(
+      '.project-hero img,.cs2-gal img,.cs2-proc .ph img,.cs2-inst .ph img,.cs2-mat-card .ph img,.cs2-rel .ph img'
+    )).filter(function(i){return (i.offsetWidth||0)>=80;});
   }
-  function add(img){
-    if(img.dataset.sealWm||skip(img))return;
-    img.dataset.sealWm='1';
-    var w=img.offsetWidth||img.naturalWidth||0,h=img.offsetHeight||img.naturalHeight||0;
-    if(w>0&&w<80)return;
-    if(h>0&&h<80)return;
-    var p=img.parentElement;if(!p)return;
-    rel(p);
-    if(p.querySelector(':scope > .cs2-seal-wm'))return;
-    var d=document.createElement('img');
-    d.src=SEAL;d.alt='';d.className='cs2-seal-wm';d.loading='lazy';
-    p.appendChild(d);
+  function bigSrc(el){
+    var g=el.closest('.cs2-gal');
+    if(g){var ds=g.getAttribute('data-src');if(ds)return ds;}
+    return el.currentSrc||el.src;
   }
-  function run(){
-    document.querySelectorAll('img').forEach(function(img){
-      if(img.complete)add(img);
-      else img.addEventListener('load',function(){add(img);});
-    });
+  function show(i){
+    if(!list.length)return;
+    idx=(i+list.length)%list.length;
+    var el=list[idx];
+    big.src=bigSrc(el);
+    big.alt=el.alt||'';
+    cnt.textContent=(idx+1)+' / '+list.length;
+    lb.classList.add('show');
+    document.body.style.overflow='hidden';
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}else{run();}
+  function close(){lb.classList.remove('show');document.body.style.overflow='';}
+  /* window 捕获阶段：先于 main js 的 document 捕获监听，拦下内容图点击 */
+  window.addEventListener('click',function(e){
+    var t=e.target;
+    if(!(t instanceof Element))return;
+    if(t.closest('#cs2lb'))return;
+    var gal=t.closest('.cs2-gal');
+    if(gal){
+      e.preventDefault();e.stopPropagation();
+      var im=gal.querySelector('img');
+      openEl(im||gal);return;
+    }
+    if(t.tagName==='IMG'&&((t.offsetWidth||0)>=80)){
+      if(t.closest('.cs2-rel .ph')||t.closest('.project-hero,.cs2-proc,.cs2-inst,.cs2-mat-card')){
+        e.preventDefault();e.stopPropagation();
+        openEl(t);
+      }
+    }
+  },true);
+  function openEl(el){list=contentImgs();var at=list.indexOf(el);show(at>-1?at:0);}
+  lb.querySelector('.cs2lb-x').addEventListener('click',close);
+  lb.querySelector('.cs2lb-prev').addEventListener('click',function(){show(idx-1);});
+  lb.querySelector('.cs2lb-next').addEventListener('click',function(){show(idx+1);});
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('show'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')show(idx-1);
+    if(e.key==='ArrowRight')show(idx+1);
+  });
 })();
 </script>
 
