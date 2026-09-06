@@ -159,6 +159,14 @@
 }
 </script>
   <meta content="Shopping mall marble floor, Marble flooring Hong Kong, Marble entrance flooring, Marble wall cladding Hong Kong, Marble staircase Hong Kong, Commercial marble project Hong Kong, Polished marble, High gloss marble" name="keywords"/>
+<style>
+/* 画廊末行两卡平铺整行（桌面端）：6 列网格，常规卡跨 2 列，末行 2 卡各跨 3 列 */
+@media (min-width:1025px){
+.cs2-gal-grid{grid-template-columns:repeat(6,1fr);}
+.cs2-gal{grid-column:span 2;}
+.cs2-gal:nth-last-child(-n+2){grid-column:span 3;aspect-ratio:2/1;}
+}
+</style>
 </head>
 <body class="inner-page premium"><!-- Navigation -->
 <nav class="navbar">
