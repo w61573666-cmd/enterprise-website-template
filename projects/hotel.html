@@ -1083,6 +1083,7 @@
 
 
 
+
 <!-- HSST Seal Lightbox (click-to-enlarge with company seal bottom-right) -->
 <style>
 #cs2lb{position:fixed;inset:0;z-index:12000;display:none;align-items:center;justify-content:center;background:rgba(10,10,14,.93);}
@@ -1097,7 +1098,7 @@
 .cs2lb-prev{left:16px;}
 .cs2lb-next{right:16px;}
 #cs2lbCount{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:.85rem;letter-spacing:.05em;}
-.cs2-gal,.cs2-proc .ph,.cs2-inst .ph,.cs2-mat-card .ph,.cs2-rel .ph,.project-hero{cursor:zoom-in;}
+.cs2-overview-media,.cs2-gal,.cs2-proc .ph,.cs2-inst .ph,.cs2-mat-card .ph,.cs2-rel .ph,.project-hero{cursor:zoom-in;}
 @media (max-width:768px){
   #cs2lbSeal{width:64px;right:8px;bottom:8px;padding:5px;border-radius:6px;}
   .cs2lb-x{top:10px;right:10px;width:42px;height:42px;}
@@ -1120,7 +1121,7 @@
   var list=[],idx=0;
   function contentImgs(){
     return Array.prototype.slice.call(document.querySelectorAll(
-      '.project-hero img,.cs2-gal img,.cs2-proc .ph img,.cs2-inst .ph img,.cs2-mat-card .ph img,.cs2-rel .ph img'
+      '.project-hero img,.cs2-overview-media img,.cs2-gal img,.cs2-proc .ph img,.cs2-inst .ph img,.cs2-mat-card .ph img,.cs2-rel .ph img'
     )).filter(function(i){return (i.offsetWidth||0)>=80;});
   }
   function bigSrc(el){
@@ -1144,6 +1145,14 @@
     var t=e.target;
     if(!(t instanceof Element))return;
     if(t.closest('#cs2lb'))return;
+    /* 項目概況圖：.cs2-overview-media（含覆蓋的 .tag 標籤）整個區域可點 */
+    var ovm=t.closest('.cs2-overview-media');
+    if(ovm){
+      e.preventDefault();e.stopPropagation();
+      var oim=ovm.querySelector('img');
+      if(oim){openEl(oim);}
+      return;
+    }
     /* hero 大图：被全屏渐变遮罩盖住，点击命中的是遮罩而非 img —— 整个 hero 区域可点 */
     var hero=t.closest('.project-hero');
     if(hero){
