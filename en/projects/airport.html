@@ -1011,6 +1011,7 @@
 
 
 
+
 <!-- HSST Seal Lightbox (click-to-enlarge with company seal bottom-right) -->
 <style>
 #cs2lb{position:fixed;inset:0;z-index:12000;display:none;align-items:center;justify-content:center;background:rgba(10,10,14,.93);}
@@ -1072,6 +1073,14 @@
     var t=e.target;
     if(!(t instanceof Element))return;
     if(t.closest('#cs2lb'))return;
+    /* hero 大图：被全屏渐变遮罩盖住，点击命中的是遮罩而非 img —— 整个 hero 区域可点 */
+    var hero=t.closest('.project-hero');
+    if(hero){
+      e.preventDefault();e.stopPropagation();
+      var him=hero.querySelector('img');
+      if(him){openEl(him);}
+      return;
+    }
     var gal=t.closest('.cs2-gal');
     if(gal){
       e.preventDefault();e.stopPropagation();
@@ -1079,7 +1088,7 @@
       openEl(im||gal);return;
     }
     if(t.tagName==='IMG'&&((t.offsetWidth||0)>=80)){
-      if(t.closest('.cs2-rel .ph')||t.closest('.project-hero,.cs2-proc,.cs2-inst,.cs2-mat-card')){
+      if(t.closest('.cs2-rel .ph')||t.closest('.cs2-proc,.cs2-inst,.cs2-mat-card')){
         e.preventDefault();e.stopPropagation();
         openEl(t);
       }
