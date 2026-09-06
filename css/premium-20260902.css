@@ -2412,41 +2412,6 @@ body.premium .cta-section.cta-home .hsst-form-btn:disabled, body.premium .hsst-f
   box-shadow: none !important;
 }
 
-/* ============================================================
-   Module 49: Mega-Panel「瀏覽全部」链接统一 (2026-09-06)
-   - 修复：旧折叠逻辑曾删除 href 致无法跳转（JS 已移除，链接恢复）
-   - 统一中英文/桌面/移动样式：淡金底 pill、深金文字（对比度达标）、
-     hover 加深上浮、focus 金环，与全站视觉一致
-   ============================================================ */
-body.premium .navbar .mega-panel-viewall {
-  border-top: 1px solid rgba(26,26,46,0.08);
-}
-body.premium .navbar .mega-panel-viewall a {
-  display: inline-flex !important;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 22px !important;
-  border-radius: 999px !important;
-  background: rgba(201,168,76,0.12) !important;
-  color: #A8863B !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.5px;
-  text-transform: none !important;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-body.premium .navbar .mega-panel-viewall a:hover {
-  background: rgba(201,168,76,0.24) !important;
-  color: #8A6D2F !important;
-  transform: translateY(-1px);
-}
-body.premium .navbar .mega-panel-viewall a:active {
-  transform: scale(0.97);
-}
-body.premium .navbar .mega-panel-viewall a:focus-visible {
-  outline: none !important;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #C9A84C !important;
-}
 
 /* ============================================================
    Module 50: 移动抽屉子菜单双列化 (2026-09-06)
@@ -2500,4 +2465,34 @@ body.drawer-open .pwa-install-btn {
   visibility: hidden !important;
   pointer-events: none !important;
   transition: opacity 0.25s ease;
+}
+
+/* ============================================================
+   Module 51: 移动抽屉子菜单末行单项铺满 (2026-09-06)
+   - viewall 入口已全站删除（子项全量直出），此处同步移除其样式依赖
+   - 双列网格中若最后一行只剩一项（奇数位末项），横向铺满整行，
+     与上一行对齐协调；整行/整对排列不受影响
+   ============================================================ */
+@media (max-width: 1160px) {
+  body.premium .navbar .mega-panel-grid .mega-panel-link:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  /* 触屏粘滞 hover 会触发桌面下划线动画 :hover::after{width:100%}，
+     把箭头三角形拉成长条并挤换行 trigger 文字——此处锁死箭头尺寸 */
+  body.premium .navbar .nav-links .nav-dropdown > a::after {
+    width: 0 !important;
+    height: 0 !important;
+    flex: none !important;
+    align-self: center !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-top: 5px solid currentColor !important;
+    border-bottom: 0 !important;
+    background: transparent !important;
+    position: static !important;
+    margin: 0 0 0 6px !important;
+  }
+  body.premium .navbar .nav-links > .nav-dropdown > a {
+    white-space: nowrap;
+  }
 }

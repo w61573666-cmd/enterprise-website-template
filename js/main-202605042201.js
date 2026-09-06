@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (dd !== dropdown) dd.classList.remove('mobile-open');
         });
         dropdown.classList.toggle('mobile-open');
-        // 展开动画结束后，把整个子面板（含「瀏覽全部」）滚入抽屉可视区，
-        // 确保全部子项与 viewall 一屏内可见可点（修复移动端点击错位/跳转异常）
+        // 展开动画结束后，把整个子面板滚入抽屉可视区，
+        // 确保全部子项一屏内可见可点（修复移动端点击错位/跳转异常）
         if (dropdown.classList.contains('mobile-open')) {
           setTimeout(function () {
             var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
@@ -107,11 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- Mega-Panel「瀏覽全部」链接 ----------
-  // 2026-09-06 修复：旧版 3×3 折叠逻辑会在子项 >9 时删除 viewall 的 href、
-  // 把它改成"展开/收起"开关并隐藏多余子项（产品中心藏 3 项、工程案例藏 8 项），
-  // 导致「瀏覽全部石材系列/工程案例」点击不跳转、文案错乱（显示异常）。
-  // 现已移除该折叠逻辑：viewall 恢复为真实导航链接，面板完整展示全部子项。
+  // ---------- Mega-Panel 子菜单 ----------
+  // 2026-09-06：旧版 3×3 折叠逻辑（子项 >9 时隐藏多余项并把 viewall 改为开关）
+  // 已移除；其后 viewall 入口亦已全站删除（子项全量直出，无需二次入口）。
   // mega-panel-v2 removed; all pages now use unified mega-panel pattern
 
   // ---------- Series Card Click Handler (All versions) ----------
