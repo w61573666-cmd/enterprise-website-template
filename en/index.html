@@ -650,7 +650,7 @@
   <section class="section-padding about-preview">
    <div class="container">
     <div class="about-grid fade-in" data-aos="fade-right">
-     <div class="about-image" style="background-image:image-set(url('../images/products/s2/0CB75F49-B049-4046-B33F-79D82F835DBE.webp') type('image/webp'), url('../images/products/s2/0CB75F49-B049-4046-B33F-79D82F835DBE.jpg') type('image/jpeg'));background-size:cover;background-position:center">
+     <div class="about-image" style="background-image:image-set(url('../images/about/hsst-factory-cnc.webp') type('image/webp'), url('../images/about/hsst-factory-cnc.jpg') type('image/jpeg'));background-size:cover;background-position:center">
      </div>
      <div>
       <span class="section-subtitle">
@@ -746,32 +746,117 @@
       From large public spaces to private residences, different settings place very different demands on stone: some prioritise durability and maintenance cost, others emphasise tactile detail and how surfaces respond to light. Through extensive work in hotel lobbies, guest bathrooms, shopping atriums, offices, clubs, apartment common areas and standalone homes, Hengsheng has built a deep portfolio of real-world cases — allowing us to recommend the most fitting stone pairings and finishes for each specific location.
      </p>
     </div>
-    <div class="scenarios-grid">
+    <style>
+     /* Homepage scenarios 5×2 grid (this page only, overrides premium column vars) */
+     .scenarios-grid-hs { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:36px; }
+     .scenarios-grid-hs .scenario-card { aspect-ratio: 3/4.3; }
+     .scenario-card-overlay { padding:14px 12px; }
+     .scenario-card h3 { font-size:1.05rem; margin-bottom:2px; }
+     .scenario-card p { font-size:0.66rem; letter-spacing:0.5px; }
+     .scenario-cta { font-size:0.64rem; margin-top:4px; }
+     .scenario-card .scenario-desc-en { font-size:0.68rem;color:rgba(26,26,46,0.72);line-height:1.5;margin:4px 0 6px; }
+     @media (max-width:1023px){ .scenarios-grid-hs{grid-template-columns:repeat(2,1fr);} .scenario-card{aspect-ratio:4/3;} .scenario-card p{font-size:0.78rem;} .scenario-card .scenario-desc-en{font-size:0.75rem !important;} }
+     @media (max-width:639px){ .scenarios-grid-hs{grid-template-columns:1fr;} .scenario-card{aspect-ratio:16/10;} .scenario-card h3{font-size:1.2rem;} .scenario-card p{font-size:0.78rem;} .scenario-card .scenario-desc-en{font-size:0.75rem !important;} }
+    </style>
+    <div class="scenarios-grid-hs">
      <a class="scenario-card fade-in" href="projects/hotel.html">
-      <div class="scenario-card-bg" style="background-image:image-set(url('../images/archive/projects-cases/001.webp') type('image/webp'), url('../images/archive/projects-cases/001.jpg') type('image/jpeg'));background-size:cover;background-position:center">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-01-hotel.webp') type('image/webp'), url('../images/scenes/scene-01-hotel.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
       </div>
       <div class="scenario-card-overlay">
        <h3>Luxury Hotels</h3>
-       <p>From lobbies and lift lobbies to guest bathrooms — stone options across gloss levels and slip ratings, balancing guest experience with safety compliance.</p>
-       <span class="scenario-cta">View Hotel Stone Solutions →</span>
+       <p>Hotels &amp; Resorts</p>
+       <p class="scenario-desc-en">Full-package stone solutions from lobby to guest room</p>
+       <span class="scenario-cta">View Hotel Solutions →</span>
       </div>
      </a>
      <a class="scenario-card fade-in" href="projects/commercial.html">
-      <div class="scenario-card-bg" style="background-image:image-set(url('../images/archive/projects-cases/010.webp') type('image/webp'), url('../images/archive/projects-cases/010.jpg') type('image/jpeg'));background-size:cover;background-position:center">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-02-commercial.webp') type('image/webp'), url('../images/scenes/scene-02-commercial.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
       </div>
       <div class="scenario-card-overlay">
-       <h3>Commercial</h3>
-       <p>For high-footfall retail spaces we prioritise wear resistance, stain protection and maintenance cycles — while keeping materials compatible with future mall refurbishments and tenant turnover.</p>
+       <h3>Commercial Spaces</h3>
+       <p>Commercial</p>
+       <p class="scenario-desc-en">Wear-resistant material systems for public areas</p>
        <span class="scenario-cta">View Commercial Solutions →</span>
       </div>
      </a>
      <a class="scenario-card fade-in" href="projects/residential.html">
-      <div class="scenario-card-bg" style="background-image:image-set(url('../images/archive/projects-cases/020.webp') type('image/webp'), url('../images/archive/projects-cases/020.jpg') type('image/jpeg'));background-size:cover;background-position:center">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-03-residential.webp') type('image/webp'), url('../images/scenes/scene-03-residential.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
       </div>
       <div class="scenario-card-overlay">
-       <h3>Residential</h3>
-       <p>Coordinated stone selection for stairs, entrances, living areas and bathrooms — helping owners balance long-term living comfort with the integrity of the design style.</p>
+       <h3>High-End Residential</h3>
+       <p>Residential</p>
+       <p class="scenario-desc-en">Coordinated selection for stairs, baths &amp; living</p>
        <span class="scenario-cta">View Residential Solutions →</span>
+      </div>
+     </a>
+     <a class="scenario-card fade-in" href="projects/office.html">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-04-office.webp') type('image/webp'), url('../images/scenes/scene-04-office.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
+      </div>
+      <div class="scenario-card-overlay">
+       <h3>Corporate Offices</h3>
+       <p>Office Headquarters</p>
+       <p class="scenario-desc-en">The stone language of corporate identity</p>
+       <span class="scenario-cta">View Office Solutions →</span>
+      </div>
+     </a>
+     <a class="scenario-card fade-in" href="projects/airport.html">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-05-airport.webp') type('image/webp'), url('../images/scenes/scene-05-airport.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
+      </div>
+      <div class="scenario-card-overlay">
+       <h3>Airport Terminals</h3>
+       <p>Transport Hubs</p>
+       <p class="scenario-desc-en">Durable flooring for high-traffic hubs</p>
+       <span class="scenario-cta">View Airport Solutions →</span>
+      </div>
+     </a>
+     <a class="scenario-card fade-in" href="projects/government.html">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-06-government.webp') type('image/webp'), url('../images/scenes/scene-06-government.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
+      </div>
+      <div class="scenario-card-overlay">
+       <h3>Government Projects</h3>
+       <p>Government</p>
+       <p class="scenario-desc-en">Quality and compliance for public works</p>
+       <span class="scenario-cta">View Government Solutions →</span>
+      </div>
+     </a>
+     <a class="scenario-card fade-in" href="projects/bank.html">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-07-bank.webp') type('image/webp'), url('../images/scenes/scene-07-bank.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
+      </div>
+      <div class="scenario-card-overlay">
+       <h3>Financial Institutions</h3>
+       <p>Banking Halls</p>
+       <p class="scenario-desc-en">Spaces where security meets texture</p>
+       <span class="scenario-cta">View Banking Solutions →</span>
+      </div>
+     </a>
+     <a class="scenario-card fade-in" href="projects/convention.html">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-08-convention.webp') type('image/webp'), url('../images/scenes/scene-08-convention.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
+      </div>
+      <div class="scenario-card-overlay">
+       <h3>Convention Centres</h3>
+       <p>Exhibition Venues</p>
+       <p class="scenario-desc-en">Stonework for large-span spaces</p>
+       <span class="scenario-cta">View Convention Solutions →</span>
+      </div>
+     </a>
+     <a class="scenario-card fade-in" href="projects/museum.html">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-09-museum.webp') type('image/webp'), url('../images/scenes/scene-09-museum.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
+      </div>
+      <div class="scenario-card-overlay">
+       <h3>Museums &amp; Culture</h3>
+       <p>Cultural Venues</p>
+       <p class="scenario-desc-en">Refined texture for cultural spaces</p>
+       <span class="scenario-cta">View Museum Solutions →</span>
+      </div>
+     </a>
+     <a class="scenario-card fade-in" href="projects/medical.html">
+      <div class="scenario-card-bg" style="background-image:image-set(url('../images/scenes/scene-10-medical.webp') type('image/webp'), url('../images/scenes/scene-10-medical.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
+      </div>
+      <div class="scenario-card-overlay">
+       <h3>Healthcare Buildings</h3>
+       <p>Medical</p>
+       <p class="scenario-desc-en">Clean, reassuring material choices</p>
+       <span class="scenario-cta">View Healthcare Solutions →</span>
       </div>
      </a>
     </div>
@@ -954,10 +1039,10 @@
 </div>
     <!-- Quarry Image Strip -->
     <div style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:8px;border-radius:10px;overflow:hidden;">
-     <picture><source srcset="../images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" type="image/webp"/><img alt="Stone Quarry" loading="lazy" src="../images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.jpg" class="img-thumb"/></picture>
-     <picture><source srcset="../images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" type="image/webp"/><img alt="Surface Finishes" loading="lazy" src="../images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.jpg" class="img-thumb"/></picture>
-     <picture><source srcset="../images/products/s1/0CB75F49-B049-4046-B33F-79D82F835DBE.webp" type="image/webp"/><img alt="Carving Art" loading="lazy" src="../images/products/s1/0CB75F49-B049-4046-B33F-79D82F835DBE.jpg" class="img-thumb"/></picture>
-     <picture><source srcset="../images/products/s1/2FCEE472-597D-4F37-AC31-7ABF416FD7F6.webp?v=20260903q90" type="image/webp"/><img alt="Luxury Inlay" loading="lazy" src="../images/products/s1/2FCEE472-597D-4F37-AC31-7ABF416FD7F6.jpg?v=20260903q90" class="img-thumb"/></picture>
+     <picture><source srcset="../images/tech/tech-cnc.webp" type="image/webp"/><img alt="Five-axis CNC machining centre" loading="lazy" src="../images/tech/tech-cnc.jpg" class="img-thumb"/></picture>
+     <picture><source srcset="../images/tech/tech-nano.webp" type="image/webp"/><img alt="Nano protection coating and automated polishing line" loading="lazy" src="../images/tech/tech-nano.jpg" class="img-thumb"/></picture>
+     <picture><source srcset="../images/tech/tech-inspect.webp" type="image/webp"/><img alt="Smart vision quality inspection system" loading="lazy" src="../images/tech/tech-inspect.jpg" class="img-thumb"/></picture>
+     <picture><source srcset="../images/tech/tech-craft.webp" type="image/webp"/><img alt="High-pressure waterjet medallion inlay craftsmanship" loading="lazy" src="../images/tech/tech-craft.jpg" class="img-thumb"/></picture>
     </div>
    </div>
   </section>
