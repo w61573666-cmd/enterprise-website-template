@@ -572,12 +572,16 @@
   <span class="jd-badge">Careers at HSST</span>
   <h1>投遞簡歷</h1>
   <p class="apply-sub">填寫下方表格，約 5 分鐘完成投遞。所填資料僅用於本次及後續 6 個月內的招聘評估。</p>
-  <p class="apply-note">✉ 提交後將自動打開您的郵件客戶端（收件人 careers@hsst.hk）——請在郵件中手動添加照片與簡歷附件後點擊發送。</p>
+  <p class="apply-note">✉ 點擊「提交投遞」後，申請將通過全站統一表單通道直接送達招聘專用信箱（careers@hsst.hk），簡歷與照片隨表單一併上傳，無需另行發送郵件。</p>
  </div>
 </section>
 <section class="jd-section" style="padding-top:40px;">
 <div class="container">
-<form id="applyForm" novalidate>
+<form id="applyForm" action="https://splitforms.com/api/submit" method="POST" enctype="multipart/form-data" novalidate>
+<input type="hidden" name="access_key" value="abc1985f211842eb9d23cfb6ea94d774"/>
+<input type="hidden" name="message" value="">
+<input type="hidden" name="subject" value="">
+<input type="text" name="_gotcha" style="display:none">
  <div class="fgroup"><h2>① 基本資料</h2><div class="fgrid">
   <div class="fld"><label>姓名 *</label><input type="text" name="name" required placeholder="請輸入真實姓名"></div>
   <div class="fld"><label>性別 *</label><div class="radio-row">
@@ -616,7 +620,7 @@
  </div></div>
 
  <div class="fgroup"><h2>⑤ 附件上傳</h2><div class="fgrid">
-  <div class="fld wide"><label>簡歷附件 *</label><input type="file" name="cv" accept=".pdf,.doc,.docx" required><small>PDF/DOC/DOCX，≤10MB；提交後請在打開的郵件中附上本文件與照片</small></div>
+  <div class="fld wide"><label>簡歷附件 *</label><input type="file" name="cv" accept=".pdf,.doc,.docx" required><small>PDF/DOC/DOCX，≤5MB；將隨表單直接上傳至招聘專用信箱</small></div>
   <div class="fld wide"><label>補充說明</label><textarea name="extra" rows="3" placeholder="選填：自我介紹、作品集鏈接、推薦人等"></textarea></div>
  </div></div>
 
@@ -624,7 +628,7 @@
  <div class="btnrow"><button type="submit" class="jd-btn">提交投遞</button><button type="reset" class="resetbtn">重置</button></div>
  <p class="form-err" id="formErr"></p>
 </form>
-<div class="okcard" id="okCard" style="display:none;"><h3>✓ 提交成功</h3><p>郵件草稿已生成。請確認已添加照片與簡歷附件後點擊發送；我們將在 5 個工作日內回覆。</p></div>
+<div class="okcard" id="okCard" style="display:none;"><h3>✓ 提交成功</h3><p>您的申請已成功送達招聘專用信箱，我們將在 5 個工作日內回覆。</p></div>
 </div></section>
 <script>
 var T = {"edu_h":"最高學歷","work_co":"公司名稱 *","work_title":"職位 *","work_time":"起止時間 *（如 2021.07–2024.03）","work_desc":"主要職責與業績 *","proj_name":"項目名稱","proj_role":"擔任角色","proj_time":"項目時間","proj_desc":"項目描述與您的貢獻","del":"刪除此段","work":"工作經歷","proj":"項目經驗"};
@@ -676,8 +680,8 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
   if(!/[^@\s]+@[^@\s]+\.[^@\s]+/.test(f.elements.email.value)){err.innerText="郵箱格式不正確";err.style.display='block';return;}
   if(!/^[+0-9\-() ]{8,16}$/.test(f.elements.phone.value.trim())){err.innerText="手機號碼格式不正確";err.style.display='block';return;}
   var cv=f.elements.cv.files[0];
-  if(cv&&!/\.(pdf|docx?)$/i.test(cv.name)){err.innerText="附件格式或大小不符（PDF/DOC/DOCX，≤10MB）";err.style.display='block';return;}
-  if(cv&&cv.size>10*1024*1024){err.innerText="附件格式或大小不符（PDF/DOC/DOCX，≤10MB）";err.style.display='block';return;}
+  if(cv&&!/\.(pdf|docx?)$/i.test(cv.name)){err.innerText="附件格式或大小不符（PDF/DOC/DOCX，≤5MB）";err.style.display='block';return;}
+  if(cv&&cv.size>5*1024*1024){err.innerText="附件格式或大小不符（PDF/DOC/DOCX，≤5MB）";err.style.display='block';return;}
   var ph=f.elements.photo.files[0];
   if(ph&&(!/^image\/(jpeg|png)$/.test(ph.type)||ph.size>5*1024*1024)){err.innerText="照片格式或大小不符（JPG/PNG，≤5MB）";err.style.display='block';return;}
   function dynTxt(listId){
@@ -689,10 +693,9 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
   }
   var info={name:f.elements.name.value,gender:(f.querySelector('input[name=gender]:checked')||{}).value||'',dob:f.elements.dob.value,phone:f.elements.phone.value,email:f.elements.email.value,city:f.elements.city.value,edu:f.elements.edu.value,school:f.elements.school.value,major:f.elements.major.value,gradyear:f.elements.gradyear.value,skill:f.elements.skill.value,jobwant:f.elements.jobwant.value,salary:f.elements.salary.value,arrive:f.elements.arrive.value+(f.elements.arrivedate.value?' ('+f.elements.arrivedate.value+')':''),extra:f.elements.extra.value};
   var body='== Application ==\n'+Object.keys(info).map(function(k){return k+': '+info[k];}).join('\n')+'\n\n[Work Experience]\n'+dynTxt('workList')+'\n\n[Projects]\n'+dynTxt('projList');
-  var subject=encodeURIComponent('應聘-'+f.elements.jobwant.value+'-'+f.elements.name.value);
-  window.location.href='mailto:careers@hsst.hk?subject='+subject+'&body='+encodeURIComponent(body);
-  var ok=document.getElementById('okCard');ok.style.display='block';ok.scrollIntoView({behavior:'smooth',block:'center'});
-  this.style.display='none';
+  f.elements.message.value=body;
+  f.elements.subject.value='應聘-'+f.elements.jobwant.value+'-'+f.elements.name.value;
+  f.submit();
 });
 </script>
 

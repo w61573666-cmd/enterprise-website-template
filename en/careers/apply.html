@@ -542,12 +542,16 @@
   <span class="jd-badge">Careers at HSST</span>
   <h1>Submit Your Application</h1>
   <p class="apply-sub">Complete the form below — about 5 minutes. Your data is used only for this and recruitment screening within the next 6 months.</p>
-  <p class="apply-note">✉ Submitting opens your email client (to careers@hsst.hk) — please attach the photo and CV file manually before sending.</p>
+  <p class="apply-note">✉ Press Submit and your application goes straight to our recruitment inbox (careers@hsst.hk) via the site-wide form service — CV and photo are uploaded with the form, no separate email needed.</p>
  </div>
 </section>
 <section class="jd-section" style="padding-top:40px;">
 <div class="container">
-<form id="applyForm" novalidate>
+<form id="applyForm" action="https://splitforms.com/api/submit" method="POST" enctype="multipart/form-data" novalidate>
+<input type="hidden" name="access_key" value="abc1985f211842eb9d23cfb6ea94d774"/>
+<input type="hidden" name="message" value="">
+<input type="hidden" name="subject" value="">
+<input type="text" name="_gotcha" style="display:none">
  <div class="fgroup"><h2>① Personal Details</h2><div class="fgrid">
   <div class="fld"><label>Full Name *</label><input type="text" name="name" required placeholder="Your legal name"></div>
   <div class="fld"><label>Gender *</label><div class="radio-row">
@@ -586,7 +590,7 @@
  </div></div>
 
  <div class="fgroup"><h2>⑤ Attachments</h2><div class="fgrid">
-  <div class="fld wide"><label>CV / Resume Attachment *</label><input type="file" name="cv" accept=".pdf,.doc,.docx" required><small>PDF/DOC/DOCX, ≤10MB; after submitting, attach this file and your photo in the opened email</small></div>
+  <div class="fld wide"><label>CV / Resume Attachment *</label><input type="file" name="cv" accept=".pdf,.doc,.docx" required><small>PDF/DOC/DOCX, ≤5MB; uploaded directly with this form to our recruitment inbox</small></div>
   <div class="fld wide"><label>Additional Information</label><textarea name="extra" rows="3" placeholder="Optional: self-introduction, portfolio links, referees"></textarea></div>
  </div></div>
 
@@ -594,7 +598,7 @@
  <div class="btnrow"><button type="submit" class="jd-btn">Submit Application</button><button type="reset" class="resetbtn">Reset</button></div>
  <p class="form-err" id="formErr"></p>
 </form>
-<div class="okcard" id="okCard" style="display:none;"><h3>✓ Submitted</h3><p>Email draft created. Confirm the photo and CV attachments, then press send; we reply within 5 working days.</p></div>
+<div class="okcard" id="okCard" style="display:none;"><h3>✓ Submitted</h3><p>Your application has been delivered to our recruitment inbox; we reply within 5 working days.</p></div>
 </div></section>
 <script>
 var T = {"edu_h":"Highest Education","work_co":"Company *","work_title":"Job Title *","work_time":"Period * (e.g. 2021.07–2024.03)","work_desc":"Responsibilities & achievements *","proj_name":"Project Name","proj_role":"Your Role","proj_time":"Timeline","proj_desc":"Description & your contribution","del":"Remove this entry","work":"Work Experience","proj":"Project Experience"};
@@ -646,8 +650,8 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
   if(!/[^@\s]+@[^@\s]+\.[^@\s]+/.test(f.elements.email.value)){err.innerText="Invalid email format";err.style.display='block';return;}
   if(!/^[+0-9\-() ]{8,16}$/.test(f.elements.phone.value.trim())){err.innerText="Invalid mobile number";err.style.display='block';return;}
   var cv=f.elements.cv.files[0];
-  if(cv&&!/\.(pdf|docx?)$/i.test(cv.name)){err.innerText="Attachment must be PDF/DOC/DOCX, ≤10MB";err.style.display='block';return;}
-  if(cv&&cv.size>10*1024*1024){err.innerText="Attachment must be PDF/DOC/DOCX, ≤10MB";err.style.display='block';return;}
+  if(cv&&!/\.(pdf|docx?)$/i.test(cv.name)){err.innerText="Attachment must be PDF/DOC/DOCX, ≤5MB";err.style.display='block';return;}
+  if(cv&&cv.size>5*1024*1024){err.innerText="Attachment must be PDF/DOC/DOCX, ≤5MB";err.style.display='block';return;}
   var ph=f.elements.photo.files[0];
   if(ph&&(!/^image\/(jpeg|png)$/.test(ph.type)||ph.size>5*1024*1024)){err.innerText="Photo must be JPG/PNG, ≤5MB";err.style.display='block';return;}
   function dynTxt(listId){
@@ -659,10 +663,9 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
   }
   var info={name:f.elements.name.value,gender:(f.querySelector('input[name=gender]:checked')||{}).value||'',dob:f.elements.dob.value,phone:f.elements.phone.value,email:f.elements.email.value,city:f.elements.city.value,edu:f.elements.edu.value,school:f.elements.school.value,major:f.elements.major.value,gradyear:f.elements.gradyear.value,skill:f.elements.skill.value,jobwant:f.elements.jobwant.value,salary:f.elements.salary.value,arrive:f.elements.arrive.value+(f.elements.arrivedate.value?' ('+f.elements.arrivedate.value+')':''),extra:f.elements.extra.value};
   var body='== Application ==\n'+Object.keys(info).map(function(k){return k+': '+info[k];}).join('\n')+'\n\n[Work Experience]\n'+dynTxt('workList')+'\n\n[Projects]\n'+dynTxt('projList');
-  var subject=encodeURIComponent('應聘-'+f.elements.jobwant.value+'-'+f.elements.name.value);
-  window.location.href='mailto:careers@hsst.hk?subject='+subject+'&body='+encodeURIComponent(body);
-  var ok=document.getElementById('okCard');ok.style.display='block';ok.scrollIntoView({behavior:'smooth',block:'center'});
-  this.style.display='none';
+  f.elements.message.value=body;
+  f.elements.subject.value='應聘-'+f.elements.jobwant.value+'-'+f.elements.name.value;
+  f.submit();
 });
 </script>
 
