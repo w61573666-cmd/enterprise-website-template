@@ -835,16 +835,16 @@
      </div>
          <style>
      /* 首页场景 5×2 网格（仅本页生效，覆盖 premium 列数变量） */
-     .scenarios-grid { --c:5; --gx:14px; --gy:14px; margin-top:36px; }
-     .scenario-card { aspect-ratio: 3/4.3; }
+     .scenarios-grid-hs { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:36px; }
+     .scenarios-grid-hs .scenario-card { aspect-ratio: 3/4.3; }
      .scenario-card-overlay { padding:14px 12px; }
      .scenario-card h3 { font-size:1.05rem; margin-bottom:2px; }
      .scenario-card p { font-size:0.66rem; letter-spacing:0.5px; }
      .scenario-cta { font-size:0.64rem; margin-top:4px; }
-     @media (max-width:1023px){ .scenarios-grid{--c-t:2;} .scenario-card{aspect-ratio:4/3;} }
-     @media (max-width:639px){ .scenario-card{aspect-ratio:16/10;} .scenario-card h3{font-size:1.2rem;} .scenario-card p{font-size:0.78rem;} .scenario-desc{font-size:0.75rem !important;} }
+     @media (max-width:1023px){ .scenarios-grid-hs{grid-template-columns:repeat(2,1fr);} .scenario-card{aspect-ratio:4/3;} }
+     @media (max-width:639px){ .scenarios-grid-hs{grid-template-columns:1fr;} .scenario-card{aspect-ratio:16/10;} .scenario-card h3{font-size:1.2rem;} .scenario-card p{font-size:0.78rem;} .scenario-desc{font-size:0.75rem !important;} }
     </style>
-     <div class="scenarios-grid">
+     <div class="scenarios-grid-hs">
       <a class="scenario-card fade-in" href="projects/hotel.html">
        <div class="scenario-card-bg" style="background-image:image-set(url('images/scenes/scene-01-hotel.webp') type('image/webp'), url('images/scenes/scene-01-hotel.jpg') type('image/jpeg'));background-size:cover;background-position:center;">
        </div>
