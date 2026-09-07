@@ -545,6 +545,12 @@
 .fld input[type=text],.fld input[type=tel],.fld input[type=email],.fld input[type=date],.fld select,.fld textarea{border:1px solid #D8D2C6;border-radius:9px;padding:11px 13px;font-size:.92rem;font-family:inherit;background:#FDFCFA;transition:border .2s;width:100%;box-sizing:border-box;}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:#C9A84C;box-shadow:0 0 0 3px rgba(201,168,76,.15);}
 .fld input[type=file]{padding:9px;background:#FDFCFA;}
+/* 自繪文件選擇按鈕：統一各語言瀏覽器下的原生按鈕文案 */
+.fp{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.fp-btn{display:inline-block;padding:9px 16px;background:#fff;border:1px solid #C9A84C;border-radius:8px;color:#1A1A2E;font-size:.9rem;cursor:pointer;transition:background .2s;}
+.fp-btn:hover{background:#F7F1E3;}
+.fp-name{color:#777;font-size:.88rem;}
+.fp input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0);}
 .radio-row{display:flex;gap:14px;padding:10px 0;}
 .rbtn{display:flex;align-items:center;gap:6px;font-size:.9rem;font-weight:400;cursor:pointer;}
 .rbtn input{accent-color:#C9A84C;width:16px;height:16px;}
@@ -809,6 +815,20 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
       var icon=this.querySelector('.faq-icon');
       if(a.style.maxHeight){a.style.maxHeight=null;icon.textContent='+';}
       else{a.style.maxHeight=a.scrollHeight+'px';icon.textContent='-';}
+    });
+  });
+})();
+/* 自繪文件選擇控件（統一原生按鈕文案） */
+(function(){
+  document.querySelectorAll('input[type=file]').forEach(function(inp){
+    var wrap=document.createElement('div');wrap.className='fp';
+    var btn=document.createElement('button');btn.type='button';btn.className='fp-btn';btn.textContent='選擇文件';
+    var name=document.createElement('span');name.className='fp-name';name.textContent='未選擇任何文件';
+    inp.parentNode.insertBefore(wrap,inp);
+    wrap.appendChild(btn);wrap.appendChild(name);wrap.appendChild(inp);
+    btn.addEventListener('click',function(){inp.click();});
+    inp.addEventListener('change',function(){
+      name.textContent=inp.files.length?inp.files[0].name:'未選擇任何文件';
     });
   });
 })();
