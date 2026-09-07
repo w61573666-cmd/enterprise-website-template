@@ -17,14 +17,14 @@
   <title>投遞簡歷 | 恆生石材科技 — 在線申請</title>
   <meta name="description" content="恆生石材在線簡歷投遞：基本資料、教育背景、工作與項目經驗、技能特長與附件上傳，5 分鐘完成投遞。"/>
 <meta name="keywords" content="石材行業招聘, 雲石公司招聘, 加工廠管理, CNC石材編程, 礦山顧問, 跨境石材貿易"/>
-  <meta content="加入我們 | 恆生石材科技有限公司" property="og:title"/>
-  <meta content="礦山、加工、工程、商務四大方向全球招聘。" property="og:description"/>
+  <meta content="投遞簡歷 | 恆生石材科技 — 在線申請" property="og:title"/>
+  <meta content="恆生石材在線簡歷投遞：基本資料、教育背景、工作與項目經驗、技能特長與附件上傳，5 分鐘完成投遞。" property="og:description"/>
   <meta content="website" property="og:type"/>
-  <meta content="https://www.hsst.hk/careers.html" property="og:url"/>
+  <meta content="https://www.hsst.hk/careers/apply.html" property="og:url"/>
   <meta content="https://www.hsst.hk/images/logo.jpg" property="og:image"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="投遞簡歷 | 恆生石材科技 — 在線申請"/>
-<meta name="twitter:description" content="礦山、加工、工程、商務四大方向全球招聘。"/>
+<meta name="twitter:description" content="恆生石材在線簡歷投遞：基本資料、教育背景、工作與項目經驗、技能特長與附件上傳，5 分鐘完成投遞。"/>
 <meta name="twitter:image" content="https://www.hsst.hk/images/logo.jpg"/>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
@@ -692,7 +692,7 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
     }).filter(Boolean).join('\n');
   }
   var info={name:f.elements.name.value,gender:(f.querySelector('input[name=gender]:checked')||{}).value||'',dob:f.elements.dob.value,phone:f.elements.phone.value,email:f.elements.email.value,city:f.elements.city.value,edu:f.elements.edu.value,school:f.elements.school.value,major:f.elements.major.value,gradyear:f.elements.gradyear.value,skill:f.elements.skill.value,jobwant:f.elements.jobwant.value,salary:f.elements.salary.value,arrive:f.elements.arrive.value+(f.elements.arrivedate.value?' ('+f.elements.arrivedate.value+')':''),extra:f.elements.extra.value};
-  var body='== Application ==\n'+Object.keys(info).map(function(k){return k+': '+info[k];}).join('\n')+'\n\n[Work Experience]\n'+dynTxt('workList')+'\n\n[Projects]\n'+dynTxt('projList');
+  var body='== 應聘資料 ==\n'+Object.keys(info).map(function(k){return k+': '+info[k];}).join('\n')+'\n\n[工作經歷]\n'+dynTxt('workList')+'\n\n[項目經驗]\n'+dynTxt('projList');
   f.elements.message.value=body;
   f.elements.subject.value='應聘-'+f.elements.jobwant.value+'-'+f.elements.name.value;
   f.submit();
