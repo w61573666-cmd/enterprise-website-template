@@ -628,6 +628,10 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   }
 
   function ensureRelative(el) {
+    // <picture> 只能作为 img 的包裹层：给它加 position 会抢占
+    // 内部绝对定位 img（如 .cs2-overview-media / .v2-hero-media）的
+    // containing block，导致图片塌缩为 0×0 不可见。永远跳过。
+    if (!el || el.tagName === 'PICTURE') return;
     var s = getComputedStyle(el);
     if (s.position === 'static') {
       el.style.position = 'relative';
@@ -695,8 +699,12 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
       return;
     }
 
-    // Fallback: add watermark to parent element
+    // Fallback: add watermark to parent element.
+    // webp 改造后 img 常被 <picture> 包裹——水印必须落在 picture 的
+    // 父级容器上（picture 自身 0×0 且不可定位），否则水印不可见，
+    // 且 picture 被定位后会让绝对定位的 img 塌缩。
     var parent = img.parentElement;
+    if (parent && parent.tagName === 'PICTURE') parent = parent.parentElement;
     if (parent) addWM(parent);
   }
 
