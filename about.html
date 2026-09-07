@@ -1133,18 +1133,19 @@
 
    <!-- INLINE CSS FOR NEW SECTIONS -->
 <style>
-.visual-timeline{position:relative;padding:20px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#C4A882 #f0f0f0}
+.visual-timeline{position:relative;padding:20px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#C4A882 #f0f0f0;scroll-snap-type:x proximity}
 .visual-timeline::-webkit-scrollbar{height:6px}
 .visual-timeline::-webkit-scrollbar-thumb{background:#C4A882;border-radius:3px}
-.vtl-track{display:flex;gap:24px;min-width:max-content;padding:0 16px 28px}
-.vtl-card{flex:0 0 260px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s}
-.vtl-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
-.vtl-img{width:100%;height:160px;object-fit:cover;display:block}
+.vtl-track{display:flex;gap:20px;min-width:max-content;padding:8px 16px 34px;position:relative}
+.vtl-card{flex:0 0 280px;scroll-snap-align:start;background:#fff;border:1px solid rgba(196,168,130,.22);border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s;position:relative}
+.vtl-card:hover{transform:translateY(-5px);box-shadow:0 10px 32px rgba(0,0,0,.13);border-color:rgba(196,168,130,.5)}
+.vtl-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
 .vtl-body{padding:16px 18px 20px}
-.vtl-year{display:inline-block;background:linear-gradient(135deg,#C4A882,#a8885e);color:#fff;font-size:.78rem;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:8px;letter-spacing:.5px}
-.vtl-title{font-size:.98rem;font-weight:700;color:#1A1A2E;margin-bottom:6px;line-height:1.3}
-.vtl-desc{font-size:.82rem;color:#666;line-height:1.55}
-.vtl-line{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C4A882,#e0d5c3 15%,#e0d5c3 85%,#C4A882);border-radius:3px}
+.vtl-year{display:inline-block;background:linear-gradient(135deg,#C9A84C,#a8885e);color:#fff;font-size:.8rem;font-weight:700;padding:3px 13px;border-radius:20px;margin-bottom:9px;letter-spacing:.5px}
+.vtl-title{font-size:1rem;font-weight:700;color:#1A1A2E;margin-bottom:7px;line-height:1.35}
+.vtl-desc{font-size:.82rem;color:#666;line-height:1.6}
+.vtl-card::after{content:'';position:absolute;left:50%;bottom:-28px;transform:translateX(-50%);width:12px;height:12px;background:#C9A84C;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(201,168,76,.4);z-index:1}
+.vtl-line{position:absolute;bottom:10px;left:0;right:0;height:3px;background:linear-gradient(90deg,#C4A882,#e0d5c3 15%,#e0d5c3 85%,#C4A882);border-radius:3px}
 .equip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
 .equip-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .3s}
 .equip-card:hover{transform:translateY(-3px)}
@@ -1178,7 +1179,7 @@
 .cert-detail-row:last-child{border-bottom:none}
 .cd-label{color:#999;flex-shrink:0;margin-right:12px}
 .cd-value{color:#1A1A2E;text-align:right;font-weight:500;line-height:1.4}
-@media(max-width:768px){.vtl-card{flex:0 0 220px}.vtl-img{height:130px}.equip-grid{grid-template-columns:1fr}.cert-detail-grid{grid-template-columns:1fr}.network-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+@media(max-width:768px){.vtl-card{flex:0 0 250px}.vtl-title{font-size:.95rem}.equip-grid{grid-template-columns:1fr}.cert-detail-grid{grid-template-columns:1fr}.network-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
 </style>
 
    <!-- ═══ Item 7: VISUAL HISTORICAL TIMELINE ═══ -->
@@ -1188,16 +1189,17 @@
      <p class="tech-subheading" data-aos="fade-up" data-aos-delay="50">1999 – 2026 · 二十七年輝煌征程</p>
      <div class="visual-timeline" data-aos="fade-up" data-aos-delay="100">
       <div class="vtl-track">
-       <div class="vtl-card"><picture><source srcset="images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.webp?v=20260903q90" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s1/057090E9-40CA-470E-B569-F0DE054485B0.jpg?v=20260903q90" alt="1999" /></picture><div class="vtl-body"><span class="vtl-year">1999</span><div class="vtl-title">公司創立</div><div class="vtl-desc">於香港九龍正式成立，從零起步專注高端天然石材貿易與加工服務，以匠心精神開啟石材產業的深耕之路，為日後全球化布局奠定堅實基礎。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s2/06214C37-17AC-4167-8C9F-39B55837E1BD.jpg" alt="2003" /></picture><div class="vtl-body"><span class="vtl-year">2003</span><div class="vtl-title">引進意大利CNC設備</div><div class="vtl-desc">從意大利引進首台 CNC 數控切割機，開啟精密加工時代，加工精度達到國際先進水平。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s3/0C469161-A333-4005-B934-18D4F44D34DB.jpg" alt="2007" /></picture><div class="vtl-body"><span class="vtl-year">2007</span><div class="vtl-title">首次出口中東市場</div><div class="vtl-desc">成功開拓中東市場，實現首個海外出口訂單，標誌著國際化戰略正式啟動，為後續全球業務拓展積累了寶貴的跨境貿易經驗。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.webp?v=20260903q90" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s4/4C3A0116-694F-4C45-AA21-2B654945DCAE.jpg?v=20260903q90" alt="2010" /></picture><div class="vtl-body"><span class="vtl-year">2010</span><div class="vtl-title">獲取 ISO 9001 認證</div><div class="vtl-desc">通過 SGS 審核取得 ISO 9001 品質管理體系認證，建立全面品質管控框架。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s5/0929D577-3A5E-44C6-9034-6FE1A5295CBF.jpg" alt="2013" /></picture><div class="vtl-body"><span class="vtl-year">2013</span><div class="vtl-title">杜拜地標酒店項目</div><div class="vtl-desc">承接首個國際五星級酒店地標項目（杜拜），以卓越的工程品質與準時交付贏得客戶高度讚譽，奠定公司在高端工程服務領域的標桿地位。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.webp?v=20260903q90" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s6/085127AB-7358-4EE2-A9F6-2816E2AEA30A.jpg?v=20260903q90" alt="2015" /></picture><div class="vtl-body"><span class="vtl-year">2015</span><div class="vtl-title">獲取 ISO 14001 認證</div><div class="vtl-desc">通過 ISO 14001 環境管理體系認證，將綠色環保理念貫穿全生產鏈。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s7/13AB1F74-1F8E-4E05-A361-28F466E33BA3.jpg" alt="2018" /></picture><div class="vtl-body"><span class="vtl-year">2018</span><div class="vtl-title">福建 80,000㎡ 加工基地</div><div class="vtl-desc">於福建省建成超大型無塵智能加工基地，總面積達 80,000 平方米，配備歐洲頂級全自動生產線，日產能達 3,000 平方米，產能與品質管控能力大幅躍升。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s8/5C23ADBF-4BDC-48FC-8592-628475E07BAD.jpg" alt="2020" /></picture><div class="vtl-body"><span class="vtl-year">2020</span><div class="vtl-title">全球累計 4,200+ 工程項目</div><div class="vtl-desc">全球累計完成 4,200+ 個工程項目，服務網絡全面覆蓋亞太、中東、歐洲及美洲市場，品牌國際影響力與市場佔有率顯著提升。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.webp?v=20260903q90" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s9/1BECCD04-001E-4D4E-A119-9DEC181C410F.jpg?v=20260903q90" alt="2023" /></picture><div class="vtl-body"><span class="vtl-year">2023</span><div class="vtl-title">GREENGUARD &amp; CE 認證</div><div class="vtl-desc">取得 GREENGUARD Gold 及 CE 認證，標誌產品符合歐盟及全球最嚴格的環保與安全標準，為進軍全球高端建築市場取得權威品質通行證。</div></div></div>
-       <div class="vtl-card"><picture><source srcset="images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/products/s10/06214C37-17AC-4167-8C9F-39B55837E1BD.jpg" alt="2026" /></picture><div class="vtl-body"><span class="vtl-year">2026</span><div class="vtl-title">全球運營網絡建成</div><div class="vtl-desc">完成全球運營網絡佈局，建成香港總部、福建基地、杜拜辦事處、歐洲代表處及東南亞倉儲樞紐，五大節點聯動，實現全球 24 小時不間斷服務響應。</div></div></div>
+       <div class="vtl-line"></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-1999.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-1999.jpg" alt="1999 年恆生石材於香港九龍創立揭幕"/></picture><div class="vtl-body"><span class="vtl-year">1999</span><div class="vtl-title">公司創立</div><div class="vtl-desc">於香港九龍正式創立，從高端天然石材貿易起步，確立「進口荒料＋本地精工」的經營路線，開啟深耕石材產業的匠心之路。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2003.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2003.jpg" alt="2003 年引進意大利 CNC 數控切割設備"/></picture><div class="vtl-body"><span class="vtl-year">2003</span><div class="vtl-title">引進意大利 CNC 設備</div><div class="vtl-desc">率先從意大利引進 CNC 數控切割設備，開啟精密加工轉型，規格板加工精度達到國際先進水平。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2007.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2007.jpg" alt="2007 年首次出口中東市場"/></picture><div class="vtl-body"><span class="vtl-year">2007</span><div class="vtl-title">首次出口中東市場</div><div class="vtl-desc">成功開拓中東市場，完成首個海外出口訂單，國際化戰略正式啟動，為後續全球業務拓展積累寶貴的跨境貿易經驗。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2010.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2010.jpg" alt="2010 年通過 ISO 9001 與 ISO 14001 雙認證"/></picture><div class="vtl-body"><span class="vtl-year">2010</span><div class="vtl-title">ISO 雙認證</div><div class="vtl-desc">通過 SGS 現場審核，取得 ISO 9001 品質管理與 ISO 14001 環境管理雙體系認證，品質與環保要求納入全流程制度化管理。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2013.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2013.jpg" alt="2013 年承接杜拜地標酒店項目"/></picture><div class="vtl-body"><span class="vtl-year">2013</span><div class="vtl-title">杜拜地標酒店項目</div><div class="vtl-desc">承接首個國際五星級酒店地標項目（杜拜），以卓越工程品質與準時交付贏得客戶高度讚譽，確立高端工程服務標桿地位。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2015.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2015.jpg" alt="2015 年全球業務拓展"/></picture><div class="vtl-body"><span class="vtl-year">2015</span><div class="vtl-title">全球業務拓展</div><div class="vtl-desc">服務網絡覆蓋亞太、中東、歐洲及北美市場，先後參與多個國際地標工程，全球化運營版圖基本成型，品牌國際影響力顯著提升。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2018.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2018.jpg" alt="2018 年福建 80,000 平方米智能加工基地建成"/></picture><div class="vtl-body"><span class="vtl-year">2018</span><div class="vtl-title">福建 80,000㎡ 加工基地</div><div class="vtl-desc">於福建省建成 80,000 平方米無塵智能加工基地，配備歐洲全自動生產線，日產能達 3,000 平方米，產能與品質管控能力大幅躍升。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2020.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2020.jpg" alt="2020 年智能製造升級"/></picture><div class="vtl-body"><span class="vtl-year">2020</span><div class="vtl-title">智能製造升級</div><div class="vtl-desc">建成智能倉儲系統與全自動化生產線，引進意大利五軸聯動 CNC 加工中心，實現從荒料進廠到成品出庫的全流程數字化管理。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2023.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2023.jpg" alt="2023 年取得 GREENGUARD Gold 及 CE 認證"/></picture><div class="vtl-body"><span class="vtl-year">2023</span><div class="vtl-title">GREENGUARD &amp; CE 認證</div><div class="vtl-desc">取得 GREENGUARD Gold 及 CE 認證，產品符合歐盟及全球最嚴格的環保與安全標準，為進軍全球高端建築市場取得權威通行證。</div></div></div>
+       <div class="vtl-card"><picture><source srcset="images/milestones/ms-2026.webp" type="image/webp"/><img loading="lazy" class="vtl-img" src="images/milestones/ms-2026.jpg" alt="2026 年全球運營網絡建成"/></picture><div class="vtl-body"><span class="vtl-year">2026</span><div class="vtl-title">全球運營網絡建成</div><div class="vtl-desc">建成香港總部、福建基地、杜拜辦事處、歐洲代表處及東南亞倉儲樞紐五大節點，全球累計交付 4,200+ 個工程項目，實現 24 小時不間斷服務響應。</div></div></div>
       </div>
       <div class="vtl-line"></div>
      </div>
