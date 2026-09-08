@@ -872,81 +872,13 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   } else { bind(); }
 })();
 
-/* ===== PWA 安装按钮 =====
-   Chrome/Edge/安卓：beforeinstallprompt 触发后点击直接弹系统安装框，
-   按钮文案固定「添加到桌面」（英文 Add to Desktop）。
-   iOS Safari：不支持自动安装，按钮「添加到主屏幕」，点击弹手动指引。 */
+/* ===== PWA：仅保留 ServiceWorker 注册 =====
+   2026-09-08：按要求移除「添加到桌面/Add to Desktop」悬浮按钮与指引弹窗（全站中英）。
+   SW 注册保留，离线缓存与浏览器原生安装入口不受影响。 */
 (function(){
   if ('serviceWorker' in navigator) {
     try { navigator.serviceWorker.register('/sw.js'); } catch(e) {}
   }
-  function isIOS(){ return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; }
-  function icon(){
-    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
-  }
-  function setup(){
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) return;
-
-    var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
-    var ios = isIOS();
-    var supportsBIP = 'beforeinstallprompt' in window;
-
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'pwa-install-btn';
-    btn.setAttribute('aria-label', '安装应用');
-    document.body.appendChild(btn);
-
-    function setBtn(text){ btn.innerHTML = icon() + '<span>' + text + '</span>'; }
-    setBtn(ios ? (lang === 'zh' ? '添加到主屏幕' : 'Add to Home Screen') : (lang === 'zh' ? '添加到桌面' : 'Add to Desktop'));
-
-    var deferredPrompt = null;
-
-    // 弹窗：iOS 手动指引 / PC 准备中提示
-    var mask = document.createElement('div');
-    mask.className = 'pwa-guide-mask';
-    function buildGuide(){
-      return '<div class="pwa-guide-icon">📲</div>'
-        + '<h3>' + (lang === 'zh' ? '添加到桌面 / 主屏幕' : 'Install to Desktop / Home Screen') + '</h3>'
-        + '<p>' + (lang === 'zh' ? '请根据您的设备选择对应方式：' : 'Choose the method for your device:') + '</p>'
-        + '<ol class="pwa-guide-steps">'
-        + '<li><span class="pwa-guide-num">1</span><span><strong>' + (lang === 'zh' ? '电脑' : 'PC') + '</strong> · ' + (lang === 'zh' ? 'Chrome/Edge 地址栏右侧「安装」图标，或菜单 → 安装应用' : 'Chrome/Edge: Install icon in the address bar, or menu → Install app') + '</span></li>'
-        + '<li><span class="pwa-guide-num">2</span><span><strong>' + (lang === 'zh' ? '安卓' : 'Android') + '</strong> · ' + (lang === 'zh' ? 'Chrome 右上角菜单（⋮）→ 安装应用 / 添加到主屏幕' : 'Chrome: menu (⋮) → Install app / Add to Home Screen') + '</span></li>'
-        + '<li><span class="pwa-guide-num">3</span><span><strong>' + (lang === 'zh' ? 'iOS' : 'iOS') + '</strong> · ' + (lang === 'zh' ? 'Safari 底部「分享」按钮 → 添加到主屏幕' : 'Safari: Share button at the bottom → Add to Home Screen') + '</span></li>'
-        + '</ol>'
-        + '<button type="button" class="pwa-guide-close">' + (lang === 'zh' ? '我知道了' : 'Got it') + '</button>';
-    }
-    mask.innerHTML = '<div class="pwa-guide-card">' + buildGuide() + '</div>';
-    document.body.appendChild(mask);
-    mask.addEventListener('click', function(e){ if (e.target === mask) mask.classList.remove('show'); });
-    mask.querySelector('.pwa-guide-close').addEventListener('click', function(){ mask.classList.remove('show'); });
-
-    btn.addEventListener('click', function(){
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function(choice){
-          if (choice.outcome === 'accepted') { btn.classList.remove('show'); }
-          deferredPrompt = null;
-        });
-      } else {
-        mask.classList.add('show');
-      }
-    });
-
-    if (supportsBIP) {
-      window.addEventListener('beforeinstallprompt', function(e){
-        e.preventDefault();
-        deferredPrompt = e;
-      });
-      window.addEventListener('appinstalled', function(){ btn.classList.remove('show'); });
-      btn.classList.add('show');
-    } else {
-      btn.classList.add('show');
-    }
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setup);
-  } else { setup(); }
 })();
 
 /* ── 导航高亮（全局，基于路径判断，2026-09-06）────────────────
