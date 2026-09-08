@@ -1,0 +1,9 @@
+{
+  "name": "enterprise-website-template",
+  "installCommand": "",
+  "buildCommand": "",
+  "assets": {
+    "directory": "./",
+    "notFoundStrategy": "404Page"
+  }
+}
