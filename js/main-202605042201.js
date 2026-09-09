@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { sessionStorage.setItem('hsst-navlog', JSON.stringify(window.__navLog)); } catch (err) {}
     if (navDebugBox) {
       var openDd = navLinks ? navLinks.querySelectorAll('.nav-dropdown.nav-open').length : 0;
-      navDebugBox.textContent = 'NAV-DBG v20260909h ' + window.innerWidth + 'x' + window.innerHeight
+      navDebugBox.textContent = 'NAV-DBG v20260909i ' + window.innerWidth + 'x' + window.innerHeight
         + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
         + '\n' + window.__navLog.slice(-14).join('\n');
     }
@@ -152,10 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
-  // 工具栏收展的假 resize 等）一律忽略；用户再次点按触发器仍可正常收起。
-  var NAV_OPEN_GRACE = 800;
+  // 九次修复（真机日志定案）：v=h 日志显示面板在展开后 1.4s 内被「第三次点按触发器」
+  // 收起（81902 OPEN → 83273 CLOSE|pup）——用户点完菜单后手指又碰到标题，切换逻辑
+  // 立即收起，导致「来不及点子菜单」。改为双窗口：
+  //   触发器重复点按忽略窗口 2s——展开后 2s 内再点同一标题 = 忽略（面板保持，够时间移指子菜单）；
+  //   外部点击幻影过滤窗口 0.5s——展开初期落在外部的杂散点击忽略，之后的真实外部点击立即收起。
+  var NAV_TRIGGER_DEBOUNCE = 2000;
+  var NAV_OUTSIDE_GRACE = 500;
+  function inTriggerDebounce(dd) {
+    return dd.__navOpenedAt && (Date.now() - dd.__navOpenedAt) < NAV_TRIGGER_DEBOUNCE;
+  }
   function inOpenGrace(dd) {
-    return dd.__navOpenedAt && (Date.now() - dd.__navOpenedAt) < NAV_OPEN_GRACE;
+    return dd.__navOpenedAt && (Date.now() - dd.__navOpenedAt) < NAV_OUTSIDE_GRACE;
   }
   function anyOpenInGrace() {
     if (!navLinks) return false;
@@ -197,7 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function toggleDropdown(trigger, dropdown, via) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
-    if (wasOpen && inOpenGrace(dropdown)) { navLog('debounce', via); return; }
+    // 九次修复：展开后 2s 内再点同一标题 = 忽略（防手指回碰标题导致刚展开就被收起）
+    if (wasOpen && inTriggerDebounce(dropdown)) { navLog('debounce', via); return; }
     // 切换到其它菜单 = 用户主动操作，强制收起其余面板
     closeAllDropdowns(dropdown, via + ':switch', true);
     const label = (trigger.textContent || '').trim().slice(0, 8);
@@ -288,10 +297,11 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => { navMemClear(); closeAllDropdowns(null, 'panel-link', true); });
     });
 
-    // 点击导航以外区域：收起全部子菜单（打开宽限期内忽略，防 iOS 假 click 误关；
-    // 强制展开态的面板不受影响——触屏会话中点外部不再自动收起）
+    // 点击导航以外区域：收起全部子菜单（九次修复：真实外部点击立即收起——
+    // pointerdown preventDefault 已掐灭合成事件链，此处不会再被幻影 click 误触发；
+    // 仅展开初期 0.5s 内的杂散点击忽略。强制展开态对外部点击不设防）
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.navbar') && !anyOpenInGrace()) closeAllDropdowns(null, 'outside-click');
+      if (!e.target.closest('.navbar') && !anyOpenInGrace()) { navMemClear(); closeAllDropdowns(null, 'outside-click', true); }
     });
     // Esc：收起子菜单并关闭抽屉（用户主动操作，强制收起）
     document.addEventListener('keydown', function(e) {
