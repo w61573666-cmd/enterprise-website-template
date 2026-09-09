@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { sessionStorage.setItem('hsst-navlog', JSON.stringify(window.__navLog)); } catch (err) {}
     if (navDebugBox) {
       var openDd = navLinks ? navLinks.querySelectorAll('.nav-dropdown.nav-open').length : 0;
-      navDebugBox.textContent = 'NAV-DBG v20260909i ' + window.innerWidth + 'x' + window.innerHeight
+      navDebugBox.textContent = 'NAV-DBG v20260909j ' + window.innerWidth + 'x' + window.innerHeight
         + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
         + '\n' + window.__navLog.slice(-14).join('\n');
     }
@@ -205,34 +205,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function toggleDropdown(trigger, dropdown, via) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
-    // 九次修复：展开后 2s 内再点同一标题 = 忽略（防手指回碰标题导致刚展开就被收起）
-    if (wasOpen && inTriggerDebounce(dropdown)) { navLog('debounce', via); return; }
+    const label = (trigger.textContent || '').trim().slice(0, 8);
+    // 十次修复（最终交互定案）：触屏上菜单标题是「只开不关」的——真机日志证实用户
+    // 点完菜单后会再碰标题（+0.4s / +1.4s / +2.9s 都出现过），任何时长窗口都拦不住。
+    // 已展开时再点标题一律忽略；收起只靠：点空白处 / 点子菜单项 / 切换其它菜单 / Esc。
+    if (wasOpen) { navLog('keep-open', via + ':' + label); return; }
     // 切换到其它菜单 = 用户主动操作，强制收起其余面板
     closeAllDropdowns(dropdown, via + ':switch', true);
-    const label = (trigger.textContent || '').trim().slice(0, 8);
-    if (wasOpen) {
-      dropdown.classList.remove('nav-open', 'mobile-open');
-      dropdown.__navForceOpen = false;
-      setPanelInline(dropdown, false);
-      trigger.setAttribute('aria-expanded', 'false');
-      dropdown.__navOpenedAt = 0;
-      navMemClear();
-      navLog('CLOSE', via + ':' + label);
-    } else {
-      dropdown.classList.add('nav-open', 'mobile-open');
-      dropdown.__navOpenedAt = Date.now();
-      dropdown.__navForceOpen = true;
-      setPanelInline(dropdown, true);
-      trigger.setAttribute('aria-expanded', 'true');
-      htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
-      if (typeof dropdown.__navIdx === 'number') navMemSave(dropdown.__navIdx);
-      navLog('OPEN', via + ':' + label);
-      // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
-      setTimeout(function () {
-        var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
-        if (panel && navLinks.classList.contains('open')) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 380);
-    }
+    dropdown.classList.add('nav-open', 'mobile-open');
+    dropdown.__navOpenedAt = Date.now();
+    dropdown.__navForceOpen = true;
+    setPanelInline(dropdown, true);
+    trigger.setAttribute('aria-expanded', 'true');
+    htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
+    if (typeof dropdown.__navIdx === 'number') navMemSave(dropdown.__navIdx);
+    navLog('OPEN', via + ':' + label);
+    // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
+    setTimeout(function () {
+      var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
+      if (panel && navLinks.classList.contains('open')) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 380);
   }
 
   if (navLinks) {
