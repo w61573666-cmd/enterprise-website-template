@@ -38,8 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('drawer-open');
     // Collapse all expanded dropdowns
     if (navLinks) {
-      navLinks.querySelectorAll('.nav-dropdown.mobile-open').forEach(dd => {
-        dd.classList.remove('mobile-open');
+      navLinks.querySelectorAll('.nav-dropdown.mobile-open, .nav-dropdown.nav-open').forEach(dd => {
+        dd.classList.remove('mobile-open', 'nav-open');
+        const t = dd.querySelector(':scope > a');
+        if (t) t.setAttribute('aria-expanded', 'false');
       });
     }
   }
@@ -68,39 +70,92 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close on overlay click
   overlay.addEventListener('click', closeMobileMenu);
 
-  // Mobile dropdown toggle (tap to expand/collapse)
+  // ---------- 导航下拉：触屏点击展开 / 收起（iPad 兼容，2026-09-09） ----------
+  // 旧实现：innerWidth>1160 直接 return —— 导致 iPad Air/Pro 横屏(1180/1194/1366px)
+  // 显示桌面导航（hover-only），触屏点按只会跳转、无法展开子菜单。
+  // 新实现：按「指针能力」分流——
+  //   触屏（hover:none 或 pointer:coarse）：点按 = 展开/收起，不再跳转（栏目页可经面板首项或页脚进入）；
+  //   桌面（支持 hover）：保持 hover 展开 + 点击跳转原行为不变。
+  // CSS 侧：新增 .nav-open 点击态（所有断点通用），见 premium-20260902.css「iPad / 触屏导航修复」段。
+  const isTouchNav = window.matchMedia('(hover: none), (pointer: coarse)');
+  // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
+  function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
+
+  function closeAllDropdowns(except) {
+    if (!navLinks) return;
+    navLinks.querySelectorAll('.nav-dropdown.nav-open, .nav-dropdown.mobile-open').forEach(dd => {
+      if (dd === except) return;
+      dd.classList.remove('nav-open', 'mobile-open');
+      const t = dd.querySelector(':scope > a');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  }
+
   if (navLinks) {
     navLinks.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
+      // 无障碍标注（触发器本体是链接，保留链接语义，用 aria-haspopup/aria-expanded 声明弹出关系）
+      if (!trigger.hasAttribute('aria-haspopup')) trigger.setAttribute('aria-haspopup', 'true');
+      if (!trigger.hasAttribute('aria-expanded')) trigger.setAttribute('aria-expanded', 'false');
+
       trigger.addEventListener('click', function(e) {
-        // Only intercept on mobile/tablet (when hamburger is visible)
-        if (window.innerWidth > 1160) return;
+        const dropdown = this.closest('.nav-dropdown');
+        // 桌面端（支持 hover）保持原行为：hover 展开、点击跳转
+        if (!touchNavMode()) return;
+        // 触屏：点按展开 / 再次点按收起，不跳转
         e.preventDefault();
         e.stopPropagation();
-        const dropdown = this.closest('.nav-dropdown');
-        // Close other dropdowns
-        navLinks.querySelectorAll('.nav-dropdown.mobile-open').forEach(dd => {
-          if (dd !== dropdown) dd.classList.remove('mobile-open');
-        });
-        dropdown.classList.toggle('mobile-open');
-        // 展开动画结束后，把整个子面板滚入抽屉可视区，
-        // 确保全部子项一屏内可见可点（修复移动端点击错位/跳转异常）
-        if (dropdown.classList.contains('mobile-open')) {
+        const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
+        closeAllDropdowns(dropdown);
+        if (wasOpen) {
+          dropdown.classList.remove('nav-open', 'mobile-open');
+          this.setAttribute('aria-expanded', 'false');
+        } else {
+          dropdown.classList.add('nav-open', 'mobile-open');
+          this.setAttribute('aria-expanded', 'true');
+          // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
           setTimeout(function () {
             var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
-            if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 400);
+            if (panel && navLinks.classList.contains('open')) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 380);
+        }
+      });
+
+      // 键盘无障碍：Enter / Space 切换，Esc 收起
+      trigger.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
         }
       });
     });
 
-    // Close menu on regular nav link click (not dropdown triggers)
-    navLinks.querySelectorAll('a:not(.nav-dropdown > a):not(.lang-switch a):not(.mega-panel-link):not(.dropdown-item)').forEach(link => {
-      link.addEventListener('click', () => {
-        closeMobileMenu();
-      });
-    });
-    // Also close on mega-panel-link and dropdown-item clicks
+    // 点击面板内链接后收起全部子菜单
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
+      link.addEventListener('click', () => closeAllDropdowns());
+    });
+
+    // 点击导航以外区域：收起全部子菜单
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.navbar')) closeAllDropdowns();
+    });
+    // Esc：收起子菜单并关闭抽屉
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeAllDropdowns(); closeMobileMenu(); }
+    });
+    // 横竖屏切换 / 窗口尺寸变化：收起子菜单，避免断点切换后布局错乱
+    window.addEventListener('orientationchange', function() {
+      setTimeout(function() { closeAllDropdowns(); }, 350);
+    });
+    let navResizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(navResizeTimer);
+      navResizeTimer = setTimeout(function() { closeAllDropdowns(); }, 250);
+    });
+  }
+
+  // Close menu on regular nav link click (not dropdown triggers)
+  if (navLinks) {
+    navLinks.querySelectorAll('a:not(.nav-dropdown > a):not(.lang-switch a):not(.mega-panel-link):not(.dropdown-item)').forEach(link => {
       link.addEventListener('click', () => {
         closeMobileMenu();
       });
@@ -165,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         // Close mobile menu and dropdowns before scrolling
         closeMobileMenu();
-        document.querySelectorAll('.nav-dropdown').forEach(dd => dd.classList.remove('mobile-open'));
+        document.querySelectorAll('.nav-dropdown').forEach(dd => { dd.classList.remove('mobile-open', 'nav-open'); const t = dd.querySelector(':scope > a'); if (t) t.setAttribute('aria-expanded', 'false'); });
         // Small delay to let menu close before scroll starts
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });

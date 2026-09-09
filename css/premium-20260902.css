@@ -2601,3 +2601,94 @@ body.drawer-open .pwa-install-btn {
   .cs2-facts{grid-template-columns:repeat(2,1fr);}
   .cs2-overview-body{padding:28px 24px;}
 }
+
+/* ============================================================
+   iPad / 触屏导航修复（2026-09-09）
+   问题：1) 抽屉菜单仅在 ≤1160px 生效，iPad Air/Pro 横屏
+   （1180 / 1194 / 1366px）显示的是桌面导航，而下拉面板纯靠 :hover 展开；
+   2) JS 点击拦截写死 innerWidth>1160 直接 return，触屏点按只会跳转到栏目页。
+   方案：新增 .nav-open 点击态，所有断点通用；触屏禁用 :hover 展开。
+   ============================================================ */
+
+/* 1) 触屏设备不再使用 hover 展开/悬停态，避免点击后 hover 残留 */
+@media (hover: none), (pointer: coarse) {
+  .navbar .nav-dropdown:hover > .mega-panel,
+  .navbar .nav-dropdown:hover > .dropdown-panel,
+  body.premium .navbar .nav-dropdown:hover > .mega-panel,
+  body.premium .navbar .nav-dropdown:hover > .dropdown-panel {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateX(-50%) translateY(8px) !important;
+    -webkit-transform: translateX(-50%) translateY(8px) !important;
+  }
+  .navbar .nav-dropdown:hover > a::after,
+  body.premium .navbar .nav-dropdown:hover > a::after {
+    width: auto !important;
+    transform: none !important;
+  }
+  .navbar .nav-links > a:hover::after { width: 0 !important; }
+}
+
+/* 2) 点击展开态 .nav-open —— 桌面区间（>1160px，浮层样式） */
+.navbar .nav-dropdown.nav-open > .mega-panel,
+.navbar .nav-dropdown.nav-open > .dropdown-panel,
+body.premium .navbar .nav-dropdown.nav-open > .mega-panel,
+body.premium .navbar .nav-dropdown.nav-open > .dropdown-panel {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+  -webkit-transform: translateX(-50%) translateY(0) !important;
+  transition-delay: 0s !important;
+}
+.navbar .nav-dropdown.nav-open > a::after,
+body.premium .navbar .nav-dropdown.nav-open > a::after {
+  transform: rotate(180deg) !important;
+}
+
+/* 3) 抽屉区间（≤1160px）跟随原有 mobile-open 样式 */
+@media (max-width: 1160px) {
+  .navbar .nav-dropdown.nav-open > .mega-panel,
+  .navbar .nav-dropdown.nav-open > .dropdown-panel,
+  body.premium .navbar .nav-dropdown.nav-open > .mega-panel,
+  body.premium .navbar .nav-dropdown.nav-open > .dropdown-panel {
+    display: block !important;
+    position: static !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-height: none !important;
+    padding: 8px 0 8px 16px !important;
+  }
+  /* 抽屉高度用 dvh，修 iOS Safari 100vh 被地址栏遮挡导致底部点不到 */
+  body.premium .navbar .nav-links {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+  }
+}
+
+/* 4) 触屏热区 ≥44px + 消除 300ms 点击延迟与灰色高亮残留 */
+@media (hover: none), (pointer: coarse) {
+  body.premium .navbar .nav-links > a,
+  body.premium .navbar .nav-dropdown > a,
+  .navbar .nav-links > a,
+  .navbar .nav-dropdown > a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(201, 168, 76, 0.18);
+  }
+}
+@media (pointer: coarse) and (min-width: 1161px) {
+  body.premium .navbar .nav-links > a,
+  body.premium .navbar .nav-dropdown > a {
+    padding: 14px 10px !important;
+    min-height: 44px !important;
+  }
+  body.premium .navbar .nav-dropdown > a { gap: 4px; font-size: 13px !important; }
+}
+/* 面板本身在触屏上给足点击面积 */
+@media (hover: none), (pointer: coarse) {
+  body.premium .navbar .mega-panel-link,
+  body.premium .navbar .dropdown-item { min-height: 44px; display: flex; align-items: center; }
+}
