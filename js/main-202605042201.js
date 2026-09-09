@@ -89,17 +89,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.pointerType === 'touch') htmlEl.classList.add('touch-nav');
     else if (e.pointerType === 'mouse' || e.pointerType === 'pen') htmlEl.classList.remove('touch-nav');
   }, true);
-  // 三次修复：pointerover 比 pointerdown 更早触发（iOS tap 事件序为
+  // pointerover 比 pointerdown 更早触发（iOS tap 事件序：
   // pointerover → pointerdown → … → 合成 hover → click），
-  // 在此即点亮 .touch-nav，让 CSS 的 hover 抑制先于合成 hover 生效，
-  // 彻底杜绝「面板闪现一下（hover 先展开）再消失」。
+  // 在此即点亮 .touch-nav，让 CSS 的 hover 抑制先于合成 hover 生效。
   document.addEventListener('pointerover', function(e) {
     if (e.pointerType === 'touch') htmlEl.classList.add('touch-nav');
   }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
   function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
 
-  // 三次修复：打开宽限期。面板刚展开的 450ms 内，任何非用户主动的关闭源
+  /* ── 导航事件诊断日志（2026-09-09 四次修复）────────────────
+     真机 iPad 复现「子菜单闪退」时，URL 加 #navdebug 打开可视日志，
+     截图即可定位是哪个事件关掉了面板。平时仅写内存环形缓冲，零开销。 */
+  window.__navLog = [];
+  var navDebugBox = null;
+  if (/(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash) && document.body) {
+    navDebugBox = document.createElement('pre');
+    navDebugBox.id = 'nav-debug-box';
+    navDebugBox.style.cssText = 'position:fixed;left:6px;bottom:6px;z-index:2147483000;background:rgba(0,0,0,.88);color:#4f4;font:10px/1.35 Menlo,Consolas,monospace;padding:8px 10px;margin:0;max-width:72vw;max-height:42vh;overflow:hidden;pointer-events:none;border-radius:6px;white-space:pre-wrap;';
+    document.body.appendChild(navDebugBox);
+  }
+  function navLog(ev, extra) {
+    var line = (Date.now() % 100000) + ' ' + ev + (extra ? ' | ' + extra : '');
+    window.__navLog.push(line);
+    if (window.__navLog.length > 80) window.__navLog.shift();
+    if (navDebugBox) navDebugBox.textContent = 'NAV-DBG v20260909d ' + window.innerWidth + 'x' + window.innerHeight + '\n' + window.__navLog.slice(-14).join('\n');
+  }
+  navLog('boot', 'w=' + window.innerWidth + ' touchMQ=' + isTouchNav.matches);
+
+  // 打开宽限期。面板刚展开的 450ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
   // 工具栏收展的假 resize 等）一律忽略；用户再次点按触发器仍可正常收起。
   var NAV_OPEN_GRACE = 450;
@@ -113,14 +131,40 @@ document.addEventListener('DOMContentLoaded', () => {
     return false;
   }
 
-  function closeAllDropdowns(except) {
+  function closeAllDropdowns(except, why) {
     if (!navLinks) return;
+    var closed = false;
     navLinks.querySelectorAll('.nav-dropdown.nav-open, .nav-dropdown.mobile-open').forEach(dd => {
       if (dd === except) return;
+      closed = true;
       dd.classList.remove('nav-open', 'mobile-open');
       const t = dd.querySelector(':scope > a');
       if (t) t.setAttribute('aria-expanded', 'false');
     });
+    if (closed && why) navLog('CLOSE', why);
+  }
+
+  function toggleDropdown(trigger, dropdown, via) {
+    const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
+    if (wasOpen && inOpenGrace(dropdown)) { navLog('debounce', via); return; }
+    closeAllDropdowns(dropdown, via + ':switch');
+    const label = (trigger.textContent || '').trim().slice(0, 8);
+    if (wasOpen) {
+      dropdown.classList.remove('nav-open', 'mobile-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      dropdown.__navOpenedAt = 0;
+      navLog('CLOSE', via + ':' + label);
+    } else {
+      dropdown.classList.add('nav-open', 'mobile-open');
+      dropdown.__navOpenedAt = Date.now();
+      trigger.setAttribute('aria-expanded', 'true');
+      navLog('OPEN', via + ':' + label);
+      // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
+      setTimeout(function () {
+        var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
+        if (panel && navLinks.classList.contains('open')) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 380);
+    }
   }
 
   if (navLinks) {
@@ -129,37 +173,43 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!trigger.hasAttribute('aria-haspopup')) trigger.setAttribute('aria-haspopup', 'true');
       if (!trigger.hasAttribute('aria-expanded')) trigger.setAttribute('aria-expanded', 'false');
 
+      // 四次修复：触屏 tap 的事件模型整体换掉——
+      // pointerdown 即 preventDefault，掐断 WebKit 的合成 hover / click /
+      // 双击缩放整条链路（这是「闪现即逝」所有可能来源的总闸）；
+      // 真正的展开/收起放在 pointerup 里自己做。
+      trigger.addEventListener('pointerdown', function(e) {
+        if (e.pointerType !== 'touch') return;
+        navLog('pdown', 'prevent');
+        e.preventDefault(); // 屏蔽兼容鼠标事件（合成 hover/mouseup/click/双击缩放）
+      });
+
+      trigger.addEventListener('pointerup', function(e) {
+        if (e.pointerType !== 'touch' && !window.FORCE_TOUCH_NAV) return;
+        navLog('pup', (e.pointerType || '?'));
+        const dropdown = this.closest('.nav-dropdown');
+        dropdown.__touchToggledAt = Date.now();
+        toggleDropdown(this, dropdown, 'pup');
+      });
+
+      // click 双保险：被 pointerdown preventDefault 后，Webkit/Chromium 均不再派发 click；
+      // 若个别内核仍派发，700ms 内跟随 pointerup 切换的 click 一律只阻断跳转、不重复切换。
       trigger.addEventListener('click', function(e) {
         const dropdown = this.closest('.nav-dropdown');
-        // 触屏判定：click 事件自带 pointerType（现代浏览器），或会话内出现过触屏交互（.touch-nav），
+        if (Date.now() - (dropdown.__touchToggledAt || 0) < 700) {
+          navLog('click-skip', 'after-pup');
+          e.preventDefault();
+          return;
+        }
+        // 触屏判定：click 自带 pointerType（部分内核），或会话内出现过触屏交互（.touch-nav），
         // 或媒体查询命中——三者任一即按触屏处理；否则桌面鼠标保持原行为（hover 展开、点击跳转）
         const touchClick = e.pointerType === 'touch'
           || htmlEl.classList.contains('touch-nav')
           || touchNavMode();
         if (!touchClick) return;
-        // 触屏：点按展开 / 再次点按收起，不跳转
+        navLog('click-toggle');
         e.preventDefault();
         e.stopPropagation();
-        const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
-        // 三次修复：防抖。iOS Safari 偶发对同一 tap 双发 click（或快速双击被判定为
-        // 两个 click），第一次展开、第二次立刻收起 = 「闪现即逝」。
-        // 展开后 450ms 内的重复点按忽略；真正的「再点收起」间隔远大于此。
-        if (wasOpen && inOpenGrace(dropdown)) return;
-        closeAllDropdowns(dropdown);
-        if (wasOpen) {
-          dropdown.classList.remove('nav-open', 'mobile-open');
-          this.setAttribute('aria-expanded', 'false');
-          dropdown.__navOpenedAt = 0;
-        } else {
-          dropdown.classList.add('nav-open', 'mobile-open');
-          dropdown.__navOpenedAt = Date.now();
-          this.setAttribute('aria-expanded', 'true');
-          // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
-          setTimeout(function () {
-            var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
-            if (panel && navLinks.classList.contains('open')) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 380);
-        }
+        toggleDropdown(this, dropdown, 'click');
       });
 
       // 键盘无障碍：Enter / Space 切换，Esc 收起
@@ -173,21 +223,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 点击面板内链接后收起全部子菜单
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
-      link.addEventListener('click', () => closeAllDropdowns());
+      link.addEventListener('click', () => closeAllDropdowns(null, 'panel-link'));
     });
 
     // 点击导航以外区域：收起全部子菜单（打开宽限期内忽略，防 iOS 假 click 误关）
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.navbar') && !anyOpenInGrace()) closeAllDropdowns();
+      if (!e.target.closest('.navbar') && !anyOpenInGrace()) closeAllDropdowns(null, 'outside-click');
     });
     // Esc：收起子菜单并关闭抽屉
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') { closeAllDropdowns(); closeMobileMenu(); }
+      if (e.key === 'Escape') { closeAllDropdowns(null, 'esc'); closeMobileMenu(); }
     });
     // 横竖屏切换 / 窗口尺寸变化：收起子菜单，避免断点切换后布局错乱
     // （打开宽限期内忽略——iOS 工具栏收展的假 resize / 旋转初期抖动不误关面板）
     window.addEventListener('orientationchange', function() {
-      setTimeout(function() { if (!anyOpenInGrace()) closeAllDropdowns(); }, 350);
+      navLog('orientchange');
+      setTimeout(function() { if (!anyOpenInGrace()) closeAllDropdowns(null, 'orient'); }, 350);
     });
     let navResizeTimer, navLastW = window.innerWidth;
     window.addEventListener('resize', function() {
@@ -196,7 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 仅在宽度变化（断点切换/旋转）时收起子菜单；
         // iOS Safari 工具栏收展会触发同宽度的 resize，不能因此关闭面板（否则菜单"闪现即逝"）
         if (window.innerWidth !== navLastW) {
-          if (!anyOpenInGrace()) closeAllDropdowns();
+          navLog('resize', navLastW + '→' + window.innerWidth);
+          if (!anyOpenInGrace()) closeAllDropdowns(null, 'resize-w');
           navLastW = window.innerWidth;
         }
       }, 250);
