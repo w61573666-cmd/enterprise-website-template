@@ -2728,11 +2728,19 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
       条件的 touch-action 不生效，快速第二次点按会被系统判为
       双击缩放而吞掉；touch-action 对鼠标无副作用，直接无条件声明。
    ------------------------------------------------------------ */
+/* 十一次修复（2026-09-09）：双击缩放根除——
+   此前 touch-action: manipulation 只盖住触发器和面板链接；用户点开面板后约一秒
+   内的第二次点按若落在面板容器/文字/格子上（无 touch-action 覆盖），iPadOS 会
+   判定为双击并缩放页面：面板其实还开着（JS 日志干净），但视口跳位 = 眼中「子菜单
+   消失」。现将 manipulation 无条件覆盖导航栏整个子树，双击缩放在导航区域内物理不可能。 */
+.navbar,
+.navbar * {
+  touch-action: manipulation;
+}
 .navbar .nav-links a,
 .navbar .nav-dropdown > a,
 .navbar .nav-toggle,
 .navbar .mega-panel-link,
 .navbar .dropdown-item {
-  touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(201, 168, 76, 0.18);
 }

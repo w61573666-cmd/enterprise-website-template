@@ -143,6 +143,28 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch (err) {}
   navLog('boot', 'w=' + window.innerWidth + ' touchMQ=' + isTouchNav.matches);
 
+  // 十一次修复：实时几何探针——#navdebug 模式下每 400ms 对展开面板采样一行：
+  //   visualViewport.scale > 1 = 页面被双击缩放（iPad 第二次点按落在无 touch-action
+  //   覆盖的面板空白处会触发系统双击缩放，面板其实还开着，但视口跳位 = 眼中「消失」）；
+  //   elementFromPoint 实测面板中心最上层元素 = 直接点名盖板者。
+  // 下一次真机截图即可一锤定音区分「被关 / 被盖 / 被缩放」。
+  if (navDebugBox) {
+    setInterval(function () {
+      if (!navLinks) return;
+      var p = navLinks.querySelector('.nav-dropdown.nav-open > .mega-panel, .nav-dropdown.nav-open > .dropdown-panel');
+      if (!p) return;
+      var r = p.getBoundingClientRect();
+      var cx = Math.round(r.left + r.width / 2), cy = Math.round(r.top + r.height / 2);
+      var topEl = document.elementFromPoint(cx, cy);
+      var cs = getComputedStyle(p);
+      var vs = window.visualViewport ? window.visualViewport.scale : 1;
+      var tag = topEl ? (topEl.tagName + '.' + (topEl.className && topEl.className.split ? String(topEl.className).split(' ')[0] : '')) : 'null';
+      navLog('GEO', 'scale=' + vs.toFixed(2)
+        + ' rect=' + Math.round(r.left) + ',' + Math.round(r.top) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height)
+        + ' top=' + tag + ' op=' + cs.opacity + ' vis=' + cs.visibility);
+    }, 400);
+  }
+
   // 七次修复：展开状态记忆。若「漏网 click 触发本页重载」（關於我們 的 href 就是
   // 当前页，重载后面板消失 ≈ 用户看到的「约一秒后自动消失」），加载后立即恢复
   // 展开状态，用户无感。用户主动收起时清除记忆。
@@ -179,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
     if (!panel) return;
     panel.style.cssText = on
-      ? 'visibility:visible!important;opacity:1!important;pointer-events:auto!important;'
+      ? 'visibility:visible!important;opacity:1!important;pointer-events:auto!important;z-index:2147483000!important;'
       : '';
   }
 
@@ -289,11 +311,21 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => { navMemClear(); closeAllDropdowns(null, 'panel-link', true); });
     });
 
-    // 点击导航以外区域：收起全部子菜单（九次修复：真实外部点击立即收起——
-    // pointerdown preventDefault 已掐灭合成事件链，此处不会再被幻影 click 误触发；
-    // 仅展开初期 0.5s 内的杂散点击忽略。强制展开态对外部点击不设防）
+    // 点击导航以外区域：收起全部子菜单。十一次修复：点击坐标落在任一展开面板
+    // 外扩 28px 矩形内 = 用户手指在面板附近的误触/擦边，不关闭（iPad 手指宽，
+    // 点完标题抬指常落在导航条下边缘之外，此前直接被当外部点击强制收起）。
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.navbar') && !anyOpenInGrace()) { navMemClear(); closeAllDropdowns(null, 'outside-click', true); }
+      if (e.target.closest('.navbar')) return;
+      if (anyOpenInGrace()) return;
+      var openPanels = navLinks.querySelectorAll('.nav-dropdown.nav-open > .mega-panel, .nav-dropdown.nav-open > .dropdown-panel');
+      for (var i = 0; i < openPanels.length; i++) {
+        var r = openPanels[i].getBoundingClientRect();
+        if (e.clientX >= r.left - 28 && e.clientX <= r.right + 28 && e.clientY >= r.top - 28 && e.clientY <= r.bottom + 28) {
+          navLog('outside-skip', 'near-panel');
+          return;
+        }
+      }
+      navMemClear(); closeAllDropdowns(null, 'outside-click', true);
     });
     // Esc：收起子菜单并关闭抽屉（用户主动操作，强制收起）
     document.addEventListener('keydown', function(e) {
