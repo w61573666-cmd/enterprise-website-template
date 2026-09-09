@@ -85,15 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const isTouchNav = window.matchMedia('(hover: none), (pointer: coarse)');
   const htmlEl = document.documentElement;
   if (isTouchNav.matches) htmlEl.classList.add('touch-nav');
+  // 五次修复（真机日志实锤）：WebKit「桌面网站」模式的老 bug——真触屏 tap 的
+  // pointer events 上报 pointerType 'mouse'，导致此前 pointerType!=='touch' 的
+  // 守卫全部失效，preventDefault 从未执行，合成 hover/click 链路原样存活，
+  // 面板被外部假 click 关闭（真机日志：OPEN | click:… 后紧跟 CLOSE | outside-click）。
+  // 判定「真触屏」改为：pointerType==='touch'，或（pointerType==='mouse' 且媒体查询命中触屏）。
+  function isTouchPointer(e) {
+    return e.pointerType === 'touch' || (e.pointerType === 'mouse' && isTouchNav.matches);
+  }
   document.addEventListener('pointerdown', function(e) {
-    if (e.pointerType === 'touch') htmlEl.classList.add('touch-nav');
-    else if (e.pointerType === 'mouse' || e.pointerType === 'pen') htmlEl.classList.remove('touch-nav');
+    if (isTouchPointer(e)) htmlEl.classList.add('touch-nav');
+    else if ((e.pointerType === 'mouse' || e.pointerType === 'pen') && !isTouchNav.matches) htmlEl.classList.remove('touch-nav');
   }, true);
   // pointerover 比 pointerdown 更早触发（iOS tap 事件序：
   // pointerover → pointerdown → … → 合成 hover → click），
   // 在此即点亮 .touch-nav，让 CSS 的 hover 抑制先于合成 hover 生效。
   document.addEventListener('pointerover', function(e) {
-    if (e.pointerType === 'touch') htmlEl.classList.add('touch-nav');
+    if (isTouchPointer(e)) htmlEl.classList.add('touch-nav');
   }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
   function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
@@ -113,14 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
     var line = (Date.now() % 100000) + ' ' + ev + (extra ? ' | ' + extra : '');
     window.__navLog.push(line);
     if (window.__navLog.length > 80) window.__navLog.shift();
-    if (navDebugBox) navDebugBox.textContent = 'NAV-DBG v20260909d ' + window.innerWidth + 'x' + window.innerHeight + '\n' + window.__navLog.slice(-14).join('\n');
+    if (navDebugBox) navDebugBox.textContent = 'NAV-DBG v20260909e ' + window.innerWidth + 'x' + window.innerHeight + '\n' + window.__navLog.slice(-14).join('\n');
   }
   navLog('boot', 'w=' + window.innerWidth + ' touchMQ=' + isTouchNav.matches);
 
-  // 打开宽限期。面板刚展开的 450ms 内，任何非用户主动的关闭源
+  // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
   // 工具栏收展的假 resize 等）一律忽略；用户再次点按触发器仍可正常收起。
-  var NAV_OPEN_GRACE = 450;
+  var NAV_OPEN_GRACE = 800;
   function inOpenGrace(dd) {
     return dd.__navOpenedAt && (Date.now() - dd.__navOpenedAt) < NAV_OPEN_GRACE;
   }
@@ -158,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropdown.classList.add('nav-open', 'mobile-open');
       dropdown.__navOpenedAt = Date.now();
       trigger.setAttribute('aria-expanded', 'true');
+      htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
       navLog('OPEN', via + ':' + label);
       // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
       setTimeout(function () {
@@ -178,13 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // 双击缩放整条链路（这是「闪现即逝」所有可能来源的总闸）；
       // 真正的展开/收起放在 pointerup 里自己做。
       trigger.addEventListener('pointerdown', function(e) {
-        if (e.pointerType !== 'touch') return;
+        if (!isTouchPointer(e)) return;
         navLog('pdown', 'prevent');
         e.preventDefault(); // 屏蔽兼容鼠标事件（合成 hover/mouseup/click/双击缩放）
       });
 
       trigger.addEventListener('pointerup', function(e) {
-        if (e.pointerType !== 'touch' && !window.FORCE_TOUCH_NAV) return;
+        if (!isTouchPointer(e) && !window.FORCE_TOUCH_NAV) return;
         navLog('pup', (e.pointerType || '?'));
         const dropdown = this.closest('.nav-dropdown');
         dropdown.__touchToggledAt = Date.now();
