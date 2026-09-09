@@ -74,10 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // 旧实现：innerWidth>1160 直接 return —— 导致 iPad Air/Pro 横屏(1180/1194/1366px)
   // 显示桌面导航（hover-only），触屏点按只会跳转、无法展开子菜单。
   // 新实现：按「指针能力」分流——
-  //   触屏（hover:none 或 pointer:coarse）：点按 = 展开/收起，不再跳转（栏目页可经面板首项或页脚进入）；
-  //   桌面（支持 hover）：保持 hover 展开 + 点击跳转原行为不变。
+  //   触屏：点按 = 展开/收起，不再跳转（栏目页可经面板首项或页脚进入）；
+  //   桌面鼠标：保持 hover 展开 + 点击跳转原行为不变。
   // CSS 侧：新增 .nav-open 点击态（所有断点通用），见 premium-20260902.css「iPad / 触屏导航修复」段。
+  //
+  // ⚠️ 2026-09-09 二次修复（「子菜单闪现后消失」）：
+  // iPadOS Safari 常按「桌面网站」呈现，matchMedia 会报 (hover:hover)+(pointer:fine)，
+  // 媒体查询判定不可靠。改为「事件实测」：pointerdown 的 pointerType==='touch'
+  // 即给 <html> 加 .touch-nav（CSS 据此禁用 hover 展开），移除则回退桌面行为。
   const isTouchNav = window.matchMedia('(hover: none), (pointer: coarse)');
+  const htmlEl = document.documentElement;
+  if (isTouchNav.matches) htmlEl.classList.add('touch-nav');
+  document.addEventListener('pointerdown', function(e) {
+    if (e.pointerType === 'touch') htmlEl.classList.add('touch-nav');
+    else if (e.pointerType === 'mouse' || e.pointerType === 'pen') htmlEl.classList.remove('touch-nav');
+  }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
   function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
 
@@ -99,8 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       trigger.addEventListener('click', function(e) {
         const dropdown = this.closest('.nav-dropdown');
-        // 桌面端（支持 hover）保持原行为：hover 展开、点击跳转
-        if (!touchNavMode()) return;
+        // 触屏判定：click 事件自带 pointerType（现代浏览器），或会话内出现过触屏交互（.touch-nav），
+        // 或媒体查询命中——三者任一即按触屏处理；否则桌面鼠标保持原行为（hover 展开、点击跳转）
+        const touchClick = e.pointerType === 'touch'
+          || htmlEl.classList.contains('touch-nav')
+          || touchNavMode();
+        if (!touchClick) return;
         // 触屏：点按展开 / 再次点按收起，不跳转
         e.preventDefault();
         e.stopPropagation();
@@ -146,10 +161,17 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('orientationchange', function() {
       setTimeout(function() { closeAllDropdowns(); }, 350);
     });
-    let navResizeTimer;
+    let navResizeTimer, navLastW = window.innerWidth;
     window.addEventListener('resize', function() {
       clearTimeout(navResizeTimer);
-      navResizeTimer = setTimeout(function() { closeAllDropdowns(); }, 250);
+      navResizeTimer = setTimeout(function() {
+        // 仅在宽度变化（断点切换/旋转）时收起子菜单；
+        // iOS Safari 工具栏收展会触发同宽度的 resize，不能因此关闭面板（否则菜单"闪现即逝"）
+        if (window.innerWidth !== navLastW) {
+          closeAllDropdowns();
+          navLastW = window.innerWidth;
+        }
+      }, 250);
     });
   }
 

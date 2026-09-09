@@ -2692,3 +2692,29 @@ body.premium .navbar .nav-dropdown.nav-open > a::after {
   body.premium .navbar .mega-panel-link,
   body.premium .navbar .dropdown-item { min-height: 44px; display: flex; align-items: center; }
 }
+
+/* ------------------------------------------------------------
+   2026-09-09 二次修复：iPadOS「子菜单闪现后消失」
+   原因：iPadOS 以桌面模式呈现时媒体查询报 (hover:hover)+(pointer:fine)，
+   点按会触发模拟 hover 使面板闪现，随后 click 跳转让面板消失。
+   JS 在真实触屏交互后给 <html> 加 .touch-nav，CSS 据此彻底禁用 hover 展开。
+   注意 :not(.nav-open)：已展开的面板不受 hover 禁用影响。
+   ------------------------------------------------------------ */
+html.touch-nav .navbar .nav-dropdown:hover:not(.nav-open) > .mega-panel,
+html.touch-nav .navbar .nav-dropdown:hover:not(.nav-open) > .dropdown-panel,
+body.premium html.touch-nav .navbar .nav-dropdown:hover:not(.nav-open) > .mega-panel,
+body.premium html.touch-nav .navbar .nav-dropdown:hover:not(.nav-open) > .dropdown-panel {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(8px) !important;
+  -webkit-transform: translateX(-50%) translateY(8px) !important;
+}
+html.touch-nav .navbar .nav-dropdown:hover:not(.nav-open) > a::after {
+  transform: none !important;
+  width: auto !important;
+}
+html.touch-nav .navbar .nav-links > a:hover::after { width: 0 !important; }
+html.touch-nav .navbar .nav-links a,
+html.touch-nav .navbar .nav-dropdown > a,
+html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
