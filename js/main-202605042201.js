@@ -89,8 +89,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.pointerType === 'touch') htmlEl.classList.add('touch-nav');
     else if (e.pointerType === 'mouse' || e.pointerType === 'pen') htmlEl.classList.remove('touch-nav');
   }, true);
+  // 三次修复：pointerover 比 pointerdown 更早触发（iOS tap 事件序为
+  // pointerover → pointerdown → … → 合成 hover → click），
+  // 在此即点亮 .touch-nav，让 CSS 的 hover 抑制先于合成 hover 生效，
+  // 彻底杜绝「面板闪现一下（hover 先展开）再消失」。
+  document.addEventListener('pointerover', function(e) {
+    if (e.pointerType === 'touch') htmlEl.classList.add('touch-nav');
+  }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
   function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
+
+  // 三次修复：打开宽限期。面板刚展开的 450ms 内，任何非用户主动的关闭源
+  // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
+  // 工具栏收展的假 resize 等）一律忽略；用户再次点按触发器仍可正常收起。
+  var NAV_OPEN_GRACE = 450;
+  function inOpenGrace(dd) {
+    return dd.__navOpenedAt && (Date.now() - dd.__navOpenedAt) < NAV_OPEN_GRACE;
+  }
+  function anyOpenInGrace() {
+    if (!navLinks) return false;
+    var open = navLinks.querySelectorAll('.nav-dropdown.nav-open, .nav-dropdown.mobile-open');
+    for (var i = 0; i < open.length; i++) { if (inOpenGrace(open[i])) return true; }
+    return false;
+  }
 
   function closeAllDropdowns(except) {
     if (!navLinks) return;
@@ -120,12 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         e.stopPropagation();
         const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
+        // 三次修复：防抖。iOS Safari 偶发对同一 tap 双发 click（或快速双击被判定为
+        // 两个 click），第一次展开、第二次立刻收起 = 「闪现即逝」。
+        // 展开后 450ms 内的重复点按忽略；真正的「再点收起」间隔远大于此。
+        if (wasOpen && inOpenGrace(dropdown)) return;
         closeAllDropdowns(dropdown);
         if (wasOpen) {
           dropdown.classList.remove('nav-open', 'mobile-open');
           this.setAttribute('aria-expanded', 'false');
+          dropdown.__navOpenedAt = 0;
         } else {
           dropdown.classList.add('nav-open', 'mobile-open');
+          dropdown.__navOpenedAt = Date.now();
           this.setAttribute('aria-expanded', 'true');
           // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
           setTimeout(function () {
@@ -149,17 +176,18 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => closeAllDropdowns());
     });
 
-    // 点击导航以外区域：收起全部子菜单
+    // 点击导航以外区域：收起全部子菜单（打开宽限期内忽略，防 iOS 假 click 误关）
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.navbar')) closeAllDropdowns();
+      if (!e.target.closest('.navbar') && !anyOpenInGrace()) closeAllDropdowns();
     });
     // Esc：收起子菜单并关闭抽屉
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { closeAllDropdowns(); closeMobileMenu(); }
     });
     // 横竖屏切换 / 窗口尺寸变化：收起子菜单，避免断点切换后布局错乱
+    // （打开宽限期内忽略——iOS 工具栏收展的假 resize / 旋转初期抖动不误关面板）
     window.addEventListener('orientationchange', function() {
-      setTimeout(function() { closeAllDropdowns(); }, 350);
+      setTimeout(function() { if (!anyOpenInGrace()) closeAllDropdowns(); }, 350);
     });
     let navResizeTimer, navLastW = window.innerWidth;
     window.addEventListener('resize', function() {
@@ -168,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 仅在宽度变化（断点切换/旋转）时收起子菜单；
         // iOS Safari 工具栏收展会触发同宽度的 resize，不能因此关闭面板（否则菜单"闪现即逝"）
         if (window.innerWidth !== navLastW) {
-          closeAllDropdowns();
+          if (!anyOpenInGrace()) closeAllDropdowns();
           navLastW = window.innerWidth;
         }
       }, 250);

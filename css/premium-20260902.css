@@ -2718,3 +2718,19 @@ html.touch-nav .navbar .nav-links > a:hover::after { width: 0 !important; }
 html.touch-nav .navbar .nav-links a,
 html.touch-nav .navbar .nav-dropdown > a,
 html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
+
+/* ------------------------------------------------------------
+   2026-09-09 三次修复： iPad 触屏「点开即被关闭」兜底
+   ① 导航触发器无条件禁用双击缩放——iPadOS 桌面模式媒体查询报
+      (hover:hover)+(pointer:fine)，上面带 .touch-nav / (hover:none)
+      条件的 touch-action 不生效，快速第二次点按会被系统判为
+      双击缩放而吞掉；touch-action 对鼠标无副作用，直接无条件声明。
+   ------------------------------------------------------------ */
+.navbar .nav-links a,
+.navbar .nav-dropdown > a,
+.navbar .nav-toggle,
+.navbar .mega-panel-link,
+.navbar .dropdown-item {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(201, 168, 76, 0.18);
+}
