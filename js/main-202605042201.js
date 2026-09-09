@@ -30,16 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(overlay);
   }
 
-  function closeMobileMenu() {
+  function closeMobileMenu(force) {
     if (navToggle) navToggle.classList.remove('active');
     if (navLinks) navLinks.classList.remove('open');
     overlay.classList.remove('active');
     document.body.style.overflow = '';
     document.body.classList.remove('drawer-open');
-    // Collapse all expanded dropdowns
+    // Collapse all expanded dropdowns（强制展开态的面板除非显式 force 否则保留）
     if (navLinks) {
       navLinks.querySelectorAll('.nav-dropdown.mobile-open, .nav-dropdown.nav-open').forEach(dd => {
+        if (dd.__navForceOpen && !force) return;
         dd.classList.remove('mobile-open', 'nav-open');
+        dd.__navForceOpen = false;
         const t = dd.querySelector(':scope > a');
         if (t) t.setAttribute('aria-expanded', 'false');
       });
@@ -121,7 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
     var line = (Date.now() % 100000) + ' ' + ev + (extra ? ' | ' + extra : '');
     window.__navLog.push(line);
     if (window.__navLog.length > 80) window.__navLog.shift();
-    if (navDebugBox) navDebugBox.textContent = 'NAV-DBG v20260909e ' + window.innerWidth + 'x' + window.innerHeight + '\n' + window.__navLog.slice(-14).join('\n');
+    if (navDebugBox) {
+      var openDd = navLinks ? navLinks.querySelectorAll('.nav-dropdown.nav-open').length : 0;
+      navDebugBox.textContent = 'NAV-DBG v20260909f ' + window.innerWidth + 'x' + window.innerHeight
+        + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
+        + '\n' + window.__navLog.slice(-14).join('\n');
+    }
   }
   navLog('boot', 'w=' + window.innerWidth + ' touchMQ=' + isTouchNav.matches);
 
@@ -139,13 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return false;
   }
 
-  function closeAllDropdowns(except, why) {
+  // 六次修复：强制展开态。触屏 tap 展开的面板打上 __navForceOpen 标记后，
+  // 一切「自动关闭源」（外部假 click、resize、orientationchange、closeMobileMenu）
+  // 都关不掉它；只有用户主动操作（再点触发器、点面板链接、Esc、切换其它菜单，
+  // 即调用时显式传 force=true）才能收起。桌面鼠标路径不经过 toggleDropdown，不受影响。
+  function closeAllDropdowns(except, why, force) {
     if (!navLinks) return;
     var closed = false;
     navLinks.querySelectorAll('.nav-dropdown.nav-open, .nav-dropdown.mobile-open').forEach(dd => {
       if (dd === except) return;
+      if (dd.__navForceOpen && !force) { navLog('KEEP', why || 'forced'); return; }
       closed = true;
       dd.classList.remove('nav-open', 'mobile-open');
+      dd.__navForceOpen = false;
       const t = dd.querySelector(':scope > a');
       if (t) t.setAttribute('aria-expanded', 'false');
     });
@@ -155,16 +168,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleDropdown(trigger, dropdown, via) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
     if (wasOpen && inOpenGrace(dropdown)) { navLog('debounce', via); return; }
-    closeAllDropdowns(dropdown, via + ':switch');
+    // 切换到其它菜单 = 用户主动操作，强制收起其余面板
+    closeAllDropdowns(dropdown, via + ':switch', true);
     const label = (trigger.textContent || '').trim().slice(0, 8);
     if (wasOpen) {
       dropdown.classList.remove('nav-open', 'mobile-open');
+      dropdown.__navForceOpen = false;
       trigger.setAttribute('aria-expanded', 'false');
       dropdown.__navOpenedAt = 0;
       navLog('CLOSE', via + ':' + label);
     } else {
       dropdown.classList.add('nav-open', 'mobile-open');
       dropdown.__navOpenedAt = Date.now();
+      dropdown.__navForceOpen = true;
       trigger.setAttribute('aria-expanded', 'true');
       htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
       navLog('OPEN', via + ':' + label);
@@ -230,18 +246,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // 点击面板内链接后收起全部子菜单
+    // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
-      link.addEventListener('click', () => closeAllDropdowns(null, 'panel-link'));
+      link.addEventListener('click', () => closeAllDropdowns(null, 'panel-link', true));
     });
 
-    // 点击导航以外区域：收起全部子菜单（打开宽限期内忽略，防 iOS 假 click 误关）
+    // 点击导航以外区域：收起全部子菜单（打开宽限期内忽略，防 iOS 假 click 误关；
+    // 强制展开态的面板不受影响——触屏会话中点外部不再自动收起）
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.navbar') && !anyOpenInGrace()) closeAllDropdowns(null, 'outside-click');
     });
-    // Esc：收起子菜单并关闭抽屉
+    // Esc：收起子菜单并关闭抽屉（用户主动操作，强制收起）
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') { closeAllDropdowns(null, 'esc'); closeMobileMenu(); }
+      if (e.key === 'Escape') { closeAllDropdowns(null, 'esc', true); closeMobileMenu(true); }
     });
     // 横竖屏切换 / 窗口尺寸变化：收起子菜单，避免断点切换后布局错乱
     // （打开宽限期内忽略——iOS 工具栏收展的假 resize / 旋转初期抖动不误关面板）
