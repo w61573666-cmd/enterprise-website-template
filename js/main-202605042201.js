@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dd.__navForceOpen && !force) return;
         dd.classList.remove('mobile-open', 'nav-open');
         dd.__navForceOpen = false;
+        setPanelInline(dd, false);
         const t = dd.querySelector(':scope > a');
         if (t) t.setAttribute('aria-expanded', 'false');
       });
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { sessionStorage.setItem('hsst-navlog', JSON.stringify(window.__navLog)); } catch (err) {}
     if (navDebugBox) {
       var openDd = navLinks ? navLinks.querySelectorAll('.nav-dropdown.nav-open').length : 0;
-      navDebugBox.textContent = 'NAV-DBG v20260909g ' + window.innerWidth + 'x' + window.innerHeight
+      navDebugBox.textContent = 'NAV-DBG v20260909h ' + window.innerWidth + 'x' + window.innerHeight
         + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
         + '\n' + window.__navLog.slice(-14).join('\n');
     }
@@ -163,6 +164,17 @@ document.addEventListener('DOMContentLoaded', () => {
     return false;
   }
 
+  // 八次修复：行内 !important 直写面板可见性——真机 iPad 实锤「类名在、JS 认为开着，
+  // 但屏幕上被某条触屏媒体查询隐藏规则藏掉」。行内 !important 优先级高于一切样式表，
+  // 物理上杜绝再被 CSS 藏掉。收起时清除行内样式，交还样式表控制。
+  function setPanelInline(dropdown, on) {
+    var panel = dropdown.querySelector('.mega-panel') || dropdown.querySelector('.dropdown-panel');
+    if (!panel) return;
+    panel.style.cssText = on
+      ? 'visibility:visible!important;opacity:1!important;pointer-events:auto!important;'
+      : '';
+  }
+
   // 六次修复：强制展开态。触屏 tap 展开的面板打上 __navForceOpen 标记后，
   // 一切「自动关闭源」（外部假 click、resize、orientationchange、closeMobileMenu）
   // 都关不掉它；只有用户主动操作（再点触发器、点面板链接、Esc、切换其它菜单，
@@ -176,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
       closed = true;
       dd.classList.remove('nav-open', 'mobile-open');
       dd.__navForceOpen = false;
+      setPanelInline(dd, false);
       const t = dd.querySelector(':scope > a');
       if (t) t.setAttribute('aria-expanded', 'false');
     });
@@ -191,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (wasOpen) {
       dropdown.classList.remove('nav-open', 'mobile-open');
       dropdown.__navForceOpen = false;
+      setPanelInline(dropdown, false);
       trigger.setAttribute('aria-expanded', 'false');
       dropdown.__navOpenedAt = 0;
       navMemClear();
@@ -199,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropdown.classList.add('nav-open', 'mobile-open');
       dropdown.__navOpenedAt = Date.now();
       dropdown.__navForceOpen = true;
+      setPanelInline(dropdown, true);
       trigger.setAttribute('aria-expanded', 'true');
       htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
       if (typeof dropdown.__navIdx === 'number') navMemSave(dropdown.__navIdx);

@@ -2610,12 +2610,14 @@ body.drawer-open .pwa-install-btn {
    方案：新增 .nav-open 点击态，所有断点通用；触屏禁用 :hover 展开。
    ============================================================ */
 
-/* 1) 触屏设备不再使用 hover 展开/悬停态，避免点击后 hover 残留 */
+/* 1) 触屏设备不再使用 hover 展开/悬停态，避免点击后 hover 残留
+   （2026-09-09 八次修复：补 :not(.nav-open)——真机 iPad 上该媒体查询命中，
+   原版会把 JS 已展开（nav-open）的面板重新藏掉 = 「展开约一秒后消失」） */
 @media (hover: none), (pointer: coarse) {
-  .navbar .nav-dropdown:hover > .mega-panel,
-  .navbar .nav-dropdown:hover > .dropdown-panel,
-  body.premium .navbar .nav-dropdown:hover > .mega-panel,
-  body.premium .navbar .nav-dropdown:hover > .dropdown-panel {
+  .navbar .nav-dropdown:hover:not(.nav-open) > .mega-panel,
+  .navbar .nav-dropdown:hover:not(.nav-open) > .dropdown-panel,
+  body.premium .navbar .nav-dropdown:hover:not(.nav-open) > .mega-panel,
+  body.premium .navbar .nav-dropdown:hover:not(.nav-open) > .dropdown-panel {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
