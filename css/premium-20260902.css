@@ -2744,3 +2744,101 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
 .navbar .dropdown-item {
   -webkit-tap-highlight-color: rgba(201, 168, 76, 0.18);
 }
+
+/* ============================================================
+   54. 移动端密度收紧层（2026-09-10 v20260910a）
+   ------------------------------------------------------------
+   全站手机端（≤768px）排版审查结论：留白过大主要来自 premium 层
+   各专题区块的固定大 padding（84/96/88/72/56px 系）在手机上未收缩。
+   本模块统一收紧为「26px 区块节距 + 20-28px 组件内距 + 14-16px 网格间距」
+   的紧凑节奏；hero 类一律 pt/mt 同步等量收缩，净距不变（fixed 导航不遮字）。
+   全部带 !important + 文件末尾位置，稳定压过前文同名规则。
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ── 通用节距 ── */
+  body.premium .section-padding { padding: 26px 0 !important; }
+  body.premium .section-padding.pt-40 { padding: 22px 0 18px !important; }
+  body.premium .hero-buttons { margin-top: 18px !important; }
+
+  /* ── Hero 族：pt/mt 同步收缩，净距不变（导航 fixed 48px 瘦条不遮字）── */
+  body.premium .hero.hero-grid-video { padding-top: 66px !important; margin-top: -50px !important; padding-bottom: 14px !important; }
+  body.premium .hero.honors-hero { padding-top: 66px !important; margin-top: -50px !important; min-height: 300px !important; }
+  body.premium .news-hero { padding-top: 68px !important; margin-top: -56px !important; padding-bottom: 16px !important; }
+  body.premium .product-hero { padding-top: 56px !important; }
+  body.premium .v2-hero .v2-hero-media { min-height: 250px !important; }
+  body.premium .v2-hero .v2-hero-text { padding: 24px 20px 22px !important; }
+  body.premium .v2-hero-full { min-height: 400px !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+  body.premium .v2-hero-full .v2-hero-content { padding: 120px 0 30px !important; }
+
+  /* ── 首页 CTA / 表单区 ── */
+  body.premium .cta-section.section-padding { padding: 38px 0 40px !important; }
+  body.premium .cta-section.cta-home { padding-top: 38px !important; padding-bottom: 42px !important; }
+  body.premium .cta-section.cta-home .cta-home-grid { gap: 16px !important; margin-top: 6px !important; }
+  body.premium .cta-section.cta-home .cta-cert-panel { padding: 20px 16px !important; }
+  body.premium .cta-section.cta-home .cta-cert-grid { margin: 14px 0 !important; gap: 10px !important; }
+  body.premium .hsst-form-success { padding: 20px 16px !important; }
+
+  /* ── 产品中心 v2 ── */
+  body.premium .v2-series { padding: 34px 0 38px !important; }
+  body.premium .v2-series .v2-series-lead { margin: 0 0 18px !important; }
+  body.premium .v2-series-card .vsc-cap { padding: 22px 16px 16px !important; }
+  body.premium .v2-spot-in { padding: 26px 20px 24px !important; }
+  body.premium .v2-spot-text { padding: 24px 20px 22px !important; }
+  body.premium .v2-spot-media { min-height: 230px !important; }
+  body.premium .v2-quote { padding: 42px 20px 34px !important; }
+  body.premium .v2-colours { padding: 34px 0 !important; }
+  body.premium .v2-archive { padding: 36px 0 !important; }
+
+  /* ── 工程案例 v2 ── */
+  body.premium .v2-card { margin-bottom: 14px !important; }
+  body.premium .v2-card .v2-card-img img { aspect-ratio: 4 / 3 !important; object-fit: cover !important; }
+  body.premium .v2-gallery { padding: 32px 0 14px !important; }
+  body.premium .v2-record { padding: 30px 0 26px !important; margin-top: 14px !important; }
+
+  /* ── 产品/制造详情页 ── */
+  body.premium .product-content-section { padding: 26px 0 !important; }
+  body.premium .tech-specs-table { margin-top: 18px !important; }
+  body.premium .stats-row { margin-top: 12px !important; }
+
+  /* ── 新闻 ── */
+  body.premium .news-spotlight { margin-bottom: 18px !important; }
+  body.premium .news-grid { margin-top: 20px !important; gap: 14px !important; }
+
+  /* ── 新闻文章正文（art-*，样式原在各页内联）── */
+  body.premium .art-body { padding: 30px 20px 8px !important; }
+  body.premium .art-hero-content { padding-bottom: 24px !important; }
+  body.premium .art-body p { font-size: 16px !important; line-height: 1.85 !important; margin: 0 0 16px !important; }
+  body.premium .art-h2 { margin: 24px 0 12px !important; padding-top: 0 !important; }
+  body.premium .art-hook { padding: 20px 18px !important; margin: 22px 0 !important; }
+  body.premium .art-facts { margin-top: 20px !important; }
+  body.premium .art-cta { padding: 28px 20px !important; margin-top: 22px !important; }
+
+  /* ── FAQ v2 ── */
+  body.premium .faqv2-hero { padding: 42px 0 30px !important; }
+  body.premium .faqv2-cat { margin-bottom: 24px !important; }
+  body.premium .faqv2-cat-head { padding: 14px 0 10px !important; margin-bottom: 12px !important; }
+  body.premium .faqv2-cta { padding: 22px 16px !important; margin-top: 26px !important; }
+
+  /* ── 关于我们 ── */
+  body.premium .section-padding.before-video { padding-top: 40px !important; }
+  body.premium .timeline-section { padding: 24px 0 20px !important; }
+  body.premium .timeline { padding: 20px 0 16px !important; }
+  body.premium .about-text-block { padding-top: 22px !important; margin-top: 12px !important; }
+  body.premium .about-stats { margin-top: 22px !important; }
+  body.premium .why-choose-grid { margin-top: 22px !important; }
+  body.premium .role-entry-section { padding: 26px 0 24px !important; }
+  body.premium .scenarios-grid-hs { margin-top: 14px !important; gap: 14px !important; }
+  body.premium .sustainability-grid { gap: 14px !important; }
+}
+
+/* ≤480px 再压一档（小屏手机） */
+@media (max-width: 480px) {
+  body.premium .section-padding { padding: 22px 0 !important; }
+  body.premium .cta-section.section-padding { padding: 32px 0 34px !important; }
+  body.premium .v2-series { padding: 28px 0 32px !important; }
+  body.premium .v2-quote { padding: 34px 18px 28px !important; }
+  body.premium .v2-hero .v2-hero-media { min-height: 210px !important; }
+  body.premium .v2-spot-media { min-height: 200px !important; }
+  body.premium .v2-hero-full { min-height: 340px !important; }
+}
