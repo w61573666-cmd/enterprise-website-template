@@ -123,14 +123,31 @@ document.addEventListener('DOMContentLoaded', () => {
     var line = (Date.now() % 100000) + ' ' + ev + (extra ? ' | ' + extra : '');
     window.__navLog.push(line);
     if (window.__navLog.length > 80) window.__navLog.shift();
+    // 七次修复：日志写入 sessionStorage，页面重载后仍可追溯（中途再现 boot 行 = 实锤发生过重载）
+    try { sessionStorage.setItem('hsst-navlog', JSON.stringify(window.__navLog)); } catch (err) {}
     if (navDebugBox) {
       var openDd = navLinks ? navLinks.querySelectorAll('.nav-dropdown.nav-open').length : 0;
-      navDebugBox.textContent = 'NAV-DBG v20260909f ' + window.innerWidth + 'x' + window.innerHeight
+      navDebugBox.textContent = 'NAV-DBG v20260909g ' + window.innerWidth + 'x' + window.innerHeight
         + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
         + '\n' + window.__navLog.slice(-14).join('\n');
     }
   }
+  // 恢复上一页面的日志（同一标签页重载不丢证据）
+  try {
+    var prevLog = JSON.parse(sessionStorage.getItem('hsst-navlog') || 'null');
+    if (Array.isArray(prevLog) && prevLog.length) {
+      window.__navLog = prevLog.slice(-60);
+      window.__navLog.push((Date.now() % 100000) + ' ── PAGE RELOAD ──');
+    }
+  } catch (err) {}
   navLog('boot', 'w=' + window.innerWidth + ' touchMQ=' + isTouchNav.matches);
+
+  // 七次修复：展开状态记忆。若「漏网 click 触发本页重载」（關於我們 的 href 就是
+  // 当前页，重载后面板消失 ≈ 用户看到的「约一秒后自动消失」），加载后立即恢复
+  // 展开状态，用户无感。用户主动收起时清除记忆。
+  var NAV_MEM_KEY = 'hsst-nav-open';
+  function navMemSave(idx) { try { sessionStorage.setItem(NAV_MEM_KEY, String(idx)); } catch (err) {} }
+  function navMemClear() { try { sessionStorage.removeItem(NAV_MEM_KEY); } catch (err) {} }
 
   // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
@@ -176,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropdown.__navForceOpen = false;
       trigger.setAttribute('aria-expanded', 'false');
       dropdown.__navOpenedAt = 0;
+      navMemClear();
       navLog('CLOSE', via + ':' + label);
     } else {
       dropdown.classList.add('nav-open', 'mobile-open');
@@ -183,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropdown.__navForceOpen = true;
       trigger.setAttribute('aria-expanded', 'true');
       htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
+      if (typeof dropdown.__navIdx === 'number') navMemSave(dropdown.__navIdx);
       navLog('OPEN', via + ':' + label);
       // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
       setTimeout(function () {
@@ -193,7 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (navLinks) {
-    navLinks.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
+    navLinks.querySelectorAll('.nav-dropdown > a').forEach((trigger, idx) => {
+      // 记录序号（供重载后恢复展开状态用）
+      const dd0 = trigger.closest('.nav-dropdown');
+      if (dd0) dd0.__navIdx = idx;
       // 无障碍标注（触发器本体是链接，保留链接语义，用 aria-haspopup/aria-expanded 声明弹出关系）
       if (!trigger.hasAttribute('aria-haspopup')) trigger.setAttribute('aria-haspopup', 'true');
       if (!trigger.hasAttribute('aria-expanded')) trigger.setAttribute('aria-expanded', 'false');
@@ -248,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
-      link.addEventListener('click', () => closeAllDropdowns(null, 'panel-link', true));
+      link.addEventListener('click', () => { navMemClear(); closeAllDropdowns(null, 'panel-link', true); });
     });
 
     // 点击导航以外区域：收起全部子菜单（打开宽限期内忽略，防 iOS 假 click 误关；
@@ -258,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Esc：收起子菜单并关闭抽屉（用户主动操作，强制收起）
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') { closeAllDropdowns(null, 'esc', true); closeMobileMenu(true); }
+      if (e.key === 'Escape') { navMemClear(); closeAllDropdowns(null, 'esc', true); closeMobileMenu(true); }
     });
     // 横竖屏切换 / 窗口尺寸变化：收起子菜单，避免断点切换后布局错乱
     // （打开宽限期内忽略——iOS 工具栏收展的假 resize / 旋转初期抖动不误关面板）
@@ -279,6 +301,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }, 250);
     });
+
+    // 七次修复：页面加载后恢复上次的展开状态（对抗「漏网 click 触发本页重载」，
+    // 重载后面板立即重现，用户无感）。仅触屏会话生效；用户主动收起时已清除记忆。
+    try {
+      var savedIdx = parseInt(sessionStorage.getItem(NAV_MEM_KEY), 10);
+      if (!isNaN(savedIdx)) {
+        var ddSaved = navLinks.querySelectorAll('.nav-dropdown')[savedIdx];
+        var trigSaved = ddSaved && ddSaved.querySelector(':scope > a');
+        if (trigSaved) {
+          navLog('restore', 'idx=' + savedIdx);
+          toggleDropdown(trigSaved, ddSaved, 'restore');
+        }
+      }
+    } catch (err) {}
   }
 
   // Close menu on regular nav link click (not dropdown triggers)
