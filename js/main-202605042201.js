@@ -171,6 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
   var NAV_MEM_KEY = 'hsst-nav-open';
   function navMemSave(idx) { try { sessionStorage.setItem(NAV_MEM_KEY, String(idx)); } catch (err) {} }
   function navMemClear() { try { sessionStorage.removeItem(NAV_MEM_KEY); } catch (err) {} }
+  // 十二次修复（2026-09-13）：点按父菜单展开/切换子菜单后，浏览器会在布局回流后于
+  // 「刚出现的面板」坐标上补发一次 click。该 click 落在子链接(.mega-panel-link)上会被误判为
+  // 「点击子菜单」而跳转（手机端切换父菜单跳到子页面、平板同类缺陷）。记下最近一次点按展开的时刻，
+  // 在极短窗口内吞掉落在展开面板内部的这次补偿 click，避免误跳；用户刻意点子链接(>600ms)仍正常跳转。
+  var navJustToggled = 0;
 
   // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
@@ -255,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     trigger.setAttribute('aria-expanded', 'true');
     htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
     if (typeof dropdown.__navIdx === 'number') navMemSave(dropdown.__navIdx);
+    navJustToggled = Date.now();
     navLog('OPEN', via + ':' + label);
     // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
     setTimeout(function () {
@@ -345,6 +351,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       navMemClear(); closeAllDropdowns(null, 'outside-click', true);
     });
+    // 十二次修复（续）：捕获阶段吞掉「点按展开后回流补偿的 click」。
+    // 该 click 落在刚展开面板的子链接上会误跳转；窗口 600ms（短于用户刻意点子链接的间隔），
+    // 仅作用于面板内部，不影响抽屉外点击 / 刻意点子链接。
+    document.addEventListener('click', function(e) {
+      if (navJustToggled && (Date.now() - navJustToggled) < 600) {
+        if (e.target.closest('.mega-panel, .dropdown-panel')) {
+          navLog('click-swallow', 'panel-after-toggle');
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+      }
+    }, true);
     // Esc：收起子菜单并关闭抽屉（用户主动操作，强制收起）
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { navMemClear(); closeAllDropdowns(null, 'esc', true); closeMobileMenu(true); }
