@@ -2041,6 +2041,19 @@ body.premium .navbar.scrolled {
     max-height: none;
     padding: 8px 0 8px 16px;
   }
+  /* 统一交互（2026-09-13）：抽屉态(≤1160px，汉堡菜单展开)下也支持鼠标悬停自动展开子菜单，
+     与全屏 .nav-dropdown:hover 行为一致。此前抽屉内子菜单面板默认 display:none 且无 :hover
+     展开规则，导致只能用点击展开；现补 hover 规则——桌面鼠标悬停父栏目即展开。
+     触屏设备(html.touch-nav)不触发 hover，仍走点按展开（见下方 touch-nav 抑制规则）。 */
+  body.premium .navbar .nav-links.open .nav-dropdown:hover .mega-panel,
+  body.premium .navbar .nav-links.open .nav-dropdown:hover .dropdown-panel {
+    display: block !important;
+    max-height: none !important;
+    padding: 8px 0 8px 16px !important;
+  }
+  body.premium .navbar .nav-links.open .nav-dropdown:hover > a::after {
+    transform: rotate(180deg) !important;
+  }
   body.premium .navbar .nav-dropdown > a::after {
     display: inline-block !important;
     transition: transform 0.3s ease;
