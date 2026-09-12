@@ -2045,13 +2045,15 @@ body.premium .navbar.scrolled {
      与全屏 .nav-dropdown:hover 行为一致。此前抽屉内子菜单面板默认 display:none 且无 :hover
      展开规则，导致只能用点击展开；现补 hover 规则——桌面鼠标悬停父栏目即展开。
      触屏设备(html.touch-nav)不触发 hover，仍走点按展开（见下方 touch-nav 抑制规则）。 */
-  body.premium .navbar .nav-links.open .nav-dropdown:hover .mega-panel,
-  body.premium .navbar .nav-links.open .nav-dropdown:hover .dropdown-panel {
+  /* 门控：仅真实指针设备（非触屏）走 hover 展开；触屏(html.touch-nav)的 :hover 会「粘住」，
+     若不过滤会让 JS 收起后面板仍被 !important 撑开，表现为「点第二次关不掉」。 */
+  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover .mega-panel,
+  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover .dropdown-panel {
     display: block !important;
     max-height: none !important;
     padding: 8px 0 8px 16px !important;
   }
-  body.premium .navbar .nav-links.open .nav-dropdown:hover > a::after {
+  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover > a::after {
     transform: rotate(180deg) !important;
   }
   body.premium .navbar .nav-dropdown > a::after {
@@ -2209,6 +2211,23 @@ body.premium .navbar.scrolled {
 .faqv2-hero h1{font-weight:800 !important;}
 /* Module 46 补丁2: 提升优先级压过 body.premium h1 */
 body.premium .faqv2-hero h1,body.premium .faqv2-cta h2{color:#fff !important;}
+
+/* ═══════════════════════════════════════════════════════════
+   47. 触屏下拉「关不掉」防御（2026-09-13）
+   触屏设备(html.touch-nav)的 :hover 会「粘住」——一次点按后元素保持
+   :hover 态，导致 JS 已收起(.mobile-open/.nav-open 已移除、行内样式已清)
+   但任何 :hover 展开规则仍用 !important 把面板撑开，表现为「再点一次关不掉」。
+   此处统一强制：未显式展开的下拉面板在触屏下一律隐藏，彻底压制 hover 粘住。
+   仅作用于 html.touch-nav；桌面鼠标(无 touch-nav)不受影响。 */
+html.touch-nav body.premium .navbar .nav-dropdown:not(.mobile-open):not(.nav-open) .mega-panel,
+html.touch-nav body.premium .navbar .nav-dropdown:not(.mobile-open):not(.nav-open) .dropdown-panel {
+  display: none !important;
+  max-height: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
 
 /* ═══════════════════════════════════════════════════════════
    Module 47: 导航高亮修正 (2026-09-06) — 子菜单当前页条目
