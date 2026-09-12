@@ -2229,26 +2229,6 @@ html.touch-nav body.premium .navbar .nav-dropdown:not(.mobile-open):not(.nav-ope
   overflow: hidden !important;
 }
 
-/* 47.1 触屏下拉「浮层覆盖相邻父菜单」修复（2026-09-13）
-   桌面区间(>1160px)下点击展开的 .nav-open 面板默认 position:absolute（浮层），
-   会盖住相邻父菜单。触屏设备（尤其平板横屏 1024–1160px 仍走桌面布局）点「另一个」
-   父菜单时，点按坐标落在浮层子链接上 → 跳转到子页面而非切换菜单，表现为「切换导航缺陷」。
-   统一在 html.touch-nav 下把「已展开」面板改为静态堆叠（与抽屉(≤1160px)一致），所有宽度通用，
-   保证「点另一个父菜单 = 收起其它、展开当前」干净切换，不再误触浮层链接。
-   说明：setPanelInline 写入的 z-index 行内 !important 对 static 元素无效，无需清理；
-        桌面鼠标(无 touch-nav)路径完全不受影响；仅 .nav-open/.mobile-open 展开态生效。 */
-html.touch-nav body.premium .navbar .nav-dropdown.nav-open > .mega-panel,
-html.touch-nav body.premium .navbar .nav-dropdown.nav-open > .dropdown-panel,
-html.touch-nav body.premium .navbar .nav-dropdown.mobile-open > .mega-panel,
-html.touch-nav body.premium .navbar .nav-dropdown.mobile-open > .dropdown-panel {
-  position: static !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  box-shadow: none !important;
-  max-height: none !important;
-  margin: 0 !important;
-}
-
 /* ═══════════════════════════════════════════════════════════
    Module 47: 导航高亮修正 (2026-09-06) — 子菜单当前页条目
    ═══════════════════════════════════════════════════════════ */
