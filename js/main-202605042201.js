@@ -286,10 +286,14 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         // 触屏判定：click 自带 pointerType（部分内核），或会话内出现过触屏交互（.touch-nav），
-        // 或媒体查询命中——三者任一即按触屏处理；否则桌面鼠标保持原行为（hover 展开、点击跳转）
+        // 或媒体查询命中，或抽屉菜单已展开（桌面浏览器缩窄至断点以下、用鼠标点按父菜单也要展开子菜单）
+        // ——四者任一即按「展开/收起」处理；否则桌面鼠标保持原行为（hover 展开、点击跳转）。
+        // 修复：此前仅认触屏指针，导致「桌面浏览器窗口未全屏、宽度 < 断点」时点击父菜单子菜单无法显示。
+        const mobileMode = navLinks && navLinks.classList.contains('open');
         const touchClick = e.pointerType === 'touch'
           || htmlEl.classList.contains('touch-nav')
-          || touchNavMode();
+          || touchNavMode()
+          || mobileMode;
         if (!touchClick) return;
         navLog('click-toggle');
         e.preventDefault();
