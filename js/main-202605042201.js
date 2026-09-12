@@ -228,10 +228,24 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleDropdown(trigger, dropdown, via) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
     const label = (trigger.textContent || '').trim().slice(0, 8);
-    // 十次修复（最终交互定案）：触屏上菜单标题是「只开不关」的——真机日志证实用户
-    // 点完菜单后会再碰标题（+0.4s / +1.4s / +2.9s 都出现过），任何时长窗口都拦不住。
-    // 已展开时再点标题一律忽略；收起只靠：点空白处 / 点子菜单项 / 切换其它菜单 / Esc。
-    if (wasOpen) { navLog('keep-open', via + ':' + label); return; }
+    // 修复（2026-09-13）：实现真正的开/关切换。已展开时再次点按父菜单即收起，
+    // 满足「首次点击展开、再次点击收起」的需求（手机/平板/桌面抽屉态通用）。
+    // 收起仍保留原有路径：点子菜单项 / 切换其它菜单 / 点空白处 / Esc。
+    if (wasOpen) {
+      dropdown.classList.remove('nav-open', 'mobile-open');
+      dropdown.__navForceOpen = false;
+      setPanelInline(dropdown, false);
+      const t = dropdown.querySelector(':scope > a');
+      if (t) t.setAttribute('aria-expanded', 'false');
+      try {
+        if (typeof dropdown.__navIdx === 'number') {
+          const saved = parseInt(sessionStorage.getItem(NAV_MEM_KEY) || 'NaN', 10);
+          if (saved === dropdown.__navIdx) navMemClear();
+        }
+      } catch (err) {}
+      navLog('CLOSE', via + ':' + label + ' (toggle)');
+      return;
+    }
     // 切换到其它菜单 = 用户主动操作，强制收起其余面板
     closeAllDropdowns(dropdown, via + ':switch', true);
     dropdown.classList.add('nav-open', 'mobile-open');
