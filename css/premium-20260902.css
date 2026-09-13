@@ -3026,3 +3026,147 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
     max-width: 100% !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   Module 52: iPhone / iOS 窄屏专修 (2026-09-13)  [IOS-IPHONE-FIX-20260913]
+   ───────────────────────────────────────────────────────────
+   依据：全站 255 页 × 320/375/430 三宽度实测扫描。
+     · 页面级横向滚动全站为 0（解除 overflow-x 掩饰后测得）；
+     · 但存在「元素被裁切且不可达」的硬缺陷 + iOS 独占行为缺陷。
+   本模块逐条对应修复。桌面端(>768px)不受任何影响。
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1) iOS 聚焦自动放大 —— 真机横向滚动的头号原因 ──────────────
+   根因：premium 主题用 !important 把输入控件字号钉死在 14px
+        （本文件 "12. Form 輸入框升級"），style.css 的 .inquiry-form
+        用 0.95rem(≈15.2px)，两者都 < 16px。
+   后果：iOS Safari 聚焦 font-size<16px 的输入框时会「整页放大」，
+        布局视口随之变宽 → 立刻出现横向滚动条，且失焦后常残留。
+   实测影响 84 个页面（联系我们 10 个控件、在线应聘 12 个）。
+   修复：窄屏统一抬到 16px（须同样 !important 才能覆盖原 !important）。 */
+@media (max-width: 768px) {
+  body.premium input[type="text"],
+  body.premium input[type="email"],
+  body.premium input[type="tel"],
+  body.premium input[type="number"],
+  body.premium input[type="search"],
+  body.premium input[type="url"],
+  body.premium input[type="date"],
+  body.premium input[type="password"],
+  body.premium textarea,
+  body.premium select,
+  .premium input[type="text"],
+  .premium input[type="email"],
+  .premium input[type="tel"],
+  .premium textarea,
+  .premium select,
+  .inquiry-form input,
+  .inquiry-form select,
+  .inquiry-form textarea,
+  .hsst-form-zone input,
+  .hsst-form-zone select,
+  .hsst-form-zone textarea,
+  form input:not([type="checkbox"]):not([type="radio"])
+             :not([type="hidden"]):not([type="submit"]):not([type="button"]),
+  form textarea,
+  form select {
+    font-size: 16px !important;
+  }
+}
+
+/* ── 2) overflow-x:clip 的旧引擎回退 ──────────────────────────
+   style.css 的 html{overflow-x:clip} 在 iOS 15 及以下不被支持，
+   不支持时整条声明被丢弃 → 原本被静默裁掉的溢出变成真实横向滚动条。
+   只给「不支持 clip」的浏览器补 hidden 回退；
+   现代浏览器保留 clip（不创建滚动容器，不影响 position:sticky）。 */
+@supports not (overflow-x: clip) {
+  html { overflow-x: hidden; }
+}
+
+/* ── 3) 100vw 在 iOS 上可能大于可视宽度 ─────────────────────
+   iOS Safari 的 100vw 计算偶发大于 window.innerWidth，
+   用于 width 时会把元素顶出屏幕。改用 100% / auto（语义等价且无风险）。 */
+@media (max-width: 900px) {
+  .mega-panel { width: auto !important; }  /* 已有 left/right:16px !important 定位 */
+}
+.image-modal-content { width: 100% !important; max-width: 100% !important; }
+.image-modal-content img { max-width: 100% !important; }
+
+/* ── 4) 长文本 / 长链接 / 邮箱断行兜底 ───────────────────────
+   用 break-word（不改动 min-content 尺寸，避免波及 flex/grid 布局）。 */
+@media (max-width: 768px) {
+  body.premium,
+  body.premium p,
+  body.premium li,
+  body.premium td,
+  body.premium th,
+  body.premium span,
+  body.premium a { overflow-wrap: break-word; }
+}
+
+/* ── 5) 媒体与嵌入元素兜底自适应 ──────────────────────────── */
+@media (max-width: 768px) {
+  body.premium img,
+  body.premium video,
+  body.premium iframe,
+  body.premium embed,
+  body.premium object,
+  body.premium canvas { max-width: 100% !important; }
+}
+
+/* ── 6) 方案页 CTA 表单：grid 轨道写死 minmax(400px,1fr) ──────────
+   根因：style.css 的 .solution-cta-grid 用
+         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+         每列最小 400px，窄屏容器只有 ~288px → 强制撑破 80px 并被裁切，
+         输入框右侧一部分既看不见也点不到（实测 8 个方案页）。
+   修复：窄屏改单列，轨道最小值归零，控件宽度 100%。 */
+@media (max-width: 768px) {
+  .solution-cta-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .solution-cta-form,
+  .solution-cta-form > * { min-width: 0 !important; }
+  .solution-cta-input,
+  .solution-cta-textarea {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* ── 7) 里程碑时间轴：flex/grid 子项 min-width:auto 撑破 ──────────
+   根因：.timeline-desc 作为弹性子项默认 min-width:auto，
+        其 min-content（最长不可断词）大于分配到的 104px → 溢出 18px 被裁。
+   修复：子项最小宽度归零 + 允许断词。 */
+@media (max-width: 768px) {
+  .timeline-item,
+  .timeline-item > *,
+  .timeline-content,
+  .timeline-desc {
+    min-width: 0 !important;
+    overflow-wrap: break-word;
+  }
+}
+
+/* ── 8) 宽表格：窄屏容器内可横滑 + iOS 惯性滚动 ────────────────
+   规格表 / 资源表列数多，min-content 远大于 320px。
+   保留「容器内横向滑动」这一标准响应式做法（内容完整可达），
+   补 -webkit-overflow-scrolling:touch 让 iOS 滑动顺畅。 */
+@media (max-width: 768px) {
+  .tech-specs-table,
+  .about-table-wrap,
+  .rs-table-wrap,
+  div[style*="overflow-x:auto"],
+  div[style*="overflow-x: auto"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100% !important;
+  }
+  .tech-specs-table table,
+  .about-table-wrap table,
+  .rs-table {
+    max-width: none;
+  }
+}
