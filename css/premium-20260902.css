@@ -3170,3 +3170,36 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
     max-width: none;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   Module 51: 内页 .container 水平 gutter 修复 (2026-09-13)
+   ───────────────────────────────────────────────────────────
+   问题：style.css 第 90 行
+     .inner-page .section-padding .container { padding: 0; }
+   本意是移除「白卡片」外观（background / border-radius / box-shadow），
+   但 padding:0 把水平 gutter 一并清掉了。
+
+   桌面 >1280px 时 .container 靠 max-width:1200px + margin:0 auto 兜底，
+   所以看不出问题；但 ≤1280px 起 :root 把 --max-width 改成 100%，容器变满幅，
+   于是所有内页内容（标题 / 正文 / 卡片）直接贴到屏幕两侧 —— 卡片边框正好
+   落在屏幕边缘、右侧内容被裁，表现为「页面内容横向溢出、快要超出屏幕边界」。
+
+   为什么只有内页中招：
+     · 首页 index.html 的 body 没有 .inner-page，不受该规则影响 → 正常
+     · 导航栏用 .navbar .container，是不同的选择器 → 页头正常
+     这正是「截图里页头正常、正文贴边」的原因。
+
+   修复：仅在容器满幅的区间(≤1280px)恢复水平 gutter，沿用各断点的 --gutter
+        （≤480:16px / ≤768:20px / 768–1199:28px / 1200–1280:32px）。
+        >1280px 完全不留痕迹 → 桌面端布局与视觉零改动。
+        刻意不加 !important：.solution-hero / .cta-section 等真正需要满幅
+        出血的容器其 padding-left/right:0 自带 !important，优先级更高，
+        不会被本规则破坏。
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1280px) {
+  .inner-page .section-padding .container {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+}
