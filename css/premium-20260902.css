@@ -2874,3 +2874,66 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
   body.premium .v2-spot-media { min-height: 200px !important; }
   body.premium .v2-hero-full { min-height: 340px !important; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   MBL-OVERFLOW-20260913 · Module 51 移动端窄屏横向溢出治理
+   目标：手机端无横向滚动条、内容完整可见且不被裁切；桌面端布局/交互/视觉保持原样。
+     1) FAQ 筛选 chip：原 overflow-x:auto + 隐滚动条，窄屏多数标签不可见 → 换行全展示
+     2) .tech-specs-table：表格 min-content 撑破容器被裁切 → 容器可横向滚动
+     3) .vtl-card（about 里程碑）：width:100% 叠加 margin-left:36px 溢出 → width:auto
+     4) 页脚 .ft-grid5：≤560px 单列 + 长联系串允许折行
+     5) 按钮：nowrap 被裁切 → 允许换行/断字
+     6) 兜底：媒体/代码块/长单词不越界
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  /* 1) FAQ chips 换行，全部可见 */
+  .faqv2-chips { flex-wrap: wrap !important; overflow-x: visible !important; row-gap: 8px; }
+  .faqv2-chip  { flex: 0 1 auto; max-width: 100%; }
+
+  /* 2) 参数表容器可横向滚动，内容可完整查看 */
+  .tech-specs-table {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    max-width: 100%;
+  }
+  .tech-specs-table th,
+  .tech-specs-table td { padding: 10px 12px !important; font-size: 13px !important; }
+  .tech-specs-table th { width: auto !important; min-width: 104px; }
+
+  /* 3) 里程碑卡片：width:auto 吸收 margin-left，消除 36px 溢出 */
+  .vtl-card  { width: auto !important; max-width: 100% !important; }
+  .vtl-track { min-width: 0 !important; }
+
+  /* 5) 按钮标签不被裁切 */
+  .btn, .hsst-btn, .btn-primary, .btn-outline-light, .btn-outline-gold,
+  .hsst-form-btn, .product-action-btn {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* 6) 兜底：媒体/代码块/长单词不越界 */
+  img, video, iframe, embed, object { max-width: 100%; }
+  pre, code { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  p, li, td, th { overflow-wrap: break-word; }
+}
+
+/* 4) 页脚 ≤560px 单列 + 折行，消除列宽不足导致的裁切 */
+@media (max-width: 560px) {
+  body.premium .ft-grid5 {
+    grid-template-columns: 1fr !important;
+    column-gap: 0 !important;
+    row-gap: 26px !important;
+  }
+  body.premium .ft-grid5 > div { min-width: 0 !important; }
+  body.premium .ft-grid5 ul    { min-width: 0 !important; }
+  body.premium .ft-grid5 ul li,
+  body.premium .ft-grid5 .ft-contact li,
+  body.premium .ft-grid5 .ft-contact li a,
+  body.premium .ft-grid5 .ft-contact li span {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    min-width: 0 !important;
+  }
+}
