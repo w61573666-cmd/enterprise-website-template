@@ -2988,3 +2988,41 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
   body.premium .hsst-form-zone .stone-checkbox-item label,
   body.premium .hsst-form-zone .radio-item label { min-width: 0 !important; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   MBL-OVERFLOW3-20260913 · Module 53 窄屏残余溢出（第三轮）
+     A) .cs2-metrics：多列指标网格在 320px 下溢出 20~55px（5 个工程页横向滚动的根因）→ 单列
+     B) .solution-hero：320px 下内部溢出 80px → 容器可收缩 + 内边距收敛
+     C) .cta-section：320px 下内部溢出 40px → 子项 min-width:0、容器不超宽
+     D) .jd-grid 加固：允许断词，避免 min-content 继续撑破轨道
+   统一思路：grid/flex 子项默认 min-width:auto 会被 min-content 撑破 → minmax(0,1fr) + min-width:0
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  /* A) 指标网格 → 单列 */
+  .cs2-metrics { grid-template-columns: minmax(0, 1fr) !important; row-gap: 14px; }
+  .cs2-metrics > * { min-width: 0 !important; }
+  .cs2-metrics * { overflow-wrap: anywhere; }
+  .cs2-metric, .cs2-metric * { min-width: 0 !important; }
+
+  /* D) JD 网格加固 */
+  .jd-grid, .jd-box, .jd-box * { min-width: 0 !important; word-break: break-word; }
+}
+
+@media (max-width: 480px) {
+  /* B) 方案页 hero */
+  .solution-hero { padding-left: 16px !important; padding-right: 16px !important; }
+  .solution-hero > .container { padding-left: 0 !important; padding-right: 0 !important;
+                                max-width: 100% !important; min-width: 0 !important; }
+  .solution-hero * { min-width: 0 !important; }
+  .solution-hero img, .solution-hero video, .solution-hero iframe { max-width: 100% !important; height: auto !important; }
+
+  /* C) CTA 区（含 cta-home / cta-sub / hsst-form-zone） */
+  .cta-section { padding-left: 16px !important; padding-right: 16px !important; }
+  .cta-section > .container { padding-left: 0 !important; padding-right: 0 !important;
+                              max-width: 100% !important; min-width: 0 !important; }
+  .cta-section * { min-width: 0 !important; overflow-wrap: anywhere; }
+  .cta-section input, .cta-section select, .cta-section textarea, .cta-section button {
+    max-width: 100% !important;
+  }
+}
