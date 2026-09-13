@@ -3554,3 +3554,75 @@ body.premium h3.pv-tick-center::before {
   left: 50% !important;
   transform: translateX(-50%) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   16) 手机端第二轮修复：竖排挤压与表格裁切（2026-09-14）
+   ═══════════════════════════════════════════════════════════
+   全站 254 页 × 390 视口实测，36 页命中三类问题：
+
+   A) .timeline-*（about/honors/careers/technology × 中英 = 8 页）
+      1024 断点给 .timeline-content 设了 width:calc(100%-50px)+margin-left:50px，
+      与 768 断点的 .timeline-item{padding-left:50px} 叠加后，年份与内容被 flex
+      压到 12–39px 宽 →「1999」竖排成 175px 高的一列数字。
+      修复：≤768 改纵向堆叠（年份在卡上方），宽度全部释放。
+   B) .contact-region-item（contact × 中英 = 2 页）
+      flex 不换行，<strong>大中華區：</strong> 被压成 22px 宽竖排 → 允许换行 + 锁定不收缩。
+   C) .cs2-tech .h .ic（18 个案例页 × 中英）
+      emoji 图标被 flex 压到 26×44 → flex:none + line-height:1。
+   D) .tech-specs-table（12 页，honors 最严重 744px vs 362px 可用宽）
+      Module 51 的 th{min-width:104px} × 4 列 = 416px 是裁切根因 → 去掉强制列宽，
+      表格 width:100% 自然换行收缩；真放不下的由 main.js 打 .pv-hscroll 显示滑动提示。
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* A) 时间线：纵向堆叠，年份不再被 flex 压缩 */
+  .timeline-item { flex-direction: column !important; align-items: stretch !important; }
+  .timeline-item:nth-child(even) { flex-direction: column !important; }
+  .timeline-year {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    white-space: nowrap;
+    margin: 0 0 10px !important;
+    line-height: 1.2;
+  }
+  .timeline-content { width: auto !important; max-width: 100% !important; margin: 0 !important; }
+
+  /* B) 联系页区域卡：允许换行，标签锁定不收缩 */
+  .contact-region-item { flex-wrap: wrap !important; }
+  .contact-region-item > strong { flex: 0 0 auto !important; white-space: nowrap; }
+  .contact-region-item > .contact-region-dot { flex: 0 0 auto !important; }
+
+  /* C) 案例页挑战卡图标：不收缩 */
+  .cs2-tech .h .ic,
+  .cs2-tech .h > div { flex: 0 0 auto; }
+  .cs2-tech .h .ic { line-height: 1; }
+  .cs2-tech .h > div { flex: 1 1 auto !important; min-width: 0 !important; }
+
+  /* D) 参数表：去掉强制列宽，让表格自然收缩换行 */
+  .tech-specs-table table { width: 100%; }
+  .tech-specs-table th { min-width: 0 !important; width: auto !important; }
+  .tech-specs-table th,
+  .tech-specs-table td { padding: 8px 8px !important; font-size: 12.5px !important; }
+
+  /* E) 设备参数行（about/en/about）：标签锁定不收缩，长内容整条换行 */
+  .equip-specs { flex-wrap: wrap !important; }
+  .equip-specs > span { flex: 0 1 auto; max-width: 100%; }
+  .equip-specs > span > strong { flex-shrink: 0 !important; }
+
+  /* F) 资源表 rs-table：表头取消 nowrap，6-7 列在 362px 内可自然收缩 */
+  .rs-table th, .rs-table td { white-space: normal !important; }
+}
+
+/* D 补充：真放不下的表格由 main.js 打 .pv-hscroll，顶部显示滑动提示 */
+.pv-hscroll { position: relative; }
+.pv-hscroll::before {
+  content: '← 左右滑動查看完整表格 →';
+  display: block;
+  font-size: 11px;
+  color: #8a8277;
+  text-align: right;
+  padding: 0 2px 6px;
+  letter-spacing: 1px;
+}
+html[lang] .pv-hscroll::before { content: '← 左右滑動查看完整表格 →'; }
+html[lang="en"] .pv-hscroll::before { content: '← Swipe to view full table →'; }
+@media (min-width: 769px) { .pv-hscroll::before { display: none; } }

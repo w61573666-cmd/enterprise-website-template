@@ -1269,3 +1269,40 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   }
   window.addEventListener('load', alignTicks);
 })();
+
+/* ── 横向滚动容器加滑动提示（2026-09-14，手机端第二轮）────────────────
+   .tech-specs-table 等容器在窄屏内容放不下时可以横向滑动，但没有任何视觉提示，
+   用户只看到最后一列被裁掉、以为内容丢了。此处实测 scrollWidth，把真正
+   放不下的容器打上 .pv-hscroll（premium 规则 16：顶部显示「← 左右滑動查看完整表格 →」）。
+   桌面端（≥769px）提示由 CSS 隐藏，滚动仍可用。 */
+(function () {
+  /* 窄屏下 ≥6 列的密集表格（如荣誉认证矩阵）：收缩换行会把表头压成 3 行碎块，
+     不如保留可读列宽 + 容器横滑（提示由 markScrollables 打 .pv-hscroll）。 */
+  function widenDenseTables() {
+    var dense = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+    Array.prototype.forEach.call(document.querySelectorAll('.tech-specs-table table'), function (t) {
+      var first = t.rows && t.rows[0];
+      if (!first) return;
+      if (dense && first.cells.length >= 6) {
+        t.style.minWidth = Math.min(first.cells.length * 92, 640) + 'px';
+      } else {
+        t.style.minWidth = '';
+      }
+    });
+  }
+  function markScrollables() {
+    widenDenseTables();
+    var list = document.querySelectorAll('.tech-specs-table, .about-table-wrap, .rs-table-wrap, div[style*="overflow-x:auto"], div[style*="overflow-x: auto"]');
+    Array.prototype.forEach.call(list, function (el) {
+      if (el.scrollWidth > el.clientWidth + 4) el.classList.add('pv-hscroll');
+      else el.classList.remove('pv-hscroll');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', markScrollables);
+  } else {
+    markScrollables();
+  }
+  window.addEventListener('load', markScrollables);
+  window.addEventListener('resize', markScrollables);
+})();
