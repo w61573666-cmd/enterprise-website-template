@@ -2937,3 +2937,54 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
     min-width: 0 !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   MBL-OVERFLOW2-20260913 · Module 52 窄屏残余横向溢出修复（第二轮）
+   针对终检暴露、组件级根因：
+     A) .jd-grid：1fr 轨道自动最小值被 .jd-box 的 min-content 撑到 320px（容器仅 288px）
+                  → 改 minmax(0,1fr) + 子项 min-width:0 + 允许断词
+     B) .cs2-inst / .cs2-facts：双列固定轨道(200px+143px / 195px+131px)超出容器
+                  → ≤767px 收成单列堆叠
+     C) 表单区(.hsst-form-zone)：控件最小宽度导致 320px 下溢出 → 控件可收缩
+     D) .section-subtitle：窄容器内容不下长单词导致文字溢出 → 允许断词
+   注意：SEO 隐藏容器(.seo-text-container-hide)为刻意隐藏，不在修复范围。
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  /* A) 招聘页 JD 网格 */
+  .jd-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 24px !important; }
+  .jd-grid > * { min-width: 0 !important; }
+  .jd-box, .jd-box * { min-width: 0 !important; overflow-wrap: anywhere; }
+
+  /* B) 工程案例 v2 双列 → 单列 */
+  .cs2-inst, .cs2-facts, .cs2-mat-card {
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 18px;
+  }
+  .cs2-inst > *, .cs2-facts > *, .cs2-mat-card > * { min-width: 0 !important; }
+  .cs2-inst *, .cs2-facts *, .cs2-mat-card * { overflow-wrap: anywhere; }
+  .cs2-inst img, .cs2-mat-card img, .cs2-rel img, .project-hero img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* D) 小徽标/副标题不断词导致溢出 */
+  .section-subtitle { overflow-wrap: anywhere; }
+}
+
+/* C) 表单区控件可收缩（≤480px） */
+@media (max-width: 480px) {
+  body.premium .hsst-form-zone .hsst-form,
+  body.premium .hsst-form-zone .sample-form-container,
+  body.premium .hsst-form-zone form { min-width: 0 !important; max-width: 100% !important; }
+  body.premium .hsst-form-zone input,
+  body.premium .hsst-form-zone select,
+  body.premium .hsst-form-zone textarea,
+  body.premium .hsst-form-zone button {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  body.premium .hsst-form-zone * { overflow-wrap: anywhere; }
+  body.premium .hsst-form-zone .stone-checkbox-item label,
+  body.premium .hsst-form-zone .radio-item label { min-width: 0 !important; }
+}
