@@ -1779,8 +1779,11 @@ body.inner-page .hero .hero-content { width: 100% !important; }
 /* ---- 新闻列表 ---- */
 .news-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
 
-/* ---- 产品对比条标签 ---- */
-.compare-panel-label{font-weight:700;color:#1A1A2E;font-size:0.9rem;}
+/* ---- 产品对比条标签 ----
+   对比条本体（style.css .compare-panel）是 #1A1A2E 深底 + #FFFFFF 白字，
+   此处若沿用同色 #1A1A2E 会与底色完全同色（全站实测「已選產品: / Selected:」
+   在展开后不可见）→ 恢复为白色，与 .compare-panel-item 一致。 */
+.compare-panel-label{font-weight:700;color:#FFFFFF;font-size:0.9rem;}
 
 /* ---- 工程目录页：行业瓦片 + 区域卡 ---- */
 .industry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
@@ -3214,3 +3217,221 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
     padding-right: var(--gutter);
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   WDTH-UNIFY-20260913 · 全站内容宽度一致性治理 (2026-09-13)
+   ───────────────────────────────────────────────────────────
+   实测：Playwright 全站 255 页 × 390/768/1024/1440 四视口，
+   量取每个 .container「内容带」（去掉 padding 后的左右边缘）。
+   发现同一页内并存多种内容带，宽度互不一致：
+
+     @1440  导航 1304 | 正常容器 1104 | 内页容器 1200 | tight 1120
+     @1024  正常 904  | 内页 960      | tight 880
+     @768   正常 728  | 内页 768      | tight 688
+     @390   正常 358  | 内页 390(贴边) | tight 310
+
+   来源共三处（其余规则均正常）：
+     1. body.premium .navbar .container 在 ≥1161px 被固定为 1400px
+        → 比正文容器宽 200px，页头左右与正文对不齐。
+        实测导航真正只需 ~830–880px（余量 300–490px）→ 收窄零风险。
+     2. style.css 第 90 行 .inner-page .section-padding .container{padding:0}
+        → 内页内容带比首页/页脚每侧多一个 --gutter；
+        Module 51 只在 ≤1280px 兜底，桌面 >1280px 仍然不一致。
+        ⚠ 另：38 个页面曾重复引入 style.css（在 premium 之后），
+          令该 padding:0 反超 premium 的兜底规则 —— 已在 HTML 侧去重。
+     3. style.css .tight-section .container{padding:16px 40px !important}
+        → 第三种水平内边距 40px，完全脱离 --gutter 体系。
+
+   修复原则：全部回归 --max-width + --gutter 单一体系。
+     · 导航 = 正文 = 页脚 = 内页 → 同一条内容带
+     · 各断点水平内边距只由 --gutter 驱动
+       （≤360:12 / ≤480:14 / ≤768:20 / 768–1199:28 / ≥1200:32–48）
+     · 竖向留白、字号、任何元素尺寸均不改动 —— 零回归
+     · ≤480px 的满幅出血规则（.solution-hero/.cta-section > .container
+       带 !important）优先级更高，不受本模块影响
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1) 导航容器与正文同宽（原先桌面固定 1400px） */
+@media (min-width: 1161px) {
+  body.premium .navbar .container { max-width: var(--max-width); }
+}
+
+/* 2) 内页 section 容器恢复统一水平 gutter（消除 1200 vs 1104 差异） */
+.inner-page .section-padding .container {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* 3) tight-section 的 40px 水平内边距回归 gutter（保留竖向 16px） */
+.tight-section .container {
+  padding-left: var(--gutter) !important;
+  padding-right: var(--gutter) !important;
+}
+
+/* 4) 页内局部收窄文本块（.tech-lead 900px）回归内容带满宽
+      注意：.inner-page / .premium 都挂在 <body> 自身，故必须写成
+      body.premium.inner-page（复合），不能写成 body.premium .inner-page。 */
+body.premium.inner-page .tech-lead { max-width: none; }
+body.premium.inner-page .tech-steps,
+body.premium.inner-page .tech-related { max-width: none; }
+
+/* 5) ≤900px：style.css 里有一条硬编码
+        @media (max-width:900px){ .nav-container,.container{padding:0 16px} }
+      它绕开了 --gutter 体系（390 应为 14 / 768 应为 20 / 769–900 应为 28），
+      导致同一页出现 14 与 16 两种内容带 → 统一回归 --gutter。 */
+@media (max-width: 900px) {
+  .nav-container,
+  .container {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+}
+
+/* 6) ≤768px / ≤480px 另有 .container{width:92%} 与 {width:94%}，
+      会让部分容器比 --max-width 窄 6–8%，与同页其他容器宽度不一致。
+      水平留白已由 --gutter 统一提供 → 宽度回归 100%。 */
+@media (max-width: 900px) {
+  .container { width: 100%; }
+}
+
+/* 7) ≤900px：.navbar 自身还带 16px 水平内边距，令导航内容比正文再多内缩 16px
+      （导航内容带 30~360 vs 正文 14~376，顶部与主体左右对不齐）
+      → 水平内边距归零，统一交由 .container 的 --gutter 决定。 */
+@media (max-width: 900px) {
+  .navbar { padding-left: 0; padding-right: 0; }
+}
+
+/* 8) 首页 .about-preview 是一整块 <section>，被 premium「卡片样式」选择器列表
+      误当成卡片套用了 border / 圆角 / 阴影 / hover 上浮：
+        · ≤1200px 容器满幅时，1px 边框让内容少 2px（388 vs 390）
+        · 满幅 section 的边框在屏幕左右边缘留下 1px 细线
+        · 悬停整块区块会整体上移 4px
+      → 还原为普通区块（仅 index.html / en/index.html 两处使用） */
+body.premium section.about-preview {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  transform: none !important;
+}
+
+/* 9) sample-request（中英各 1 页）没有使用 .container，包装层接近满幅
+      （@1440 实测正文 53~1387，全站标准内容带为 168~1272）
+      → 包装层收敛到统一内容带（--max-width 减去两侧 --gutter）。
+        层内文字的宽度上限（.sample-hero p 650px）与全站章节描述 token
+        （cta-home 620 / cta-sub 600 / 默认 700px）同族，保持不变。 */
+body.premium .sample-hero .sample-hero-content,
+body.premium .sample-form-section > .sample-form-container {
+  max-width: calc(var(--max-width) - 2 * var(--gutter)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+
+/* ───────────────────────────────────────────────────────────
+   10) 标题组内对齐统一
+   ───────────────────────────────────────────────────────────
+   style.css:142 全局写死 .section-title{text-align:center}，
+   于是 .text-left 组里必然出现「副标题左 / 标题居中 / 描述左」的混用。
+   全站实测语境分布（.section-title/.section-subtitle/.section-desc）：
+     .text-left   208 处   ← 最多，且已存在 .text-left .section-subtitle::after
+                             专用变体，说明设计本意即为左对齐组
+     none         127 处
+     .text-center 124 处
+   其中「.text-left 组内标题被强制居中」78 处、「无语境组内标题居中」22 处。
+
+   处理：标题与描述改为继承父级对齐 —— 与副标题行为一致，
+        组内三者永远同向；.text-center 组原样保持居中，零影响。
+        装饰线（::before 金色短线）与描述块外边距同步跟随。
+   ─────────────────────────────────────────────────────────── */
+
+/* 默认：跟随父级（.text-left / 无语境组 → 左对齐） */
+body.premium .section-title { text-align: inherit; }
+body.premium .section-title::before { left: 0; transform: none; }
+body.premium .section-desc { margin-left: 0 !important; margin-right: 0 !important; }
+body.premium .section-subtitle { text-align: inherit; }
+
+/* 显式居中的标题组：完整保持居中（装饰线 / 描述块一并居中） */
+body.premium .text-center .section-title,
+body.premium .text-center .section-subtitle { text-align: center; }
+body.premium .text-center .section-title::before { left: 50%; transform: translateX(-50%); }
+body.premium .text-center .section-desc { margin-left: auto !important; margin-right: auto !important; }
+
+/* 10.1 「居中但不是 .text-center」的标题组：装饰线同步居中
+     上面把 .section-title::before 默认改到左端（配合左对齐标题），
+     但仍有 16 页的标题是靠「自身内联样式」或「所属容器」居中的
+     （index 客戶 logo 區 .client-logo-section、technology 頁尾 CTA 的
+       <div class="container" style="text-align:center">、partnerships 的
+       .solution-hero、以及 10 处内联 text-align:center 的标题）。
+     这些标题文字居中、装饰线却在左端 → 视觉脱节，此处逐一还原为居中。
+     实测：修复前 16 页错位，修复后 0 页。 */
+body.premium .section-title[style*="text-align:center"]::before,
+body.premium .section-title[style*="text-align: center"]::before,
+body.premium .container[style*="text-align:center"] .section-title::before,
+body.premium .container[style*="text-align: center"] .section-title::before,
+body.premium .solution-hero .section-title::before,
+body.premium .client-logo-section .section-title::before { left: 50%; transform: translateX(-50%); }
+
+/* ───────────────────────────────────────────────────────────
+   11) 项目案例页英雄区宽度对齐（34 页 / 中英各 17）
+   ───────────────────────────────────────────────────────────
+   页面内联样式用自有内边距取代 gutter 体系：
+     .project-hero-overlay { padding: 0 48px 48px }
+     .project-hero-content { max-width: var(--max-width) }
+   → @1440 英雄区文字落在 120~1320，比正文内容带 168~1272 每侧宽 48px，
+     页头大标题与下方正文左右对不齐。
+   处理：水平内边距归零，交由 .project-hero-content 的 --gutter 统一。
+        竖向内边距（48px / 移动 32px）原样保留。
+   ─────────────────────────────────────────────────────────── */
+body.premium .project-hero-overlay { padding-left: 0; padding-right: 0; }
+body.premium .project-hero-content {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  box-sizing: border-box;
+}
+
+/* ───────────────────────────────────────────────────────────
+   12) 深色底語境：修復 premium 全局 h1/h2/h3 墨色覆蓋造成的不可讀
+   ───────────────────────────────────────────────────────────
+   本檔第 2 節把 h1/h2/h3 一律設為 --pv-ink（#14130F 近黑）並帶 !important，
+   於是「照片英雄區 / 深色漸層塊」上頁面自行聲明的白色標題全部失效，
+   ink 蓋在深底上 → 標題幾乎不可見。
+
+   全站實測判定方式（逐頁把字形設為 transparent、隱藏 fixed 浮層後截圖，
+   取該文字框內真實渲染像素的中位亮度；底 < 0.30 且字 < 0.30 即判不可讀）：
+     section.art-hero h1          90 頁  新聞內頁（深色照片 + 漸層遮罩）
+     .project-hero-title          32 頁  案例頁（照片 brightness(.5) + 遮罩）
+     .product-hero-title          20 頁  產品系列頁
+     .jd-cta h3                   40 頁  招聘詳情頁 CTA（#1A1A2E→#2A2740 漸層卡）
+     .news-hero-title             2 頁   新聞首頁（#1a1a2e→#2c2c3e 漸層）
+     .news-hero 麵包屑             2 頁   同上（頁面自帶 #888/#555 深字，落在深底上）
+     .v2-record h2                2 頁   工程實績（#16150F 黑底）
+     .compare-panel-label         2 頁   產品對比條（已於第 1783 行同步修正）
+
+   註：.cta-dark / .products-cta / .v2-quote / .trust-bar / .v2-btn 經實測已是
+       「淺底深字」（premium 已把這些區塊的底色一併改成淺色），故不列入。
+   ─────────────────────────────────────────────────────────── */
+
+/* 12.1 照片英雄區（深色照片底）：標題恢復白色 */
+body.premium .art-hero h1, body.premium .art-hero h2, body.premium .art-hero h3,
+body.premium .project-hero h1, body.premium .project-hero h2, body.premium .project-hero h3,
+body.premium .product-hero h1, body.premium .product-hero h2, body.premium .product-hero h3,
+body.premium .news-hero h1, body.premium .news-hero h2, body.premium .news-hero h3,
+body.premium .news-hero .section-title, body.premium .news-hero .section-subtitle {
+  color: #FFFFFF !important;
+}
+
+/* 12.2 深色漸層卡 / 深色塊：標題恢復白色 */
+body.premium .jd-cta h1, body.premium .jd-cta h2, body.premium .jd-cta h3, body.premium .jd-cta h4,
+body.premium .v2-record h1, body.premium .v2-record h2, body.premium .v2-record h3 {
+  color: #FFFFFF !important;
+}
+
+/* 12.3 新聞首頁英雄區內的麵包屑（深底上的深字） */
+body.premium .news-hero .breadcrumb,
+body.premium .news-hero .breadcrumb ol,
+body.premium .news-hero .breadcrumb li { color: rgba(255,255,255,.72) !important; }
+body.premium .news-hero .breadcrumb a { color: rgba(255,255,255,.9) !important; }
+body.premium .news-hero .breadcrumb a:hover { color: var(--pv-gold) !important; }
+body.premium .news-hero .breadcrumb li:not(:last-child)::after { color: rgba(255,255,255,.35) !important; }
