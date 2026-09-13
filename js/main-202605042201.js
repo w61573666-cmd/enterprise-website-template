@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Navbar Scroll Effect ----------
   const navbar = document.querySelector('.navbar');
   const handleScroll = () => {
+    if (!navbar) return;
     if (window.scrollY > 60) {
       navbar.classList.add('scrolled');
     } else {

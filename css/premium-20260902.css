@@ -717,7 +717,7 @@ body.premium :is(
   box-sizing: border-box;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   body.premium :is(
     .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
     .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
@@ -730,7 +730,7 @@ body.premium :is(
   }
 }
 
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   body.premium :is(
     .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
     .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
@@ -826,10 +826,10 @@ body.premium .contact-commitments {
   gap: 20px !important;
   margin-top: 18px !important;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   body.premium .contact-commitments { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   body.premium .contact-commitments { grid-template-columns: minmax(0, 1fr) !important; }
 }
 body.premium .contact-commitment-item {
@@ -868,7 +868,7 @@ body.premium .contact-visit-map iframe {
   flex: none !important; width: 100%; border: none;
   height: 330px; min-height: 0 !important; background: #F2EDE6;
 }
-@media (max-width: 1023px) { body.premium .contact-visit-map iframe { height: 330px; } }
+@media (max-width: 1024px) { body.premium .contact-visit-map iframe { height: 330px; } }
 body.premium .contact-visit-map .v-map-bar {
   padding: 12px 16px; border-bottom: 1px solid #eee6da;
 }
@@ -938,8 +938,8 @@ body.premium .contact-process-grid {
   gap: 18px !important;
   margin: 4px 0 24px !important;
 }
-@media (max-width: 1023px) { body.premium .contact-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-@media (max-width: 639px) { body.premium .contact-process-grid { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (max-width: 1024px) { body.premium .contact-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 640px) { body.premium .contact-process-grid { grid-template-columns: minmax(0, 1fr) !important; } }
 body.premium .contact-process-step {
   background: #FBF8F2; border: 1px solid #eee6da; border-radius: 12px;
   padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; box-sizing: border-box;
@@ -1843,7 +1843,7 @@ body.premium :is(
   width: auto !important;
   box-sizing: border-box;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   body.premium :is(
     .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
     .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
@@ -1851,7 +1851,7 @@ body.premium :is(
     flex-basis: calc((100% - (var(--c-t, 2) - 1) * var(--gx, 22px)) / var(--c-t, 2)) !important;
   }
 }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   body.premium :is(
     .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
     .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
@@ -1923,7 +1923,7 @@ body.premium .mega-panel-grid > .mega-panel-link {
 }
 .faq-cat-num { color: #C9A84C; font-size: 1.3rem; }
 .faq-category { display: block; }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   .faq-chip { flex: 1 1 100%; justify-content: flex-start; }
   .faq-cat-title { font-size: 1.06rem; }
 }
@@ -1946,10 +1946,10 @@ body.premium .mega-panel-grid > .mega-panel-link {
   flex: none !important;
   flex-basis: auto !important;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .product-gallery-grid { grid-template-columns: repeat(3, 1fr) !important; }
 }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   .product-gallery-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
 }
 
@@ -2897,7 +2897,7 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
      5) 按钮：nowrap 被裁切 → 允许换行/断字
      6) 兜底：媒体/代码块/长单词不越界
    ═══════════════════════════════════════════════════════════ */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* 1) FAQ chips 换行，全部可见 */
   .faqv2-chips { flex-wrap: wrap !important; overflow-x: visible !important; row-gap: 8px; }
   .faqv2-chip  { flex: 0 1 auto; max-width: 100%; }
@@ -2961,7 +2961,7 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
      D) .section-subtitle：窄容器内容不下长单词导致文字溢出 → 允许断词
    注意：SEO 隐藏容器(.seo-text-container-hide)为刻意隐藏，不在修复范围。
    ═══════════════════════════════════════════════════════════ */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* A) 招聘页 JD 网格 */
   .jd-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 24px !important; }
   .jd-grid > * { min-width: 0 !important; }
@@ -3009,7 +3009,7 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
      D) .jd-grid 加固：允许断词，避免 min-content 继续撑破轨道
    统一思路：grid/flex 子项默认 min-width:auto 会被 min-content 撑破 → minmax(0,1fr) + min-width:0
    ═══════════════════════════════════════════════════════════ */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* A) 指标网格 → 单列 */
   .cs2-metrics { grid-template-columns: minmax(0, 1fr) !important; row-gap: 14px; }
   .cs2-metrics > * { min-width: 0 !important; }
