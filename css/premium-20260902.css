@@ -3435,3 +3435,36 @@ body.premium .news-hero .breadcrumb li { color: rgba(255,255,255,.72) !important
 body.premium .news-hero .breadcrumb a { color: rgba(255,255,255,.9) !important; }
 body.premium .news-hero .breadcrumb a:hover { color: var(--pv-gold) !important; }
 body.premium .news-hero .breadcrumb li:not(:last-child)::after { color: rgba(255,255,255,.35) !important; }
+
+/* ───────────────────────────────────────────────────────────
+   13) WhatsApp 悬浮球：右下角 → 左下角（全站统一）
+   ───────────────────────────────────────────────────────────
+   254 页都带这个按钮（<a class="whatsapp-float" href="https://wa.me/85255380525">），
+   但改动前实测存在两族、位置本就不一致：
+     · 共享层生效（本档 1707 行，约 157 页）：right 22 / bottom 26 / 54×54 / z 1500
+     · 页面内联 <style> 生效（97 页）：right 24 / bottom 28 / 56×56 / z 999，
+       且 ≤768 另有 right 16 / bottom 20 / 50×50
+     · 404.html 另为 66×56（宽度受按钮统一规则的 padding 影响）
+
+   处理：只统一「位置」——桌面 left 22 / bottom 26，≤768 left 16 / bottom 20，
+        right 一律置 auto。样式（绿色圆底、阴影、hover 放大）、尺寸、z-index、
+        href 与 main.js 的 WhatsApp 双协议改写逻辑全部不碰。
+        用 !important 是因为那 97 页的内联 <style> 与共享层争抢同一属性。
+
+   左下角无其它固定浮层占位（.pwa-install-btn 虽有 left:20 的规则，但全站 HTML
+   无该元素、JS 亦无引用，属遗留死样式）；抽屉打开时 body.drawer-open 仍会隐藏本按钮。
+   ─────────────────────────────────────────────────────────── */
+body.premium .whatsapp-float,
+body.premium .wpp-float.whatsapp-float {
+  left: 22px !important;
+  right: auto !important;
+  bottom: 26px !important;
+}
+@media (max-width: 768px) {
+  body.premium .whatsapp-float,
+  body.premium .wpp-float.whatsapp-float {
+    left: 16px !important;
+    right: auto !important;
+    bottom: 20px !important;
+  }
+}
