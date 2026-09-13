@@ -2933,11 +2933,12 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
   p, li, td, th { overflow-wrap: break-word; }
 }
 
-/* 4) 页脚 ≤560px 单列 + 折行，消除列宽不足导致的裁切 */
+/* 4) 页脚 ≤560px：维持两列（2026-09-14 Stone 指令：手机端不要单列，两列起），
+   保留折行与 min-width:0 防裁切（当年单列是为了治裁切，实测两列 + 下方折行规则即可） */
 @media (max-width: 560px) {
   body.premium .ft-grid5 {
-    grid-template-columns: 1fr !important;
-    column-gap: 0 !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 18px !important;
     row-gap: 26px !important;
   }
   body.premium .ft-grid5 > div { min-width: 0 !important; }
@@ -3626,3 +3627,43 @@ body.premium h3.pv-tick-center::before {
 html[lang] .pv-hscroll::before { content: '← 左右滑動查看完整表格 →'; }
 html[lang="en"] .pv-hscroll::before { content: '← Swipe to view full table →'; }
 @media (min-width: 769px) { .pv-hscroll::before { display: none; } }
+
+/* ═══════════════════════════════════════════════════════════
+   17) 统计数字条手机端横排（2026-09-14 Stone 指令：27+/4,200+/68/60+
+       要横排，不要一列一个竖排下来）
+   ═══════════════════════════════════════════════════════════
+   17a) 内页「核心數據」.stats-row（about/manufacturing/projects-catalog/
+        careers/partnerships 中英 10 页，各 4 项）
+        style.css ≤768 把容器压成 width:40%，4 个数字被迫竖排。
+        → 恢复整行：4 项一行均分，数字与短标签居中（标签最长 7 字放得下）。
+   17b) 首页 .about-stats（4 项，标签较长）与 .trust-items（5 项）
+        被「≤640 flex-basis:100%」压成单列 → 改两列横排。 */
+@media (max-width: 768px) {
+  body.premium .stats-row {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  body.premium .stats-row .stat-item {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    text-align: center;
+  }
+  body.premium .stats-row .stat-number { font-size: 1.45rem !important; margin-bottom: 4px !important; }
+  body.premium .stats-row .stat-label  { font-size: .68rem !important; line-height: 1.35 !important; }
+}
+@media (max-width: 360px) {
+  body.premium .stats-row .stat-number { font-size: 1.25rem !important; }
+  body.premium .stats-row .stat-label  { font-size: .62rem !important; }
+}
+@media (max-width: 640px) {
+  body.premium .about-stats  { --gy: 20px; }
+  body.premium .trust-items  { --gy: 20px; }
+  body.premium .about-stats > *,
+  body.premium .trust-items > * {
+    flex-basis: calc((100% - var(--gx, 24px)) / 2) !important;
+  }
+}
