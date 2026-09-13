@@ -1232,3 +1232,40 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
     if (pf === file && groupOf(pd, pf) === group) a.classList.add('active');
   });
 })();
+
+/* ── 居中标题的金色短线自动对齐（渲染层兜底，2026-09-13）────────────────
+   premium 给 h1/h2 的 ::before 挂的是「左对齐标题」样式（left:0、36×1px 金线）。
+   凡文字居中的标题，短线必须与文字整体居中，否则线卡在盒子最左端、与文字脱节。
+
+   难点：居中常常是从祖先继承来的（如 section.cta-section → div.container → h2），
+   标题自己和父级都没有任何 center 标记，纯 CSS 选择器枚举不完。故在此按
+   computed text-align 判定，给命中的标题打 .pv-tick-center（样式见 premium 规则 15b）。
+
+   只加类、不改 DOM 结构、不改文字内容，语义与 SEO 不受影响；
+   height > 4px 的 ::before 视为色块/图标类装饰，跳过，避免误伤。
+   编辑器预览 iframe 里同样执行，所见即所得。 */
+(function () {
+  function hasTick(el) {
+    var pb = window.getComputedStyle ? getComputedStyle(el, '::before') : null;
+    if (!pb) return false;
+    if (pb.content === 'none' || pb.content === 'normal') return false;
+    if (!(parseFloat(pb.width) > 0)) return false;
+    if (parseFloat(pb.height) > 4) return false;
+    return true;
+  }
+  function alignTicks() {
+    var els = document.querySelectorAll('h1, h2, h3');
+    Array.prototype.forEach.call(els, function (el) {
+      if (el.classList && el.classList.contains('pv-tick-center')) return;
+      if (!hasTick(el)) return;
+      if (getComputedStyle(el).textAlign !== 'center') return;
+      el.classList.add('pv-tick-center');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', alignTicks);
+  } else {
+    alignTicks();
+  }
+  window.addEventListener('load', alignTicks);
+})();

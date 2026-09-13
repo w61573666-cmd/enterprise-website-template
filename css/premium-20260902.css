@@ -3497,3 +3497,60 @@ body.premium .btt.back-to-top {
     bottom: 20px !important;
   }
 }
+
+/* ───────────────────────────────────────────────────────────
+   15) 居中 H2 的金色短线：与 .section-title 标准一致（线随文字整体居中）
+   ───────────────────────────────────────────────────────────
+   背景：premium 第 2 节给 h2 统一挂了 `::before` 金色短线（36×1px、--pv-gold、
+   top:0、left:0，配 h2 的 padding-top:22px），这是「左对齐编辑式标题」的样式。
+   但全站有 **478 处** 居中 H2（76 页）仍沿用这条「左端」短线 → 线在盒子最左、
+   文字居中，两者相距可达数百像素，视觉完全脱节。
+
+   盘点结论（全量脚本实测，非抽样）：
+     · 478 处全部是 h2，全部为「文字居中 + 线在左端」，0 处例外；
+     · 特殊结构为 0：无图标、无子元素、无自身底色/边框、无嵌套内联标签 → 无需白名单；
+     · 居中来源只有 8 类容器 + 2 个自有 class：
+         .cs2-head 224 | .section-header-center 120 | div.product-section-title 84
+         .container(内联 text-align:center) 20 | .solution-hero .container 8
+         h2.tech-heading 12 | h2.role-entry-title 4 | .wrap/.faqv2-cta/.v2-quote 各 2
+
+   处理：只改「线的水平位置」（left/transform），线长·线粗·色值·与文字的垂直间距
+        （padding-top:22px）全部沿用 .section-title 同一套 token，不新增任何变量，
+        字号/字重/字体/上下边距一概不动（避免误伤这 478 处既有的自定义标题样式）。
+        末尾 3 条为增量兜底：内联 text-align:center、Quill 的 .ql-align-center。
+   ─────────────────────────────────────────────────────────── */
+body.premium .cs2-head h2::before,
+body.premium h2.cs2-title::before,
+body.premium .section-header-center h2::before,
+body.premium div.product-section-title h2::before,
+body.premium .solution-hero .container h2::before,
+body.premium .container[style*="text-align:center"] h2::before,
+body.premium .container[style*="text-align: center"] h2::before,
+body.premium .faqv2-cta h2::before,
+body.premium .v2-quote h2::before,
+body.premium .wrap h2::before,
+body.premium h2.tech-heading::before,
+body.premium h2.role-entry-title::before,
+body.premium h2[style*="text-align:center"]::before,
+body.premium h2[style*="text-align: center"]::before,
+body.premium h2.ql-align-center::before,
+/* 第二轮补漏（首轮实测 70 处未覆盖）：.text-center 18 处（CTA 区块）
+   + 案例页尾 h2.project-section-title 32 处（在 div.project-container.text-center 内，
+   已被 .text-center 命中）。注意 h2.project-section-title 与 .products-cta 这两个
+   名字同时用于左对齐区块（en/projects/* 的「Build Your Premier」、en/products.html），
+   不能做裸选择器，否则反向误伤——它们的居中场景交给下方 JS 兜底判定。 */
+body.premium .text-center h2::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 15b) 渲染层兜底：JS 判定「文字居中」的标题统一打 .pv-tick-center
+   居中可能来自任意祖先继承（如 section.cta-section → div.container → h2），
+   纯 CSS 选择器枚举不完，故由 main.js 按 computed text-align 自动打类。
+   存量 478 处即使上面枚举有遗漏，以及 CMS 后续新建的居中标题，都自动生效。 */
+body.premium h1.pv-tick-center::before,
+body.premium h2.pv-tick-center::before,
+body.premium h3.pv-tick-center::before {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
