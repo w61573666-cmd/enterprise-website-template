@@ -2875,6 +2875,17 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
   body.premium .v2-hero-full { min-height: 340px !important; }
 }
 
+/* ═══ 移动端留白收敛 + 断点统一 (2026-09-13) ═══
+   标准断点基线：1160(抽屉导航) / 1024 / 768 / 640 / 480 / 360
+   仅做约束型收口，与 style.css 全局加固协同；不放大任何元素，零回归风险 */
+@media (max-width: 480px) {
+  :root { --gutter: 14px; }
+  body.premium .section-padding { padding: 20px 0 !important; }
+}
+@media (max-width: 360px) {
+  :root { --gutter: 12px; }
+}
+
 
 /* ═══════════════════════════════════════════════════════════
    MBL-OVERFLOW-20260913 · Module 51 移动端窄屏横向溢出治理

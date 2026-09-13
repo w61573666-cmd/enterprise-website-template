@@ -9072,3 +9072,32 @@ body {
   padding-left: var(--gutter);
   padding-right: var(--gutter);
 }
+
+/* ════════════════════════════════════════════════════════════════
+   移动端防御性加固 (2026-09-13，与 origin/main 同步后追加)
+   目标：杜绝移动端横向溢出、收敛不必要留白、统一响应式基线
+   —— 仅做"约束型"修改（限制最大尺寸/断行），绝不放大任何元素，零回归风险
+   ════════════════════════════════════════════════════════════════ */
+
+/* 1) 全局盒模型：padding/border 计入宽度，杜绝 width:100%+padding 撑破视口 */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* 2) 媒体类元素默认不超出视口宽度（历史无全局 img max-width，是横向溢出主因之一） */
+img, video, canvas, svg, iframe, embed, object { max-width: 100%; }
+img, video { height: auto; }
+
+/* 3) 长串（URL / 邮箱 / 追踪参数 / 代码）强制断行，防止被撑宽 */
+p, li, td, th, dd, dt, blockquote, pre, code, a, span,
+.article-body, .content, .section, .container, .card, .text-block,
+.about-table, .tech-specs-table, .table-responsive { overflow-wrap: break-word; word-break: break-word; }
+
+/* 4) 根级裁剪横向溢出兜底（overflow-x:clip 不会像 hidden 那样破坏 position:sticky 定位） */
+html { overflow-x: clip; }
+body { overflow-x: clip; max-width: 100%; }
+
+/* 5) 表格移动端允许横向滚动而非撑破页面（与 .table-responsive / .tech-specs-table 滚动策略一致） */
+table { max-width: 100%; }
+
+/* 6) 小屏留白收敛：把 --gutter 进一步收窄，减少手机端不必要空白（统一断点基线 480/360） */
+@media (max-width: 480px) { :root { --gutter: 14px; } }
+@media (max-width: 360px) { :root { --gutter: 12px; } }
