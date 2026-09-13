@@ -3468,3 +3468,32 @@ body.premium .wpp-float.whatsapp-float {
     bottom: 20px !important;
   }
 }
+
+/* ───────────────────────────────────────────────────────────
+   14) 「返回顶部」与左下角 WhatsApp 镜像对齐（一左一右、同一底线）
+   ───────────────────────────────────────────────────────────
+   改动前（254 页全量实测一致）：252 页的内联 <style> 把 .back-to-top 放在
+   right 24 / bottom 90（≤768：right 16 / bottom 80 / 38×38），
+   那是「叠在 WhatsApp 正上方」的旧布局；WhatsApp 移到左下角后，右下角只剩它一个，
+   仍悬在 90px 高处就显得不上不下。
+
+   处理：与规则 13 完全镜像 —— 桌面 right 22 / bottom 26，≤768 right 16 / bottom 20，
+        left 置 auto（防止个别页面用 left 定位）。
+        尺寸（44 / 移动 38）、z-index（998）、样式、滚动显隐（.visible）逻辑一律不变。
+   注：两球底边对齐（同为 bottom 26 / 20）。WhatsApp 54–56px、返回顶部 44px，
+      若要「视觉居中对齐」需再各加半个高度差（约 +5px），未做，保持底边对齐这种确定性做法。
+   ─────────────────────────────────────────────────────────── */
+body.premium .back-to-top,
+body.premium .btt.back-to-top {
+  left: auto !important;
+  right: 22px !important;
+  bottom: 26px !important;
+}
+@media (max-width: 768px) {
+  body.premium .back-to-top,
+  body.premium .btt.back-to-top {
+    left: auto !important;
+    right: 16px !important;
+    bottom: 20px !important;
+  }
+}
