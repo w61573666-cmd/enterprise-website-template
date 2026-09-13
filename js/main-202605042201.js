@@ -109,6 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
   function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
+  // 最近一次用户输入是否为键盘（供「键盘焦点自动展开子菜单」判定；
+  // :focus-visible 在部分 WebKit 版本对脚本聚焦判定不稳，故双条件取或）
+  var lastInputWasKeyboard = false;
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab' || e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') lastInputWasKeyboard = true;
+  }, true);
+  document.addEventListener('pointerdown', function () { lastInputWasKeyboard = false; }, true);
 
   /* ── 导航事件诊断日志（2026-09-09 四次修复）────────────────
      真机 iPad 复现「子菜单闪退」时，URL 加 #navdebug 打开可视日志，
@@ -329,6 +336,43 @@ document.addEventListener('DOMContentLoaded', () => {
           this.click();
         }
       });
+
+      /* ── 键盘焦点自动展开（2026-09-14 iPad 专项）──────────────
+         此前只有鼠标 hover 与触屏点按两条路径；键盘用户 Tab 到父菜单时
+         子面板不可见，只能靠 Enter 直接跳栏目页，无法选子项。
+         只在「键盘聚焦」(:focus-visible) 时展开——触屏点按虽也会让触发器
+         获得焦点，但不匹配 :focus-visible，因此不会重演「点第二次关不掉」。
+         焦点移入面板内部保持展开，移出整个 dropdown 才收起。 */
+      trigger.addEventListener('focus', function () {
+        var dd = this.closest('.nav-dropdown');
+        if (!dd) return;
+        var kb = false;
+        try { kb = this.matches(':focus-visible'); } catch (err) { kb = false; }
+        // 兜底：部分 WebKit 版本对脚本聚焦/合成事件的 :focus-visible 判定不稳，
+        // 用「最近一次用户输入是否为键盘」二次判定（Tab/Enter/Space 置位，指针按下清零）。
+        if (!kb && lastInputWasKeyboard) kb = true;
+        if (!kb) return;
+        if (dd.classList.contains('nav-open') || dd.classList.contains('mobile-open')) return;
+        this.setAttribute('aria-expanded', 'true');
+        dd.classList.add('nav-open', 'mobile-open');
+        dd.__navOpenedAt = Date.now();
+        setPanelInline(dd, true);
+        navLog('OPEN', 'focus:' + (this.textContent || '').trim().slice(0, 8));
+      });
+      var ddRef = trigger.closest('.nav-dropdown');
+      if (ddRef) {
+        ddRef.addEventListener('focusout', function (e) {
+          var dd = this;
+          setTimeout(function () {
+            if (dd.contains(document.activeElement)) return; // 焦点进入子面板
+            dd.classList.remove('nav-open', 'mobile-open');
+            dd.__navForceOpen = false;
+            setPanelInline(dd, false);
+            var t = dd.querySelector(':scope > a');
+            if (t) t.setAttribute('aria-expanded', 'false');
+          }, 0);
+        });
+      }
     });
 
     // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）
@@ -1292,7 +1336,7 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
   }
   function markScrollables() {
     widenDenseTables();
-    var list = document.querySelectorAll('.tech-specs-table, .about-table-wrap, .rs-table-wrap, div[style*="overflow-x:auto"], div[style*="overflow-x: auto"]');
+    var list = document.querySelectorAll('.tech-specs-table, .about-table-wrap, .rs-table-wrap, .visual-timeline, .faqv2-chips, div[style*="overflow-x:auto"], div[style*="overflow-x: auto"]');
     Array.prototype.forEach.call(list, function (el) {
       if (el.scrollWidth > el.clientWidth + 4) el.classList.add('pv-hscroll');
       else el.classList.remove('pv-hscroll');

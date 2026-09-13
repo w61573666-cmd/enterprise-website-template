@@ -3613,20 +3613,9 @@ body.premium h3.pv-tick-center::before {
   .rs-table th, .rs-table td { white-space: normal !important; }
 }
 
-/* D 补充：真放不下的表格由 main.js 打 .pv-hscroll，顶部显示滑动提示 */
-.pv-hscroll { position: relative; }
-.pv-hscroll::before {
-  content: '← 左右滑動查看完整表格 →';
-  display: block;
-  font-size: 11px;
-  color: #8a8277;
-  text-align: right;
-  padding: 0 2px 6px;
-  letter-spacing: 1px;
-}
-html[lang] .pv-hscroll::before { content: '← 左右滑動查看完整表格 →'; }
-html[lang="en"] .pv-hscroll::before { content: '← Swipe to view full table →'; }
-@media (min-width: 769px) { .pv-hscroll::before { display: none; } }
+/* D 补充：真放不下的表格由 main.js 打 .pv-hscroll，提示样式统一见下方「18d」段
+   （2026-09-14：此处原定义已被模块 18d 取代——18d 支持表格/时间线/标签三种文案，
+   保留占位说明以免后人重复定义时产生优先级冲突） */
 
 /* ═══════════════════════════════════════════════════════════
    17) 统计数字条手机端横排（2026-09-14 Stone 指令：27+/4,200+/68/60+
@@ -3666,4 +3655,91 @@ html[lang="en"] .pv-hscroll::before { content: '← Swipe to view full table →
   body.premium .trust-items > * {
     flex-basis: calc((100% - var(--gx, 24px)) / 2) !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   18) iPad / 平板专项（2026-09-14 全站平板深度排查后的收口）
+   ═══════════════════════════════════════════════════════════
+   排查结论（WebKit 真内核，254 页 × 768/1024/1366 三断点）：
+     0 处 JS 报错、0 次崩溃、0 处文档横向溢出、0 条中英文不一致；
+     导航 14 组（7 尺寸 × 触屏/桌面网站两模式）点按展开与子项跳转全部通过；
+     子菜单面板在 1180/1194/1366 均无边缘溢出（右溢出为负=完全在视口内）。
+   因此本模块只补齐排查暴露的「体验与健壮性」缺口，不动已验证可用的交互链路：
+     18a) 键盘焦点可见：Tab 聚焦导航项显示金色焦点环（iPad 外接键盘 / 无障碍）
+     18b) 抽屉在平板加宽到 380px（原 300px 在 1024 屏上过窄）+ 100dvh 适配
+          iPad Safari 动态工具栏，避免抽屉底部被工具栏吃掉
+     18c) 悬浮球（WhatsApp / 返回顶部）加安全区内边距，横屏 home indicator 不遮挡
+     18d) 横滑区提示文案通用化（.visual-timeline 里程碑 / .faqv2-chips 标签），
+          由 main.js 实测 scrollWidth 后打 .pv-hscroll */
+body.premium .navbar a:focus-visible,
+body.premium .navbar button:focus-visible,
+body.premium .mega-panel-link:focus-visible {
+  outline: 2px solid #C9A84C !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) and (max-width: 1160px) {
+  body.premium .navbar .nav-links { width: 380px !important; }
+}
+@supports (height: 100dvh) {
+  @media (max-width: 1160px) {
+    body.premium .navbar .nav-links { height: 100dvh !important; }
+  }
+}
+@media (max-width: 1160px) {
+  body.premium .navbar .nav-links {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body.premium .navbar .nav-links.open {
+    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
+  }
+}
+
+@supports (bottom: env(safe-area-inset-bottom)) {
+  body.premium .whatsapp-float,
+  body.premium .wpp-float.whatsapp-float {
+    left: calc(22px + env(safe-area-inset-left, 0px)) !important;
+    bottom: calc(26px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body.premium .back-to-top,
+  body.premium .btt.back-to-top {
+    right: calc(22px + env(safe-area-inset-right, 0px)) !important;
+    bottom: calc(26px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  @media (max-width: 768px) {
+    body.premium .whatsapp-float,
+    body.premium .wpp-float.whatsapp-float {
+      left: calc(16px + env(safe-area-inset-left, 0px)) !important;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+    body.premium .back-to-top,
+    body.premium .btt.back-to-top {
+      right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+  }
+}
+
+/* 18d) 横滑提示：默认通用文案，表格沿用表格文案 */
+.pv-hscroll { position: relative; }
+.pv-hscroll::before {
+  content: '← 左右滑動查看完整內容 →';
+  display: block;
+  font-size: 11px;
+  color: #8a8277;
+  text-align: right;
+  padding: 0 2px 6px;
+  letter-spacing: 1px;
+}
+.tech-specs-table.pv-hscroll::before,
+.about-table-wrap.pv-hscroll::before,
+.rs-table-wrap.pv-hscroll::before { content: '← 左右滑動查看完整表格 →'; }
+html[lang="en"] .pv-hscroll::before { content: '← Swipe to view all →'; }
+html[lang="en"] .tech-specs-table.pv-hscroll::before,
+html[lang="en"] .about-table-wrap.pv-hscroll::before,
+html[lang="en"] .rs-table-wrap.pv-hscroll::before { content: '← Swipe to view full table →'; }
+@media (min-width: 769px) and (max-width: 1160px) {
+  /* 平板：提示常显（此时导航为抽屉，宽度充裕） */
+  .pv-hscroll::before { padding-bottom: 8px; }
 }
