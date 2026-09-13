@@ -43,6 +43,25 @@ Allow: /
 User-agent: 360Spider
 Allow: /
 
+# AI 搜索/引用爬虫（GEO: 生成式引擎优化，欢迎被 AI 检索引用）
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 # Crawl delay
 Crawl-delay: 1
 
@@ -50,3 +69,4 @@ Crawl-delay: 1
 Sitemap: https://www.hsst.hk/sitemap.xml
 Sitemap: https://www.hsst.hk/sitemap-zh.xml
 Sitemap: https://www.hsst.hk/sitemap-en.xml
+Sitemap: https://www.hsst.hk/sitemap-images.xml
