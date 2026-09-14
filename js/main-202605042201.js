@@ -103,11 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // touch 事件在桌面网站模式下照常派发、不会说谎——以「1.5s 内出现过真实 touchstart」
   // 作为第三证据（单次手势内 touchstart 晚于 pointerdown，但早于 pointerup/click，
   // 故首tap即可经 pointerup 正常展开）。
-  var lastRealTouchAt = 0;
+  var lastRealTouchAt = 0, lastRealTouchInNav = false;
   function recentRealTouch() { return Date.now() - lastRealTouchAt < 1500; }
-  document.addEventListener('touchstart', function() {
+  // 十六次修复（续）：记录最近手势起点是否在导航内，供外部 click 处理器
+  // 识别「手势起于导航、click 落于文档/其它元素」的幻影 click（防误关面板）。
+  document.addEventListener('touchstart', function(e) {
     lastRealTouchAt = Date.now();
+    try { lastRealTouchInNav = !!(e.target && e.target.closest && e.target.closest('.navbar')); } catch (err) { lastRealTouchInNav = false; }
     htmlEl.classList.add('touch-nav');
+  }, true);
+  var lastMouseDownAt = 0, lastMouseDownInNav = false;
+  document.addEventListener('mousedown', function(e) {
+    lastMouseDownAt = Date.now();
+    try { lastMouseDownInNav = !!(e.target && e.target.closest && e.target.closest('.navbar')); } catch (err) { lastMouseDownInNav = false; }
   }, true);
   function isTouchPointer(e) {
     return e.pointerType === 'touch'
@@ -270,6 +278,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleDropdown(trigger, dropdown, via) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
     const label = (trigger.textContent || '').trim().slice(0, 8);
+    // 十六次修复（2026-09-14 真机复检）：九次修复的 2s 重复点按忽略窗此前定义了
+    // 但从未接线（inTriggerDebounce 无调用点）。iPadOS 桌面网站模式下系统会双发
+    // click（第二发落在触发器上、晚于 700ms click-skip 窗），或补偿 click 晚到，
+    // 直接 toggle 收起刚展开的面板 = Stone 真机「子菜单出现不到一秒就消失」。
+    // 现接线：面板已展开且距展开 <2s 时，对同一触发器的重复点按一律忽略
+    // （面板保持，够用户移指子菜单）；>2s 后再点才收起，开合语义不变。
+    if (wasOpen && inTriggerDebounce(dropdown)) {
+      navLog('skip', 'trigger-debounce(' + via + ')');
+      return;
+    }
     // 修复（2026-09-13）：实现真正的开/关切换。已展开时再次点按父菜单即收起，
     // 满足「首次点击展开、再次点击收起」的需求（手机/平板/桌面抽屉态通用）。
     // 收起仍保留原有路径：点子菜单项 / 切换其它菜单 / 点空白处 / Esc。
@@ -413,7 +431,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 外扩 28px 矩形内 = 用户手指在面板附近的误触/擦边，不关闭（iPad 手指宽，
     // 点完标题抬指常落在导航条下边缘之外，此前直接被当外部点击强制收起）。
     document.addEventListener('click', function(e) {
-      if (e.target.closest('.navbar')) return;
+      if (e.target.closest && e.target.closest('.navbar')) return;
+      // 十六次修复（续）：幻影外部 click 过滤——产生这次 click 的手势若起于导航内
+      // （touchstart/mousedown 在导航上，1.5s 内），则它是 iPadOS 双发 click 或
+      // 回流补偿 click 的漂移目标（落在文档/其它元素上），不是用户点外部，
+      // 忽略之，面板保持。真人点外部时手势起点必在导航外（lastRealTouchInNav
+      // 已被新触碰刷新为 false），不受影响。
+      if ((lastRealTouchInNav && Date.now() - lastRealTouchAt < 1500) ||
+          (lastMouseDownInNav && Date.now() - lastMouseDownAt < 1500)) {
+        navLog('outside-skip', 'phantom-nav-gesture');
+        return;
+      }
       if (anyOpenInGrace()) return;
       var openPanels = navLinks.querySelectorAll('.nav-dropdown.nav-open > .mega-panel, .nav-dropdown.nav-open > .dropdown-panel');
       for (var i = 0; i < openPanels.length; i++) {
