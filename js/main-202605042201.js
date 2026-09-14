@@ -94,8 +94,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // 守卫全部失效，preventDefault 从未执行，合成 hover/click 链路原样存活，
   // 面板被外部假 click 关闭（真机日志：OPEN | click:… 后紧跟 CLOSE | outside-click）。
   // 判定「真触屏」改为：pointerType==='touch'，或（pointerType==='mouse' 且媒体查询命中触屏）。
+  // 十五次修复（2026-09-14 真机复检）：以上两条在 iPadOS「请求桌面网站」下同时失效——
+  // 平板 Safari 默认请求桌面网站，媒体查询谎报 (hover:hover)+(pointer:fine)，
+  // 且真触屏 tap 的 pointerType 仍上报 'mouse'，双证皆假 → isTouchPointer 恒 false →
+  // pointerdown/pointerup 的触屏展开逻辑全部跳过；横屏宽 >1160 时 mobileMode 亦 false，
+  // 点父菜单直接落回桌面行为（跳转/不展开）= Stone 真机「子菜单打不开」根因。
+  // 模拟器 tap 上报 pointerType 'touch'，故此前 WebKit 全量回归测不出。
+  // touch 事件在桌面网站模式下照常派发、不会说谎——以「1.5s 内出现过真实 touchstart」
+  // 作为第三证据（单次手势内 touchstart 晚于 pointerdown，但早于 pointerup/click，
+  // 故首tap即可经 pointerup 正常展开）。
+  var lastRealTouchAt = 0;
+  function recentRealTouch() { return Date.now() - lastRealTouchAt < 1500; }
+  document.addEventListener('touchstart', function() {
+    lastRealTouchAt = Date.now();
+    htmlEl.classList.add('touch-nav');
+  }, true);
   function isTouchPointer(e) {
-    return e.pointerType === 'touch' || (e.pointerType === 'mouse' && isTouchNav.matches);
+    return e.pointerType === 'touch'
+      || (e.pointerType === 'mouse' && isTouchNav.matches)
+      || (e.pointerType === 'mouse' && recentRealTouch());
   }
   document.addEventListener('pointerdown', function(e) {
     if (isTouchPointer(e)) htmlEl.classList.add('touch-nav');
