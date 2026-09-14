@@ -318,13 +318,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleDropdown(trigger, dropdown, via, touch) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
     const label = (trigger.textContent || '').trim().slice(0, 8);
-    // 二十次修复（2026-09-14，恢复十次修复 b9f77473 的真机定案语义）：
-    // 触屏点按父菜单 = 只开不关。真机历史日志：用户点完菜单后 0.4s/1.4s/2.9s
-    // 都会再碰标题，任何时长窗口都拦不住误关（今天十六修复的 2s 去抖即在
-    // 2.1s 处被突破，造成「出现不到一秒就消失」）。已展开时再点标题一律忽略；
-    // 收起只靠：点面板外空白 / 点面板内子项 / 切换其它菜单 / Esc。
-    // 鼠标环境（桌面缩窗抽屉）保留「再点收起」，并受 2s 双发去抖保护。
-    if (wasOpen && touch) {
+    // 二十八次修复（2026-09-14 晚，回退到已确认有效的 09-09 语义）：
+    // 与 7f08311(v20260909k，Stone「这次解决了」) 的 toggleDropdown 逐行对照发现——
+    // 那一版是「已展开 → 无条件 keep-open，return」；09-13 的一批「开/关切换」改动把它
+    // 改成「已展开 && touch 才 keep-open，否则落到下面的 CLOSE 分支收起」。于是
+    // 「只开不关」这个救命语义被绑在一个脆弱且可能为假的 touch 标志上：任何走到
+    // 「已展开 + touch 假」的路径都会把刚展开的面板收起 = 真机「点开不到一秒就消失」。
+    // 现改回「触屏证据 或 本机为触屏硬件 → 一律 keep-open」，与 09-09 有效版等价，
+    // 且不再依赖单一 touch 标志。纯鼠标桌面缩窗（isTouchDevice 假）仍保留再点收起。
+    if (wasOpen && (touch || isTouchDevice || isTouchNav.matches || recentRealTouch())) {
       navLog('skip', 'open-only(' + via + ')');
       return;
     }
@@ -557,8 +559,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       navMemClear(); closeAllDropdowns(null, via, true);
     }
+    // 二十八次修复（回退 26 次）：移除 capture 级 pointerdown 外部收起。原因有二——
+    // ① 实测发现它并非必要：pointerdown preventDefault 只挂在「触发器」上，点外部空白
+    //    并无 preventDefault，click 照常派发 → 下方 click 版 closeIfOutside 本就生效；
+    // ② 它在真机上有误关风险：展开瞬间若跟来第二个 pointerdown（点按残留/合成），
+    //    一旦落在 .navbar 之外且越过了 500ms 宽限，就会把刚开的面板关掉——与 Stone
+    //    「点开不到一秒就消失、四个菜单全中」高度吻合。09-09 有效版正是「仅 click」。
     document.addEventListener('click', function(e) { closeIfOutside(e, 'outside-click'); });
-    document.addEventListener('pointerdown', function(e) { closeIfOutside(e, 'outside-pdown'); }, true);
     // 十二次修复（续）：捕获阶段吞掉「点按展开后回流补偿的 click」。
     // 该 click 落在刚展开面板的子链接上会误跳转；窗口 600ms（短于用户刻意点子链接的间隔），
     // 仅作用于面板内部，不影响抽屉外点击 / 刻意点子链接。
