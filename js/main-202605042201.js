@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {}
       navDebugBox.textContent = 'NAV-DBG js=' + assetV + ' ' + window.innerWidth + 'x' + window.innerHeight
         + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
-        + ' rt=' + (Date.now() - lastRealTouchAt) + 'ms'
+        + (lastRealTouchAt ? ' rt=' + (Date.now() - lastRealTouchAt) + 'ms' : ' rt=never')
         + '\n' + window.__navLog.slice(-14).join('\n');
     }
   }
