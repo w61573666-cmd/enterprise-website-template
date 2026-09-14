@@ -105,17 +105,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // 故首tap即可经 pointerup 正常展开）。
   var lastRealTouchAt = 0, lastRealTouchInNav = false;
   function recentRealTouch() { return Date.now() - lastRealTouchAt < 1500; }
+  // 二十一次修复辅助：每次真实点按都在日志留痕（类型+落点类名），
+  // 真机截图即可看到「点了哪、以什么指针类型」。
+  function navTapLog(e) {
+    try {
+      navLog('tap', (e.pointerType || e.type) + '@' + ((e.target && e.target.className && String(e.target.className).split(' ')[0]) || e.target.tagName));
+    } catch (err) {}
+  }
   // 十六次修复（续）：记录最近手势起点是否在导航内，供外部 click 处理器
   // 识别「手势起于导航、click 落于文档/其它元素」的幻影 click（防误关面板）。
   document.addEventListener('touchstart', function(e) {
     lastRealTouchAt = Date.now();
     try { lastRealTouchInNav = !!(e.target && e.target.closest && e.target.closest('.navbar')); } catch (err) { lastRealTouchInNav = false; }
     htmlEl.classList.add('touch-nav');
+    navTapLog(e);
   }, true);
   var lastMouseDownAt = 0, lastMouseDownInNav = false;
   document.addEventListener('mousedown', function(e) {
     lastMouseDownAt = Date.now();
     try { lastMouseDownInNav = !!(e.target && e.target.closest && e.target.closest('.navbar')); } catch (err) { lastMouseDownInNav = false; }
+    navTapLog(e);
   }, true);
   function isTouchPointer(e) {
     return e.pointerType === 'touch'
@@ -147,7 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
      截图即可定位是哪个事件关掉了面板。平时仅写内存环形缓冲，零开销。 */
   window.__navLog = [];
   var navDebugBox = null;
-  if (/(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash) && document.body) {
+  // 二十一次修复辅助（临时诊断，2026-09-16 23:59 后自动失效）：
+  // 诊断框无条件开启——不再依赖 URL 参数，任何页面打开即记录。
+  var NAV_DBG_CUTOFF = new Date('2026-09-16T23:59:59+08:00').getTime();
+  if ((Date.now() < NAV_DBG_CUTOFF || /(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash)) && document.body) {
     navDebugBox = document.createElement('pre');
     navDebugBox.id = 'nav-debug-box';
     navDebugBox.style.cssText = 'position:fixed;left:6px;bottom:6px;z-index:2147483000;background:rgba(0,0,0,.88);color:#4f4;font:10px/1.35 Menlo,Consolas,monospace;padding:8px 10px;margin:0;max-width:72vw;max-height:42vh;overflow:hidden;pointer-events:none;border-radius:6px;white-space:pre-wrap;';
@@ -233,7 +245,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 「只有 pointer 事件、全程无 touchstart/mousedown」的输入环境——指针证据
   // 必须同时来自 pointerdown，否则该环境下子项真人点按被 panel-link 守卫
   // 与吞咽窗永久拦截（表现为「根本无法点子菜单」）。
-  document.addEventListener('pointerdown', navMarkPointer, true);
+  // 二十一次修复辅助：pointerdown 也留痕。
+  document.addEventListener('pointerdown', function(e) {
+    navMarkPointer(e);
+    navTapLog(e);
+  }, true);
 
   // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
@@ -453,6 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ——晚于吞咽窗（2.5s）的合成 click 落在子项上时不得触发收起。
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
       link.addEventListener('click', function(e) {
+        navLog('item-click', 'dp=' + e.defaultPrevented);
         var freshGesture = navLastPointer.inPanel && (Date.now() - navLastPointer.t) < 1200;
         if (navJustToggled && !freshGesture) {
           // 十九次修复：晚于吞咽窗的合成 click——除不收起外，还要阻断默认跳转
