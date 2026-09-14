@@ -172,18 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function navMemSave(idx) { try { sessionStorage.setItem(NAV_MEM_KEY, String(idx)); } catch (err) {} }
   function navMemClear() { try { sessionStorage.removeItem(NAV_MEM_KEY); } catch (err) {} }
 
-  // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
-  // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
-  // 九次修复（真机日志定案）：v=h 日志显示面板在展开后 1.4s 内被「第三次点按触发器」
-  // 收起（81902 OPEN → 83273 CLOSE|pup）——用户点完菜单后手指又碰到标题，切换逻辑
-  // 立即收起，导致「来不及点子菜单」。改为双窗口：
-  //   触发器重复点按忽略窗口 2s——展开后 2s 内再点同一标题 = 忽略（面板保持，够时间移指子菜单）；
-  //   外部点击幻影过滤窗口 0.5s——展开初期落在外部的杂散点击忽略，之后的真实外部点击立即收起。
-  var NAV_TRIGGER_DEBOUNCE = 2000;
+  // 2026-09-14（Stone 指定「方案一」：再点同一菜单项 = 收起）——
+  // 旧「展开后 2s 内忽略重复点按」（keep-open / NAV_TRIGGER_DEBOUNCE）语义已废除，
+  // 菜单标题改为真正的开关：点一下展开，再点同一下收起。
+  // 唯一保留的防护是 NAV_TOGGLE_GUARD（300ms）——只吃掉「同一次物理点按」在真机
+  // iPad 上偶发的重复 pointerup，不会拦住用户 300ms 之后的第二次有意点按。
+  // 外部点击幻影过滤窗口保留：展开初期落在外部的杂散点击忽略，之后真实外部点击立即收起。
+  var NAV_TOGGLE_GUARD = 300;
   var NAV_OUTSIDE_GRACE = 500;
-  function inTriggerDebounce(dd) {
-    return dd.__navOpenedAt && (Date.now() - dd.__navOpenedAt) < NAV_TRIGGER_DEBOUNCE;
-  }
   function inOpenGrace(dd) {
     return dd.__navOpenedAt && (Date.now() - dd.__navOpenedAt) < NAV_OUTSIDE_GRACE;
   }
@@ -228,10 +224,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleDropdown(trigger, dropdown, via) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
     const label = (trigger.textContent || '').trim().slice(0, 8);
-    // 十次修复（最终交互定案）：触屏上菜单标题是「只开不关」的——真机日志证实用户
-    // 点完菜单后会再碰标题（+0.4s / +1.4s / +2.9s 都出现过），任何时长窗口都拦不住。
-    // 已展开时再点标题一律忽略；收起只靠：点空白处 / 点子菜单项 / 切换其它菜单 / Esc。
-    if (wasOpen) { navLog('keep-open', via + ':' + label); return; }
+    // 方案一（2026-09-14 Stone 指定）：已展开时再点同一菜单项 = 收起。
+    // 收起源：① 再点同一标题（本分支，唯一的开关式收起源）② 点导航外空白
+    // ③ 点子菜单项 ④ 切换其它菜单 ⑤ Esc。手机端 / iPad 触屏行为一致。
+    if (wasOpen) {
+      if (Date.now() - (dropdown.__navOpenedAt || 0) < NAV_TOGGLE_GUARD) {
+        navLog('toggle-guard', via + ':' + label);
+        return;
+      }
+      navMemClear(); // 用户主动收起：清掉重载恢复记忆，避免刷新后又被“恢复”开
+      closeAllDropdowns(null, via + ':toggle-close', true);
+      return;
+    }
     // 切换到其它菜单 = 用户主动操作，强制收起其余面板
     closeAllDropdowns(dropdown, via + ':switch', true);
     dropdown.classList.add('nav-open', 'mobile-open');
@@ -305,6 +309,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+
+    // ---------- 位移幽灵点击拦截（2026-09-14） ----------
+    // 真机/真内核复现出的「误触发」：手指按在菜单标题上（如 產品中心），pointerup 里
+    // 我们收起上一个面板并展开本面板 —— 抽屉模式下两个面板都在文档流里，内容整体位移，
+    // 浏览器却在 touchend 之后才做命中测试，于是把这一击判给了刚滑到手指下方的**子菜单项**，
+    // 直接跳转（实测 Chromium 触屏：pointerdown/pointerup 的 target 都是 products.html，
+    // click 的 target 却变成 products/luxury-stone.html 且 prevented=false）。
+    // 判定：一次触摸的 click 目标与它自己的 pointerdown 目标不是同一个链接 = 内容在
+    // 指下移动过，这一击不是用户点的东西 → 拦截。每次 pointerdown 都会刷新记录，
+    // 所以用户随后真正点某个子项（有自己的 pointerdown）不受影响。
+    var navDownLink = null;
+    document.addEventListener('pointerdown', function(e) {
+      if (!isTouchPointer(e) && !window.FORCE_TOUCH_NAV) { navDownLink = null; return; }
+      var el = e.target;
+      navDownLink = { a: (el && el.closest) ? el.closest('a') : null, t: Date.now() };
+    }, true);
+    document.addEventListener('click', function(e) {
+      var d = navDownLink;
+      navDownLink = null;
+      if (!d || !d.a) return;
+      if (Date.now() - d.t > 900) return;
+      var el = e.target;
+      var a = (el && el.closest) ? el.closest('a') : null;
+      if (a === d.a) return;                    // 同一链接：正常点击
+      if (!a || !el.closest('.navbar')) return; // 点击落到导航以外：不干预
+      if (!d.a.closest('.navbar')) return;      // 按下点不在导航内：不干预
+      navLog('ghost-click', 'down=' + String(d.a.getAttribute('href')).slice(0, 16) + '→ click=' + String(a.getAttribute('href')).slice(0, 20));
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }, true);
 
     // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
