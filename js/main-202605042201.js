@@ -420,6 +420,11 @@ document.addEventListener('DOMContentLoaded', () => {
           var dd = this;
           setTimeout(function () {
             if (dd.contains(document.activeElement)) return; // 焦点进入子面板
+            // 十九次修复（2026-09-14 关闭路径全量审计）：焦点收起仅服务外接键盘流。
+            // 触屏会话（近 2.5s 内有真实触点且非键盘输入）的任何 blur——如 iOS 在
+            // 惯性滚动开始时会强制 blur——都不得收起面板：此路径直写样式、完全绕过
+            // __navForceOpen，是「子菜单不到一秒消失」最后一处无守卫的关闭源。
+            if (recentRealTouch() && !lastInputWasKeyboard) { navLog('KEEP', 'focusout-touch'); return; }
             dd.classList.remove('nav-open', 'mobile-open');
             dd.__navForceOpen = false;
             setPanelInline(dd, false);
@@ -430,9 +435,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）
+    // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）。
+    // 十九次修复：需真人触点证据（近 1.2s 内有落在面板内的 touchstart/mousedown）
+    // ——晚于吞咽窗（2.5s）的合成 click 落在子项上时不得触发收起。
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
-      link.addEventListener('click', () => { navMemClear(); closeAllDropdowns(null, 'panel-link', true); });
+      link.addEventListener('click', function(e) {
+        var freshGesture = navLastPointer.inPanel && (Date.now() - navLastPointer.t) < 1200;
+        if (navJustToggled && !freshGesture) {
+          // 十九次修复：晚于吞咽窗的合成 click——除不收起外，还要阻断默认跳转
+          navLog('skip', 'panel-link-phantom');
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        navMemClear(); closeAllDropdowns(null, 'panel-link', true);
+      });
     });
 
     // 点击导航以外区域：收起全部子菜单。十一次修复：点击坐标落在任一展开面板
@@ -445,8 +462,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // 回流补偿 click 的漂移目标（落在文档/其它元素上），不是用户点外部，
       // 忽略之，面板保持。真人点外部时手势起点必在导航外（lastRealTouchInNav
       // 已被新触碰刷新为 false），不受影响。
-      if ((lastRealTouchInNav && Date.now() - lastRealTouchAt < 1500) ||
-          (lastMouseDownInNav && Date.now() - lastMouseDownAt < 1500)) {
+      // 十九次修复（修订）：幻影判定「触屏证据优先」——近 2.5s 内有 touchstart 时
+      // 以手势起点为准（起点在导航内 = 补偿/双发 click，忽略；起点在外 = 真人点
+      // 外部，放行收起）。鼠标 mousedown 证据仅在无触屏证据时使用（纯鼠标环境的
+      // 漂移 click）。此前两证据取「或」，浏览器 touch tap 合成的 mousedown
+      // （目标在导航内）会污染判定，否决真人点外部导致面板关不掉。
+      if (Date.now() - lastRealTouchAt < 2500) {
+        if (lastRealTouchInNav) {
+          navLog('outside-skip', 'phantom-nav-gesture');
+          return;
+        }
+      } else if (lastMouseDownInNav && Date.now() - lastMouseDownAt < 2500) {
         navLog('outside-skip', 'phantom-nav-gesture');
         return;
       }
@@ -469,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 即 iPad「点子菜单没反应」根因）。现在只吞「手势起点不在面板内」的 click
     // （= 回流补发的合成 click）；真人点子项必有 900ms 内落在面板内的触点，放行。
     document.addEventListener('click', function(e) {
-      if (!navJustToggled || (Date.now() - navJustToggled) >= 1500) return;
+      if (!navJustToggled || (Date.now() - navJustToggled) >= 2500) return;
       if (!e.target.closest('.mega-panel, .dropdown-panel')) return;
       var genuineTap = navLastPointer.inPanel && (Date.now() - navLastPointer.t) < 900;
       if (genuineTap) return;
