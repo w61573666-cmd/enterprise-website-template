@@ -87,8 +87,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // 媒体查询判定不可靠。改为「事件实测」：pointerdown 的 pointerType==='touch'
   // 即给 <html> 加 .touch-nav（CSS 据此禁用 hover 展开），移除则回退桌面行为。
   const isTouchNav = window.matchMedia('(hover: none), (pointer: coarse)');
+  // 二十六次修复（2026-09-14）：matchMedia('(hover:none),(pointer:coarse)') 在 iPadOS
+  // 「请求桌面网站」模式下谎报 (hover:hover)+(pointer:fine)（isTouchNav.matches=false），
+  // 导致真触屏点按父菜单被当成纯桌面鼠标 → click 不拦截 → 直接跳转栏目页（子菜单永远打不开，
+  // 真机表现「点父菜单页面直接跳走 / 子菜单一闪即逝」）。navigator.maxTouchPoints>0 是
+  // 「设备是否触屏」的硬件级稳定信号，不受媒体查询欺骗：iPad 即便在桌面模式也上报 ≥1，
+  // 纯桌面（无触屏）为 0。以此作为触屏判定兜底，覆盖所有「真触屏却谎报 matchMedia」的环境。
+  const isTouchDevice = (typeof navigator !== 'undefined') &&
+    ((navigator.maxTouchPoints || 0) > 0 || ('ontouchstart' in window) || isTouchNav.matches);
   const htmlEl = document.documentElement;
-  if (isTouchNav.matches) htmlEl.classList.add('touch-nav');
+  if (isTouchNav.matches || isTouchDevice) htmlEl.classList.add('touch-nav');
   // 五次修复（真机日志实锤）：WebKit「桌面网站」模式的老 bug——真触屏 tap 的
   // pointer events 上报 pointerType 'mouse'，导致此前 pointerType!=='touch' 的
   // 守卫全部失效，preventDefault 从未执行，合成 hover/click 链路原样存活，
@@ -128,8 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
   function isTouchPointer(e) {
     return e.pointerType === 'touch'
-      || (e.pointerType === 'mouse' && isTouchNav.matches)
-      || (e.pointerType === 'mouse' && recentRealTouch());
+      || (e.pointerType === 'mouse' && (isTouchNav.matches || isTouchDevice || recentRealTouch()));
   }
   document.addEventListener('pointerdown', function(e) {
     if (isTouchPointer(e)) htmlEl.classList.add('touch-nav');
@@ -142,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isTouchPointer(e)) htmlEl.classList.add('touch-nav');
   }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
-  function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
+  function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches || isTouchDevice; }
   // 最近一次用户输入是否为键盘（供「键盘焦点自动展开子菜单」判定；
   // :focus-visible 在部分 WebKit 版本对脚本聚焦判定不稳，故双条件取或）
   var lastInputWasKeyboard = false;
@@ -158,8 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
   var navDebugBox = null;
   // 二十一次修复辅助（临时诊断，2026-09-16 23:59 后自动失效）：
   // 诊断框无条件开启——不再依赖 URL 参数，任何页面打开即记录。
-  var NAV_DBG_CUTOFF = new Date('2026-09-16T23:59:59+08:00').getTime();
-  if ((Date.now() < NAV_DBG_CUTOFF || /(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash)) && document.body) {
+  // 二十六次修复（2026-09-14）：诊断框不再无条件常驻（此前 Stone 反馈 iPad 上
+  // 「一直有个类似检查的东西」干扰浏览）。改为仅当 URL 带 #navdebug 时显示，
+  // 平时零干扰；真机仍需取证时加 #navdebug 即可复现完整日志。
+  if (/(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash) && document.body) {
     navDebugBox = document.createElement('pre');
     navDebugBox.id = 'nav-debug-box';
     navDebugBox.style.cssText = 'position:fixed;left:6px;bottom:6px;z-index:2147483000;background:rgba(0,0,0,.88);color:#4f4;font:10px/1.35 Menlo,Consolas,monospace;padding:8px 10px;margin:0;max-width:72vw;max-height:42vh;overflow:hidden;pointer-events:none;border-radius:6px;white-space:pre-wrap;';
@@ -445,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 触屏点按也会让链接获得焦点(focus 在 pointerdown 即触发，早于 pointerup)，须按触屏展开→blur 不收起；
         // 二十五次修复补充：iPad + 鼠标/触控板(或某些 iPadOS 模式) pointerType='mouse' 且全程无 touchstart，
         // recentRealTouch() 恒为 false，但 isTouchNav.matches=true(环境是 touch)，必须一并视为触屏展开。
-        dd.__openedByTouch = recentRealTouch() || isTouchNav.matches;
+        dd.__openedByTouch = recentRealTouch() || isTouchNav.matches || isTouchDevice;
         setPanelInline(dd, true);
         navLog('OPEN', 'focus:' + (this.textContent || '').trim().slice(0, 8));
       });
@@ -467,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // iPadOS 模式：无 touchstart，但 isTouchNav.matches=true）。故守卫再补一层「环境信号」：
             // 只要浏览器把本设备归类为 touch 环境(isTouchNav.matches)，或近 1.5s 内有真实 touchstart，
             // focusout 一律保持展开；纯桌面鼠标二者皆 false，仍正常在焦点离开整个 dropdown 时收起。
-            if (dd.__openedByTouch || recentRealTouch() || isTouchNav.matches) { navLog('KEEP', 'focusout-touch'); return; }
+            if (dd.__openedByTouch || recentRealTouch() || isTouchNav.matches || isTouchDevice) { navLog('KEEP', 'focusout-touch'); return; }
             dd.classList.remove('nav-open', 'mobile-open');
             dd.__navForceOpen = false;
             setPanelInline(dd, false);
@@ -509,10 +518,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // 点击导航以外区域：收起全部子菜单。十一次修复：点击坐标落在任一展开面板
-    // 外扩 28px 矩形内 = 用户手指在面板附近的误触/擦边，不关闭（iPad 手指宽，
-    // 点完标题抬指常落在导航条下边缘之外，此前直接被当外部点击强制收起）。
-    document.addEventListener('click', function(e) {
+    // 二十六次修复（2026-09-14）：触屏会话下触发器 pointerdown 调 preventDefault 会
+    // 抑制后续 click（Chromium 规范行为），「点外部收起」所依赖的 click 监听在触屏环境
+    // 永不触发——面板开了就关不掉（只能点子项跳走或 Esc）。故抽成 closeIfOutside，
+    // 同时挂在 click 与 pointerdown：触屏走 pointerdown（click 被抑制也能收起），
+    // 桌面走 click（行为不变）。
+    function closeIfOutside(e, via) {
       if (e.target.closest && e.target.closest('.navbar')) return;
       // 十六次修复（续）：幻影外部 click 过滤——产生这次 click 的手势若起于导航内
       // （touchstart/mousedown 在导航上，1.5s 内），则它是 iPadOS 双发 click 或
@@ -542,8 +553,10 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
       }
-      navMemClear(); closeAllDropdowns(null, 'outside-click', true);
-    });
+      navMemClear(); closeAllDropdowns(null, via, true);
+    }
+    document.addEventListener('click', function(e) { closeIfOutside(e, 'outside-click'); });
+    document.addEventListener('pointerdown', function(e) { closeIfOutside(e, 'outside-pdown'); }, true);
     // 十二次修复（续）：捕获阶段吞掉「点按展开后回流补偿的 click」。
     // 该 click 落在刚展开面板的子链接上会误跳转；窗口 600ms（短于用户刻意点子链接的间隔），
     // 仅作用于面板内部，不影响抽屉外点击 / 刻意点子链接。
