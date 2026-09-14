@@ -327,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (wasOpen) {
       dropdown.classList.remove('nav-open', 'mobile-open');
       dropdown.__navForceOpen = false;
+      dropdown.__openedByTouch = false;
       setPanelInline(dropdown, false);
       const t = dropdown.querySelector(':scope > a');
       if (t) t.setAttribute('aria-expanded', 'false');
@@ -344,6 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dropdown.classList.add('nav-open', 'mobile-open');
     dropdown.__navOpenedAt = Date.now();
     dropdown.__navForceOpen = true;
+    dropdown.__openedByTouch = touch; // 记录展开方式：触屏展开者绝不因 blur/focusout 收起
     setPanelInline(dropdown, true);
     trigger.setAttribute('aria-expanded', 'true');
     htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
@@ -440,6 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.setAttribute('aria-expanded', 'true');
         dd.classList.add('nav-open', 'mobile-open');
         dd.__navOpenedAt = Date.now();
+        dd.__openedByTouch = false; // 键盘聚焦展开：仍走焦点离开收起（无障碍 Tab 流）
         setPanelInline(dd, true);
         navLog('OPEN', 'focus:' + (this.textContent || '').trim().slice(0, 8));
       });
@@ -453,7 +456,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // 触屏会话（近 2.5s 内有真实触点且非键盘输入）的任何 blur——如 iOS 在
             // 惯性滚动开始时会强制 blur——都不得收起面板：此路径直写样式、完全绕过
             // __navForceOpen，是「子菜单不到一秒消失」最后一处无守卫的关闭源。
-            if (recentRealTouch() && !lastInputWasKeyboard) { navLog('KEEP', 'focusout-touch'); return; }
+            // 二十三次修复（2026-09-14 终局）：旧守卫 recentRealTouch() && !lastInputWasKeyboard
+            // 依赖「键盘态未置位」——当 :focus-visible 命中触屏点按、或会话内曾用键盘
+            // (lastInputWasKeyboard 残留 true)，守卫即失效 → iOS 点按后 blur 立即收起面板
+            // = 真机「弹出不到一秒消失」。改为按「展开方式」判定：触屏展开的(__openedByTouch)
+            // 永不因 focusout 收起；仅键盘展开的才在焦点离开整个 dropdown 时收起。
+            if (dd.__openedByTouch) { navLog('KEEP', 'focusout-touch'); return; }
             dd.classList.remove('nav-open', 'mobile-open');
             dd.__navForceOpen = false;
             setPanelInline(dd, false);
@@ -647,7 +655,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         // Close mobile menu and dropdowns before scrolling
         closeMobileMenu();
-        document.querySelectorAll('.nav-dropdown').forEach(dd => { dd.classList.remove('mobile-open', 'nav-open'); const t = dd.querySelector(':scope > a'); if (t) t.setAttribute('aria-expanded', 'false'); });
+        document.querySelectorAll('.nav-dropdown').forEach(dd => {
+          if (dd.__openedByTouch) return; // 触屏展开的面板不因此类锚点点击收起
+          dd.classList.remove('mobile-open', 'nav-open'); const t = dd.querySelector(':scope > a'); if (t) t.setAttribute('aria-expanded', 'false');
+        });
         // Small delay to let menu close before scroll starts
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
