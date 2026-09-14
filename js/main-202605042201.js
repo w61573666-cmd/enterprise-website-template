@@ -333,6 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
       var el = e.target;
       var a = (el && el.closest) ? el.closest('a') : null;
       if (a === d.a) return;                    // 同一链接：正常点击
+      // 只在「按下的那个链接是菜单标题」时才拦截——这正是本 bug 的形态。
+      // 若按下的是子菜单项，说明用户本意就是点子项，即使面板正在滚动也不干预。
+      if (!d.a.matches('.nav-dropdown > a')) return;
       if (!a || !el.closest('.navbar')) return; // 点击落到导航以外：不干预
       if (!d.a.closest('.navbar')) return;      // 按下点不在导航内：不干预
       navLog('ghost-click', 'down=' + String(d.a.getAttribute('href')).slice(0, 16) + '→ click=' + String(a.getAttribute('href')).slice(0, 20));
