@@ -165,10 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
   var navDebugBox = null;
   // 二十一次修复辅助（临时诊断，2026-09-16 23:59 后自动失效）：
   // 诊断框无条件开启——不再依赖 URL 参数，任何页面打开即记录。
-  // 二十六次修复（2026-09-14）：诊断框不再无条件常驻（此前 Stone 反馈 iPad 上
-  // 「一直有个类似检查的东西」干扰浏览）。改为仅当 URL 带 #navdebug 时显示，
-  // 平时零干扰；真机仍需取证时加 #navdebug 即可复现完整日志。
-  if (/(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash) && document.body) {
+  // 二十六次修复补（2026-09-14 晚）：为定位「真机仍打不开」根因，临时把诊断框
+  // 无条件常驻回来（2026-09-16 23:59 自动失效），平时用 #navdebug 参数即可。
+  // 目的：让用户一键截图即可看到 js=版本号 + OPEN/CLOSE 日志 + GEO 缩放/覆盖，
+  // 确认到底是「跑了旧缓存代码」还是「新代码仍有逻辑缺陷」。定位清楚后即撤。
+  var NAV_DBG_CUTOFF = new Date('2026-09-16T23:59:59+08:00').getTime();
+  if ((Date.now() < NAV_DBG_CUTOFF || /(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash)) && document.body) {
     navDebugBox = document.createElement('pre');
     navDebugBox.id = 'nav-debug-box';
     navDebugBox.style.cssText = 'position:fixed;left:6px;bottom:6px;z-index:2147483000;background:rgba(0,0,0,.88);color:#4f4;font:10px/1.35 Menlo,Consolas,monospace;padding:8px 10px;margin:0;max-width:72vw;max-height:42vh;overflow:hidden;pointer-events:none;border-radius:6px;white-space:pre-wrap;';
