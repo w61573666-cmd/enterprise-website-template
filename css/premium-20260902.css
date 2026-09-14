@@ -2044,21 +2044,8 @@ body.premium .navbar.scrolled {
     max-height: none;
     padding: 8px 0 8px 16px;
   }
-  /* 统一交互（2026-09-13）：抽屉态(≤1160px，汉堡菜单展开)下也支持鼠标悬停自动展开子菜单，
-     与全屏 .nav-dropdown:hover 行为一致。此前抽屉内子菜单面板默认 display:none 且无 :hover
-     展开规则，导致只能用点击展开；现补 hover 规则——桌面鼠标悬停父栏目即展开。
-     触屏设备(html.touch-nav)不触发 hover，仍走点按展开（见下方 touch-nav 抑制规则）。 */
-  /* 门控：仅真实指针设备（非触屏）走 hover 展开；触屏(html.touch-nav)的 :hover 会「粘住」，
-     若不过滤会让 JS 收起后面板仍被 !important 撑开，表现为「点第二次关不掉」。 */
-  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover .mega-panel,
-  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover .dropdown-panel {
-    display: block !important;
-    max-height: none !important;
-    padding: 8px 0 8px 16px !important;
-  }
-  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover > a::after {
-    transform: rotate(180deg) !important;
-  }
+  
+  
   body.premium .navbar .nav-dropdown > a::after {
     display: inline-block !important;
     transition: transform 0.3s ease;
@@ -2215,22 +2202,7 @@ body.premium .navbar.scrolled {
 /* Module 46 补丁2: 提升优先级压过 body.premium h1 */
 body.premium .faqv2-hero h1,body.premium .faqv2-cta h2{color:#fff !important;}
 
-/* ═══════════════════════════════════════════════════════════
-   47. 触屏下拉「关不掉」防御（2026-09-13）
-   触屏设备(html.touch-nav)的 :hover 会「粘住」——一次点按后元素保持
-   :hover 态，导致 JS 已收起(.mobile-open/.nav-open 已移除、行内样式已清)
-   但任何 :hover 展开规则仍用 !important 把面板撑开，表现为「再点一次关不掉」。
-   此处统一强制：未显式展开的下拉面板在触屏下一律隐藏，彻底压制 hover 粘住。
-   仅作用于 html.touch-nav；桌面鼠标(无 touch-nav)不受影响。 */
-html.touch-nav body.premium .navbar .nav-dropdown:not(.mobile-open):not(.nav-open) .mega-panel,
-html.touch-nav body.premium .navbar .nav-dropdown:not(.mobile-open):not(.nav-open) .dropdown-panel {
-  display: none !important;
-  max-height: 0 !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
-}
+
 
 /* ═══════════════════════════════════════════════════════════
    Module 47: 导航高亮修正 (2026-09-06) — 子菜单当前页条目
@@ -3102,8 +3074,7 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
 /* ── 3) 100vw 在 iOS 上可能大于可视宽度 ─────────────────────
    iOS Safari 的 100vw 计算偶发大于 window.innerWidth，
    用于 width 时会把元素顶出屏幕。改用 100% / auto（语义等价且无风险）。 */
-@media (max-width: 900px) {
-  .mega-panel { width: auto !important; }  /* 已有 left/right:16px !important 定位 */
+@media (max-width: 900px) {  /* 已有 left/right:16px !important 定位 */
 }
 .image-modal-content { width: 100% !important; max-width: 100% !important; }
 .image-modal-content img { max-width: 100% !important; }
@@ -3254,9 +3225,6 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
    ═══════════════════════════════════════════════════════════ */
 
 /* 1) 导航容器与正文同宽（原先桌面固定 1400px） */
-@media (min-width: 1161px) {
-  body.premium .navbar .container { max-width: var(--max-width); }
-}
 
 /* 2) 内页 section 容器恢复统一水平 gutter（消除 1200 vs 1104 差异） */
 .inner-page .section-padding .container {
@@ -3282,7 +3250,7 @@ body.premium.inner-page .tech-related { max-width: none; }
       它绕开了 --gutter 体系（390 应为 14 / 768 应为 20 / 769–900 应为 28），
       导致同一页出现 14 与 16 两种内容带 → 统一回归 --gutter。 */
 @media (max-width: 900px) {
-  .nav-container,
+  
   .container {
     padding-left: var(--gutter);
     padding-right: var(--gutter);
@@ -3299,9 +3267,6 @@ body.premium.inner-page .tech-related { max-width: none; }
 /* 7) ≤900px：.navbar 自身还带 16px 水平内边距，令导航内容比正文再多内缩 16px
       （导航内容带 30~360 vs 正文 14~376，顶部与主体左右对不齐）
       → 水平内边距归零，统一交由 .container 的 --gutter 决定。 */
-@media (max-width: 900px) {
-  .navbar { padding-left: 0; padding-right: 0; }
-}
 
 /* 8) 首页 .about-preview 是一整块 <section>，被 premium「卡片样式」选择器列表
       误当成卡片套用了 border / 圆角 / 阴影 / hover 上浮：
@@ -3437,24 +3402,7 @@ body.premium .news-hero .breadcrumb a { color: rgba(255,255,255,.9) !important; 
 body.premium .news-hero .breadcrumb a:hover { color: var(--pv-gold) !important; }
 body.premium .news-hero .breadcrumb li:not(:last-child)::after { color: rgba(255,255,255,.35) !important; }
 
-/* ───────────────────────────────────────────────────────────
-   13) WhatsApp 悬浮球：右下角 → 左下角（全站统一）
-   ───────────────────────────────────────────────────────────
-   254 页都带这个按钮（<a class="whatsapp-float" href="https://wa.me/85255380525">），
-   但改动前实测存在两族、位置本就不一致：
-     · 共享层生效（本档 1707 行，约 157 页）：right 22 / bottom 26 / 54×54 / z 1500
-     · 页面内联 <style> 生效（97 页）：right 24 / bottom 28 / 56×56 / z 999，
-       且 ≤768 另有 right 16 / bottom 20 / 50×50
-     · 404.html 另为 66×56（宽度受按钮统一规则的 padding 影响）
 
-   处理：只统一「位置」——桌面 left 22 / bottom 26，≤768 left 16 / bottom 20，
-        right 一律置 auto。样式（绿色圆底、阴影、hover 放大）、尺寸、z-index、
-        href 与 main.js 的 WhatsApp 双协议改写逻辑全部不碰。
-        用 !important 是因为那 97 页的内联 <style> 与共享层争抢同一属性。
-
-   左下角无其它固定浮层占位（.pwa-install-btn 虽有 left:20 的规则，但全站 HTML
-   无该元素、JS 亦无引用，属遗留死样式）；抽屉打开时 body.drawer-open 仍会隐藏本按钮。
-   ─────────────────────────────────────────────────────────── */
 body.premium .whatsapp-float,
 body.premium .wpp-float.whatsapp-float {
   left: 22px !important;
@@ -3671,30 +3619,6 @@ body.premium h3.pv-tick-center::before {
      18c) 悬浮球（WhatsApp / 返回顶部）加安全区内边距，横屏 home indicator 不遮挡
      18d) 横滑区提示文案通用化（.visual-timeline 里程碑 / .faqv2-chips 标签），
           由 main.js 实测 scrollWidth 后打 .pv-hscroll */
-body.premium .navbar a:focus-visible,
-body.premium .navbar button:focus-visible,
-body.premium .mega-panel-link:focus-visible {
-  outline: 2px solid #C9A84C !important;
-  outline-offset: 3px !important;
-  border-radius: 4px;
-}
-
-@media (min-width: 768px) and (max-width: 1160px) {
-  body.premium .navbar .nav-links { width: 380px !important; }
-}
-@supports (height: 100dvh) {
-  @media (max-width: 1160px) {
-    body.premium .navbar .nav-links { height: 100dvh !important; }
-  }
-}
-@media (max-width: 1160px) {
-  body.premium .navbar .nav-links {
-    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)) !important;
-  }
-  body.premium .navbar .nav-links.open {
-    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
-  }
-}
 
 @supports (bottom: env(safe-area-inset-bottom)) {
   body.premium .whatsapp-float,
@@ -3744,36 +3668,4 @@ html[lang="en"] .rs-table-wrap.pv-hscroll::before { content: '← Swipe to view 
   .pv-hscroll::before { padding-bottom: 8px; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   23) iOS 合成层绘制失效免疫（二十三次修复，2026-09-14 真机定案）
-   ═══════════════════════════════════════════════════════════
-   现象（Stone 真机 NAV-DBG 日志实锤）：面板 DOM 状态完全正常
-   （op=1 / vis=visible / elementFromPoint 命中自身内容 / GEO 连续
-   3.8s 无 CLOSE），但屏幕上「出现不到一秒就消失」——元素可命中
-   不可见 = iOS Safari 合成器丢层，桌面模拟器无法复现。
-   诱因组合（仅桌面导航 >1160 命中）：
-     translateZ(0) 强制合成层（style-202605042143.css L331）
-     + visibility/opacity 0.3s 过渡
-     + backdrop-filter 毛玻璃导航栏（premium 规则 45）。
-   处置：触屏会话（html.touch-nav）下三者全拆——
-     ① 面板过渡归零（出现即最终态，不做淡入）；
-     ② 桌面面板 transform 去掉 translateY/translateZ（保留水平居中）；
-     ③ 导航栏毛玻璃改近似实色（消灭问题上下文）。
-   桌面鼠标（无 touch-nav）外观与动画完全不变。 */
-html.touch-nav body.premium .navbar .mega-panel,
-html.touch-nav body.premium .navbar .dropdown-panel {
-  transition: none !important;
-  -webkit-transition: none !important;
-}
-@media (min-width: 1161px) {
-  html.touch-nav body.premium .navbar .mega-panel,
-  html.touch-nav body.premium .navbar .dropdown-panel {
-    transform: translateX(-50%) !important;
-    -webkit-transform: translateX(-50%) !important;
-  }
-}
-html.touch-nav body.premium .navbar {
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  background: rgba(245, 241, 234, 0.97) !important;
-}
+
