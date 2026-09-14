@@ -502,19 +502,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 250);
     });
 
-    // 七次修复：页面加载后恢复上次的展开状态（对抗「漏网 click 触发本页重载」，
-    // 重载后面板立即重现，用户无感）。仅触屏会话生效；用户主动收起时已清除记忆。
-    try {
-      var savedIdx = parseInt(sessionStorage.getItem(NAV_MEM_KEY), 10);
-      if (!isNaN(savedIdx)) {
-        var ddSaved = navLinks.querySelectorAll('.nav-dropdown')[savedIdx];
-        var trigSaved = ddSaved && ddSaved.querySelector(':scope > a');
-        if (trigSaved) {
-          navLog('restore', 'idx=' + savedIdx);
-          toggleDropdown(trigSaved, ddSaved, 'restore');
-        }
-      }
-    } catch (err) {}
+    // 十八次修复（2026-09-14 真机日志定案）：移除「页面加载后恢复上次展开状态」
+    // （七次修复）。其保护对象「漏网 click 触发本页重载」已被后续修复链彻底堵死
+    // （pointerdown preventDefault + click-skip + 幻影 click 过滤，触发器不再引发重载）；
+    // 而恢复展开会：① 页面一加载就凭空弹出子菜单（用户并未点开，困惑）；
+    // ② 重置 2s 去抖窗——真机日志实锤：restore 打开后 1.2s 的用户首点被去抖吞掉、
+    // 2.1s 的第二点变成 toggle 收起 = Stone 真机「子菜单出现又不到一秒消失」。
+    // navMemSave/navMemClear 保留（写读无害，便于将来需要时重开此功能）。
   }
 
   // Close menu on regular nav link click (not dropdown triggers)
