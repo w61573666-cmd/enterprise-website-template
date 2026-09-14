@@ -717,7 +717,7 @@ body.premium :is(
   box-sizing: border-box;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   body.premium :is(
     .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
     .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
@@ -730,7 +730,7 @@ body.premium :is(
   }
 }
 
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   body.premium :is(
     .trust-items, .why-choose-grid, .about-stats, .scenarios-grid, .role-cards,
     .certificates-grid, .info-cards, .service-cards, .advantage-cards, .solutions-grid,
@@ -826,10 +826,10 @@ body.premium .contact-commitments {
   gap: 20px !important;
   margin-top: 18px !important;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   body.premium .contact-commitments { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   body.premium .contact-commitments { grid-template-columns: minmax(0, 1fr) !important; }
 }
 body.premium .contact-commitment-item {
@@ -868,7 +868,7 @@ body.premium .contact-visit-map iframe {
   flex: none !important; width: 100%; border: none;
   height: 330px; min-height: 0 !important; background: #F2EDE6;
 }
-@media (max-width: 1023px) { body.premium .contact-visit-map iframe { height: 330px; } }
+@media (max-width: 1024px) { body.premium .contact-visit-map iframe { height: 330px; } }
 body.premium .contact-visit-map .v-map-bar {
   padding: 12px 16px; border-bottom: 1px solid #eee6da;
 }
@@ -938,8 +938,8 @@ body.premium .contact-process-grid {
   gap: 18px !important;
   margin: 4px 0 24px !important;
 }
-@media (max-width: 1023px) { body.premium .contact-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-@media (max-width: 639px) { body.premium .contact-process-grid { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (max-width: 1024px) { body.premium .contact-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 640px) { body.premium .contact-process-grid { grid-template-columns: minmax(0, 1fr) !important; } }
 body.premium .contact-process-step {
   background: #FBF8F2; border: 1px solid #eee6da; border-radius: 12px;
   padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; box-sizing: border-box;
@@ -1779,8 +1779,11 @@ body.inner-page .hero .hero-content { width: 100% !important; }
 /* ---- 新闻列表 ---- */
 .news-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
 
-/* ---- 产品对比条标签 ---- */
-.compare-panel-label{font-weight:700;color:#1A1A2E;font-size:0.9rem;}
+/* ---- 产品对比条标签 ----
+   对比条本体（style.css .compare-panel）是 #1A1A2E 深底 + #FFFFFF 白字，
+   此处若沿用同色 #1A1A2E 会与底色完全同色（全站实测「已選產品: / Selected:」
+   在展开后不可见）→ 恢复为白色，与 .compare-panel-item 一致。 */
+.compare-panel-label{font-weight:700;color:#FFFFFF;font-size:0.9rem;}
 
 /* ---- 工程目录页：行业瓦片 + 区域卡 ---- */
 .industry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
@@ -1843,7 +1846,7 @@ body.premium :is(
   width: auto !important;
   box-sizing: border-box;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   body.premium :is(
     .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
     .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
@@ -1851,7 +1854,7 @@ body.premium :is(
     flex-basis: calc((100% - (var(--c-t, 2) - 1) * var(--gx, 22px)) / var(--c-t, 2)) !important;
   }
 }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   body.premium :is(
     .why-grid,.honor-grid,.partner-grid,.manufacturing-grid,.mines-grid,
     .esg-grid,.industry-grid,.jobs-grid,.region-grid,.strength-grid
@@ -1923,7 +1926,7 @@ body.premium .mega-panel-grid > .mega-panel-link {
 }
 .faq-cat-num { color: #C9A84C; font-size: 1.3rem; }
 .faq-category { display: block; }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   .faq-chip { flex: 1 1 100%; justify-content: flex-start; }
   .faq-cat-title { font-size: 1.06rem; }
 }
@@ -1946,10 +1949,10 @@ body.premium .mega-panel-grid > .mega-panel-link {
   flex: none !important;
   flex-basis: auto !important;
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .product-gallery-grid { grid-template-columns: repeat(3, 1fr) !important; }
 }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
   .product-gallery-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
 }
 
@@ -2040,6 +2043,21 @@ body.premium .navbar.scrolled {
     display: block;
     max-height: none;
     padding: 8px 0 8px 16px;
+  }
+  /* 统一交互（2026-09-13）：抽屉态(≤1160px，汉堡菜单展开)下也支持鼠标悬停自动展开子菜单，
+     与全屏 .nav-dropdown:hover 行为一致。此前抽屉内子菜单面板默认 display:none 且无 :hover
+     展开规则，导致只能用点击展开；现补 hover 规则——桌面鼠标悬停父栏目即展开。
+     触屏设备(html.touch-nav)不触发 hover，仍走点按展开（见下方 touch-nav 抑制规则）。 */
+  /* 门控：仅真实指针设备（非触屏）走 hover 展开；触屏(html.touch-nav)的 :hover 会「粘住」，
+     若不过滤会让 JS 收起后面板仍被 !important 撑开，表现为「点第二次关不掉」。 */
+  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover .mega-panel,
+  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover .dropdown-panel {
+    display: block !important;
+    max-height: none !important;
+    padding: 8px 0 8px 16px !important;
+  }
+  html:not(.touch-nav) body.premium .navbar .nav-links.open .nav-dropdown:hover > a::after {
+    transform: rotate(180deg) !important;
   }
   body.premium .navbar .nav-dropdown > a::after {
     display: inline-block !important;
@@ -2196,6 +2214,23 @@ body.premium .navbar.scrolled {
 .faqv2-hero h1{font-weight:800 !important;}
 /* Module 46 补丁2: 提升优先级压过 body.premium h1 */
 body.premium .faqv2-hero h1,body.premium .faqv2-cta h2{color:#fff !important;}
+
+/* ═══════════════════════════════════════════════════════════
+   47. 触屏下拉「关不掉」防御（2026-09-13）
+   触屏设备(html.touch-nav)的 :hover 会「粘住」——一次点按后元素保持
+   :hover 态，导致 JS 已收起(.mobile-open/.nav-open 已移除、行内样式已清)
+   但任何 :hover 展开规则仍用 !important 把面板撑开，表现为「再点一次关不掉」。
+   此处统一强制：未显式展开的下拉面板在触屏下一律隐藏，彻底压制 hover 粘住。
+   仅作用于 html.touch-nav；桌面鼠标(无 touch-nav)不受影响。 */
+html.touch-nav body.premium .navbar .nav-dropdown:not(.mobile-open):not(.nav-open) .mega-panel,
+html.touch-nav body.premium .navbar .nav-dropdown:not(.mobile-open):not(.nav-open) .dropdown-panel {
+  display: none !important;
+  max-height: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
 
 /* ═══════════════════════════════════════════════════════════
    Module 47: 导航高亮修正 (2026-09-06) — 子菜单当前页条目
@@ -2841,4 +2876,904 @@ html.touch-nav .navbar .nav-toggle { touch-action: manipulation; }
   body.premium .v2-hero .v2-hero-media { min-height: 210px !important; }
   body.premium .v2-spot-media { min-height: 200px !important; }
   body.premium .v2-hero-full { min-height: 340px !important; }
+}
+
+/* ═══ 移动端留白收敛 + 断点统一 (2026-09-13) ═══
+   标准断点基线：1160(抽屉导航) / 1024 / 768 / 640 / 480 / 360
+   仅做约束型收口，与 style.css 全局加固协同；不放大任何元素，零回归风险 */
+@media (max-width: 480px) {
+  :root { --gutter: 14px; }
+  body.premium .section-padding { padding: 20px 0 !important; }
+}
+@media (max-width: 360px) {
+  :root { --gutter: 12px; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   MBL-OVERFLOW-20260913 · Module 51 移动端窄屏横向溢出治理
+   目标：手机端无横向滚动条、内容完整可见且不被裁切；桌面端布局/交互/视觉保持原样。
+     1) FAQ 筛选 chip：原 overflow-x:auto + 隐滚动条，窄屏多数标签不可见 → 换行全展示
+     2) .tech-specs-table：表格 min-content 撑破容器被裁切 → 容器可横向滚动
+     3) .vtl-card（about 里程碑）：width:100% 叠加 margin-left:36px 溢出 → width:auto
+     4) 页脚 .ft-grid5：≤560px 单列 + 长联系串允许折行
+     5) 按钮：nowrap 被裁切 → 允许换行/断字
+     6) 兜底：媒体/代码块/长单词不越界
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* 1) FAQ chips 换行，全部可见 */
+  .faqv2-chips { flex-wrap: wrap !important; overflow-x: visible !important; row-gap: 8px; }
+  .faqv2-chip  { flex: 0 1 auto; max-width: 100%; }
+
+  /* 2) 参数表容器可横向滚动，内容可完整查看 */
+  .tech-specs-table {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    max-width: 100%;
+  }
+  .tech-specs-table th,
+  .tech-specs-table td { padding: 10px 12px !important; font-size: 13px !important; }
+  .tech-specs-table th { width: auto !important; min-width: 104px; }
+
+  /* 3) 里程碑卡片：width:auto 吸收 margin-left，消除 36px 溢出 */
+  .vtl-card  { width: auto !important; max-width: 100% !important; }
+  .vtl-track { min-width: 0 !important; }
+
+  /* 5) 按钮标签不被裁切 */
+  .btn, .hsst-btn, .btn-primary, .btn-outline-light, .btn-outline-gold,
+  .hsst-form-btn, .product-action-btn {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* 6) 兜底：媒体/代码块/长单词不越界 */
+  img, video, iframe, embed, object { max-width: 100%; }
+  pre, code { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  p, li, td, th { overflow-wrap: break-word; }
+}
+
+/* 4) 页脚 ≤560px：维持两列（2026-09-14 Stone 指令：手机端不要单列，两列起），
+   保留折行与 min-width:0 防裁切（当年单列是为了治裁切，实测两列 + 下方折行规则即可） */
+@media (max-width: 560px) {
+  body.premium .ft-grid5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 18px !important;
+    row-gap: 26px !important;
+  }
+  body.premium .ft-grid5 > div { min-width: 0 !important; }
+  body.premium .ft-grid5 ul    { min-width: 0 !important; }
+  body.premium .ft-grid5 ul li,
+  body.premium .ft-grid5 .ft-contact li,
+  body.premium .ft-grid5 .ft-contact li a,
+  body.premium .ft-grid5 .ft-contact li span {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    min-width: 0 !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   MBL-OVERFLOW2-20260913 · Module 52 窄屏残余横向溢出修复（第二轮）
+   针对终检暴露、组件级根因：
+     A) .jd-grid：1fr 轨道自动最小值被 .jd-box 的 min-content 撑到 320px（容器仅 288px）
+                  → 改 minmax(0,1fr) + 子项 min-width:0 + 允许断词
+     B) .cs2-inst / .cs2-facts：双列固定轨道(200px+143px / 195px+131px)超出容器
+                  → ≤767px 收成单列堆叠
+     C) 表单区(.hsst-form-zone)：控件最小宽度导致 320px 下溢出 → 控件可收缩
+     D) .section-subtitle：窄容器内容不下长单词导致文字溢出 → 允许断词
+   注意：SEO 隐藏容器(.seo-text-container-hide)为刻意隐藏，不在修复范围。
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* A) 招聘页 JD 网格 */
+  .jd-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 24px !important; }
+  .jd-grid > * { min-width: 0 !important; }
+  .jd-box, .jd-box * { min-width: 0 !important; overflow-wrap: anywhere; }
+
+  /* B) 工程案例 v2 双列 → 单列 */
+  .cs2-inst, .cs2-facts, .cs2-mat-card {
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 18px;
+  }
+  .cs2-inst > *, .cs2-facts > *, .cs2-mat-card > * { min-width: 0 !important; }
+  .cs2-inst *, .cs2-facts *, .cs2-mat-card * { overflow-wrap: anywhere; }
+  .cs2-inst img, .cs2-mat-card img, .cs2-rel img, .project-hero img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* D) 小徽标/副标题不断词导致溢出 */
+  .section-subtitle { overflow-wrap: anywhere; }
+}
+
+/* C) 表单区控件可收缩（≤480px） */
+@media (max-width: 480px) {
+  body.premium .hsst-form-zone .hsst-form,
+  body.premium .hsst-form-zone .sample-form-container,
+  body.premium .hsst-form-zone form { min-width: 0 !important; max-width: 100% !important; }
+  body.premium .hsst-form-zone input,
+  body.premium .hsst-form-zone select,
+  body.premium .hsst-form-zone textarea,
+  body.premium .hsst-form-zone button {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  body.premium .hsst-form-zone * { overflow-wrap: anywhere; }
+  body.premium .hsst-form-zone .stone-checkbox-item label,
+  body.premium .hsst-form-zone .radio-item label { min-width: 0 !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   MBL-OVERFLOW3-20260913 · Module 53 窄屏残余溢出（第三轮）
+     A) .cs2-metrics：多列指标网格在 320px 下溢出 20~55px（5 个工程页横向滚动的根因）→ 单列
+     B) .solution-hero：320px 下内部溢出 80px → 容器可收缩 + 内边距收敛
+     C) .cta-section：320px 下内部溢出 40px → 子项 min-width:0、容器不超宽
+     D) .jd-grid 加固：允许断词，避免 min-content 继续撑破轨道
+   统一思路：grid/flex 子项默认 min-width:auto 会被 min-content 撑破 → minmax(0,1fr) + min-width:0
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* A) 指标网格 → 单列 */
+  .cs2-metrics { grid-template-columns: minmax(0, 1fr) !important; row-gap: 14px; }
+  .cs2-metrics > * { min-width: 0 !important; }
+  .cs2-metrics * { overflow-wrap: anywhere; }
+  .cs2-metric, .cs2-metric * { min-width: 0 !important; }
+
+  /* D) JD 网格加固 */
+  .jd-grid, .jd-box, .jd-box * { min-width: 0 !important; word-break: break-word; }
+}
+
+@media (max-width: 480px) {
+  /* B) 方案页 hero */
+  .solution-hero { padding-left: 16px !important; padding-right: 16px !important; }
+  .solution-hero > .container { padding-left: 0 !important; padding-right: 0 !important;
+                                max-width: 100% !important; min-width: 0 !important; }
+  .solution-hero * { min-width: 0 !important; }
+  .solution-hero img, .solution-hero video, .solution-hero iframe { max-width: 100% !important; height: auto !important; }
+
+  /* C) CTA 区（含 cta-home / cta-sub / hsst-form-zone） */
+  .cta-section { padding-left: 16px !important; padding-right: 16px !important; }
+  .cta-section > .container { padding-left: 0 !important; padding-right: 0 !important;
+                              max-width: 100% !important; min-width: 0 !important; }
+  .cta-section * { min-width: 0 !important; overflow-wrap: anywhere; }
+  .cta-section input, .cta-section select, .cta-section textarea, .cta-section button {
+    max-width: 100% !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Module 52: iPhone / iOS 窄屏专修 (2026-09-13)  [IOS-IPHONE-FIX-20260913]
+   ───────────────────────────────────────────────────────────
+   依据：全站 255 页 × 320/375/430 三宽度实测扫描。
+     · 页面级横向滚动全站为 0（解除 overflow-x 掩饰后测得）；
+     · 但存在「元素被裁切且不可达」的硬缺陷 + iOS 独占行为缺陷。
+   本模块逐条对应修复。桌面端(>768px)不受任何影响。
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1) iOS 聚焦自动放大 —— 真机横向滚动的头号原因 ──────────────
+   根因：premium 主题用 !important 把输入控件字号钉死在 14px
+        （本文件 "12. Form 輸入框升級"），style.css 的 .inquiry-form
+        用 0.95rem(≈15.2px)，两者都 < 16px。
+   后果：iOS Safari 聚焦 font-size<16px 的输入框时会「整页放大」，
+        布局视口随之变宽 → 立刻出现横向滚动条，且失焦后常残留。
+   实测影响 84 个页面（联系我们 10 个控件、在线应聘 12 个）。
+   修复：窄屏统一抬到 16px（须同样 !important 才能覆盖原 !important）。 */
+@media (max-width: 768px) {
+  body.premium input[type="text"],
+  body.premium input[type="email"],
+  body.premium input[type="tel"],
+  body.premium input[type="number"],
+  body.premium input[type="search"],
+  body.premium input[type="url"],
+  body.premium input[type="date"],
+  body.premium input[type="password"],
+  body.premium textarea,
+  body.premium select,
+  .premium input[type="text"],
+  .premium input[type="email"],
+  .premium input[type="tel"],
+  .premium textarea,
+  .premium select,
+  .inquiry-form input,
+  .inquiry-form select,
+  .inquiry-form textarea,
+  .hsst-form-zone input,
+  .hsst-form-zone select,
+  .hsst-form-zone textarea,
+  form input:not([type="checkbox"]):not([type="radio"])
+             :not([type="hidden"]):not([type="submit"]):not([type="button"]),
+  form textarea,
+  form select {
+    font-size: 16px !important;
+  }
+}
+
+/* ── 2) overflow-x:clip 的旧引擎回退 ──────────────────────────
+   style.css 的 html{overflow-x:clip} 在 iOS 15 及以下不被支持，
+   不支持时整条声明被丢弃 → 原本被静默裁掉的溢出变成真实横向滚动条。
+   只给「不支持 clip」的浏览器补 hidden 回退；
+   现代浏览器保留 clip（不创建滚动容器，不影响 position:sticky）。 */
+@supports not (overflow-x: clip) {
+  html { overflow-x: hidden; }
+}
+
+/* ── 3) 100vw 在 iOS 上可能大于可视宽度 ─────────────────────
+   iOS Safari 的 100vw 计算偶发大于 window.innerWidth，
+   用于 width 时会把元素顶出屏幕。改用 100% / auto（语义等价且无风险）。 */
+@media (max-width: 900px) {
+  .mega-panel { width: auto !important; }  /* 已有 left/right:16px !important 定位 */
+}
+.image-modal-content { width: 100% !important; max-width: 100% !important; }
+.image-modal-content img { max-width: 100% !important; }
+
+/* ── 4) 长文本 / 长链接 / 邮箱断行兜底 ───────────────────────
+   用 break-word（不改动 min-content 尺寸，避免波及 flex/grid 布局）。 */
+@media (max-width: 768px) {
+  body.premium,
+  body.premium p,
+  body.premium li,
+  body.premium td,
+  body.premium th,
+  body.premium span,
+  body.premium a { overflow-wrap: break-word; }
+}
+
+/* ── 5) 媒体与嵌入元素兜底自适应 ──────────────────────────── */
+@media (max-width: 768px) {
+  body.premium img,
+  body.premium video,
+  body.premium iframe,
+  body.premium embed,
+  body.premium object,
+  body.premium canvas { max-width: 100% !important; }
+}
+
+/* ── 6) 方案页 CTA 表单：grid 轨道写死 minmax(400px,1fr) ──────────
+   根因：style.css 的 .solution-cta-grid 用
+         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+         每列最小 400px，窄屏容器只有 ~288px → 强制撑破 80px 并被裁切，
+         输入框右侧一部分既看不见也点不到（实测 8 个方案页）。
+   修复：窄屏改单列，轨道最小值归零，控件宽度 100%。 */
+@media (max-width: 768px) {
+  .solution-cta-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .solution-cta-form,
+  .solution-cta-form > * { min-width: 0 !important; }
+  .solution-cta-input,
+  .solution-cta-textarea {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* ── 7) 里程碑时间轴：flex/grid 子项 min-width:auto 撑破 ──────────
+   根因：.timeline-desc 作为弹性子项默认 min-width:auto，
+        其 min-content（最长不可断词）大于分配到的 104px → 溢出 18px 被裁。
+   修复：子项最小宽度归零 + 允许断词。 */
+@media (max-width: 768px) {
+  .timeline-item,
+  .timeline-item > *,
+  .timeline-content,
+  .timeline-desc {
+    min-width: 0 !important;
+    overflow-wrap: break-word;
+  }
+}
+
+/* ── 8) 宽表格：窄屏容器内可横滑 + iOS 惯性滚动 ────────────────
+   规格表 / 资源表列数多，min-content 远大于 320px。
+   保留「容器内横向滑动」这一标准响应式做法（内容完整可达），
+   补 -webkit-overflow-scrolling:touch 让 iOS 滑动顺畅。 */
+@media (max-width: 768px) {
+  .tech-specs-table,
+  .about-table-wrap,
+  .rs-table-wrap,
+  div[style*="overflow-x:auto"],
+  div[style*="overflow-x: auto"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100% !important;
+  }
+  .tech-specs-table table,
+  .about-table-wrap table,
+  .rs-table {
+    max-width: none;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Module 51: 内页 .container 水平 gutter 修复 (2026-09-13)
+   ───────────────────────────────────────────────────────────
+   问题：style.css 第 90 行
+     .inner-page .section-padding .container { padding: 0; }
+   本意是移除「白卡片」外观（background / border-radius / box-shadow），
+   但 padding:0 把水平 gutter 一并清掉了。
+
+   桌面 >1280px 时 .container 靠 max-width:1200px + margin:0 auto 兜底，
+   所以看不出问题；但 ≤1280px 起 :root 把 --max-width 改成 100%，容器变满幅，
+   于是所有内页内容（标题 / 正文 / 卡片）直接贴到屏幕两侧 —— 卡片边框正好
+   落在屏幕边缘、右侧内容被裁，表现为「页面内容横向溢出、快要超出屏幕边界」。
+
+   为什么只有内页中招：
+     · 首页 index.html 的 body 没有 .inner-page，不受该规则影响 → 正常
+     · 导航栏用 .navbar .container，是不同的选择器 → 页头正常
+     这正是「截图里页头正常、正文贴边」的原因。
+
+   修复：仅在容器满幅的区间(≤1280px)恢复水平 gutter，沿用各断点的 --gutter
+        （≤480:16px / ≤768:20px / 768–1199:28px / 1200–1280:32px）。
+        >1280px 完全不留痕迹 → 桌面端布局与视觉零改动。
+        刻意不加 !important：.solution-hero / .cta-section 等真正需要满幅
+        出血的容器其 padding-left/right:0 自带 !important，优先级更高，
+        不会被本规则破坏。
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1280px) {
+  .inner-page .section-padding .container {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   WDTH-UNIFY-20260913 · 全站内容宽度一致性治理 (2026-09-13)
+   ───────────────────────────────────────────────────────────
+   实测：Playwright 全站 255 页 × 390/768/1024/1440 四视口，
+   量取每个 .container「内容带」（去掉 padding 后的左右边缘）。
+   发现同一页内并存多种内容带，宽度互不一致：
+
+     @1440  导航 1304 | 正常容器 1104 | 内页容器 1200 | tight 1120
+     @1024  正常 904  | 内页 960      | tight 880
+     @768   正常 728  | 内页 768      | tight 688
+     @390   正常 358  | 内页 390(贴边) | tight 310
+
+   来源共三处（其余规则均正常）：
+     1. body.premium .navbar .container 在 ≥1161px 被固定为 1400px
+        → 比正文容器宽 200px，页头左右与正文对不齐。
+        实测导航真正只需 ~830–880px（余量 300–490px）→ 收窄零风险。
+     2. style.css 第 90 行 .inner-page .section-padding .container{padding:0}
+        → 内页内容带比首页/页脚每侧多一个 --gutter；
+        Module 51 只在 ≤1280px 兜底，桌面 >1280px 仍然不一致。
+        ⚠ 另：38 个页面曾重复引入 style.css（在 premium 之后），
+          令该 padding:0 反超 premium 的兜底规则 —— 已在 HTML 侧去重。
+     3. style.css .tight-section .container{padding:16px 40px !important}
+        → 第三种水平内边距 40px，完全脱离 --gutter 体系。
+
+   修复原则：全部回归 --max-width + --gutter 单一体系。
+     · 导航 = 正文 = 页脚 = 内页 → 同一条内容带
+     · 各断点水平内边距只由 --gutter 驱动
+       （≤360:12 / ≤480:14 / ≤768:20 / 768–1199:28 / ≥1200:32–48）
+     · 竖向留白、字号、任何元素尺寸均不改动 —— 零回归
+     · ≤480px 的满幅出血规则（.solution-hero/.cta-section > .container
+       带 !important）优先级更高，不受本模块影响
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1) 导航容器与正文同宽（原先桌面固定 1400px） */
+@media (min-width: 1161px) {
+  body.premium .navbar .container { max-width: var(--max-width); }
+}
+
+/* 2) 内页 section 容器恢复统一水平 gutter（消除 1200 vs 1104 差异） */
+.inner-page .section-padding .container {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* 3) tight-section 的 40px 水平内边距回归 gutter（保留竖向 16px） */
+.tight-section .container {
+  padding-left: var(--gutter) !important;
+  padding-right: var(--gutter) !important;
+}
+
+/* 4) 页内局部收窄文本块（.tech-lead 900px）回归内容带满宽
+      注意：.inner-page / .premium 都挂在 <body> 自身，故必须写成
+      body.premium.inner-page（复合），不能写成 body.premium .inner-page。 */
+body.premium.inner-page .tech-lead { max-width: none; }
+body.premium.inner-page .tech-steps,
+body.premium.inner-page .tech-related { max-width: none; }
+
+/* 5) ≤900px：style.css 里有一条硬编码
+        @media (max-width:900px){ .nav-container,.container{padding:0 16px} }
+      它绕开了 --gutter 体系（390 应为 14 / 768 应为 20 / 769–900 应为 28），
+      导致同一页出现 14 与 16 两种内容带 → 统一回归 --gutter。 */
+@media (max-width: 900px) {
+  .nav-container,
+  .container {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+}
+
+/* 6) ≤768px / ≤480px 另有 .container{width:92%} 与 {width:94%}，
+      会让部分容器比 --max-width 窄 6–8%，与同页其他容器宽度不一致。
+      水平留白已由 --gutter 统一提供 → 宽度回归 100%。 */
+@media (max-width: 900px) {
+  .container { width: 100%; }
+}
+
+/* 7) ≤900px：.navbar 自身还带 16px 水平内边距，令导航内容比正文再多内缩 16px
+      （导航内容带 30~360 vs 正文 14~376，顶部与主体左右对不齐）
+      → 水平内边距归零，统一交由 .container 的 --gutter 决定。 */
+@media (max-width: 900px) {
+  .navbar { padding-left: 0; padding-right: 0; }
+}
+
+/* 8) 首页 .about-preview 是一整块 <section>，被 premium「卡片样式」选择器列表
+      误当成卡片套用了 border / 圆角 / 阴影 / hover 上浮：
+        · ≤1200px 容器满幅时，1px 边框让内容少 2px（388 vs 390）
+        · 满幅 section 的边框在屏幕左右边缘留下 1px 细线
+        · 悬停整块区块会整体上移 4px
+      → 还原为普通区块（仅 index.html / en/index.html 两处使用） */
+body.premium section.about-preview {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  transform: none !important;
+}
+
+/* 9) sample-request（中英各 1 页）没有使用 .container，包装层接近满幅
+      （@1440 实测正文 53~1387，全站标准内容带为 168~1272）
+      → 包装层收敛到统一内容带（--max-width 减去两侧 --gutter）。
+        层内文字的宽度上限（.sample-hero p 650px）与全站章节描述 token
+        （cta-home 620 / cta-sub 600 / 默认 700px）同族，保持不变。 */
+body.premium .sample-hero .sample-hero-content,
+body.premium .sample-form-section > .sample-form-container {
+  max-width: calc(var(--max-width) - 2 * var(--gutter)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+
+/* ───────────────────────────────────────────────────────────
+   10) 标题组内对齐统一
+   ───────────────────────────────────────────────────────────
+   style.css:142 全局写死 .section-title{text-align:center}，
+   于是 .text-left 组里必然出现「副标题左 / 标题居中 / 描述左」的混用。
+   全站实测语境分布（.section-title/.section-subtitle/.section-desc）：
+     .text-left   208 处   ← 最多，且已存在 .text-left .section-subtitle::after
+                             专用变体，说明设计本意即为左对齐组
+     none         127 处
+     .text-center 124 处
+   其中「.text-left 组内标题被强制居中」78 处、「无语境组内标题居中」22 处。
+
+   处理：标题与描述改为继承父级对齐 —— 与副标题行为一致，
+        组内三者永远同向；.text-center 组原样保持居中，零影响。
+        装饰线（::before 金色短线）与描述块外边距同步跟随。
+   ─────────────────────────────────────────────────────────── */
+
+/* 默认：跟随父级（.text-left / 无语境组 → 左对齐） */
+body.premium .section-title { text-align: inherit; }
+body.premium .section-title::before { left: 0; transform: none; }
+body.premium .section-desc { margin-left: 0 !important; margin-right: 0 !important; }
+body.premium .section-subtitle { text-align: inherit; }
+
+/* 显式居中的标题组：完整保持居中（装饰线 / 描述块一并居中） */
+body.premium .text-center .section-title,
+body.premium .text-center .section-subtitle { text-align: center; }
+body.premium .text-center .section-title::before { left: 50%; transform: translateX(-50%); }
+body.premium .text-center .section-desc { margin-left: auto !important; margin-right: auto !important; }
+
+/* 10.1 「居中但不是 .text-center」的标题组：装饰线同步居中
+     上面把 .section-title::before 默认改到左端（配合左对齐标题），
+     但仍有 16 页的标题是靠「自身内联样式」或「所属容器」居中的
+     （index 客戶 logo 區 .client-logo-section、technology 頁尾 CTA 的
+       <div class="container" style="text-align:center">、partnerships 的
+       .solution-hero、以及 10 处内联 text-align:center 的标题）。
+     这些标题文字居中、装饰线却在左端 → 视觉脱节，此处逐一还原为居中。
+     实测：修复前 16 页错位，修复后 0 页。 */
+body.premium .section-title[style*="text-align:center"]::before,
+body.premium .section-title[style*="text-align: center"]::before,
+body.premium .container[style*="text-align:center"] .section-title::before,
+body.premium .container[style*="text-align: center"] .section-title::before,
+body.premium .solution-hero .section-title::before,
+body.premium .client-logo-section .section-title::before { left: 50%; transform: translateX(-50%); }
+
+/* ───────────────────────────────────────────────────────────
+   11) 项目案例页英雄区宽度对齐（34 页 / 中英各 17）
+   ───────────────────────────────────────────────────────────
+   页面内联样式用自有内边距取代 gutter 体系：
+     .project-hero-overlay { padding: 0 48px 48px }
+     .project-hero-content { max-width: var(--max-width) }
+   → @1440 英雄区文字落在 120~1320，比正文内容带 168~1272 每侧宽 48px，
+     页头大标题与下方正文左右对不齐。
+   处理：水平内边距归零，交由 .project-hero-content 的 --gutter 统一。
+        竖向内边距（48px / 移动 32px）原样保留。
+   ─────────────────────────────────────────────────────────── */
+body.premium .project-hero-overlay { padding-left: 0; padding-right: 0; }
+body.premium .project-hero-content {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  box-sizing: border-box;
+}
+
+/* ───────────────────────────────────────────────────────────
+   12) 深色底語境：修復 premium 全局 h1/h2/h3 墨色覆蓋造成的不可讀
+   ───────────────────────────────────────────────────────────
+   本檔第 2 節把 h1/h2/h3 一律設為 --pv-ink（#14130F 近黑）並帶 !important，
+   於是「照片英雄區 / 深色漸層塊」上頁面自行聲明的白色標題全部失效，
+   ink 蓋在深底上 → 標題幾乎不可見。
+
+   全站實測判定方式（逐頁把字形設為 transparent、隱藏 fixed 浮層後截圖，
+   取該文字框內真實渲染像素的中位亮度；底 < 0.30 且字 < 0.30 即判不可讀）：
+     section.art-hero h1          90 頁  新聞內頁（深色照片 + 漸層遮罩）
+     .project-hero-title          32 頁  案例頁（照片 brightness(.5) + 遮罩）
+     .product-hero-title          20 頁  產品系列頁
+     .jd-cta h3                   40 頁  招聘詳情頁 CTA（#1A1A2E→#2A2740 漸層卡）
+     .news-hero-title             2 頁   新聞首頁（#1a1a2e→#2c2c3e 漸層）
+     .news-hero 麵包屑             2 頁   同上（頁面自帶 #888/#555 深字，落在深底上）
+     .v2-record h2                2 頁   工程實績（#16150F 黑底）
+     .compare-panel-label         2 頁   產品對比條（已於第 1783 行同步修正）
+
+   註：.cta-dark / .products-cta / .v2-quote / .trust-bar / .v2-btn 經實測已是
+       「淺底深字」（premium 已把這些區塊的底色一併改成淺色），故不列入。
+   ─────────────────────────────────────────────────────────── */
+
+/* 12.1 照片英雄區（深色照片底）：標題恢復白色 */
+body.premium .art-hero h1, body.premium .art-hero h2, body.premium .art-hero h3,
+body.premium .project-hero h1, body.premium .project-hero h2, body.premium .project-hero h3,
+body.premium .product-hero h1, body.premium .product-hero h2, body.premium .product-hero h3,
+body.premium .news-hero h1, body.premium .news-hero h2, body.premium .news-hero h3,
+body.premium .news-hero .section-title, body.premium .news-hero .section-subtitle {
+  color: #FFFFFF !important;
+}
+
+/* 12.2 深色漸層卡 / 深色塊：標題恢復白色 */
+body.premium .jd-cta h1, body.premium .jd-cta h2, body.premium .jd-cta h3, body.premium .jd-cta h4,
+body.premium .v2-record h1, body.premium .v2-record h2, body.premium .v2-record h3 {
+  color: #FFFFFF !important;
+}
+
+/* 12.3 新聞首頁英雄區內的麵包屑（深底上的深字） */
+body.premium .news-hero .breadcrumb,
+body.premium .news-hero .breadcrumb ol,
+body.premium .news-hero .breadcrumb li { color: rgba(255,255,255,.72) !important; }
+body.premium .news-hero .breadcrumb a { color: rgba(255,255,255,.9) !important; }
+body.premium .news-hero .breadcrumb a:hover { color: var(--pv-gold) !important; }
+body.premium .news-hero .breadcrumb li:not(:last-child)::after { color: rgba(255,255,255,.35) !important; }
+
+/* ───────────────────────────────────────────────────────────
+   13) WhatsApp 悬浮球：右下角 → 左下角（全站统一）
+   ───────────────────────────────────────────────────────────
+   254 页都带这个按钮（<a class="whatsapp-float" href="https://wa.me/85255380525">），
+   但改动前实测存在两族、位置本就不一致：
+     · 共享层生效（本档 1707 行，约 157 页）：right 22 / bottom 26 / 54×54 / z 1500
+     · 页面内联 <style> 生效（97 页）：right 24 / bottom 28 / 56×56 / z 999，
+       且 ≤768 另有 right 16 / bottom 20 / 50×50
+     · 404.html 另为 66×56（宽度受按钮统一规则的 padding 影响）
+
+   处理：只统一「位置」——桌面 left 22 / bottom 26，≤768 left 16 / bottom 20，
+        right 一律置 auto。样式（绿色圆底、阴影、hover 放大）、尺寸、z-index、
+        href 与 main.js 的 WhatsApp 双协议改写逻辑全部不碰。
+        用 !important 是因为那 97 页的内联 <style> 与共享层争抢同一属性。
+
+   左下角无其它固定浮层占位（.pwa-install-btn 虽有 left:20 的规则，但全站 HTML
+   无该元素、JS 亦无引用，属遗留死样式）；抽屉打开时 body.drawer-open 仍会隐藏本按钮。
+   ─────────────────────────────────────────────────────────── */
+body.premium .whatsapp-float,
+body.premium .wpp-float.whatsapp-float {
+  left: 22px !important;
+  right: auto !important;
+  bottom: 26px !important;
+}
+@media (max-width: 768px) {
+  body.premium .whatsapp-float,
+  body.premium .wpp-float.whatsapp-float {
+    left: 16px !important;
+    right: auto !important;
+    bottom: 20px !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   14) 「返回顶部」与左下角 WhatsApp 镜像对齐（一左一右、同一底线）
+   ───────────────────────────────────────────────────────────
+   改动前（254 页全量实测一致）：252 页的内联 <style> 把 .back-to-top 放在
+   right 24 / bottom 90（≤768：right 16 / bottom 80 / 38×38），
+   那是「叠在 WhatsApp 正上方」的旧布局；WhatsApp 移到左下角后，右下角只剩它一个，
+   仍悬在 90px 高处就显得不上不下。
+
+   处理：与规则 13 完全镜像 —— 桌面 right 22 / bottom 26，≤768 right 16 / bottom 20，
+        left 置 auto（防止个别页面用 left 定位）。
+        尺寸（44 / 移动 38）、z-index（998）、样式、滚动显隐（.visible）逻辑一律不变。
+   注：两球底边对齐（同为 bottom 26 / 20）。WhatsApp 54–56px、返回顶部 44px，
+      若要「视觉居中对齐」需再各加半个高度差（约 +5px），未做，保持底边对齐这种确定性做法。
+   ─────────────────────────────────────────────────────────── */
+body.premium .back-to-top,
+body.premium .btt.back-to-top {
+  left: auto !important;
+  right: 22px !important;
+  bottom: 26px !important;
+}
+@media (max-width: 768px) {
+  body.premium .back-to-top,
+  body.premium .btt.back-to-top {
+    left: auto !important;
+    right: 16px !important;
+    bottom: 20px !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   15) 居中 H2 的金色短线：与 .section-title 标准一致（线随文字整体居中）
+   ───────────────────────────────────────────────────────────
+   背景：premium 第 2 节给 h2 统一挂了 `::before` 金色短线（36×1px、--pv-gold、
+   top:0、left:0，配 h2 的 padding-top:22px），这是「左对齐编辑式标题」的样式。
+   但全站有 **478 处** 居中 H2（76 页）仍沿用这条「左端」短线 → 线在盒子最左、
+   文字居中，两者相距可达数百像素，视觉完全脱节。
+
+   盘点结论（全量脚本实测，非抽样）：
+     · 478 处全部是 h2，全部为「文字居中 + 线在左端」，0 处例外；
+     · 特殊结构为 0：无图标、无子元素、无自身底色/边框、无嵌套内联标签 → 无需白名单；
+     · 居中来源只有 8 类容器 + 2 个自有 class：
+         .cs2-head 224 | .section-header-center 120 | div.product-section-title 84
+         .container(内联 text-align:center) 20 | .solution-hero .container 8
+         h2.tech-heading 12 | h2.role-entry-title 4 | .wrap/.faqv2-cta/.v2-quote 各 2
+
+   处理：只改「线的水平位置」（left/transform），线长·线粗·色值·与文字的垂直间距
+        （padding-top:22px）全部沿用 .section-title 同一套 token，不新增任何变量，
+        字号/字重/字体/上下边距一概不动（避免误伤这 478 处既有的自定义标题样式）。
+        末尾 3 条为增量兜底：内联 text-align:center、Quill 的 .ql-align-center。
+   ─────────────────────────────────────────────────────────── */
+body.premium .cs2-head h2::before,
+body.premium h2.cs2-title::before,
+body.premium .section-header-center h2::before,
+body.premium div.product-section-title h2::before,
+body.premium .solution-hero .container h2::before,
+body.premium .container[style*="text-align:center"] h2::before,
+body.premium .container[style*="text-align: center"] h2::before,
+body.premium .faqv2-cta h2::before,
+body.premium .v2-quote h2::before,
+body.premium .wrap h2::before,
+body.premium h2.tech-heading::before,
+body.premium h2.role-entry-title::before,
+body.premium h2[style*="text-align:center"]::before,
+body.premium h2[style*="text-align: center"]::before,
+body.premium h2.ql-align-center::before,
+/* 第二轮补漏（首轮实测 70 处未覆盖）：.text-center 18 处（CTA 区块）
+   + 案例页尾 h2.project-section-title 32 处（在 div.project-container.text-center 内，
+   已被 .text-center 命中）。注意 h2.project-section-title 与 .products-cta 这两个
+   名字同时用于左对齐区块（en/projects/* 的「Build Your Premier」、en/products.html），
+   不能做裸选择器，否则反向误伤——它们的居中场景交给下方 JS 兜底判定。 */
+body.premium .text-center h2::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 15b) 渲染层兜底：JS 判定「文字居中」的标题统一打 .pv-tick-center
+   居中可能来自任意祖先继承（如 section.cta-section → div.container → h2），
+   纯 CSS 选择器枚举不完，故由 main.js 按 computed text-align 自动打类。
+   存量 478 处即使上面枚举有遗漏，以及 CMS 后续新建的居中标题，都自动生效。 */
+body.premium h1.pv-tick-center::before,
+body.premium h2.pv-tick-center::before,
+body.premium h3.pv-tick-center::before {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   16) 手机端第二轮修复：竖排挤压与表格裁切（2026-09-14）
+   ═══════════════════════════════════════════════════════════
+   全站 254 页 × 390 视口实测，36 页命中三类问题：
+
+   A) .timeline-*（about/honors/careers/technology × 中英 = 8 页）
+      1024 断点给 .timeline-content 设了 width:calc(100%-50px)+margin-left:50px，
+      与 768 断点的 .timeline-item{padding-left:50px} 叠加后，年份与内容被 flex
+      压到 12–39px 宽 →「1999」竖排成 175px 高的一列数字。
+      修复：≤768 改纵向堆叠（年份在卡上方），宽度全部释放。
+   B) .contact-region-item（contact × 中英 = 2 页）
+      flex 不换行，<strong>大中華區：</strong> 被压成 22px 宽竖排 → 允许换行 + 锁定不收缩。
+   C) .cs2-tech .h .ic（18 个案例页 × 中英）
+      emoji 图标被 flex 压到 26×44 → flex:none + line-height:1。
+   D) .tech-specs-table（12 页，honors 最严重 744px vs 362px 可用宽）
+      Module 51 的 th{min-width:104px} × 4 列 = 416px 是裁切根因 → 去掉强制列宽，
+      表格 width:100% 自然换行收缩；真放不下的由 main.js 打 .pv-hscroll 显示滑动提示。
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* A) 时间线：纵向堆叠，年份不再被 flex 压缩 */
+  .timeline-item { flex-direction: column !important; align-items: stretch !important; }
+  .timeline-item:nth-child(even) { flex-direction: column !important; }
+  .timeline-year {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    white-space: nowrap;
+    margin: 0 0 10px !important;
+    line-height: 1.2;
+  }
+  .timeline-content { width: auto !important; max-width: 100% !important; margin: 0 !important; }
+
+  /* B) 联系页区域卡：允许换行，标签锁定不收缩 */
+  .contact-region-item { flex-wrap: wrap !important; }
+  .contact-region-item > strong { flex: 0 0 auto !important; white-space: nowrap; }
+  .contact-region-item > .contact-region-dot { flex: 0 0 auto !important; }
+
+  /* C) 案例页挑战卡图标：不收缩 */
+  .cs2-tech .h .ic,
+  .cs2-tech .h > div { flex: 0 0 auto; }
+  .cs2-tech .h .ic { line-height: 1; }
+  .cs2-tech .h > div { flex: 1 1 auto !important; min-width: 0 !important; }
+
+  /* D) 参数表：去掉强制列宽，让表格自然收缩换行 */
+  .tech-specs-table table { width: 100%; }
+  .tech-specs-table th { min-width: 0 !important; width: auto !important; }
+  .tech-specs-table th,
+  .tech-specs-table td { padding: 8px 8px !important; font-size: 12.5px !important; }
+
+  /* E) 设备参数行（about/en/about）：标签锁定不收缩，长内容整条换行 */
+  .equip-specs { flex-wrap: wrap !important; }
+  .equip-specs > span { flex: 0 1 auto; max-width: 100%; }
+  .equip-specs > span > strong { flex-shrink: 0 !important; }
+
+  /* F) 资源表 rs-table：表头取消 nowrap，6-7 列在 362px 内可自然收缩 */
+  .rs-table th, .rs-table td { white-space: normal !important; }
+}
+
+/* D 补充：真放不下的表格由 main.js 打 .pv-hscroll，提示样式统一见下方「18d」段
+   （2026-09-14：此处原定义已被模块 18d 取代——18d 支持表格/时间线/标签三种文案，
+   保留占位说明以免后人重复定义时产生优先级冲突） */
+
+/* ═══════════════════════════════════════════════════════════
+   17) 统计数字条手机端横排（2026-09-14 Stone 指令：27+/4,200+/68/60+
+       要横排，不要一列一个竖排下来）
+   ═══════════════════════════════════════════════════════════
+   17a) 内页「核心數據」.stats-row（about/manufacturing/projects-catalog/
+        careers/partnerships 中英 10 页，各 4 项）
+        style.css ≤768 把容器压成 width:40%，4 个数字被迫竖排。
+        → 恢复整行：4 项一行均分，数字与短标签居中（标签最长 7 字放得下）。
+   17b) 首页 .about-stats（4 项，标签较长）与 .trust-items（5 项）
+        被「≤640 flex-basis:100%」压成单列 → 改两列横排。 */
+@media (max-width: 768px) {
+  body.premium .stats-row {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  body.premium .stats-row .stat-item {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    text-align: center;
+  }
+  body.premium .stats-row .stat-number { font-size: 1.45rem !important; margin-bottom: 4px !important; }
+  body.premium .stats-row .stat-label  { font-size: .68rem !important; line-height: 1.35 !important; }
+}
+@media (max-width: 360px) {
+  body.premium .stats-row .stat-number { font-size: 1.25rem !important; }
+  body.premium .stats-row .stat-label  { font-size: .62rem !important; }
+}
+@media (max-width: 640px) {
+  body.premium .about-stats  { --gy: 20px; }
+  body.premium .trust-items  { --gy: 20px; }
+  body.premium .about-stats > *,
+  body.premium .trust-items > * {
+    flex-basis: calc((100% - var(--gx, 24px)) / 2) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   18) iPad / 平板专项（2026-09-14 全站平板深度排查后的收口）
+   ═══════════════════════════════════════════════════════════
+   排查结论（WebKit 真内核，254 页 × 768/1024/1366 三断点）：
+     0 处 JS 报错、0 次崩溃、0 处文档横向溢出、0 条中英文不一致；
+     导航 14 组（7 尺寸 × 触屏/桌面网站两模式）点按展开与子项跳转全部通过；
+     子菜单面板在 1180/1194/1366 均无边缘溢出（右溢出为负=完全在视口内）。
+   因此本模块只补齐排查暴露的「体验与健壮性」缺口，不动已验证可用的交互链路：
+     18a) 键盘焦点可见：Tab 聚焦导航项显示金色焦点环（iPad 外接键盘 / 无障碍）
+     18b) 抽屉在平板加宽到 380px（原 300px 在 1024 屏上过窄）+ 100dvh 适配
+          iPad Safari 动态工具栏，避免抽屉底部被工具栏吃掉
+     18c) 悬浮球（WhatsApp / 返回顶部）加安全区内边距，横屏 home indicator 不遮挡
+     18d) 横滑区提示文案通用化（.visual-timeline 里程碑 / .faqv2-chips 标签），
+          由 main.js 实测 scrollWidth 后打 .pv-hscroll */
+body.premium .navbar a:focus-visible,
+body.premium .navbar button:focus-visible,
+body.premium .mega-panel-link:focus-visible {
+  outline: 2px solid #C9A84C !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) and (max-width: 1160px) {
+  body.premium .navbar .nav-links { width: 380px !important; }
+}
+@supports (height: 100dvh) {
+  @media (max-width: 1160px) {
+    body.premium .navbar .nav-links { height: 100dvh !important; }
+  }
+}
+@media (max-width: 1160px) {
+  body.premium .navbar .nav-links {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body.premium .navbar .nav-links.open {
+    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
+  }
+}
+
+@supports (bottom: env(safe-area-inset-bottom)) {
+  body.premium .whatsapp-float,
+  body.premium .wpp-float.whatsapp-float {
+    left: calc(22px + env(safe-area-inset-left, 0px)) !important;
+    bottom: calc(26px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body.premium .back-to-top,
+  body.premium .btt.back-to-top {
+    right: calc(22px + env(safe-area-inset-right, 0px)) !important;
+    bottom: calc(26px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  @media (max-width: 768px) {
+    body.premium .whatsapp-float,
+    body.premium .wpp-float.whatsapp-float {
+      left: calc(16px + env(safe-area-inset-left, 0px)) !important;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+    body.premium .back-to-top,
+    body.premium .btt.back-to-top {
+      right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+  }
+}
+
+/* 18d) 横滑提示：默认通用文案，表格沿用表格文案 */
+.pv-hscroll { position: relative; }
+.pv-hscroll::before {
+  content: '← 左右滑動查看完整內容 →';
+  display: block;
+  font-size: 11px;
+  color: #8a8277;
+  text-align: right;
+  padding: 0 2px 6px;
+  letter-spacing: 1px;
+}
+.tech-specs-table.pv-hscroll::before,
+.about-table-wrap.pv-hscroll::before,
+.rs-table-wrap.pv-hscroll::before { content: '← 左右滑動查看完整表格 →'; }
+html[lang="en"] .pv-hscroll::before { content: '← Swipe to view all →'; }
+html[lang="en"] .tech-specs-table.pv-hscroll::before,
+html[lang="en"] .about-table-wrap.pv-hscroll::before,
+html[lang="en"] .rs-table-wrap.pv-hscroll::before { content: '← Swipe to view full table →'; }
+@media (min-width: 769px) and (max-width: 1160px) {
+  /* 平板：提示常显（此时导航为抽屉，宽度充裕） */
+  .pv-hscroll::before { padding-bottom: 8px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   23) iOS 合成层绘制失效免疫（二十三次修复，2026-09-14 真机定案）
+   ═══════════════════════════════════════════════════════════
+   现象（Stone 真机 NAV-DBG 日志实锤）：面板 DOM 状态完全正常
+   （op=1 / vis=visible / elementFromPoint 命中自身内容 / GEO 连续
+   3.8s 无 CLOSE），但屏幕上「出现不到一秒就消失」——元素可命中
+   不可见 = iOS Safari 合成器丢层，桌面模拟器无法复现。
+   诱因组合（仅桌面导航 >1160 命中）：
+     translateZ(0) 强制合成层（style-202605042143.css L331）
+     + visibility/opacity 0.3s 过渡
+     + backdrop-filter 毛玻璃导航栏（premium 规则 45）。
+   处置：触屏会话（html.touch-nav）下三者全拆——
+     ① 面板过渡归零（出现即最终态，不做淡入）；
+     ② 桌面面板 transform 去掉 translateY/translateZ（保留水平居中）；
+     ③ 导航栏毛玻璃改近似实色（消灭问题上下文）。
+   桌面鼠标（无 touch-nav）外观与动画完全不变。 */
+html.touch-nav body.premium .navbar .mega-panel,
+html.touch-nav body.premium .navbar .dropdown-panel {
+  transition: none !important;
+  -webkit-transition: none !important;
+}
+@media (min-width: 1161px) {
+  html.touch-nav body.premium .navbar .mega-panel,
+  html.touch-nav body.premium .navbar .dropdown-panel {
+    transform: translateX(-50%) !important;
+    -webkit-transform: translateX(-50%) !important;
+  }
+}
+html.touch-nav body.premium .navbar {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background: rgba(245, 241, 234, 0.97) !important;
 }

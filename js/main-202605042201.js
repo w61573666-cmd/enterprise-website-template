@@ -433,7 +433,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         // Close mobile menu and dropdowns before scrolling
         closeMobileMenu();
-        document.querySelectorAll('.nav-dropdown').forEach(dd => { dd.classList.remove('mobile-open', 'nav-open'); const t = dd.querySelector(':scope > a'); if (t) t.setAttribute('aria-expanded', 'false'); });
+        document.querySelectorAll('.nav-dropdown').forEach(dd => {
+          if (dd.__openedByTouch) return; // 触屏展开的面板不因此类锚点点击收起
+          dd.classList.remove('mobile-open', 'nav-open'); const t = dd.querySelector(':scope > a'); if (t) t.setAttribute('aria-expanded', 'false');
+        });
         // Small delay to let menu close before scroll starts
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1193,4 +1196,78 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
     var pd = parts.length >= 2 ? parts[parts.length - 2] : '';
     if (pf === file && groupOf(pd, pf) === group) a.classList.add('active');
   });
+})();
+
+/* ── 居中标题的金色短线自动对齐（渲染层兜底，2026-09-13）────────────────
+   premium 给 h1/h2 的 ::before 挂的是「左对齐标题」样式（left:0、36×1px 金线）。
+   凡文字居中的标题，短线必须与文字整体居中，否则线卡在盒子最左端、与文字脱节。
+
+   难点：居中常常是从祖先继承来的（如 section.cta-section → div.container → h2），
+   标题自己和父级都没有任何 center 标记，纯 CSS 选择器枚举不完。故在此按
+   computed text-align 判定，给命中的标题打 .pv-tick-center（样式见 premium 规则 15b）。
+
+   只加类、不改 DOM 结构、不改文字内容，语义与 SEO 不受影响；
+   height > 4px 的 ::before 视为色块/图标类装饰，跳过，避免误伤。
+   编辑器预览 iframe 里同样执行，所见即所得。 */
+(function () {
+  function hasTick(el) {
+    var pb = window.getComputedStyle ? getComputedStyle(el, '::before') : null;
+    if (!pb) return false;
+    if (pb.content === 'none' || pb.content === 'normal') return false;
+    if (!(parseFloat(pb.width) > 0)) return false;
+    if (parseFloat(pb.height) > 4) return false;
+    return true;
+  }
+  function alignTicks() {
+    var els = document.querySelectorAll('h1, h2, h3');
+    Array.prototype.forEach.call(els, function (el) {
+      if (el.classList && el.classList.contains('pv-tick-center')) return;
+      if (!hasTick(el)) return;
+      if (getComputedStyle(el).textAlign !== 'center') return;
+      el.classList.add('pv-tick-center');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', alignTicks);
+  } else {
+    alignTicks();
+  }
+  window.addEventListener('load', alignTicks);
+})();
+
+/* ── 横向滚动容器加滑动提示（2026-09-14，手机端第二轮）────────────────
+   .tech-specs-table 等容器在窄屏内容放不下时可以横向滑动，但没有任何视觉提示，
+   用户只看到最后一列被裁掉、以为内容丢了。此处实测 scrollWidth，把真正
+   放不下的容器打上 .pv-hscroll（premium 规则 16：顶部显示「← 左右滑動查看完整表格 →」）。
+   桌面端（≥769px）提示由 CSS 隐藏，滚动仍可用。 */
+(function () {
+  /* 窄屏下 ≥6 列的密集表格（如荣誉认证矩阵）：收缩换行会把表头压成 3 行碎块，
+     不如保留可读列宽 + 容器横滑（提示由 markScrollables 打 .pv-hscroll）。 */
+  function widenDenseTables() {
+    var dense = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+    Array.prototype.forEach.call(document.querySelectorAll('.tech-specs-table table'), function (t) {
+      var first = t.rows && t.rows[0];
+      if (!first) return;
+      if (dense && first.cells.length >= 6) {
+        t.style.minWidth = Math.min(first.cells.length * 92, 640) + 'px';
+      } else {
+        t.style.minWidth = '';
+      }
+    });
+  }
+  function markScrollables() {
+    widenDenseTables();
+    var list = document.querySelectorAll('.tech-specs-table, .about-table-wrap, .rs-table-wrap, .visual-timeline, .faqv2-chips, div[style*="overflow-x:auto"], div[style*="overflow-x: auto"]');
+    Array.prototype.forEach.call(list, function (el) {
+      if (el.scrollWidth > el.clientWidth + 4) el.classList.add('pv-hscroll');
+      else el.classList.remove('pv-hscroll');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', markScrollables);
+  } else {
+    markScrollables();
+  }
+  window.addEventListener('load', markScrollables);
+  window.addEventListener('resize', markScrollables);
 })();
