@@ -229,6 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   document.addEventListener('touchstart', navMarkPointer, true);
   document.addEventListener('mousedown', navMarkPointer, true);
+  // 二十次修复（关键）：Stone 真机（v20260913o 日志 rt=never）证实存在
+  // 「只有 pointer 事件、全程无 touchstart/mousedown」的输入环境——指针证据
+  // 必须同时来自 pointerdown，否则该环境下子项真人点按被 panel-link 守卫
+  // 与吞咽窗永久拦截（表现为「根本无法点子菜单」）。
+  document.addEventListener('pointerdown', navMarkPointer, true);
 
   // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
@@ -283,15 +288,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closed && why) navLog('CLOSE', why);
   }
 
-  function toggleDropdown(trigger, dropdown, via) {
+  function toggleDropdown(trigger, dropdown, via, touch) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
     const label = (trigger.textContent || '').trim().slice(0, 8);
-    // 十六次修复（2026-09-14 真机复检）：九次修复的 2s 重复点按忽略窗此前定义了
-    // 但从未接线（inTriggerDebounce 无调用点）。iPadOS 桌面网站模式下系统会双发
-    // click（第二发落在触发器上、晚于 700ms click-skip 窗），或补偿 click 晚到，
-    // 直接 toggle 收起刚展开的面板 = Stone 真机「子菜单出现不到一秒就消失」。
-    // 现接线：面板已展开且距展开 <2s 时，对同一触发器的重复点按一律忽略
-    // （面板保持，够用户移指子菜单）；>2s 后再点才收起，开合语义不变。
+    // 二十次修复（2026-09-14，恢复十次修复 b9f77473 的真机定案语义）：
+    // 触屏点按父菜单 = 只开不关。真机历史日志：用户点完菜单后 0.4s/1.4s/2.9s
+    // 都会再碰标题，任何时长窗口都拦不住误关（今天十六修复的 2s 去抖即在
+    // 2.1s 处被突破，造成「出现不到一秒就消失」）。已展开时再点标题一律忽略；
+    // 收起只靠：点面板外空白 / 点面板内子项 / 切换其它菜单 / Esc。
+    // 鼠标环境（桌面缩窗抽屉）保留「再点收起」，并受 2s 双发去抖保护。
+    if (wasOpen && touch) {
+      navLog('skip', 'open-only(' + via + ')');
+      return;
+    }
     if (wasOpen && inTriggerDebounce(dropdown)) {
       navLog('skip', 'trigger-debounce(' + via + ')');
       return;
@@ -356,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLog('pup', (e.pointerType || '?'));
         const dropdown = this.closest('.nav-dropdown');
         dropdown.__touchToggledAt = Date.now();
-        toggleDropdown(this, dropdown, 'pup');
+        toggleDropdown(this, dropdown, 'pup', true);
       });
 
       // click 双保险：被 pointerdown preventDefault 后，Webkit/Chromium 均不再派发 click；
@@ -381,7 +390,11 @@ document.addEventListener('DOMContentLoaded', () => {
         navLog('click-toggle');
         e.preventDefault();
         e.stopPropagation();
-        toggleDropdown(this, dropdown, 'click');
+        // 二十次修复：只开不关仅适用触屏证据；mobileMode（纯鼠标缩窗）保留再点收起
+        const touchOnly = e.pointerType === 'touch'
+          || htmlEl.classList.contains('touch-nav')
+          || touchNavMode();
+        toggleDropdown(this, dropdown, 'click', touchOnly);
       });
 
       // 键盘无障碍：Enter / Space 切换，Esc 收起
