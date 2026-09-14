@@ -161,8 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
     try { sessionStorage.setItem('hsst-navlog', JSON.stringify(window.__navLog)); } catch (err) {}
     if (navDebugBox) {
       var openDd = navLinks ? navLinks.querySelectorAll('.nav-dropdown.nav-open').length : 0;
-      navDebugBox.textContent = 'NAV-DBG v20260909j ' + window.innerWidth + 'x' + window.innerHeight
+      // 十七次修复辅助：调试框头部显示实际加载的 JS 资产版本（截图即知真机跑的哪版代码）
+      var assetV = 'unknown';
+      try {
+        var s = document.querySelector('script[src*="main-"]');
+        var m = s && s.src.match(/v=([0-9a-z]+)/);
+        if (m) assetV = m[1];
+      } catch (err) {}
+      navDebugBox.textContent = 'NAV-DBG js=' + assetV + ' ' + window.innerWidth + 'x' + window.innerHeight
         + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
+        + ' rt=' + (Date.now() - lastRealTouchAt) + 'ms'
         + '\n' + window.__navLog.slice(-14).join('\n');
     }
   }
