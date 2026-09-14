@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Navbar Scroll Effect ----------
   const navbar = document.querySelector('.navbar');
   const handleScroll = () => {
-    if (!navbar) return;
     if (window.scrollY > 60) {
       navbar.classList.add('scrolled');
     } else {
@@ -87,56 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // 媒体查询判定不可靠。改为「事件实测」：pointerdown 的 pointerType==='touch'
   // 即给 <html> 加 .touch-nav（CSS 据此禁用 hover 展开），移除则回退桌面行为。
   const isTouchNav = window.matchMedia('(hover: none), (pointer: coarse)');
-  // 二十六次修复（2026-09-14）：matchMedia('(hover:none),(pointer:coarse)') 在 iPadOS
-  // 「请求桌面网站」模式下谎报 (hover:hover)+(pointer:fine)（isTouchNav.matches=false），
-  // 导致真触屏点按父菜单被当成纯桌面鼠标 → click 不拦截 → 直接跳转栏目页（子菜单永远打不开，
-  // 真机表现「点父菜单页面直接跳走 / 子菜单一闪即逝」）。navigator.maxTouchPoints>0 是
-  // 「设备是否触屏」的硬件级稳定信号，不受媒体查询欺骗：iPad 即便在桌面模式也上报 ≥1，
-  // 纯桌面（无触屏）为 0。以此作为触屏判定兜底，覆盖所有「真触屏却谎报 matchMedia」的环境。
-  const isTouchDevice = (typeof navigator !== 'undefined') &&
-    ((navigator.maxTouchPoints || 0) > 0 || ('ontouchstart' in window) || isTouchNav.matches);
   const htmlEl = document.documentElement;
-  if (isTouchNav.matches || isTouchDevice) htmlEl.classList.add('touch-nav');
+  if (isTouchNav.matches) htmlEl.classList.add('touch-nav');
   // 五次修复（真机日志实锤）：WebKit「桌面网站」模式的老 bug——真触屏 tap 的
   // pointer events 上报 pointerType 'mouse'，导致此前 pointerType!=='touch' 的
   // 守卫全部失效，preventDefault 从未执行，合成 hover/click 链路原样存活，
   // 面板被外部假 click 关闭（真机日志：OPEN | click:… 后紧跟 CLOSE | outside-click）。
   // 判定「真触屏」改为：pointerType==='touch'，或（pointerType==='mouse' 且媒体查询命中触屏）。
-  // 十五次修复（2026-09-14 真机复检）：以上两条在 iPadOS「请求桌面网站」下同时失效——
-  // 平板 Safari 默认请求桌面网站，媒体查询谎报 (hover:hover)+(pointer:fine)，
-  // 且真触屏 tap 的 pointerType 仍上报 'mouse'，双证皆假 → isTouchPointer 恒 false →
-  // pointerdown/pointerup 的触屏展开逻辑全部跳过；横屏宽 >1160 时 mobileMode 亦 false，
-  // 点父菜单直接落回桌面行为（跳转/不展开）= Stone 真机「子菜单打不开」根因。
-  // 模拟器 tap 上报 pointerType 'touch'，故此前 WebKit 全量回归测不出。
-  // touch 事件在桌面网站模式下照常派发、不会说谎——以「1.5s 内出现过真实 touchstart」
-  // 作为第三证据（单次手势内 touchstart 晚于 pointerdown，但早于 pointerup/click，
-  // 故首tap即可经 pointerup 正常展开）。
-  var lastRealTouchAt = 0, lastRealTouchInNav = false;
-  function recentRealTouch() { return Date.now() - lastRealTouchAt < 1500; }
-  // 二十一次修复辅助：每次真实点按都在日志留痕（类型+落点类名），
-  // 真机截图即可看到「点了哪、以什么指针类型」。
-  function navTapLog(e) {
-    try {
-      navLog('tap', (e.pointerType || e.type) + '@' + ((e.target && e.target.className && String(e.target.className).split(' ')[0]) || e.target.tagName));
-    } catch (err) {}
-  }
-  // 十六次修复（续）：记录最近手势起点是否在导航内，供外部 click 处理器
-  // 识别「手势起于导航、click 落于文档/其它元素」的幻影 click（防误关面板）。
-  document.addEventListener('touchstart', function(e) {
-    lastRealTouchAt = Date.now();
-    try { lastRealTouchInNav = !!(e.target && e.target.closest && e.target.closest('.navbar')); } catch (err) { lastRealTouchInNav = false; }
-    htmlEl.classList.add('touch-nav');
-    navTapLog(e);
-  }, true);
-  var lastMouseDownAt = 0, lastMouseDownInNav = false;
-  document.addEventListener('mousedown', function(e) {
-    lastMouseDownAt = Date.now();
-    try { lastMouseDownInNav = !!(e.target && e.target.closest && e.target.closest('.navbar')); } catch (err) { lastMouseDownInNav = false; }
-    navTapLog(e);
-  }, true);
   function isTouchPointer(e) {
-    return e.pointerType === 'touch'
-      || (e.pointerType === 'mouse' && (isTouchNav.matches || isTouchDevice || recentRealTouch()));
+    return e.pointerType === 'touch' || (e.pointerType === 'mouse' && isTouchNav.matches);
   }
   document.addEventListener('pointerdown', function(e) {
     if (isTouchPointer(e)) htmlEl.classList.add('touch-nav');
@@ -149,28 +107,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isTouchPointer(e)) htmlEl.classList.add('touch-nav');
   }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
-  function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches || isTouchDevice; }
-  // 最近一次用户输入是否为键盘（供「键盘焦点自动展开子菜单」判定；
-  // :focus-visible 在部分 WebKit 版本对脚本聚焦判定不稳，故双条件取或）
-  var lastInputWasKeyboard = false;
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Tab' || e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') lastInputWasKeyboard = true;
-  }, true);
-  document.addEventListener('pointerdown', function () { lastInputWasKeyboard = false; }, true);
+  function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
 
   /* ── 导航事件诊断日志（2026-09-09 四次修复）────────────────
      真机 iPad 复现「子菜单闪退」时，URL 加 #navdebug 打开可视日志，
      截图即可定位是哪个事件关掉了面板。平时仅写内存环形缓冲，零开销。 */
   window.__navLog = [];
   var navDebugBox = null;
-  // 二十一次修复辅助（临时诊断，2026-09-16 23:59 后自动失效）：
-  // 诊断框无条件开启——不再依赖 URL 参数，任何页面打开即记录。
-  // 二十六次修复补（2026-09-14 晚）：为定位「真机仍打不开」根因，临时把诊断框
-  // 无条件常驻回来（2026-09-16 23:59 自动失效），平时用 #navdebug 参数即可。
-  // 目的：让用户一键截图即可看到 js=版本号 + OPEN/CLOSE 日志 + GEO 缩放/覆盖，
-  // 确认到底是「跑了旧缓存代码」还是「新代码仍有逻辑缺陷」。定位清楚后即撤。
-  var NAV_DBG_CUTOFF = new Date('2026-09-16T23:59:59+08:00').getTime();
-  if ((Date.now() < NAV_DBG_CUTOFF || /(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash)) && document.body) {
+  if (/(^|\?)navdebug=1|#navdebug/.test(location.search + location.hash) && document.body) {
     navDebugBox = document.createElement('pre');
     navDebugBox.id = 'nav-debug-box';
     navDebugBox.style.cssText = 'position:fixed;left:6px;bottom:6px;z-index:2147483000;background:rgba(0,0,0,.88);color:#4f4;font:10px/1.35 Menlo,Consolas,monospace;padding:8px 10px;margin:0;max-width:72vw;max-height:42vh;overflow:hidden;pointer-events:none;border-radius:6px;white-space:pre-wrap;';
@@ -184,16 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try { sessionStorage.setItem('hsst-navlog', JSON.stringify(window.__navLog)); } catch (err) {}
     if (navDebugBox) {
       var openDd = navLinks ? navLinks.querySelectorAll('.nav-dropdown.nav-open').length : 0;
-      // 十七次修复辅助：调试框头部显示实际加载的 JS 资产版本（截图即知真机跑的哪版代码）
-      var assetV = 'unknown';
-      try {
-        var s = document.querySelector('script[src*="main-"]');
-        var m = s && s.src.match(/v=([0-9a-z]+)/);
-        if (m) assetV = m[1];
-      } catch (err) {}
-      navDebugBox.textContent = 'NAV-DBG js=' + assetV + ' ' + window.innerWidth + 'x' + window.innerHeight
+      navDebugBox.textContent = 'NAV-DBG v20260909j ' + window.innerWidth + 'x' + window.innerHeight
         + ' open=' + openDd + ' touch=' + htmlEl.classList.contains('touch-nav')
-        + (lastRealTouchAt ? ' rt=' + (Date.now() - lastRealTouchAt) + 'ms' : ' rt=never')
         + '\n' + window.__navLog.slice(-14).join('\n');
     }
   }
@@ -235,32 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var NAV_MEM_KEY = 'hsst-nav-open';
   function navMemSave(idx) { try { sessionStorage.setItem(NAV_MEM_KEY, String(idx)); } catch (err) {} }
   function navMemClear() { try { sessionStorage.removeItem(NAV_MEM_KEY); } catch (err) {} }
-  // 十二次修复（2026-09-13）：点按父菜单展开/切换子菜单后，浏览器会在布局回流后于
-  // 「刚出现的面板」坐标上补发一次 click。该 click 落在子链接(.mega-panel-link)上会被误判为
-  // 「点击子菜单」而跳转（手机端切换父菜单跳到子页面、平板同类缺陷）。记下最近一次点按展开的时刻，
-  // 在极短窗口内吞掉落在展开面板内部的这次补偿 click，避免误跳；用户刻意点子链接(>600ms)仍正常跳转。
-  var navJustToggled = 0;
-  // 十四次修复（2026-09-14，iPad 全站排查）：记录最近一次真实指针触点
-  // （touchstart / mousedown 捕获阶段）及其是否落在子面板内部。
-  // 合成补偿 click 的手势起点在父菜单（面板外），真人点子项必有触点落在面板内。
-  var navLastPointer = { t: 0, inPanel: false };
-  function navMarkPointer(e) {
-    navLastPointer.t = Date.now();
-    try {
-      navLastPointer.inPanel = !!(e.target && e.target.closest && e.target.closest('.mega-panel, .dropdown-panel'));
-    } catch (err) { navLastPointer.inPanel = false; }
-  }
-  document.addEventListener('touchstart', navMarkPointer, true);
-  document.addEventListener('mousedown', navMarkPointer, true);
-  // 二十次修复（关键）：Stone 真机（v20260913o 日志 rt=never）证实存在
-  // 「只有 pointer 事件、全程无 touchstart/mousedown」的输入环境——指针证据
-  // 必须同时来自 pointerdown，否则该环境下子项真人点按被 panel-link 守卫
-  // 与吞咽窗永久拦截（表现为「根本无法点子菜单」）。
-  // 二十一次修复辅助：pointerdown 也留痕。
-  document.addEventListener('pointerdown', function(e) {
-    navMarkPointer(e);
-    navTapLog(e);
-  }, true);
 
   // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
@@ -315,55 +225,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closed && why) navLog('CLOSE', why);
   }
 
-  function toggleDropdown(trigger, dropdown, via, touch) {
+  function toggleDropdown(trigger, dropdown, via) {
     const wasOpen = dropdown.classList.contains('nav-open') || dropdown.classList.contains('mobile-open');
     const label = (trigger.textContent || '').trim().slice(0, 8);
-    // 二十八次修复（2026-09-14 晚，回退到已确认有效的 09-09 语义）：
-    // 与 7f08311(v20260909k，Stone「这次解决了」) 的 toggleDropdown 逐行对照发现——
-    // 那一版是「已展开 → 无条件 keep-open，return」；09-13 的一批「开/关切换」改动把它
-    // 改成「已展开 && touch 才 keep-open，否则落到下面的 CLOSE 分支收起」。于是
-    // 「只开不关」这个救命语义被绑在一个脆弱且可能为假的 touch 标志上：任何走到
-    // 「已展开 + touch 假」的路径都会把刚展开的面板收起 = 真机「点开不到一秒就消失」。
-    // 现改回「触屏证据 或 本机为触屏硬件 → 一律 keep-open」，与 09-09 有效版等价，
-    // 且不再依赖单一 touch 标志。纯鼠标桌面缩窗（isTouchDevice 假）仍保留再点收起。
-    if (wasOpen && (touch || isTouchDevice || isTouchNav.matches || recentRealTouch())) {
-      navLog('skip', 'open-only(' + via + ')');
-      return;
-    }
-    if (wasOpen && inTriggerDebounce(dropdown)) {
-      navLog('skip', 'trigger-debounce(' + via + ')');
-      return;
-    }
-    // 修复（2026-09-13）：实现真正的开/关切换。已展开时再次点按父菜单即收起，
-    // 满足「首次点击展开、再次点击收起」的需求（手机/平板/桌面抽屉态通用）。
-    // 收起仍保留原有路径：点子菜单项 / 切换其它菜单 / 点空白处 / Esc。
-    if (wasOpen) {
-      dropdown.classList.remove('nav-open', 'mobile-open');
-      dropdown.__navForceOpen = false;
-      dropdown.__openedByTouch = false;
-      setPanelInline(dropdown, false);
-      const t = dropdown.querySelector(':scope > a');
-      if (t) t.setAttribute('aria-expanded', 'false');
-      try {
-        if (typeof dropdown.__navIdx === 'number') {
-          const saved = parseInt(sessionStorage.getItem(NAV_MEM_KEY) || 'NaN', 10);
-          if (saved === dropdown.__navIdx) navMemClear();
-        }
-      } catch (err) {}
-      navLog('CLOSE', via + ':' + label + ' (toggle)');
-      return;
-    }
+    // 十次修复（最终交互定案）：触屏上菜单标题是「只开不关」的——真机日志证实用户
+    // 点完菜单后会再碰标题（+0.4s / +1.4s / +2.9s 都出现过），任何时长窗口都拦不住。
+    // 已展开时再点标题一律忽略；收起只靠：点空白处 / 点子菜单项 / 切换其它菜单 / Esc。
+    if (wasOpen) { navLog('keep-open', via + ':' + label); return; }
     // 切换到其它菜单 = 用户主动操作，强制收起其余面板
     closeAllDropdowns(dropdown, via + ':switch', true);
     dropdown.classList.add('nav-open', 'mobile-open');
     dropdown.__navOpenedAt = Date.now();
     dropdown.__navForceOpen = true;
-    dropdown.__openedByTouch = touch; // 记录展开方式：触屏展开者绝不因 blur/focusout 收起
     setPanelInline(dropdown, true);
     trigger.setAttribute('aria-expanded', 'true');
     htmlEl.classList.add('touch-nav'); // 保险：触屏会话确保 hover 抑制持续生效
     if (typeof dropdown.__navIdx === 'number') navMemSave(dropdown.__navIdx);
-    navJustToggled = Date.now();
     navLog('OPEN', via + ':' + label);
     // 展开动画结束后，把子面板滚入抽屉可视区（≤1160 抽屉模式）
     setTimeout(function () {
@@ -396,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLog('pup', (e.pointerType || '?'));
         const dropdown = this.closest('.nav-dropdown');
         dropdown.__touchToggledAt = Date.now();
-        toggleDropdown(this, dropdown, 'pup', true);
+        toggleDropdown(this, dropdown, 'pup');
       });
 
       // click 双保险：被 pointerdown preventDefault 后，Webkit/Chromium 均不再派发 click；
@@ -409,23 +286,15 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         // 触屏判定：click 自带 pointerType（部分内核），或会话内出现过触屏交互（.touch-nav），
-        // 或媒体查询命中，或抽屉菜单已展开（桌面浏览器缩窄至断点以下、用鼠标点按父菜单也要展开子菜单）
-        // ——四者任一即按「展开/收起」处理；否则桌面鼠标保持原行为（hover 展开、点击跳转）。
-        // 修复：此前仅认触屏指针，导致「桌面浏览器窗口未全屏、宽度 < 断点」时点击父菜单子菜单无法显示。
-        const mobileMode = navLinks && navLinks.classList.contains('open');
+        // 或媒体查询命中——三者任一即按触屏处理；否则桌面鼠标保持原行为（hover 展开、点击跳转）
         const touchClick = e.pointerType === 'touch'
           || htmlEl.classList.contains('touch-nav')
-          || touchNavMode()
-          || mobileMode;
+          || touchNavMode();
         if (!touchClick) return;
         navLog('click-toggle');
         e.preventDefault();
         e.stopPropagation();
-        // 二十次修复：只开不关仅适用触屏证据；mobileMode（纯鼠标缩窗）保留再点收起
-        const touchOnly = e.pointerType === 'touch'
-          || htmlEl.classList.contains('touch-nav')
-          || touchNavMode();
-        toggleDropdown(this, dropdown, 'click', touchOnly);
+        toggleDropdown(this, dropdown, 'click');
       });
 
       // 键盘无障碍：Enter / Space 切换，Esc 收起
@@ -435,119 +304,18 @@ document.addEventListener('DOMContentLoaded', () => {
           this.click();
         }
       });
-
-      /* ── 键盘焦点自动展开（2026-09-14 iPad 专项）──────────────
-         此前只有鼠标 hover 与触屏点按两条路径；键盘用户 Tab 到父菜单时
-         子面板不可见，只能靠 Enter 直接跳栏目页，无法选子项。
-         只在「键盘聚焦」(:focus-visible) 时展开——触屏点按虽也会让触发器
-         获得焦点，但不匹配 :focus-visible，因此不会重演「点第二次关不掉」。
-         焦点移入面板内部保持展开，移出整个 dropdown 才收起。 */
-      trigger.addEventListener('focus', function () {
-        var dd = this.closest('.nav-dropdown');
-        if (!dd) return;
-        var kb = false;
-        try { kb = this.matches(':focus-visible'); } catch (err) { kb = false; }
-        // 兜底：部分 WebKit 版本对脚本聚焦/合成事件的 :focus-visible 判定不稳，
-        // 用「最近一次用户输入是否为键盘」二次判定（Tab/Enter/Space 置位，指针按下清零）。
-        if (!kb && lastInputWasKeyboard) kb = true;
-        if (!kb) return;
-        if (dd.classList.contains('nav-open') || dd.classList.contains('mobile-open')) return;
-        this.setAttribute('aria-expanded', 'true');
-        dd.classList.add('nav-open', 'mobile-open');
-        dd.__navOpenedAt = Date.now();
-        // 触屏点按也会让链接获得焦点(focus 在 pointerdown 即触发，早于 pointerup)，须按触屏展开→blur 不收起；
-        // 二十五次修复补充：iPad + 鼠标/触控板(或某些 iPadOS 模式) pointerType='mouse' 且全程无 touchstart，
-        // recentRealTouch() 恒为 false，但 isTouchNav.matches=true(环境是 touch)，必须一并视为触屏展开。
-        dd.__openedByTouch = recentRealTouch() || isTouchNav.matches || isTouchDevice;
-        setPanelInline(dd, true);
-        navLog('OPEN', 'focus:' + (this.textContent || '').trim().slice(0, 8));
-      });
-      var ddRef = trigger.closest('.nav-dropdown');
-      if (ddRef) {
-        ddRef.addEventListener('focusout', function (e) {
-          var dd = this;
-          setTimeout(function () {
-            if (dd.contains(document.activeElement)) return; // 焦点进入子面板
-            // 十九次修复（2026-09-14 关闭路径全量审计）：焦点收起仅服务外接键盘流。
-            // 触屏会话（近 2.5s 内有真实触点且非键盘输入）的任何 blur——如 iOS 在
-            // 惯性滚动开始时会强制 blur——都不得收起面板：此路径直写样式、完全绕过
-            // __navForceOpen，是「子菜单不到一秒消失」最后一处无守卫的关闭源。
-            // 二十五次修复（2026-09-14 终局再补）：旧守卫 recentRealTouch() && !lastInputWasKeyboard
-            // 依赖「键盘态未置位」——当 :focus-visible 命中触屏点按、或会话内曾用键盘
-            // (lastInputWasKeyboard 残留 true)，守卫即失效 → iOS 点按后 blur 立即收起面板
-            // = 真机「弹出不到一秒消失」。二十四次改为按「触屏会话」判定(recentRealTouch)，但
-            // Stone 真机出现 pointerType='mouse' 且 rt=never 的环境（iPad 接鼠标/触控板或特殊
-            // iPadOS 模式：无 touchstart，但 isTouchNav.matches=true）。故守卫再补一层「环境信号」：
-            // 只要浏览器把本设备归类为 touch 环境(isTouchNav.matches)，或近 1.5s 内有真实 touchstart，
-            // focusout 一律保持展开；纯桌面鼠标二者皆 false，仍正常在焦点离开整个 dropdown 时收起。
-            if (dd.__openedByTouch || recentRealTouch() || isTouchNav.matches || isTouchDevice) { navLog('KEEP', 'focusout-touch'); return; }
-            dd.classList.remove('nav-open', 'mobile-open');
-            dd.__navForceOpen = false;
-            setPanelInline(dd, false);
-            var t = dd.querySelector(':scope > a');
-            if (t) t.setAttribute('aria-expanded', 'false');
-          }, 0);
-        });
-      }
     });
 
-    // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）。
-    // 十九次修复：需真人触点证据（近 1.2s 内有落在面板内的 touchstart/mousedown）
-    // ——晚于吞咽窗（2.5s）的合成 click 落在子项上时不得触发收起。
+    // 点击面板内链接后收起全部子菜单（用户主动选择，强制收起）
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
-      // 二十二次修复（终局兜底）：子项跳转直接挂在 pointerup——Stone 真机两种
-      // 会话签名下 pointerup 均可靠触发（pup 日志每次都在），不再依赖 click 链路
-      // 的任何一环（吞咽窗/守卫/兼容事件缺失都无法再阻断跳转）。
-      link.addEventListener('pointerup', function(e) {
-        if (!isTouchPointer(e)) return;
-        var href = this.getAttribute('href');
-        if (!href || href.charAt(0) === '#') return;
-        navLog('item-nav', 'pointerup');
-        navMemClear();
-        closeAllDropdowns(null, 'item-nav', true);
-        if (this.getAttribute('target') === '_blank') { window.open(href, '_blank'); return; }
-        window.location.href = href;
-      });
-      link.addEventListener('click', function(e) {
-        navLog('item-click', 'dp=' + e.defaultPrevented);
-        var freshGesture = navLastPointer.inPanel && (Date.now() - navLastPointer.t) < 1200;
-        if (navJustToggled && !freshGesture) {
-          // 十九次修复：晚于吞咽窗的合成 click——除不收起外，还要阻断默认跳转
-          navLog('skip', 'panel-link-phantom');
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-        navMemClear(); closeAllDropdowns(null, 'panel-link', true);
-      });
+      link.addEventListener('click', () => { navMemClear(); closeAllDropdowns(null, 'panel-link', true); });
     });
 
-    // 二十六次修复（2026-09-14）：触屏会话下触发器 pointerdown 调 preventDefault 会
-    // 抑制后续 click（Chromium 规范行为），「点外部收起」所依赖的 click 监听在触屏环境
-    // 永不触发——面板开了就关不掉（只能点子项跳走或 Esc）。故抽成 closeIfOutside，
-    // 同时挂在 click 与 pointerdown：触屏走 pointerdown（click 被抑制也能收起），
-    // 桌面走 click（行为不变）。
-    function closeIfOutside(e, via) {
-      if (e.target.closest && e.target.closest('.navbar')) return;
-      // 十六次修复（续）：幻影外部 click 过滤——产生这次 click 的手势若起于导航内
-      // （touchstart/mousedown 在导航上，1.5s 内），则它是 iPadOS 双发 click 或
-      // 回流补偿 click 的漂移目标（落在文档/其它元素上），不是用户点外部，
-      // 忽略之，面板保持。真人点外部时手势起点必在导航外（lastRealTouchInNav
-      // 已被新触碰刷新为 false），不受影响。
-      // 十九次修复（修订）：幻影判定「触屏证据优先」——近 2.5s 内有 touchstart 时
-      // 以手势起点为准（起点在导航内 = 补偿/双发 click，忽略；起点在外 = 真人点
-      // 外部，放行收起）。鼠标 mousedown 证据仅在无触屏证据时使用（纯鼠标环境的
-      // 漂移 click）。此前两证据取「或」，浏览器 touch tap 合成的 mousedown
-      // （目标在导航内）会污染判定，否决真人点外部导致面板关不掉。
-      if (Date.now() - lastRealTouchAt < 2500) {
-        if (lastRealTouchInNav) {
-          navLog('outside-skip', 'phantom-nav-gesture');
-          return;
-        }
-      } else if (lastMouseDownInNav && Date.now() - lastMouseDownAt < 2500) {
-        navLog('outside-skip', 'phantom-nav-gesture');
-        return;
-      }
+    // 点击导航以外区域：收起全部子菜单。十一次修复：点击坐标落在任一展开面板
+    // 外扩 28px 矩形内 = 用户手指在面板附近的误触/擦边，不关闭（iPad 手指宽，
+    // 点完标题抬指常落在导航条下边缘之外，此前直接被当外部点击强制收起）。
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.navbar')) return;
       if (anyOpenInGrace()) return;
       var openPanels = navLinks.querySelectorAll('.nav-dropdown.nav-open > .mega-panel, .nav-dropdown.nav-open > .dropdown-panel');
       for (var i = 0; i < openPanels.length; i++) {
@@ -557,32 +325,8 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
       }
-      navMemClear(); closeAllDropdowns(null, via, true);
-    }
-    // 二十八次修复（回退 26 次）：移除 capture 级 pointerdown 外部收起。原因有二——
-    // ① 实测发现它并非必要：pointerdown preventDefault 只挂在「触发器」上，点外部空白
-    //    并无 preventDefault，click 照常派发 → 下方 click 版 closeIfOutside 本就生效；
-    // ② 它在真机上有误关风险：展开瞬间若跟来第二个 pointerdown（点按残留/合成），
-    //    一旦落在 .navbar 之外且越过了 500ms 宽限，就会把刚开的面板关掉——与 Stone
-    //    「点开不到一秒就消失、四个菜单全中」高度吻合。09-09 有效版正是「仅 click」。
-    document.addEventListener('click', function(e) { closeIfOutside(e, 'outside-click'); });
-    // 十二次修复（续）：捕获阶段吞掉「点按展开后回流补偿的 click」。
-    // 该 click 落在刚展开面板的子链接上会误跳转；窗口 600ms（短于用户刻意点子链接的间隔），
-    // 仅作用于面板内部，不影响抽屉外点击 / 刻意点子链接。
-    // 十四次修复（续）：吞补偿 click 改为「指针证据」判定。旧 600ms 纯时间窗会
-    // 误伤真人快速点按（点父菜单→立刻点子项可低至 400–600ms，实测 582ms 被吞，
-    // 即 iPad「点子菜单没反应」根因）。现在只吞「手势起点不在面板内」的 click
-    // （= 回流补发的合成 click）；真人点子项必有 900ms 内落在面板内的触点，放行。
-    document.addEventListener('click', function(e) {
-      if (!navJustToggled || (Date.now() - navJustToggled) >= 2500) return;
-      if (!e.target.closest('.mega-panel, .dropdown-panel')) return;
-      var genuineTap = navLastPointer.inPanel && (Date.now() - navLastPointer.t) < 900;
-      if (genuineTap) return;
-      navLog('click-swallow', 'panel-after-toggle');
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }, true);
+      navMemClear(); closeAllDropdowns(null, 'outside-click', true);
+    });
     // Esc：收起子菜单并关闭抽屉（用户主动操作，强制收起）
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { navMemClear(); closeAllDropdowns(null, 'esc', true); closeMobileMenu(true); }
@@ -607,13 +351,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 250);
     });
 
-    // 十八次修复（2026-09-14 真机日志定案）：移除「页面加载后恢复上次展开状态」
-    // （七次修复）。其保护对象「漏网 click 触发本页重载」已被后续修复链彻底堵死
-    // （pointerdown preventDefault + click-skip + 幻影 click 过滤，触发器不再引发重载）；
-    // 而恢复展开会：① 页面一加载就凭空弹出子菜单（用户并未点开，困惑）；
-    // ② 重置 2s 去抖窗——真机日志实锤：restore 打开后 1.2s 的用户首点被去抖吞掉、
-    // 2.1s 的第二点变成 toggle 收起 = Stone 真机「子菜单出现又不到一秒消失」。
-    // navMemSave/navMemClear 保留（写读无害，便于将来需要时重开此功能）。
+    // 七次修复：页面加载后恢复上次的展开状态（对抗「漏网 click 触发本页重载」，
+    // 重载后面板立即重现，用户无感）。仅触屏会话生效；用户主动收起时已清除记忆。
+    try {
+      var savedIdx = parseInt(sessionStorage.getItem(NAV_MEM_KEY), 10);
+      if (!isNaN(savedIdx)) {
+        var ddSaved = navLinks.querySelectorAll('.nav-dropdown')[savedIdx];
+        var trigSaved = ddSaved && ddSaved.querySelector(':scope > a');
+        if (trigSaved) {
+          navLog('restore', 'idx=' + savedIdx);
+          toggleDropdown(trigSaved, ddSaved, 'restore');
+        }
+      }
+    } catch (err) {}
   }
 
   // Close menu on regular nav link click (not dropdown triggers)
