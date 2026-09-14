@@ -442,7 +442,10 @@ document.addEventListener('DOMContentLoaded', () => {
         this.setAttribute('aria-expanded', 'true');
         dd.classList.add('nav-open', 'mobile-open');
         dd.__navOpenedAt = Date.now();
-        dd.__openedByTouch = recentRealTouch(); // 触屏点按也会让链接获得焦点(focus 在 pointerdown 即触发，早于 pointerup)，须按触屏展开→blur 不收起；纯键盘 Tab(recentRealTouch=false)才走焦点离开收起
+        // 触屏点按也会让链接获得焦点(focus 在 pointerdown 即触发，早于 pointerup)，须按触屏展开→blur 不收起；
+        // 二十五次修复补充：iPad + 鼠标/触控板(或某些 iPadOS 模式) pointerType='mouse' 且全程无 touchstart，
+        // recentRealTouch() 恒为 false，但 isTouchNav.matches=true(环境是 touch)，必须一并视为触屏展开。
+        dd.__openedByTouch = recentRealTouch() || isTouchNav.matches;
         setPanelInline(dd, true);
         navLog('OPEN', 'focus:' + (this.textContent || '').trim().slice(0, 8));
       });
@@ -456,17 +459,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // 触屏会话（近 2.5s 内有真实触点且非键盘输入）的任何 blur——如 iOS 在
             // 惯性滚动开始时会强制 blur——都不得收起面板：此路径直写样式、完全绕过
             // __navForceOpen，是「子菜单不到一秒消失」最后一处无守卫的关闭源。
-            // 二十四次修复（2026-09-14 终局加固）：旧守卫 recentRealTouch() && !lastInputWasKeyboard
+            // 二十五次修复（2026-09-14 终局再补）：旧守卫 recentRealTouch() && !lastInputWasKeyboard
             // 依赖「键盘态未置位」——当 :focus-visible 命中触屏点按、或会话内曾用键盘
             // (lastInputWasKeyboard 残留 true)，守卫即失效 → iOS 点按后 blur 立即收起面板
-            // = 真机「弹出不到一秒消失」。二十三次改为按「展开方式」(__openedByTouch) 判定，
-            // 但真机事件序为 focus 在 pointerdown 即触发(早于 pointerup 把 __openedByTouch 置 true)，
-            // 若 iOS 在 down/up 之间 blur 链接，focusout 看到的仍是展开前的 false → 仍秒关。
-            // 故守卫与「事件时序」解耦：只要当前处于触屏会话(近 1.5s 内有真实 touchstart，
-            // lastRealTouchAt 仅由 touchstart 写入、桌面 mousedown 不污染)即保持展开，
-            // 与 __openedByTouch 是否已被 pointerup 赋值无关。键盘流(无 touchstart)recentRealTouch
-            // 恒为 false，仍正常在焦点离开整个 dropdown 时收起，零桌面退化。
-            if (dd.__openedByTouch || recentRealTouch()) { navLog('KEEP', 'focusout-touch'); return; }
+            // = 真机「弹出不到一秒消失」。二十四次改为按「触屏会话」判定(recentRealTouch)，但
+            // Stone 真机出现 pointerType='mouse' 且 rt=never 的环境（iPad 接鼠标/触控板或特殊
+            // iPadOS 模式：无 touchstart，但 isTouchNav.matches=true）。故守卫再补一层「环境信号」：
+            // 只要浏览器把本设备归类为 touch 环境(isTouchNav.matches)，或近 1.5s 内有真实 touchstart，
+            // focusout 一律保持展开；纯桌面鼠标二者皆 false，仍正常在焦点离开整个 dropdown 时收起。
+            if (dd.__openedByTouch || recentRealTouch() || isTouchNav.matches) { navLog('KEEP', 'focusout-touch'); return; }
             dd.classList.remove('nav-open', 'mobile-open');
             dd.__navForceOpen = false;
             setPanelInline(dd, false);
