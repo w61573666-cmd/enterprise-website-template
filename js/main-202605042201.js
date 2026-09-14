@@ -468,6 +468,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // 十九次修复：需真人触点证据（近 1.2s 内有落在面板内的 touchstart/mousedown）
     // ——晚于吞咽窗（2.5s）的合成 click 落在子项上时不得触发收起。
     navLinks.querySelectorAll('.mega-panel-link, .dropdown-item').forEach(link => {
+      // 二十二次修复（终局兜底）：子项跳转直接挂在 pointerup——Stone 真机两种
+      // 会话签名下 pointerup 均可靠触发（pup 日志每次都在），不再依赖 click 链路
+      // 的任何一环（吞咽窗/守卫/兼容事件缺失都无法再阻断跳转）。
+      link.addEventListener('pointerup', function(e) {
+        if (!isTouchPointer(e)) return;
+        var href = this.getAttribute('href');
+        if (!href || href.charAt(0) === '#') return;
+        navLog('item-nav', 'pointerup');
+        navMemClear();
+        closeAllDropdowns(null, 'item-nav', true);
+        if (this.getAttribute('target') === '_blank') { window.open(href, '_blank'); return; }
+        window.location.href = href;
+      });
       link.addEventListener('click', function(e) {
         navLog('item-click', 'dp=' + e.defaultPrevented);
         var freshGesture = navLastPointer.inPanel && (Date.now() - navLastPointer.t) < 1200;
