@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.setAttribute('aria-expanded', 'true');
         dd.classList.add('nav-open', 'mobile-open');
         dd.__navOpenedAt = Date.now();
-        dd.__openedByTouch = false; // 键盘聚焦展开：仍走焦点离开收起（无障碍 Tab 流）
+        dd.__openedByTouch = recentRealTouch(); // 触屏点按也会让链接获得焦点(focus 在 pointerdown 即触发，早于 pointerup)，须按触屏展开→blur 不收起；纯键盘 Tab(recentRealTouch=false)才走焦点离开收起
         setPanelInline(dd, true);
         navLog('OPEN', 'focus:' + (this.textContent || '').trim().slice(0, 8));
       });
@@ -456,12 +456,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // 触屏会话（近 2.5s 内有真实触点且非键盘输入）的任何 blur——如 iOS 在
             // 惯性滚动开始时会强制 blur——都不得收起面板：此路径直写样式、完全绕过
             // __navForceOpen，是「子菜单不到一秒消失」最后一处无守卫的关闭源。
-            // 二十三次修复（2026-09-14 终局）：旧守卫 recentRealTouch() && !lastInputWasKeyboard
+            // 二十四次修复（2026-09-14 终局加固）：旧守卫 recentRealTouch() && !lastInputWasKeyboard
             // 依赖「键盘态未置位」——当 :focus-visible 命中触屏点按、或会话内曾用键盘
             // (lastInputWasKeyboard 残留 true)，守卫即失效 → iOS 点按后 blur 立即收起面板
-            // = 真机「弹出不到一秒消失」。改为按「展开方式」判定：触屏展开的(__openedByTouch)
-            // 永不因 focusout 收起；仅键盘展开的才在焦点离开整个 dropdown 时收起。
-            if (dd.__openedByTouch) { navLog('KEEP', 'focusout-touch'); return; }
+            // = 真机「弹出不到一秒消失」。二十三次改为按「展开方式」(__openedByTouch) 判定，
+            // 但真机事件序为 focus 在 pointerdown 即触发(早于 pointerup 把 __openedByTouch 置 true)，
+            // 若 iOS 在 down/up 之间 blur 链接，focusout 看到的仍是展开前的 false → 仍秒关。
+            // 故守卫与「事件时序」解耦：只要当前处于触屏会话(近 1.5s 内有真实 touchstart，
+            // lastRealTouchAt 仅由 touchstart 写入、桌面 mousedown 不污染)即保持展开，
+            // 与 __openedByTouch 是否已被 pointerup 赋值无关。键盘流(无 touchstart)recentRealTouch
+            // 恒为 false，仍正常在焦点离开整个 dropdown 时收起，零桌面退化。
+            if (dd.__openedByTouch || recentRealTouch()) { navLog('KEEP', 'focusout-touch'); return; }
             dd.classList.remove('nav-open', 'mobile-open');
             dd.__navForceOpen = false;
             setPanelInline(dd, false);
