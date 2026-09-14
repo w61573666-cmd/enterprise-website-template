@@ -184,6 +184,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // 「点击子菜单」而跳转（手机端切换父菜单跳到子页面、平板同类缺陷）。记下最近一次点按展开的时刻，
   // 在极短窗口内吞掉落在展开面板内部的这次补偿 click，避免误跳；用户刻意点子链接(>600ms)仍正常跳转。
   var navJustToggled = 0;
+  // 十四次修复（2026-09-14，iPad 全站排查）：记录最近一次真实指针触点
+  // （touchstart / mousedown 捕获阶段）及其是否落在子面板内部。
+  // 合成补偿 click 的手势起点在父菜单（面板外），真人点子项必有触点落在面板内。
+  var navLastPointer = { t: 0, inPanel: false };
+  function navMarkPointer(e) {
+    navLastPointer.t = Date.now();
+    try {
+      navLastPointer.inPanel = !!(e.target && e.target.closest && e.target.closest('.mega-panel, .dropdown-panel'));
+    } catch (err) { navLastPointer.inPanel = false; }
+  }
+  document.addEventListener('touchstart', navMarkPointer, true);
+  document.addEventListener('mousedown', navMarkPointer, true);
 
   // 打开宽限期。面板刚展开的 800ms 内，任何非用户主动的关闭源
   // （外部 click、resize、orientationchange——含 iOS 双发 click 落在文档上、
@@ -399,15 +411,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // 十二次修复（续）：捕获阶段吞掉「点按展开后回流补偿的 click」。
     // 该 click 落在刚展开面板的子链接上会误跳转；窗口 600ms（短于用户刻意点子链接的间隔），
     // 仅作用于面板内部，不影响抽屉外点击 / 刻意点子链接。
+    // 十四次修复（续）：吞补偿 click 改为「指针证据」判定。旧 600ms 纯时间窗会
+    // 误伤真人快速点按（点父菜单→立刻点子项可低至 400–600ms，实测 582ms 被吞，
+    // 即 iPad「点子菜单没反应」根因）。现在只吞「手势起点不在面板内」的 click
+    // （= 回流补发的合成 click）；真人点子项必有 900ms 内落在面板内的触点，放行。
     document.addEventListener('click', function(e) {
-      if (navJustToggled && (Date.now() - navJustToggled) < 600) {
-        if (e.target.closest('.mega-panel, .dropdown-panel')) {
-          navLog('click-swallow', 'panel-after-toggle');
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-      }
+      if (!navJustToggled || (Date.now() - navJustToggled) >= 1500) return;
+      if (!e.target.closest('.mega-panel, .dropdown-panel')) return;
+      var genuineTap = navLastPointer.inPanel && (Date.now() - navLastPointer.t) < 900;
+      if (genuineTap) return;
+      navLog('click-swallow', 'panel-after-toggle');
+      e.preventDefault();
+      e.stopPropagation();
+      return;
     }, true);
     // Esc：收起子菜单并关闭抽屉（用户主动操作，强制收起）
     document.addEventListener('keydown', function(e) {
