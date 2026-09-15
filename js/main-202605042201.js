@@ -108,6 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
   // QA 测试开关：浏览器控制台设 window.FORCE_TOUCH_NAV=true 可强制走触屏分支（便于桌面端回归测试）
   function touchNavMode() { return window.FORCE_TOUCH_NAV === true || isTouchNav.matches; }
+  // 抽屉（汉堡）模式：只要抽屉已展开，父菜单点按即展开/收起子菜单，与指针类型无关。
+  // 用于修复「电脑端窗口缩窄到断点以下 → 汉堡抽屉 → 鼠标点击父菜单无法展开子菜单」。
+  // 桌面正常宽度（≥1161px）下抽屉从不展开，故 isDrawerOpen() 恒为 false，不影响桌面 hover 行为。
+  function isDrawerOpen() {
+    return !!navLinks && navLinks.classList.contains('open');
+  }
 
   /* ── 导航事件诊断日志（2026-09-09 四次修复）────────────────
      真机 iPad 复现「子菜单闪退」时，URL 加 #navdebug 打开可视日志，
@@ -273,8 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       trigger.addEventListener('pointerup', function(e) {
-        if (!isTouchPointer(e) && !window.FORCE_TOUCH_NAV) return;
-        navLog('pup', (e.pointerType || '?'));
+        if (!isTouchPointer(e) && !window.FORCE_TOUCH_NAV && !isDrawerOpen()) return;
+        navLog('pup', (e.pointerType || '?') + (isDrawerOpen() ? '|drawer' : ''));
         const dropdown = this.closest('.nav-dropdown');
         dropdown.__touchToggledAt = Date.now();
         toggleDropdown(this, dropdown, 'pup');
@@ -290,10 +296,12 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         // 触屏判定：click 自带 pointerType（部分内核），或会话内出现过触屏交互（.touch-nav），
-        // 或媒体查询命中——三者任一即按触屏处理；否则桌面鼠标保持原行为（hover 展开、点击跳转）
+        // 或媒体查询命中，或抽屉（汉堡）已展开——任一即按「点按展开/收起」处理；
+        // 否则桌面鼠标保持原行为（hover 展开、点击跳转）。
         const touchClick = e.pointerType === 'touch'
           || htmlEl.classList.contains('touch-nav')
-          || touchNavMode();
+          || touchNavMode()
+          || isDrawerOpen();
         if (!touchClick) return;
         navLog('click-toggle');
         e.preventDefault();
@@ -376,15 +384,26 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(function() { if (!anyOpenInGrace()) closeAllDropdowns(null, 'orient'); }, 350);
     });
     let navResizeTimer, navLastW = window.innerWidth;
+    const NAV_BP = 1160;
+    let navLastBelowBp = window.innerWidth <= NAV_BP;
     window.addEventListener('resize', function() {
       clearTimeout(navResizeTimer);
       navResizeTimer = setTimeout(function() {
+        var w = window.innerWidth;
         // 仅在宽度变化（断点切换/旋转）时收起子菜单；
         // iOS Safari 工具栏收展会触发同宽度的 resize，不能因此关闭面板（否则菜单"闪现即逝"）
-        if (window.innerWidth !== navLastW) {
-          navLog('resize', navLastW + '→' + window.innerWidth);
-          if (!anyOpenInGrace()) closeAllDropdowns(null, 'resize-w');
-          navLastW = window.innerWidth;
+        if (w !== navLastW) {
+          navLog('resize', navLastW + '→' + w);
+          var belowBp = w <= NAV_BP;
+          if (belowBp !== navLastBelowBp) {
+            // 穿越 1160 断点（抽屉态 ↔ 桌面态）：抽屉态下展开的子菜单与行内样式会残留，
+            // 必须强制清除，否则回到桌面宽度后面板被 inline !important 强制常显，破坏桌面布局。
+            closeAllDropdowns(null, 'resize-bp', true);
+          } else if (!anyOpenInGrace()) {
+            closeAllDropdowns(null, 'resize-w');
+          }
+          navLastW = w;
+          navLastBelowBp = belowBp;
         }
       }, 250);
     });
