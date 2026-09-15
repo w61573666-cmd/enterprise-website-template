@@ -4043,47 +4043,50 @@ body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-caret::after{
   transform:translate(-50%,-50%) scaleY(.15);
   opacity:0;
 }
-/* ── 「查看整個系列」CTA（取代舊 +/− 圓鈕；僅 JS 就緒時出現，無 JS 不誤導） ── */
+/* ── 「查看整個系列」CTA：與品名同列、置於右側，只顯示箭頭（減少縱向留白） ── */
 body.premium .eng-var-cta{ display:none; }
 body.premium .eng-vars-list.is-ready .eng-var-cta{
   display:inline-flex;
+  position:relative;
   align-items:center;
   justify-content:center;
-  gap:7px;
-  padding:9px 18px;
-  border-radius:999px;
+  flex:0 0 auto;
+  width:34px; height:34px;
+  padding:0;
+  border-radius:50%;
   background:var(--pv-gold,#C9A84C);
   border:1px solid var(--pv-gold,#C9A84C);
   color:#1A1A2E;
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:.05em;
-  line-height:1;
-  white-space:nowrap;
-  box-shadow:0 3px 12px rgba(201,168,76,.32);
+  box-shadow:0 3px 10px rgba(201,168,76,.30);
   transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease;
 }
 body.premium .eng-vars-list.is-ready .eng-var-cta:hover{ transform:translateY(-1px); }
-body.premium .eng-vars-list.is-ready .eng-var-cta .eng-var-cta-txt.is-alt{ display:none; }
+/* 只顯示箭頭：文字不佔版面（整顆 CTA 為 aria-hidden，head 的 aria-expanded 已表狀態） */
+body.premium .eng-vars-list.is-ready .eng-var-cta .eng-var-cta-txt{ display:none; }
 body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta{
   background:transparent;
   color:var(--pv-gold,#C9A84C);
   box-shadow:none;
 }
-body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta .eng-var-cta-txt:not(.is-alt){ display:none; }
-body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta .eng-var-cta-txt.is-alt{ display:inline; }
-body.premium .eng-vars-list.is-ready .eng-var-cta-icon{ flex:0 0 auto; transition:transform .3s ease; }
-body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta-icon{ transform:rotate(-90deg); }
-/* meta 直排：標題在上、CTA 居中在下（限定 .is-ready，不影響無 JS 回退） */
+body.premium .eng-vars-list.is-ready .eng-var-cta-icon{
+  flex:0 0 auto;
+  width:16px; height:16px;
+  transform:rotate(90deg);                 /* 右箭頭轉向下＝展開 */
+  transition:transform .3s ease;
+}
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta-icon{
+  transform:rotate(-90deg);                /* 轉向上＝收起 */
+}
+/* meta 維持橫排：品名在左（flex:1）、箭頭鈕在右，兩者並排同列 */
 body.premium .eng-vars-list.is-ready .eng-var-meta{
-  flex-direction:column;
+  flex-direction:row;
   align-items:center;
-  gap:12px;
-  text-align:center;
+  gap:10px;
+  text-align:left;
 }
 @media (max-width:560px){
-  body.premium .eng-vars-list.is-ready .eng-var-cta{ font-size:12px; padding:8px 14px; gap:6px; }
-  body.premium .eng-vars-list.is-ready .eng-var-meta{ gap:10px; }
+  body.premium .eng-vars-list.is-ready .eng-var-cta{ width:30px; height:30px; }
+  body.premium .eng-vars-list.is-ready .eng-var-cta-icon{ width:14px; height:14px; }
 }
 /* 未展開 → 收起內容；展開 → 顯示並補內距 */
 body.premium .eng-vars-list.is-ready .eng-var-body{ display:none; }
