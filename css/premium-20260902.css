@@ -3832,3 +3832,96 @@ body.premium .eng-variety-grid{
 @media (max-width:560px){
   body.premium .eng-variety-grid{ gap:11px; }
 }
+
+/* ============================================================
+   Module 57 — 人造石（無縫石）品種詳解：7 品種併入單頁 (2026-09-15)
+   Stone 指令：撤掉 7 個獨立品種頁，內容併入「人造石（無縫石）」單頁，
+   呈現方式對齊其它系列頁（品種圖 → 技術參數表 → 應用場景）。
+   新增：.eng-vars / .eng-vars-list / .eng-var / .eng-var-head / .eng-var-idx /
+        .eng-var-name / .eng-var-desc / .eng-var-banner / .eng-var-subhead
+   內層零重複定義：沿用 .spec-grid / .application-grid / .granite-variety-card /
+   .eng-variety-grid / .surface-treatment-* / .spec-dimension-*。
+   ============================================================ */
+body.premium .eng-vars{ background:#fff; }
+body.premium .eng-vars-list{
+  display:flex;
+  flex-direction:column;
+  gap:52px;
+  margin-top:40px;
+}
+body.premium .eng-var{
+  background:#faf8f4;
+  border:1px solid #ece6da;
+  border-radius:16px;
+  padding:34px 34px 30px;
+  scroll-margin-top:96px;
+}
+body.premium .eng-var-head{
+  position:relative;
+  padding-left:64px;
+  margin-bottom:22px;
+}
+body.premium .eng-var-idx{
+  position:absolute; left:0; top:1px;
+  font-family:'Playfair Display', serif;
+  font-size:32px; line-height:1; font-weight:600;
+  color:var(--pv-gold);
+  letter-spacing:.02em;
+}
+body.premium .eng-var-name{
+  margin:0 0 10px;
+  font-size:26px;
+  display:flex; align-items:baseline; flex-wrap:wrap; gap:10px;
+}
+body.premium .eng-var-name span{
+  font-family:'Inter', sans-serif;
+  font-size:12.5px; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--pv-gold) !important;
+}
+body.premium .eng-var-desc{
+  margin:0; max-width:940px;
+  font-size:15px; line-height:1.85; color:var(--pv-muted);
+}
+body.premium .eng-var-banner{
+  margin:0 0 20px;
+  border-radius:12px; overflow:hidden;
+  background:#efece5; line-height:0;
+}
+body.premium .eng-var-banner img{
+  display:block; width:100%; height:auto;
+  aspect-ratio:3 / 2; object-fit:cover;
+}
+body.premium .eng-var-subhead{
+  margin:32px 0 15px;
+  padding-left:15px; position:relative;
+  font-size:17px; font-weight:600; color:var(--pv-ink);
+  display:flex; align-items:baseline; flex-wrap:wrap; gap:9px;
+}
+body.premium .eng-var-subhead::before{
+  content:''; position:absolute; left:0; top:.42em;
+  width:4px; height:15px; border-radius:1px; background:var(--pv-gold);
+}
+body.premium .eng-var-subhead span{
+  font-family:'Inter', sans-serif;
+  font-size:11px; font-weight:400; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--pv-soft);
+}
+body.premium .eng-var .surface-treatment-section{ margin-top:32px; }
+@media (max-width:900px){
+  body.premium .eng-vars-list{ gap:34px; margin-top:30px; }
+  body.premium .eng-var{ padding:24px 20px 22px; border-radius:14px; }
+  body.premium .eng-var-head{ padding-left:52px; }
+  body.premium .eng-var-idx{ font-size:26px; }
+  body.premium .eng-var-name{ font-size:22px; }
+}
+@media (max-width:560px){
+  body.premium .eng-var{ padding:20px 15px 18px; }
+  body.premium .eng-var-head{ padding-left:0; margin-bottom:16px; }
+  body.premium .eng-var-idx{ position:static; display:block; margin-bottom:6px; font-size:20px; }
+  body.premium .eng-var-name{ font-size:19px; gap:7px; margin-bottom:8px; }
+  body.premium .eng-var-name span{ font-size:11px; }
+  body.premium .eng-var-desc{ font-size:14px; line-height:1.8; }
+  body.premium .eng-var-banner img{ aspect-ratio:4 / 3; }
+  body.premium .eng-var-subhead{ font-size:15.5px; margin:24px 0 12px; }
+}
