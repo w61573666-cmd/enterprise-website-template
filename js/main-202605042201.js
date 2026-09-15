@@ -933,7 +933,7 @@ document.querySelectorAll('.about-stats, .trust-items, .trust-bar').forEach(func
 // ===== HSST Watermark: add company name to all content images & videos =====
 (function() {
   var isEN = /^\/en/.test(window.location.pathname);
-  var wmText = isEN ? 'HENGSHENG MARBLE S&T CO. LIMITED' : '恒生石材科技有限公司';
+  var wmText = isEN ? 'HENGSHENG MARBLE S&T CO. LIMITED' : '恆生石材科技有限公司';
 
   // Skip these elements (logos, nav icons, footer, etc.)
   var skipSelectors = [
