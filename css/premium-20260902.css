@@ -3753,3 +3753,64 @@ body.premium .v2-material-card:hover .vmc-go { opacity: 1; transform: translateY
   body.premium .vmc-swatch { flex-basis: 60px; width: 60px; height: 60px; }
 }
 
+/* ============================================================
+   Module 54 — 麻石品種畫廊 Granite Varieties Gallery (2026-09-15)
+   花崗岩（麻石）產品頁頂部：十大麻石品種，每款以 2×2
+   四個樣本／視角拼圖呈現。圖片：images/products/granite-varieties/
+   ============================================================ */
+body.premium .granite-variety-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:20px;
+  margin-top:10px;
+}
+body.premium .granite-variety-card{
+  margin:0;
+  background:#FFFFFF;
+  border:1px solid var(--pv-hair,#DCD5CB);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 2px 14px rgba(16,14,10,.06);
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease, border-color .35s ease;
+}
+body.premium .granite-variety-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 34px rgba(16,14,10,.16);
+  border-color:var(--pv-gold,#C2A25E);
+}
+body.premium .granite-variety-img{
+  position:relative;
+  aspect-ratio:1 / 1;
+  overflow:hidden;
+  background:#F1EEE8;
+}
+body.premium .granite-variety-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s cubic-bezier(.2,.7,.3,1);
+}
+body.premium .granite-variety-card:hover .granite-variety-img img{
+  transform:scale(1.045);
+}
+body.premium .granite-variety-cap{
+  display:block;
+  padding:13px 10px 15px;
+  text-align:center;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--pv-ink,#14130F);
+}
+@media (max-width:1200px){
+  body.premium .granite-variety-grid{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
+@media (max-width:900px){
+  body.premium .granite-variety-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+}
+@media (max-width:560px){
+  body.premium .granite-variety-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; }
+  body.premium .granite-variety-cap{ font-size:13px; padding:9px 5px 11px; }
+}
+
