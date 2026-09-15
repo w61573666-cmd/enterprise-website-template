@@ -457,6 +457,13 @@
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/news/rd-center.html"/>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/news/guangdong-base.html</loc>
+    <lastmod>2026-09-16T05:28:26+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.hsst.hk/news/guangdong-base.html"/>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/news/riyadh.html</loc>
     <lastmod>2026-09-14T22:42:18+08:00</lastmod>
     <changefreq>monthly</changefreq>

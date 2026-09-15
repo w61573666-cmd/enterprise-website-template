@@ -156,6 +156,10 @@
     <image:image><image:loc>https://www.hsst.hk/images/news/greenguard-gold.jpg</image:loc></image:image>
   </url>
   <url>
+    <loc>https://www.hsst.hk/en/news/guangdong-base.html</loc>
+    <image:image><image:loc>https://www.hsst.hk/images/news/guangdong-base.jpg</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://www.hsst.hk/en/news/gulf-hotel-boom.html</loc>
     <image:image><image:loc>https://www.hsst.hk/images/news/gulf-hotel-boom.jpg</image:loc></image:image>
   </url>
@@ -696,6 +700,10 @@
   <url>
     <loc>https://www.hsst.hk/news/greenguard-gold.html</loc>
     <image:image><image:loc>https://www.hsst.hk/images/news/greenguard-gold.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/news/guangdong-base.html</loc>
+    <image:image><image:loc>https://www.hsst.hk/images/news/guangdong-base.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.hsst.hk/news/gulf-hotel-boom.html</loc>
