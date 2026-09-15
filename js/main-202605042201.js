@@ -605,6 +605,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Don't intercept clicks inside lightbox
     if (e.target.closest('.image-modal')) return;
 
+    // 人造石品種卡頭部（含大圖）點擊歸頁內手風琴管——點圖片應展開系列而非彈燈箱
+    if (e.target.closest('.eng-var-head')) return;
+
     // Don't intercept nav/footer clicks
     if (e.target.closest('nav, footer, .nav-overlay, .nav-toggle, .lang-switch, .mega-panel')) return;
 

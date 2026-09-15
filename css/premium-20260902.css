@@ -4043,6 +4043,48 @@ body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-caret::after{
   transform:translate(-50%,-50%) scaleY(.15);
   opacity:0;
 }
+/* ── 「查看整個系列」CTA（取代舊 +/− 圓鈕；僅 JS 就緒時出現，無 JS 不誤導） ── */
+body.premium .eng-var-cta{ display:none; }
+body.premium .eng-vars-list.is-ready .eng-var-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:9px 18px;
+  border-radius:999px;
+  background:var(--pv-gold,#C9A84C);
+  border:1px solid var(--pv-gold,#C9A84C);
+  color:#1A1A2E;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.05em;
+  line-height:1;
+  white-space:nowrap;
+  box-shadow:0 3px 12px rgba(201,168,76,.32);
+  transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease;
+}
+body.premium .eng-vars-list.is-ready .eng-var-cta:hover{ transform:translateY(-1px); }
+body.premium .eng-vars-list.is-ready .eng-var-cta .eng-var-cta-txt.is-alt{ display:none; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta{
+  background:transparent;
+  color:var(--pv-gold,#C9A84C);
+  box-shadow:none;
+}
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta .eng-var-cta-txt:not(.is-alt){ display:none; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta .eng-var-cta-txt.is-alt{ display:inline; }
+body.premium .eng-vars-list.is-ready .eng-var-cta-icon{ flex:0 0 auto; transition:transform .3s ease; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta-icon{ transform:rotate(-90deg); }
+/* meta 直排：標題在上、CTA 居中在下（限定 .is-ready，不影響無 JS 回退） */
+body.premium .eng-vars-list.is-ready .eng-var-meta{
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  text-align:center;
+}
+@media (max-width:560px){
+  body.premium .eng-vars-list.is-ready .eng-var-cta{ font-size:12px; padding:8px 14px; gap:6px; }
+  body.premium .eng-vars-list.is-ready .eng-var-meta{ gap:10px; }
+}
 /* 未展開 → 收起內容；展開 → 顯示並補內距 */
 body.premium .eng-vars-list.is-ready .eng-var-body{ display:none; }
 body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-body{
