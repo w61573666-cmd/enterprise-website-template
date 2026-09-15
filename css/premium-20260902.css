@@ -4063,19 +4063,11 @@ body.premium .eng-vars-list.is-ready .eng-var-cta{
 body.premium .eng-vars-list.is-ready .eng-var-cta:hover{ transform:translateY(-1px); }
 /* 只顯示箭頭：文字不佔版面（整顆 CTA 為 aria-hidden，head 的 aria-expanded 已表狀態） */
 body.premium .eng-vars-list.is-ready .eng-var-cta .eng-var-cta-txt{ display:none; }
-body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta{
-  background:transparent;
-  color:var(--pv-gold,#C9A84C);
-  box-shadow:none;
-}
 body.premium .eng-vars-list.is-ready .eng-var-cta-icon{
   flex:0 0 auto;
   width:16px; height:16px;
-  transform:rotate(90deg);                 /* 右箭頭轉向下＝展開 */
+  transform:rotate(90deg);                 /* 固定向下：單純的「點開查看」入口，不隨展開狀態變化 */
   transition:transform .3s ease;
-}
-body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-cta-icon{
-  transform:rotate(-90deg);                /* 轉向上＝收起 */
 }
 /* meta 維持橫排：品名在左（flex:1）、箭頭鈕在右，兩者並排同列 */
 body.premium .eng-vars-list.is-ready .eng-var-meta{
