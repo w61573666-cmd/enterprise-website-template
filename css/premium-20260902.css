@@ -3834,14 +3834,20 @@ body.premium .eng-variety-grid{
 }
 
 /* ============================================================
-   Module 57 — 人造石（無縫石）品種詳解：7 品種併入單頁 (2026-09-15)
-   Stone 指令：撤掉 7 個獨立品種頁，內容併入「人造石（無縫石）」單頁，
-   呈現方式對齊其它系列頁（品種圖 → 技術參數表 → 應用場景）。
-   新增：.eng-vars / .eng-vars-list / .eng-var / .eng-var-head / .eng-var-idx /
-        .eng-var-name / .eng-var-desc / .eng-var-banner / .eng-var-subhead
-   內層零重複定義：沿用 .spec-grid / .application-grid / .granite-variety-card /
-   .eng-variety-grid / .surface-treatment-* / .spec-dimension-*。
+   Module 57 — 人造石（無縫石）品種：網格平鋪 + 點擊展開 (2026-09-15)
+   Stone 指令：7 個品種不要全部展開；先以**網格式**平鋪，點哪個才展開哪個。
+   兩層設計（漸進增強，避免 JS 失效時內容整批消失）：
+     ① 基礎樣式（無 JS）＝ 全部展開的縱向堆疊，內容對 SEO／無 JS 友善，
+        且與「其它系列頁一致的模式」相同（圖 → 技術參數 → 應用場景）。
+     ② JS 給 .eng-vars-list 加 .is-ready → 切成網格 + 手風琴：
+        未展開的 .eng-var-body 隱藏，被點開的那張 grid-column:1/-1 撐滿整行。
+   卡片標題結構：<h3 class="eng-var-name"><span class="eng-var-idx">01</span>中文名
+   <span class="eng-var-name-en">Quartz Stone</span></h3>
+   —— 編號**行內**置於品名之前，這樣不論品名折幾行都與第一行對齊。
+   為使同一列的卡片等高，.eng-var-name 有保留高度（見 .is-ready 段）。
    ============================================================ */
+
+/* ---------- ① 基礎（＝無 JS 的完整展開版）---------- */
 body.premium .eng-vars{ background:#fff; }
 body.premium .eng-vars-list{
   display:flex;
@@ -3855,73 +3861,215 @@ body.premium .eng-var{
   border-radius:16px;
   padding:34px 34px 30px;
   scroll-margin-top:96px;
+  transition:box-shadow .35s ease, border-color .35s ease;
 }
 body.premium .eng-var-head{
-  position:relative;
-  padding-left:64px;
-  margin-bottom:22px;
+  display:block;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
-body.premium .eng-var-idx{
-  position:absolute; left:0; top:1px;
-  font-family:'Playfair Display', serif;
-  font-size:32px; line-height:1; font-weight:600;
-  color:var(--pv-gold);
-  letter-spacing:.02em;
+body.premium .eng-var-head:focus-visible{
+  outline:2px solid var(--pv-gold);
+  outline-offset:4px;
+  border-radius:14px;
+}
+body.premium .eng-var-media{
+  display:block;
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:22px;
+  background:#efece5;
+  line-height:0;
+}
+body.premium .eng-var-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  aspect-ratio:3 / 2;
+  object-fit:cover;
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);
+}
+body.premium .eng-var-head:hover .eng-var-media img{ transform:scale(1.04); }
+body.premium .eng-var-meta{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:4px;
 }
 body.premium .eng-var-name{
-  margin:0 0 10px;
-  font-size:26px;
-  display:flex; align-items:baseline; flex-wrap:wrap; gap:10px;
+  flex:1 1 auto;
+  min-width:0;
+  margin:0;
+  font-size:24px;
+  line-height:1.28;
 }
-body.premium .eng-var-name span{
+body.premium .eng-var-idx{
+  font-family:'Playfair Display', serif;
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--pv-gold);
+  margin-right:13px;
+}
+body.premium .eng-var-name-en{
+  display:block;
+  margin-top:6px;
   font-family:'Inter', sans-serif;
-  font-size:12.5px; font-weight:500;
-  letter-spacing:.08em; text-transform:uppercase;
+  font-size:12.5px;
+  font-weight:500;
+  letter-spacing:.08em;
+  text-transform:uppercase;
   color:var(--pv-gold) !important;
 }
+/* 無 JS 時沒有展開行為 → 不顯示 +/− 指示，避免誤導 */
+body.premium .eng-var-caret{ display:none; }
 body.premium .eng-var-desc{
-  margin:0; max-width:940px;
-  font-size:15px; line-height:1.85; color:var(--pv-muted);
-}
-body.premium .eng-var-banner{
-  margin:0 0 20px;
-  border-radius:12px; overflow:hidden;
-  background:#efece5; line-height:0;
-}
-body.premium .eng-var-banner img{
-  display:block; width:100%; height:auto;
-  aspect-ratio:3 / 2; object-fit:cover;
+  margin:0 0 4px;
+  max-width:940px;
+  font-size:15px;
+  line-height:1.85;
+  color:var(--pv-muted);
 }
 body.premium .eng-var-subhead{
   margin:32px 0 15px;
-  padding-left:15px; position:relative;
-  font-size:17px; font-weight:600; color:var(--pv-ink);
-  display:flex; align-items:baseline; flex-wrap:wrap; gap:9px;
+  padding-left:15px;
+  position:relative;
+  font-size:17px;
+  font-weight:600;
+  color:var(--pv-ink);
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:9px;
 }
 body.premium .eng-var-subhead::before{
-  content:''; position:absolute; left:0; top:.42em;
-  width:4px; height:15px; border-radius:1px; background:var(--pv-gold);
+  content:'';
+  position:absolute;
+  left:0; top:.42em;
+  width:4px; height:15px;
+  border-radius:1px;
+  background:var(--pv-gold);
 }
 body.premium .eng-var-subhead span{
   font-family:'Inter', sans-serif;
-  font-size:11px; font-weight:400; letter-spacing:.09em;
-  text-transform:uppercase; color:var(--pv-soft);
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--pv-soft);
 }
 body.premium .eng-var .surface-treatment-section{ margin-top:32px; }
+
+/* ---------- ② JS 就緒：網格 + 手風琴 ---------- */
+body.premium .eng-vars-list.is-ready{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:18px;
+  align-items:start;
+}
+body.premium .eng-vars-list.is-ready > .eng-var{
+  padding:0;
+  overflow:hidden;
+}
+body.premium .eng-vars-list.is-ready > .eng-var:hover{
+  border-color:rgba(194,162,94,.5);
+  box-shadow:0 10px 26px rgba(0,0,0,.07);
+}
+body.premium .eng-vars-list.is-ready > .eng-var.is-open{
+  grid-column:1 / -1;
+  border-color:rgba(194,162,94,.45);
+  box-shadow:0 20px 50px rgba(0,0,0,.1);
+}
+body.premium .eng-vars-list.is-ready .eng-var-media{
+  border-radius:15px 15px 0 0;
+  margin-bottom:0;
+}
+body.premium .eng-vars-list.is-ready .eng-var-media img{ aspect-ratio:4 / 3; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-media img{
+  aspect-ratio:8 / 3;
+  transform:none;
+}
+body.premium .eng-vars-list.is-ready .eng-var-meta{ padding:15px 18px 16px; margin-bottom:0; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-meta{ padding:20px 34px 14px; }
+body.premium .eng-vars-list.is-ready .eng-var-idx{ font-size:14px; margin-right:8px; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-idx{ font-size:26px; margin-right:13px; }
+/* 保留 2 行標題 + 2 行英文名的高度 → 同一列卡片必然等高 */
+body.premium .eng-vars-list.is-ready .eng-var-name{ font-size:16.5px; min-height:74px; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-name{ font-size:24px; min-height:0; }
+body.premium .eng-vars-list.is-ready .eng-var-name-en{
+  font-size:10.5px;
+  line-height:1.3;
+  min-height:2.6em;
+  margin-top:4px;
+}
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-name-en{
+  font-size:12.5px;
+  line-height:1.35;
+  min-height:0;
+  margin-top:6px;
+}
+/* +/− 展開指示（僅 JS 就緒時出現） */
+body.premium .eng-vars-list.is-ready .eng-var-caret{
+  display:block;
+  flex:0 0 auto;
+  position:relative;
+  width:24px; height:24px;
+  border:1px solid rgba(194,162,94,.62);
+  border-radius:50%;
+}
+body.premium .eng-vars-list.is-ready .eng-var-caret::before,
+body.premium .eng-vars-list.is-ready .eng-var-caret::after{
+  content:'';
+  position:absolute;
+  left:50%; top:50%;
+  background:var(--pv-gold);
+  transform:translate(-50%,-50%);
+  transition:transform .3s ease, opacity .3s ease;
+}
+body.premium .eng-vars-list.is-ready .eng-var-caret::before{ width:10px; height:1.5px; }
+body.premium .eng-vars-list.is-ready .eng-var-caret::after{ width:1.5px; height:10px; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-caret::after{
+  transform:translate(-50%,-50%) scaleY(.15);
+  opacity:0;
+}
+/* 未展開 → 收起內容；展開 → 顯示並補內距 */
+body.premium .eng-vars-list.is-ready .eng-var-body{ display:none; }
+body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-body{
+  display:block;
+  padding:0 34px 32px;
+}
+
+@media (max-width:1200px){
+  body.premium .eng-vars-list.is-ready{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+}
 @media (max-width:900px){
   body.premium .eng-vars-list{ gap:34px; margin-top:30px; }
+  body.premium .eng-vars-list.is-ready{ gap:14px; grid-template-columns:repeat(2, minmax(0,1fr)); }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-meta{ padding:18px 22px 12px; }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-body{ padding:0 22px 26px; }
   body.premium .eng-var{ padding:24px 20px 22px; border-radius:14px; }
-  body.premium .eng-var-head{ padding-left:52px; }
-  body.premium .eng-var-idx{ font-size:26px; }
-  body.premium .eng-var-name{ font-size:22px; }
+  body.premium .eng-var-idx{ font-size:22px; }
+  body.premium .eng-var-name{ font-size:21px; }
 }
 @media (max-width:560px){
+  body.premium .eng-vars-list{ gap:34px; }
+  body.premium .eng-vars-list.is-ready{ gap:11px; margin-top:26px; }
+  body.premium .eng-vars-list.is-ready .eng-var-meta{ padding:12px 13px 13px; gap:9px; }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-meta{ padding:15px 16px 11px; }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-body{ padding:0 16px 22px; }
+  body.premium .eng-vars-list.is-ready .eng-var-media img{ aspect-ratio:1 / 1; }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-media img{ aspect-ratio:4 / 3; }
+  body.premium .eng-vars-list.is-ready .eng-var-idx{ font-size:12px; margin-right:5px; }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-idx{ font-size:20px; margin-right:8px; }
+  body.premium .eng-vars-list.is-ready .eng-var-name{ font-size:14px; min-height:78px; }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-name{ font-size:19px; min-height:0; }
+  body.premium .eng-vars-list.is-ready .eng-var-name-en{ font-size:9.5px; margin-top:3px; }
+  body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-name-en{ font-size:11px; margin-top:4px; }
+  body.premium .eng-vars-list.is-ready .eng-var-caret{ width:20px; height:20px; }
   body.premium .eng-var{ padding:20px 15px 18px; }
-  body.premium .eng-var-head{ padding-left:0; margin-bottom:16px; }
-  body.premium .eng-var-idx{ position:static; display:block; margin-bottom:6px; font-size:20px; }
-  body.premium .eng-var-name{ font-size:19px; gap:7px; margin-bottom:8px; }
-  body.premium .eng-var-name span{ font-size:11px; }
+  body.premium .eng-var-media{ margin-bottom:16px; }
+  body.premium .eng-var-idx{ font-size:19px; margin-right:8px; }
+  body.premium .eng-var-name{ font-size:18px; }
   body.premium .eng-var-desc{ font-size:14px; line-height:1.8; }
-  body.premium .eng-var-banner img{ aspect-ratio:4 / 3; }
   body.premium .eng-var-subhead{ font-size:15.5px; margin:24px 0 12px; }
 }
