@@ -3753,4 +3753,45 @@ body.premium .v2-material-card:hover .vmc-go { opacity: 1; transform: translateY
   body.premium .vmc-swatch { flex-basis: 60px; width: 60px; height: 60px; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   Module 53: 导航「产品中心」石材種類分組 (2026-09-14)
+   下拉顶部新增「石材種類」分组：4 个材质家族入口（花岗岩/云石/板石/
+   人造石），与下方系列列表视觉区分。选中态沿用既有 .active 规则，
+   此处仅补齐分组内家族入口的高亮表现。
+   ═══════════════════════════════════════════════════════════ */
+body.premium .navbar .mega-group-label {
+  flex-basis: 100% !important;
+  width: 100% !important;
+  grid-column: 1 / -1 !important;
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: #C9A84C !important;
+  font-weight: 700 !important;
+  padding: 12px 14px 5px !important;
+  border-top: 1px solid rgba(201,168,76,0.28) !important;
+  margin-top: 6px !important;
+}
+body.premium .navbar .mega-panel-grid > .mega-group-label:first-child {
+  border-top: none !important;
+  margin-top: 0 !important;
+  padding-top: 2px !important;
+}
+body.premium .navbar .mega-panel-link.family-link {
+  position: relative !important;
+  border-left: 3px solid rgba(201,168,76,0.55) !important;
+  padding-left: 12px !important;
+}
+body.premium .navbar .mega-panel-link.family-link .mega-panel-text strong {
+  color: #1A1A2E !important;
+}
+body.premium .navbar .mega-panel-link.family-link.active .mega-panel-text strong {
+  color: #C9A84C !important;
+}
+body.premium .navbar .mega-panel-link.family-link.active {
+  background: rgba(201,168,76,0.10) !important;
+}
+
+
 
