@@ -4073,3 +4073,310 @@ body.premium .eng-vars-list.is-ready > .eng-var.is-open .eng-var-body{
   body.premium .eng-var-desc{ font-size:14px; line-height:1.8; }
   body.premium .eng-var-subhead{ font-size:15.5px; margin:24px 0 12px; }
 }
+
+/* ============================================================
+   Module 58 — 人造石（無縫石）頁：內容擴充區塊 (2026-09-15)
+   Stone 指令：頁面留白過多，需補充詳實內容、排版與全站一致、
+   視覺衝擊力不得遜於其它系列頁、頁頭需有人造石背景圖。
+   本模組只定義「站上原本沒有」的四類區塊；其餘一律沿用既有類
+   （product-hero / product-action-bar / product-section-title /
+   product-video-* / granite-variety-* / spec-* / application-* /
+   surface-treatment-* / specs-dimensions-* / products-cta），
+   以確保與其它系列頁的排版完全一致。
+     A. .eng-adv-*     核心優勢 6 卡
+     B. .eng-stat-*    數據條（手機維持橫排 2×2，站規）
+     C. .eng-cmp-*     七品種橫向對比總表（≤760 轉卡片式）
+     D. .eng-process-* 選材到安裝 4 步
+     E. .eng-faq-*     常見問題（原生 <details>，零 JS 相依）
+   ============================================================ */
+
+/* ---------- A. 核心優勢 ---------- */
+body.premium .eng-adv-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  margin-top:38px;
+}
+body.premium .eng-adv-card{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--pv-hair);
+  border-radius:14px;
+  padding:28px 26px 26px;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .45s;
+}
+body.premium .eng-adv-card::before{
+  content:'';position:absolute;left:26px;top:0;width:34px;height:2px;
+  background:var(--pv-gold);opacity:.85;
+}
+body.premium .eng-adv-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 22px 50px rgba(20,19,15,.10);
+  border-color:var(--pv-gold);
+}
+body.premium .eng-adv-icon{
+  display:block;font-size:26px;line-height:1;margin-bottom:14px;
+}
+body.premium .eng-adv-title{
+  font-size:17px;font-weight:700;margin:0 0 10px;letter-spacing:.01em;
+  font-family:'Noto Serif TC',serif;
+}
+body.premium .eng-adv-text{
+  font-size:14.5px;line-height:1.8;color:var(--pv-muted);margin:0;
+}
+
+/* ---------- B. 數據條 ---------- */
+body.premium .eng-stat-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  margin-top:34px;
+  background:var(--pv-deep);
+  border-radius:14px;
+  overflow:hidden;
+}
+body.premium .eng-stat{
+  padding:26px 18px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,.09);
+}
+body.premium .eng-stat:last-child{ border-right:0; }
+body.premium .eng-stat-num{
+  font-family:'Noto Serif TC',serif;
+  font-size:32px;font-weight:700;line-height:1.1;
+  color:var(--pv-gold) !important;
+  letter-spacing:.01em;
+}
+body.premium .eng-stat-label{
+  margin-top:8px;font-size:13px;line-height:1.5;
+  color:var(--pv-deep-muted) !important;
+}
+
+/* ---------- C. 七品種對比總表 ---------- */
+body.premium .eng-cmp-wrap{
+  margin-top:34px;
+  border:1px solid var(--pv-hair);
+  border-radius:14px;
+  overflow:auto;
+  background:#fff;
+  -webkit-overflow-scrolling:touch;
+}
+body.premium .eng-cmp-table{
+  width:100%;
+  min-width:940px;
+  border-collapse:collapse;
+  font-size:13.5px;
+}
+body.premium .eng-cmp-table thead th{
+  background:var(--pv-deep);
+  color:var(--pv-deep-text) !important;
+  font-weight:600;
+  font-size:12.5px;
+  letter-spacing:.04em;
+  text-align:left;
+  padding:14px 14px;
+  white-space:nowrap;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+body.premium .eng-cmp-table thead th:last-child{ border-right:0; }
+body.premium .eng-cmp-table tbody tr{ border-top:1px solid var(--pv-hair); }
+body.premium .eng-cmp-table tbody tr:nth-child(even){ background:#FBF9F6; }
+body.premium .eng-cmp-table tbody th{
+  text-align:left;
+  padding:15px 14px;
+  vertical-align:top;
+  font-weight:600;
+  white-space:nowrap;
+  border-right:1px solid var(--pv-hair);
+}
+body.premium .eng-cmp-table tbody td{
+  padding:15px 14px;
+  color:var(--pv-muted) !important;
+  vertical-align:top;
+  border-right:1px solid rgba(220,213,203,.55);
+}
+body.premium .eng-cmp-table tbody td:last-child{ border-right:0; }
+body.premium .eng-cmp-name{ display:block; font-size:14px; }
+body.premium .eng-cmp-name-en{
+  display:block;margin-top:3px;font-size:11px;font-weight:400;
+  letter-spacing:.04em;color:var(--pv-soft) !important;
+}
+
+/* ---------- D. 服務流程 ---------- */
+body.premium .eng-process-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+  margin-top:38px;
+  counter-reset:engstep;
+}
+body.premium .eng-process-step{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--pv-hair);
+  border-radius:14px;
+  padding:28px 24px 26px;
+}
+body.premium .eng-process-step::after{
+  content:'';
+  position:absolute;
+  top:46px;
+  right:-12px;
+  width:22px;height:1px;
+  background:var(--pv-hair);
+}
+body.premium .eng-process-step:last-child::after{ display:none; }
+body.premium .eng-process-num{
+  display:inline-block;
+  font-family:'Noto Serif TC',serif;
+  font-size:26px;
+  font-weight:700;
+  line-height:1;
+  color:var(--pv-gold) !important;
+  margin-bottom:12px;
+}
+body.premium .eng-process-title{
+  font-size:16.5px;font-weight:700;margin:0 0 9px;
+  font-family:'Noto Serif TC',serif;
+}
+body.premium .eng-process-text{
+  font-size:14px;line-height:1.8;color:var(--pv-muted);margin:0;
+}
+
+/* ---------- E. 常見問題 ---------- */
+body.premium .eng-faq-list{
+  max-width:920px;
+  margin:34px auto 0;
+  display:grid;
+  gap:12px;
+}
+body.premium .eng-faq-item{
+  background:#fff;
+  border:1px solid var(--pv-hair);
+  border-radius:12px;
+  transition:border-color .35s,box-shadow .35s;
+}
+body.premium .eng-faq-item:hover{ border-color:rgba(194,162,94,.55); }
+body.premium .eng-faq-item[open]{
+  border-color:var(--pv-gold);
+  box-shadow:0 14px 34px rgba(20,19,15,.07);
+}
+body.premium .eng-faq-q{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  padding:19px 22px;
+  cursor:pointer;
+  list-style:none;
+  font-size:15.5px;
+  font-weight:600;
+  line-height:1.6;
+  color:var(--pv-ink) !important;
+}
+body.premium .eng-faq-q::-webkit-details-marker{ display:none; }
+body.premium .eng-faq-q::marker{ content:''; }
+body.premium .eng-faq-icon{
+  flex:0 0 auto;
+  position:relative;
+  width:20px;height:20px;
+  margin-top:2px;
+  border:1px solid var(--pv-hair);
+  border-radius:50%;
+  transition:transform .35s,border-color .35s;
+}
+body.premium .eng-faq-icon::before,
+body.premium .eng-faq-icon::after{
+  content:'';position:absolute;top:50%;left:50%;
+  background:var(--pv-gold);
+  transform:translate(-50%,-50%);
+}
+body.premium .eng-faq-icon::before{ width:9px;height:1.5px; }
+body.premium .eng-faq-icon::after{ width:1.5px;height:9px; transition:opacity .3s; }
+body.premium .eng-faq-item[open] .eng-faq-icon{ border-color:var(--pv-gold); transform:rotate(180deg); }
+body.premium .eng-faq-item[open] .eng-faq-icon::after{ opacity:0; }
+body.premium .eng-faq-a{
+  padding:0 22px 20px;
+  border-top:1px solid rgba(220,213,203,.6);
+  margin-top:-1px;
+}
+body.premium .eng-faq-a p{
+  margin:16px 0 0;
+  font-size:14.5px;
+  line-height:1.9;
+  color:var(--pv-muted) !important;
+}
+
+/* ---------- 響應式 ---------- */
+@media (max-width:1200px){
+  body.premium .eng-adv-grid{ gap:18px; }
+  body.premium .eng-process-grid{ gap:18px; }
+}
+@media (max-width:900px){
+  body.premium .eng-adv-grid{ grid-template-columns:repeat(2,1fr); }
+  body.premium .eng-process-grid{ grid-template-columns:repeat(2,1fr); }
+  body.premium .eng-process-step::after{ display:none; }
+  body.premium .eng-stat{ padding:22px 12px; }
+  body.premium .eng-stat-num{ font-size:27px; }
+}
+@media (max-width:760px){
+  /* 對比總表轉卡片式，避免手機橫向滾動 */
+  body.premium .eng-cmp-wrap{ border:0; border-radius:0; overflow:visible; background:transparent; }
+  body.premium .eng-cmp-table{ min-width:0; font-size:14px; }
+  body.premium .eng-cmp-table thead{ display:none; }
+  body.premium .eng-cmp-table,
+  body.premium .eng-cmp-table tbody,
+  body.premium .eng-cmp-table tr,
+  body.premium .eng-cmp-table th,
+  body.premium .eng-cmp-table td{ display:block; width:100%; }
+  body.premium .eng-cmp-table tbody tr{
+    background:#fff !important;
+    border:1px solid var(--pv-hair);
+    border-radius:12px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  body.premium .eng-cmp-table tbody th{
+    background:var(--pv-warm);
+    border-right:0;
+    border-bottom:1px solid var(--pv-hair);
+    padding:13px 16px;
+    white-space:normal;
+  }
+  body.premium .eng-cmp-table tbody td{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    padding:10px 16px;
+    border-right:0;
+    border-bottom:1px solid rgba(220,213,203,.45);
+    text-align:right;
+  }
+  body.premium .eng-cmp-table tbody td:last-child{ border-bottom:0; }
+  body.premium .eng-cmp-table tbody td::before{
+    content:attr(data-label);
+    flex:0 0 44%;
+    text-align:left;
+    font-size:12px;
+    color:var(--pv-soft) !important;
+  }
+}
+@media (max-width:560px){
+  body.premium .eng-adv-grid{ grid-template-columns:1fr; gap:14px; }
+  body.premium .eng-adv-card{ padding:24px 20px 22px; }
+  body.premium .eng-adv-card::before{ left:20px; }
+  /* 站規：數據條手機端必須橫排，不許一列一個 */
+  body.premium .eng-stat-row{ grid-template-columns:repeat(2,1fr); margin-top:26px; }
+  body.premium .eng-stat{ padding:20px 10px; }
+  body.premium .eng-stat:nth-child(2){ border-right:0; }
+  body.premium .eng-stat:nth-child(1),
+  body.premium .eng-stat:nth-child(2){ border-bottom:1px solid rgba(255,255,255,.09); }
+  body.premium .eng-stat-num{ font-size:24px; }
+  body.premium .eng-stat-label{ font-size:12px; }
+  body.premium .eng-process-grid{ grid-template-columns:1fr; gap:14px; }
+  body.premium .eng-process-step{ padding:24px 20px 22px; }
+  body.premium .eng-faq-q{ padding:17px 18px; font-size:14.5px; gap:12px; }
+  body.premium .eng-faq-a{ padding:0 18px 18px; }
+  body.premium .eng-faq-a p{ font-size:14px; }
+}
