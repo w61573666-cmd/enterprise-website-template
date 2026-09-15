@@ -266,7 +266,7 @@
         <a class="mega-panel-link" href="../products/custom-craft.html">
          <div class="mega-panel-text">
           <strong>
-           定制加工
+           定製加工
           </strong>
           <span>
            Waterjet / Carving / Special Shape
@@ -675,7 +675,7 @@
   <div class="fld wide"><label>補充說明</label><textarea name="extra" rows="3" placeholder="選填：自我介紹、作品集鏈接、推薦人等"></textarea></div>
  </div></div>
 
- <label class="agree"><input type="checkbox" name="agree" required> 我已閱讀並同意《招聘信息處理告知》：所填信息僅用於招聘評估，6 個月後刪除。</label>
+ <label class="agree"><input type="checkbox" name="agree" required> 我已閱讀並同意《招聘資訊處理告知》：所填資訊僅用於招聘評估，6 個月後刪除。</label>
  <div class="btnrow"><button type="submit" class="jd-btn">提交投遞</button><button type="reset" class="resetbtn">重置</button></div>
  <p class="form-err" id="formErr"></p>
 </form>
@@ -726,7 +726,7 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
   if(!okWork)miss.push(T.work);
   if(!f.querySelector('input[name=gender]:checked'))miss.push("性別");
   if(!f.elements.cv.value)miss.push("簡歷附件");
-  if(!f.elements.agree.checked){err.innerText="請先勾選同意《招聘信息處理告知》";err.style.display='block';err.scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(!f.elements.agree.checked){err.innerText="請先勾選同意《招聘資訊處理告知》";err.style.display='block';err.scrollIntoView({behavior:'smooth',block:'center'});return;}
   if(miss.length){err.innerText="請填寫必填項："+Array.from(new Set(miss)).join('、');err.style.display='block';err.scrollIntoView({behavior:'smooth',block:'center'});return;}
   if(!/[^@\s]+@[^@\s]+\.[^@\s]+/.test(f.elements.email.value)){err.innerText="郵箱格式不正確";err.style.display='block';return;}
   if(!/^[+0-9\-() ]{8,16}$/.test(f.elements.phone.value.trim())){err.innerText="手機號碼格式不正確";err.style.display='block';return;}
@@ -781,7 +781,7 @@ document.getElementById('applyForm').addEventListener('submit',function(e){
        <li><a href="../products/granite-collection.html">花崗岩（麻石）</a></li>
        <li><a href="../products/travertine-sandstone.html">洞石與砂岩</a></li>
        <li><a href="../products/luxury-stone.html">奢石系列</a></li>
-       <li><a href="../products/custom-craft.html">定制加工</a></li>
+       <li><a href="../products/custom-craft.html">定製加工</a></li>
       </ul>
      </div>
      <div>
