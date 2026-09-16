@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://www.hsst.hk/about.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-strength.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-strength-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 企業實力</video:title>
+      <video:description>恆生石材的產能規模、設備實力與品質管控體系介紹。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 工程案例展示</video:title>
+      <video:description>恆生石材歷年香港及海外標誌性工程案例精選展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 工藝製作實錄</video:title>
+      <video:description>香港恆生石材科技有限公司的石材切割、打磨與拼接工藝實錄，展現三十年加工實力。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-team.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-team-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 專業團隊</video:title>
+      <video:description>恆生石材由資深石材工程師與設計顧問組成的專業團隊。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-csr.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-csr-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 企業社會責任</video:title>
+      <video:description>恆生石材踐行綠色製造與社區回饋的企業社會責任實踐。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/about.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-strength.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-strength-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 企業實力</video:title>
+      <video:description>恆生石材的產能規模、設備實力與品質管控體系介紹。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 工程案例展示</video:title>
+      <video:description>恆生石材歷年香港及海外標誌性工程案例精選展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 工藝製作實錄</video:title>
+      <video:description>香港恆生石材科技有限公司的石材切割、打磨與拼接工藝實錄，展現三十年加工實力。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-team.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-team-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 專業團隊</video:title>
+      <video:description>恆生石材由資深石材工程師與設計顧問組成的專業團隊。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/about-csr.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/about-csr-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 企業社會責任</video:title>
+      <video:description>恆生石材踐行綠色製造與社區回饋的企業社會責任實踐。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/beige-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/black-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/custom-craft.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/engineered-stone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/granite-collection.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/grey-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/luxury-stone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/marble-furniture.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/marble-furniture-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/marble-furniture-craft-opt.mp4</video:content_loc>
+      <video:title>雲石家私 · 石材加工工藝</video:title>
+      <video:description>雲石家私（Marble Furniture）的高精度 CNC 加工與手工鑲嵌工藝展示。</video:description>
+      <video:publication_date>2026-09-17</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/marble-furniture-finish.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/marble-furniture-finish-opt.mp4</video:content_loc>
+      <video:title>雲石家私 · 成品表面處理</video:title>
+      <video:description>雲石家私成品的表面拋光、防護與細節處理工序展示。</video:description>
+      <video:publication_date>2026-09-17</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/new-arrivals.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/project-stone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/travertine-sandstone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/en/products/white-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/beige-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/black-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/custom-craft.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/engineered-stone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/granite-collection.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/grey-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/luxury-stone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/marble-furniture.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/marble-furniture-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/marble-furniture-craft-opt.mp4</video:content_loc>
+      <video:title>雲石家私 · 石材加工工藝</video:title>
+      <video:description>雲石家私（Marble Furniture）的高精度 CNC 加工與手工鑲嵌工藝展示。</video:description>
+      <video:publication_date>2026-09-17</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/marble-furniture-finish.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/marble-furniture-finish-opt.mp4</video:content_loc>
+      <video:title>雲石家私 · 成品表面處理</video:title>
+      <video:description>雲石家私成品的表面拋光、防護與細節處理工序展示。</video:description>
+      <video:publication_date>2026-09-17</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/new-arrivals.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/project-stone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/travertine-sandstone.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.hsst.hk/products/white-marble.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/product-showcase.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/product-showcase-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 產品展示</video:title>
+      <video:description>恆生石材天然大理石、花崗岩與人造石產品系列展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.hsst.hk/videos/posters/processing-craft.jpg</video:thumbnail_loc>
+      <video:content_loc>https://www.hsst.hk/videos/processing-craft-opt.mp4</video:content_loc>
+      <video:title>恆生石材 · 加工工藝</video:title>
+      <video:description>恆生石材從荒料到成品的全流程加工工藝展示。</video:description>
+      <video:publication_date>2026-09-03</video:publication_date>
+    </video:video>
+  </url>
+</urlset>

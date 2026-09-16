@@ -70,3 +70,4 @@ Sitemap: https://www.hsst.hk/sitemap.xml
 Sitemap: https://www.hsst.hk/sitemap-zh.xml
 Sitemap: https://www.hsst.hk/sitemap-en.xml
 Sitemap: https://www.hsst.hk/sitemap-images.xml
+Sitemap: https://www.hsst.hk/sitemap-video.xml
