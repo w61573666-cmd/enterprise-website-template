@@ -4614,3 +4614,31 @@ body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(
   body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(3n+1){ grid-column:auto !important; }
   body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(odd){ grid-column:1 / -1 !important; }
 }
+
+/* ============================================================
+   C-4-ext-2：品种手风琴 6 品種 → 桌面 3+3 滿鋪（2026-09-16）
+   問題：Module 57 桌面規則（上四 span3 / 下排 span4）對 7 品種得 4+3（已批准），
+   但對 20 個 6 品種頁得「4 + 2（各 span4＝8 軌，留 4 軌空）」→ 右下角空缺，
+   Stone 判定「還是沒修復」。
+   修法：僅在桌面（>1200px）對「恰好 6 張」的清單，把前 4 張也改 span 4
+   （與 5/6 張同寬），形成 3+3 滿鋪；7 張清單（:nth-last-child 不匹配）完全不受影響，維持 4+3。
+   ⚠️ 用 :nth-child(k):nth-last-child(7-k) 精準命中「恰 6 張」，不會外溢到 7 張；
+      包在 min-width:1201px，避免污染 ≤900 的 2 欄（span6）布局。
+   ============================================================ */
+@media (min-width:1201px){
+  /* 6 品種：前 4 張改 span 4 → 與 5/6 張同寬，整體 3+3 滿鋪 */
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(1):nth-last-child(6),
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(2):nth-last-child(5),
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(3):nth-last-child(4),
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(4):nth-last-child(3){
+    grid-column:span 4;
+  }
+  /* 1/3 寬卡片統一 9:5，與 7 品種下排（已批准比例）等高、整齊；
+     同時把前 4 張的原預設 4:3（含第 4 張——它在 3+3 中落入第 2 列）一併對齊 */
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(1):nth-last-child(6) .eng-var-media img,
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(2):nth-last-child(5) .eng-var-media img,
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(3):nth-last-child(4) .eng-var-media img,
+  body.premium .eng-vars-list.is-ready > .eng-var:nth-child(4):nth-last-child(3) .eng-var-media img{
+    aspect-ratio:9 / 5;
+  }
+}
