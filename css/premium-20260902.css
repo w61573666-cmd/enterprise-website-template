@@ -4643,3 +4643,98 @@ body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(
     aspect-ratio:9 / 5;
   }
 }
+
+/* ============================================================
+   模块 60 · 页脚重建（2026-09-17）
+   ① 產品業務矩陣補齊 12 個系列（新增工程石材/新品上架/人造石/雲石家私），
+      並改為「兩排」= 6 行 × 2 列，避免 12 項單列把頁腳拉得過高；
+   ② 五列寬度按內容重新配比，矩陣列加寬以容納雙列；
+   ③ 品牌區新增資質徽章、矩陣列標題加「全部系列」入口、底欄加法律連結；
+   ④ 由模塊 35 的「全居中」改為編輯式左對齊（高端品牌調性），
+      並保留既有深色底／金色標題體系；
+   ⑤ 響應式：≤1180 品牌整行 + 3 列；≤900 矩陣與聯絡整行；≤560 單列。
+   ============================================================ */
+body.premium .ft-v2 .ft-grid5 {
+  grid-template-columns: 1.32fr .84fr 1.6fr .84fr 1.2fr !important;
+  column-gap: 30px !important;
+  row-gap: 30px !important;
+}
+/* 左對齊：覆蓋模塊 35 的全居中 */
+body.premium .ft-v2 .ft-grid5 > div {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+body.premium .ft-v2 .ft-grid5 .ft-h,
+body.premium .ft-v2 .ft-grid5 ul,
+body.premium .ft-v2 .ft-grid5 ul li { text-align: left !important; }
+body.premium .ft-v2 .ft-brand .ft-brand-name,
+body.premium .ft-v2 .ft-brand .ft-brand-en,
+body.premium .ft-v2 .ft-brand .ft-brand-desc { text-align: left !important; }
+
+/* ① 產品業務矩陣：12 項兩排（6 行 × 2 列） */
+body.premium .ft-v2 .ft-grid5 ul.ft-2col {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  column-gap: 18px !important;
+  row-gap: 7px !important;
+}
+
+/* ② 品牌區資質徽章 */
+body.premium .ft-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+body.premium .ft-badges span {
+  font-size: .64rem; letter-spacing: .05em; white-space: nowrap;
+  color: rgba(255,255,255,.62);
+  border: 1px solid rgba(212,180,122,.38);
+  background: rgba(212,180,122,.08);
+  border-radius: 999px; padding: 3px 10px;
+}
+
+/* ③ 列標題右側入口 */
+body.premium .ft-v2 .ft-h {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+}
+body.premium .ft-h-more {
+  font-size: .66rem; font-weight: 500; letter-spacing: .02em; text-transform: none;
+  color: rgba(229,204,138,.85); text-decoration: none; white-space: nowrap;
+}
+body.premium .ft-h-more:hover { color: #E5CC8A; text-decoration: underline; }
+
+/* ④ 底欄：版權左 / 法律連結右 */
+body.premium .ft-v2 .ft-bottom {
+  justify-content: space-between !important;
+  text-align: left !important;
+  margin-top: 30px !important;
+  padding-top: 16px !important;
+}
+body.premium .ft-v2 .ft-legal { gap: 18px; }
+body.premium .ft-v2 .ft-legal a { white-space: nowrap; }
+
+/* ⑤ 影片卡片下方說明（本系列加工工藝實錄） */
+body.premium .product-video-cap {
+  margin: 12px 2px 0; font-size: .82rem; line-height: 1.6;
+  color: #5C574F; letter-spacing: .01em;
+}
+
+/* 響應式 */
+@media (max-width: 1180px) {
+  body.premium .ft-v2 .ft-grid5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    column-gap: 26px !important; row-gap: 30px !important;
+  }
+  body.premium .ft-v2 .ft-grid5 > div:first-child { grid-column: 1 / -1 !important; }
+}
+@media (max-width: 900px) {
+  body.premium .ft-v2 .ft-grid5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 22px !important; row-gap: 26px !important;
+  }
+  /* 矩陣（12 項）與聯絡渠道（6 行）各自鋪滿整行，避免擠成窄條 */
+  body.premium .ft-v2 .ft-matrix { grid-column: 1 / -1 !important; }
+  body.premium .ft-v2 .ft-grid5 > div:nth-child(5) { grid-column: 1 / -1 !important; }
+}
+@media (max-width: 560px) {
+  body.premium .ft-v2 .ft-bottom {
+    flex-direction: column; align-items: flex-start !important;
+    gap: 10px; text-align: left !important;
+  }
+  body.premium .ft-v2 .ft-badges span { font-size: .6rem; }
+}
