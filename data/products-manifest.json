@@ -1,0 +1,432 @@
+{
+  "_readme": [
+    "產品中心（产品中心）子菜單的唯一數據源 —— SINGLE SOURCE OF TRUTH",
+    "",
+    "本檔案同時驅動全站三處『產品中心』清單，任何新增／刪除／改名／換序只需改這裡，",
+    "然後在站點根目錄執行：  python3 scripts/sync-products.py",
+    "  · ① 全站 258 個 HTML 的導航『產品中心』下拉 mega-panel（12 系列 + navExtra）",
+    "  · ② 全站 258 個 HTML 的頁腳『產品業務矩陣』ft-matrix-grid（僅 12 系列）",
+    "  · ③ products.html / en/products.html 的『全部系列』卡片牆 v2-series-grid（僅 12 系列）",
+    "三處全部按本檔案的 series 順序重排，自動對齊，不會再出現『下拉有、卡片牆沒有』。",
+    "",
+    "── 新增一個系列的最小步驟 ──────────────────────────────",
+    "  1. 在 series 陣列插入一筆（order 即為顯示順序）",
+    "  2. 準備封面圖 images/series-cards/<slug>-card.jpg + .webp（1536 寬，見 skill site-imagegen-batch）",
+    "  3. 確認 products/<slug>.html 與 en/products/<slug>.html 存在",
+    "  4. 執行 python3 scripts/sync-products.py  → 自動全站同步",
+    "",
+    "── 欄位說明 ────────────────────────────────────────────",
+    "  slug   : 產品系列頁檔名（不含 .html），同時是封面圖前綴",
+    "  href   : 站點根目錄相對路徑（導航/卡片牆用；腳本自動加 ../ 前綴）",
+    "  nav    : 導航下拉主標題    navSub : 導航下拉灰色副標",
+    "  footer : 頁腳業務矩陣文字",
+    "  card   :『全部系列』卡片牆文案（i=英文小標 b=中文主標 alt=圖片替代文字 d=描述 go=行動字）",
+    "  card[lang].go 省略時用 defaults.cardGo[lang]",
+    "  navExtra : 產品中心下拉裡的非系列條目（企業頁），只進下拉、不進矩陣與卡片牆"
+  ],
+  "defaults": {
+    "cardGo": {
+      "zh": "探索此系列 →",
+      "en": "Explore collection →"
+    }
+  },
+  "series": [
+    {
+      "slug": "white-marble",
+      "short": "白色系",
+      "href": "products/white-marble.html",
+      "nav": {
+        "zh": "白色大理石",
+        "en": "White Marble"
+      },
+      "navSub": {
+        "zh": "Snow White / Carrara / Calacatta",
+        "en": "Snow White / Carrara / Calacatta"
+      },
+      "footer": {
+        "zh": "白色大理石",
+        "en": "White Marble"
+      },
+      "card": {
+        "zh": {
+          "i": "White Marble",
+          "b": "白色大理石",
+          "alt": "白色大理石",
+          "d": "從卡拉拉到爵士白，最純粹的留白美學，酒店大堂與高端住宅的恆久底色。"
+        },
+        "en": {
+          "i": "White Marble",
+          "b": "White Marble",
+          "alt": "White Marble",
+          "d": "From Carrara classics to Statuario — pure, luminous whites that define timeless luxury."
+        }
+      }
+    },
+    {
+      "slug": "beige-marble",
+      "short": "米黃系",
+      "href": "products/beige-marble.html",
+      "nav": {
+        "zh": "米黃大理石",
+        "en": "Beige Marble"
+      },
+      "navSub": {
+        "zh": "Crema / Botticino / Emperador",
+        "en": "Crema / Botticino / Emperador"
+      },
+      "footer": {
+        "zh": "米黃大理石",
+        "en": "Beige Marble"
+      },
+      "card": {
+        "zh": {
+          "i": "Beige Marble",
+          "b": "米黃大理石",
+          "alt": "米黃大理石",
+          "d": "溫潤米色調，貼合東方美學的柔和質感，牆身與地面皆宜。"
+        },
+        "en": {
+          "i": "Beige Marble",
+          "b": "Beige Marble",
+          "alt": "Beige Marble",
+          "d": "Warm beige tones with an understated Eastern elegance for floors and walls."
+        }
+      }
+    },
+    {
+      "slug": "grey-marble",
+      "short": "灰色系",
+      "href": "products/grey-marble.html",
+      "nav": {
+        "zh": "灰色大理石",
+        "en": "Grey Marble"
+      },
+      "navSub": {
+        "zh": "Grigio / Pietra Grey / Euboea",
+        "en": "Grigio / Pietra Grey / Euboea"
+      },
+      "footer": {
+        "zh": "灰色大理石",
+        "en": "Grey Marble"
+      },
+      "card": {
+        "zh": {
+          "i": "Grey Marble",
+          "b": "灰色大理石",
+          "alt": "灰色大理石",
+          "d": "銀影灰與雅典灰，低調內斂的現代建築語言。"
+        },
+        "en": {
+          "i": "Grey Marble",
+          "b": "Grey Marble",
+          "alt": "Grey Marble",
+          "d": "Silver-grey and Athenian tones — a quiet, modern architectural voice."
+        }
+      }
+    },
+    {
+      "slug": "black-marble",
+      "short": "黑色系",
+      "href": "products/black-marble.html",
+      "nav": {
+        "zh": "黑色大理石",
+        "en": "Black Marble"
+      },
+      "navSub": {
+        "zh": "Nero Marquina / Portoro / Black Gold",
+        "en": "Nero Marquina / Portoro / Black Gold"
+      },
+      "footer": {
+        "zh": "黑色大理石",
+        "en": "Black Marble"
+      },
+      "card": {
+        "zh": {
+          "i": "Black Marble",
+          "b": "黑色大理石",
+          "alt": "黑色大理石",
+          "d": "深邃黑金、黑白根，空間裡最具張力的點睛一筆。"
+        },
+        "en": {
+          "i": "Black Marble",
+          "b": "Black Marble",
+          "alt": "Black Marble",
+          "d": "Deep Nero Marquina and black-and-gold — bold accents of presence."
+        }
+      }
+    },
+    {
+      "slug": "granite-collection",
+      "short": "花崗岩",
+      "href": "products/granite-collection.html",
+      "nav": {
+        "zh": "花崗岩（麻石）",
+        "en": "Granite (麻石)"
+      },
+      "navSub": {
+        "zh": "G682 / Golden Beige / Yellow Granite",
+        "en": "G682 / Golden Beige / Yellow Granite"
+      },
+      "footer": {
+        "zh": "花崗岩（麻石）",
+        "en": "Granite"
+      },
+      "card": {
+        "zh": {
+          "i": "Granite",
+          "b": "花崗岩（麻石）",
+          "alt": "花崗岩（麻石）",
+          "d": "高強耐磨、歷久彌新，地標級工程的堅實之選。"
+        },
+        "en": {
+          "i": "Granite",
+          "b": "Granite",
+          "alt": "Granite",
+          "d": "Dense and durable granite trusted by landmark engineering."
+        }
+      }
+    },
+    {
+      "slug": "travertine-sandstone",
+      "short": "洞石砂岩",
+      "href": "products/travertine-sandstone.html",
+      "nav": {
+        "zh": "洞石與砂岩",
+        "en": "Travertine & Sandstone"
+      },
+      "navSub": {
+        "zh": "Travertine / Sandstone",
+        "en": "Travertine / Sandstone"
+      },
+      "footer": {
+        "zh": "洞石與砂岩",
+        "en": "Travertine & Sandstone"
+      },
+      "card": {
+        "zh": {
+          "i": "Travertine & Sandstone",
+          "b": "洞石與砂岩",
+          "alt": "洞石與砂岩",
+          "d": "天然孔洞肌理與沙岩層理，時間沉澱出的建築詩意。"
+        },
+        "en": {
+          "i": "Travertine & Sandstone",
+          "b": "Travertine & Sandstone",
+          "alt": "Travertine & Sandstone",
+          "d": "Travertine texture and sandstone strata — architecture written by time."
+        }
+      }
+    },
+    {
+      "slug": "luxury-stone",
+      "short": "奢石",
+      "href": "products/luxury-stone.html",
+      "nav": {
+        "zh": "奢石系列",
+        "en": "Luxury Stone"
+      },
+      "navSub": {
+        "zh": "Blue Agate / Amazonita / Onyx",
+        "en": "Blue Agate / Amazonita / Onyx"
+      },
+      "footer": {
+        "zh": "奢石系列",
+        "en": "Luxury Stone"
+      },
+      "card": {
+        "zh": {
+          "i": "Luxury Stone",
+          "b": "奢石系列",
+          "alt": "奢石系列",
+          "d": "巴西藍翡翠等稀有礦脈，一石一世界，為空間注入典藏價值。"
+        },
+        "en": {
+          "i": "Luxury Stone",
+          "b": "Luxury Stone",
+          "alt": "Luxury Stone",
+          "d": "Rare veins — Blue Agate and beyond; each slab a collector's piece."
+        }
+      }
+    },
+    {
+      "slug": "project-stone",
+      "short": "工程石材",
+      "href": "products/project-stone.html",
+      "nav": {
+        "zh": "工程石材",
+        "en": "Project Stone"
+      },
+      "navSub": {
+        "zh": "Curtain Wall / Lobby / Bulk Supply",
+        "en": "Curtain Wall / Lobby / Bulk Supply"
+      },
+      "footer": {
+        "zh": "工程石材",
+        "en": "Project Stone"
+      },
+      "card": {
+        "zh": {
+          "i": "Project Stone",
+          "b": "工程石材",
+          "alt": "工程石材",
+          "d": "幕牆、大堂與大板批量供應，高效整合的工程級方案。"
+        },
+        "en": {
+          "i": "Project Stone",
+          "b": "Project Stone",
+          "alt": "Project Stone",
+          "d": "Facade, lobby and bulk slab programs engineered for delivery."
+        }
+      }
+    },
+    {
+      "slug": "new-arrivals",
+      "short": "新品上架",
+      "href": "products/new-arrivals.html",
+      "nav": {
+        "zh": "新品上架",
+        "en": "New Arrivals"
+      },
+      "navSub": {
+        "zh": "Latest Arrival / New Textures",
+        "en": "Latest Arrival / New Textures"
+      },
+      "footer": {
+        "zh": "新品上架",
+        "en": "New Arrivals"
+      },
+      "card": {
+        "zh": {
+          "i": "New Arrivals",
+          "b": "新品上架",
+          "alt": "新品上架",
+          "d": "全球礦山最新到貨，前沿紋理與色系第一時間鑑賞。"
+        },
+        "en": {
+          "i": "New Arrivals",
+          "b": "New Arrivals",
+          "alt": "New Arrivals",
+          "d": "Fresh from quarries worldwide — see new veins before anyone else."
+        }
+      }
+    },
+    {
+      "slug": "custom-craft",
+      "short": "定製工藝",
+      "href": "products/custom-craft.html",
+      "nav": {
+        "zh": "定製加工",
+        "en": "Custom Craft"
+      },
+      "navSub": {
+        "zh": "Waterjet / Carving / Special Shape",
+        "en": "Waterjet / Carving / Special Shape"
+      },
+      "footer": {
+        "zh": "定製加工",
+        "en": "Custom Fabrication"
+      },
+      "card": {
+        "zh": {
+          "i": "Custom Fabrication",
+          "b": "定製加工",
+          "alt": "定製加工",
+          "d": "水刀拼花、異形曲面與雕刻工藝，把設計圖紙變為觸得到的現實。"
+        },
+        "en": {
+          "i": "Custom Fabrication",
+          "b": "Custom Fabrication",
+          "alt": "Custom Fabrication",
+          "d": "CNC, waterjet, curves and carving — turning drawings into reality."
+        }
+      }
+    },
+    {
+      "slug": "engineered-stone",
+      "short": "人造石",
+      "href": "products/engineered-stone.html",
+      "nav": {
+        "zh": "人造石（無縫石）",
+        "en": "Engineered Stone"
+      },
+      "navSub": {
+        "zh": "Engineered · Quartz · Homogeneous",
+        "en": "Quartz · Solid Surface · Seamless"
+      },
+      "footer": {
+        "zh": "人造石（無縫石）",
+        "en": "Engineered Stone"
+      },
+      "card": {
+        "zh": {
+          "i": "Engineered Stone",
+          "b": "人造石（無縫石）",
+          "alt": "人造石（無縫石）",
+          "d": "石英石與無縫實體面材，無孔隙、可無縫拼接，廚衛檯面與牆身的耐污之選。"
+        },
+        "en": {
+          "i": "Engineered Stone",
+          "b": "Engineered Stone",
+          "alt": "Engineered Stone",
+          "d": "Quartz and seamless solid surface — non-porous, joint-free worktops and wall cladding."
+        }
+      }
+    },
+    {
+      "slug": "marble-furniture",
+      "short": "雲石家私",
+      "href": "products/marble-furniture.html",
+      "nav": {
+        "zh": "雲石家私",
+        "en": "Marble Furniture"
+      },
+      "navSub": {
+        "zh": "Dining · Coffee · Console · Vanity",
+        "en": "Dining · Coffee · Console · Vanity"
+      },
+      "footer": {
+        "zh": "雲石家私",
+        "en": "Marble Furniture"
+      },
+      "card": {
+        "zh": {
+          "i": "Marble Furniture",
+          "b": "雲石家私",
+          "alt": "雲石家私",
+          "d": "整料開料、一體成型、紋理對花：餐桌、茶几、玄關几、浴室櫃與接待台的收藏級訂製。"
+        },
+        "en": {
+          "i": "Marble Furniture",
+          "b": "Marble Furniture",
+          "alt": "Marble Furniture",
+          "go": "Explore →",
+          "d": "Cut from solid slab, formed in one piece, bookmatched: bespoke dining and coffee tables, consoles, vanities and reception counters."
+        }
+      }
+    }
+  ],
+  "navExtra": [
+    {
+      "href": "manufacturing.html",
+      "nav": {
+        "zh": "智造基地",
+        "en": "Smart Manufacturing"
+      },
+      "navSub": {
+        "zh": "Factory / Equipment / 68 Quality Nodes",
+        "en": "Factory / Equipment / 68 Quality Nodes"
+      }
+    },
+    {
+      "href": "mines.html",
+      "nav": {
+        "zh": "全球礦源",
+        "en": "Global Quarries"
+      },
+      "navSub": {
+        "zh": "60+ Countries · 180+ Quarries",
+        "en": "60+ Countries · 180+ Quarries"
+      }
+    }
+  ]
+}
