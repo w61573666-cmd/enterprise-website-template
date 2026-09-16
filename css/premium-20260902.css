@@ -4568,3 +4568,49 @@ body.premium .eng-vars-list.is-ready > .eng-var:nth-child(n+5) .eng-var-media im
     aspect-ratio:4 / 3;
   }
 }
+
+/* ============================================================
+   Module 59-ext — 产品中心其余固定栏位网格「末行补齊」(2026-09-16)
+   沿用 Module 51/59 既有惯例：「多列网格末行未满，末项横向铺满整行」。
+   Module 59 已处理 .eng-gallery-grid 与 .eng-vars-list.is-ready，
+   本段补齐其余固定栏位产品中心网格（优势卡 / 服务流程 / 品种样本墙 / 产品图库 / 参数表）。
+   ⚠️ 与 Module 59 同铁律：本段必须留在档案最末，靠「同特异度、后出现者胜」覆盖既有栏数规则；
+       只做末行补位增量，绝不改任何栏数断点。每个较宽断点新增的跨栏规则，
+       都要在更窄断点「明确复原」，否则会外溢（见 Module 59 注释）。
+   ============================================================ */
+
+/* A. 核心优势卡（桌面 3 栏 / ≤900 2 栏 / ≤560 1 栏） */
+body.premium .eng-adv-grid > .eng-adv-card:last-child:nth-child(3n+1){ grid-column:1 / -1; }
+@media (max-width:900px){
+  /* 2 栏时：先复原上面 3 栏的跨栏，再对「2+1」的末项（奇数位）铺满 */
+  body.premium .eng-adv-grid > .eng-adv-card:last-child:nth-child(3n+1){ grid-column:auto; }
+  body.premium .eng-adv-grid > .eng-adv-card:last-child:nth-child(odd){ grid-column:1 / -1; }
+}
+@media (max-width:560px){
+  /* 1 栏天然满铺 → 复原 2 栏的跨栏 */
+  body.premium .eng-adv-grid > .eng-adv-card:last-child:nth-child(odd){ grid-column:auto; }
+}
+
+/* B. 服务流程（桌面 4 栏 / ≤900 2 栏 / ≤560 1 栏） */
+body.premium .eng-process-grid > .eng-process-step:last-child:nth-child(4n+1){ grid-column:1 / -1; }
+@media (max-width:900px){
+  body.premium .eng-process-grid > .eng-process-step:last-child:nth-child(4n+1){ grid-column:auto; }
+  body.premium .eng-process-grid > .eng-process-step:last-child:nth-child(odd){ grid-column:1 / -1; }
+}
+@media (max-width:560px){
+  body.premium .eng-process-grid > .eng-process-step:last-child:nth-child(odd){ grid-column:auto; }
+}
+
+/* C. 品种样本图墙（恒为 2 栏，栏数不变） */
+body.premium .eng-variety-grid > .granite-variety-card:last-child:nth-child(odd){ grid-column:1 / -1; }
+
+/* D. 产品图库（5 栏 / ≤1024 3 栏 / ≤640 2 栏；原规则带 !important，这里同加 !important） */
+body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(5n+1){ grid-column:1 / -1 !important; }
+@media (max-width:1024px){
+  body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(5n+1){ grid-column:auto !important; }
+  body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(3n+1){ grid-column:1 / -1 !important; }
+}
+@media (max-width:640px){
+  body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(3n+1){ grid-column:auto !important; }
+  body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(odd){ grid-column:1 / -1 !important; }
+}

@@ -2885,6 +2885,8 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
   gap: 24px;
   margin: 0 auto;
 }
+/* 满铺：2 栏末行若只剩 1 张（奇数位末项），铺满整行（全站 Module 51/59 惯例） */
+.spec-grid > .spec-item:last-child:nth-child(odd){ grid-column:1 / -1; }
 .spec-item {
   background: #fff;
   border-radius: var(--radius-md);
