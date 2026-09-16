@@ -4645,68 +4645,126 @@ body.premium .product-gallery-grid > .product-gallery-item:last-child:nth-child(
 }
 
 /* ============================================================
-   模块 60 · 页脚重建（2026-09-17）
-   ① 產品業務矩陣補齊 12 個系列（新增工程石材/新品上架/人造石/雲石家私），
-      並改為「兩排」= 6 行 × 2 列，避免 12 項單列把頁腳拉得過高；
-   ② 五列寬度按內容重新配比，矩陣列加寬以容納雙列；
-   ③ 品牌區新增資質徽章、矩陣列標題加「全部系列」入口、底欄加法律連結；
-   ④ 由模塊 35 的「全居中」改為編輯式左對齊（高端品牌調性），
-      並保留既有深色底／金色標題體系；
-   ⑤ 響應式：≤1180 品牌整行 + 3 列；≤900 矩陣與聯絡整行；≤560 單列。
+   模块 60 · 页脚重构 v2（2026-09-17 续做）
+   设计目标：对称 / 大气 / 视觉冲击力 / 彰显大公司定位
+   结构：CTA 吸睛条 + 四列等宽链接（品牌列加宽）+ 整行产品矩阵（6 列两排）+ 底栏
+   ① 彻底消除旧版 5 列不规则 fr 导致的列高参差与「全部系列」箭头错位；
+   ② 所有列标题统一样式、顶部对齐；矩阵标题行 flex 右对齐「全部系列 →」；
+   ③ 产品矩阵整行 6 列网格（12 项 = 2 行 6 列），hover 为金边卡片，强对称性；
+   ④ 保留深色底 + 金色标题体系；CTA 条用金色渐变描边制造视觉焦点。
+   ⑤ 响应式：≤1180 品牌整行 + 3 列；≤900 CTA 竖排 + 2 列；≤700 矩阵 3 列；≤560 矩阵 2 列。
    ============================================================ */
-body.premium .ft-v2 .ft-grid5 {
-  grid-template-columns: 1.32fr .84fr 1.6fr .84fr 1.2fr !important;
-  column-gap: 30px !important;
-  row-gap: 30px !important;
-}
-/* 左對齊：覆蓋模塊 35 的全居中 */
-body.premium .ft-v2 .ft-grid5 > div {
-  align-items: flex-start !important;
-  text-align: left !important;
-}
-body.premium .ft-v2 .ft-grid5 .ft-h,
-body.premium .ft-v2 .ft-grid5 ul,
-body.premium .ft-v2 .ft-grid5 ul li { text-align: left !important; }
-body.premium .ft-v2 .ft-brand .ft-brand-name,
-body.premium .ft-v2 .ft-brand .ft-brand-en,
-body.premium .ft-v2 .ft-brand .ft-brand-desc { text-align: left !important; }
+/* 页脚整体留白（base .footer padding 仅 32 0 0，补底部） */
+body.premium .ft-v2 { padding-bottom: 42px !important; }
 
-/* ① 產品業務矩陣：12 項兩排（6 行 × 2 列） */
-body.premium .ft-v2 .ft-grid5 ul.ft-2col {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  column-gap: 18px !important;
-  row-gap: 7px !important;
+/* ① CTA 吸睛条 */
+body.premium .ft-v2 .ft-cta {
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  padding: 28px 34px; margin-bottom: 40px;
+  background: linear-gradient(120deg, rgba(212,180,122,.16), rgba(212,180,122,.05));
+  border: 1px solid rgba(212,180,122,.32);
+  border-radius: 18px;
 }
+body.premium .ft-v2 .ft-cta-txt { min-width: 0; }
+body.premium .ft-v2 .ft-cta-kicker {
+  margin: 0 0 9px; font-size: .62rem; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(229,204,138,.82); font-weight: 600;
+}
+body.premium .ft-v2 .ft-cta-title {
+  margin: 0 0 7px; font-size: 1.32rem; font-weight: 700; color: #fff; letter-spacing: .01em;
+}
+body.premium .ft-v2 .ft-cta-sub { margin: 0; font-size: .85rem; line-height: 1.65; color: rgba(255,255,255,.66); }
+body.premium .ft-v2 .ft-cta-actions { display: flex; gap: 14px; flex-shrink: 0; }
+body.premium .ft-v2 .ft-cta-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 28px; border-radius: 999px; font-size: .86rem; font-weight: 600;
+  text-decoration: none; white-space: nowrap; transition: background .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+body.premium .ft-v2 .ft-cta-solid { background: #C9A84C; color: #1A1A2E; box-shadow: 0 6px 18px rgba(201,168,76,.28); }
+body.premium .ft-v2 .ft-cta-solid:hover { background: #E5CC8A; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(229,204,138,.36); }
+body.premium .ft-v2 .ft-cta-line { background: transparent; color: #E5CC8A; border: 1px solid rgba(229,204,138,.5); }
+body.premium .ft-v2 .ft-cta-line:hover { background: rgba(229,204,138,.12); transform: translateY(-2px); }
 
-/* ② 品牌區資質徽章 */
-body.premium .ft-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-body.premium .ft-badges span {
-  font-size: .64rem; letter-spacing: .05em; white-space: nowrap;
-  color: rgba(255,255,255,.62);
-  border: 1px solid rgba(212,180,122,.38);
-  background: rgba(212,180,122,.08);
-  border-radius: 999px; padding: 3px 10px;
+/* ② 四列等宽链接 */
+body.premium .ft-v2 .ft-cols {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.15fr;
+  gap: 40px 32px; padding-bottom: 38px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
 }
+body.premium .ft-v2 .ft-col { min-width: 0; }
+body.premium .ft-v2 .ft-col .ft-h {
+  margin: 0 0 16px !important; padding: 0 0 12px;
+  font-size: .76rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: #D4B47A; border-bottom: 1px solid rgba(212,180,122,.22);
+}
+body.premium .ft-v2 .ft-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+body.premium .ft-v2 .ft-links li { line-height: 1.4; }
+body.premium .ft-v2 .ft-links a {
+  font-size: .84rem; color: rgba(255,255,255,.74); text-decoration: none;
+  display: inline-block; transition: color .18s ease, transform .18s ease;
+}
+body.premium .ft-v2 .ft-links a:hover { color: #E5CC8A; transform: translateX(3px); }
 
-/* ③ 列標題右側入口 */
-body.premium .ft-v2 .ft-h {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+/* 品牌列 */
+body.premium .ft-v2 .ft-brand-name { margin: 0 0 4px; font-size: 1.04rem; font-weight: 700; color: #fff; letter-spacing: .01em; }
+body.premium .ft-v2 .ft-brand-en { margin: 0 0 15px; font-size: .66rem; letter-spacing: .12em; color: rgba(229,204,138,.82); }
+body.premium .ft-v2 .ft-brand-desc { margin: 0 0 16px; font-size: .8rem; line-height: 1.78; color: rgba(255,255,255,.6); }
+body.premium .ft-v2 .ft-badges { display: flex; flex-wrap: wrap; gap: 7px; }
+body.premium .ft-v2 .ft-badges span {
+  font-size: .62rem; letter-spacing: .03em; white-space: nowrap;
+  color: rgba(255,255,255,.66); border: 1px solid rgba(212,180,122,.34);
+  background: rgba(212,180,122,.07); border-radius: 999px; padding: 4px 11px;
 }
-body.premium .ft-h-more {
-  font-size: .66rem; font-weight: 500; letter-spacing: .02em; text-transform: none;
-  color: rgba(229,204,138,.85); text-decoration: none; white-space: nowrap;
+/* 联络列 */
+body.premium .ft-v2 .ft-contact .ft-c-line { font-size: .8rem; color: rgba(255,255,255,.86); line-height: 1.5; }
+body.premium .ft-v2 .ft-contact .ft-c-line a { color: inherit; text-decoration: none; }
+body.premium .ft-v2 .ft-contact .ft-c-line a:hover { color: #E5CC8A; }
+body.premium .ft-v2 .ft-contact .ft-c-note { display: block; margin-top: 3px; font-size: .68rem; color: rgba(255,255,255,.42); }
+
+/* ③ 产品矩阵整行 */
+body.premium .ft-v2 .ft-matrix { padding-top: 34px; }
+body.premium .ft-v2 .ft-matrix-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px;
 }
-body.premium .ft-h-more:hover { color: #E5CC8A; text-decoration: underline; }
+body.premium .ft-v2 .ft-matrix-head .ft-h {
+  margin: 0 !important; padding: 0; border: 0; font-size: .82rem; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; color: #D4B47A;
+}
+body.premium .ft-v2 .ft-h-more {
+  font-size: .8rem; font-weight: 500; color: #E5CC8A; text-decoration: none;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  transition: gap .18s ease, color .18s ease;
+}
+body.premium .ft-v2 .ft-h-more:hover { color: #fff; gap: 10px; }
+body.premium .ft-v2 .ft-matrix-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px 18px;
+}
+body.premium .ft-v2 .ft-matrix-grid li a {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .82rem; color: rgba(255,255,255,.78); text-decoration: none;
+  padding: 10px 13px; border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+body.premium .ft-v2 .ft-matrix-grid li a::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(212,180,122,.5); flex-shrink: 0; transition: background .18s ease;
+}
+body.premium .ft-v2 .ft-matrix-grid li a:hover {
+  color: #fff; border-color: rgba(212,180,122,.45); background: rgba(212,180,122,.10); transform: translateY(-2px);
+}
+body.premium .ft-v2 .ft-matrix-grid li a:hover::before { background: #E5CC8A; }
 
 /* ④ 底欄：版權左 / 法律連結右 */
 body.premium .ft-v2 .ft-bottom {
-  justify-content: space-between !important;
-  text-align: left !important;
-  margin-top: 30px !important;
-  padding-top: 16px !important;
+  display: flex; justify-content: space-between !important; align-items: center; flex-wrap: wrap; gap: 12px;
+  margin-top: 34px !important; padding-top: 18px !important; border-top: 1px solid rgba(255,255,255,.10);
+  font-size: .74rem; color: rgba(255,255,255,.5); text-align: left !important;
 }
-body.premium .ft-v2 .ft-legal { gap: 18px; }
-body.premium .ft-v2 .ft-legal a { white-space: nowrap; }
+body.premium .ft-v2 .ft-legal { display: flex; flex-wrap: wrap; gap: 20px; }
+body.premium .ft-v2 .ft-legal a { font-size: .74rem; color: rgba(255,255,255,.55); text-decoration: none; transition: color .18s ease; }
+body.premium .ft-v2 .ft-legal a:hover { color: #E5CC8A; }
 
 /* ⑤ 影片卡片下方說明（本系列加工工藝實錄） */
 body.premium .product-video-cap {
@@ -4714,27 +4772,24 @@ body.premium .product-video-cap {
   color: #5C574F; letter-spacing: .01em;
 }
 
-/* 響應式 */
+/* 响应式 */
 @media (max-width: 1180px) {
-  body.premium .ft-v2 .ft-grid5 {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    column-gap: 26px !important; row-gap: 30px !important;
-  }
-  body.premium .ft-v2 .ft-grid5 > div:first-child { grid-column: 1 / -1 !important; }
+  body.premium .ft-v2 .ft-cols { grid-template-columns: 1.4fr 1fr 1fr; gap: 36px 28px; }
+  body.premium .ft-v2 .ft-col-brand { grid-column: 1 / -1; }
+  body.premium .ft-v2 .ft-matrix-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
-  body.premium .ft-v2 .ft-grid5 {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    column-gap: 22px !important; row-gap: 26px !important;
-  }
-  /* 矩陣（12 項）與聯絡渠道（6 行）各自鋪滿整行，避免擠成窄條 */
-  body.premium .ft-v2 .ft-matrix { grid-column: 1 / -1 !important; }
-  body.premium .ft-v2 .ft-grid5 > div:nth-child(5) { grid-column: 1 / -1 !important; }
+  body.premium .ft-v2 .ft-cta { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+  body.premium .ft-v2 .ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body.premium .ft-v2 .ft-col-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  body.premium .ft-v2 .ft-matrix-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  body.premium .ft-v2 .ft-bottom { flex-direction: column !important; align-items: flex-start !important; }
 }
 @media (max-width: 560px) {
-  body.premium .ft-v2 .ft-bottom {
-    flex-direction: column; align-items: flex-start !important;
-    gap: 10px; text-align: left !important;
-  }
+  body.premium .ft-v2 .ft-matrix-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 12px; }
+  body.premium .ft-v2 .ft-cta-actions { width: 100%; }
+  body.premium .ft-v2 .ft-cta-btn { flex: 1; }
   body.premium .ft-v2 .ft-badges span { font-size: .6rem; }
 }
