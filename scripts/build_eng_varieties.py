@@ -9,7 +9,7 @@
   詳情頁  products/engineering-stone-varieties/<slug>.html  (×18, + en/)
 
 做法：以站內現有真實頁面為模板（保留完整 nav / footer / JSON-LD），
-只替換 <head> 元信息與 <main-content> 主體，確保導航與結構一致。
+只替換 <head> 元資訊與 <main-content> 主體，確保導航與結構一致。
 
 圖片策略（Stone 2026-09-17 更新）：19 張 AI 場景主圖（18 系列 + 落地頁）已由
 scripts/process_ev_heroes.py 生成並去水印，落盤 jpg+webp 雙格式；
@@ -50,7 +50,7 @@ GRANITE_SPECS = [
 SERIES = [
 {
  "slug":"bollard-ball","idx":"01",
- "zh":{"name":"挡车石球","hk":"車檔石球","en":"Granite Bollard Ball",
+ "zh":{"name":"擋車石球","hk":"車檔石球","en":"Granite Bollard Ball",
   "intro":"以花崗岩（麻石）整料車削而成的球形車檔，用於人行道、廣場、停車場與公共設施入口，分隔人車、防範車輛誤闖，堅固耐撞、歷久不鏽。",
   "material":"選用高密度花崗岩（麻石）荒料整球車削，質地緻密、抗壓耐撞；表面常做火燒面或荔枝面處理以提升質感。麻石天然耐候、抗紫外線、不褪色，適合香港高溫多雨、臨海鹽霧的戶外環境長期使用。",
   "apps":[("🚧","公共設施入口","分隔人車、防車輛誤闖"),("🅿️","停車場與車道","界定行車動線"),("🏞️","廣場與園區","景觀與安全兼備"),("🏫","校園與醫院","守護行人安全"),("🏛️","文化地標","莊重且耐看"),("🌳","住宅社群","低調實用")]},
@@ -58,7 +58,7 @@ SERIES = [
   "intro":"Solid-turned granite spheres used at building entrances, plazas, car parks and public facilities to separate pedestrians from vehicles — robust, impact-resistant and weatherproof.",
   "material":"Turned from solid high-density granite (麻石) blocks. Dense, compression-resistant and impact-proof; usually flamed or bush-hammered for texture. Granite is naturally weatherproof, UV-stable and non-fading — ideal for Hong Kong's hot, rainy, coastal climate.",
   "apps":[("🚧","Facility Entrances","Separate people and vehicles"),("🅿️","Car Parks & Driveways","Define traffic lines"),("🏞️","Plazas & Parks","Landscape + safety"),("🏫","Campuses & Hospitals","Protect pedestrians"),("🏛️","Cultural Landmarks","Dignified finish"),("🌳","Residential Estates","Low-key utility")]},
- "common_specs":[("常見規格 Common Sizes","Φ300 / Φ400 / Φ500 / Φ600 mm（可定制）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
+ "common_specs":[("常見規格 Common Sizes","Φ300 / Φ400 / Φ500 / Φ600 mm（可訂造）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
  "items":[
   {"zh":"標準圓球","hk":"標準圓球","en":"Standard Sphere","zh_note":"最常見規格，Φ400–Φ600","en_note":"Most common Φ400–Φ600"},
   {"zh":"帶底座石球","hk":"連座石球","en":"Ball with Base","zh_note":"球+基座一體，防滾動","en_note":"Ball+plinth, anti-roll"},
@@ -73,9 +73,9 @@ SERIES = [
 },
 {
  "slug":"bollard-post","idx":"02",
- "zh":{"name":"挡车石柱","hk":"車檔柱","en":"Granite Bollard Post",
+ "zh":{"name":"擋車石柱","hk":"車檔柱","en":"Granite Bollard Post",
   "intro":"花崗岩（麻石）整料雕刻的立柱式車檔，用於限制車輛進入的行人區、廣場與設施入口，兼具防撞隔離與景觀裝飾功能。",
-  "material":"採用高密度麻石整柱車削或雕刻，柱體筆直、頂帽可循羅馬/簡約等風格定制。麻石抗壓、耐撞、耐候，表面火燒/荔枝面防反光，適合香港戶外長期佈設。",
+  "material":"採用高密度麻石整柱車削或雕刻，柱體筆直、頂帽可循羅馬/簡約等風格訂造。麻石抗壓、耐撞、耐候，表面火燒/荔枝面防反光，適合香港戶外長期佈設。",
   "apps":[("🚷","行人專區","禁車區軟隔離"),("🏛️","古蹟與地標","風格協調"),("🌆","商場外廣場","安全與美觀"),("🏫","校園圍界","守護學童"),("🏥","醫院落客區","人車分流"),("🌳","私宅車道","低調防闖")]},
  "en":{"name":"Bollard Post","hk":"Traffic Bollard Post","en":"Granite Bollard Post",
   "intro":"Turned or carved granite posts that restrict vehicle access to pedestrian zones, plazas and entrances — combining impact resistance with decorative presence.",
@@ -104,7 +104,7 @@ SERIES = [
   "intro":"Granite balustrade systems — newel posts, infill panels, handrail and caps — for stairs, terraces, bridges, balconies and garden paths; solid guidance with a classic profile.",
   "material":"Mortise-joined granite: newels, panels and handrail, with drum/Roman/plain caps. Heavy, wind-loaded, weatherproof and non-rotting; flamed/bush-hammered for grip — ideal for HK outdoor stairs and seafront walks.",
   "apps":[("🪜","Stairs & Terraces","Safe guidance"),("🌉","Bridges & Quays","Wind-loaded rail"),("🏞️","Garden Paths","Rustic match"),("🏠","Balconies","Durable guard"),("🏛️","Landmark Facades","Formal lines"),("⛲","Pools & Decks","Rot-proof")]},
- "common_specs":[("常見規格 Common Sizes","欄板高 400–1100 mm；柱距 1000–1500 mm（可定制）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
+ "common_specs":[("常見規格 Common Sizes","欄板高 400–1100 mm；柱距 1000–1500 mm（可訂造）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
  "items":[
   {"zh":"欄杆望柱","hk":"欄杆柱（望柱）","en":"Newel Post","zh_note":"欄杆主柱，承重","en_note":"Main load post"},
   {"zh":"欄板","hk":"欄板","en":"Infill Panel","zh_note":"柱間欄板","en_note":"Between-post panel"},
@@ -120,9 +120,9 @@ SERIES = [
 {
  "slug":"engraved-name-stone","idx":"04",
  "zh":{"name":"刻字门牌石","hk":"門口石（刻字石）","en":"Engraved Entrance Stone",
-  "intro":"花崗岩（麻石）門牌、招牌與題字景石，用於別墅、企業、園林與公共設施的識別與點題，陰刻/浮雕字經久清晰、風雨不褪。",
+  "intro":"花崗岩（麻石）門牌、招牌與題字景石，用於獨立屋、企業、園林與公共設施的識別與點題，陰刻/浮雕字經久清晰、風雨不褪。",
   "material":"選用色澤均一的麻石板材或自然景石，表面光面便於刻字、火燒/荔枝面顯質樸。石材不褪色、不腐、抗撞，適合香港戶外長期標識；字口可填漆或描金強化辨識。",
-  "apps":[("🏡","別墅與住宅","門牌識別"),("🏢","企業總部","招牌題字"),("🏞️","園林景觀","點題刻石"),("🏛️","文化設施","落成名碑"),("🪨","廣場與公園","導視刻字"),("💒","宗教場所","莊重題字")]},
+  "apps":[("🏡","獨立屋與住宅","門牌識別"),("🏢","企業總部","招牌題字"),("🏞️","園林景觀","點題刻石"),("🏛️","文化設施","落成名碑"),("🪨","廣場與公園","導視刻字"),("💒","宗教場所","莊重題字")]},
  "en":{"name":"Engraved Name Stone","hk":"Entrance Stone","en":"Engraved Entrance Stone",
   "intro":"Granite nameplates, signage and inscribed feature stones for villas, corporations, gardens and public facilities — incised/relief lettering stays sharp through weather.",
   "material":"Even-toned granite slab or natural boulder; polished for legibility, flamed/bush-hammered for rustic feel. Non-fading, non-rotting, impact-proof — ideal for HK outdoor signage; lettering can be painted or gilded.",
@@ -133,7 +133,7 @@ SERIES = [
   {"zh":"立體字門牌","hk":"浮雕門牌","en":"Relief Nameplate","zh_note":"字體浮雕凸起","en_note":"Raised-letter plate"},
   {"zh":"鎮宅石","hk":"鎮宅石","en":"Guard Stone","zh_note":"園門側立石","en_note":"Gate-side stone"},
   {"zh":"公司招牌石","hk":"公司招牌石","en":"Corporate Sign","zh_note":"企業標識石刻","en_note":"Corporate logo stone"},
-  {"zh":"別墅門牌","hk":"別墅門牌","en":"Villa Nameplate","zh_note":"住宅入口識別","en_note":"Residence ID"},
+  {"zh":"獨立屋門牌","hk":"獨立屋門牌","en":"Villa Nameplate","zh_note":"住宅入口識別","en_note":"Residence ID"},
   {"zh":"園林刻字石","hk":"園林刻字石","en":"Garden Inscription","zh_note":"景石題字","en_note":"Inscribed boulder"},
   {"zh":"景石題字","hk":"景石題字","en":"Feature Inscription","zh_note":"自然石點題","en_note":"Natural-stone text"},
   {"zh":"奠基石","hk":"奠基石","en":"Foundation Stone","zh_note":"動工紀念刻石","en_note":"Groundbreaking stone"},
@@ -145,7 +145,7 @@ SERIES = [
  "zh":{"name":"石雕石墩","hk":"石墩（柱礎）","en":"Carved Stone Pier / Plinth",
   "intro":"花崗岩（麻石）雕刻的柱礎、門枕、抱鼓與景觀石墩，用於建築承托、圍牆收頭與園林點景，承重穩固、雕工精細、歷久彌新。",
   "material":"麻石質地均勻、便於雕刻，柱礎/門枕等承重件選高密度料確保承壓；表面可光面顯雕工或火燒/荔枝面顯質樸。石材耐候抗腐，適合香港戶外與半戶外佈設。",
-  "apps":[("🏛️","古建與圍牆","柱礎承托"),("🚪","門樓與照壁","門枕抱鼓"),("🌳","園林點景","景觀石墩"),("🏺","花缽與燈座","基座承托"),("🪨","廣場收頭","圍牆端柱"),("🏠","別墅門廊","裝飾墩座")]},
+  "apps":[("🏛️","古建與圍牆","柱礎承托"),("🚪","門樓與照壁","門枕抱鼓"),("🌳","園林點景","景觀石墩"),("🏺","花缽與燈座","基座承托"),("🪨","廣場收頭","圍牆端柱"),("🏠","獨立屋門廊","裝飾墩座")]},
  "en":{"name":"Carved Stone Pier","hk":"Stone Plinth","en":"Carved Stone Pier / Plinth",
   "intro":"Carved granite plinths, base stones, drum stones and landscape piers for structural support, wall ends and garden accents — load-bearing, finely carved, enduring.",
   "material":"Even granite, easy to carve; load parts use high-density stock for compression. Polished shows carving, flamed/bush-hammered shows rustic grain. Weatherproof and rot-proof for HK use.",
@@ -165,7 +165,7 @@ SERIES = [
 },
 {
  "slug":"flamed-paving","idx":"06",
- "zh":{"name":"火烧板地铺石","hk":"火燒面地鋪石","en":"Flamed Granite Paving Tile",
+ "zh":{"name":"火燒板地鋪石","hk":"火燒面地鋪石","en":"Flamed Granite Paving Tile",
   "intro":"花崗岩（麻石）經火燒處理的戶外地鋪板材，表面粗糙防滑、色澤沉穩，適用於人行道、廣場、園路與車行區，耐磨抗壓、雨後不滑。",
   "material":"麻石板材經高溫火燒使表層礦物微爆形成均勻糙面，防滑且不易積水反光。石材密度高、抗壓耐磨，耐香港多雨與紫外線；厚度依荷載選 30/50 mm。",
   "apps":[("🚶","人行道","防滑安全"),("🏞️","園路與廣場","自然啞光"),("🅿️","車行區","承重耐磨"),("🏛️","地標鋪裝","莊重色調"),("🌳","住宅社群","低維護"),("🏫","校園戶外","耐走耐磨")]},
@@ -188,7 +188,7 @@ SERIES = [
 },
 {
  "slug":"bushhammered-paving","idx":"07",
- "zh":{"name":"荔枝面地铺石","hk":"荔枝面地鋪石","en":"Bush-Hammered Granite Paving",
+ "zh":{"name":"荔枝面地鋪石","hk":"荔枝面地鋪石","en":"Bush-Hammered Granite Paving",
   "intro":"花崗岩（麻石）經荔枝錘處理的戶外地鋪板材，表面呈均勻點狀糙面、觸感細密防滑，色澤溫潤，適用人行道、園路、廣場與建築散水。",
   "material":"麻石板材以荔枝錘衝打形成細密均點糙面，比火燒面更細膩、防滑且不易藏污。石材抗壓耐磨、耐候，適合香港潮濕多雨戶外；厚度依荷載選 30/50 mm。",
   "apps":[("🚶","人行道","細密防滑"),("🏞️","園林步道","溫潤質感"),("🏛️","建築散水","協調立面"),("🅿️","車行區","承重耐磨"),("🌳","住宅社群","低維護"),("🏫","校園戶外","耐走耐磨")]},
@@ -257,7 +257,7 @@ SERIES = [
 },
 {
  "slug":"crazy-paving","idx":"10",
- "zh":{"name":"冰裂纹碎拼石","hk":"冰裂紋碎拼石","en":"Irregular Flagstone / Crazy Paving",
+ "zh":{"name":"冰裂紋碎拼石","hk":"冰裂紋碎拼石","en":"Irregular Flagstone / Crazy Paving",
   "intro":"花崗岩（麻石）自然面或機切的冰裂紋碎拼板材，用於園路、廣場、景牆與水岸，肌理靈動、排水自然、野趣盎然，契合香港園林與休閒空間。",
   "material":"麻石板材經自然面處理或機切多邊形，拼合呈冰裂紋。石材耐候、抗壓、不褪色，縫隙可填碎石或植草；適合香港戶外園景長期使用。",
   "apps":[("🏞️","園林步道","野趣肌理"),("🪨","景牆與旱景","自然面質"),("⛲","水岸平台","防滑耐潮"),("🏛️","廣場碎拼","圖案靈動"),("🌳","住宅社群","低維護"),("🏫","校園戶外","親自然")]},
@@ -288,7 +288,7 @@ SERIES = [
   "intro":"Granite kerbs for carriageways, footpaths, plazas and green belts — separate flows, protect subgrade, straighten lines; compression-proof, wear-proof, true-edged.",
   "material":"Pressed or dressed granite with crisp straight lines. Compression-proof, frost-proof, weatherproof; flamed/bush-hammered face — for HK roads and public space.",
   "apps":[("🛣️","Carriageway","Separate flows"),("🚶","Footpath","Protect base"),("🌳","Green Belt","Edge stone"),("🏞️","Plaza/Park","Clean lines"),("🅿️","Car Park","Define lane"),("🏫","Campus/Hospital","Safe edge")]},
- "common_specs":[("常見規格 Common Sizes","1000×300×120 / 1000×250×100 mm（長×上寬×高，可定制）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
+ "common_specs":[("常見規格 Common Sizes","1000×300×120 / 1000×250×100 mm（長×上寬×高，可訂造）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
  "items":[
   {"zh":"立道牙（路緣石）","hk":"立路緣石","en":"Vertical Kerb","zh_note":"直立分隔","en_note":"Vertical divide"},
   {"zh":"平石","hk":"平石","en":"Lay-back Kerb","zh_note":"與路面齊平","en_note":"Flush with road"},
@@ -298,7 +298,7 @@ SERIES = [
   {"zh":"L型道牙","hk":"L型道牙","en":"L-type Kerb","zh_note":"擋邊兼收水","en_note":"Curb+drain"},
   {"zh":"帶排水孔道牙","hk":"排水孔道牙","en":"Drained Kerb","zh_note":"預留孔排水","en_note":"Pre-drilled drain"},
   {"zh":"轉角道牙","hk":"轉角道牙","en":"Corner Kerb","zh_note":"路口轉角","en_note":"Junction corner"},
-  {"zh":"異型道牙","hk":"異型道牙","en":"Special Kerb","zh_note":"定制造型","en_note":"Custom shape"},
+  {"zh":"異型道牙","hk":"異型道牙","en":"Special Kerb","zh_note":"訂造造型","en_note":"Custom shape"},
   {"zh":"樹池道牙","hk":"樹圈道牙","en":"Tree-ring Kerb","zh_note":"樹池收邊","en_note":"Tree ring"}]
 },
 {
@@ -311,7 +311,7 @@ SERIES = [
   "intro":"Pre-radiused granite kerbs for roundabouts, bends, plaza arcs and landscape curves — smooth lines, tight joints, compression-proof and wear-proof.",
   "material":"Moulded or wire-cut granite to accurate radius, tight seams. Frost-proof, weatherproof, flamed/bush-hammered face — for HK road and garden arcs.",
   "apps":[("🔄","Roundabouts","Smooth arc"),("🏞️","Plaza Arc","Elegant line"),("🌳","Garden Curve","Natural transition"),("🅿️","Lot Arc","Lane guide"),("🏫","Campus Path","Safe bend"),("⛲","Quay Curve","Wet-proof")]},
- "common_specs":[("常見規格 Common Sizes","半徑 R500 / R1000 / R2000 mm；長×高 500×120 mm（可定制）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
+ "common_specs":[("常見規格 Common Sizes","半徑 R500 / R1000 / R2000 mm；長×高 500×120 mm（可訂造）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 光面 Polished")],
  "items":[
   {"zh":"內彎道牙","hk":"內彎道牙","en":"Inner Curve","zh_note":"圓環內弧","en_note":"Inner arc"},
   {"zh":"外彎道牙","hk":"外彎道牙","en":"Outer Curve","zh_note":"圓環外弧","en_note":"Outer arc"},
@@ -322,7 +322,7 @@ SERIES = [
   {"zh":"圓角彎位","hk":"圓角彎位","en":"Fillet Curve","zh_note":"緩衝彎","en_note":"Ease bend"},
   {"zh":"收口彎位","hk":"收口彎位","en":"Taper Curve","zh_note":"弧線收口","en_note":"Arc taper"},
   {"zh":"坡道彎位","hk":"坡道彎位","en":"Ramp Curve","zh_note":"無障礙坡弧","en_note":"Ramp arc"},
-  {"zh":"異型彎位","hk":"異型彎位","en":"Special Curve","zh_note":"定制曲線","en_note":"Custom curve"}]
+  {"zh":"異型彎位","hk":"異型彎位","en":"Special Curve","zh_note":"訂造曲線","en_note":"Custom curve"}]
 },
 {
  "slug":"tree-pit-stone","idx":"13",
@@ -342,14 +342,14 @@ SERIES = [
   {"zh":"帶格柵樹池","hk":"連格柵樹池","en":"Grated Pit","zh_note":"配格柵透水","en_note":"With grate"},
   {"zh":"雙層樹池","hk":"雙層樹池","en":"Double Pit","zh_note":"高低雙圈","en_note":"Double ring"},
   {"zh":"收邊樹池","hk":"收邊樹池","en":"Edge Pit","zh_note":"與鋪裝齊","en_note":"Flush edge"},
-  {"zh":"異型樹池","hk":"異型樹池","en":"Special Pit","zh_note":"定制造型","en_note":"Custom shape"},
+  {"zh":"異型樹池","hk":"異型樹池","en":"Special Pit","zh_note":"訂造造型","en_note":"Custom shape"},
   {"zh":"草地樹池","hk":"草地樹池","en":"Lawn Pit","zh_note":"草地收邊","en_note":"Lawn edge"},
   {"zh":"廣場樹池","hk":"廣場樹池","en":"Plaza Pit","zh_note":"大面陳列","en_note":"Plaza display"},
   {"zh":"組合樹池","hk":"組合樹池","en":"Composite Pit","zh_note":"樹池+坐凳","en_note":"Pit+bench"}]
 },
 {
  "slug":"coping-stone","idx":"14",
- "zh":{"name":"压顶石","hk":"壓頂石（笠帽石）","en":"Coping Stone / Wall Coping",
+ "zh":{"name":"壓顶石","hk":"壓頂石（笠帽石）","en":"Coping Stone / Wall Coping",
   "intro":"花崗岩（麻石）牆頂壓頂與笠帽石，用於矮牆、女兒牆、花槽、欄河與柱頂收頭，遮雨防滲、線條挺括，保護牆身、提升立面質感。",
   "material":"麻石壓頂石以整料鑿製，前緣常做滴水/斜角導水。石材抗壓、耐候、抗凍融，表面火燒/荔枝面或光面；適合香港多雨戶外收頭。",
   "apps":[("🧱","矮牆與女兒牆","遮雨收頭"),("🪴","花槽與欄河","挺括線條"),("🏛️","柱頂與牆頭","莊重收口"),("🏞️","園景牆身","保護牆身"),("🌳","住宅社群","低維護"),("⛲","水岸擋牆","防潮耐潮")]},
@@ -367,7 +367,7 @@ SERIES = [
   {"zh":"花槽壓頂","hk":"花槽壓頂","en":"Planter Coping","zh_note":"花槽收口","en_note":"Planter cap"},
   {"zh":"柱頂壓頂","hk":"柱頂壓頂","en":"Column Cap","zh_note":"柱頭笠帽","en_note":"Column cap"},
   {"zh":"收邊壓頂","hk":"收邊壓頂","en":"Edge Coping","zh_note":"轉角收口","en_note":"Corner cap"},
-  {"zh":"異型壓頂","hk":"異型壓頂","en":"Special Coping","zh_note":"定制造型","en_note":"Custom shape"},
+  {"zh":"異型壓頂","hk":"異型壓頂","en":"Special Coping","zh_note":"訂造造型","en_note":"Custom shape"},
   {"zh":"厚版壓頂","hk":"厚版壓頂","en":"Thick Coping","zh_note":"重載收頭","en_note":"Heavy cap"}]
 },
 {
@@ -375,7 +375,7 @@ SERIES = [
  "zh":{"name":"台阶踏步石","hk":"石級（踏步石）","en":"Granite Step Tread / Stair Tread",
   "intro":"花崗岩（麻石）室內外踏步與石級，用於大堂、平台、園林階梯與無障礙坡道，承重防滑、線條挺括、耐磨抗壓。",
   "material":"麻石踏步以整料鑿製，踏面常做防滑槽/火燒/荔枝面，踢腳可一體。石材抗壓耐磨、耐候，適合香港潮濕戶外階梯長期使用。",
-  "apps":[("🪜","室外階梯","防滑安全"),("🏛️","大堂石級","莊重線條"),("🏞️","園林階梯","自然協調"),("♿","無障礙坡","平穩過渡"),("🏠","別墅門廊","耐用美觀"),("🏫","校園與醫院","重載耐磨")]},
+  "apps":[("🪜","室外階梯","防滑安全"),("🏛️","大堂石級","莊重線條"),("🏞️","園林階梯","自然協調"),("♿","無障礙坡","平穩過渡"),("🏠","獨立屋門廊","耐用美觀"),("🏫","校園與醫院","重載耐磨")]},
  "en":{"name":"Step Tread","hk":"Stair Tread","en":"Granite Step Tread / Stair Tread",
   "intro":"Granite indoor/outdoor treads for lobbies, terraces, garden stairs and ramps — load-bearing, slip-resistant, crisp, wear-proof.",
   "material":"Dressed granite with anti-slip groove / flamed / bush-hammered tread, integral riser. Compression-proof, wear-proof, weatherproof — for HK wet outdoor stairs.",
@@ -403,7 +403,7 @@ SERIES = [
   "intro":"Granite floor grates and drain covers for plaza, park, drive and building-apron surface drainage — load-bearing, slip-resistant, non-rusting, paving-matched.",
   "material":"Dressed or wire-cut granite with code-compliant bar spacing, drive-load rated. Compression-proof, weatherproof, frost-proof, flamed/bush-hammered grip — for HK rainy drainage.",
   "apps":[("🌧️","Plaza Drain","Surface collect"),("🅿️","Drive Zone","Load grate"),("🏞️","Park Apron","Match paving"),("🏢","Building Apron","Anti-clog"),("🌳","Estates","Low upkeep"),("⛲","Quay/Pool","Wet-proof")]},
- "common_specs":[("常見規格 Common Sizes","格蓋 300×300 / 500×500 mm；縫寬 15–25 mm（可定制）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 線切 Slot-cut")],
+ "common_specs":[("常見規格 Common Sizes","格蓋 300×300 / 500×500 mm；縫寬 15–25 mm（可訂造）"),("表面處理 Finish","火燒面 Flamed / 荔枝面 Bush-hammered / 線切 Slot-cut")],
  "items":[
   {"zh":"直線水篦","hk":"直線水篦","en":"Linear Grate","zh_note":"長條直排","en_note":"Linear row"},
   {"zh":"格柵水篦","hk":"格柵水篦","en":"Grid Grate","zh_note":"井字格","en_note":"Grid pattern"},
@@ -413,7 +413,7 @@ SERIES = [
   {"zh":"園林水篦","hk":"園林水篦","en":"Garden Grate","zh_note":"低調收水","en_note":"Low-key"},
   {"zh":"車行水篦","hk":"車行水篦","en":"Drive Grate","zh_note":"重載格蓋","en_note":"Drive load"},
   {"zh":"收邊水篦","hk":"收邊水篦","en":"Edge Grate","zh_note":"邊界收口","en_note":"Border trim"},
-  {"zh":"異型水篦","hk":"異型水篦","en":"Special Grate","zh_note":"定制造型","en_note":"Custom shape"},
+  {"zh":"異型水篦","hk":"異型水篦","en":"Special Grate","zh_note":"訂造造型","en_note":"Custom shape"},
   {"zh":"組合水篦","hk":"組合水篦","en":"Composite Grate","zh_note":"石+鋼組合","en_note":"Stone+steel"}]
 },
 {
@@ -442,9 +442,9 @@ SERIES = [
 {
  "slug":"mushroom-stone","idx":"18",
  "zh":{"name":"蘑菇石","hk":"蘑菇石（磊石）","en":"Mushroom Stone / Rustic Cladding",
-  "intro":"花崗岩（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於別墅、圍牆、景牆與園林建築，自然野趣、耐候不褪。",
+  "intro":"花崗岩（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、景牆與園林建築，自然野趣、耐候不褪。",
   "material":"麻石蘑菇石以整料鑿製或模具成型，中央隆起、四緣漸薄便於錯縫拼貼。石材抗壓、耐候、抗凍融，表面自然面/火燒；適合香港戶外立面與園景。",
-  "apps":[("🏡","別墅與圍牆","質樸立面"),("🪨","景牆與旱景","立體肌理"),("🏞️","園林建築","自然野趣"),("🏛️","地標外飾","特色造型"),("🌳","住宅社群","低維護"),("⛲","水岸擋牆","防潮耐潮")]},
+  "apps":[("🏡","獨立屋與圍牆","質樸立面"),("🪨","景牆與旱景","立體肌理"),("🏞️","園林建築","自然野趣"),("🏛️","地標外飾","特色造型"),("🌳","住宅社群","低維護"),("⛲","水岸擋牆","防潮耐潮")]},
  "en":{"name":"Mushroom Stone","hk":"Rustic Cladding","en":"Mushroom Stone / Rustic Cladding",
   "intro":"Granite mushroom (rustic) cladding — raised centre, thin tapered edges — for villas, walls, feature walls and garden buildings; textured, weatherproof, non-fading.",
   "material":"Dressed or moulded granite, centre-bulged with thin tapered edges for staggered laying. Compression-proof, weatherproof, frost-proof, natural/flamed face — for HK outdoor cladding.",
@@ -459,10 +459,14 @@ SERIES = [
   {"zh":"收邊蘑菇石","hk":"收邊蘑菇石","en":"Edge Mushroom","zh_note":"轉角收口","en_note":"Corner trim"},
   {"zh":"園林蘑菇石","hk":"園林蘑菇石","en":"Garden Mushroom","zh_note":"園景外飾","en_note":"Garden trim"},
   {"zh":"景牆蘑菇石","hk":"景牆蘑菇石","en":"Wall Mushroom","zh_note":"立面粉拼","en_note":"Wall clad"},
-  {"zh":"異型蘑菇石","hk":"異型蘑菇石","en":"Special Mushroom","zh_note":"定制造型","en_note":"Custom shape"},
+  {"zh":"異型蘑菇石","hk":"異型蘑菇石","en":"Special Mushroom","zh_note":"訂造造型","en_note":"Custom shape"},
   {"zh":"組合蘑菇石","hk":"組合蘑菇石","en":"Composite Mushroom","zh_note":"混鋪圖案","en_note":"Mixed pattern"}]
 },
 ]
+
+for _s in SERIES:
+    _s["zh"]["disp"] = _s["zh"]["hk"]
+    _s["en"]["disp"] = _s["en"]["name"]
 
 # ---------------- 共享 CSS（占位圖框 + 表格 + 卡片） ----------------
 SHARED_CSS = """
@@ -501,10 +505,10 @@ def build_seo_ld_auto(lang, is_landing, s):
             url = cat_url
             crumbs = [("首頁", home), ("產品中心", prod), (cat_name, cat_url)]
         else:
-            name = z["name"]
+            name = z["disp"]
             desc = z["intro"]
             url = cat_url + "/" + s["slug"] + ".html"
-            crumbs = [("首頁", home), ("產品中心", prod), (cat_name, cat_url), (z["name"], url)]
+            crumbs = [("首頁", home), ("產品中心", prod), (cat_name, cat_url), (z["disp"], url)]
     else:
         prod = "https://www.hsst.hk/en/products.html"
         cat_url = "https://www.hsst.hk/en/products/engineering-stone-varieties.html"
@@ -516,10 +520,10 @@ def build_seo_ld_auto(lang, is_landing, s):
             url = cat_url
             crumbs = [("Home", home), ("Products", prod), (cat_name, cat_url)]
         else:
-            name = z["name"]
+            name = z["disp"]
             desc = z["intro"]
             url = cat_url + "/" + s["slug"] + ".html"
-            crumbs = [("Home", home), ("Products", prod), (cat_name, cat_url), (z["name"], url)]
+            crumbs = [("Home", home), ("Products", prod), (cat_name, cat_url), (z["disp"], url)]
     bc = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -554,9 +558,9 @@ def build_detail_main(lang, s, prev_s, next_s):
     z = s[lang]
     L = "zh" if lang == "zh" else "en"
     crumbs = (("首頁","../../index.html"),("產品中心","../../products.html"),
-              ("工程石材","../../products/engineering-stone-varieties.html"),(z["name"],None)) if lang=="zh" else \
+              ("工程石材","../../products/engineering-stone-varieties.html"),(z["disp"],None)) if lang=="zh" else \
              (("Home","../../../index.html"),("Products","../../../products.html"),
-              ("Engineering Stone","../../../products/engineering-stone-varieties.html"),(z["name"],None))
+              ("Engineering Stone","../../../products/engineering-stone-varieties.html"),(z["disp"],None))
     crumb = '<nav class="breadcrumb" aria-label="Breadcrumb"><ol>%s</ol></nav>' % "".join(
         ('<li><a href="%s">%s</a></li>' % (u,n)) if u else '<li><span aria-current="page">%s</span></li>' % n
         for n,u in crumbs)
@@ -564,7 +568,7 @@ def build_detail_main(lang, s, prev_s, next_s):
     ip = "../../" if lang=="zh" else "../../../"
     pic = ('<picture><source srcset="%simages/products/engineering-stone-varieties/%s-hero.webp" type="image/webp"/>'
            '<img alt="%s" class="product-hero-bg" src="%simages/products/engineering-stone-varieties/%s-hero.jpg"/></picture>'
-           ) % (ip, s["slug"], esc(z["name"]), ip, s["slug"])
+           ) % (ip, s["slug"], esc(z["disp"]), ip, s["slug"])
 
     specs_rows = "".join(
         '<div class="spec-item"><div class="spec-item-left"><div class="spec-item-name">%s</div>%s</div>'
@@ -589,7 +593,7 @@ def build_detail_main(lang, s, prev_s, next_s):
         for i, it in enumerate(s["items"]))
 
     label_detail = "品種詳解 · 工程石材品種系列" if lang=="zh" else "Variety Detail · Engineering Stone Series"
-    h2 = "%s · 樣本、技術參數與應用" % z["name"] if lang=="zh" else "%s — Samples, Technical Data & Applications" % z["name"]
+    h2 = "%s · 樣本、技術參數與應用" % z["disp"] if lang=="zh" else "%s — Samples, Technical Data & Applications" % z["disp"]
     f1 = "產品名錄（四項對照）" if lang=="zh" else "Product Name Reference (4 fields)"
     f2 = "材料與工藝" if lang=="zh" else "Material & Craft"
     f3 = "技術參數" if lang=="zh" else "Technical Data"
@@ -601,9 +605,9 @@ def build_detail_main(lang, s, prev_s, next_s):
 
     pager = '<div class="var-pager-wrap">'
     if prev_s:
-        pager += '<a class="var-pager prev" href="%s.html"><span>%s</span><b>%s</b></a>' % (prev_s["slug"], ("上一系列" if lang=="zh" else "Prev"), prev_s[lang]["name"])
+        pager += '<a class="var-pager prev" href="%s.html"><span>%s</span><b>%s</b></a>' % (prev_s["slug"], ("上一系列" if lang=="zh" else "Prev"), prev_s[lang]["disp"])
     if next_s:
-        pager += '<a class="var-pager next" href="%s.html"><span>%s</span><b>%s</b></a>' % (next_s["slug"], ("下一系列" if lang=="zh" else "Next"), next_s[lang]["name"])
+        pager += '<a class="var-pager next" href="%s.html"><span>%s</span><b>%s</b></a>' % (next_s["slug"], ("下一系列" if lang=="zh" else "Next"), next_s[lang]["disp"])
     pager += '<a class="var-pager back" href="engineering-stone-varieties.html"><span>%s</span><b>%s</b></a></div>' % (("返回系列" if lang=="zh" else "Back"), ("工程石材品種系列" if lang=="zh" else "Engineering Stone Series"))
 
     hero = ('<section class="product-hero">%s'
@@ -613,7 +617,7 @@ def build_detail_main(lang, s, prev_s, next_s):
             '<h1 class="product-hero-title">%s</h1>'
             '<p class="product-hero-subtitle">%s</p>'
             '<p class="product-hero-desc">%s</p>'
-            '</div></section>') % (pic, esc(z["name"]), esc(z["en"]), esc(z["intro"][:90]+"…") if len(z["intro"])>90 else esc(z["intro"]))
+            '</div></section>') % (pic, esc(z["disp"]), esc(z["en"]), esc(z["intro"][:90]+"…") if len(z["intro"])>90 else esc(z["intro"]))
 
     action = ('<section class="product-action-bar"><div class="container">'
               '<a href="%ssample-request.html" class="product-action-btn sample">📦 %s</a>'
@@ -634,8 +638,8 @@ def build_detail_main(lang, s, prev_s, next_s):
                    '<picture><source srcset="%simages/products/engineering-stone-varieties/%s-hero.webp" type="image/webp"/>'
                    '<img alt="%s" loading="lazy" src="%simages/products/engineering-stone-varieties/%s-hero.jpg"/></picture></div>'
                    '<figcaption class="granite-variety-cap">%s</figcaption></figure></div>')
-                  % (ip, s["slug"], esc(z["name"]), ip, s["slug"],
-                     esc(z["name"] + (" · 產品場景一覽" if lang=="zh" else " · Product Scene"))))
+                  % (ip, s["slug"], esc(z["disp"]), ip, s["slug"],
+                     esc(z["disp"] + (" · 產品場景一覽" if lang=="zh" else " · Product Scene"))))
     detail.append('   <h4 class="eng-var-subhead">%s <span>%s</span></h4>' % (f1, "4 Fields" if lang=="en" else "四項對照"))
     detail.append('   <table class="ev-fields"><tr><th>%s</th><td><b>%s</b><span class="ev-en">%s · %s</span></td></tr>' % ("產品內地名稱" if lang=="zh" else "Mainland CN Name", esc(z["name"]), esc(z["hk"]), esc(z["en"])))
     detail.append('   <tr><th>%s</th><td><b>%s</b><span class="ev-en">%s</span></td></tr>' % ("香港本地行業叫法" if lang=="zh" else "HK Local Trade Term", esc(z["hk"]), esc(z["en"])))
@@ -670,12 +674,12 @@ def build_detail_page(lang, s, prev_s, next_s, tpl_path):
     base = "https://www.hsst.hk/products/engineering-stone-varieties"
     if lang=="zh":
         canon = "%s/%s.html" % (base, s["slug"]); alt_zh = canon; alt_en = "https://www.hsst.hk/en/products/engineering-stone-varieties/%s.html" % s["slug"]
-        title = "%s · 工程石材品種系列 | 恆生石材科技有限公司" % z["name"]
+        title = "%s · 工程石材品種系列 | 恆生石材科技有限公司" % z["disp"]
         desc = z["intro"]
     else:
         canon = "https://www.hsst.hk/en/products/engineering-stone-varieties/%s.html" % s["slug"]
         alt_en = canon; alt_zh = "%s/%s.html" % (base, s["slug"])
-        title = "%s — Engineering Stone Variety Series | HENGSHENG MARBLE S&T CO. LIMITED" % z["name"]
+        title = "%s — Engineering Stone Variety Series | HENGSHENG MARBLE S&T CO. LIMITED" % z["disp"]
         desc = z["intro"]
     # head meta
     h = re.sub(r'<title>.*?</title>', '<title>%s</title>' % esc(title), h, count=1, flags=re.S)
@@ -717,7 +721,7 @@ def build_landing_main(lang):
     hero_sub = "Engineering Stone Variety Series" if not z else "工程石材品種系列"
     intro_p = ("恆生石材「工程石材品種系列」聚焦香港公共工程、路政工程、園林工程與住宅戶外場景所需的花崗岩（麻石）製品，"
                "涵蓋車檔、欄杆、地鋪、路緣、樹池、壓頂、踏步、排水、幕牆與景牆等 18 大類。全系選用高密度麻石，"
-               "耐候抗腐、防滑承重、易清潔低維護，契合香港高溫多雨、臨海鹽霧的戶外環境，為承建商、建築師與工程客戶提供一站式的製品型錄與定制加工。") if z else \
+               "耐候抗腐、防滑承重、易清潔低維護，契合香港高溫多雨、臨海鹽霧的戶外環境，為承建商、建築師與工程客戶提供一站式的製品型錄與訂造加工。") if z else \
               ("HENGSHENG's Engineering Stone Variety Series covers granite (麻石) products for Hong Kong public works, road authority, landscape and residential outdoor use — "
                "18 families from bollards, balustrades, paving, kerbs, tree pits, coping, treads, drainage, curtain wall to feature cladding. All in dense granite: weatherproof, slip-resistant, load-bearing and low-maintenance, suited to Hong Kong's hot, rainy, coastal climate — a one-stop catalogue and fabrication source for contractors, architects and engineering clients.")
     ip = "../" if z else "../../"
@@ -744,8 +748,8 @@ def build_landing_main(lang):
                 '<span class="vsc-cap"><i>%s</i><b>%s</b>'
                 '<span class="vsc-d">%s</span>'
                 '<em class="vsc-go">%s</em></span></a>') % (
-                s["slug"], ip, s["slug"], esc(v["name"]), ip, s["slug"],
-                esc(v["en"]), esc(v["name"]), esc(v["intro"][:46]+"…") if len(v["intro"])>46 else esc(v["intro"]),
+                s["slug"], ip, s["slug"], esc(v["disp"]), ip, s["slug"],
+                esc(v["en"]), esc(v["disp"]), esc(v["intro"][:46]+"…") if len(v["intro"])>46 else esc(v["intro"]),
                 "查看詳情 →" if z else "View details →")
         cards.append(card)
     grid = '<div class="v2-series-grid ev-grid">%s</div>' % "".join(cards)
