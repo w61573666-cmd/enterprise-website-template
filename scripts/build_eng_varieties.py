@@ -34,14 +34,14 @@ EN_LAND_TPL = os.path.join(SITE, "en/products/project-stone.html")
 
 # ---------------- 共享花崗岩（麻石）技術參數 ----------------
 GRANITE_SPECS = [
-    ("密度 Density", "2.60 – 2.80 g/cm³"),
-    ("吸水率 Water Absorption", "≤ 0.50 %"),
-    ("抗壓強度 Compressive Strength", "120 – 260 MPa"),
-    ("抗彎強度 Flexural Strength", "8 – 20 MPa"),
-    ("莫氏硬度 Mohs Hardness", "6.0 – 7.0"),
-    ("放射性等級 Radioactivity Class", "A 類 Class A（GB 6566）"),
-    ("耐磨性 Abrasion Resistance", "≤ 8.0 mm（EN 14157）"),
-    ("耐凍融 Frost Resistance", "50 次循環合格（ASTM C666）"),
+    ("密度", "Density", "2.60 – 2.80 g/cm³", "ASTM C97"),
+    ("吸水率", "Water Absorption", "≤ 0.50 %", "ASTM C97"),
+    ("抗壓強度", "Compressive Strength", "120 – 260 MPa", "ASTM C170"),
+    ("抗彎強度", "Flexural Strength", "8 – 20 MPa", "ASTM C880"),
+    ("莫氏硬度", "Mohs Hardness", "6.0 – 7.0", "EN 14157"),
+    ("放射性等級", "Radioactivity Class", "A 類 Class A", "GB 6566"),
+    ("耐磨性", "Abrasion Resistance", "≤ 8.0 mm", "EN 14157"),
+    ("耐凍融", "Frost Resistance", "50 次循環合格", "ASTM C666"),
 ]
 
 # ---------------- 18 系列數據 ----------------
@@ -567,9 +567,15 @@ def build_detail_main(lang, s, prev_s, next_s):
            ) % (ip, s["slug"], esc(z["name"]), ip, s["slug"])
 
     specs_rows = "".join(
-        '<div class="spec-item"><div class="spec-item-left"><div class="spec-item-name">%s</div></div>'
-        '<div class="spec-item-right"><div class="spec-item-value">%s</div></div></div>' % (esc(lbl), esc(v))
-        for (lbl, v) in (s["common_specs"] + GRANITE_SPECS))
+        '<div class="spec-item"><div class="spec-item-left"><div class="spec-item-name">%s</div>%s</div>'
+        '<div class="spec-item-right"><div class="spec-item-value">%s</div><div class="spec-item-meta">%s</div></div></div>'
+        % (esc(zn), ('<span class="spec-item-name-en">%s</span>' % esc(en)) if lang=="zh" else '', esc(v), esc(std))
+        for (zn, en, v, std) in GRANITE_SPECS)
+
+    dims_rows = '<div class="specs-dimensions-wrap"><div class="specs-dimensions-grid">%s</div></div>' % "".join(
+        '<div class="spec-dimension-card"><div class="spec-dimension-label">%s</div>'
+        '<div class="spec-dimension-value">%s</div></div>' % (esc(lbl), esc(v).replace(" / ", "<br>"))
+        for (lbl, v) in s["common_specs"])
 
     apps_cards = "".join(
         '<div class="application-card"><div class="application-card-icon">%s</div>'
@@ -623,6 +629,13 @@ def build_detail_main(lang, s, prev_s, next_s):
     detail.append('  <div class="product-section-title"><span class="label">%s</span><h2>%s</h2></div>' % (label_detail, h2))
     detail.append('  <div class="eng-var-body eng-var-page-body">')
     detail.append('   <p class="eng-var-desc">%s</p>' % esc(z["intro"]))
+    detail.append(('   <div class="eng-variety-grid">'
+                   '<figure class="granite-variety-card"><div class="granite-variety-img">'
+                   '<picture><source srcset="%simages/products/engineering-stone-varieties/%s-hero.webp" type="image/webp"/>'
+                   '<img alt="%s" loading="lazy" src="%simages/products/engineering-stone-varieties/%s-hero.jpg"/></picture></div>'
+                   '<figcaption class="granite-variety-cap">%s</figcaption></figure></div>')
+                  % (ip, s["slug"], esc(z["name"]), ip, s["slug"],
+                     esc(z["name"] + (" · 產品場景一覽" if lang=="zh" else " · Product Scene"))))
     detail.append('   <h4 class="eng-var-subhead">%s <span>%s</span></h4>' % (f1, "4 Fields" if lang=="en" else "四項對照"))
     detail.append('   <table class="ev-fields"><tr><th>%s</th><td><b>%s</b><span class="ev-en">%s · %s</span></td></tr>' % ("產品內地名稱" if lang=="zh" else "Mainland CN Name", esc(z["name"]), esc(z["hk"]), esc(z["en"])))
     detail.append('   <tr><th>%s</th><td><b>%s</b><span class="ev-en">%s</span></td></tr>' % ("香港本地行業叫法" if lang=="zh" else "HK Local Trade Term", esc(z["hk"]), esc(z["en"])))
@@ -637,6 +650,7 @@ def build_detail_main(lang, s, prev_s, next_s):
     detail.append('   <div class="application-grid">%s</div>' % apps_cards)
     detail.append('   <div class="surface-treatment-section"><h5 class="surface-treatment-title">%s</h5>' % f5)
     detail.append('     <div class="surface-treatment-tags">%s</div></div>' % finishes)
+    detail.append('   ' + dims_rows)
     detail.append('   <h4 class="eng-var-subhead">%s <span>%s</span></h4>' % (f6, "10 Items" if lang=="en" else "10 款"))
     detail.append('   <div class="ev-range"><table>%s</table></div>' % items_rows)
     detail.append('  </div>')
@@ -765,7 +779,8 @@ def build_landing_main(lang):
         "工程石材" if z else "Engineering Stone", adv_title, esc(adv_lead), adv_cards)
 
     style = ("<style>%s.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}"
-             ".ev-card .vsc-img{display:block;}.ev-grid{grid-template-columns:repeat(3,1fr);}@media(max-width:900px){.ev-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:560px){.ev-grid{grid-template-columns:1fr;}}</style>") % SHARED_CSS
+             ".ev-card .vsc-img{display:block;}.ev-grid{grid-template-columns:repeat(3,1fr);}@media(max-width:900px){.ev-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:560px){.ev-grid{grid-template-columns:1fr;}}"
+             "body.premium .v2-series-card .vsc-go{opacity:1;transform:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid #C9A84C;border-radius:999px;background:#fff;color:#1A1A2E;}</style>") % SHARED_CSS
     return style + crumb + hero + action + intro_sec + adv_sec
 
 
