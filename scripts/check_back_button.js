@@ -90,6 +90,26 @@ const SEL = '.hsst-back';
   }
   await m.close();
 
+  // —— 品種獨立頁（三層路徑）——
+  const v = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  let vp = await v.newPage();
+  await vp.goto(BASE + 'products/white-marble/carrara-white.html', { waitUntil: 'load' });
+  btn = vp.locator(SEL); await btn.waitFor({ timeout: 5000 }).catch(() => {});
+  ok('ZH 品种页显示按钮', await btn.count() === 1);
+  ok('ZH 品种页文案=返回系列', (await btn.innerText()).includes('返回系列'));
+  ok('ZH 品种页 href=../../products/white-marble.html',
+     (await btn.getAttribute('href')) === '../../products/white-marble.html');
+  await btn.click();
+  await vp.waitForLoadState('load');
+  ok('点击跳转到系列页', new URL(vp.url()).pathname === '/products/white-marble.html', vp.url());
+
+  await vp.goto(BASE + 'en/products/white-marble/carrara-white.html', { waitUntil: 'load' });
+  btn = vp.locator(SEL); await btn.waitFor({ timeout: 5000 }).catch(() => {});
+  ok('EN 品种页文案=Back to Series', (await btn.innerText()).trim() === 'Back to Series');
+  ok('EN 品种页 href=../../products/white-marble.html',
+     (await btn.getAttribute('href')) === '../../products/white-marble.html');
+  await v.close();
+
   await browser.close();
   let fail = 0;
   for (const [s, name, extra] of results) {

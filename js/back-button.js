@@ -4,11 +4,12 @@
  * 規則（純前端依 pathname 推導，頁面零配置）：
  *   · 語言根：/en/ 前綴 → EN 文案；其餘 → 繁體文案
  *   · 目錄頁（products/white-marble.html 等）→ 上級 = 該目錄同名著陸頁
+ *   · 嵌套詳情頁（products/<系列>/<品種>.html 等 dir/a/b.html）→ 上級 = 子目錄著陸頁
  *   · 語言根一級頁（about.html 等）→ 上級 = 語言根首頁
  *   · 語言根首頁（index.html / en/index.html）→ 不顯示
  *   · 未知目錄 → 不顯示（防 404）
  * 樣式自包含（JS 注入 <style>），不依賴任何 CSS 檔，改版只動本檔。
- * ⚠️ 本站 JS 走 CDN immutable 長快取：改本檔必須同步遞增各頁引用的 ?v= 令牌。
+ * ⚠️ 實測本檔 CDN 頭為 max-age=0,must-revalidate（非 immutable）：改本檔無需遞增 ?v= 令牌。
  */
 (function () {
   "use strict";
@@ -29,6 +30,11 @@
     solutions:   { zh: "返回解決方案", en: "Back to Solutions" }
   };
 
+  /* 嵌套詳情頁（dir/<子目錄>/x.html）的上一級文案；未列出的目錄用通用文案 */
+  var SUB_LABELS = {
+    products: { zh: "返回系列", en: "Back to Series" }
+  };
+
   /* new Array(n).join(x) 產生 n-1 個分隔符；rest.length 段（含檔名）需要 rest.length-1 層 ../ */
   var prefix = rest.length > 1 ? new Array(rest.length).join("../") : "";
   var parent, label;
@@ -38,8 +44,15 @@
   } else {
     var dir = rest[0], d = DIRS[dir];
     if (!d) return;                                 // 未知目錄不顯示
-    parent = prefix + dir + ".html";
-    label = isEn ? d.en : d.zh;
+    if (rest.length >= 3) {                         // 嵌套詳情頁 → 子目錄著陸頁
+      var sub = rest[rest.length - 2];
+      parent = prefix + dir + "/" + sub + ".html";
+      var sd = SUB_LABELS[dir];
+      label = isEn ? (sd ? sd.en : "Back") : (sd ? sd.zh : "返回上一級");
+    } else {
+      parent = prefix + dir + ".html";
+      label = isEn ? d.en : d.zh;
+    }
   }
 
   var ARROW =
