@@ -48,8 +48,9 @@
     'stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   var css = [
-    ".hsst-back{position:fixed;bottom:26px;left:22px;z-index:1500;display:inline-flex;align-items:center;gap:7px;",
-    "padding:10px 17px 10px 13px;border-radius:999px;background:rgba(26,26,46,.92);",
+    /* 桌面：右下角列自下而上 = WhatsApp 球(26) → 回到頂部(90,高44) → 本按鈕(148) */
+    ".hsst-back{position:fixed;bottom:148px;right:22px;z-index:1500;display:inline-flex;align-items:center;gap:7px;",
+    "padding:10px 13px 10px 17px;border-radius:999px;background:rgba(26,26,46,.92);",
     "border:1px solid rgba(201,168,76,.45);color:#C9A84C;font:600 13px/1 -apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;",
     "letter-spacing:.04em;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.28);",
     "transition:transform .25s ease,border-color .25s ease,background .25s ease;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}",
@@ -58,10 +59,11 @@
     ".hsst-back:hover svg{transform:translateX(-2px);}",
     ".hsst-back:focus-visible{outline:2px solid #C9A84C;outline-offset:2px;}",
     "body.drawer-open .hsst-back{opacity:0;visibility:hidden;pointer-events:none;}",
-    /* ≤768px：WhatsApp 球被 premium 模块移到左下（left 16px / bottom 20px），
-       本按钮须上移到球之上，与右下角 back-to-top(80px) 对称；断点必须同为 768px */
-    "@media (max-width:768px){.hsst-back{bottom:calc(86px + env(safe-area-inset-bottom,0px));",
-    "left:calc(14px + env(safe-area-inset-left,0px));padding:9px 14px 9px 11px;font-size:12px;gap:6px;}}",
+    /* ≤768px：右下角「回到頂部」被 premium 釘在 bottom:20px+safe-area（高38），
+       本按鈕墊在其上方（70 → 留 12px 縫）；WhatsApp 球在左下，互不干擾。
+       斷點必須同步 768px */
+    "@media (max-width:768px){.hsst-back{bottom:calc(70px + env(safe-area-inset-bottom,0px));",
+    "right:calc(14px + env(safe-area-inset-right,0px));padding:9px 11px 9px 14px;font-size:12px;gap:6px;}}",
     "@media print{.hsst-back{display:none!important}}"
   ].join("\n");
 

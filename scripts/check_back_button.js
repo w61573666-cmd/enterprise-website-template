@@ -18,6 +18,12 @@ const SEL = '.hsst-back';
   ok('ZH 系列页显示按钮', await btn.count() === 1, await btn.count() ? ('文案=' + (await btn.innerText()).trim() + ' href=' + await btn.getAttribute('href')) : '未找到');
   ok('ZH 文案=返回產品中心', (await btn.innerText()).includes('返回產品中心'));
   ok('href 指向 ../products.html', (await btn.getAttribute('href')) === '../products.html');
+  const dbox = await btn.boundingBox();
+  ok('桌面按钮在右侧', !!dbox && dbox.x > 720, dbox ? `x=${Math.round(dbox.x)},y=${Math.round(dbox.y)} (视口1440)` : '');
+  const dbtt = await p.locator('.back-to-top').first().boundingBox().catch(() => null);
+  ok('桌面按钮在回到顶部正上方（不重叠）',
+     !!dbtt && !!dbox && (dbox.y + dbox.height) <= dbtt.y + 2,
+     dbtt && dbox ? `按钮底=${Math.round(dbox.y + dbox.height)} 回到顶部上缘=${Math.round(dbtt.y)}` : '');
   await btn.click();
   await p.waitForLoadState('load');
   ok('点击精确跳转到 /products.html（不是 /products/products.html）', new URL(p.url()).pathname === '/products.html', p.url());
@@ -44,7 +50,7 @@ const SEL = '.hsst-back';
   const vis = await btn.isVisible();
   let box = await btn.boundingBox();
   ok('手机端按钮可见', vis, box ? `位置 x=${Math.round(box.x)},y=${Math.round(box.y)},w=${Math.round(box.width)},h=${Math.round(box.height)}` : '');
-  ok('手机端按钮在左下且不出屏', !!box && box.x >= 0 && box.y + box.height <= 845 && box.width < 200);
+  ok('手机端按钮在右下且不出屏', !!box && box.x >= 0 && box.y + box.height <= 845 && box.width < 200);
   // 手机端 WhatsApp 球在左下（premium ≤768px left:16px bottom:20px），按钮应在其正上方
   // 先接受 cookie 关掉横幅，验证「常态位置」不与球重叠
   await p.evaluate(() => localStorage.setItem('cookieConsent', 'accepted'));
@@ -53,11 +59,17 @@ const SEL = '.hsst-back';
   btn = p.locator(SEL); await btn.waitFor({ timeout: 5000 }).catch(() => {});
   box = await btn.boundingBox();
   ok('手机端按钮可见', await btn.isVisible(), box ? `y=${Math.round(box.y)},h=${Math.round(box.height)}` : '');
+  // 手机端右下：按钮垫在「回到顶部」(right 16 / bottom 80) 下方，不得重叠
+  const btt = await p.locator('.back-to-top').first().boundingBox().catch(() => null);
+  ok('手机端按钮位于回到顶部正上方（不重叠）',
+     !!btt && !!box && (box.y + box.height) <= btt.y + 2,
+     btt && box ? `按钮底=${Math.round(box.y + box.height)} 回到顶部上缘=${Math.round(btt.y)}` : '');
+  // WhatsApp 球在左下（premium ≤768px left:16px），按钮在右下，不得重叠
   const wa = await p.locator('.whatsapp-float').boundingBox().catch(() => null);
-  ok('手机端按钮位于 WhatsApp 球正上方（不重叠）',
-     !!wa && !!box && (box.y + box.height) <= wa.y + 2,
-     wa && box ? `按钮底=${Math.round(box.y + box.height)} 球顶=${Math.round(wa.y)} 球x=${Math.round(wa.x)}` : '');
-  ok('手机端按钮不出屏、宽度合理', !!box && box.x >= 0 && box.y + box.height <= 845 && box.width < 200);
+  ok('手机端按钮不与左下 WhatsApp 球重叠',
+     !!wa && !!box && (box.x >= wa.x + wa.width - 2),
+     wa && box ? `按钮x=${Math.round(box.x)} 球右缘=${Math.round(wa.x + wa.width)}` : '');
+  ok('手机端按钮不出屏、宽度合理', !!box && box.x >= 0 && box.x + box.width <= 391 && box.y + box.height <= 845 && box.width < 200);
   await p.screenshot({ path: '/tmp/backbtn-mobile.png' });
 
   // EN 手机
