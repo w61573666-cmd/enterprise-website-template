@@ -11,8 +11,9 @@
 做法：以站內現有真實頁面為模板（保留完整 nav / footer / JSON-LD），
 只替換 <head> 元信息與 <main-content> 主體，確保導航與結構一致。
 
-圖片策略（Stone 2026-09-17 定）：先放標註尺寸的占位圖框 + 10 款拍攝清單，
-後續由真實工程實拍替換。故本腳本不生成任何圖片檔。
+圖片策略（Stone 2026-09-17 更新）：19 張 AI 場景主圖（18 系列 + 落地頁）已由
+scripts/process_ev_heroes.py 生成並去水印，落盤 jpg+webp 雙格式；
+本腳本以 <picture> 引用真實圖片（詳情頁 ../../ 與 ../../../，落地頁 ../ 與 ../../）。
 
 用法：
   python3 scripts/build_eng_varieties.py          # dry-run（輸出到 /tmp）
@@ -465,12 +466,6 @@ SERIES = [
 
 # ---------------- 共享 CSS（占位圖框 + 表格 + 卡片） ----------------
 SHARED_CSS = """
-.ev-ph{position:relative;aspect-ratio:16/9;border:2px dashed rgba(201,168,76,.55);border-radius:14px;background:repeating-linear-gradient(45deg,#faf8f3,#faf8f3 14px,#f3efe6 14px,#f3efe6 28px);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9a8f76;text-align:center;padding:22px 18px;margin:0 0 8px;}
-.ev-ph .ev-ph-tag{font-size:13px;font-weight:700;letter-spacing:.5px;color:#8a7d5e;}
-.ev-ph .ev-ph-note{font-size:12px;margin-top:6px;line-height:1.6;max-width:560px;}
-.ev-ph.ev-ph-hero{aspect-ratio:21/9;border-width:3px;margin-bottom:0;}
-.ev-ph.ev-ph-sm{aspect-ratio:4/3;padding:12px 10px;}
-.ev-ph.ev-ph-sm .ev-ph-tag{font-size:11px;}
 .ev-fields{width:100%;border-collapse:collapse;margin:10px 0 6px;background:#fff;border:1px solid rgba(201,168,76,.28);border-radius:12px;overflow:hidden;}
 .ev-fields th,.ev-fields td{padding:13px 16px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(201,168,76,.16);font-size:14.5px;}
 .ev-fields tr:last-child td{border-bottom:none;}
@@ -549,7 +544,7 @@ def build_seo_ld_auto(lang, is_landing, s):
             "name": name, "url": url,
             "brand": {"@type": "Brand", "name": brand},
             "description": desc, "category": "Natural Stone",
-            "image": "https://www.hsst.hk/images/logo.jpg",
+            "image": "https://www.hsst.hk/images/products/engineering-stone-varieties/%s-hero.jpg" % s["slug"],
         }
         blocks += ['<script type="application/ld+json">', json.dumps(prod_ld, ensure_ascii=False, indent=1), "</script>"]
     return "<!-- SEO-LD:auto -->\n" + "\n".join(blocks) + "\n<!-- /SEO-LD:auto -->"
@@ -566,9 +561,10 @@ def build_detail_main(lang, s, prev_s, next_s):
         ('<li><a href="%s">%s</a></li>' % (u,n)) if u else '<li><span aria-current="page">%s</span></li>' % n
         for n,u in crumbs)
 
-    ph = ('<div class="ev-ph ev-ph-hero"><span class="ev-ph-tag">【示意圖 · 待補工程實拍】%s</span>'
-          '<span class="ev-ph-note">建議尺寸 1600×900（jpg + webp）｜本系列 10 款產品見下方「系列產品一覽」</span></div>') % (""
-          if lang=="zh" else " — photo to be added")
+    ip = "../../" if lang=="zh" else "../../../"
+    pic = ('<picture><source srcset="%simages/products/engineering-stone-varieties/%s-hero.webp" type="image/webp"/>'
+           '<img alt="%s" class="product-hero-bg" src="%simages/products/engineering-stone-varieties/%s-hero.jpg"/></picture>'
+           ) % (ip, s["slug"], esc(z["name"]), ip, s["slug"])
 
     specs_rows = "".join(
         '<div class="spec-item"><div class="spec-item-left"><div class="spec-item-name">%s</div></div>'
@@ -611,7 +607,7 @@ def build_detail_main(lang, s, prev_s, next_s):
             '<h1 class="product-hero-title">%s</h1>'
             '<p class="product-hero-subtitle">%s</p>'
             '<p class="product-hero-desc">%s</p>'
-            '</div></section>') % (ph, esc(z["name"]), esc(z["en"]), esc(z["intro"][:90]+"…") if len(z["intro"])>90 else esc(z["intro"]))
+            '</div></section>') % (pic, esc(z["name"]), esc(z["en"]), esc(z["intro"][:90]+"…") if len(z["intro"])>90 else esc(z["intro"]))
 
     action = ('<section class="product-action-bar"><div class="container">'
               '<a href="%ssample-request.html" class="product-action-btn sample">📦 %s</a>'
@@ -710,13 +706,15 @@ def build_landing_main(lang):
                "耐候抗腐、防滑承重、易清潔低維護，契合香港高溫多雨、臨海鹽霧的戶外環境，為承建商、建築師與工程客戶提供一站式的製品型錄與定制加工。") if z else \
               ("HENGSHENG's Engineering Stone Variety Series covers granite (麻石) products for Hong Kong public works, road authority, landscape and residential outdoor use — "
                "18 families from bollards, balustrades, paving, kerbs, tree pits, coping, treads, drainage, curtain wall to feature cladding. All in dense granite: weatherproof, slip-resistant, load-bearing and low-maintenance, suited to Hong Kong's hot, rainy, coastal climate — a one-stop catalogue and fabrication source for contractors, architects and engineering clients.")
-    ph = ('<div class="ev-ph ev-ph-hero"><span class="ev-ph-tag">【系列合集示意圖 · 待補工程實拍】%s</span>'
-          '<span class="ev-ph-note">建議拍攝：18 大類製品於戶外場景陳列（1600×900，jpg + webp）</span></div>') % ("" if z else " — photo to be added")
+    ip = "../" if z else "../../"
+    pic = ('<picture><source srcset="%simages/products/engineering-stone-varieties/landing-hero.webp" type="image/webp"/>'
+           '<img alt="%s" class="product-hero-bg" src="%simages/products/engineering-stone-varieties/landing-hero.jpg"/></picture>'
+           ) % (ip, "工程石材品種系列" if z else "Engineering Stone Variety Series", ip)
 
     hero = ('<section class="product-hero">%s<div class="product-hero-overlay"></div>'
             '<div class="product-hero-content"><span class="product-hero-badge">工程石材</span>'
             '<h1 class="product-hero-title">%s</h1><p class="product-hero-subtitle">%s</p>'
-            '<p class="product-hero-desc">%s</p></div></section>') % (ph, "工程石材品種系列" if z else "Engineering Stone Variety Series", hero_sub, esc(intro_p[:120]+"…") if len(intro_p)>120 else esc(intro_p))
+            '<p class="product-hero-desc">%s</p></div></section>') % (pic, "工程石材品種系列" if z else "Engineering Stone Variety Series", hero_sub, esc(intro_p[:120]+"…") if len(intro_p)>120 else esc(intro_p))
 
     action = ('<section class="product-action-bar"><div class="container">'
               '<a href="%ssample-request.html" class="product-action-btn sample">📦 %s</a>'
@@ -727,11 +725,12 @@ def build_landing_main(lang):
     for s in SERIES:
         v = s[lang]
         card = ('<a class="v2-series-card ev-card" href="engineering-stone-varieties/%s.html">'
-                '<span class="vsc-img"><span class="ev-ph ev-ph-sm"><span class="ev-ph-tag">%s</span></span></span>'
+                '<span class="vsc-img"><picture><source srcset="%simages/products/engineering-stone-varieties/%s-hero.webp" type="image/webp"/>'
+                '<img alt="%s" loading="lazy" src="%simages/products/engineering-stone-varieties/%s-hero.jpg"/></picture></span>'
                 '<span class="vsc-cap"><i>%s</i><b>%s</b>'
                 '<span class="vsc-d">%s</span>'
                 '<em class="vsc-go">%s</em></span></a>') % (
-                s["slug"], ("%s 示意圖" % v["hk"] if z else "Photo: "+v["en"]),
+                s["slug"], ip, s["slug"], esc(v["name"]), ip, s["slug"],
                 esc(v["en"]), esc(v["name"]), esc(v["intro"][:46]+"…") if len(v["intro"])>46 else esc(v["intro"]),
                 "查看詳情 →" if z else "View details →")
         cards.append(card)
