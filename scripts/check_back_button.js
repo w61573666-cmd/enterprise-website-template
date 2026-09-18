@@ -1,4 +1,4 @@
-/* 「返回上一級」按鈕驗證：桌面 + 手機視口、中英文、點擊跳轉、首頁不顯示、截圖 */
+/* 「返回上頁」按鈕驗證：桌面 + 手機視口、中英文、點擊跳轉、首頁不顯示、截圖 */
 const { chromium, webkit } = require('playwright');
 const BASE = 'http://127.0.0.1:8080/';
 const SEL = '.hsst-back';

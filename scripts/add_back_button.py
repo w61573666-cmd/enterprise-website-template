@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-全站接入「返回上一級」浮動按鈕  js/back-button.js
+全站接入「返回上頁」浮動按鈕  js/back-button.js
 ================================================
 在每個 HTML 的 </body> 前插入一行 <script src="…/js/back-button.js?v=…">。
 相對前綴 = '../' * depth（資源以真實檔案位置為基準，en/ 也算一層）。

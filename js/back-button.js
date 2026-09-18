@@ -1,5 +1,5 @@
 /*!
- * hsst.hk 全站「返回上一級」浮動按鈕
+ * hsst.hk 全站「返回上頁」浮動按鈕
  * -----------------------------------
  * 規則（純前端依 pathname 推導，頁面零配置）：
  *   · 語言根：/en/ 前綴 → EN 文案；其餘 → 繁體文案
@@ -30,7 +30,7 @@
     solutions:   { zh: "返回解決方案", en: "Back to Solutions" }
   };
 
-  /* 嵌套詳情頁（dir/<子目錄>/x.html）的上一級文案；未列出的目錄用通用文案 */
+  /* 嵌套詳情頁（dir/<子目錄>/x.html）的上一頁文案；未列出的目錄用通用文案 */
   var SUB_LABELS = {
     products: { zh: "返回系列", en: "Back to Series" }
   };
@@ -48,7 +48,7 @@
       var sub = rest[rest.length - 2];
       parent = prefix + dir + "/" + sub + ".html";
       var sd = SUB_LABELS[dir];
-      label = isEn ? (sd ? sd.en : "Back") : (sd ? sd.zh : "返回上一級");
+      label = isEn ? (sd ? sd.en : "Back") : (sd ? sd.zh : "返回上頁");
     } else {
       parent = prefix + dir + ".html";
       label = isEn ? d.en : d.zh;
