@@ -1,3 +1,7 @@
 # 本地预览页（__ 开头）不部署
 __*.html
 .DS_Store
+
+# 原始四宫格临时图（不参与部署，已合成为 jpg/webp）
+# 仅 products/*-varieties/ 下的 png 是临时中间图；正式拼图以 jpg/webp 交付
+images/products/*-varieties/*.png
