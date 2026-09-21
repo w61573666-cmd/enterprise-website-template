@@ -3,8 +3,8 @@
 # 读取 sitemap 全部 URL，调用 IndexNow 协议推送
 # 支持 sitemapindex 格式（自动递归读取子 sitemap）
 
-KEY="763f4d076a057089b538afed0aa7fdab"
-KEY_LOCATION="https://www.hsst.hk/hsst2026indexnowkey.txt"
+KEY="c943282877d61c5747f96fe445fe02fc"
+KEY_LOCATION="https://www.hsst.hk/c943282877d61c5747f96fe445fe02fc.txt"
 SITEMAP_URL="https://www.hsst.hk/sitemap.xml"
 ENDPOINTS=(
   "https://api.indexnow.org/IndexNow"
