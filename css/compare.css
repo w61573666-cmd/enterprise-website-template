@@ -379,10 +379,10 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   border-radius: 2px;
-  background: rgba(255, 255, 255, .92);
-  color: #14130F;
-  border: 1.5px solid rgba(194, 162, 94, .65);
-  box-shadow: 0 2px 8px rgba(20, 19, 15, .06);
+  background: #FFFFFF;
+  color: #5C4A1A;
+  border: 1.5px solid #C9A84C;
+  box-shadow: 0 3px 12px rgba(20, 19, 15, .12);
   cursor: pointer;
   overflow: hidden;
   transition: all .35s cubic-bezier(.34, 1.4, .64, 1);
@@ -417,4 +417,56 @@
     width: 100%;
     padding: 14px 20px;
   }
+}
+/* ============================================================
+   系列卡片（a.v2-series-card.ev-card）內的「加入比較」按鈕
+   ------------------------------------------------------------
+   卡片內 .vsc-img / .vsc-cap 皆為 position:absolute 且覆蓋整張卡片；
+   按鈕原本是靜態流元素，依 CSS 繪製順序會被絕對定位層壓在底下 →
+   完全看不見（僅能透過半透明深色漸變透出一點，糊成一團）。
+   故此處將按鈕提升為絕對定位並置於卡片右上角、賦予最高 z-index，
+   並改用「實心品牌金底 + 深墨字」確保在任何石紋圖上皆清晰可讀
+   （#14130F on #C9A84C ≈ 7.7:1，遠超 AA）。
+   [CRITICAL UI - DO NOT DELETE OR MODIFY]
+   ============================================================ */
+a.v2-series-card > .hsst-cmp-cta-inline {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  left: auto;
+  bottom: auto;
+  z-index: 6;
+  width: auto;
+  max-width: calc(100% - 20px);
+  margin: 0;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  border-radius: 999px;
+  background: #C9A84C;
+  background-image: linear-gradient(135deg, #E0C463 0%, #C9A84C 55%, #B38F35 100%);
+  color: #14130F;
+  border: 1px solid rgba(20, 19, 15, .30);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .30);
+}
+a.v2-series-card > .hsst-cmp-cta-inline:hover {
+  background-image: linear-gradient(135deg, #EBCE6A 0%, #D4AF37 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, .36);
+}
+a.v2-series-card > .hsst-cmp-cta-inline.cmp-selected {
+  background: #2E7D32;
+  background-image: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, .55);
+}
+a.v2-series-card > .hsst-cmp-cta-inline .hsst-cmp-btn-label { color: inherit; }
+/* 後備：若按鈕未能落入 .product-action-bar .container（缺 container 的頁面），仍置中顯示 */
+.product-action-bar > .hsst-cmp-cta-detail {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 14px auto 0;
 }

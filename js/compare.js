@@ -319,7 +319,10 @@
       e.stopPropagation();
       toggleItem(item, btn);
     });
-    var bar = document.querySelector('.product-action-bar .container, .product-action-bar');
+    // 注意：不可寫成 querySelector('.product-action-bar .container, .product-action-bar')
+    // ——選擇器列表會回傳「文檔順序最先匹配」者，即外層 .product-action-bar 本身（祖先先於後代），
+    //   導致按鈕被追加到 bar 而非其內部的 .container，脫離 flex 居中行、錯位顯示。
+    var bar = document.querySelector('.product-action-bar .container') || document.querySelector('.product-action-bar');
     if (bar) bar.appendChild(btn);
     else h1.insertAdjacentElement('afterend', btn);
   }
