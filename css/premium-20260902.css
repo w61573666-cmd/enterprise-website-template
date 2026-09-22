@@ -1155,8 +1155,8 @@ body.premium .cta-section.cta-home .hsst-form-consent a { color: #A8884A; text-d
 body.premium .cta-section.cta-home .hsst-form-error--consent { grid-column: 1 / -1; margin-top: -10px; }
 body.premium .cta-section.cta-home .hsst-form-privacy { display: flex; align-items: center; justify-content: center; gap: 6px; color: #8a8277 !important; margin-top: 2px; font-size: .76rem; }
 body.premium .cta-section.cta-home .hsst-form-privacy svg { width: 13px; height: 13px; flex: none; opacity: .85; }
-body.premium .cta-section.cta-home .hsst-form-success { background: #F4F1EA !important; border-color: #E3D9C9 !important; }
-body.premium .cta-section.cta-home .hsst-form-success-icon { color: #C2A25E; font-size: 1.6rem; font-weight: 700; }
+body.premium .cta-section.cta-home .hsst-form-success { background:#FFFFFF !important; border:1px solid #E6DCC8 !important; border-top:4px solid #C9A84C !important; }
+body.premium .cta-section.cta-home .hsst-form-success-icon { color: #C9A84C; font-size: 1.6rem; font-weight: 700; }
 @media (max-width: 640px) {
   body.premium .cta-section.cta-home .hsst-form-row { grid-template-columns: 1fr; }
   body.premium .cta-section.cta-home .hsst-form { padding: 22px 18px; }
@@ -1224,8 +1224,8 @@ body.premium .cta-section.cta-sub .hsst-form-consent a { color: #A8884A; text-de
 body.premium .cta-section.cta-sub .hsst-form-error--consent { grid-column: 1 / -1; margin-top: -8px; }
 body.premium .cta-section.cta-sub .hsst-form-privacy { grid-column: 1 / -1; text-align: center; color: #9a9388 !important; margin-top: 4px; font-size: .72rem; }
 body.premium .cta-section.cta-sub .hsst-form-privacy svg { display: none !important; }
-body.premium .cta-section.cta-sub .hsst-form-success { grid-column: 1 / -1; background: #F4F1EA !important; border-color: #E3D9C9 !important; }
-body.premium .cta-section.cta-sub .hsst-form-success-icon { color: #C2A25E; font-size: 1.5rem; font-weight: 700; }
+body.premium .cta-section.cta-sub .hsst-form-success { grid-column: 1 / -1; background:#FFFFFF !important; border:1px solid #E6DCC8 !important; border-top:4px solid #C9A84C !important; }
+body.premium .cta-section.cta-sub .hsst-form-success-icon { color: #C9A84C; font-size: 1.5rem; font-weight: 700; }
 @media (max-width: 640px) {
   body.premium .cta-section.cta-sub .hsst-form { grid-template-columns: 1fr; padding: 22px 18px; }
 }
@@ -1316,12 +1316,13 @@ body.premium .hsst-form-zone .form-subtitle {
 
 /* —— 32.10 提交成功提示塊 —— */
 body.premium .hsst-form-zone .hsst-form-success {
-  background: #FCFAF6 !important;
-  border-color: #E3D9C9 !important;
+  background:#FFFFFF !important;
+  border:1px solid #E6DCC8 !important;
+  border-top:4px solid #C9A84C !important;
 }
 body.premium .hsst-form-zone .hsst-form-success p,
 body.premium .hsst-form-zone .sample-form-success p {
-  color: #5C574F !important;
+  color: #444444 !important;
 }
 
 /* —— 32.11 提交按鈕文字色統一為深墨黑 #1A1A2E（模組 48 白底黑字金框規範）—— */

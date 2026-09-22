@@ -3039,11 +3039,11 @@ p { font-size: 1rem; color: var(--color-dark-gray); line-height: 1.6; }
 .hsst-form-hint{font-size:12px;color:#999 !important;margin-top:5px;line-height:1.5;}
 .hsst-form-divider{height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,0.3),transparent);margin:28px 0;}
 .hsst-form-privacy{font-size:12px;color:#999 !important;text-align:center;margin-top:24px;line-height:1.7;}
-.hsst-form-success{display:none;text-align:center;padding:40px 20px;background:#FAF8F5;border-radius:12px;border:1px solid #EEE8DD;}
+.hsst-form-success{display:none;text-align:center;padding:40px 20px;background:#FFFFFF;border-radius:12px;border:1px solid #E6DCC8;border-top:4px solid #C9A84C;}
 .hsst-form-success.show{display:block !important;}
-.hsst-form-success-icon{font-size:44px;margin-bottom:14px;}
+.hsst-form-success-icon{font-size:44px;margin-bottom:14px;color:#C9A84C;}
 .hsst-form-success h3{font-size:20px;color:#1A1A1A !important;margin-bottom:8px;}
-.hsst-form-success p{font-size:14px;color:#666 !important;line-height:1.7;}
+.hsst-form-success p{font-size:14px;color:#444444 !important;line-height:1.7;}
 
 @media(max-width:768px){.hsst-form-row{grid-template-columns:1fr;gap:0;}.hsst-form-btn{width:100%;min-width:0;}}
 
