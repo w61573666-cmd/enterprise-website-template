@@ -3313,10 +3313,16 @@ body.premium .sample-form-section > .sample-form-container {
         装饰线（::before 金色短线）与描述块外边距同步跟随。
    ─────────────────────────────────────────────────────────── */
 
-/* 默认：跟随父级（.text-left / 无语境组 → 左对齐） */
+/* 默认：跟随父级（.text-left → 左对齐；無語境組 → 回到 .section-desc 的預設置中） */
 body.premium .section-title { text-align: inherit; }
 body.premium .section-title::before { left: 0; transform: none; }
-body.premium .section-desc { margin-left: 0 !important; margin-right: 0 !important; }
+/* [2026-09-23 修正] 原為 body.premium .section-desc{ margin-left/right:0 !important }，
+   對「全站」導言段強制左對齊。但 .product-section-title{text-align:center} 本身置中，
+   其下的 168 段 p.section-desc 因此被拉成左對齊（配合 max-width:60ch），
+   形成「標題居中、導言貼左」的錯位 —— 用户反映的產品中心導言問題即此類。
+   現收窄作用域至 .text-left 組（該組設計本意就是左對齊），
+   無語境組回落至第 4 節 `.section-desc{max-width:60ch;margin:0 auto 1.5rem}` 的置中行為。 */
+body.premium .text-left .section-desc { margin-left: 0 !important; margin-right: 0 !important; }
 body.premium .section-subtitle { text-align: inherit; }
 
 /* 显式居中的标题组：完整保持居中（装饰线 / 描述块一并居中） */
@@ -4807,4 +4813,50 @@ body.premium .product-video-cap {
   body.premium .ft-v2 .ft-cta-actions { width: 100%; }
   body.premium .ft-v2 .ft-cta-btn { flex: 1; }
   body.premium .ft-v2 .ft-badges span { font-size: .6rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [INTRO TEXT TYPOGRAPHY · 2026-09-23]
+   標題下方「介紹文字」統一排版：兩端對齊 (justify) + 區塊置中適配版面
+   ───────────────────────────────────────────────────────────────────────
+   問題：
+     · .product-section-title{text-align:center} 本身置中，但其下的
+       p.section-desc 被 body.premium 的 `margin-left:0 !important` 拉成
+       左對齊；配合 max-width:60ch，整段貼左、容器右側大片留白，形成
+       「標題居中 / 導言貼左」的錯位（產品中心 → 工程石材品種系列頁即此類）。
+     · 導言段僅左對齊，右緣參差，長段落閱讀節奏不佳。
+
+   處理（作用域嚴格限定「標題下方的介紹段落」，卡片內文 / 表格 / 頁腳 / 選單不動）：
+     0. 上方第 10 節的 `body.premium .section-desc{margin:0 !important}` 已收窄為
+        `.text-left .section-desc`，無語境組的 section-desc 回到置中（見該段註釋）。
+     A. 168 處  div.product-section-title > p.section-desc
+     B.   4 處  .product-content-section > .container > p.eng-var-desc（系列 landing 頁）
+     C. 256 處  #variety-detail .eng-var-body > p.eng-var-desc（品種詳解頁導言）
+        → 區塊 margin:0 auto 置中 + text-align:justify 兩端對齊。
+          行寬沿用各元素既有 token（section-desc 為 60ch、eng-var-desc 為 940px），
+          不改動任何既有 max-width，避免版面比例與其他區塊脫節。
+     D. 例外 72 處：#variety-detail 內 h4.eng-var-subhead 之下的導言屬
+        「左對齊小節」，維持左對齊（僅加兩端對齊）與其小標題同向。
+        D 置於 C 之後並帶 #id，特異性（1,2,2）與 C 相同 → 靠後者勝出。
+   實測（本機 BeautifulSoup select 全量比對，450 頁）：A 168 / B 4 / C 256 / D 72，
+   與設計值一致，0 例外、0 溢出。
+   ═══════════════════════════════════════════════════════════════════════ */
+body.premium div.product-section-title > p.section-desc,
+body.premium .product-content-section > .container > p.eng-var-desc,
+body.premium #variety-detail .eng-var-body > p.eng-var-desc {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: justify;
+  text-justify: auto;
+  text-wrap: pretty;
+}
+
+/* D) 左對齊小節（h4.eng-var-subhead）之下的導言：維持左對齊，只加兩端對齊。
+   置於 C 之後並帶 #id，特異性（1,2,2）與 C 相同 → 靠後者勝出。 */
+body.premium #variety-detail .eng-var-subhead ~ p.eng-var-desc {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left;
+  text-justify: auto;
+  text-wrap: pretty;
 }

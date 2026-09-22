@@ -7832,7 +7832,12 @@ html {
 .product-hero {
   position: relative;
   width: 100%;
-  height: 560px;
+  /* 2026-09-23 修正：原為固定 height:560px + overflow:hidden，
+     會令較長的產品描述在窄屏被裁切。改為 min-height 自適應：
+     內容短時維持 560px 的原有版式，內容長時自動向下撐開，永不裁切。 */
+  min-height: 560px;
+  height: auto;
+  padding: 96px 0;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -7857,7 +7862,8 @@ html {
 /* 無背景圖版本：原 Hero 背景圖與頁面下方圖重複時直接移除背景圖，
    改以品牌中性淺色漸層呈現，維持「一圖一用」且不影響美觀。 */
 .product-hero.is-noimage {
-  height: 400px;
+  min-height: 400px;
+  height: auto;
   background: linear-gradient(135deg, #fdfcfa 0%, #f2efe9 55%, #e9e4db 100%);
   border-bottom: 1px solid rgba(10,42,107,0.10);
 }
@@ -8209,10 +8215,14 @@ html {
 /* ---- Responsive for sub-page components ---- */
 @media (max-width: 768px) {
   .product-hero {
-    height: 320px;
+    /* 2026-09-23 修正：固定 320px 會在窄屏裁切長描述，改為自適應下限 */
+    min-height: 320px;
+    height: auto;
+    padding: 76px 0;
   }
   .product-hero.is-noimage {
-    height: 300px;
+    min-height: 300px;
+    height: auto;
   }
   .product-hero-title {
     font-size: 1.75rem;
