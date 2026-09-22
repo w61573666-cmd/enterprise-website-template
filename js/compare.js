@@ -89,12 +89,27 @@
   }
 
   // ---- 抽屉 UI ----
+  // 决定是否需要浮动抽屉：仅当页面存在可加入对比的品种（落地页 .eng-var 或品种详情）
+  // 首页/资讯/联络等没有品种卡片的页面不会显示 — 避免空状态干扰 UX
+  function pageHasVariety() {
+    if (document.body.classList.contains('hsst-compare-page')) return false;
+    if (document.querySelector('article.eng-var[id], .granite-variety-card')) return true;
+    if (document.querySelector('.hsst-cmp-cta')) return true;
+    return false;
+  }
+
   function ensureTray() {
     var tray = document.getElementById('hsst-cmp-tray');
     if (tray) return tray;
+    // 没有可对比品种 AND localStorage 也无数据 — 不创建（避免空抽屉干扰）
+    var hasStored = false;
+    try { hasStored = (JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]').length > 0); } catch(e) {}
+    if (!pageHasVariety() && !document.body.classList.contains('hsst-compare-page') && !hasStored) return null;
     tray = document.createElement('div');
     tray.id = 'hsst-cmp-tray';
     tray.className = 'hsst-cmp-tray';
+    // 默认 display:none — 有项目时才显示
+    tray.style.display = 'none';
     tray.innerHTML = [
       '<button class="hsst-cmp-handle" aria-label="' + escapeHTML(T.drawerTitle) + '" aria-expanded="false">',
       '  <span class="hsst-cmp-icon" aria-hidden="true">⚖️</span>',
@@ -121,6 +136,12 @@
     var tray = document.getElementById('hsst-cmp-tray');
     if (!tray) return;
     var items = read();
+    // 空状态：彻底隐藏抽屉 — 首页等无品种页不显示，跨页持久但不出现在无关页
+    if (items.length === 0) {
+      tray.style.display = 'none';
+      return;
+    }
+    tray.style.display = '';
     tray.querySelector('.hsst-cmp-count').textContent = String(items.length);
     var list = tray.querySelector('.hsst-cmp-list');
     if (!items.length) {
@@ -155,6 +176,7 @@
 
   function bindTray() {
     var tray = ensureTray();
+    if (!tray) return; // 没有可对比品种的页面 — 不绑定
     var handle = tray.querySelector('.hsst-cmp-handle');
     var panel = tray.querySelector('.hsst-cmp-panel');
     handle.addEventListener('click', function () {
