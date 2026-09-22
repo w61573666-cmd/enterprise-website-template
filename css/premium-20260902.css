@@ -4968,3 +4968,213 @@ body.premium .product-hero .product-hero-desc {
   text-wrap: pretty;
 }
 body.premium .cta-section .section-desc { text-align: center; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [MOBILE GRID UNIFY · 2026-09-23] 移動端內容網格統一
+   ───────────────────────────────────────────────────────────────────────
+   需求：手機 ≤768px 一律 2 列、末行單元素佔滿整行、緊湊間距、
+   觸摸反饋、不錯位不溢出。
+
+   範圍（內容卡片網格）：
+   application / service / solutions / pain-point / honor / art-related /
+   why / info-cards / ev / product-video / product-gallery / eng-variety /
+   eng-adv / eng-process / eng-gallery / granite-variety / v2-series /
+   cs2-mat / cs2-gal / cs2-proc / cs2-inst / cs2-rel / cs2-tech
+
+   排除（刻意）：
+   · .mega-panel-grid —— 導航巨型選單，非內容網格
+   · .spec-grid / .specs-dimensions-grid / .ft-matrix-grid —— 規格數據表
+     （標籤/值對，2 列會擠爆，維持數據表佈局）
+   · .jd-grid —— 職位 JD 卡含職責表格，寬版單列為可讀性設計
+   · .cta-grid / .fgrid —— 頁腳/CTA 專用佈局
+   · ev-grid 桌面為 inline style repeat(3,1fr)，本塊 !important 於手機覆蓋
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  body.premium .application-grid,
+  body.premium .service-grid,
+  body.premium .solutions-grid,
+  body.premium .pain-point-grid,
+  body.premium .honor-grid,
+  body.premium .art-related-grid,
+  body.premium .why-grid,
+  body.premium .info-cards,
+  body.premium .ev-grid,
+  body.premium .product-video-grid,
+  body.premium .product-gallery-grid,
+  body.premium .eng-variety-grid,
+  body.premium .eng-adv-grid,
+  body.premium .eng-process-grid,
+  body.premium .eng-gallery-grid,
+  body.premium .granite-variety-grid,
+  body.premium .v2-series-grid,
+  body.premium .cs2-mat-grid,
+  body.premium .cs2-gal-grid,
+  body.premium .cs2-proc-grid,
+  body.premium .cs2-inst-grid,
+  body.premium .cs2-rel-grid,
+  body.premium .cs2-tech-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* 末行僅剩一個元素 → 佔滿整行（奇數序 + 最後一個 = 獨佔末行） */
+  body.premium .application-grid > :last-child:nth-child(odd),
+  body.premium .service-grid > :last-child:nth-child(odd),
+  body.premium .solutions-grid > :last-child:nth-child(odd),
+  body.premium .pain-point-grid > :last-child:nth-child(odd),
+  body.premium .honor-grid > :last-child:nth-child(odd),
+  body.premium .art-related-grid > :last-child:nth-child(odd),
+  body.premium .why-grid > :last-child:nth-child(odd),
+  body.premium .info-cards > :last-child:nth-child(odd),
+  body.premium .ev-grid > :last-child:nth-child(odd),
+  body.premium .product-video-grid > :last-child:nth-child(odd),
+  body.premium .product-gallery-grid > :last-child:nth-child(odd),
+  body.premium .eng-variety-grid > :last-child:nth-child(odd),
+  body.premium .eng-adv-grid > :last-child:nth-child(odd),
+  body.premium .eng-process-grid > :last-child:nth-child(odd),
+  body.premium .eng-gallery-grid > :last-child:nth-child(odd),
+  body.premium .granite-variety-grid > :last-child:nth-child(odd),
+  body.premium .v2-series-grid > :last-child:nth-child(odd),
+  body.premium .cs2-mat-grid > :last-child:nth-child(odd),
+  body.premium .cs2-gal-grid > :last-child:nth-child(odd),
+  body.premium .cs2-proc-grid > :last-child:nth-child(odd),
+  body.premium .cs2-inst-grid > :last-child:nth-child(odd),
+  body.premium .cs2-rel-grid > :last-child:nth-child(odd),
+  body.premium .cs2-tech-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* 防溢出：網格項允許收縮，圖片不撐破 */
+  body.premium .application-grid > *,
+  body.premium .service-grid > *,
+  body.premium .solutions-grid > *,
+  body.premium .pain-point-grid > *,
+  body.premium .honor-grid > *,
+  body.premium .art-related-grid > *,
+  body.premium .why-grid > *,
+  body.premium .info-cards > *,
+  body.premium .ev-grid > *,
+  body.premium .product-video-grid > *,
+  body.premium .product-gallery-grid > *,
+  body.premium .eng-variety-grid > *,
+  body.premium .eng-adv-grid > *,
+  body.premium .eng-process-grid > *,
+  body.premium .eng-gallery-grid > *,
+  body.premium .granite-variety-grid > *,
+  body.premium .v2-series-grid > *,
+  body.premium .cs2-mat-grid > *,
+  body.premium .cs2-gal-grid > *,
+  body.premium .cs2-proc-grid > *,
+  body.premium .cs2-inst-grid > *,
+  body.premium .cs2-rel-grid > *,
+  body.premium .cs2-tech-grid > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+  body.premium .application-grid img,
+  body.premium .honor-grid img,
+  body.premium .art-related-grid img,
+  body.premium .cs2-gal-grid img,
+  body.premium .eng-gallery-grid img,
+  body.premium .granite-variety-grid img,
+  body.premium .product-gallery-grid img,
+  body.premium .product-video-grid img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 緊湊排版：常見卡片內距收窄 */
+  body.premium .application-card,
+  body.premium .honor-card,
+  body.premium .why-card,
+  body.premium .pain-point-card,
+  body.premium .info-card {
+    padding: 14px 12px !important;
+  }
+}
+
+/* 小屏（≤380px）：維持 2 列，僅再縮間距 */
+@media (max-width: 380px) {
+  body.premium .application-grid,
+  body.premium .honor-grid,
+  body.premium .art-related-grid,
+  body.premium .why-grid,
+  body.premium .info-cards,
+  body.premium .ev-grid,
+  body.premium .product-gallery-grid,
+  body.premium .eng-variety-grid,
+  body.premium .eng-gallery-grid,
+  body.premium .granite-variety-grid,
+  body.premium .v2-series-grid,
+  body.premium .cs2-mat-grid,
+  body.premium .cs2-gal-grid,
+  body.premium .cs2-proc-grid,
+  body.premium .cs2-inst-grid,
+  body.premium .cs2-rel-grid,
+  body.premium .cs2-tech-grid {
+    gap: 8px !important;
+  }
+}
+
+/* 觸摸反饋：觸屏設備上卡片與按鈕的按下狀態 */
+@media (hover: none) {
+  body.premium .application-grid > *,
+  body.premium .service-grid > *,
+  body.premium .solutions-grid > *,
+  body.premium .pain-point-grid > *,
+  body.premium .honor-grid > *,
+  body.premium .art-related-grid > *,
+  body.premium .why-grid > *,
+  body.premium .info-cards > *,
+  body.premium .ev-grid > *,
+  body.premium .product-video-grid > *,
+  body.premium .product-gallery-grid > *,
+  body.premium .eng-variety-grid > *,
+  body.premium .eng-adv-grid > *,
+  body.premium .eng-process-grid > *,
+  body.premium .eng-gallery-grid > *,
+  body.premium .granite-variety-grid > *,
+  body.premium .v2-series-grid > *,
+  body.premium .cs2-mat-grid > *,
+  body.premium .cs2-gal-grid > *,
+  body.premium .cs2-proc-grid > *,
+  body.premium .cs2-inst-grid > *,
+  body.premium .cs2-rel-grid > *,
+  body.premium .cs2-tech-grid > *,
+  body.premium .btn,
+  body.premium .product-action-btn,
+  body.premium a.v2-series-card {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+  }
+  body.premium .application-grid > :active,
+  body.premium .service-grid > :active,
+  body.premium .solutions-grid > :active,
+  body.premium .pain-point-grid > :active,
+  body.premium .honor-grid > :active,
+  body.premium .art-related-grid > :active,
+  body.premium .why-grid > :active,
+  body.premium .info-cards > :active,
+  body.premium .ev-grid > :active,
+  body.premium .product-video-grid > :active,
+  body.premium .product-gallery-grid > :active,
+  body.premium .eng-variety-grid > :active,
+  body.premium .eng-adv-grid > :active,
+  body.premium .eng-process-grid > :active,
+  body.premium .eng-gallery-grid > :active,
+  body.premium .granite-variety-grid > :active,
+  body.premium .v2-series-grid > :active,
+  body.premium .cs2-mat-grid > :active,
+  body.premium .cs2-gal-grid > :active,
+  body.premium .cs2-proc-grid > :active,
+  body.premium .cs2-inst-grid > :active,
+  body.premium .cs2-rel-grid > :active,
+  body.premium .cs2-tech-grid > :active,
+  body.premium .btn:active,
+  body.premium .product-action-btn:active,
+  body.premium a.v2-series-card:active {
+    transform: scale(.97);
+    opacity: .88;
+  }
+}
