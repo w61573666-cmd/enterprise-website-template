@@ -1194,35 +1194,7 @@ body.premium .arch-hero p{font-size:15px;line-height:1.9;color:rgba(255,255,255,
   });
 })();
 
-// Form AJAX
-(function(){
-  var f = document.getElementById('metroFormZh');
-  var s = document.getElementById('metroSuccessZh');
-  if(!f) return;
-  f.addEventListener('submit', function(e){
-    e.preventDefault();
-    var btn = f.querySelector('.hsst-form-btn');
-    var orig = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Submitting...';
-    fetch(f.action, {method:'POST', body: new FormData(f), headers: {'Accept': 'application/json'}})
-      .then(function(r){
-        if(r.ok){
-          f.style.display = 'none';
-          s.classList.add('show');
-        } else {
-          btn.disabled = false;
-          btn.textContent = orig;
-          alert('Submission failed — please try again or contact us directly.');
-        }
-      })
-      .catch(function(){
-        btn.disabled = false;
-        btn.textContent = orig;
-        alert('Network error — please try again or contact us directly.');
-      });
-  });
-})();
+// Form: 交由全站「統一提交守衛」發送並展示成功提示頁（與「索取样板」一致，保證只寄一封郵件、絕不重發）
 </script>
   <script src="../../js/main-202605042201.js?v=20260922d"></script>
 
