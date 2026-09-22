@@ -4921,3 +4921,22 @@ body.premium .v2-series .v2-series-lead {
   text-justify: auto;
   text-wrap: pretty;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [HERO SUBTITLE ALIGNMENT · 2026-09-23]
+   內頁 hero 副標（.hero-content .hero-subtitle，全站 14 頁）排版錯位修復
+   ───────────────────────────────────────────────────────────────────────
+   問題：.hero-content 為 text-align:center 容器（H1 / 徽章 / 按鈕全居中），
+   但副標僅 max-width:60ch 且無 margin:auto → 區塊貼左、段內文字卻繼承居中，
+   形成「標題居中 / 描述塊貼左」的錯位（專業認證、加入我們等頁用戶實際看到的位置）。
+   修復：區塊置中 (margin auto) + 兩端對齊；行寬維持 60ch 居中欄（hero 展示區
+   保持聚焦感，不隨正文同寬規則放寬）。首頁 hero-grid-video 變體同構，一併生效。
+   ═══════════════════════════════════════════════════════════════════════ */
+.premium .hero-content .hero-subtitle,
+body.premium .hero-content .hero-subtitle {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: justify;
+  text-justify: auto;
+  text-wrap: pretty;
+}
