@@ -1,0 +1,187 @@
+/* ============================================================
+   HENGSHENG MARBLE — 統一產品參數展示樣式
+   用途：產品詳情頁參數表 / 列表卡片參數摘要 / 對比頁對齊表
+   [CRITICAL CODE - DO NOT DELETE OR MODIFY]
+   ============================================================ */
+
+/* ── 1. 產品詳情頁：分組參數表 ───────────────────────── */
+.hsst-spec-groups { margin-top: 6px; }
+.hsst-spec-group { margin-bottom: 26px; }
+.hsst-spec-group:last-child { margin-bottom: 0; }
+.hsst-spec-group-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-accent, #c9a227);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary, #1a1a1a);
+  letter-spacing: .02em;
+}
+.hsst-spec-group-title span {
+  font-size: .72rem;
+  font-weight: 400;
+  color: var(--color-mid-gray, #8a8a8a);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.hsst-spec-group .spec-grid { margin-bottom: 0; }
+.hsst-spec-group .spec-item-value { font-size: .95rem; line-height: 1.35; }
+.hsst-spec-group .spec-item { align-items: flex-start; }
+.hsst-spec-group .spec-item-right { text-align: right; }
+.hsst-spec-note {
+  margin-top: 18px;
+  font-size: .78rem;
+  color: var(--color-mid-gray, #8a8a8a);
+  line-height: 1.6;
+}
+
+/* ── 2. 列表卡片：參數摘要 chips ─────────────────────── */
+.hsst-spec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.hsst-spec-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  max-width: 100%;
+  padding: 3px 8px;
+  border: 1px solid var(--color-light-gray, #e2e2e2);
+  border-radius: 999px;
+  background: #fafafa;
+  font-size: .7rem;
+  line-height: 1.5;
+  color: var(--color-primary, #1a1a1a);
+  white-space: nowrap;
+}
+.hsst-spec-chip b {
+  font-weight: 600;
+  color: var(--color-mid-gray, #8a8a8a);
+}
+.hsst-spec-chip span { font-weight: 700; }
+a.v2-series-card .hsst-spec-chips { margin-top: 6px; }
+
+/* ── 3. 對比頁：統一維度對齊表 ───────────────────────── */
+.hsst-cmp-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.hsst-cmp-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .84rem;
+  color: var(--color-primary, #1a1a1a);
+  cursor: pointer;
+  user-select: none;
+}
+.hsst-cmp-toggle input { width: 15px; height: 15px; accent-color: var(--color-accent, #c9a227); cursor: pointer; }
+.hsst-cmp-legend { font-size: .74rem; color: var(--color-mid-gray, #8a8a8a); }
+.hsst-cmp-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin-right: 4px; }
+.hsst-cmp-swatch-diff { background: #fff3cd; border: 1px solid #e0a800; }
+
+.hsst-cmp-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hsst-cmp-table { min-width: 100%; border-collapse: separate; border-spacing: 0; }
+.hsst-cmp-row { display: grid; grid-template-columns: 168px repeat(var(--cols, 2), minmax(150px, 1fr)); }
+.hsst-cmp-cell {
+  padding: 9px 11px;
+  border-bottom: 1px solid var(--color-light-gray, #e6e6e6);
+  font-size: .82rem;
+  line-height: 1.45;
+  word-break: break-word;
+}
+.hsst-cmp-label {
+  background: #f7f6f3;
+  font-weight: 600;
+  color: var(--color-primary, #1a1a1a);
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+.hsst-cmp-grouprow { margin-top: 10px; }
+.hsst-cmp-group {
+  grid-column: 1 / -1;
+  background: var(--color-primary, #1a1a1a);
+  color: #fff;
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .04em;
+  padding: 7px 11px;
+}
+.hsst-cmp-head .hsst-cmp-th {
+  background: #fff;
+  text-align: center;
+  vertical-align: top;
+  font-weight: 700;
+}
+.hsst-cmp-head .hsst-cmp-th img { width: 100%; max-width: 120px; aspect-ratio: 3/2; object-fit: cover; border-radius: 4px; }
+.hsst-cmp-name { margin-top: 6px; font-size: .88rem; font-weight: 700; }
+.hsst-cmp-en { font-size: .72rem; color: var(--color-mid-gray, #8a8a8a); }
+.hsst-cmp-remove {
+  margin-top: 6px;
+  padding: 3px 10px;
+  border: 1px solid var(--color-light-gray, #ddd);
+  background: #fff;
+  border-radius: 999px;
+  font-size: .72rem;
+  cursor: pointer;
+}
+.hsst-cmp-remove:hover { border-color: #c0392b; color: #c0392b; }
+
+/* 差異標記 */
+.hsst-cmp-fieldrow.is-diff .hsst-cmp-label { background: #fff8e1; }
+.hsst-cmp-cell.is-diffcell {
+  background: #fff3cd;
+  font-weight: 700;
+  box-shadow: inset 2px 0 0 #e0a800;
+}
+.hsst-cmp-diffbadge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #e0a800;
+  color: #fff;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  vertical-align: 1px;
+}
+/* 缺失：不支援／無 */
+.hsst-cmp-cell.is-na {
+  color: #a0a0a0;
+  font-style: italic;
+  background: repeating-linear-gradient(45deg, #fafafa, #fafafa 6px, #f2f2f2 6px, #f2f2f2 12px);
+}
+/* 只顯示差異 */
+.hsst-cmp-wrap.only-diff .hsst-cmp-fieldrow:not(.is-diff) { display: none; }
+.hsst-cmp-wrap.only-diff .hsst-cmp-fieldrow.is-diff { display: grid; }
+.hsst-cmp-nodata { padding: 24px; text-align: center; color: var(--color-mid-gray, #8a8a8a); }
+.hsst-cmp-empty-page { padding: 40px 20px; text-align: center; }
+.hsst-cmp-empty-page p { font-size: .95rem; color: var(--color-mid-gray, #8a8a8a); }
+
+/* 系列卡片內的比對按鈕 */
+.hsst-cmp-cta-inline { margin-top: 8px; }
+
+/* ── 4. 行動端 ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hsst-cmp-row { grid-template-columns: 124px repeat(var(--cols, 2), minmax(132px, 1fr)); }
+  .hsst-cmp-cell { padding: 8px 9px; font-size: .78rem; }
+  .hsst-cmp-label { font-size: .74rem; }
+  .hsst-spec-group-title { font-size: .92rem; }
+  .hsst-cmp-toolbar { justify-content: flex-start; }
+}
+@media (max-width: 480px) {
+  .hsst-cmp-row { grid-template-columns: 108px repeat(var(--cols, 2), minmax(124px, 1fr)); }
+  .hsst-spec-chip { font-size: .66rem; padding: 2px 7px; }
+}
