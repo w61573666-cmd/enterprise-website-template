@@ -122,13 +122,14 @@
     var existing = null;
     var parent = f.parentElement;
     while (parent && !existing) {
-      existing = parent.querySelector('#sampleSuccess, .sample-form-success');
+      existing = parent.querySelector('#sampleSuccess, .sample-form-success, .hsst-form-success');
       if (existing) break;
       parent = parent.parentElement;
     }
     if (existing) {
       try { f.style.display = 'none'; } catch (e) {}
       existing.style.display = 'block';
+      existing.classList.add('show');
       try { existing.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
       return;
     }
@@ -151,13 +152,15 @@
         '<p>感謝您的提交。我們的專員將於 <b>24 小時內</b> 與您聯繫，確認需求並安排後續事宜。' +
         '如需緊急處理，請致電 <b>+852 5538 0525</b> 或發送郵件至 <b>stone@hsst.hk</b>。</p>';
     }
-    if (f.parentElement) {
-      f.parentElement.insertBefore(panel, f.nextSibling);
-    } else {
-      f.insertBefore(panel, f.nextSibling);
+    // 同步顯示（不依賴 requestAnimationFrame，避免部分環境動畫回調不觸發導致「提交後無提示」）
+    panel.classList.add('show');
+    try {
+      if (f.parentElement) f.parentElement.insertBefore(panel, f.nextSibling);
+      else document.body.appendChild(panel);
+    } catch (e) {
+      try { document.body.appendChild(panel); } catch (e2) {}
     }
     try { f.style.display = 'none'; } catch (e) {}
-    // 觸發動畫
     requestAnimationFrame(function () { panel.classList.add('show'); });
     try { panel.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
   }
@@ -191,10 +194,9 @@
   document.addEventListener('submit', function (e) {
     var f = e.target;
     if (!isOurForm(f) || !e.__hsstGuardPass) return;
-    var rejected = e.defaultPrevented;   /* 頁面處理器是否已判定「不送出」 */
     e.preventDefault();                  /* 一律阻止瀏覽器整頁跳轉 */
     if (window.__hsstSendCount > 0 || f.__hsstSent) return;  /* 頁面已自行發送 → 不重發 */
-    if (rejected || !validate(f)) { unlock(f); return; }     /* 校驗未過 → 不寄信 */
+    if (!validate(f)) { unlock(f); return; }                 /* 校驗未過 → 不寄信（守衛為唯一判斷依據，不受頁面 preventDefault 影響） */
     sendOnce(f);
   }, false);
 
