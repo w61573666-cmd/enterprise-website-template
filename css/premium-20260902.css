@@ -5178,3 +5178,94 @@ body.premium .cta-section .section-desc { text-align: center; }
     opacity: .88;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [MOBILE IMG 2-UP · 2026-09-23] 手機端圖片區兩列一排
+   ───────────────────────────────────────────────────────────────────────
+   需求：手機端所有圖片區一律 2 個一排（不再 1 個一排），
+   僅末行只剩 1 個時鋪滿整行。
+
+   覆蓋 5 類漏網圖片容器（各頁內嵌樣式 / projects-v2.css 於手機壓成單列；
+   本塊帶 body.premium 前綴，特異性恆勝出，無需改動頁面源碼）：
+   · .arch-grid     projects/other-images（中英）頁內嵌 ≤900px 單列
+   · .equip-grid    about（中英）頁內嵌 ≤768px 單列
+   · .rs-imgstrip   resources（中英）頁內嵌 ≤640px 單列
+   · .v2-masonry    projects（中英）projects-v2.css ≤900px column-count:1
+                    （masonry 錯落無「末行鋪滿」概念，維持 2 欄錯落）
+   · .vtl-track     about（中英）頁內嵌 ≤768px 豎排時間軸 → 改 2 列網格，
+                    隱藏時間豎線/節點圓點/漸隱遮罩，年份徽章保留里程碑語義
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  body.premium .arch-grid,
+  body.premium .equip-grid,
+  body.premium .rs-imgstrip,
+  body.premium .vtl-track {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* 末行僅剩一個元素 → 佔滿整行 */
+  body.premium .arch-grid > :last-child:nth-child(odd),
+  body.premium .equip-grid > :last-child:nth-child(odd),
+  body.premium .rs-imgstrip > :last-child:nth-child(odd),
+  body.premium .vtl-track > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* 防溢出；清除時間軸豎排遺留的左縮進 */
+  body.premium .arch-grid > *,
+  body.premium .equip-grid > *,
+  body.premium .rs-imgstrip > *,
+  body.premium .vtl-track > * {
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+  }
+  body.premium .arch-grid img,
+  body.premium .equip-grid img,
+  body.premium .rs-imgstrip img,
+  body.premium .vtl-track img {
+    max-width: 100%;
+  }
+
+  /* 發展里程碑：隱藏時間豎線、節點圓點、漸隱遮罩（2 列網格下無意義） */
+  body.premium .vtl-track::before,
+  body.premium .vtl-card::after,
+  body.premium .vtl-fade,
+  body.premium .vtl-line { display: none !important; }
+  body.premium .vtl-card { width: auto !important; scroll-snap-align: none; }
+
+  /* projects 錯落 masonry：手機維持 2 欄錯落、收緊間距 */
+  body.premium .v2-masonry { column-count: 2 !important; column-gap: 10px !important; }
+  body.premium .v2-masonry .v2-card { margin-bottom: 10px; }
+}
+
+/* 小屏（≤380px）：維持 2 列，僅再縮間距 */
+@media (max-width: 380px) {
+  body.premium .arch-grid,
+  body.premium .equip-grid,
+  body.premium .rs-imgstrip,
+  body.premium .vtl-track { gap: 8px !important; }
+  body.premium .v2-masonry { column-gap: 8px !important; }
+}
+
+/* 觸摸反饋（與 [MOBILE GRID UNIFY] 同一邏輯） */
+@media (hover: none) {
+  body.premium .arch-grid > *,
+  body.premium .equip-grid > *,
+  body.premium .rs-imgstrip > *,
+  body.premium .vtl-card,
+  body.premium .v2-masonry .v2-card {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+  }
+  body.premium .arch-grid > :active,
+  body.premium .equip-grid > :active,
+  body.premium .rs-imgstrip > :active,
+  body.premium .vtl-card:active,
+  body.premium .v2-masonry .v2-card:active {
+    transform: scale(.97);
+    opacity: .88;
+  }
+}
