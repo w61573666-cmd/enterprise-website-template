@@ -957,7 +957,7 @@
     btn.disabled = true;
 
     var data = new FormData(form);
-    fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+    if(window.__hsstMarkSent)window.__hsstMarkSent(form);fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
       .then(function(response){
         if (response.ok) {
           form.style.display = 'none';
@@ -1105,10 +1105,35 @@
 <script src="../js/main-202605042201.js?v=20260922d"></script>
 <script src="../js/back-button.js?v=20260918a" defer></script>
 <script>
+/* =================================================================
+   [CRITICAL CODE - DO NOT DELETE OR MODIFY / 核心代碼 嚴禁刪除]
+   HSST 全站表單「統一提交守衛」（Form Guard）— 保證每次有效提交只寄一封通知郵件
+   -----------------------------------------------------------------
+   PROJECT : HSST 全站表單（endpoint: splitforms.com）
+   PURPOSE : 消除重複寄信；同時確保校驗未通過時不會寄出郵件
+   ROOT CAUSE（已修復）:
+     過去「頁面自訂 submit 處理器」與「全域 splitforms 處理器」各自執行
+     一次 fetch，且全域處理器註冊於「捕獲階段」（早於頁面校驗執行），
+     造成 ① 一次提交寄出兩封郵件 ② 校驗失敗仍會寄出郵件。
+   HOW IT WORKS:
+     ① 捕獲階段 — 只做「去重上鎖」，永不發信
+     ② 頁面處理器 — 可自行發送（完整保留原有成功提示與 UI）
+     ③ 冒泡階段 — 僅在「本輪無人發送過 AND 校驗通過」時才由全域補發一次
+   WARNING: 刪除或改動本段將導致表單重複寄信或失效，請勿修改。
+   ================================================================= */
 (function(){
-  // 监听 splitforms 提交，弹 toast 反馈
-  if (window.__HSST_TOAST_LOADED__) return;
-  window.__HSST_TOAST_LOADED__ = true;
+  if (window.__HSST_FORM_GUARD__) return;
+  window.__HSST_FORM_GUARD__ = true;
+
+  var ENDPOINT = 'splitforms.com';
+  var LOCK_MS  = 5000;
+  var LANG = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'zh';
+  var T = function(en, zh){ return LANG === 'en' ? en : zh; };
+
+  function isOurForm(f){
+    return !!(f && f.action && String(f.action).indexOf(ENDPOINT) >= 0);
+  }
+
   function toast(msg, type){
     var t = document.getElementById('hsst-form-toast');
     if (!t) {
@@ -1117,41 +1142,117 @@
       t.className = 'hsst-form-toast';
       document.body.appendChild(t);
     }
-    t.className = 'hsst-form-toast show ' + (type||'success');
+    t.className = 'hsst-form-toast show ' + (type || 'success');
     t.textContent = msg;
     clearTimeout(t.__timer);
     t.__timer = setTimeout(function(){ t.className = 'hsst-form-toast'; }, 4000);
   }
   window.__hsstFormToast = toast;
-  // 拦截表单提交
+
+  function unlock(f){
+    if (!f) return;
+    f.__hsstBusy = false;
+    clearTimeout(f.__hsstLockT);
+  }
+  window.__hsstUnlock   = unlock;
+  window.__hsstMarkSent = function(f){ if (f) f.__hsstSent = true; };
+
+  /* 校驗安全網：required 必填 / email 格式 / 必勾選 */
+  function validate(f){
+    var ok = true;
+    f.querySelectorAll('[required]').forEach(function(el){
+      var ty = (el.type || '').toLowerCase();
+      if (ty === 'checkbox' || ty === 'radio') { if (!el.checked) ok = false; }
+      else if (!String(el.value || '').trim()) ok = false;
+    });
+    f.querySelectorAll('input[type="email"][required]').forEach(function(el){
+      var v = String(el.value || '').trim();
+      if (v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) ok = false;
+    });
+    return ok;
+  }
+
+  /* 統計「本輪事件內」已發出的請求數，供去重判斷 */
+  window.__hsstSendCount  = 0;
+  window.__hsstActiveForm = null;
+  var _fetch = window.fetch;
+  if (typeof _fetch === 'function'){
+    window.fetch = function(){
+      var isOurs = false;
+      try {
+        var u = arguments[0];
+        var s = (typeof u === 'string') ? u : ((u && u.url) || '');
+        isOurs = String(s).indexOf(ENDPOINT) >= 0;
+      } catch(e){}
+      var p = _fetch.apply(window, arguments);
+      if (isOurs){
+        window.__hsstSendCount++;
+        var done = function(){ unlock(window.__hsstActiveForm); };
+        try { p.then(done, done); } catch(e){}
+      }
+      return p;
+    };
+  }
+
+  /* ① 捕獲階段：去重上鎖，絕不發信 */
   document.addEventListener('submit', function(e){
     var f = e.target;
-    if (f && f.action && f.action.indexOf('splitforms.com') >= 0) {
-      // 异步等待响应
-      var origDisabled = null;
-      var btn = f.querySelector('button[type="submit"], input[type="submit"]');
-      if (btn) { origDisabled = btn.disabled; btn.disabled = true; btn.dataset.__orig = btn.textContent; btn.textContent = '送出中…'; }
-      fetch(f.action, {
-        method: 'POST',
-        body: new FormData(f),
-        headers: { 'Accept': 'application/json' }
-      }).then(function(r){
-        if (r.ok || r.status === 200 || r.status === 201 || r.status === 0) {
-          toast(LANG==='en'?'✓ Thanks! We will reply within 24 hours.':'✓ 已收到！我們將於 24 小時內回覆', 'success');
-          f.reset();
-        } else {
-          toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
-        }
-        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
-      }).catch(function(){
-        toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
-        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
-      });
+    if (!isOurForm(f)) return;
+    window.__hsstSendCount = 0;
+    f.__hsstSent = false;
+    if (f.__hsstBusy){
       e.preventDefault();
+      e.stopImmediatePropagation();   /* 重複觸發：直接掐斷，不再向下傳遞 */
+      return;
     }
+    f.__hsstBusy = true;
+    window.__hsstActiveForm = f;
+    var btn = f.querySelector('button[type="submit"], input[type="submit"]');
+    if (btn){
+      f.__hsstBtn = btn;
+      f.__hsstBtnText = btn.textContent;
+      f.__hsstBtnDisabled = btn.disabled;
+    }
+    clearTimeout(f.__hsstLockT);
+    f.__hsstLockT = setTimeout(function(){ unlock(f); }, LOCK_MS);
+    e.__hsstGuardPass = true;
   }, true);
-  var LANG = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+
+  /* ② 冒泡階段：頁面處理器跑完後，才決定是否發信 */
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if (!isOurForm(f) || !e.__hsstGuardPass) return;
+    var rejected = e.defaultPrevented;   /* 頁面處理器是否已判定「不送出」 */
+    e.preventDefault();                  /* 一律阻止瀏覽器整頁跳轉 */
+    if (window.__hsstSendCount > 0 || f.__hsstSent) return;  /* 頁面已自行發送 → 不重發 */
+    if (rejected || !validate(f)) { unlock(f); return; }     /* 校驗未過 → 不寄信 */
+    sendOnce(f);
+  }, false);
+
+  function sendOnce(f){
+    var btn = f.__hsstBtn;
+    if (btn){ btn.disabled = true; btn.textContent = T('Sending…', '送出中…'); }
+    fetch(f.action, {
+      method: 'POST',
+      body: new FormData(f),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r){
+      if (r.ok || r.status === 200 || r.status === 201 || r.status === 0){
+        toast(T('✓ Thanks! We will reply within 24 hours.', '✓ 已收到！我們將於 24 小時內回覆'), 'success');
+        try { f.reset(); } catch(e){}
+      } else {
+        toast(T('Submission failed, please try again later.', '提交失敗，請稍後再試'), 'error');
+      }
+      if (btn){ btn.disabled = false; btn.textContent = f.__hsstBtnText; }
+      unlock(f);
+    }).catch(function(){
+      toast(T('Submission failed, please try again later.', '提交失敗，請稍後再試'), 'error');
+      if (btn){ btn.disabled = false; btn.textContent = f.__hsstBtnText; }
+      unlock(f);
+    });
+  }
 })();
+
 </script>
 </body>
 </html>
