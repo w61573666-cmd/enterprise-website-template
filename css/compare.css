@@ -358,3 +358,63 @@
   box-shadow: none;
   cursor: default;
 }
+/* ============================================================
+   品種詳情頁：操作條內的第三級 CTA（與「索取樣板 / 立即諮詢」並列）
+   只在品種詳情頁出現，行動版自動換行
+   ============================================================ */
+.product-action-bar .hsst-cmp-cta-detail,
+.product-action-bar .hsst-cmp-cta-detail.hsst-cmp-cta-detail {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: auto;
+  min-width: 220px;
+  margin: 0;
+  padding: 16px 38px;
+  align-self: center;
+  font-family: 'Inter', 'Noto Sans TC', 'Noto Serif TC', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .92);
+  color: #14130F;
+  border: 1.5px solid rgba(194, 162, 94, .65);
+  box-shadow: 0 2px 8px rgba(20, 19, 15, .06);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all .35s cubic-bezier(.34, 1.4, .64, 1);
+}
+.product-action-bar .hsst-cmp-cta-detail::after {
+  content: '→';
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.product-action-bar .hsst-cmp-cta-detail:hover {
+  background: linear-gradient(135deg, #E5D3A6 0%, #C2A25E 100%);
+  color: #14130F;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(194, 162, 94, .32);
+}
+.product-action-bar .hsst-cmp-cta-detail:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+.product-action-bar .hsst-cmp-cta-detail.cmp-selected {
+  background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
+  color: #fff;
+  border-color: rgba(76, 175, 80, .5);
+}
+@media (max-width: 720px) {
+  .product-action-bar .hsst-cmp-cta-detail,
+  .product-action-bar .hsst-cmp-cta-detail.hsst-cmp-cta-detail {
+    min-width: 0;
+    width: 100%;
+    padding: 14px 20px;
+  }
+}
