@@ -48,6 +48,7 @@
     
 
 
+<link href="css/compare.css?v=20260922e" rel="stylesheet"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -150,7 +151,7 @@
      </span>
     </a>
     <span class="nav-center-title">恆生石材科技有限公司</span>
-    <div class="nav-links">
+    <div id="navLinks" class="nav-links">
      <a href="../index.html">
       首頁
      </a>
@@ -615,7 +616,7 @@
      <div class="lang-switch"><a class="active" data-lang="zh" href="five-axis-cnc.html">TC</a><span class="lang-divider">|</span><a data-lang="en" href="../en/technology/five-axis-cnc.html">EN</a></div>
     </div>
     
-    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <style>
@@ -894,8 +895,8 @@ a.solutions-card{text-decoration:none;display:block;}
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">我們使用 Cookie 來提升您的瀏覽體驗。繼續使用本網站即表示您同意我們的 <a href="../privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 
@@ -918,5 +919,6 @@ a.solutions-card{text-decoration:none;display:block;}
 </script>
 
 <script src="../js/back-button.js?v=20260918a" defer></script>
+<script src="js/compare.js?v=20260922e"></script>
 </body>
 </html>

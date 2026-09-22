@@ -177,6 +177,7 @@
  "image": "https://www.hsst.hk/images/logo.jpg"
 }</script>
 <!-- /SEO-LD:auto -->
+<link href="../css/compare.css?v=20260922e" rel="stylesheet"/>
 </head>
 <body class="inner-page premium">
 <nav class="navbar">
@@ -189,7 +190,7 @@
      </span>
     </a>
 <span class="nav-center-title">HENGSHENG MARBLE S&amp;T CO. LIMITED</span>
-<div class="nav-links">
+<div id="navLinks" class="nav-links">
      <a href="../../index.html">Home</a>
      <div class="nav-dropdown">
       <a href="../../about.html">About</a>
@@ -625,7 +626,7 @@
      <div class="lang-switch"><a data-lang="zh" href="../../../products/custom-craft.html">TC</a><span class="lang-divider">|</span><a class="active" data-lang="en" href="../custom-craft.html">EN</a></div>
     </div>
 
-<div class="nav-toggle"><span></span><span></span><span></span></div>
+<button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span></span><span></span><span></span></button>
 </div></nav>
 <section id="main-content">
 <style>
@@ -850,7 +851,7 @@
 <div class="form-group"><label>Phone</label><input type="text" name="user_phone" placeholder="Please enter your phone number"/></div>
 </div>
 <div class="form-group"><label>Requirements</label><textarea name="user_message" placeholder="Please describe your stone requirements (quantity, specs, application, etc.)"></textarea></div>
-<label class="hsst-consent"><input type="checkbox" name="consent" value="Agree" required/><span>I have read and agree to the <a href="../../privacy.html" target="_blank">Privacy Policy</a>, authorizing HENGSHENG MARBLE S&amp;T CO. LIMITED to use the above information to contact me.</span></label>
+<label class="hsst-consent"><input type="checkbox" name="consent" value="Agree" required/><span>I have read and agree to the <a href="../../privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>, authorizing HENGSHENG MARBLE S&amp;T CO. LIMITED to use the above information to contact me.</span></label>
 <button type="submit" class="hsst-form-btn">Submit Inquiry</button>
 </form>
 <div class="form-trust-badges">
@@ -1010,8 +1011,8 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="../../privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">Accept</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">Accept</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 <script>
@@ -1100,5 +1101,55 @@
 ]
 </script>
 <script src="../../../js/back-button.js?v=20260918a" defer></script>
+<script src="../js/compare.js?v=20260922e"></script>
+<script>
+(function(){
+  // 监听 splitforms 提交，弹 toast 反馈
+  if (window.__HSST_TOAST_LOADED__) return;
+  window.__HSST_TOAST_LOADED__ = true;
+  function toast(msg, type){
+    var t = document.getElementById('hsst-form-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'hsst-form-toast';
+      t.className = 'hsst-form-toast';
+      document.body.appendChild(t);
+    }
+    t.className = 'hsst-form-toast show ' + (type||'success');
+    t.textContent = msg;
+    clearTimeout(t.__timer);
+    t.__timer = setTimeout(function(){ t.className = 'hsst-form-toast'; }, 4000);
+  }
+  window.__hsstFormToast = toast;
+  // 拦截表单提交
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if (f && f.action && f.action.indexOf('splitforms.com') >= 0) {
+      // 异步等待响应
+      var origDisabled = null;
+      var btn = f.querySelector('button[type="submit"], input[type="submit"]');
+      if (btn) { origDisabled = btn.disabled; btn.disabled = true; btn.dataset.__orig = btn.textContent; btn.textContent = '送出中…'; }
+      fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r){
+        if (r.ok || r.status === 200 || r.status === 201 || r.status === 0) {
+          toast(LANG==='en'?'✓ Thanks! We will reply within 24 hours.':'✓ 已收到！我們將於 24 小時內回覆', 'success');
+          f.reset();
+        } else {
+          toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        }
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      }).catch(function(){
+        toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      });
+      e.preventDefault();
+    }
+  }, true);
+  var LANG = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+})();
+</script>
 </body>
 </html>

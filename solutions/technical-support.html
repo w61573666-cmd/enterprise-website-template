@@ -48,6 +48,7 @@
     
 
 
+<link href="css/compare.css?v=20260922e" rel="stylesheet"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -167,7 +168,7 @@
      </span>
     </a>
     <span class="nav-center-title">恆生石材科技有限公司</span>
-    <div class="nav-links">
+    <div id="navLinks" class="nav-links">
      <a href="../index.html">
       首頁
      </a>
@@ -632,7 +633,7 @@
      <div class="lang-switch"><a class="active" data-lang="zh" href="technical-support.html">TC</a><span class="lang-divider">|</span><a data-lang="en" href="../en/solutions/technical-support.html">EN</a></div>
     </div>
     
-    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <style>
@@ -715,7 +716,7 @@
           <textarea name="message" placeholder="請描述現場情況、石材規格、遇到的技術問題或需支援的具體工序（如異形拼接、錯縫處理等）…" required></textarea></div>
       
       <div class="form-note">標註 <span class="required">*</span> 的欄位為必填項</div>
-      <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="../privacy.html" target="_blank">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
+      <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="../privacy.html" target="_blank" rel="noopener noreferrer">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
       <button type="submit">提交技術支持申請</button>
       <input type="text" name="_gotcha" style="display:none">
      </form>
@@ -874,8 +875,8 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">我們使用 Cookie 來提升您的瀏覽體驗。繼續使用本網站即表示您同意我們的 <a href="../privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 
@@ -898,5 +899,55 @@
 </script>
 
 <script src="../js/back-button.js?v=20260918a" defer></script>
+<script src="js/compare.js?v=20260922e"></script>
+<script>
+(function(){
+  // 监听 splitforms 提交，弹 toast 反馈
+  if (window.__HSST_TOAST_LOADED__) return;
+  window.__HSST_TOAST_LOADED__ = true;
+  function toast(msg, type){
+    var t = document.getElementById('hsst-form-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'hsst-form-toast';
+      t.className = 'hsst-form-toast';
+      document.body.appendChild(t);
+    }
+    t.className = 'hsst-form-toast show ' + (type||'success');
+    t.textContent = msg;
+    clearTimeout(t.__timer);
+    t.__timer = setTimeout(function(){ t.className = 'hsst-form-toast'; }, 4000);
+  }
+  window.__hsstFormToast = toast;
+  // 拦截表单提交
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if (f && f.action && f.action.indexOf('splitforms.com') >= 0) {
+      // 异步等待响应
+      var origDisabled = null;
+      var btn = f.querySelector('button[type="submit"], input[type="submit"]');
+      if (btn) { origDisabled = btn.disabled; btn.disabled = true; btn.dataset.__orig = btn.textContent; btn.textContent = '送出中…'; }
+      fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r){
+        if (r.ok || r.status === 200 || r.status === 201 || r.status === 0) {
+          toast(LANG==='en'?'✓ Thanks! We will reply within 24 hours.':'✓ 已收到！我們將於 24 小時內回覆', 'success');
+          f.reset();
+        } else {
+          toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        }
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      }).catch(function(){
+        toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      });
+      e.preventDefault();
+    }
+  }, true);
+  var LANG = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+})();
+</script>
 </body>
 </html>

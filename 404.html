@@ -56,13 +56,21 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter','Noto Sans TC',sans-serif;background:#faf8f5;min-height:100vh;display:flex;flex-direction:column;align-items:stretch;justify-content:center;text-align:center;padding:20px}
-    .wrap{max-width:500px;width:100%;margin:0 auto}
+    .wrap{max-width:880px;width:100%;margin:0 auto;padding:0 20px}
     h1{font-family:'Playfair Display',serif;font-size:clamp(4rem,8vw,7rem);color:#C4A882;margin-bottom:16px;line-height:1}
     h2{font-size:1.25rem;color:#1a1a1a;margin-bottom:12px;font-weight:600}
     p{color:#666;margin-bottom:32px;line-height:1.7;font-size:0.95rem}
     a{display:inline-block;padding:12px 32px;background:#C4A882;color:#fff;text-decoration:none;border-radius:6px;font-weight:500;transition:all .3s ease}
     a:hover{background:#1a1a1a}
     .sub{display:block;margin-top:24px;font-size:0.82rem;color:#999}
+    .hsst-404-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px;margin-bottom:36px;text-align:left;}
+    .hsst-404-card{background:#fff;border:1px solid #ececec;border-radius:10px;padding:18px 16px;text-decoration:none;color:#1a1a1a;transition:all .3s ease;display:flex;flex-direction:column;gap:6px;}
+    .hsst-404-card:hover{border-color:#C9A84C;transform:translateY(-3px);box-shadow:0 10px 28px rgba(201,168,76,0.15);}
+    .hsst-404-card b{font-size:14px;font-weight:600;}
+    .hsst-404-card span{font-size:12px;color:#888;}
+    .hsst-404-card em{font-size:11px;color:#C9A84C;font-style:normal;margin-top:4px;}
+    @media(max-width:720px){.hsst-404-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:420px){.hsst-404-grid{grid-template-columns:1fr;}}
   </style>
 
 
@@ -116,8 +124,16 @@
 <body class="premium"><div class="wrap">
     <h1>404</h1>
     <h2>抱歉，此頁面不存在</h2>
-    <p>您訪問的頁面可能已被移除、名稱已變更或暫時無法使用。<br>請檢查網址是否正確，或返回首頁繼續瀏覽。</p>
-    <a href="/">返回首頁</a>
+    <p>您訪問的頁面可能已被移除、名稱已變更或暫時無法使用。<br>請檢查網址是否正確，或瀏覽下方主要分類繼續探索。</p>
+    <div class="hsst-404-grid">
+      <a class="hsst-404-card" href="products.html"><b>產品中心</b><span>雲石・花崗岩・洞石・奢石</span><em>→</em></a>
+      <a class="hsst-404-card" href="projects.html"><b>工程項目</b><span>酒店・豪宅・公建・幕牆</span><em>→</em></a>
+      <a class="hsst-404-card" href="about.html"><b>關於我們</b><span>26 年石材專業，全球 180+ 礦山</span><em>→</em></a>
+      <a class="hsst-404-card" href="solutions.html"><b>解決方案</b><span>報價・技術・批量・批發</span><em>→</em></a>
+      <a class="hsst-404-card" href="news.html"><b>資訊動態</b><span>公司・工程・洞察・展會</span><em>→</em></a>
+      <a class="hsst-404-card" href="contact.html"><b>聯絡我們</b><span>WhatsApp・郵箱・電話</span><em>→</em></a>
+    </div>
+    <a href="/" style="background:#1a1a1a;">返回首頁</a>
     <span class="sub">HENGSHENG MARBLE S&amp;T CO. LIMITED</span>
   </div>
 
@@ -159,8 +175,8 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">我們使用 Cookie 來提升您的瀏覽體驗。繼續使用本網站即表示您同意我們的 <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 <script src="js/main-202605042201.js?v=20260922d"></script>

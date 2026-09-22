@@ -139,6 +139,7 @@
 }
 </script>
 <!-- /SEO-LD:auto -->
+<link href="../css/compare.css?v=20260922e" rel="stylesheet"/>
 </head>
 <body class="inner-page premium"><nav class="navbar">
  <div class="container">
@@ -150,7 +151,7 @@
      </span>
     </a>
   <span class="nav-center-title">HENGSHENG MARBLE S&amp;T CO. LIMITED</span>
-  <div class="nav-links">
+  <div id="navLinks" class="nav-links">
      <a href="../index.html">Home</a>
      <div class="nav-dropdown">
       <a href="../about.html">About</a>
@@ -586,7 +587,7 @@
      <div class="lang-switch"><a data-lang="zh" href="../../technology/nano-coating.html">TC</a><span class="lang-divider">|</span><a class="active" data-lang="en" href="nano-coating.html">EN</a></div>
     </div>
 
-  <div class="nav-toggle"><span></span><span></span><span></span></div>
+  <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span></span><span></span><span></span></button>
  </div>
 </nav>
 <style>
@@ -900,8 +901,8 @@ a.solutions-card{text-decoration:none;display:block;}
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="../privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">Accept</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">Accept</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 
@@ -930,5 +931,6 @@ a.solutions-card{text-decoration:none;display:block;}
 })();
 </script>
 <script src="../../js/back-button.js?v=20260918a" defer></script>
+<script src="../js/compare.js?v=20260922e"></script>
 </body>
 </html>

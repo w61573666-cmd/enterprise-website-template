@@ -44,7 +44,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
   <link href="css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
-  <link href="css/products-v2.css?v=20260922d" rel="stylesheet"/>
+<style>
+.hsst-form-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);background:rgba(26,26,26,.94);color:#fff;padding:14px 28px;border-radius:28px;font-size:14px;font-weight:500;z-index:9999;opacity:0;pointer-events:none;transition:all .3s ease;box-shadow:0 8px 32px rgba(0,0,0,.3);max-width:90vw;}
+.hsst-form-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.hsst-form-toast.success{border:1px solid rgba(76,175,80,.45);}
+.hsst-form-toast.error{border:1px solid rgba(244,67,54,.55);background:rgba(50,10,10,.94);}
+</style>
+  <link href="css/compare.css?v=20260922e" rel="stylesheet"/>
+<link href="css/products-v2.css?v=20260922d" rel="stylesheet"/>
   
  
 
@@ -148,7 +155,7 @@
      </span>
     </a>
     <span class="nav-center-title">恆生石材科技有限公司</span>
-    <div class="nav-links">
+    <div id="navLinks" class="nav-links">
      <a href="index.html">
       首頁
      </a>
@@ -617,7 +624,7 @@
      </div>
     </div>
     
-    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span></span><span></span><span></span></button>
    </div>
 </nav>
   <section id="main-content">
@@ -645,20 +652,22 @@
    <div class="v2-kicker">TWELVE SIGNATURE COLLECTIONS<span>十二大系列 · 一部大地色譜</span></div>
    <h2 class="v2-series-title">每一系，皆有一方天地</h2>
    <p class="v2-series-lead">從經典白繫到稀有奢石，十二個主流系列、<strong>300+ 種主流天然石材品種</strong>、覆蓋<strong>60+ 個國家</strong>與<strong>180+ 座認證礦山</strong>，為您的空間選擇最恰如其分的石語。</p>
-   <div class="v2-series-grid">
-<a class="v2-series-card" href="products/white-marble.html"><span class="vsc-img"><picture><source srcset="images/series-cards/white-marble-card.webp" type="image/webp"/><img alt="白色雲石" loading="lazy" src="images/series-cards/white-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>White Marble</i><b>白色雲石</b><span class="vsc-d">從卡拉拉到爵士白，最純粹的留白美學，酒店大堂與高端住宅的恆久底色。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/beige-marble.html"><span class="vsc-img"><picture><source srcset="images/series-cards/beige-marble-card.webp" type="image/webp"/><img alt="米黃雲石" loading="lazy" src="images/series-cards/beige-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>Beige Marble</i><b>米黃雲石</b><span class="vsc-d">溫潤米色調，貼合東方美學的柔和質感，牆身與地面皆宜。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/grey-marble.html"><span class="vsc-img"><picture><source srcset="images/series-cards/grey-marble-card.webp" type="image/webp"/><img alt="灰色雲石" loading="lazy" src="images/series-cards/grey-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>Grey Marble</i><b>灰色雲石</b><span class="vsc-d">銀影灰與雅典灰，低調內斂的現代建築語言。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/black-marble.html"><span class="vsc-img"><picture><source srcset="images/series-cards/black-marble-card.webp" type="image/webp"/><img alt="黑色雲石" loading="lazy" src="images/series-cards/black-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>Black Marble</i><b>黑色雲石</b><span class="vsc-d">深邃黑金、黑白根，空間裡最具張力的點睛一筆。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/granite-collection.html"><span class="vsc-img"><picture><source srcset="images/series-cards/granite-collection-card.webp" type="image/webp"/><img alt="麻石（花崗巖）" loading="lazy" src="images/series-cards/granite-collection-card.jpg"/></picture></span><span class="vsc-cap"><i>Granite</i><b>麻石（花崗巖）</b><span class="vsc-d">高強耐磨、歷久彌新，地標級工程的堅實之選。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/travertine-sandstone.html"><span class="vsc-img"><picture><source srcset="images/series-cards/travertine-sandstone-card.webp" type="image/webp"/><img alt="洞石及砂岩" loading="lazy" src="images/series-cards/travertine-sandstone-card.jpg"/></picture></span><span class="vsc-cap"><i>Travertine &amp; Sandstone</i><b>洞石及砂岩</b><span class="vsc-d">天然孔洞肌理與沙岩層理，時間沉澱出的建築詩意。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/luxury-stone.html"><span class="vsc-img"><picture><source srcset="images/series-cards/luxury-stone-card.webp" type="image/webp"/><img alt="特色石材系列" loading="lazy" src="images/series-cards/luxury-stone-card.jpg"/></picture></span><span class="vsc-cap"><i>Luxury Stone</i><b>特色石材系列</b><span class="vsc-d">巴西藍翡翠等稀有礦脈，一石一世界，為空間注入典藏價值。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/project-stone.html"><span class="vsc-img"><picture><source srcset="images/series-cards/project-stone-card.webp" type="image/webp"/><img alt="工程石材" loading="lazy" src="images/series-cards/project-stone-card.jpg"/></picture></span><span class="vsc-cap"><i>Architectural Stone</i><b>工程石材</b><span class="vsc-d">幕牆、大堂與大板批量供應，高效整合的工程級方案。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/engineering-stone-varieties.html"><span class="vsc-img"><picture><source srcset="images/products/landing-cards/engineering-stone-varieties.webp" type="image/webp"/><img alt="工程石材製品型錄" loading="lazy" src="images/products/landing-cards/engineering-stone-varieties.jpg"/></picture></span><span class="vsc-cap"><i>Architectural Stone Products</i><b>工程石材製品型錄</b><span class="vsc-d">18 大類香港公共工程、路政、園林與住宅戶外麻石製品型錄。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/new-arrivals.html"><span class="vsc-img"><picture><source srcset="images/series-cards/new-arrivals-card.webp" type="image/webp"/><img alt="最新產品" loading="lazy" src="images/series-cards/new-arrivals-card.jpg"/></picture></span><span class="vsc-cap"><i>New Arrivals</i><b>最新產品</b><span class="vsc-d">全球礦山最新到貨，前沿紋理與色系第一時間鑑賞。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/custom-craft.html"><span class="vsc-img"><picture><source srcset="images/series-cards/custom-craft-card.webp" type="image/webp"/><img alt="訂造加工" loading="lazy" src="images/series-cards/custom-craft-card.jpg"/></picture></span><span class="vsc-cap"><i>Custom Fabrication</i><b>訂造加工</b><span class="vsc-d">水刀拼花、異形曲面與雕刻工藝，把設計圖紙變為觸得到的現實。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/engineered-stone.html"><span class="vsc-img"><picture><source srcset="images/series-cards/engineered-stone-card.webp" type="image/webp"/><img alt="人造石（無縫石）" loading="lazy" src="images/series-cards/engineered-stone-card.jpg"/></picture></span><span class="vsc-cap"><i>Engineered Stone</i><b>人造石（無縫石）</b><span class="vsc-d">石英石與無縫實體面材，無孔隙、可無縫拼接，廚衛檯面與牆身的耐污之選。</span><em class="vsc-go">探索此係列 →</em></span></a>
-<a class="v2-series-card" href="products/marble-furniture.html"><span class="vsc-img"><picture><source srcset="images/series-cards/marble-furniture-card.webp" type="image/webp"/><img alt="雲石傢俬" loading="lazy" src="images/series-cards/marble-furniture-card.jpg"/></picture></span><span class="vsc-cap"><i>Marble Furniture</i><b>雲石傢俬</b><span class="vsc-d">整料開料、一體成型、紋理對花：餐桌、茶几、玄關幾、浴室櫃與接待臺的收藏級訂造。</span><em class="vsc-go">探索此係列 →</em></span></a>
+   <div class="hsst-filter-group" data-filter-group data-filter-target=".v2-series-card" data-filter-empty=".v2-empty" role="group" aria-label="按系列篩選"><button class="hsst-filter-btn is-active" data-filter="" aria-pressed="true">全部</button><button class="hsst-filter-btn" data-filter="marble" aria-pressed="false">雲石</button><button class="hsst-filter-btn" data-filter="granite" aria-pressed="false">花崗岩</button><button class="hsst-filter-btn" data-filter="quartzite" aria-pressed="false">石英石</button><button class="hsst-filter-btn" data-filter="travertine" aria-pressed="false">洞石</button><button class="hsst-filter-btn" data-filter="sandstone" aria-pressed="false">砂岩</button><button class="hsst-filter-btn" data-filter="luxury" aria-pressed="false">奢石</button><button class="hsst-filter-btn" data-filter="engineering" aria-pressed="false">工程製品</button><button class="hsst-filter-btn" data-filter="engineered" aria-pressed="false">人造石</button></div>
+<div class="filter-empty" style="display:none;">沒有符合的系列</div>
+<div class="v2-series-grid">
+<a class="v2-series-card" href="products/white-marble.html" data-filter-cat="marble"><span class="vsc-img"><picture><source srcset="images/series-cards/white-marble-card.webp" type="image/webp"/><img alt="白色雲石" loading="lazy" src="images/series-cards/white-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>White Marble</i><b>白色雲石</b><span class="vsc-d">從卡拉拉到爵士白，最純粹的留白美學，酒店大堂與高端住宅的恆久底色。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/beige-marble.html" data-filter-cat="marble"><span class="vsc-img"><picture><source srcset="images/series-cards/beige-marble-card.webp" type="image/webp"/><img alt="米黃雲石" loading="lazy" src="images/series-cards/beige-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>Beige Marble</i><b>米黃雲石</b><span class="vsc-d">溫潤米色調，貼合東方美學的柔和質感，牆身與地面皆宜。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/grey-marble.html" data-filter-cat="marble"><span class="vsc-img"><picture><source srcset="images/series-cards/grey-marble-card.webp" type="image/webp"/><img alt="灰色雲石" loading="lazy" src="images/series-cards/grey-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>Grey Marble</i><b>灰色雲石</b><span class="vsc-d">銀影灰與雅典灰，低調內斂的現代建築語言。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/black-marble.html" data-filter-cat="marble"><span class="vsc-img"><picture><source srcset="images/series-cards/black-marble-card.webp" type="image/webp"/><img alt="黑色雲石" loading="lazy" src="images/series-cards/black-marble-card.jpg"/></picture></span><span class="vsc-cap"><i>Black Marble</i><b>黑色雲石</b><span class="vsc-d">深邃黑金、黑白根，空間裡最具張力的點睛一筆。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/granite-collection.html" data-filter-cat="granite"><span class="vsc-img"><picture><source srcset="images/series-cards/granite-collection-card.webp" type="image/webp"/><img alt="麻石（花崗巖）" loading="lazy" src="images/series-cards/granite-collection-card.jpg"/></picture></span><span class="vsc-cap"><i>Granite</i><b>麻石（花崗巖）</b><span class="vsc-d">高強耐磨、歷久彌新，地標級工程的堅實之選。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/travertine-sandstone.html" data-filter-cat="travertine sandstone"><span class="vsc-img"><picture><source srcset="images/series-cards/travertine-sandstone-card.webp" type="image/webp"/><img alt="洞石及砂岩" loading="lazy" src="images/series-cards/travertine-sandstone-card.jpg"/></picture></span><span class="vsc-cap"><i>Travertine &amp; Sandstone</i><b>洞石及砂岩</b><span class="vsc-d">天然孔洞肌理與沙岩層理，時間沉澱出的建築詩意。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/luxury-stone.html" data-filter-cat="luxury quartzite"><span class="vsc-img"><picture><source srcset="images/series-cards/luxury-stone-card.webp" type="image/webp"/><img alt="特色石材系列" loading="lazy" src="images/series-cards/luxury-stone-card.jpg"/></picture></span><span class="vsc-cap"><i>Luxury Stone</i><b>特色石材系列</b><span class="vsc-d">巴西藍翡翠等稀有礦脈，一石一世界，為空間注入典藏價值。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/project-stone.html" data-filter-cat="marble granite engineering"><span class="vsc-img"><picture><source srcset="images/series-cards/project-stone-card.webp" type="image/webp"/><img alt="工程石材" loading="lazy" src="images/series-cards/project-stone-card.jpg"/></picture></span><span class="vsc-cap"><i>Architectural Stone</i><b>工程石材</b><span class="vsc-d">幕牆、大堂與大板批量供應，高效整合的工程級方案。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/engineering-stone-varieties.html" data-filter-cat="engineering granite"><span class="vsc-img"><picture><source srcset="images/products/landing-cards/engineering-stone-varieties.webp" type="image/webp"/><img alt="工程石材製品型錄" loading="lazy" src="images/products/landing-cards/engineering-stone-varieties.jpg"/></picture></span><span class="vsc-cap"><i>Architectural Stone Products</i><b>工程石材製品型錄</b><span class="vsc-d">18 大類香港公共工程、路政、園林與住宅戶外麻石製品型錄。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/new-arrivals.html" data-filter-cat="marble quartzite luxury"><span class="vsc-img"><picture><source srcset="images/series-cards/new-arrivals-card.webp" type="image/webp"/><img alt="最新產品" loading="lazy" src="images/series-cards/new-arrivals-card.jpg"/></picture></span><span class="vsc-cap"><i>New Arrivals</i><b>最新產品</b><span class="vsc-d">全球礦山最新到貨，前沿紋理與色系第一時間鑑賞。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/custom-craft.html" data-filter-cat="marble engineering"><span class="vsc-img"><picture><source srcset="images/series-cards/custom-craft-card.webp" type="image/webp"/><img alt="訂造加工" loading="lazy" src="images/series-cards/custom-craft-card.jpg"/></picture></span><span class="vsc-cap"><i>Custom Fabrication</i><b>訂造加工</b><span class="vsc-d">水刀拼花、異形曲面與雕刻工藝，把設計圖紙變為觸得到的現實。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/engineered-stone.html" data-filter-cat="engineered"><span class="vsc-img"><picture><source srcset="images/series-cards/engineered-stone-card.webp" type="image/webp"/><img alt="人造石（無縫石）" loading="lazy" src="images/series-cards/engineered-stone-card.jpg"/></picture></span><span class="vsc-cap"><i>Engineered Stone</i><b>人造石（無縫石）</b><span class="vsc-d">石英石與無縫實體面材，無孔隙、可無縫拼接，廚衛檯面與牆身的耐污之選。</span><em class="vsc-go">探索此係列 →</em></span></a>
+<a class="v2-series-card" href="products/marble-furniture.html" data-filter-cat="marble"><span class="vsc-img"><picture><source srcset="images/series-cards/marble-furniture-card.webp" type="image/webp"/><img alt="雲石傢俬" loading="lazy" src="images/series-cards/marble-furniture-card.jpg"/></picture></span><span class="vsc-cap"><i>Marble Furniture</i><b>雲石傢俬</b><span class="vsc-d">整料開料、一體成型、紋理對花：餐桌、茶几、玄關幾、浴室櫃與接待臺的收藏級訂造。</span><em class="vsc-go">探索此係列 →</em></span></a>
 </div>
   </div>
  </section>
@@ -721,7 +730,7 @@
        <label>留言／需求</label>
        <textarea name="user_demand" placeholder="請描述您的工程／採購需求、尺寸、用量等"></textarea>
       </div>
-      <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
+      <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank" rel="noopener noreferrer">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
       <button type="submit">立即提交諮詢</button>
      </form>
      <div class="form-trust-badges">
@@ -842,7 +851,8 @@
     </path>
    </svg>
   </a>
-  <script src="js/main-202605042201.js?v=20260922d">
+  <script src="js/filter.js?v=20260922e"></script>
+<script src="js/main-202605042201.js?v=20260922d">
   </script>
  
   <!-- 電子畫冊下載 Modal -->
@@ -857,7 +867,7 @@
      <input type="text" name="user_name" placeholder="您的姓名" required/>
      <input type="text" name="user_company" placeholder="公司名稱（選填）"/>
      <input type="email" name="user_email" placeholder="接收畫冊郵箱" required/>
-     <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
+     <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank" rel="noopener noreferrer">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
      <button type="submit">提交下載</button>
     </form>
    </div>
@@ -1072,10 +1082,60 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">我們使用Cookie以改善您的瀏覽體驗，繼續使用即表示您同意我們的 <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 <script src="js/back-button.js?v=20260918a" defer></script>
+<script src="js/compare.js?v=20260922e"></script>
+<script>
+(function(){
+  // 监听 splitforms 提交，弹 toast 反馈
+  if (window.__HSST_TOAST_LOADED__) return;
+  window.__HSST_TOAST_LOADED__ = true;
+  function toast(msg, type){
+    var t = document.getElementById('hsst-form-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'hsst-form-toast';
+      t.className = 'hsst-form-toast';
+      document.body.appendChild(t);
+    }
+    t.className = 'hsst-form-toast show ' + (type||'success');
+    t.textContent = msg;
+    clearTimeout(t.__timer);
+    t.__timer = setTimeout(function(){ t.className = 'hsst-form-toast'; }, 4000);
+  }
+  window.__hsstFormToast = toast;
+  // 拦截表单提交
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if (f && f.action && f.action.indexOf('splitforms.com') >= 0) {
+      // 异步等待响应
+      var origDisabled = null;
+      var btn = f.querySelector('button[type="submit"], input[type="submit"]');
+      if (btn) { origDisabled = btn.disabled; btn.disabled = true; btn.dataset.__orig = btn.textContent; btn.textContent = '送出中…'; }
+      fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r){
+        if (r.ok || r.status === 200 || r.status === 201 || r.status === 0) {
+          toast(LANG==='en'?'✓ Thanks! We will reply within 24 hours.':'✓ 已收到！我們將於 24 小時內回覆', 'success');
+          f.reset();
+        } else {
+          toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        }
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      }).catch(function(){
+        toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      });
+      e.preventDefault();
+    }
+  }, true);
+  var LANG = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+})();
+</script>
 </body>
 </html>

@@ -61,8 +61,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
   <link href="css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
+<style>
+.hsst-form-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);background:rgba(26,26,26,.94);color:#fff;padding:14px 28px;border-radius:28px;font-size:14px;font-weight:500;z-index:9999;opacity:0;pointer-events:none;transition:all .3s ease;box-shadow:0 8px 32px rgba(0,0,0,.3);max-width:90vw;}
+.hsst-form-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.hsst-form-toast.success{border:1px solid rgba(76,175,80,.45);}
+.hsst-form-toast.error{border:1px solid rgba(244,67,54,.55);background:rgba(50,10,10,.94);}
+</style>
   
-    <meta content="https://www.hsst.hk/images/tech/tech-cnc.jpg" property="og:image"/>
+    <link href="css/compare.css?v=20260922e" rel="stylesheet"/>
+<meta content="https://www.hsst.hk/images/tech/tech-cnc.jpg" property="og:image"/>
 <!-- Schema.org -->
 
 
@@ -196,7 +203,7 @@
      </span>
     </a>
     <span class="nav-center-title">恆生石材科技有限公司</span>
-    <div class="nav-links">
+    <div id="navLinks" class="nav-links">
      <a class="active" href="index.html">
       首頁
      </a>
@@ -664,14 +671,12 @@
       <a data-lang="en" href="en/index.html">EN</a>
      </div>
     </div>
-    <div class="nav-toggle">
-     <span>
+    <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span>
      </span>
      <span>
      </span>
      <span>
-     </span>
-    </div>
+     </span></button>
    </div>
   </nav>
   <section id="main-content">
@@ -1225,7 +1230,7 @@
       </div>
       <div class="hsst-form-group hsst-form-group--full"><label class="hsst-form-label">項目需求說明<span class="required">*</span></label><textarea class="hsst-form-textarea" name="contact_message" placeholder="請填寫：項目類型、石材品類、預計用量、項目所在地、項目階段、預算範圍（可選）" required></textarea><div class="hsst-form-error">請簡述項目需求</div></div>
       <div class="hsst-form-group hsst-form-group--full"><label class="hsst-form-label">是否需要提供樣品／打樣服務？</label><select class="hsst-form-select" name="sample_needed"><option value="">請選擇</option><option value="是">是，需要提供樣品或打樣服務</option><option value="否">否，暫不需要</option></select></div>
-      <label class="hsst-form-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
+      <label class="hsst-form-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank" rel="noopener noreferrer">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
       <div class="hsst-form-error hsst-form-error--consent"></div>
       <button class="hsst-form-btn" type="submit">提交項目諮詢 →</button>
       <p class="hsst-form-privacy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 0 1 6 0v3z" fill="currentColor"/></svg> 您的資訊僅用於項目對接，我們承諾嚴格保密，絕不外洩</p>
@@ -1372,6 +1377,7 @@
           <li><a href="projects.html">工程項目</a></li>
           <li><a href="news.html">資訊動態</a></li>
           <li><a href="solutions.html">解決方案</a></li>
+          <li><a href="compare.html">品種對比</a></li>
           <li><a href="contact.html">聯絡我們</a></li>
       </ul>
      </div>
@@ -1527,8 +1533,8 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">我們使用Cookie以改善您的瀏覽體驗，繼續使用即表示您同意我們的 <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 
@@ -1551,5 +1557,55 @@
 })();
 </script>
 <script src="js/back-button.js?v=20260918a" defer></script>
+<script src="js/compare.js?v=20260922e"></script>
+<script>
+(function(){
+  // 监听 splitforms 提交，弹 toast 反馈
+  if (window.__HSST_TOAST_LOADED__) return;
+  window.__HSST_TOAST_LOADED__ = true;
+  function toast(msg, type){
+    var t = document.getElementById('hsst-form-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'hsst-form-toast';
+      t.className = 'hsst-form-toast';
+      document.body.appendChild(t);
+    }
+    t.className = 'hsst-form-toast show ' + (type||'success');
+    t.textContent = msg;
+    clearTimeout(t.__timer);
+    t.__timer = setTimeout(function(){ t.className = 'hsst-form-toast'; }, 4000);
+  }
+  window.__hsstFormToast = toast;
+  // 拦截表单提交
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if (f && f.action && f.action.indexOf('splitforms.com') >= 0) {
+      // 异步等待响应
+      var origDisabled = null;
+      var btn = f.querySelector('button[type="submit"], input[type="submit"]');
+      if (btn) { origDisabled = btn.disabled; btn.disabled = true; btn.dataset.__orig = btn.textContent; btn.textContent = '送出中…'; }
+      fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r){
+        if (r.ok || r.status === 200 || r.status === 201 || r.status === 0) {
+          toast(LANG==='en'?'✓ Thanks! We will reply within 24 hours.':'✓ 已收到！我們將於 24 小時內回覆', 'success');
+          f.reset();
+        } else {
+          toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        }
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      }).catch(function(){
+        toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      });
+      e.preventDefault();
+    }
+  }, true);
+  var LANG = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+})();
+</script>
 </body>
 </html>

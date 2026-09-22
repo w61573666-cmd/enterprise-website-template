@@ -35,6 +35,7 @@
   <link href="css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
 
+<link href="css/compare.css?v=20260922e" rel="stylesheet"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -110,7 +111,7 @@
      </span>
     </a>
     <span class="nav-center-title">恆生石材科技有限公司</span>
-    <div class="nav-links">
+    <div id="navLinks" class="nav-links">
      <a href="index.html">
       首頁
      </a>
@@ -579,7 +580,7 @@
      </div>
     </div>
     
-    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span></span><span></span><span></span></button>
    </div>
   </nav>
 
@@ -908,6 +909,7 @@
 .whatsapp-float:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(37,211,102,0.55);}
 @media(max-width:768px){.whatsapp-float{bottom:20px;right:16px;width:50px;height:50px;}}
 </style>
+<script src="js/compare.js?v=20260922e"></script>
 <script src="js/main-202605042201.js?v=20260922d"></script>
 
 <!-- Back to Top -->
@@ -934,8 +936,8 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">我們使用 Cookie 來提升您的瀏覽體驗。繼續使用本網站即表示您同意我們的 <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 

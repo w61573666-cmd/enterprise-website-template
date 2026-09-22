@@ -39,7 +39,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
   <link href="css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
-  <link href="css/projects-v2.css?v=20260922d" rel="stylesheet"/>
+<style>
+.hsst-form-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);background:rgba(26,26,26,.94);color:#fff;padding:14px 28px;border-radius:28px;font-size:14px;font-weight:500;z-index:9999;opacity:0;pointer-events:none;transition:all .3s ease;box-shadow:0 8px 32px rgba(0,0,0,.3);max-width:90vw;}
+.hsst-form-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.hsst-form-toast.success{border:1px solid rgba(76,175,80,.45);}
+.hsst-form-toast.error{border:1px solid rgba(244,67,54,.55);background:rgba(50,10,10,.94);}
+</style>
+  <link href="css/compare.css?v=20260922e" rel="stylesheet"/>
+<link href="css/projects-v2.css?v=20260922d" rel="stylesheet"/>
   <!-- HSST Form Styles (inline, high priority) -->
 <meta content="雲石工程項目 | 恆生石材 — 雲石工程香港・麻石工程香港" property="og:title"/>
   <meta content="website" property="og:type"/>
@@ -149,7 +156,7 @@
      </span>
     </a>
     <span class="nav-center-title">恆生石材科技有限公司</span>
-    <div class="nav-links">
+    <div id="navLinks" class="nav-links">
      <a href="index.html">
       首頁
      </a>
@@ -618,14 +625,12 @@
      </div>
     </div>
     
-    <div class="nav-toggle">
-     <span>
+    <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span>
      </span>
      <span>
      </span>
      <span>
-     </span>
-    </div>
+     </span></button>
    </div>
   </nav>
   <section id="main-content">
@@ -659,7 +664,7 @@
         </div>
       </div>
 
-      <div class="v2-masonry">
+      <div class="v2-masonry" data-loadmore data-loadmore-batch="6">
         <a class="v2-card" href="projects/hotel.html">
           <div class="v2-card-img"><picture><source srcset="images/projects-v2/case-hotel.webp" type="image/webp"/><img loading="lazy" src="images/projects-v2/case-hotel.jpg" alt="香港四季酒店大堂 米黃洞石工程"/></picture></div>
           <div class="v2-card-meta"><div class="cm-l"><b>香港四季酒店大堂</b><span>酒店與會所 · 米黃洞石</span></div><span class="cm-r">HONG KONG</span></div>
@@ -730,7 +735,8 @@
         </a>
       </div>
 
-      <div class="v2-loadmore"><a href="projects/hotel.html">瀏覽更多工程項目 →</a></div>
+      <button class="hsst-loadmore-btn" data-loadmore-trigger type="button" aria-label="載入更多">載入更多</button>
+<div class="v2-loadmore"><a href="projects/hotel.html">瀏覽更多工程項目 →</a></div>
     </div>
   </section>
 
@@ -823,7 +829,7 @@
        <textarea name="message" class="hsst-form-textarea" placeholder="請簡述您的項目需求、預算範圍、工期要求等..." required></textarea>
       </div>
       <div class="hsst-form-group text-center" style="margin-top:28px;">
-       <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
+       <label class="hsst-consent"><input type="checkbox" name="consent" value="同意" required/><span>我已閱讀並同意<a href="privacy.html" target="_blank" rel="noopener noreferrer">《隱私政策》</a>，授權恆生石材使用上述資訊與我聯繫。</span></label>
        <button type="submit" class="hsst-form-btn">提交諮詢</button>
       </div>
       <p class="hsst-form-privacy">提交即表示您同意我們的隱私政策。我們將在24小時內與您聯繫。</p>
@@ -949,7 +955,8 @@
     </path>
    </svg>
   </a>
-  <script src="js/main-202605042201.js?v=20260922d">
+  <script src="js/loadmore.js?v=20260922e"></script>
+<script src="js/main-202605042201.js?v=20260922d">
   </script>
   <!-- AJAX form handler for CTA form -->
   <script>
@@ -1016,10 +1023,60 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">我們使用Cookie以改善您的瀏覽體驗，繼續使用即表示您同意我們的 <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">接受</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">拒絕</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 <script src="js/back-button.js?v=20260918a" defer></script>
+<script src="js/compare.js?v=20260922e"></script>
+<script>
+(function(){
+  // 监听 splitforms 提交，弹 toast 反馈
+  if (window.__HSST_TOAST_LOADED__) return;
+  window.__HSST_TOAST_LOADED__ = true;
+  function toast(msg, type){
+    var t = document.getElementById('hsst-form-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'hsst-form-toast';
+      t.className = 'hsst-form-toast';
+      document.body.appendChild(t);
+    }
+    t.className = 'hsst-form-toast show ' + (type||'success');
+    t.textContent = msg;
+    clearTimeout(t.__timer);
+    t.__timer = setTimeout(function(){ t.className = 'hsst-form-toast'; }, 4000);
+  }
+  window.__hsstFormToast = toast;
+  // 拦截表单提交
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if (f && f.action && f.action.indexOf('splitforms.com') >= 0) {
+      // 异步等待响应
+      var origDisabled = null;
+      var btn = f.querySelector('button[type="submit"], input[type="submit"]');
+      if (btn) { origDisabled = btn.disabled; btn.disabled = true; btn.dataset.__orig = btn.textContent; btn.textContent = '送出中…'; }
+      fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r){
+        if (r.ok || r.status === 200 || r.status === 201 || r.status === 0) {
+          toast(LANG==='en'?'✓ Thanks! We will reply within 24 hours.':'✓ 已收到！我們將於 24 小時內回覆', 'success');
+          f.reset();
+        } else {
+          toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        }
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      }).catch(function(){
+        toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      });
+      e.preventDefault();
+    }
+  }, true);
+  var LANG = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+})();
+</script>
 </body>
 </html>

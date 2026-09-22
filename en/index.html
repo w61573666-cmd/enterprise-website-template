@@ -45,7 +45,8 @@
 <link href="../css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
    
       
-  </meta>
+  <link href="../css/compare.css?v=20260922e" rel="stylesheet"/>
+</meta>
 <!-- Schema.org -->
 
 
@@ -178,7 +179,7 @@
      </span>
     </a>
     <span class="nav-center-title">HENGSHENG MARBLE S&amp;T CO. LIMITED</span>
-    <div class="nav-links">
+    <div id="navLinks" class="nav-links">
      <a href="index.html">Home</a>
      <div class="nav-dropdown">
       <a href="about.html">About</a>
@@ -614,14 +615,12 @@
      <div class="lang-switch"><a data-lang="zh" href="../index.html">TC</a><span class="lang-divider">|</span><a class="active" data-lang="en" href="index.html">EN</a></div>
     </div>
 
-    <div class="nav-toggle">
-     <span>
+    <button type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" class="nav-toggle"><span>
      </span>
      <span>
      </span>
      <span>
-     </span>
-    </div>
+     </span></button>
    </div>
   </nav>
   <!-- Hero Section -->
@@ -1156,7 +1155,7 @@
       </div>
       <div class="hsst-form-group hsst-form-group--full"><label class="hsst-form-label">Project Requirements<span class="required">*</span></label><textarea class="hsst-form-textarea" name="contact_message" placeholder="Project type, stone preference, quantity, location, phase, budget (optional)" required></textarea><div class="hsst-form-error">Please describe your project requirements</div></div>
       <div class="hsst-form-group hsst-form-group--full"><label class="hsst-form-label">Do you need sample / mock-up service?</label><select class="hsst-form-select" name="sample_needed"><option value="">Select</option><option value="Yes">Yes, please provide samples</option><option value="No">No, not needed at this time</option></select></div>
-      <label class="hsst-form-consent"><input type="checkbox" name="consent" value="Agree" required/><span>I have read and agree to the <a href="privacy.html" target="_blank">Privacy Policy</a>, authorizing HENGSHENG MARBLE S&amp;T CO. LIMITED to use the above information to contact me.</span></label>
+      <label class="hsst-form-consent"><input type="checkbox" name="consent" value="Agree" required/><span>I have read and agree to the <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>, authorizing HENGSHENG MARBLE S&amp;T CO. LIMITED to use the above information to contact me.</span></label>
       <div class="hsst-form-error hsst-form-error--consent"></div>
       <button class="hsst-form-btn" type="submit">Submit Project Inquiry →</button>
       <p class="hsst-form-privacy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 0 1 6 0v3z" fill="currentColor"/></svg> Your information is used solely for project consultation and will never be shared.</p>
@@ -1311,6 +1310,7 @@
           <li><a href="projects.html">Projects</a></li>
           <li><a href="news.html">News &amp; Insights</a></li>
           <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="compare.html">Stone Comparison</a></li>
           <li><a href="contact.html">Contact Us</a></li>
       </ul>
      </div>
@@ -1466,8 +1466,8 @@
 <div class="container cookie-banner-inner">
 <p class="cookie-banner-text">We use cookies to enhance your browsing experience. By continuing, you agree to our <a href="privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a>.</p>
 <div class="cookie-banner-btns">
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">Accept</button>
-<button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','accepted');" class="cookie-btn-accept">Accept</button>
+<button type="button" onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieConsent','declined');" class="cookie-btn-decline">Decline</button>
 </div></div></div>
 <script>(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block';}})();</script>
 
@@ -1490,5 +1490,55 @@
 })();
 </script>
 <script src="../js/back-button.js?v=20260918a" defer></script>
+<script src="../js/compare.js?v=20260922e"></script>
+<script>
+(function(){
+  // 监听 splitforms 提交，弹 toast 反馈
+  if (window.__HSST_TOAST_LOADED__) return;
+  window.__HSST_TOAST_LOADED__ = true;
+  function toast(msg, type){
+    var t = document.getElementById('hsst-form-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'hsst-form-toast';
+      t.className = 'hsst-form-toast';
+      document.body.appendChild(t);
+    }
+    t.className = 'hsst-form-toast show ' + (type||'success');
+    t.textContent = msg;
+    clearTimeout(t.__timer);
+    t.__timer = setTimeout(function(){ t.className = 'hsst-form-toast'; }, 4000);
+  }
+  window.__hsstFormToast = toast;
+  // 拦截表单提交
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if (f && f.action && f.action.indexOf('splitforms.com') >= 0) {
+      // 异步等待响应
+      var origDisabled = null;
+      var btn = f.querySelector('button[type="submit"], input[type="submit"]');
+      if (btn) { origDisabled = btn.disabled; btn.disabled = true; btn.dataset.__orig = btn.textContent; btn.textContent = '送出中…'; }
+      fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r){
+        if (r.ok || r.status === 200 || r.status === 201 || r.status === 0) {
+          toast(LANG==='en'?'✓ Thanks! We will reply within 24 hours.':'✓ 已收到！我們將於 24 小時內回覆', 'success');
+          f.reset();
+        } else {
+          toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        }
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      }).catch(function(){
+        toast(LANG==='en'?'Submission failed, please try again later.':'提交失敗，請稍後再試', 'error');
+        if (btn) { btn.disabled = origDisabled; btn.textContent = btn.dataset.__orig || btn.textContent; }
+      });
+      e.preventDefault();
+    }
+  }, true);
+  var LANG = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+})();
+</script>
 </body>
 </html>
