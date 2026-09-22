@@ -8,7 +8,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400, stale-if-error=86400"
         }
       ]
     },
@@ -26,6 +26,10 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
         }
       ]
     },
@@ -34,7 +38,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
+          "value": "public, max-age=3600, s-maxage=604800, stale-while-revalidate=86400"
         }
       ]
     },
@@ -43,11 +47,21 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
+          "value": "public, max-age=3600, s-maxage=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "**/*.{jpg,jpeg,png,webp,avif,gif,svg,ico,woff,woff2,ttf}",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800"
         }
       ]
     }
   ],
-  "_rebuild": "2026-06-13T01:18:00Z",
-  "version": 2
+  "_cache_note_zh": "快取政策（2026-09 修訂）：HTML 邊緣快取 5 分鐘（內容更新後最多 5 分鐘全域生效，可於 EdgeOne 控制台手動清除）；CSS/JS 邊緣 7 天；圖片與字型 30 天。若平台未套用本檔標頭，請於 EdgeOne 控制台「快取配置」設定相同規則。",
+  "_rebuild": "2026-09-26T00:00:00Z",
+  "version": 3
 }

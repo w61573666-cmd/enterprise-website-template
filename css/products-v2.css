@@ -8,9 +8,9 @@ body.v2-products { background:#F6F3EE; }
 
 /* ---------- 通用 ---------- */
 .v2-wrap  { width:min(1180px, 92%); margin-inline:auto; }
-.v2-kicker{ font-family:'Inter','Noto Sans TC',sans-serif; letter-spacing:.32em;
+.v2-kicker{ font-family:'Inter',"PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體",sans-serif; letter-spacing:.32em;
             text-transform:uppercase; font-size:12px; color:#C2A25E; }
-.v2-sereno{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:600; }
+.v2-sereno{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:600; }
 
 /* ============================================================
    HERO — 左右分欄 Editorial
@@ -24,7 +24,7 @@ body.v2-products { background:#F6F3EE; }
   display:flex; flex-direction:column; justify-content:center; gap:22px;
 }
 .v2-hero-text h1{
-  font-family:'Playfair Display','Noto Serif TC',serif; font-weight:500;
+  font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500;
   font-size:clamp(34px,4.2vw,58px); line-height:1.16; color:#14130F;
   letter-spacing:.01em; margin:0;
 }
@@ -35,7 +35,7 @@ body.v2-products { background:#F6F3EE; }
 .v2-hero-stats{ display:flex; gap:clamp(28px,4vw,56px); margin-top:8px;
   border-top:1px solid #DCD5CB; padding-top:22px; }
 .v2-hero-stats .hs b{
-  font-family:'Playfair Display','Noto Serif TC',serif; font-weight:600;
+  font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:600;
   font-size:clamp(24px,2.6vw,34px); color:#14130F; display:block;
 }
 .v2-hero-stats .hs span{ font-size:13px; color:#8A8176; letter-spacing:.12em;
@@ -57,9 +57,9 @@ body.v2-products { background:#F6F3EE; }
 .v2-swatch .chip{ aspect-ratio:1/1; width:100%; border-radius:2px; position:relative;
   transition:transform .35s cubic-bezier(.34,1.56,.64,1); box-shadow:inset 0 0 0 1px rgba(0,0,0,.06); }
 .v2-swatch:hover .chip{ transform:translateY(-4px); }
-.v2-swatch b{ display:block; font-family:'Noto Sans TC',sans-serif; font-weight:600;
+.v2-swatch b{ display:block; font-family:"PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體",sans-serif; font-weight:600;
   font-size:14px; color:#14130F; margin-top:12px; letter-spacing:.06em; }
-.v2-swatch span{ display:block; font-family:'Inter','Noto Sans TC',sans-serif;
+.v2-swatch span{ display:block; font-family:'Inter',"PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體",sans-serif;
   font-size:11.5px; color:#8A8176; letter-spacing:.04em; margin-top:2px; }
 
 /* ============================================================
@@ -68,7 +68,7 @@ body.v2-products { background:#F6F3EE; }
 .v2-archive{ background:#16150F; color:#F4F1EA; padding:clamp(60px,7vw,96px) 0; }
 .v2-archive .v2-archive-head{ display:flex; justify-content:space-between; align-items:flex-end;
   margin-bottom:clamp(30px,4vw,52px); gap:24px; flex-wrap:wrap; }
-.v2-archive-head h2{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:500;
+.v2-archive-head h2{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500;
   font-size:clamp(26px,3vw,40px); color:#F4F1EA; margin:12px 0 0; }
 .v2-archive-head p{ color:#A7A091; font-size:14px; line-height:1.8; max-width:40ch; margin:0; }
 .v2-index{ list-style:none; margin:0; padding:0; }
@@ -78,7 +78,7 @@ body.v2-products { background:#F6F3EE; }
   color:inherit; text-decoration:none; }
 .v2-index li a:hover{ background:rgba(255,255,255,.03); }
 .v2-index li .no{ font-family:'Inter',sans-serif; font-size:13px; color:#C2A25E; letter-spacing:.08em; }
-.v2-index li .zh{ font-family:'Noto Serif TC',serif; font-weight:500; font-size:19px; color:#F4F1EA; }
+.v2-index li .zh{ font-family:"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500; font-size:19px; color:#F4F1EA; }
 .v2-index li .en{ font-family:'Playfair Display',serif; font-style:italic; font-size:14px;
   color:#8A8176; letter-spacing:.03em; }
 .v2-index li .sp{ font-size:13px; color:#A7A091; letter-spacing:.03em; }
@@ -98,7 +98,7 @@ body.v2-products { background:#F6F3EE; }
 .v2-spot-media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .v2-spot-text{ padding:clamp(44px,6vw,88px) clamp(28px,5vw,72px);
   display:flex; flex-direction:column; justify-content:center; gap:20px; }
-.v2-spot-text h2{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:500;
+.v2-spot-text h2{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500;
   font-size:clamp(28px,3.4vw,46px); line-height:1.2; color:#14130F; margin:0; }
 .v2-spot-text p{ font-size:15px; line-height:1.85; color:#5C574F; margin:0; max-width:46ch; }
 .v2-btn{ display:inline-flex; align-items:center; gap:10px; padding:13px 26px;
@@ -114,7 +114,7 @@ body.v2-products { background:#F6F3EE; }
 .v2-quote{ background:#1E1C16; color:#F4F1EA; text-align:center;
   padding:clamp(60px,8vw,104px) 24px; }
 .v2-quote .v2-kicker{ justify-content:center; }
-.v2-quote h2{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:500;
+.v2-quote h2{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500;
   font-size:clamp(28px,4vw,52px); color:#F4F1EA; margin:18px auto; max-width:16ch; line-height:1.18; }
 .v2-quote p{ color:#A7A091; font-size:14.5px; max-width:52ch; margin:0 auto 30px; line-height:1.8; }
 .v2-quote .v2-qbtns{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }

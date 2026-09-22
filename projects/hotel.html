@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" data-hsst-nocache>
-<meta http-equiv="Pragma" content="no-cache" data-hsst-nocache>
-<meta http-equiv="Expires" content="0" data-hsst-nocache>
+<!-- 快取策略統一交由 HTTP 標頭管理：public, max-age=0, must-revalidate + ETag。
+     每次訪問都會重新驗證（內容必定最新），同時允許 304 回應節省傳輸量；
+     原先的 no-store meta 會強制每次完整重新下載，已移除。 -->
+
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta charset="utf-8"/>
 <link rel="manifest" href="/site.webmanifest">
@@ -49,7 +50,9 @@
 <meta name="baidu-site-verification" content="bdb042aece67fd4bf1109e354fce771e">
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/></noscript>
   <link href="../css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="../css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
   
@@ -159,34 +162,253 @@
 <!-- ================================================================= -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "恆生石材科技有限公司",
-  "alternateName": "HENGSHENG MARBLE S&T CO. LIMITED",
-  "url": "https://www.hsst.hk",
-  "logo": "https://www.hsst.hk/images/logo.jpg",
-  "description": "亞太領先的高端石材供應商與工程服務商，專注天然大理石與花崗巖的全球採購、精密加工與工程訂造",
-  "foundingDate": "1999",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
-    "addressLocality": "Kowloon",
-    "addressRegion": "Hong Kong",
-    "addressCountry": "HK"
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "恆生石材科技有限公司",
+ "alternateName": "HENGSHENG MARBLE S&T CO. LIMITED",
+ "url": "https://www.hsst.hk",
+ "logo": "https://www.hsst.hk/images/logo.jpg",
+ "description": "亞太領先的高端石材供應商與工程服務商，專注天然大理石與花崗巖的全球採購、精密加工與工程訂造",
+ "foundingDate": "1999",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
+  "addressLocality": "Kowloon",
+  "addressRegion": "Hong Kong",
+  "addressCountry": "HK"
+ },
+ "contactPoint": {
+  "@type": "ContactPoint",
+  "telephone": "+852-5538-0525",
+  "contactType": "customer service",
+  "email": "stone@hsst.hk",
+  "areaServed": "Worldwide"
+ },
+ "slogan": "Premium Natural Stone Since 1999",
+ "foundingLocation": {
+  "@type": "Place",
+  "name": "香港九龍 Kowloon, Hong Kong"
+ },
+ "areaServed": [
+  "HK",
+  "CN",
+  "MO",
+  "TW",
+  "AE",
+  "SA",
+  "SG",
+  "MY",
+  "TH",
+  "ID",
+  "US",
+  "GB",
+  "EU"
+ ],
+ "knowsAbout": [
+  "天然雲石",
+  "花崗巖（麻石）",
+  "洞石及砂岩",
+  "人造石（無縫石）",
+  "石材乾掛幕牆",
+  "水刀拼花",
+  "五軸 CNC 石材加工",
+  "石材晶面保養",
+  "雲石傢俬訂造",
+  "工程石材深化設計"
+ ],
+ "makesOffer": {
+  "@type": "OfferCatalog",
+  "name": "Stone Supply & Engineering Services",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Natural Stone Slab Supply"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Fabrication & Processing"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Engineering & Installation"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Quarry Sourcing & Import"
+    }
+   }
+  ]
+ },
+ "sameAs": [],
+ "hasCertification": [
+  {
+   "@type": "Certification",
+   "name": "ISO 9001:2015 品質管理系統認證",
+   "description": "恆生石材依 ISO 9001:2015 建立全流程品質管理系統，涵蓋礦山選料、大板採購、深加工、預拼裝至現場安裝的每一道工序，並通過第三方認可機構年度監督稽核。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 9001:2015",
+    "termCode": "9001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
   },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+852-5538-0525",
-    "contactType": "customer service",
-    "email": "stone@hsst.hk",
-    "areaServed": "Worldwide"
+  {
+   "@type": "Certification",
+   "name": "ISO 14001:2015 環境管理系統認證",
+   "description": "依 ISO 14001:2015 管理石材加工的廢水循環、粉塵控制與固廢處置，廠區生產用水回收再用，鋸切泥漿經壓濾後合規處置。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 14001:2015",
+    "termCode": "14001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
   },
-    "slogan": "Premium Natural Stone Since 1999",
-  "foundingLocation": { "@type": "Place", "name": "Hong Kong" },
-  "areaServed": [ "HK", "CN", "MO", "TW", "AE", "SA", "SG", "MY", "TH", "ID", "US", "GB", "EU" ],
-  "knowsAbout": [ "Natural Marble", "Granite", "Quartzite", "Travertine", "Onyx", "Stone Engineering", "Stone Fabrication", "Quarry Sourcing", "Architectural Stone", "Luxury Stone" ],
-  "makesOffer": { "@type": "OfferCatalog", "name": "Stone Supply & Engineering Services", "itemListElement": [ { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Natural Stone Slab Supply" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Fabrication & Processing" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Engineering & Installation" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Quarry Sourcing & Import" } } ] },
-"sameAs": []
+  {
+   "@type": "Certification",
+   "name": "ISO 45001:2018 職業健康安全管理系統認證",
+   "description": "依 ISO 45001:2018 管理廠區與工地的職業健康安全風險，含行車吊運、乾掛高區作業及粉塵崗位的防護與培訓制度。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 45001:2018",
+    "termCode": "45001:2018",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "CE 標誌 — 天然石材板材（EN 12058 / EN 1341 / EN 1342 / EN 1343）",
+   "description": "外銷歐盟的天然石材板材依建築產品法規（EU）No 305/2011 加貼 CE 標誌，按 EN 12058（室內外地板及樓梯板）、EN 1341（外牆板）、EN 1342（鋪路石）、EN 1343（路緣石）完成型式試驗並出具性能聲明 DoP。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "EN 12058 / EN 1341 / EN 1342 / EN 1343",
+    "termCode": "EN 12058",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "歐洲標準化委員會 CEN",
+     "url": "https://www.cen.eu/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GREENGUARD 低揮發性有機化合物認證（UL 2818）",
+   "description": "人造石（無縫石）及相關室內飾面材料依 UL 2818 測試總揮發性有機化合物（TVOC）釋放量，符合室內空氣品質要求。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "UL 2818 GREENGUARD",
+    "termCode": "UL 2818",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "UL Solutions",
+     "url": "https://www.ul.com/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html",
+   "hasMeasurement": [
+    {
+     "@type": "QuantitativeValue",
+     "name": "總揮發性有機化合物 TVOC 釋放量",
+     "maxValue": 0.22,
+     "unitText": "mg/m³"
+    }
+   ]
+  },
+  {
+   "@type": "Certification",
+   "name": "NSF/ANSI 51 食品設備材料認證",
+   "description": "檯面用人造石（無縫石）依 NSF/ANSI 51 評估與食品接觸面的材料安全性，適用於廚房檯面、餐飲區與醫療膳食區。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "NSF/ANSI 51",
+    "termCode": "NSF/ANSI 51",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "NSF International",
+     "url": "https://www.nsf.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GB 6566 A 類裝飾材料放射性核素限量",
+   "description": "全線天然石材依 GB 6566《建築材料放射性核素限量》檢測，內照射指數與外照射指數均符合 A 類要求，可不受限制用於民用建築室內飾面。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "GB 6566 A 類",
+    "termCode": "GB 6566",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "中國國家標準 GB",
+     "url": "https://www.sac.gov.cn/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  }
+ ],
+ "@id": "https://www.hsst.hk/#organization"
 }
 </script>
 <!-- ================================================================= -->
@@ -271,6 +493,79 @@
 <!-- ================================================================= -->
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["LocalBusiness", "HomeAndConstructionBusiness", "StoneStore"], "@id": "https://www.hsst.hk#business", "name": "恆生石材科技有限公司", "alternateName": "HENGSHENG MARBLE S&T CO. LIMITED", "url": "https://www.hsst.hk/", "image": {"@id": "https://www.hsst.hk/projects/hotel.html#primaryimage"}, "telephone": "+852-5538-0525", "email": "stone@hsst.hk", "address": {"@type": "PostalAddress", "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD", "addressLocality": "Mong Kok, Kowloon", "addressRegion": "Hong Kong", "addressCountry": "HK"}, "geo": {"@type": "GeoCoordinates", "latitude": 22.31, "longitude": 114.17}, "areaServed": [{"@type": "Country", "name": "Hong Kong"}, {"@type": "Country", "name": "China"}, {"@type": "Country", "name": "Singapore"}]}, {"@type": "WebSite", "@id": "https://www.hsst.hk/#website", "url": "https://www.hsst.hk/", "name": "恆生石材科技有限公司", "publisher": {"@id": "https://www.hsst.hk#business"}, "inLanguage": "zh-HK"}, {"@type": "ImageObject", "@id": "https://www.hsst.hk/projects/hotel.html#primaryimage", "url": "https://www.hsst.hk/images/projects/hotel-cover.jpg", "contentUrl": "https://www.hsst.hk/images/projects/hotel-cover.jpg", "caption": "酒店雲石工程 | 恆生石材 — 酒店雲石供應商・雲石牆身", "description": "迪拜 Burj Al Arab 酒店石材工程：30,000㎡ 飾面石材以 Calacatta Gold 金紋雙層挑空主牆、Carrara White 客房基調與 Nero Marquina 升降機大堂塑造七星級戲劇性。", "geo": {"@type": "GeoCoordinates", "latitude": 22.31, "longitude": 114.17}, "license": "https://www.hsst.hk/", "acquireLicensePage": "https://www.hsst.hk/contact.html"}]}</script>
   <link rel="preload" as="image" href="/images/projects/hotel-cover.webp?v=20260922h" fetchpriority="high" type="image/webp">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Project",
+ "@id": "https://www.hsst.hk/projects/hotel.html#project",
+ "name": "迪拜 Burj Al Arab 石材工程",
+ "description": "迪拜 Burj Al Arab 酒店石材工程：30,000㎡ 飾面石材以 Calacatta Gold 金紋雙層挑空主牆、Carrara White 客房基調與 Nero Marquina 升降機大堂塑造七星級戲劇性。",
+ "url": "https://www.hsst.hk/projects/hotel.html",
+ "inLanguage": "zh-HK",
+ "parentOrganization": {
+  "@id": "https://www.hsst.hk/#organization"
+ },
+ "location": {
+  "@type": "Place",
+  "name": "迪拜 · 阿聯酋",
+  "address": {
+   "@type": "PostalAddress",
+   "addressCountry": "AE",
+   "addressLocality": "迪拜"
+  }
+ },
+ "image": "https://www.hsst.hk/images/projects/hotel-cover.jpg",
+ "alternateName": "Burj Al Arab, Dubai — Stone Works",
+ "hasMeasurement": [
+  {
+   "@type": "QuantitativeValue",
+   "name": "石材施工面積",
+   "value": 30000.0,
+   "unitText": "m²"
+  }
+ ],
+ "knowsAbout": [
+  "Calacatta Gold",
+  "Carrara White",
+  "Nero Marquina"
+ ],
+ "additionalProperty": [
+  {
+   "@type": "PropertyValue",
+   "name": "交付週期",
+   "value": "14 個月"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "石材品種數",
+   "value": "9 款"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "設計單位",
+   "value": "WKK Architects"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "豪華套房",
+   "value": "202 洞"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "平整度控制",
+   "value": "±1.5mm"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "業主滿意度",
+   "value": "97%"
+  }
+ ],
+ "mainEntityOfPage": {
+  "@id": "https://www.hsst.hk/projects/hotel.html#webpage"
+ }
+}
+</script>
 </head>
 <body class="inner-page premium">
 
@@ -756,7 +1051,7 @@
 
 <!-- Hero -->
 <section class="project-hero">
-  <picture><source srcset="../images/projects/hotel-cover.webp" type="image/webp"/><img loading="lazy" alt="迪拜帆船酒店石材工程" src="../images/projects/hotel-cover.jpg?v=20260922h" width="1600" height="1066"></picture>
+  <picture><source srcset="../images/projects/hotel-cover.webp" type="image/webp"/><img fetchpriority="high" loading="eager" alt="迪拜帆船酒店石材工程" src="../images/projects/hotel-cover.jpg?v=20260922h" width="1600" height="1066"></picture>
   <div class="project-hero-overlay">
     <div class="project-hero-content">
       <span class="project-hero-tag">五星級酒店 · Hotel &amp; Resort</span>

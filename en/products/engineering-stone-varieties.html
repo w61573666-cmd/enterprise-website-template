@@ -2,9 +2,10 @@
 
 <html lang="en-HK">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" data-hsst-nocache>
-<meta http-equiv="Pragma" content="no-cache" data-hsst-nocache>
-<meta http-equiv="Expires" content="0" data-hsst-nocache>
+<!-- 快取策略統一交由 HTTP 標頭管理：public, max-age=0, must-revalidate + ETag。
+     每次訪問都會重新驗證（內容必定最新），同時允許 304 回應節省傳輸量；
+     原先的 no-store meta 會強制每次完整重新下載，已移除。 -->
+
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <meta charset="utf-8"/>
 <link rel="manifest" href="/site.webmanifest">
@@ -51,7 +52,9 @@
 <meta content="project stone, bulk stone, construction marble, Marble thin slab, Marble thick slab, Polished marble, Honed marble, Matt finish marble, High gloss marble, Marble big slab Hong Kong, Marble slabs Hong Kong, Granite slabs Hong Kong, Commercial marble project Hong Kong" name="keywords"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/></noscript>
 <link href="../../css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="../../css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
 
@@ -86,34 +89,253 @@
 <!-- ================================================================= -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
-  "alternateName": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
-  "url": "https://www.hsst.hk",
-  "logo": "https://www.hsst.hk/images/logo.jpg",
-  "description": "Asia-Pacific's leading premium stone supplier and engineering service provider, specializing in global sourcing, precision processing and custom engineering of natural marble and granite",
-  "foundingDate": "1999",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
-    "addressLocality": "Kowloon",
-    "addressRegion": "Hong Kong",
-    "addressCountry": "HK"
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
+ "alternateName": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
+ "url": "https://www.hsst.hk",
+ "logo": "https://www.hsst.hk/images/logo.jpg",
+ "description": "Asia-Pacific's leading premium stone supplier and engineering service provider, specializing in global sourcing, precision processing and custom engineering of natural marble and granite",
+ "foundingDate": "1999",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
+  "addressLocality": "Kowloon",
+  "addressRegion": "Hong Kong",
+  "addressCountry": "HK"
+ },
+ "contactPoint": {
+  "@type": "ContactPoint",
+  "telephone": "+852-5538-0525",
+  "contactType": "customer service",
+  "email": "stone@hsst.hk",
+  "areaServed": "Worldwide"
+ },
+ "slogan": "Premium Natural Stone Since 1999",
+ "foundingLocation": {
+  "@type": "Place",
+  "name": "Kowloon, Hong Kong SAR, China"
+ },
+ "areaServed": [
+  "HK",
+  "CN",
+  "MO",
+  "TW",
+  "AE",
+  "SA",
+  "SG",
+  "MY",
+  "TH",
+  "ID",
+  "US",
+  "GB",
+  "EU"
+ ],
+ "knowsAbout": [
+  "Natural Marble",
+  "Granite",
+  "Quartzite",
+  "Travertine",
+  "Onyx",
+  "Stone Engineering",
+  "Stone Fabrication",
+  "Quarry Sourcing",
+  "Architectural Stone",
+  "Luxury Stone"
+ ],
+ "makesOffer": {
+  "@type": "OfferCatalog",
+  "name": "Stone Supply & Engineering Services",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Natural Stone Slab Supply"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Fabrication & Processing"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Engineering & Installation"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Quarry Sourcing & Import"
+    }
+   }
+  ]
+ },
+ "sameAs": [],
+ "hasCertification": [
+  {
+   "@type": "Certification",
+   "name": "ISO 9001:2015 Quality Management System Certification",
+   "description": "HENGSHENG MARBLE operates an ISO 9001:2015 quality management system covering every stage from quarry selection and slab sourcing to fabrication, dry-lay pre-assembly and on-site installation, under annual surveillance audits by an accredited third-party body.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 9001:2015",
+    "termCode": "9001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "International Organization for Standardization (ISO)",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
   },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+852-5538-0525",
-    "contactType": "customer service",
-    "email": "stone@hsst.hk",
-    "areaServed": "Worldwide"
+  {
+   "@type": "Certification",
+   "name": "ISO 14001:2015 Environmental Management System Certification",
+   "description": "ISO 14001:2015 governs wastewater recirculation, dust suppression and solid-waste handling across the factories: process water is recycled and sawing slurry is filter-pressed before compliant disposal.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 14001:2015",
+    "termCode": "14001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "International Organization for Standardization (ISO)",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
   },
-    "slogan": "Premium Natural Stone Since 1999",
-  "foundingLocation": { "@type": "Place", "name": "Hong Kong" },
-  "areaServed": [ "HK", "CN", "MO", "TW", "AE", "SA", "SG", "MY", "TH", "ID", "US", "GB", "EU" ],
-  "knowsAbout": [ "Natural Marble", "Granite", "Quartzite", "Travertine", "Onyx", "Stone Engineering", "Stone Fabrication", "Quarry Sourcing", "Architectural Stone", "Luxury Stone" ],
-  "makesOffer": { "@type": "OfferCatalog", "name": "Stone Supply & Engineering Services", "itemListElement": [ { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Natural Stone Slab Supply" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Fabrication & Processing" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Engineering & Installation" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Quarry Sourcing & Import" } } ] },
-"sameAs": []
+  {
+   "@type": "Certification",
+   "name": "ISO 45001:2018 Occupational Health and Safety Management System Certification",
+   "description": "ISO 45001:2018 governs occupational health and safety risk control in factories and on site, including crane handling, high-level dry-hang works and dust-exposed posts.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 45001:2018",
+    "termCode": "45001:2018",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "International Organization for Standardization (ISO)",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "CE Marking — Natural Stone Products (EN 12058 / EN 1341 / EN 1342 / EN 1343)",
+   "description": "Natural stone products placed on the EU market carry CE marking under Construction Products Regulation (EU) No 305/2011, type-tested to EN 12058 (floor and stair slabs), EN 1341 (external wall slabs), EN 1342 (setts) and EN 1343 (kerbs), with a Declaration of Performance issued for each.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "EN 12058 / EN 1341 / EN 1342 / EN 1343",
+    "termCode": "EN 12058",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "European Committee for Standardization (CEN)",
+     "url": "https://www.cen.eu/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GREENGUARD Low VOC Certification (UL 2818)",
+   "description": "Engineered stone and interior surfacing materials are tested to UL 2818 for total volatile organic compound (TVOC) emissions to meet indoor air quality requirements.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "UL 2818 GREENGUARD",
+    "termCode": "UL 2818",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "UL Solutions",
+     "url": "https://www.ul.com/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html",
+   "hasMeasurement": [
+    {
+     "@type": "QuantitativeValue",
+     "name": "Total volatile organic compound (TVOC) emission",
+     "maxValue": 0.22,
+     "unitText": "mg/m³"
+    }
+   ]
+  },
+  {
+   "@type": "Certification",
+   "name": "NSF/ANSI 51 Food Equipment Materials Certification",
+   "description": "Engineered stone worktops are evaluated to NSF/ANSI 51 for material safety in food-contact zones, suitable for kitchen countertops, F&B areas and healthcare catering areas.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "NSF/ANSI 51",
+    "termCode": "NSF/ANSI 51",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "NSF International",
+     "url": "https://www.nsf.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GB 6566 Class A — Radionuclide Limits for Decorative Materials",
+   "description": "All natural stone lines are tested to GB 6566 \"Limits of radionuclides in building materials\"; both the internal and external exposure indices meet Class A, permitting unrestricted use for interior finishes of civil buildings.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "GB 6566 Class A",
+    "termCode": "GB 6566",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "Chinese National Standard (GB)",
+     "url": "https://www.sac.gov.cn/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  }
+ ],
+ "@id": "https://www.hsst.hk/#organization"
 }
 </script>
 <!-- ================================================================= -->
@@ -670,7 +892,7 @@
 .ev-range td.ev-rz b{color:#1A1A2E;}
 .ev-range td.ev-rz .ev-en{display:block;color:rgba(26,26,46,.6);font-size:12px;}
 .ev-range td.ev-rnote{width:34%;color:rgba(26,26,46,.7);font-size:13px;}
-.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}.ev-card .vsc-img{display:block;}.ev-grid{grid-template-columns:repeat(3,1fr);}@media(max-width:900px){.ev-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:560px){.ev-grid{grid-template-columns:1fr;}}body.premium .v2-series-card .vsc-go{opacity:1;transform:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid #C9A84C;border-radius:999px;background:#fff;color:#1A1A2E;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../products.html">Products</a></li><li><span aria-current="page">Engineering Stone Series</span></li></ol></nav><section class="product-hero"><picture><source srcset="../../images/products/engineering-stone-varieties/landing-hero.webp" type="image/webp"/><img alt="Engineering Stone Variety Series" class="product-hero-bg" src="../../images/products/engineering-stone-varieties/landing-hero.jpg" width="1536" height="986"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">Engineering Stone</span><h1 class="product-hero-title">Engineering Stone Variety Series</h1><p class="product-hero-subtitle">Engineering Stone Variety Series</p><p class="product-hero-desc">HENGSHENG's Engineering Stone Variety Series covers granite (Granite) products for Hong Kong public works, road authority, la…</p></div></section><section class="product-action-bar"><div class="container"><a href="../../sample-request.html" class="product-action-btn sample">📦 Request Samples</a><a href="../../contact.html" class="product-action-btn inquire">Inquire Now</a></div></section><section class="section-padding product-content-section border-top-light" id="series-intro"><div class="container"><div class="product-section-title"><span class="label">Engineering Stone Variety Series</span><h2>18 Families of Outdoor Granite Products</h2></div><p class="eng-var-desc">HENGSHENG's Engineering Stone Variety Series covers granite (Granite) products for Hong Kong public works, road authority, landscape and residential outdoor use — 18 families from bollards, balustrades, paving, kerbs, tree pits, coping, treads, drainage, curtain wall to feature cladding. All in dense granite: weatherproof, slip-resistant, load-bearing and low-maintenance, suited to Hong Kong's hot, rainy, coastal climate — a one-stop catalogue and fabrication source for contractors, architects and engineering clients.</p><div class="v2-series-grid ev-grid"><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-ball.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/bollard-ball.webp" type="image/webp"/><img alt="Granite Bollard Ball" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/bollard-ball.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Ball</i><b>Bollard Ball</b><span class="vsc-d">Solid-turned granite spheres used at building …</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>198</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-post.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/bollard-post.webp" type="image/webp"/><img alt="Granite Bollard Post" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/bollard-post.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Post</i><b>Bollard Post</b><span class="vsc-d">Turned or carved granite posts that restrict v…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>186</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-balustrade.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/stone-balustrade.webp" type="image/webp"/><img alt="Stone Balustrade &amp; Handrail" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/stone-balustrade.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Balustrade &amp; Handrail</i><b>Stone Balustrade</b><span class="vsc-d">Granite balustrade systems — newel posts, infi…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>208</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/engraved-name-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.webp" type="image/webp"/><img alt="Engraved Entrance Stone" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Engraved Entrance Stone</i><b>Engraved Name Stone</b><span class="vsc-d">Granite nameplates, signage and inscribed feat…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>196</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/carved-stone-pier.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.webp" type="image/webp"/><img alt="Carved Stone Pier / Plinth" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Carved Stone Pier / Plinth</i><b>Carved Stone Pier</b><span class="vsc-d">Carved granite plinths, base stones, drum ston…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>205</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/flamed-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/flamed-paving.webp" type="image/webp"/><img alt="Flamed Granite Paving Tile" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/flamed-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Flamed Granite Paving Tile</i><b>Flamed Paving</b><span class="vsc-d">Granite tiles flamed for a rough, slip-resista…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>174</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bushhammered-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.webp" type="image/webp"/><img alt="Bush-Hammered Granite Paving" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Bush-Hammered Granite Paving</i><b>Bush-Hammered Paving</b><span class="vsc-d">Granite tiles bush-hammered into an even dotte…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>178</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tactile-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/tactile-paving.webp" type="image/webp"/><img alt="Tactile Paving Stone" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/tactile-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tactile Paving Stone</i><b>Tactile Paving</b><span class="vsc-d">Granite tactile guides — directional bars (tra…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>176</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/cobblestone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/cobblestone.webp" type="image/webp"/><img alt="Granite Cobblestone / Setts" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/cobblestone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Cobblestone / Setts</i><b>Cobblestone</b><span class="vsc-d">Granite setts and cobbles for garden ways, pla…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>162</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/crazy-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/crazy-paving.webp" type="image/webp"/><img alt="Irregular Flagstone / Crazy Paving" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/crazy-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Irregular Flagstone / Crazy Paving</i><b>Crazy Paving</b><span class="vsc-d">Natural or machine-cut granite crazy paving fo…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>168</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curb-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/curb-stone.webp" type="image/webp"/><img alt="Granite Curb Stone / Kerb" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/curb-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curb Stone / Kerb</i><b>Curb Stone</b><span class="vsc-d">Granite kerbs for carriageways, footpaths, pla…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>182</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curved-curb.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/curved-curb.webp" type="image/webp"/><img alt="Curved Curb / Radius Kerb" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/curved-curb.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Curved Curb / Radius Kerb</i><b>Curved Curb</b><span class="vsc-d">Pre-radiused granite kerbs for roundabouts, be…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>180</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tree-pit-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.webp" type="image/webp"/><img alt="Tree Pit Stone / Tree Surround" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tree Pit Stone / Tree Surround</i><b>Tree Pit Stone</b><span class="vsc-d">Granite tree-pit surrounds for street, plaza a…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>165</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/coping-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/coping-stone.webp" type="image/webp"/><img alt="Coping Stone / Wall Coping" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/coping-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Coping Stone / Wall Coping</i><b>Coping Stone</b><span class="vsc-d">Granite coping and capping for low walls, para…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>192</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/step-tread.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/step-tread.webp" type="image/webp"/><img alt="Granite Step Tread / Stair Tread" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/step-tread.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Step Tread / Stair Tread</i><b>Step Tread</b><span class="vsc-d">Granite indoor/outdoor treads for lobbies, ter…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>188</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-drain-grate.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.webp" type="image/webp"/><img alt="Stone Drain Grate / Floor Grate" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Drain Grate / Floor Grate</i><b>Stone Drain Grate</b><span class="vsc-d">Granite floor grates and drain covers for plaz…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>194</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curtain-wall-panel.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.webp" type="image/webp"/><img alt="Granite Curtain Wall Panel" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curtain Wall Panel</i><b>Curtain Wall Panel</b><span class="vsc-d">Granite curtain-wall panels for offices, hotel…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>212</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 6.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/mushroom-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/mushroom-stone.webp" type="image/webp"/><img alt="Mushroom Stone / Rustic Cladding" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/mushroom-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Mushroom Stone / Rustic Cladding</i><b>Mushroom Stone</b><span class="vsc-d">Granite mushroom (rustic) cladding — raised ce…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>158</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a></div><div class="surface-treatment-section" style="margin-top:18px"><h5 class="surface-treatment-title">Common Surface Finishes</h5><div class="surface-treatment-tags"><span class="surface-treatment-tag">Flamed Flamed</span><span class="surface-treatment-tag">Bush-hammered Bush-hammered</span><span class="surface-treatment-tag"> Polished</span><span class="surface-treatment-tag">Matte Honed</span><span class="surface-treatment-tag">Sandblasted Sandblasted</span><span class="surface-treatment-tag"> Axe-cut</span></div></div></div></section><section class="section-padding product-content-section border-top-light" id="why-granite"><div class="container"><div class="product-section-title"><span class="label">Engineering Stone</span><h2>Why Granite (Granite) Engineering Products</h2></div><p class="eng-var-desc">Natural granite is the preferred stone for Hong Kong outdoor public &amp; landscape works:</p><div class="application-grid"><div class="application-card"><div class="application-card-icon">🛡️</div><div class="app-card-title">UV-resistant, Salt-spray Resistant, Stainless (corrosion-free), Stable for long-term outdoor use</div><div class="app-card-desc">UV &amp; salt-spray resistant, non-rusting</div></div><div class="application-card"><div class="application-card-icon">🚶</div><div class="app-card-title">Flamed/Bush-hammered Rough，Slip-resistant after rain，Protects pedestrians</div><div class="app-card-desc">Flamed/bush-hammered grip when wet</div></div><div class="application-card"><div class="application-card-icon">🏗️</div><div class="app-card-title">High-density granite, compression & wear resistant, Withstands vehicular loads</div><div class="app-card-desc">Compression-proof, drive-load rated</div></div><div class="application-card"><div class="application-card-icon">🧽</div><div class="app-card-title">Non-absorbent and Stain-resistant，Clean with high-pressure wash</div><div class="app-card-desc">Non-absorbing, easy wash</div></div><div class="application-card"><div class="application-card-icon">☀️</div><div class="app-card-title">Naturally color-stable，Everlasting</div><div class="app-card-desc">Stable natural colour</div></div><div class="application-card"><div class="application-card-icon">🌧️</div><div class="app-card-title">Heat & rain resistant、Coastal salt-spray outdoor environments</div><div class="app-card-desc">Hot, rainy, coastal ready</div></div></div></div></section>
+.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}.ev-card .vsc-img{display:block;}.ev-grid{grid-template-columns:repeat(3,1fr);}@media(max-width:900px){.ev-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:560px){.ev-grid{grid-template-columns:1fr;}}body.premium .v2-series-card .vsc-go{opacity:1;transform:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid #C9A84C;border-radius:999px;background:#fff;color:#1A1A2E;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../products.html">Products</a></li><li><span aria-current="page">Engineering Stone Series</span></li></ol></nav><section class="product-hero"><picture><source srcset="../../images/products/engineering-stone-varieties/landing-hero.webp" type="image/webp"/><img fetchpriority="high" loading="eager" alt="Engineering Stone Variety Series" class="product-hero-bg" src="../../images/products/engineering-stone-varieties/landing-hero.jpg" width="1536" height="986"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">Engineering Stone</span><h1 class="product-hero-title">Engineering Stone Variety Series</h1><p class="product-hero-subtitle">Engineering Stone Variety Series</p><p class="product-hero-desc">HENGSHENG's Engineering Stone Variety Series covers granite (Granite) products for Hong Kong public works, road authority, la…</p></div></section><section class="product-action-bar"><div class="container"><a href="../../sample-request.html" class="product-action-btn sample">📦 Request Samples</a><a href="../../contact.html" class="product-action-btn inquire">Inquire Now</a></div></section><section class="section-padding product-content-section border-top-light" id="series-intro"><div class="container"><div class="product-section-title"><span class="label">Engineering Stone Variety Series</span><h2>18 Families of Outdoor Granite Products</h2></div><p class="eng-var-desc">HENGSHENG's Engineering Stone Variety Series covers granite (Granite) products for Hong Kong public works, road authority, landscape and residential outdoor use — 18 families from bollards, balustrades, paving, kerbs, tree pits, coping, treads, drainage, curtain wall to feature cladding. All in dense granite: weatherproof, slip-resistant, load-bearing and low-maintenance, suited to Hong Kong's hot, rainy, coastal climate — a one-stop catalogue and fabrication source for contractors, architects and engineering clients.</p><div class="v2-series-grid ev-grid"><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-ball.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/bollard-ball.webp" type="image/webp"/><img alt="Granite Bollard Ball" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/bollard-ball.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Ball</i><b>Bollard Ball</b><span class="vsc-d">Solid-turned granite spheres used at building …</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>198</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-post.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/bollard-post.webp" type="image/webp"/><img alt="Granite Bollard Post" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/bollard-post.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Post</i><b>Bollard Post</b><span class="vsc-d">Turned or carved granite posts that restrict v…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>186</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-balustrade.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/stone-balustrade.webp" type="image/webp"/><img alt="Stone Balustrade &amp; Handrail" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/stone-balustrade.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Balustrade &amp; Handrail</i><b>Stone Balustrade</b><span class="vsc-d">Granite balustrade systems — newel posts, infi…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>208</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/engraved-name-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.webp" type="image/webp"/><img alt="Engraved Entrance Stone" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Engraved Entrance Stone</i><b>Engraved Name Stone</b><span class="vsc-d">Granite nameplates, signage and inscribed feat…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>196</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/carved-stone-pier.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.webp" type="image/webp"/><img alt="Carved Stone Pier / Plinth" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Carved Stone Pier / Plinth</i><b>Carved Stone Pier</b><span class="vsc-d">Carved granite plinths, base stones, drum ston…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>205</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/flamed-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/flamed-paving.webp" type="image/webp"/><img alt="Flamed Granite Paving Tile" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/flamed-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Flamed Granite Paving Tile</i><b>Flamed Paving</b><span class="vsc-d">Granite tiles flamed for a rough, slip-resista…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>174</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bushhammered-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.webp" type="image/webp"/><img alt="Bush-Hammered Granite Paving" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Bush-Hammered Granite Paving</i><b>Bush-Hammered Paving</b><span class="vsc-d">Granite tiles bush-hammered into an even dotte…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>178</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tactile-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/tactile-paving.webp" type="image/webp"/><img alt="Tactile Paving Stone" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/tactile-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tactile Paving Stone</i><b>Tactile Paving</b><span class="vsc-d">Granite tactile guides — directional bars (tra…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>176</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/cobblestone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/cobblestone.webp" type="image/webp"/><img alt="Granite Cobblestone / Setts" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/cobblestone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Cobblestone / Setts</i><b>Cobblestone</b><span class="vsc-d">Granite setts and cobbles for garden ways, pla…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>162</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/crazy-paving.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/crazy-paving.webp" type="image/webp"/><img alt="Irregular Flagstone / Crazy Paving" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/crazy-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Irregular Flagstone / Crazy Paving</i><b>Crazy Paving</b><span class="vsc-d">Natural or machine-cut granite crazy paving fo…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>168</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curb-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/curb-stone.webp" type="image/webp"/><img alt="Granite Curb Stone / Kerb" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/curb-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curb Stone / Kerb</i><b>Curb Stone</b><span class="vsc-d">Granite kerbs for carriageways, footpaths, pla…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>182</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curved-curb.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/curved-curb.webp" type="image/webp"/><img alt="Curved Curb / Radius Kerb" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/curved-curb.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Curved Curb / Radius Kerb</i><b>Curved Curb</b><span class="vsc-d">Pre-radiused granite kerbs for roundabouts, be…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>180</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tree-pit-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.webp" type="image/webp"/><img alt="Tree Pit Stone / Tree Surround" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tree Pit Stone / Tree Surround</i><b>Tree Pit Stone</b><span class="vsc-d">Granite tree-pit surrounds for street, plaza a…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>165</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/coping-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/coping-stone.webp" type="image/webp"/><img alt="Coping Stone / Wall Coping" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/coping-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Coping Stone / Wall Coping</i><b>Coping Stone</b><span class="vsc-d">Granite coping and capping for low walls, para…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>192</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/step-tread.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/step-tread.webp" type="image/webp"/><img alt="Granite Step Tread / Stair Tread" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/step-tread.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Step Tread / Stair Tread</i><b>Step Tread</b><span class="vsc-d">Granite indoor/outdoor treads for lobbies, ter…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>188</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-drain-grate.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.webp" type="image/webp"/><img alt="Stone Drain Grate / Floor Grate" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Drain Grate / Floor Grate</i><b>Stone Drain Grate</b><span class="vsc-d">Granite floor grates and drain covers for plaz…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>194</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curtain-wall-panel.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.webp" type="image/webp"/><img alt="Granite Curtain Wall Panel" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curtain Wall Panel</i><b>Curtain Wall Panel</b><span class="vsc-d">Granite curtain-wall panels for offices, hotel…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>212</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 6.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/mushroom-stone.html"><span class="vsc-img"><picture><source srcset="../../images/products/engineering-stone-varieties-thumbs/mushroom-stone.webp" type="image/webp"/><img alt="Mushroom Stone / Rustic Cladding" loading="lazy" src="../../images/products/engineering-stone-varieties-thumbs/mushroom-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Mushroom Stone / Rustic Cladding</i><b>Mushroom Stone</b><span class="vsc-d">Granite mushroom (rustic) cladding — raised ce…</span><em class="vsc-go">View details →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>Compressive Strength</b><span>158</span></span><span class="hsst-spec-chip"><b>Abrasion Resistance</b><span>≤ 9.5 mm</span></span><span class="hsst-spec-chip"><b>Frost Resistance</b><span>50 freeze-thaw cycles pass (B…</span></span></div></a></div><div class="surface-treatment-section" style="margin-top:18px"><h5 class="surface-treatment-title">Common Surface Finishes</h5><div class="surface-treatment-tags"><span class="surface-treatment-tag">Flamed Flamed</span><span class="surface-treatment-tag">Bush-hammered Bush-hammered</span><span class="surface-treatment-tag"> Polished</span><span class="surface-treatment-tag">Matte Honed</span><span class="surface-treatment-tag">Sandblasted Sandblasted</span><span class="surface-treatment-tag"> Axe-cut</span></div></div></div></section><section class="section-padding product-content-section border-top-light" id="why-granite"><div class="container"><div class="product-section-title"><span class="label">Engineering Stone</span><h2>Why Granite (Granite) Engineering Products</h2></div><p class="eng-var-desc">Natural granite is the preferred stone for Hong Kong outdoor public &amp; landscape works:</p><div class="application-grid"><div class="application-card"><div class="application-card-icon">🛡️</div><div class="app-card-title">UV-resistant, Salt-spray Resistant, Stainless (corrosion-free), Stable for long-term outdoor use</div><div class="app-card-desc">UV &amp; salt-spray resistant, non-rusting</div></div><div class="application-card"><div class="application-card-icon">🚶</div><div class="app-card-title">Flamed/Bush-hammered Rough，Slip-resistant after rain，Protects pedestrians</div><div class="app-card-desc">Flamed/bush-hammered grip when wet</div></div><div class="application-card"><div class="application-card-icon">🏗️</div><div class="app-card-title">High-density granite, compression & wear resistant, Withstands vehicular loads</div><div class="app-card-desc">Compression-proof, drive-load rated</div></div><div class="application-card"><div class="application-card-icon">🧽</div><div class="app-card-title">Non-absorbent and Stain-resistant，Clean with high-pressure wash</div><div class="app-card-desc">Non-absorbing, easy wash</div></div><div class="application-card"><div class="application-card-icon">☀️</div><div class="app-card-title">Naturally color-stable，Everlasting</div><div class="app-card-desc">Stable natural colour</div></div><div class="application-card"><div class="application-card-icon">🌧️</div><div class="app-card-title">Heat & rain resistant、Coastal salt-spray outdoor environments</div><div class="app-card-desc">Hot, rainy, coastal ready</div></div></div></div></section>
 <section class="products-cta section-padding hsst-form-zone">
 <div class="container">
 <h2>Get Your Custom Solution</h2>

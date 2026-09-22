@@ -21,8 +21,8 @@
   --color-mid-gray: #888;
   --color-dark-gray: #444;
   /* Typography */
-  --font-heading: 'Playfair Display', 'Noto Serif TC', serif;
-  --font-body: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+  --font-heading: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif;
+  --font-body: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", -apple-system, sans-serif;
   /* Motion */
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --transition-slow: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -3759,7 +3759,7 @@ section[id],
   display: block;
 }
 .series-title {
-  font-family: 'Noto Serif TC', 'Playfair Display', serif;
+  font-family: "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", 'Playfair Display', serif;
   font-size: 1.2rem;
   font-weight: 700;
   color: #1A1A2E;
@@ -3907,7 +3907,7 @@ section[id],
   padding: 28px;
 }
 .stone-modal-info h3 {
-  font-family: 'Noto Serif TC', 'Playfair Display', serif;
+  font-family: "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", 'Playfair Display', serif;
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 8px;
@@ -4055,7 +4055,7 @@ section[id],
   background: #F5F0EB;
   color: rgba(26,26,46,0.65);
   padding: 32px 0 0;
-  font-family: "Inter", "Noto Sans TC", sans-serif;
+  font-family: "Inter", "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", sans-serif;
 }
 .footer-grid {
   display: grid;
@@ -4491,8 +4491,8 @@ section[id],
 /* iOS System Font Optimization */
 @supports (-webkit-touch-callout: none) {
   :root {
-    --font-heading: 'Playfair Display', 'Noto Serif TC', 'PingFang SC', 'Hiragino Sans GB', -apple-system, serif;
-    --font-body: 'Inter', 'Noto Sans TC', 'PingFang SC', 'Hiragino Sans GB', -apple-system, sans-serif;
+    --font-heading: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", 'PingFang SC', 'Hiragino Sans GB', -apple-system, serif;
+    --font-body: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", 'PingFang SC', 'Hiragino Sans GB', -apple-system, sans-serif;
   }
 }
 
@@ -5535,7 +5535,7 @@ html {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Noto Serif TC', 'Playfair Display', serif;
+    font-family: "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", 'Playfair Display', serif;
     font-size: 1rem;
     font-weight: 700;
     color: #1A1A2E;
@@ -6850,7 +6850,7 @@ html {
   white-space: nowrap;
   letter-spacing: 0.5px;
   line-height: 1.5;
-  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", -apple-system, BlinkMacSystemFont, sans-serif;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 /* 灏忓睆骞曠缉锟斤拷姘村嵃 */
@@ -6900,7 +6900,7 @@ html {
   font-weight: 700;
   color: #1A1A2E;
   margin-bottom: 8px;
-  font-family: 'Playfair Display', 'Noto Serif TC', serif;
+  font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif;
   position: relative;
   padding-bottom: 12px;
 }
@@ -6988,7 +6988,7 @@ html {
   font-weight: 700;
   color: #1A1A2E;
   margin-bottom: 28px;
-  font-family: 'Playfair Display', 'Noto Serif TC', serif;
+  font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif;
 }
 .timeline {
   position: relative;
@@ -7052,7 +7052,7 @@ html {
   font-weight: 700;
   color: #1A1A2E;
   margin-bottom: 8px;
-  font-family: 'Playfair Display', 'Noto Serif TC', serif;
+  font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif;
   position: relative;
   padding-bottom: 12px;
 }

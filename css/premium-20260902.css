@@ -2,7 +2,7 @@
    hsst.hk · 共享頂級視覺層 (Premium Visual Layer)
    版本: 20260902f
    載入: 所有頁面 (154+) 透過 <link> 加載，body 加 class="premium"
-   風格: Editorial 大地色 + 香檳金 + Playfair Display + Noto Serif TC
+   風格: Editorial 大地色 + 香檳金 + Playfair Display + "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU"
    原則: 純視覺疊加，0 內容刪改；只升級共享視覺 DNA
    ============================================================= */
 
@@ -15,14 +15,14 @@ body.premium { background: var(--pv-bg) !important; }
 
 /* ---------- 2. H1 / H2 / H3 升級（覆蓋 base 樣式）---------- */
 .premium h1, body.premium h1 {
-  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif !important;
   font-weight: 500 !important;
   color: var(--pv-ink) !important;
   line-height: 1.18 !important;
   letter-spacing: .01em !important;
 }
 .premium h2, body.premium h2 {
-  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif !important;
   font-weight: 500 !important;
   color: var(--pv-ink) !important;
   line-height: 1.24 !important;
@@ -35,7 +35,7 @@ body.premium { background: var(--pv-bg) !important; }
 }
 .premium h2.centered::before, body.premium h2.centered::before { left: 50%; transform: translateX(-50%); }
 .premium h3, body.premium h3 {
-  font-family: 'Noto Serif TC', 'Playfair Display', serif !important;
+  font-family: "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", 'Playfair Display', serif !important;
   font-weight: 500 !important;
   color: var(--pv-ink) !important;
 }
@@ -44,7 +44,7 @@ body.premium { background: var(--pv-bg) !important; }
 
 /* ---------- 3. Section title/subtitle (index/about/solutions/contact/faq 等通用)---------- */
 .premium .section-title, body.premium .section-title {
-  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif !important;
   font-weight: 500 !important;
   color: var(--pv-ink) !important;
   font-size: clamp(28px, 3.2vw, 42px) !important;
@@ -75,7 +75,7 @@ body.premium { background: var(--pv-bg) !important; }
 /* ---------- 4. 頂級 kicker / 標籤 (class-based)---------- */
 .premium .kicker, body.premium .kicker {
   display: inline-block !important;
-  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-family: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", sans-serif !important;
   letter-spacing: .32em !important;
   text-transform: uppercase !important;
   font-size: 12px !important;
@@ -87,7 +87,7 @@ body.premium { background: var(--pv-bg) !important; }
 }
 .premium .hero-badge, body.premium .hero-badge {
   display: inline-block !important;
-  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-family: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", sans-serif !important;
   letter-spacing: .32em !important;
   text-transform: uppercase !important;
   font-size: 11px !important;
@@ -102,7 +102,7 @@ body.premium { background: var(--pv-bg) !important; }
 .premium .btn, body.premium .btn {
   display: inline-flex !important; align-items: center; gap: 10px;
   padding: 14px 28px !important; border-radius: 2px !important;
-  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-family: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", sans-serif !important;
   font-size: 14px !important; letter-spacing: .08em !important;
   cursor: pointer;
   transition: background .3s, color .3s, border-color .3s, transform .25s !important;
@@ -175,7 +175,7 @@ body.premium { background: var(--pv-bg) !important; }
 .premium .stat-number, body.premium .stat-number,
 .premium .trust-number, body.premium .trust-number,
 .premium .about-stats .stat-num, body.premium .about-stats .stat-num {
-  font-family: 'Playfair Display', 'Noto Serif TC', serif !important;
+  font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif !important;
   font-weight: 600 !important;
   font-size: clamp(28px, 3.4vw, 44px) !important;
   color: var(--pv-ink) !important;
@@ -185,7 +185,7 @@ body.premium { background: var(--pv-bg) !important; }
 .premium .stat-label, body.premium .stat-label,
 .premium .trust-label, body.premium .trust-label,
 .premium .about-stats .stat-name, body.premium .about-stats .stat-name {
-  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-family: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", sans-serif !important;
   font-size: 12px !important;
   color: var(--pv-soft) !important;
   letter-spacing: .14em !important;
@@ -273,7 +273,7 @@ body.premium textarea, body.premium select {
   border: 1px solid var(--pv-hair) !important;
   border-radius: 2px !important;
   padding: 12px 16px !important;
-  font-family: 'Inter', 'Noto Sans TC', sans-serif !important;
+  font-family: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", sans-serif !important;
   font-size: 14px !important;
   background: #fff !important;
   transition: border-color .3s, box-shadow .3s !important;
@@ -309,7 +309,7 @@ body.premium textarea:focus, body.premium select:focus {
 .premium .editorial-list li:last-child, body.premium .editorial-list li:last-child { border-bottom: 1px solid var(--pv-hair) !important; }
 .premium .editorial-list li:hover, body.premium .editorial-list li:hover { background: rgba(194,162,94,.05) !important; }
 .premium .editorial-list li .no, body.premium .editorial-list li .no { font-family: 'Inter', sans-serif !important; font-size: 13px !important; color: var(--pv-gold) !important; letter-spacing: .08em !important; }
-.premium .editorial-list li .zh, body.premium .editorial-list li .zh { font-family: 'Noto Serif TC', serif !important; font-weight: 500 !important; font-size: 19px !important; color: var(--pv-ink) !important; }
+.premium .editorial-list li .zh, body.premium .editorial-list li .zh { font-family: "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif !important; font-weight: 500 !important; font-size: 19px !important; color: var(--pv-ink) !important; }
 .premium .editorial-list li .en, body.premium .editorial-list li .en { font-family: 'Playfair Display', serif !important; font-style: italic !important; font-size: 14px !important; color: var(--pv-soft) !important; }
 .premium .editorial-list li .meta, body.premium .editorial-list li .meta { font-size: 13px !important; color: var(--pv-muted) !important; }
 .premium .editorial-list li .arrow, body.premium .editorial-list li .arrow { font-size: 20px !important; color: var(--pv-gold) !important; text-align: right !important; }
@@ -598,7 +598,7 @@ body.premium .product-action-bar .product-action-btn {
   gap: 10px;
   min-width: 220px;
   padding: 16px 38px !important;
-  font-family: 'Inter', 'Noto Sans TC', 'Noto Serif TC', sans-serif !important;
+  font-family: 'Inter', "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", sans-serif !important;
   font-size: 14.5px !important;
   font-weight: 600 !important;
   letter-spacing: 0.06em !important;
@@ -1170,7 +1170,7 @@ body.premium .cta-section.cta-home .cta-form-col .form-scene-desc { text-align: 
 body.premium .cta-section.cta-home .hsst-form { max-width: 100% !important; margin: 0 !important; height: 100%; }
 body.premium .cta-section.cta-home .cta-cert-panel { background: #FFFFFF; border: 1px solid #ECE4D7; border-radius: 16px; padding: 30px; box-shadow: 0 24px 60px rgba(17,16,15,.07); display: flex; flex-direction: column; min-width: 0; }
 body.premium .cta-section.cta-home .cta-cert-kicker { display: inline-block; font-family: 'Inter Tight', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #A8884A; margin-bottom: 10px; }
-body.premium .cta-section.cta-home .cta-cert-head h3 { font-family: 'Noto Serif TC', serif; font-size: 1.35rem; color: #14130F; margin: 0 0 8px; }
+body.premium .cta-section.cta-home .cta-cert-head h3 { font-family: "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif; font-size: 1.35rem; color: #14130F; margin: 0 0 8px; }
 body.premium .cta-section.cta-home .cta-cert-head p { color: #5C574F; font-size: .86rem; line-height: 1.7; margin: 0; }
 body.premium .cta-section.cta-home .cta-cert-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; margin: 22px 0; }
 body.premium .cta-section.cta-home .cta-cert-item { display: flex; gap: 12px; align-items: flex-start; background: #FBF8F2; border: 1px solid #F0E9DC; border-radius: 12px; padding: 14px; min-width: 0; }
@@ -1178,7 +1178,7 @@ body.premium .cta-section.cta-home .cta-cert-badge { flex: none; min-width: 76px
 body.premium .cta-section.cta-home .cta-cert-txt strong { display: block; color: #14130F; font-size: .84rem; margin-bottom: 3px; }
 body.premium .cta-section.cta-home .cta-cert-txt p { margin: 0; color: #8a8277; font-size: .74rem; line-height: 1.5; overflow-wrap: anywhere; min-width: 0; }
 body.premium .cta-section.cta-home .cta-cert-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 18px 0; border-top: 1px solid #EDE6DA; border-bottom: 1px solid #EDE6DA; }
-body.premium .cta-section.cta-home .cta-cert-stats strong { display: block; font-family: 'Noto Serif TC', serif; font-size: 1.5rem; color: #A8884A; line-height: 1; }
+body.premium .cta-section.cta-home .cta-cert-stats strong { display: block; font-family: "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif; font-size: 1.5rem; color: #A8884A; line-height: 1; }
 body.premium .cta-section.cta-home .cta-cert-stats span { display: block; margin-top: 6px; color: #5C574F; font-size: .74rem; }
 body.premium .cta-section.cta-home .cta-cert-link { margin-top: auto; align-self: flex-start; font-size: .82rem; font-weight: 600; color: #A8884A; text-decoration: none; padding-top: 8px; }
 body.premium .cta-section.cta-home .cta-cert-link:hover { color: #C2A25E; }
@@ -1210,7 +1210,7 @@ body.premium .cta-section.cta-sub .hsst-form-input,
 body.premium .cta-section.cta-sub .hsst-form-textarea,
 body.premium .cta-section.cta-sub .hsst-form-select {
   width: 100%; background: #FCFAF6 !important; border: 1px solid #E3D9C9 !important; border-radius: 8px !important; color: #14130F !important;
-  padding: 11px 13px; font-size: .9rem; font-family: 'Noto Sans TC', 'Inter', sans-serif;
+  padding: 11px 13px; font-size: .9rem; font-family: "PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體", 'Inter', sans-serif;
   transition: border-color .25s, box-shadow .25s, background .25s;
 }
 body.premium .cta-section.cta-sub .hsst-form-input:focus,
@@ -1665,7 +1665,7 @@ body.premium .hero-pillar p { font-size: .82rem; color: var(--pv-muted); line-he
 body.premium .hero-timeline { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 980px; margin: 24px auto 0; padding: 18px 8px 0; border-top: 1px solid var(--pv-hair); }
 body.premium .hero-timeline .ht-item { text-align: center; position: relative; padding: 0 10px; }
 body.premium .hero-timeline .ht-item::before { content: ''; position: absolute; top: -21.5px; left: 50%; transform: translateX(-50%); width: 7px; height: 7px; border-radius: 50%; background: var(--pv-gold); box-shadow: 0 0 0 3px rgba(194,162,94,.18); }
-body.premium .hero-timeline .ht-year { display: block; font-family: 'Playfair Display', 'Noto Serif TC', serif; font-size: 1.18rem; font-weight: 700; color: #A8884A; }
+body.premium .hero-timeline .ht-year { display: block; font-family: 'Playfair Display', "Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU", serif; font-size: 1.18rem; font-weight: 700; color: #A8884A; }
 body.premium .hero-timeline .ht-text { display: block; font-size: .76rem; color: var(--pv-muted); margin-top: 3px; letter-spacing: .02em; }
 /* 按鈕對比度修復：淺色 hero 底上 → 金底深字（主）+ 深墨底米字（副） */
 body.premium .hero-grid-video .hero-buttons .btn-primary { background: var(--pv-gold) !important; color: #1A160F !important; border-color: var(--pv-gold) !important; font-weight: 600 !important; box-shadow: 0 6px 18px rgba(194,162,94,.35); }
@@ -4200,7 +4200,7 @@ body.premium .eng-adv-icon{
 }
 body.premium .eng-adv-title{
   font-size:17px;font-weight:700;margin:0 0 10px;letter-spacing:.01em;
-  font-family:'Noto Serif TC',serif;
+  font-family:"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif;
 }
 body.premium .eng-adv-text{
   font-size:14.5px;line-height:1.8;color:var(--pv-muted);margin:0;
@@ -4223,7 +4223,7 @@ body.premium .eng-stat{
 }
 body.premium .eng-stat:last-child{ border-right:0; }
 body.premium .eng-stat-num{
-  font-family:'Noto Serif TC',serif;
+  font-family:"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif;
   font-size:32px;font-weight:700;line-height:1.1;
   color:var(--pv-gold) !important;
   letter-spacing:.01em;
@@ -4309,7 +4309,7 @@ body.premium .eng-process-step::after{
 body.premium .eng-process-step:last-child::after{ display:none; }
 body.premium .eng-process-num{
   display:inline-block;
-  font-family:'Noto Serif TC',serif;
+  font-family:"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif;
   font-size:26px;
   font-weight:700;
   line-height:1;
@@ -4318,7 +4318,7 @@ body.premium .eng-process-num{
 }
 body.premium .eng-process-title{
   font-size:16.5px;font-weight:700;margin:0 0 9px;
-  font-family:'Noto Serif TC',serif;
+  font-family:"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif;
 }
 body.premium .eng-process-text{
   font-size:14px;line-height:1.8;color:var(--pv-muted);margin:0;

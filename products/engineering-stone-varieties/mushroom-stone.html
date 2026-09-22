@@ -2,9 +2,10 @@
 
 <html lang="zh-HK">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" data-hsst-nocache>
-<meta http-equiv="Pragma" content="no-cache" data-hsst-nocache>
-<meta http-equiv="Expires" content="0" data-hsst-nocache>
+<!-- 快取策略統一交由 HTTP 標頭管理：public, max-age=0, must-revalidate + ETag。
+     每次訪問都會重新驗證（內容必定最新），同時允許 304 回應節省傳輸量；
+     原先的 no-store meta 會強制每次完整重新下載，已移除。 -->
+
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <meta charset="utf-8"/>
 <link rel="manifest" href="/site.webmanifest">
@@ -50,7 +51,9 @@
 
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/></noscript>
 <link href="../../css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="../../css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
 
@@ -85,34 +88,253 @@
 <!-- ================================================================= -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "恆生石材科技有限公司",
-  "alternateName": "HENGSHENG MARBLE S&T CO. LIMITED",
-  "url": "https://www.hsst.hk",
-  "logo": "https://www.hsst.hk/images/logo.jpg",
-  "description": "亞太領先的高端石材供應商與工程服務商，專注天然大理石與花崗巖的全球採購、精密加工與工程訂造",
-  "foundingDate": "1999",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
-    "addressLocality": "Kowloon",
-    "addressRegion": "Hong Kong",
-    "addressCountry": "HK"
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "恆生石材科技有限公司",
+ "alternateName": "HENGSHENG MARBLE S&T CO. LIMITED",
+ "url": "https://www.hsst.hk",
+ "logo": "https://www.hsst.hk/images/logo.jpg",
+ "description": "亞太領先的高端石材供應商與工程服務商，專注天然大理石與花崗巖的全球採購、精密加工與工程訂造",
+ "foundingDate": "1999",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
+  "addressLocality": "Kowloon",
+  "addressRegion": "Hong Kong",
+  "addressCountry": "HK"
+ },
+ "contactPoint": {
+  "@type": "ContactPoint",
+  "telephone": "+852-5538-0525",
+  "contactType": "customer service",
+  "email": "stone@hsst.hk",
+  "areaServed": "Worldwide"
+ },
+ "slogan": "Premium Natural Stone Since 1999",
+ "foundingLocation": {
+  "@type": "Place",
+  "name": "香港九龍 Kowloon, Hong Kong"
+ },
+ "areaServed": [
+  "HK",
+  "CN",
+  "MO",
+  "TW",
+  "AE",
+  "SA",
+  "SG",
+  "MY",
+  "TH",
+  "ID",
+  "US",
+  "GB",
+  "EU"
+ ],
+ "knowsAbout": [
+  "天然雲石",
+  "花崗巖（麻石）",
+  "洞石及砂岩",
+  "人造石（無縫石）",
+  "石材乾掛幕牆",
+  "水刀拼花",
+  "五軸 CNC 石材加工",
+  "石材晶面保養",
+  "雲石傢俬訂造",
+  "工程石材深化設計"
+ ],
+ "makesOffer": {
+  "@type": "OfferCatalog",
+  "name": "Stone Supply & Engineering Services",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Natural Stone Slab Supply"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Fabrication & Processing"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Engineering & Installation"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Quarry Sourcing & Import"
+    }
+   }
+  ]
+ },
+ "sameAs": [],
+ "hasCertification": [
+  {
+   "@type": "Certification",
+   "name": "ISO 9001:2015 品質管理系統認證",
+   "description": "恆生石材依 ISO 9001:2015 建立全流程品質管理系統，涵蓋礦山選料、大板採購、深加工、預拼裝至現場安裝的每一道工序，並通過第三方認可機構年度監督稽核。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 9001:2015",
+    "termCode": "9001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
   },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+852-5538-0525",
-    "contactType": "customer service",
-    "email": "stone@hsst.hk",
-    "areaServed": "Worldwide"
+  {
+   "@type": "Certification",
+   "name": "ISO 14001:2015 環境管理系統認證",
+   "description": "依 ISO 14001:2015 管理石材加工的廢水循環、粉塵控制與固廢處置，廠區生產用水回收再用，鋸切泥漿經壓濾後合規處置。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 14001:2015",
+    "termCode": "14001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
   },
-    "slogan": "Premium Natural Stone Since 1999",
-  "foundingLocation": { "@type": "Place", "name": "Hong Kong" },
-  "areaServed": [ "HK", "CN", "MO", "TW", "AE", "SA", "SG", "MY", "TH", "ID", "US", "GB", "EU" ],
-  "knowsAbout": [ "Natural Marble", "Granite", "Quartzite", "Travertine", "Onyx", "Stone Engineering", "Stone Fabrication", "Quarry Sourcing", "Architectural Stone", "Luxury Stone" ],
-  "makesOffer": { "@type": "OfferCatalog", "name": "Stone Supply & Engineering Services", "itemListElement": [ { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Natural Stone Slab Supply" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Fabrication & Processing" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Engineering & Installation" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Quarry Sourcing & Import" } } ] },
-"sameAs": []
+  {
+   "@type": "Certification",
+   "name": "ISO 45001:2018 職業健康安全管理系統認證",
+   "description": "依 ISO 45001:2018 管理廠區與工地的職業健康安全風險，含行車吊運、乾掛高區作業及粉塵崗位的防護與培訓制度。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 45001:2018",
+    "termCode": "45001:2018",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "CE 標誌 — 天然石材板材（EN 12058 / EN 1341 / EN 1342 / EN 1343）",
+   "description": "外銷歐盟的天然石材板材依建築產品法規（EU）No 305/2011 加貼 CE 標誌，按 EN 12058（室內外地板及樓梯板）、EN 1341（外牆板）、EN 1342（鋪路石）、EN 1343（路緣石）完成型式試驗並出具性能聲明 DoP。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "EN 12058 / EN 1341 / EN 1342 / EN 1343",
+    "termCode": "EN 12058",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "歐洲標準化委員會 CEN",
+     "url": "https://www.cen.eu/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GREENGUARD 低揮發性有機化合物認證（UL 2818）",
+   "description": "人造石（無縫石）及相關室內飾面材料依 UL 2818 測試總揮發性有機化合物（TVOC）釋放量，符合室內空氣品質要求。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "UL 2818 GREENGUARD",
+    "termCode": "UL 2818",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "UL Solutions",
+     "url": "https://www.ul.com/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html",
+   "hasMeasurement": [
+    {
+     "@type": "QuantitativeValue",
+     "name": "總揮發性有機化合物 TVOC 釋放量",
+     "maxValue": 0.22,
+     "unitText": "mg/m³"
+    }
+   ]
+  },
+  {
+   "@type": "Certification",
+   "name": "NSF/ANSI 51 食品設備材料認證",
+   "description": "檯面用人造石（無縫石）依 NSF/ANSI 51 評估與食品接觸面的材料安全性，適用於廚房檯面、餐飲區與醫療膳食區。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "NSF/ANSI 51",
+    "termCode": "NSF/ANSI 51",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "NSF International",
+     "url": "https://www.nsf.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GB 6566 A 類裝飾材料放射性核素限量",
+   "description": "全線天然石材依 GB 6566《建築材料放射性核素限量》檢測，內照射指數與外照射指數均符合 A 類要求，可不受限制用於民用建築室內飾面。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "GB 6566 A 類",
+    "termCode": "GB 6566",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "中國國家標準 GB",
+     "url": "https://www.sac.gov.cn/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  }
+ ],
+ "@id": "https://www.hsst.hk/#organization"
 }
 </script>
 <!-- ================================================================= -->
@@ -185,7 +407,265 @@
 <!-- PURPOSE: Advanced Schema.org JSON-LD & Open Graph Metadata       -->
 <!-- MAINTAINED BY: SEO Strategy Team                                  -->
 <!-- ================================================================= -->
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "蘑菇石（磊石）", "url": "https://www.hsst.hk/products/engineering-stone-varieties/mushroom-stone.html", "brand": {"@type": "Brand", "name": "恆生石材科技有限公司"}, "description": "花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、景牆與園林建築，自然野趣、耐候不褪。", "category": "Natural Stone", "image": "https://www.hsst.hk/images/products/engineering-stone-varieties/mushroom-stone-hero.jpg", "additionalProperty": [{"@type": "PropertyValue", "name": "石材類型", "value": "天然花崗巖（麻石）"}, {"@type": "PropertyValue", "name": "產地", "value": "中國福建／山東礦區（可選印度）"}, {"@type": "PropertyValue", "name": "色系", "value": "自然劈面蘑菇面"}, {"@type": "PropertyValue", "name": "製品常規尺寸", "value": "200×400×50–80mm（自然面）"}, {"@type": "PropertyValue", "name": "常規厚度", "value": "50 – 80mm"}, {"@type": "PropertyValue", "name": "尺寸公差", "value": "±2.0mm（機切面）"}, {"@type": "PropertyValue", "name": "密度", "value": "2.64"}, {"@type": "PropertyValue", "name": "吸水率", "value": "0.45"}, {"@type": "PropertyValue", "name": "抗壓強度", "value": "158"}, {"@type": "PropertyValue", "name": "抗彎強度", "value": "11.5"}, {"@type": "PropertyValue", "name": "莫氏硬度", "value": "6.0"}, {"@type": "PropertyValue", "name": "耐磨性", "value": "≤ 9.5 mm"}, {"@type": "PropertyValue", "name": "耐凍融", "value": "50 次凍融循環合格（BS EN 12371）"}, {"@type": "PropertyValue", "name": "放射性等級", "value": "A 類 Class A（GB 6566）"}, {"@type": "PropertyValue", "name": "安裝方式", "value": "水泥砂漿濕鋪／膨脹螺栓固定"}, {"@type": "PropertyValue", "name": "接縫處理", "value": "5–8mm 水泥砂漿勾縫"}, {"@type": "PropertyValue", "name": "承重／承載等級", "value": "牆身飾面，非承重"}, {"@type": "PropertyValue", "name": "認證標準", "value": "ISO 9001 · BS EN 1341／1342／1343 · GB 6566 A 類"}, {"@type": "PropertyValue", "name": "執行標準", "value": "BS EN 1342（花崗巖路緣／製品）"}, {"@type": "PropertyValue", "name": "保養週期", "value": "高壓水洗；每 24 個月檢查勾縫"}, {"@type": "PropertyValue", "name": "品質保固", "value": "戶外耐候保固 15 年"}, {"@type": "PropertyValue", "name": "價格單位", "value": "HK$／m²"}, {"@type": "PropertyValue", "name": "最小訂購量", "value": "20 m²"}, {"@type": "PropertyValue", "name": "供貨週期", "value": "15–25 個工作天（訂造 30–40 天）"}, {"@type": "PropertyValue", "name": "包裝方式", "value": "木托盤纏繞膜，每托 40–60 件"}], "material": "天然花崗巖（麻石）"}</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Product",
+ "name": "蘑菇石（磊石）",
+ "url": "https://www.hsst.hk/products/engineering-stone-varieties/mushroom-stone.html",
+ "brand": {
+  "@type": "Brand",
+  "name": "恆生石材科技有限公司"
+ },
+ "description": "花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、景牆與園林建築，自然野趣、耐候不褪。",
+ "category": "Natural Stone",
+ "image": "https://www.hsst.hk/images/products/engineering-stone-varieties/mushroom-stone-hero.jpg",
+ "additionalProperty": [
+  {
+   "@type": "PropertyValue",
+   "name": "石材類型",
+   "value": "天然花崗巖（麻石）"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "產地",
+   "value": "中國福建／山東礦區（可選印度）"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "色系",
+   "value": "自然劈面蘑菇面"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "製品常規尺寸",
+   "value": "200×400×50–80mm（自然面）"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "常規厚度",
+   "value": "50 – 80mm",
+   "measurementTechnique": "卡尺實測"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "尺寸公差",
+   "value": "±2.0mm（機切面）",
+   "measurementTechnique": "BS EN 12058"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "密度",
+   "value": "2.64",
+   "measurementTechnique": "ASTM C97 / EN 1936",
+   "unitText": "g/cm³"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "吸水率",
+   "value": "0.45",
+   "measurementTechnique": "ASTM C97",
+   "unitText": "%"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "抗壓強度",
+   "value": "158",
+   "measurementTechnique": "ASTM C170 / EN 1926",
+   "unitText": "MPa"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "抗彎強度",
+   "value": "11.5",
+   "measurementTechnique": "ASTM C880 / EN 12372",
+   "unitText": "MPa"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "莫氏硬度",
+   "value": "6.0",
+   "measurementTechnique": "EN 14157"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "耐磨性",
+   "value": "≤ 9.5 mm",
+   "measurementTechnique": "EN 14157"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "耐凍融",
+   "value": "50 次凍融循環合格（BS EN 12371）",
+   "measurementTechnique": "BS EN 12371"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "放射性等級",
+   "value": "A 類 Class A（GB 6566）",
+   "measurementTechnique": "GB 6566"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "安裝方式",
+   "value": "水泥砂漿濕鋪／膨脹螺栓固定"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "接縫處理",
+   "value": "5–8mm 水泥砂漿勾縫"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "承重／承載等級",
+   "value": "牆身飾面，非承重",
+   "measurementTechnique": "結構荷載計算"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "認證標準",
+   "value": "ISO 9001 · BS EN 1341／1342／1343 · GB 6566 A 類",
+   "measurementTechnique": "第三方認證"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "執行標準",
+   "value": "BS EN 1342（花崗巖路緣／製品）",
+   "measurementTechnique": "產品執行標準"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "保養週期",
+   "value": "高壓水洗；每 24 個月檢查勾縫"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "品質保固",
+   "value": "戶外耐候保固 15 年"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "價格單位",
+   "value": "HK$／m²"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "最小訂購量",
+   "value": "20 m²"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "供貨週期",
+   "value": "15–25 個工作天（訂造 30–40 天）"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "包裝方式",
+   "value": "木托盤纏繞膜，每托 40–60 件"
+  }
+ ],
+ "material": "天然花崗巖（麻石）",
+ "hasMeasurement": [
+  {
+   "@type": "QuantitativeValue",
+   "name": "密度",
+   "value": 2.64,
+   "unitText": "g/cm³",
+   "measurementTechnique": "ASTM C97 / EN 1936",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C97 / EN 1936",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "吸水率",
+   "value": 0.45,
+   "unitText": "%",
+   "measurementTechnique": "ASTM C97",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C97",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "抗壓強度",
+   "value": 158.0,
+   "unitText": "MPa",
+   "measurementTechnique": "ASTM C170 / EN 1926",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C170 / EN 1926",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "抗彎強度",
+   "value": 11.5,
+   "unitText": "MPa",
+   "measurementTechnique": "ASTM C880 / EN 12372",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C880 / EN 12372",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "莫氏硬度",
+   "value": 6.0,
+   "measurementTechnique": "EN 14157",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "EN 14157",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "European Committee for Standardization (CEN)",
+     "url": "https://www.cen.eu/"
+    }
+   }
+  }
+ ],
+ "hasCertification": [
+  {
+   "@type": "Certification",
+   "name": "GB 6566 A 類放射性核素限量",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "GB 6566 A 類",
+    "termCode": "GB 6566",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "中國國家標準 GB",
+     "url": "https://www.sac.gov.cn/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "url": "https://www.hsst.hk/compliance.html"
+  }
+ ]
+}
+</script>
 <!-- /SEO-LD:auto -->
 <link href="/css/compare.css?v=20260923a" rel="stylesheet"/>
 <link href="/css/product-specs.css?v=20260923b" rel="stylesheet"/>
@@ -692,7 +1172,7 @@
 .ev-range td.ev-rz b{color:#1A1A2E;}
 .ev-range td.ev-rz .ev-en{display:block;color:rgba(26,26,46,.6);font-size:12px;}
 .ev-range td.ev-rnote{width:34%;color:rgba(26,26,46,.7);font-size:13px;}
-.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">首頁</a></li><li><a href="../../products.html">產品中心</a></li><li><a href="../../products/engineering-stone-varieties.html">工程石材</a></li><li><span aria-current="page">蘑菇石（磊石）</span></li></ol></nav><section class="product-hero"><picture><source srcset="../../images/products/engineering-stone-varieties-hero-banners/mushroom-stone.webp" type="image/webp"/><img alt="蘑菇石（磊石）" class="product-hero-bg" src="../../images/products/engineering-stone-varieties-hero-banners/mushroom-stone.jpg" width="1536" height="1024"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">工程石材品種系列</span><h1 class="product-hero-title">蘑菇石（磊石）</h1><p class="product-hero-subtitle">Mushroom Stone / Rustic Cladding</p><p class="product-hero-desc">花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、景牆與園林建築，自然野趣、耐候不褪。</p></div></section><section class="product-action-bar"><div class="container"><a href="../../sample-request.html" class="product-action-btn sample">📦 索取樣板</a><a href="../../contact.html" class="product-action-btn inquire">立即諮詢</a></div></section><section class="section-padding product-content-section border-top-light" id="variety-detail"> <div class="container">  <div class="product-section-title"><span class="label">品種詳解 · 工程石材品種系列</span><h2>蘑菇石（磊石） · 樣本、技術參數與應用</h2></div>  <div class="eng-var-body eng-var-page-body">   <p class="eng-var-desc">花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、景牆與園林建築，自然野趣、耐候不褪。</p>   <div class="eng-variety-grid"><figure class="granite-variety-card"><div class="granite-variety-img"><picture><source srcset="../../images/products/engineering-stone-varieties/mushroom-stone-hero.webp" type="image/webp"/><img alt="蘑菇石（磊石）" loading="lazy" src="../../images/products/engineering-stone-varieties/mushroom-stone-hero.jpg" width="1536" height="986"></picture></div><figcaption class="granite-variety-cap">蘑菇石（磊石） · 產品場景一覽</figcaption></figure><figure class="granite-variety-card">
+.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">首頁</a></li><li><a href="../../products.html">產品中心</a></li><li><a href="../../products/engineering-stone-varieties.html">工程石材</a></li><li><span aria-current="page">蘑菇石（磊石）</span></li></ol></nav><section class="product-hero"><picture><source srcset="../../images/products/engineering-stone-varieties-hero-banners/mushroom-stone.webp" type="image/webp"/><img fetchpriority="high" loading="eager" alt="蘑菇石（磊石）" class="product-hero-bg" src="../../images/products/engineering-stone-varieties-hero-banners/mushroom-stone.jpg" width="1536" height="1024"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">工程石材品種系列</span><h1 class="product-hero-title">蘑菇石（磊石）</h1><p class="product-hero-subtitle">Mushroom Stone / Rustic Cladding</p><p class="product-hero-desc">花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、景牆與園林建築，自然野趣、耐候不褪。</p></div></section><section class="product-action-bar"><div class="container"><a href="../../sample-request.html" class="product-action-btn sample">📦 索取樣板</a><a href="../../contact.html" class="product-action-btn inquire">立即諮詢</a></div></section><section class="section-padding product-content-section border-top-light" id="variety-detail"> <div class="container">  <div class="product-section-title"><span class="label">品種詳解 · 工程石材品種系列</span><h2>蘑菇石（磊石） · 樣本、技術參數與應用</h2></div>  <div class="eng-var-body eng-var-page-body">   <p class="eng-var-desc">花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、景牆與園林建築，自然野趣、耐候不褪。</p>   <div class="eng-variety-grid"><figure class="granite-variety-card"><div class="granite-variety-img"><picture><source srcset="../../images/products/engineering-stone-varieties/mushroom-stone-hero.webp" type="image/webp"/><img alt="蘑菇石（磊石）" loading="lazy" src="../../images/products/engineering-stone-varieties/mushroom-stone-hero.jpg" width="1536" height="986"></picture></div><figcaption class="granite-variety-cap">蘑菇石（磊石） · 產品場景一覽</figcaption></figure><figure class="granite-variety-card">
      <div class="granite-variety-img">
       <picture><source srcset="../../images/products/engineering-stone-varieties/mushroom-stone-a.webp" type="image/webp"/><img alt="蘑菇石（磊石） — 大板全景" loading="lazy" src="../../images/products/engineering-stone-varieties/mushroom-stone-a.jpg" width="1536" height="1536"></picture>
      </div>

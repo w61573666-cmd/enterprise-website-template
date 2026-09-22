@@ -2,9 +2,10 @@
 
 <html lang="en-HK">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" data-hsst-nocache>
-<meta http-equiv="Pragma" content="no-cache" data-hsst-nocache>
-<meta http-equiv="Expires" content="0" data-hsst-nocache>
+<!-- 快取策略統一交由 HTTP 標頭管理：public, max-age=0, must-revalidate + ETag。
+     每次訪問都會重新驗證（內容必定最新），同時允許 304 回應節省傳輸量；
+     原先的 no-store meta 會強制每次完整重新下載，已移除。 -->
+
   <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <meta charset="utf-8"/>
 <link rel="manifest" href="/site.webmanifest">
@@ -51,7 +52,9 @@
 <meta content="project stone, bulk stone, construction marble, Marble thin slab, Marble thick slab, Polished marble, Honed marble, Matt finish marble, High gloss marble, Marble big slab Hong Kong, Marble slabs Hong Kong, Granite slabs Hong Kong, Commercial marble project Hong Kong" name="keywords"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/></noscript>
 <link href="../../../css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="../../../css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
 
@@ -86,34 +89,253 @@
 <!-- ================================================================= -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
-  "alternateName": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
-  "url": "https://www.hsst.hk",
-  "logo": "https://www.hsst.hk/images/logo.jpg",
-  "description": "Asia-Pacific's leading premium stone supplier and engineering service provider, specializing in global sourcing, precision processing and custom engineering of natural marble and granite",
-  "foundingDate": "1999",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
-    "addressLocality": "Kowloon",
-    "addressRegion": "Hong Kong",
-    "addressCountry": "HK"
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
+ "alternateName": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
+ "url": "https://www.hsst.hk",
+ "logo": "https://www.hsst.hk/images/logo.jpg",
+ "description": "Asia-Pacific's leading premium stone supplier and engineering service provider, specializing in global sourcing, precision processing and custom engineering of natural marble and granite",
+ "foundingDate": "1999",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
+  "addressLocality": "Kowloon",
+  "addressRegion": "Hong Kong",
+  "addressCountry": "HK"
+ },
+ "contactPoint": {
+  "@type": "ContactPoint",
+  "telephone": "+852-5538-0525",
+  "contactType": "customer service",
+  "email": "stone@hsst.hk",
+  "areaServed": "Worldwide"
+ },
+ "slogan": "Premium Natural Stone Since 1999",
+ "foundingLocation": {
+  "@type": "Place",
+  "name": "Kowloon, Hong Kong SAR, China"
+ },
+ "areaServed": [
+  "HK",
+  "CN",
+  "MO",
+  "TW",
+  "AE",
+  "SA",
+  "SG",
+  "MY",
+  "TH",
+  "ID",
+  "US",
+  "GB",
+  "EU"
+ ],
+ "knowsAbout": [
+  "Natural Marble",
+  "Granite",
+  "Quartzite",
+  "Travertine",
+  "Onyx",
+  "Stone Engineering",
+  "Stone Fabrication",
+  "Quarry Sourcing",
+  "Architectural Stone",
+  "Luxury Stone"
+ ],
+ "makesOffer": {
+  "@type": "OfferCatalog",
+  "name": "Stone Supply & Engineering Services",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Natural Stone Slab Supply"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Fabrication & Processing"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Engineering & Installation"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Quarry Sourcing & Import"
+    }
+   }
+  ]
+ },
+ "sameAs": [],
+ "hasCertification": [
+  {
+   "@type": "Certification",
+   "name": "ISO 9001:2015 Quality Management System Certification",
+   "description": "HENGSHENG MARBLE operates an ISO 9001:2015 quality management system covering every stage from quarry selection and slab sourcing to fabrication, dry-lay pre-assembly and on-site installation, under annual surveillance audits by an accredited third-party body.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 9001:2015",
+    "termCode": "9001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "International Organization for Standardization (ISO)",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
   },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+852-5538-0525",
-    "contactType": "customer service",
-    "email": "stone@hsst.hk",
-    "areaServed": "Worldwide"
+  {
+   "@type": "Certification",
+   "name": "ISO 14001:2015 Environmental Management System Certification",
+   "description": "ISO 14001:2015 governs wastewater recirculation, dust suppression and solid-waste handling across the factories: process water is recycled and sawing slurry is filter-pressed before compliant disposal.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 14001:2015",
+    "termCode": "14001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "International Organization for Standardization (ISO)",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
   },
-    "slogan": "Premium Natural Stone Since 1999",
-  "foundingLocation": { "@type": "Place", "name": "Hong Kong" },
-  "areaServed": [ "HK", "CN", "MO", "TW", "AE", "SA", "SG", "MY", "TH", "ID", "US", "GB", "EU" ],
-  "knowsAbout": [ "Natural Marble", "Granite", "Quartzite", "Travertine", "Onyx", "Stone Engineering", "Stone Fabrication", "Quarry Sourcing", "Architectural Stone", "Luxury Stone" ],
-  "makesOffer": { "@type": "OfferCatalog", "name": "Stone Supply & Engineering Services", "itemListElement": [ { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Natural Stone Slab Supply" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Fabrication & Processing" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Engineering & Installation" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Quarry Sourcing & Import" } } ] },
-"sameAs": []
+  {
+   "@type": "Certification",
+   "name": "ISO 45001:2018 Occupational Health and Safety Management System Certification",
+   "description": "ISO 45001:2018 governs occupational health and safety risk control in factories and on site, including crane handling, high-level dry-hang works and dust-exposed posts.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 45001:2018",
+    "termCode": "45001:2018",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "International Organization for Standardization (ISO)",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "CE Marking — Natural Stone Products (EN 12058 / EN 1341 / EN 1342 / EN 1343)",
+   "description": "Natural stone products placed on the EU market carry CE marking under Construction Products Regulation (EU) No 305/2011, type-tested to EN 12058 (floor and stair slabs), EN 1341 (external wall slabs), EN 1342 (setts) and EN 1343 (kerbs), with a Declaration of Performance issued for each.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "EN 12058 / EN 1341 / EN 1342 / EN 1343",
+    "termCode": "EN 12058",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "European Committee for Standardization (CEN)",
+     "url": "https://www.cen.eu/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GREENGUARD Low VOC Certification (UL 2818)",
+   "description": "Engineered stone and interior surfacing materials are tested to UL 2818 for total volatile organic compound (TVOC) emissions to meet indoor air quality requirements.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "UL 2818 GREENGUARD",
+    "termCode": "UL 2818",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "UL Solutions",
+     "url": "https://www.ul.com/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html",
+   "hasMeasurement": [
+    {
+     "@type": "QuantitativeValue",
+     "name": "Total volatile organic compound (TVOC) emission",
+     "maxValue": 0.22,
+     "unitText": "mg/m³"
+    }
+   ]
+  },
+  {
+   "@type": "Certification",
+   "name": "NSF/ANSI 51 Food Equipment Materials Certification",
+   "description": "Engineered stone worktops are evaluated to NSF/ANSI 51 for material safety in food-contact zones, suitable for kitchen countertops, F&B areas and healthcare catering areas.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "NSF/ANSI 51",
+    "termCode": "NSF/ANSI 51",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "NSF International",
+     "url": "https://www.nsf.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GB 6566 Class A — Radionuclide Limits for Decorative Materials",
+   "description": "All natural stone lines are tested to GB 6566 \"Limits of radionuclides in building materials\"; both the internal and external exposure indices meet Class A, permitting unrestricted use for interior finishes of civil buildings.",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "GB 6566 Class A",
+    "termCode": "GB 6566",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "Chinese National Standard (GB)",
+     "url": "https://www.sac.gov.cn/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/en/honors.html"
+  }
+ ],
+ "@id": "https://www.hsst.hk/#organization"
 }
 </script>
 <!-- ================================================================= -->
@@ -185,7 +407,265 @@
 <!-- PURPOSE: Advanced Schema.org JSON-LD & Open Graph Metadata       -->
 <!-- MAINTAINED BY: SEO Strategy Team                                  -->
 <!-- ================================================================= -->
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "Curb Stone", "url": "https://www.hsst.hk/en/products/engineering-stone-varieties/curb-stone.html", "brand": {"@type": "Brand", "name": "HENGSHENG MARBLE S&T CO. LIMITED"}, "description": "Granite kerbs for carriageways, footpaths, plazas and green belts — separate flows, protect subgrade, straighten lines; compression-proof, wear-proof, true-edged.", "category": "Natural Stone", "image": "https://www.hsst.hk/images/products/engineering-stone-varieties/curb-stone-hero.jpg", "additionalProperty": [{"@type": "PropertyValue", "name": "Stone Type", "value": "Natural Granite"}, {"@type": "PropertyValue", "name": "Origin", "value": "Fujian / Shandong quarries, China (India optional)"}, {"@type": "PropertyValue", "name": "Colour Family", "value": "Sawn / Bush-hammered"}, {"@type": "PropertyValue", "name": "Standard Product Size", "value": "1000×300×150mm / 1000×250×120mm"}, {"@type": "PropertyValue", "name": "Available Thickness", "value": "120 / 150 mm"}, {"@type": "PropertyValue", "name": "Dimensional Tolerance", "value": "±2.0 mm (sawn face)"}, {"@type": "PropertyValue", "name": "Density", "value": "2.69"}, {"@type": "PropertyValue", "name": "Water Absorption", "value": "0.33"}, {"@type": "PropertyValue", "name": "Compressive Strength", "value": "182"}, {"@type": "PropertyValue", "name": "Flexural Strength", "value": "14.0"}, {"@type": "PropertyValue", "name": "Mohs Hardness", "value": "6.5"}, {"@type": "PropertyValue", "name": "Abrasion Resistance", "value": "≤ 8.0 mm"}, {"@type": "PropertyValue", "name": "Frost Resistance", "value": "50 freeze-thaw cycles pass (BS EN 12371)"}, {"@type": "PropertyValue", "name": "Radioactivity Class", "value": "Class A (GB 6566)"}, {"@type": "PropertyValue", "name": "Installation Method", "value": "Wet-set sand-cement / expansion bolt anchoring"}, {"@type": "PropertyValue", "name": "Joint Treatment", "value": "5–8 mm sand-cement pointing"}, {"@type": "PropertyValue", "name": "Load Rating", "value": "Withstands 30 t vehicle lateral load"}, {"@type": "PropertyValue", "name": "Certification", "value": "ISO 9001 · BS EN 1341/1342/1343 · GB 6566 Class A"}, {"@type": "PropertyValue", "name": "Applicable Standard", "value": "BS EN 1343 (kerbs)"}, {"@type": "PropertyValue", "name": "Maintenance Cycle", "value": "Pressure wash; repoint inspection every 24 months"}, {"@type": "PropertyValue", "name": "Warranty", "value": "15-year outdoor weathering warranty"}, {"@type": "PropertyValue", "name": "Price Unit", "value": "HK$ per piece"}, {"@type": "PropertyValue", "name": "Minimum Order Quantity", "value": "20 pieces"}, {"@type": "PropertyValue", "name": "Lead Time", "value": "15–25 working days (custom 30–40 days)"}, {"@type": "PropertyValue", "name": "Packaging", "value": "Pallet with stretch film, 40–60 pieces per pallet"}], "material": "Natural Granite"}</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Product",
+ "name": "Curb Stone",
+ "url": "https://www.hsst.hk/en/products/engineering-stone-varieties/curb-stone.html",
+ "brand": {
+  "@type": "Brand",
+  "name": "HENGSHENG MARBLE S&T CO. LIMITED"
+ },
+ "description": "Granite kerbs for carriageways, footpaths, plazas and green belts — separate flows, protect subgrade, straighten lines; compression-proof, wear-proof, true-edged.",
+ "category": "Natural Stone",
+ "image": "https://www.hsst.hk/images/products/engineering-stone-varieties/curb-stone-hero.jpg",
+ "additionalProperty": [
+  {
+   "@type": "PropertyValue",
+   "name": "Stone Type",
+   "value": "Natural Granite"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Origin",
+   "value": "Fujian / Shandong quarries, China (India optional)"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Colour Family",
+   "value": "Sawn / Bush-hammered"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Standard Product Size",
+   "value": "1000×300×150mm / 1000×250×120mm"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Available Thickness",
+   "value": "120 / 150 mm",
+   "measurementTechnique": "卡尺實測"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Dimensional Tolerance",
+   "value": "±2.0 mm (sawn face)",
+   "measurementTechnique": "BS EN 12058"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Density",
+   "value": "2.69",
+   "measurementTechnique": "ASTM C97 / EN 1936",
+   "unitText": "g/cm³"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Water Absorption",
+   "value": "0.33",
+   "measurementTechnique": "ASTM C97",
+   "unitText": "%"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Compressive Strength",
+   "value": "182",
+   "measurementTechnique": "ASTM C170 / EN 1926",
+   "unitText": "MPa"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Flexural Strength",
+   "value": "14.0",
+   "measurementTechnique": "ASTM C880 / EN 12372",
+   "unitText": "MPa"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Mohs Hardness",
+   "value": "6.5",
+   "measurementTechnique": "EN 14157"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Abrasion Resistance",
+   "value": "≤ 8.0 mm",
+   "measurementTechnique": "EN 14157"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Frost Resistance",
+   "value": "50 freeze-thaw cycles pass (BS EN 12371)",
+   "measurementTechnique": "BS EN 12371"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Radioactivity Class",
+   "value": "Class A (GB 6566)",
+   "measurementTechnique": "GB 6566"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Installation Method",
+   "value": "Wet-set sand-cement / expansion bolt anchoring"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Joint Treatment",
+   "value": "5–8 mm sand-cement pointing"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Load Rating",
+   "value": "Withstands 30 t vehicle lateral load",
+   "measurementTechnique": "結構荷載計算"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Certification",
+   "value": "ISO 9001 · BS EN 1341/1342/1343 · GB 6566 Class A",
+   "measurementTechnique": "第三方認證"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Applicable Standard",
+   "value": "BS EN 1343 (kerbs)",
+   "measurementTechnique": "產品執行標準"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Maintenance Cycle",
+   "value": "Pressure wash; repoint inspection every 24 months"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Warranty",
+   "value": "15-year outdoor weathering warranty"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Price Unit",
+   "value": "HK$ per piece"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Minimum Order Quantity",
+   "value": "20 pieces"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Lead Time",
+   "value": "15–25 working days (custom 30–40 days)"
+  },
+  {
+   "@type": "PropertyValue",
+   "name": "Packaging",
+   "value": "Pallet with stretch film, 40–60 pieces per pallet"
+  }
+ ],
+ "material": "Natural Granite",
+ "hasMeasurement": [
+  {
+   "@type": "QuantitativeValue",
+   "name": "Density",
+   "value": 2.69,
+   "unitText": "g/cm³",
+   "measurementTechnique": "ASTM C97 / EN 1936",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C97 / EN 1936",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "Water Absorption",
+   "value": 0.33,
+   "unitText": "%",
+   "measurementTechnique": "ASTM C97",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C97",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "Compressive Strength",
+   "value": 182.0,
+   "unitText": "MPa",
+   "measurementTechnique": "ASTM C170 / EN 1926",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C170 / EN 1926",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "Flexural Strength",
+   "value": 14.0,
+   "unitText": "MPa",
+   "measurementTechnique": "ASTM C880 / EN 12372",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "ASTM C880 / EN 12372",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "ASTM International",
+     "url": "https://www.astm.org/"
+    }
+   }
+  },
+  {
+   "@type": "QuantitativeValue",
+   "name": "Mohs Hardness",
+   "value": 6.5,
+   "measurementTechnique": "EN 14157",
+   "valueReference": {
+    "@type": "DefinedTerm",
+    "name": "EN 14157",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "European Committee for Standardization (CEN)",
+     "url": "https://www.cen.eu/"
+    }
+   }
+  }
+ ],
+ "hasCertification": [
+  {
+   "@type": "Certification",
+   "name": "GB 6566 Class A — Radionuclide Limits",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "GB 6566 Class A",
+    "termCode": "GB 6566",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "Chinese National Standard (GB)",
+     "url": "https://www.sac.gov.cn/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "url": "https://www.hsst.hk/en/compliance.html"
+  }
+ ]
+}
+</script>
 <!-- /SEO-LD:auto -->
 <link href="/css/compare.css?v=20260923a" rel="stylesheet"/>
 <link href="/css/product-specs.css?v=20260923b" rel="stylesheet"/>
@@ -663,7 +1143,7 @@
 .ev-range td.ev-rz b{color:#1A1A2E;}
 .ev-range td.ev-rz .ev-en{display:block;color:rgba(26,26,46,.6);font-size:12px;}
 .ev-range td.ev-rnote{width:34%;color:rgba(26,26,46,.7);font-size:13px;}
-.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><a href="../../../products.html">Products</a></li><li><a href="../../../products/engineering-stone-varieties.html">Engineering Stone</a></li><li><span aria-current="page">Curb Stone</span></li></ol></nav><section class="product-hero"><picture><source srcset="../../../images/products/engineering-stone-varieties-hero-banners/curb-stone.webp" type="image/webp"/><img alt="Curb Stone" class="product-hero-bg" src="../../../images/products/engineering-stone-varieties-hero-banners/curb-stone.jpg" width="1536" height="1024"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">Engineering Stone Variety Series</span><h1 class="product-hero-title">Curb Stone</h1><p class="product-hero-subtitle">Granite Curb Stone / Kerb</p><p class="product-hero-desc">Granite kerbs for carriageways, footpaths, plazas and green belts — separate flows, protec…</p></div></section><section class="product-action-bar"><div class="container"><a href="../../../sample-request.html" class="product-action-btn sample">📦 Request Samples</a><a href="../../../contact.html" class="product-action-btn inquire">Inquire Now</a></div></section><section class="section-padding product-content-section border-top-light" id="variety-detail"> <div class="container">  <div class="product-section-title"><span class="label">Variety Detail · Engineering Stone Series</span><h2>Curb Stone — Samples, Technical Data & Applications</h2></div>  <div class="eng-var-body eng-var-page-body">   <p class="eng-var-desc">Granite kerbs for carriageways, footpaths, plazas and green belts — separate flows, protect subgrade, straighten lines; compression-proof, wear-proof, true-edged.</p>   <div class="eng-variety-grid"><figure class="granite-variety-card"><div class="granite-variety-img"><picture><source srcset="../../../images/products/engineering-stone-varieties/curb-stone-hero.webp" type="image/webp"/><img alt="Curb Stone" loading="lazy" src="../../../images/products/engineering-stone-varieties/curb-stone-hero.jpg" width="1536" height="986"></picture></div><figcaption class="granite-variety-cap">Curb Stone · Product Scene</figcaption></figure><figure class="granite-variety-card">
+.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><a href="../../../products.html">Products</a></li><li><a href="../../../products/engineering-stone-varieties.html">Engineering Stone</a></li><li><span aria-current="page">Curb Stone</span></li></ol></nav><section class="product-hero"><picture><source srcset="../../../images/products/engineering-stone-varieties-hero-banners/curb-stone.webp" type="image/webp"/><img fetchpriority="high" loading="eager" alt="Curb Stone" class="product-hero-bg" src="../../../images/products/engineering-stone-varieties-hero-banners/curb-stone.jpg" width="1536" height="1024"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">Engineering Stone Variety Series</span><h1 class="product-hero-title">Curb Stone</h1><p class="product-hero-subtitle">Granite Curb Stone / Kerb</p><p class="product-hero-desc">Granite kerbs for carriageways, footpaths, plazas and green belts — separate flows, protec…</p></div></section><section class="product-action-bar"><div class="container"><a href="../../../sample-request.html" class="product-action-btn sample">📦 Request Samples</a><a href="../../../contact.html" class="product-action-btn inquire">Inquire Now</a></div></section><section class="section-padding product-content-section border-top-light" id="variety-detail"> <div class="container">  <div class="product-section-title"><span class="label">Variety Detail · Engineering Stone Series</span><h2>Curb Stone — Samples, Technical Data & Applications</h2></div>  <div class="eng-var-body eng-var-page-body">   <p class="eng-var-desc">Granite kerbs for carriageways, footpaths, plazas and green belts — separate flows, protect subgrade, straighten lines; compression-proof, wear-proof, true-edged.</p>   <div class="eng-variety-grid"><figure class="granite-variety-card"><div class="granite-variety-img"><picture><source srcset="../../../images/products/engineering-stone-varieties/curb-stone-hero.webp" type="image/webp"/><img alt="Curb Stone" loading="lazy" src="../../../images/products/engineering-stone-varieties/curb-stone-hero.jpg" width="1536" height="986"></picture></div><figcaption class="granite-variety-cap">Curb Stone · Product Scene</figcaption></figure><figure class="granite-variety-card">
      <div class="granite-variety-img">
       <picture><source srcset="../../../images/products/engineering-stone-varieties/curb-stone-a.webp" type="image/webp"/><img alt="Granite Curb Stone / Kerb — Full Slab View" loading="lazy" src="../../../images/products/engineering-stone-varieties/curb-stone-a.jpg" width="1536" height="1536"></picture>
      </div>

@@ -5,7 +5,7 @@
 
 body.v2-projects { background:#F6F3EE; }
 .v2-wrap  { width:min(1180px, 92%); margin-inline:auto; }
-.v2-kicker{ font-family:'Inter','Noto Sans TC',sans-serif; letter-spacing:.32em;
+.v2-kicker{ font-family:'Inter',"PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體",sans-serif; letter-spacing:.32em;
   text-transform:uppercase; font-size:12px; color:#C2A25E; }
 
 /* ============================================================
@@ -17,7 +17,7 @@ body.v2-projects { background:#F6F3EE; }
 .v2-hero-full .v2-hero-shade{ position:absolute; inset:0;
   background:linear-gradient(90deg, rgba(14,13,9,.82) 0%, rgba(14,13,9,.42) 55%, rgba(14,13,9,.12) 100%); }
 .v2-hero-full .v2-hero-content{ position:relative; z-index:2; padding:clamp(64px,8vw,120px) 0 clamp(52px,6vw,84px); }
-.v2-hero-full h1{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:500;
+.v2-hero-full h1{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500;
   font-size:clamp(36px,4.6vw,62px); line-height:1.14; color:#F4F1EA; margin:16px 0 18px; }
 .v2-hero-full h1 em{ font-style:normal; color:#C2A25E; }
 .v2-hero-full p{ color:rgba(244,241,234,.82); font-size:15.5px; line-height:1.85; max-width:48ch; }
@@ -28,11 +28,11 @@ body.v2-projects { background:#F6F3EE; }
 .v2-gallery{ background:#F6F3EE; padding:clamp(56px,7vw,92px) 0 clamp(20px,3vw,40px); }
 .v2-g-head{ display:flex; justify-content:space-between; align-items:flex-end;
   gap:20px; flex-wrap:wrap; margin-bottom:30px; }
-.v2-g-head h2{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:500;
+.v2-g-head h2{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500;
   font-size:clamp(28px,3.4vw,44px); color:#14130F; margin:12px 0 0; }
 .v2-chips{ display:flex; gap:8px; flex-wrap:wrap; }
 .v2-chip{ border:1px solid #DCD5CB; background:transparent; color:#5C574F;
-  font-family:'Noto Sans TC',sans-serif; font-size:13px; letter-spacing:.04em;
+  font-family:"PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體",sans-serif; font-size:13px; letter-spacing:.04em;
   padding:9px 16px; border-radius:2px; cursor:pointer; transition:all .25s; }
 .v2-chip:hover{ border-color:#C2A25E; color:#14130F; }
 .v2-chip.active{ background:#14130F; border-color:#14130F; color:#F4F1EA; }
@@ -48,10 +48,10 @@ body.v2-projects { background:#F6F3EE; }
 .v2-card:hover .v2-card-img::after{ opacity:1; }
 .v2-card .v2-card-meta{ padding:16px 18px 18px; display:flex; justify-content:space-between;
   align-items:flex-end; gap:14px; }
-.v2-card .cm-l b{ display:block; font-family:'Noto Serif TC',serif; font-weight:600;
+.v2-card .cm-l b{ display:block; font-family:"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:600;
   font-size:17px; color:#14130F; letter-spacing:.03em; }
 .v2-card .cm-l span{ display:block; font-size:12.5px; color:#8A8176; margin-top:5px; letter-spacing:.05em; }
-.v2-card .cm-r{ font-family:'Inter','Noto Sans TC',sans-serif; font-size:11px; letter-spacing:.16em;
+.v2-card .cm-r{ font-family:'Inter',"PingFang HK","PingFang TC","Noto Sans CJK HK","Microsoft JhengHei","微軟正黑體",sans-serif; font-size:11px; letter-spacing:.16em;
   color:#C2A25E; text-transform:uppercase; white-space:nowrap; }
 
 .v2-loadmore{ text-align:center; margin:10px 0 0; padding:10px 0 0; }
@@ -67,13 +67,13 @@ body.v2-projects { background:#F6F3EE; }
   padding:clamp(52px,6vw,84px) 0; }
 .v2-record .v2-r-top{ display:flex; justify-content:space-between; align-items:flex-end;
   margin-bottom:clamp(28px,3.6vw,48px); }
-.v2-record h2{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:500;
+.v2-record h2{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:500;
   font-size:clamp(26px,3.2vw,42px); color:#F4F1EA; margin:0; }
 .v2-record .v2-more{ color:#C2A25E; text-decoration:none; font-size:13px; letter-spacing:.12em; }
 .v2-r-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(20px,3vw,40px);
   border-top:1px solid rgba(255,255,255,.12); }
 .v2-r-grid .rg{ padding-top:26px; }
-.v2-r-grid .rg b{ font-family:'Playfair Display','Noto Serif TC',serif; font-weight:600;
+.v2-r-grid .rg b{ font-family:'Playfair Display',"Songti TC","Songti SC","Noto Serif CJK TC","PMingLiU",serif; font-weight:600;
   font-size:clamp(30px,3.6vw,46px); color:#C2A25E; display:block; line-height:1; }
 .v2-r-grid .rg span{ display:block; font-size:13.5px; color:#A7A091; margin-top:12px; letter-spacing:.06em; }
 

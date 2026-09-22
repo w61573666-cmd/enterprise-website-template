@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-HK">
  <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" data-hsst-nocache>
-<meta http-equiv="Pragma" content="no-cache" data-hsst-nocache>
-<meta http-equiv="Expires" content="0" data-hsst-nocache>
+<!-- 快取策略統一交由 HTTP 標頭管理：public, max-age=0, must-revalidate + ETag。
+     每次訪問都會重新驗證（內容必定最新），同時允許 304 回應節省傳輸量；
+     原先的 no-store meta 會強制每次完整重新下載，已移除。 -->
+
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <meta charset="utf-8"/>
 <link rel="manifest" href="/site.webmanifest">
@@ -39,7 +40,9 @@
 <meta name="twitter:description" content="Plan and run stone content on Xiaohongshu, WeChat Channels, Douyin and LinkedIn — turning quarry trips and factory lines into content that drives sales."/>
 <meta name="twitter:image" content="https://www.hsst.hk/images/banner-careers.jpg"/>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/></noscript>
   <link href="../../css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="../../css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
 
@@ -127,7 +130,181 @@
   "@type": "Organization",
   "name": "HENGSHENG MARBLE S&amp;T CO. LIMITED",
   "sameAs": "https://www.hsst.hk",
-  "logo": "https://www.hsst.hk/images/logo.jpg"
+  "logo": "https://www.hsst.hk/images/logo.jpg",
+  "hasCertification": [
+   {
+    "@type": "Certification",
+    "name": "ISO 9001:2015 Quality Management System Certification",
+    "description": "HENGSHENG MARBLE operates an ISO 9001:2015 quality management system covering every stage from quarry selection and slab sourcing to fabrication, dry-lay pre-assembly and on-site installation, under annual surveillance audits by an accredited third-party body.",
+    "about": {
+     "@type": "DefinedTerm",
+     "name": "ISO 9001:2015",
+     "termCode": "9001:2015",
+     "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "International Organization for Standardization (ISO)",
+      "url": "https://www.iso.org/"
+     }
+    },
+    "certificationStatus": "https://schema.org/CertificationActive",
+    "validIn": {
+     "@type": "AdministrativeArea",
+     "name": "Hong Kong SAR, China"
+    },
+    "url": "https://www.hsst.hk/en/honors.html"
+   },
+   {
+    "@type": "Certification",
+    "name": "ISO 14001:2015 Environmental Management System Certification",
+    "description": "ISO 14001:2015 governs wastewater recirculation, dust suppression and solid-waste handling across the factories: process water is recycled and sawing slurry is filter-pressed before compliant disposal.",
+    "about": {
+     "@type": "DefinedTerm",
+     "name": "ISO 14001:2015",
+     "termCode": "14001:2015",
+     "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "International Organization for Standardization (ISO)",
+      "url": "https://www.iso.org/"
+     }
+    },
+    "certificationStatus": "https://schema.org/CertificationActive",
+    "validIn": {
+     "@type": "AdministrativeArea",
+     "name": "Hong Kong SAR, China"
+    },
+    "url": "https://www.hsst.hk/en/honors.html"
+   },
+   {
+    "@type": "Certification",
+    "name": "ISO 45001:2018 Occupational Health and Safety Management System Certification",
+    "description": "ISO 45001:2018 governs occupational health and safety risk control in factories and on site, including crane handling, high-level dry-hang works and dust-exposed posts.",
+    "about": {
+     "@type": "DefinedTerm",
+     "name": "ISO 45001:2018",
+     "termCode": "45001:2018",
+     "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "International Organization for Standardization (ISO)",
+      "url": "https://www.iso.org/"
+     }
+    },
+    "certificationStatus": "https://schema.org/CertificationActive",
+    "validIn": {
+     "@type": "AdministrativeArea",
+     "name": "Hong Kong SAR, China"
+    },
+    "url": "https://www.hsst.hk/en/honors.html"
+   },
+   {
+    "@type": "Certification",
+    "name": "CE Marking — Natural Stone Products (EN 12058 / EN 1341 / EN 1342 / EN 1343)",
+    "description": "Natural stone products placed on the EU market carry CE marking under Construction Products Regulation (EU) No 305/2011, type-tested to EN 12058 (floor and stair slabs), EN 1341 (external wall slabs), EN 1342 (setts) and EN 1343 (kerbs), with a Declaration of Performance issued for each.",
+    "about": {
+     "@type": "DefinedTerm",
+     "name": "EN 12058 / EN 1341 / EN 1342 / EN 1343",
+     "termCode": "EN 12058",
+     "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "European Committee for Standardization (CEN)",
+      "url": "https://www.cen.eu/"
+     }
+    },
+    "certificationStatus": "https://schema.org/CertificationActive",
+    "validIn": {
+     "@type": "AdministrativeArea",
+     "name": "Hong Kong SAR, China"
+    },
+    "url": "https://www.hsst.hk/en/honors.html"
+   },
+   {
+    "@type": "Certification",
+    "name": "GREENGUARD Low VOC Certification (UL 2818)",
+    "description": "Engineered stone and interior surfacing materials are tested to UL 2818 for total volatile organic compound (TVOC) emissions to meet indoor air quality requirements.",
+    "about": {
+     "@type": "DefinedTerm",
+     "name": "UL 2818 GREENGUARD",
+     "termCode": "UL 2818",
+     "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "UL Solutions",
+      "url": "https://www.ul.com/"
+     }
+    },
+    "certificationStatus": "https://schema.org/CertificationActive",
+    "validIn": {
+     "@type": "AdministrativeArea",
+     "name": "Hong Kong SAR, China"
+    },
+    "url": "https://www.hsst.hk/en/honors.html",
+    "hasMeasurement": [
+     {
+      "@type": "QuantitativeValue",
+      "name": "Total volatile organic compound (TVOC) emission",
+      "maxValue": 0.22,
+      "unitText": "mg/m³"
+     }
+    ]
+   },
+   {
+    "@type": "Certification",
+    "name": "NSF/ANSI 51 Food Equipment Materials Certification",
+    "description": "Engineered stone worktops are evaluated to NSF/ANSI 51 for material safety in food-contact zones, suitable for kitchen countertops, F&B areas and healthcare catering areas.",
+    "about": {
+     "@type": "DefinedTerm",
+     "name": "NSF/ANSI 51",
+     "termCode": "NSF/ANSI 51",
+     "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "NSF International",
+      "url": "https://www.nsf.org/"
+     }
+    },
+    "certificationStatus": "https://schema.org/CertificationActive",
+    "validIn": {
+     "@type": "AdministrativeArea",
+     "name": "Hong Kong SAR, China"
+    },
+    "url": "https://www.hsst.hk/en/honors.html"
+   },
+   {
+    "@type": "Certification",
+    "name": "GB 6566 Class A — Radionuclide Limits for Decorative Materials",
+    "description": "All natural stone lines are tested to GB 6566 \"Limits of radionuclides in building materials\"; both the internal and external exposure indices meet Class A, permitting unrestricted use for interior finishes of civil buildings.",
+    "about": {
+     "@type": "DefinedTerm",
+     "name": "GB 6566 Class A",
+     "termCode": "GB 6566",
+     "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "Chinese National Standard (GB)",
+      "url": "https://www.sac.gov.cn/"
+     }
+    },
+    "certificationStatus": "https://schema.org/CertificationActive",
+    "validIn": {
+     "@type": "AdministrativeArea",
+     "name": "Hong Kong SAR, China"
+    },
+    "url": "https://www.hsst.hk/en/honors.html"
+   }
+  ],
+  "knowsAbout": [
+   "Natural marble",
+   "Granite",
+   "Travertine and sandstone",
+   "Engineered stone",
+   "Stone curtain wall and dry-hang cladding",
+   "Waterjet inlay",
+   "5-axis CNC stone machining",
+   "Stone crystallisation maintenance",
+   "Bespoke marble furniture",
+   "Stone shop-drawing detailing"
+  ],
+  "foundingLocation": {
+   "@type": "Place",
+   "name": "Kowloon, Hong Kong SAR, China"
+  },
+  "@id": "https://www.hsst.hk/#organization"
  },
  "jobLocation": {
   "@type": "Place",

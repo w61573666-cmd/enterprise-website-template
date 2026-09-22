@@ -2,9 +2,10 @@
 
 <html lang="zh-HK">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" data-hsst-nocache>
-<meta http-equiv="Pragma" content="no-cache" data-hsst-nocache>
-<meta http-equiv="Expires" content="0" data-hsst-nocache>
+<!-- 快取策略統一交由 HTTP 標頭管理：public, max-age=0, must-revalidate + ETag。
+     每次訪問都會重新驗證（內容必定最新），同時允許 304 回應節省傳輸量；
+     原先的 no-store meta 會強制每次完整重新下載，已移除。 -->
+
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta charset="utf-8"/>
 <link rel="manifest" href="/site.webmanifest">
@@ -50,7 +51,9 @@
 
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"/></noscript>
 <link href="../css/style-202605042143.css?v=20260922d" rel="stylesheet"/>
 <link href="../css/premium-20260902.css?v=20260922d" rel="stylesheet"/>
 
@@ -87,34 +90,253 @@
 <!-- ================================================================= -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "恆生石材科技有限公司",
-  "alternateName": "HENGSHENG MARBLE S&T CO. LIMITED",
-  "url": "https://www.hsst.hk",
-  "logo": "https://www.hsst.hk/images/logo.jpg",
-  "description": "亞太領先的高端石材供應商與工程服務商，專注天然大理石與花崗巖的全球採購、精密加工與工程訂造",
-  "foundingDate": "1999",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
-    "addressLocality": "Kowloon",
-    "addressRegion": "Hong Kong",
-    "addressCountry": "HK"
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "恆生石材科技有限公司",
+ "alternateName": "HENGSHENG MARBLE S&T CO. LIMITED",
+ "url": "https://www.hsst.hk",
+ "logo": "https://www.hsst.hk/images/logo.jpg",
+ "description": "亞太領先的高端石材供應商與工程服務商，專注天然大理石與花崗巖的全球採購、精密加工與工程訂造",
+ "foundingDate": "1999",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "FLAT/RM 1405B, 14/F, THE BELGIAN BANK BLDG, NOS 721-725 NATHAN RD",
+  "addressLocality": "Kowloon",
+  "addressRegion": "Hong Kong",
+  "addressCountry": "HK"
+ },
+ "contactPoint": {
+  "@type": "ContactPoint",
+  "telephone": "+852-5538-0525",
+  "contactType": "customer service",
+  "email": "stone@hsst.hk",
+  "areaServed": "Worldwide"
+ },
+ "slogan": "Premium Natural Stone Since 1999",
+ "foundingLocation": {
+  "@type": "Place",
+  "name": "香港九龍 Kowloon, Hong Kong"
+ },
+ "areaServed": [
+  "HK",
+  "CN",
+  "MO",
+  "TW",
+  "AE",
+  "SA",
+  "SG",
+  "MY",
+  "TH",
+  "ID",
+  "US",
+  "GB",
+  "EU"
+ ],
+ "knowsAbout": [
+  "天然雲石",
+  "花崗巖（麻石）",
+  "洞石及砂岩",
+  "人造石（無縫石）",
+  "石材乾掛幕牆",
+  "水刀拼花",
+  "五軸 CNC 石材加工",
+  "石材晶面保養",
+  "雲石傢俬訂造",
+  "工程石材深化設計"
+ ],
+ "makesOffer": {
+  "@type": "OfferCatalog",
+  "name": "Stone Supply & Engineering Services",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Natural Stone Slab Supply"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Fabrication & Processing"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Stone Engineering & Installation"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Quarry Sourcing & Import"
+    }
+   }
+  ]
+ },
+ "sameAs": [],
+ "hasCertification": [
+  {
+   "@type": "Certification",
+   "name": "ISO 9001:2015 品質管理系統認證",
+   "description": "恆生石材依 ISO 9001:2015 建立全流程品質管理系統，涵蓋礦山選料、大板採購、深加工、預拼裝至現場安裝的每一道工序，並通過第三方認可機構年度監督稽核。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 9001:2015",
+    "termCode": "9001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
   },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+852-5538-0525",
-    "contactType": "customer service",
-    "email": "stone@hsst.hk",
-    "areaServed": "Worldwide"
+  {
+   "@type": "Certification",
+   "name": "ISO 14001:2015 環境管理系統認證",
+   "description": "依 ISO 14001:2015 管理石材加工的廢水循環、粉塵控制與固廢處置，廠區生產用水回收再用，鋸切泥漿經壓濾後合規處置。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 14001:2015",
+    "termCode": "14001:2015",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
   },
-    "slogan": "Premium Natural Stone Since 1999",
-  "foundingLocation": { "@type": "Place", "name": "Hong Kong" },
-  "areaServed": [ "HK", "CN", "MO", "TW", "AE", "SA", "SG", "MY", "TH", "ID", "US", "GB", "EU" ],
-  "knowsAbout": [ "Natural Marble", "Granite", "Quartzite", "Travertine", "Onyx", "Stone Engineering", "Stone Fabrication", "Quarry Sourcing", "Architectural Stone", "Luxury Stone" ],
-  "makesOffer": { "@type": "OfferCatalog", "name": "Stone Supply & Engineering Services", "itemListElement": [ { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Natural Stone Slab Supply" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Fabrication & Processing" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stone Engineering & Installation" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Quarry Sourcing & Import" } } ] },
-"sameAs": []
+  {
+   "@type": "Certification",
+   "name": "ISO 45001:2018 職業健康安全管理系統認證",
+   "description": "依 ISO 45001:2018 管理廠區與工地的職業健康安全風險，含行車吊運、乾掛高區作業及粉塵崗位的防護與培訓制度。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "ISO 45001:2018",
+    "termCode": "45001:2018",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "國際標準化組織 ISO",
+     "url": "https://www.iso.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "CE 標誌 — 天然石材板材（EN 12058 / EN 1341 / EN 1342 / EN 1343）",
+   "description": "外銷歐盟的天然石材板材依建築產品法規（EU）No 305/2011 加貼 CE 標誌，按 EN 12058（室內外地板及樓梯板）、EN 1341（外牆板）、EN 1342（鋪路石）、EN 1343（路緣石）完成型式試驗並出具性能聲明 DoP。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "EN 12058 / EN 1341 / EN 1342 / EN 1343",
+    "termCode": "EN 12058",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "歐洲標準化委員會 CEN",
+     "url": "https://www.cen.eu/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GREENGUARD 低揮發性有機化合物認證（UL 2818）",
+   "description": "人造石（無縫石）及相關室內飾面材料依 UL 2818 測試總揮發性有機化合物（TVOC）釋放量，符合室內空氣品質要求。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "UL 2818 GREENGUARD",
+    "termCode": "UL 2818",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "UL Solutions",
+     "url": "https://www.ul.com/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html",
+   "hasMeasurement": [
+    {
+     "@type": "QuantitativeValue",
+     "name": "總揮發性有機化合物 TVOC 釋放量",
+     "maxValue": 0.22,
+     "unitText": "mg/m³"
+    }
+   ]
+  },
+  {
+   "@type": "Certification",
+   "name": "NSF/ANSI 51 食品設備材料認證",
+   "description": "檯面用人造石（無縫石）依 NSF/ANSI 51 評估與食品接觸面的材料安全性，適用於廚房檯面、餐飲區與醫療膳食區。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "NSF/ANSI 51",
+    "termCode": "NSF/ANSI 51",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "NSF International",
+     "url": "https://www.nsf.org/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  },
+  {
+   "@type": "Certification",
+   "name": "GB 6566 A 類裝飾材料放射性核素限量",
+   "description": "全線天然石材依 GB 6566《建築材料放射性核素限量》檢測，內照射指數與外照射指數均符合 A 類要求，可不受限制用於民用建築室內飾面。",
+   "about": {
+    "@type": "DefinedTerm",
+    "name": "GB 6566 A 類",
+    "termCode": "GB 6566",
+    "inDefinedTermSet": {
+     "@type": "DefinedTermSet",
+     "name": "中國國家標準 GB",
+     "url": "https://www.sac.gov.cn/"
+    }
+   },
+   "certificationStatus": "https://schema.org/CertificationActive",
+   "validIn": {
+    "@type": "AdministrativeArea",
+    "name": "香港 Hong Kong SAR, China"
+   },
+   "url": "https://www.hsst.hk/honors.html"
+  }
+ ],
+ "@id": "https://www.hsst.hk/#organization"
 }
 </script>
 <!-- ================================================================= -->
@@ -699,7 +921,7 @@
 .ev-range td.ev-rz b{color:#1A1A2E;}
 .ev-range td.ev-rz .ev-en{display:block;color:rgba(26,26,46,.6);font-size:12px;}
 .ev-range td.ev-rnote{width:34%;color:rgba(26,26,46,.7);font-size:13px;}
-.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}.ev-card .vsc-img{display:block;}.ev-grid{grid-template-columns:repeat(3,1fr);}@media(max-width:900px){.ev-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:560px){.ev-grid{grid-template-columns:1fr;}}body.premium .v2-series-card .vsc-go{opacity:1;transform:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid #C9A84C;border-radius:999px;background:#fff;color:#1A1A2E;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../index.html">首頁</a></li><li><a href="../products.html">產品中心</a></li><li><span aria-current="page">工程石材品種系列</span></li></ol></nav><section class="product-hero"><picture><source srcset="../images/products/engineering-stone-varieties/landing-hero.webp" type="image/webp"/><img alt="工程石材品種系列" class="product-hero-bg" src="../images/products/engineering-stone-varieties/landing-hero.jpg" width="1536" height="986"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">工程石材</span><h1 class="product-hero-title">工程石材品種系列</h1><p class="product-hero-subtitle">工程石材品種系列</p><p class="product-hero-desc">恆生石材「工程石材品種系列」聚焦香港公共工程、路政工程、園林工程與住宅戶外場景所需的花崗巖（麻石）製品，涵蓋車檔、欄杆、地鋪、路緣、樹池、壓頂、踏步、排水、幕牆與景牆等 18 大類。全系選用高密度麻石，耐候抗腐、防滑承重、易清潔低維護，契合…</p></div></section><section class="product-action-bar"><div class="container"><a href="../sample-request.html" class="product-action-btn sample">📦 索取樣板</a><a href="../contact.html" class="product-action-btn inquire">立即諮詢</a></div></section><section class="section-padding product-content-section border-top-light" id="series-intro"><div class="container"><div class="product-section-title"><span class="label">工程石材品種系列</span><h2>18 大類戶外麻石製品型錄</h2></div><p class="eng-var-desc">恆生石材「工程石材品種系列」聚焦香港公共工程、路政工程、園林工程與住宅戶外場景所需的花崗巖（麻石）製品，涵蓋車檔、欄杆、地鋪、路緣、樹池、壓頂、踏步、排水、幕牆與景牆等 18 大類。全系選用高密度麻石，耐候抗腐、防滑承重、易清潔低維護，契合香港高溫多雨、臨海鹽霧的戶外環境，為承建商、建築師與工程客戶提供一站式的製品型錄與訂造加工。</p><div class="v2-series-grid ev-grid"><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-ball.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/bollard-ball.webp" type="image/webp"/><img alt="車檔石球" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/bollard-ball.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Ball</i><b>車檔石球</b><span class="vsc-d">以花崗巖（麻石）整料車削而成的球形車檔，用於人行道、廣場、停車場與公共設施入口，分隔人車、防…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>198</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-post.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/bollard-post.webp" type="image/webp"/><img alt="車檔柱" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/bollard-post.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Post</i><b>車檔柱</b><span class="vsc-d">花崗巖（麻石）整料雕刻的立柱式車檔，用於限制車輛進入的行人區、廣場與設施入口，兼具防撞隔離與…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>186</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-balustrade.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/stone-balustrade.webp" type="image/webp"/><img alt="石欄河（麻石欄杆）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/stone-balustrade.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Balustrade &amp; Handrail</i><b>石欄河（麻石欄杆）</b><span class="vsc-d">花崗巖（麻石）欄杆扶手系統，含望柱、欄板、扶手與柱頭，適用於樓梯、平臺、橋樑、陽臺與園林步道…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>208</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/engraved-name-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.webp" type="image/webp"/><img alt="門口石（刻字石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Engraved Entrance Stone</i><b>門口石（刻字石）</b><span class="vsc-d">花崗巖（麻石）門牌、招牌與題字景石，用於獨立屋、企業、園林與公共設施的識別與點題，陰刻/浮雕…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>196</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/carved-stone-pier.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.webp" type="image/webp"/><img alt="石墩（柱礎）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Carved Stone Pier / Plinth</i><b>石墩（柱礎）</b><span class="vsc-d">花崗巖（麻石）雕刻的柱礎、門枕、抱鼓與景觀石墩，用於建築承託、圍牆收頭與園林點景，承重穩固、…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>205</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/flamed-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/flamed-paving.webp" type="image/webp"/><img alt="火燒面地鋪石" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/flamed-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Flamed Granite Paving Tile</i><b>火燒面地鋪石</b><span class="vsc-d">花崗巖（麻石）經火燒處理的戶外地鋪板材，表面粗糙防滑、色澤沉穩，適用於人行道、廣場、園路與車…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>174</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bushhammered-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.webp" type="image/webp"/><img alt="荔枝面地鋪石" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Bush-Hammered Granite Paving</i><b>荔枝面地鋪石</b><span class="vsc-d">花崗巖（麻石）經荔枝錘處理的戶外地鋪板材，表面呈均勻點狀糙面、觸感細密防滑，色澤溫潤，適用人…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>178</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tactile-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/tactile-paving.webp" type="image/webp"/><img alt="導盲磚（盲人磚）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/tactile-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tactile Paving Stone</i><b>導盲磚（盲人磚）</b><span class="vsc-d">花崗巖（麻石）觸覺引導鋪裝，含條紋導盲（行進）與圓點警示（停止），用於人行道、路口與公共設施…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>176</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/cobblestone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/cobblestone.webp" type="image/webp"/><img alt="麻石小方石（卵石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/cobblestone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Cobblestone / Setts</i><b>麻石小方石（卵石）</b><span class="vsc-d">花崗巖（麻石）小方石與卵石，用於園路、廣場、車行與歷史街區鋪裝，質樸耐用、排水佳、可拼花，承…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>162</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/crazy-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/crazy-paving.webp" type="image/webp"/><img alt="冰裂紋碎拼石" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/crazy-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Irregular Flagstone / Crazy Paving</i><b>冰裂紋碎拼石</b><span class="vsc-d">花崗巖（麻石）自然面或機切的冰裂紋碎拼板材，用於園路、廣場、景牆與水岸，肌理靈動、排水自然、…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>168</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curb-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/curb-stone.webp" type="image/webp"/><img alt="路緣石（石壆）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/curb-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curb Stone / Kerb</i><b>路緣石（石壆）</b><span class="vsc-d">花崗巖（麻石）路緣石與道牙，用於車行道、人行道、廣場與綠化帶邊界，分隔動線、保護路基、規整立…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>182</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curved-curb.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/curved-curb.webp" type="image/webp"/><img alt="彎位路緣石（曲線道牙）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/curved-curb.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Curved Curb / Radius Kerb</i><b>彎位路緣石（曲線道牙）</b><span class="vsc-d">花崗巖（麻石）曲線路緣石，按半徑預彎成型，用於圓環、彎道、廣場弧線與景觀曲線，線條順暢、拼接…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>180</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tree-pit-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.webp" type="image/webp"/><img alt="樹池石（樹圈石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tree Pit Stone / Tree Surround</i><b>樹池石（樹圈石）</b><span class="vsc-d">花崗巖（麻石）樹池圍石，用於人行道、廣場與園區樹穴收邊，保護樹根、規整立面、利於排水，堅固耐…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>165</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/coping-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/coping-stone.webp" type="image/webp"/><img alt="壓頂石（笠帽石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/coping-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Coping Stone / Wall Coping</i><b>壓頂石（笠帽石）</b><span class="vsc-d">花崗巖（麻石）牆頂壓頂與笠帽石，用於矮牆、女兒牆、花槽、欄河與柱頂收頭，遮雨防滲、線條挺括，…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>192</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/step-tread.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/step-tread.webp" type="image/webp"/><img alt="石級（踏步石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/step-tread.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Step Tread / Stair Tread</i><b>石級（踏步石）</b><span class="vsc-d">花崗巖（麻石）室內外踏步與石級，用於大堂、平臺、園林階梯與無障礙坡道，承重防滑、線條挺括、耐…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>188</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-drain-grate.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.webp" type="image/webp"/><img alt="石水屜（去水石蓋）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Drain Grate / Floor Grate</i><b>石水屜（去水石蓋）</b><span class="vsc-d">花崗巖（麻石）去水位與水篦子蓋板，用於廣場、園區、車行與建築散水的地表排水，承重防滑、不鏽不腐…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>194</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curtain-wall-panel.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.webp" type="image/webp"/><img alt="外牆乾掛麻石板" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curtain Wall Panel</i><b>外牆乾掛麻石板</b><span class="vsc-d">花崗巖（麻石）幕牆乾掛板材，用於商廈、酒店、公共建築與車站外立面，背栓/開放式乾掛，平整挺括…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>212</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 6.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/mushroom-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/mushroom-stone.webp" type="image/webp"/><img alt="蘑菇石（磊石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/mushroom-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Mushroom Stone / Rustic Cladding</i><b>蘑菇石（磊石）</b><span class="vsc-d">花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>158</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a></div><div class="surface-treatment-section" style="margin-top:18px"><h5 class="surface-treatment-title">通用表面處理工藝</h5><div class="surface-treatment-tags"><span class="surface-treatment-tag">火燒面 Flamed</span><span class="surface-treatment-tag">荔枝面 Bush-hammered</span><span class="surface-treatment-tag">光面 Polished</span><span class="surface-treatment-tag">亞光面 Honed</span><span class="surface-treatment-tag">噴砂面 Sandblasted</span><span class="surface-treatment-tag">剁斧面 Axe-cut</span></div></div></div></section><section class="section-padding product-content-section border-top-light" id="why-granite"><div class="container"><div class="product-section-title"><span class="label">工程石材</span><h2>為何選用工程麻石製品</h2></div><p class="eng-var-desc">天然花崗巖（麻石）是香港戶外公共與景觀工程的首選材料：</p><div class="application-grid"><div class="application-card"><div class="application-card-icon">🛡️</div><div class="app-card-title">耐候抗腐蝕</div><div class="app-card-desc">Weatherproof</div></div><div class="application-card"><div class="application-card-icon">🚶</div><div class="app-card-title">防滑安全</div><div class="app-card-desc">Slip-safe</div></div><div class="application-card"><div class="application-card-icon">🏗️</div><div class="app-card-title">承重抗壓</div><div class="app-card-desc">Load-bearing</div></div><div class="application-card"><div class="application-card-icon">🧽</div><div class="app-card-title">易清潔低維護</div><div class="app-card-desc">Low upkeep</div></div><div class="application-card"><div class="application-card-icon">☀️</div><div class="app-card-title">耐紫外線不褪色</div><div class="app-card-desc">Non-fading</div></div><div class="application-card"><div class="application-card-icon">🌧️</div><div class="app-card-title">契合香港氣候</div><div class="app-card-desc">HK climate</div></div></div></div></section>
+.breadcrumb{padding:14px 0 0;font-size:13px;}.breadcrumb ol{list-style:none;display:flex;align-items:center;gap:8px;margin:0;padding:0;flex-wrap:wrap;}.ev-card .vsc-img{display:block;}.ev-grid{grid-template-columns:repeat(3,1fr);}@media(max-width:900px){.ev-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:560px){.ev-grid{grid-template-columns:1fr;}}body.premium .v2-series-card .vsc-go{opacity:1;transform:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid #C9A84C;border-radius:999px;background:#fff;color:#1A1A2E;}</style><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../index.html">首頁</a></li><li><a href="../products.html">產品中心</a></li><li><span aria-current="page">工程石材品種系列</span></li></ol></nav><section class="product-hero"><picture><source srcset="../images/products/engineering-stone-varieties/landing-hero.webp" type="image/webp"/><img fetchpriority="high" loading="eager" alt="工程石材品種系列" class="product-hero-bg" src="../images/products/engineering-stone-varieties/landing-hero.jpg" width="1536" height="986"></picture><div class="product-hero-overlay"></div><div class="product-hero-content"><span class="product-hero-badge">工程石材</span><h1 class="product-hero-title">工程石材品種系列</h1><p class="product-hero-subtitle">工程石材品種系列</p><p class="product-hero-desc">恆生石材「工程石材品種系列」聚焦香港公共工程、路政工程、園林工程與住宅戶外場景所需的花崗巖（麻石）製品，涵蓋車檔、欄杆、地鋪、路緣、樹池、壓頂、踏步、排水、幕牆與景牆等 18 大類。全系選用高密度麻石，耐候抗腐、防滑承重、易清潔低維護，契合…</p></div></section><section class="product-action-bar"><div class="container"><a href="../sample-request.html" class="product-action-btn sample">📦 索取樣板</a><a href="../contact.html" class="product-action-btn inquire">立即諮詢</a></div></section><section class="section-padding product-content-section border-top-light" id="series-intro"><div class="container"><div class="product-section-title"><span class="label">工程石材品種系列</span><h2>18 大類戶外麻石製品型錄</h2></div><p class="eng-var-desc">恆生石材「工程石材品種系列」聚焦香港公共工程、路政工程、園林工程與住宅戶外場景所需的花崗巖（麻石）製品，涵蓋車檔、欄杆、地鋪、路緣、樹池、壓頂、踏步、排水、幕牆與景牆等 18 大類。全系選用高密度麻石，耐候抗腐、防滑承重、易清潔低維護，契合香港高溫多雨、臨海鹽霧的戶外環境，為承建商、建築師與工程客戶提供一站式的製品型錄與訂造加工。</p><div class="v2-series-grid ev-grid"><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-ball.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/bollard-ball.webp" type="image/webp"/><img alt="車檔石球" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/bollard-ball.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Ball</i><b>車檔石球</b><span class="vsc-d">以花崗巖（麻石）整料車削而成的球形車檔，用於人行道、廣場、停車場與公共設施入口，分隔人車、防…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>198</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bollard-post.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/bollard-post.webp" type="image/webp"/><img alt="車檔柱" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/bollard-post.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Bollard Post</i><b>車檔柱</b><span class="vsc-d">花崗巖（麻石）整料雕刻的立柱式車檔，用於限制車輛進入的行人區、廣場與設施入口，兼具防撞隔離與…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>186</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-balustrade.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/stone-balustrade.webp" type="image/webp"/><img alt="石欄河（麻石欄杆）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/stone-balustrade.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Balustrade &amp; Handrail</i><b>石欄河（麻石欄杆）</b><span class="vsc-d">花崗巖（麻石）欄杆扶手系統，含望柱、欄板、扶手與柱頭，適用於樓梯、平臺、橋樑、陽臺與園林步道…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>208</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/engraved-name-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.webp" type="image/webp"/><img alt="門口石（刻字石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/engraved-name-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Engraved Entrance Stone</i><b>門口石（刻字石）</b><span class="vsc-d">花崗巖（麻石）門牌、招牌與題字景石，用於獨立屋、企業、園林與公共設施的識別與點題，陰刻/浮雕…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>196</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/carved-stone-pier.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.webp" type="image/webp"/><img alt="石墩（柱礎）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/carved-stone-pier.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Carved Stone Pier / Plinth</i><b>石墩（柱礎）</b><span class="vsc-d">花崗巖（麻石）雕刻的柱礎、門枕、抱鼓與景觀石墩，用於建築承託、圍牆收頭與園林點景，承重穩固、…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>205</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/flamed-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/flamed-paving.webp" type="image/webp"/><img alt="火燒面地鋪石" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/flamed-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Flamed Granite Paving Tile</i><b>火燒面地鋪石</b><span class="vsc-d">花崗巖（麻石）經火燒處理的戶外地鋪板材，表面粗糙防滑、色澤沉穩，適用於人行道、廣場、園路與車…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>174</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/bushhammered-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.webp" type="image/webp"/><img alt="荔枝面地鋪石" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/bushhammered-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Bush-Hammered Granite Paving</i><b>荔枝面地鋪石</b><span class="vsc-d">花崗巖（麻石）經荔枝錘處理的戶外地鋪板材，表面呈均勻點狀糙面、觸感細密防滑，色澤溫潤，適用人…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>178</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tactile-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/tactile-paving.webp" type="image/webp"/><img alt="導盲磚（盲人磚）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/tactile-paving.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tactile Paving Stone</i><b>導盲磚（盲人磚）</b><span class="vsc-d">花崗巖（麻石）觸覺引導鋪裝，含條紋導盲（行進）與圓點警示（停止），用於人行道、路口與公共設施…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>176</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/cobblestone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/cobblestone.webp" type="image/webp"/><img alt="麻石小方石（卵石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/cobblestone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Cobblestone / Setts</i><b>麻石小方石（卵石）</b><span class="vsc-d">花崗巖（麻石）小方石與卵石，用於園路、廣場、車行與歷史街區鋪裝，質樸耐用、排水佳、可拼花，承…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>162</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/crazy-paving.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/crazy-paving.webp" type="image/webp"/><img alt="冰裂紋碎拼石" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/crazy-paving.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Irregular Flagstone / Crazy Paving</i><b>冰裂紋碎拼石</b><span class="vsc-d">花崗巖（麻石）自然面或機切的冰裂紋碎拼板材，用於園路、廣場、景牆與水岸，肌理靈動、排水自然、…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>168</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curb-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/curb-stone.webp" type="image/webp"/><img alt="路緣石（石壆）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/curb-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curb Stone / Kerb</i><b>路緣石（石壆）</b><span class="vsc-d">花崗巖（麻石）路緣石與道牙，用於車行道、人行道、廣場與綠化帶邊界，分隔動線、保護路基、規整立…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>182</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curved-curb.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/curved-curb.webp" type="image/webp"/><img alt="彎位路緣石（曲線道牙）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/curved-curb.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Curved Curb / Radius Kerb</i><b>彎位路緣石（曲線道牙）</b><span class="vsc-d">花崗巖（麻石）曲線路緣石，按半徑預彎成型，用於圓環、彎道、廣場弧線與景觀曲線，線條順暢、拼接…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>180</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/tree-pit-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.webp" type="image/webp"/><img alt="樹池石（樹圈石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/tree-pit-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Tree Pit Stone / Tree Surround</i><b>樹池石（樹圈石）</b><span class="vsc-d">花崗巖（麻石）樹池圍石，用於人行道、廣場與園區樹穴收邊，保護樹根、規整立面、利於排水，堅固耐…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>165</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/coping-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/coping-stone.webp" type="image/webp"/><img alt="壓頂石（笠帽石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/coping-stone.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Coping Stone / Wall Coping</i><b>壓頂石（笠帽石）</b><span class="vsc-d">花崗巖（麻石）牆頂壓頂與笠帽石，用於矮牆、女兒牆、花槽、欄河與柱頂收頭，遮雨防滲、線條挺括，…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>192</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/step-tread.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/step-tread.webp" type="image/webp"/><img alt="石級（踏步石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/step-tread.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Step Tread / Stair Tread</i><b>石級（踏步石）</b><span class="vsc-d">花崗巖（麻石）室內外踏步與石級，用於大堂、平臺、園林階梯與無障礙坡道，承重防滑、線條挺括、耐…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>188</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 8.0 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/stone-drain-grate.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.webp" type="image/webp"/><img alt="石水屜（去水石蓋）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/stone-drain-grate.jpg?v=20260922h" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Stone Drain Grate / Floor Grate</i><b>石水屜（去水石蓋）</b><span class="vsc-d">花崗巖（麻石）去水位與水篦子蓋板，用於廣場、園區、車行與建築散水的地表排水，承重防滑、不鏽不腐…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>194</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 7.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/curtain-wall-panel.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.webp" type="image/webp"/><img alt="外牆乾掛麻石板" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/curtain-wall-panel.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Granite Curtain Wall Panel</i><b>外牆乾掛麻石板</b><span class="vsc-d">花崗巖（麻石）幕牆乾掛板材，用於商廈、酒店、公共建築與車站外立面，背栓/開放式乾掛，平整挺括…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>212</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 6.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a><a class="v2-series-card ev-card" href="engineering-stone-varieties/mushroom-stone.html"><span class="vsc-img"><picture><source srcset="../images/products/engineering-stone-varieties-thumbs/mushroom-stone.webp" type="image/webp"/><img alt="蘑菇石（磊石）" loading="lazy" src="../images/products/engineering-stone-varieties-thumbs/mushroom-stone.jpg" width="1536" height="1024"></picture></span><span class="vsc-cap"><i>Mushroom Stone / Rustic Cladding</i><b>蘑菇石（磊石）</b><span class="vsc-d">花崗巖（麻石）蘑菇石（磊石）外牆裝飾板，表面中部凸起、邊緣薄收，質樸立體，用於獨立屋、圍牆、…</span><em class="vsc-go">查看詳情 →</em></span><div class="hsst-spec-chips"><span class="hsst-spec-chip"><b>抗壓強度</b><span>158</span></span><span class="hsst-spec-chip"><b>耐磨性</b><span>≤ 9.5 mm</span></span><span class="hsst-spec-chip"><b>耐凍融</b><span>50 次凍融循環合格（BS EN 12371）</span></span></div></a></div><div class="surface-treatment-section" style="margin-top:18px"><h5 class="surface-treatment-title">通用表面處理工藝</h5><div class="surface-treatment-tags"><span class="surface-treatment-tag">火燒面 Flamed</span><span class="surface-treatment-tag">荔枝面 Bush-hammered</span><span class="surface-treatment-tag">光面 Polished</span><span class="surface-treatment-tag">亞光面 Honed</span><span class="surface-treatment-tag">噴砂面 Sandblasted</span><span class="surface-treatment-tag">剁斧面 Axe-cut</span></div></div></div></section><section class="section-padding product-content-section border-top-light" id="why-granite"><div class="container"><div class="product-section-title"><span class="label">工程石材</span><h2>為何選用工程麻石製品</h2></div><p class="eng-var-desc">天然花崗巖（麻石）是香港戶外公共與景觀工程的首選材料：</p><div class="application-grid"><div class="application-card"><div class="application-card-icon">🛡️</div><div class="app-card-title">耐候抗腐蝕</div><div class="app-card-desc">Weatherproof</div></div><div class="application-card"><div class="application-card-icon">🚶</div><div class="app-card-title">防滑安全</div><div class="app-card-desc">Slip-safe</div></div><div class="application-card"><div class="application-card-icon">🏗️</div><div class="app-card-title">承重抗壓</div><div class="app-card-desc">Load-bearing</div></div><div class="application-card"><div class="application-card-icon">🧽</div><div class="app-card-title">易清潔低維護</div><div class="app-card-desc">Low upkeep</div></div><div class="application-card"><div class="application-card-icon">☀️</div><div class="app-card-title">耐紫外線不褪色</div><div class="app-card-desc">Non-fading</div></div><div class="application-card"><div class="application-card-icon">🌧️</div><div class="app-card-title">契合香港氣候</div><div class="app-card-desc">HK climate</div></div></div></div></section>
 <section class="products-cta section-padding hsst-form-zone">
 <div class="container">
 <h2>獲取專屬方案</h2>
