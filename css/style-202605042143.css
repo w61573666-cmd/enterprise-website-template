@@ -7854,6 +7854,19 @@ html {
   background: transparent;      /* 遮罩 100% 完全透明，移除深色遮蓋 */
   pointer-events: none;
 }
+/* 無背景圖版本：原 Hero 背景圖與頁面下方圖重複時直接移除背景圖，
+   改以品牌中性淺色漸層呈現，維持「一圖一用」且不影響美觀。 */
+.product-hero.is-noimage {
+  height: 400px;
+  background: linear-gradient(135deg, #fdfcfa 0%, #f2efe9 55%, #e9e4db 100%);
+  border-bottom: 1px solid rgba(10,42,107,0.10);
+}
+.product-hero.is-noimage .product-hero-overlay {
+  display: none;
+}
+.product-hero.is-noimage .product-hero-title {
+  -webkit-text-stroke: 1.5px rgba(0,0,0,0.6);
+}
 .product-hero-content {
   position: relative;
   z-index: 2;
@@ -8197,6 +8210,9 @@ html {
 @media (max-width: 768px) {
   .product-hero {
     height: 320px;
+  }
+  .product-hero.is-noimage {
+    height: 300px;
   }
   .product-hero-title {
     font-size: 1.75rem;
