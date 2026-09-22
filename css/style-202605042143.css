@@ -7827,65 +7827,78 @@ html {
    ============================================ */
 
 /* ---- Product Detail Hero ---- */
+/* 2026-09-22 全站統一：背景圖完整顯示（不裁切、不壓暗），遮罩 100% 透明；
+   標題＝鮮黃，副標題／描述＝深藍；文字一律不加底色，僅用描邊確保在任何底色上可讀。 */
 .product-hero {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 560px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
 }
 .product-hero-bg {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
-  filter: brightness(0.5);
+  object-fit: contain;          /* 完整顯示整張圖，不裁切 */
+  object-position: center;
+  filter: none;                 /* 移除壓暗，背景圖清晰可見 */
 }
 .product-hero-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+  background: transparent;      /* 遮罩 100% 完全透明，移除深色遮蓋 */
+  pointer-events: none;
 }
 .product-hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  color: #fff;
+  color: #0a2a6b;
   padding: 0 24px;
 }
 .product-hero-badge {
   display: inline-block;
-  background: rgba(212,175,55,0.85);
-  color: #111;
+  background: transparent;      /* 不加底色，避免遮擋背景圖 */
+  color: #0a2a6b;
   padding: 6px 20px;
+  border: 1px solid rgba(10,42,107,0.35);
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 2px;
   margin-bottom: 20px;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.95), 0 0 10px rgba(255,255,255,0.85);
 }
 .product-hero-title {
   font-size: 2.75rem;
   font-weight: 700;
   letter-spacing: 3px;
   margin-bottom: 8px;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  color: #ffd400;               /* 鮮黃色標題 */
+  -webkit-text-stroke: 2px rgba(0,0,0,0.55);
+  paint-order: stroke fill;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.45);
 }
 .product-hero-subtitle {
   font-size: 1.1rem;
-  color: rgba(255,255,255,0.75);
+  color: #0a2a6b;               /* 深藍色英文副標題 */
+  font-weight: 600;
   margin-bottom: 24px;
   letter-spacing: 1.5px;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.95), 0 0 10px rgba(255,255,255,0.85);
 }
 .product-hero-desc {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.65);
+  color: #10346b;               /* 深藍色描述內文 */
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.7;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.95), 0 0 10px rgba(255,255,255,0.8);
 }
 
 /* ---- Product Action Bar ---- */
@@ -8187,6 +8200,7 @@ html {
   }
   .product-hero-title {
     font-size: 1.75rem;
+    -webkit-text-stroke-width: 1.5px;
   }
   .product-hero-subtitle {
     font-size: 1rem;
