@@ -7827,7 +7827,7 @@ html {
    ============================================ */
 
 /* ---- Product Detail Hero ---- */
-/* 2026-09-22 全站統一：背景圖完整顯示（不裁切、不壓暗），遮罩 100% 透明；
+/* 2026-09-22 全站統一：背景圖與頁面同寬鋪滿、不壓暗，遮罩 100% 透明；
    標題＝鮮黃，副標題／描述＝深藍；文字一律不加底色，僅用描邊確保在任何底色上可讀。 */
 .product-hero {
   position: relative;
@@ -7843,7 +7843,7 @@ html {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  object-fit: contain;          /* 完整顯示整張圖，不裁切 */
+  object-fit: cover;            /* 與頁面同寬鋪滿，不出現左右留白 */
   object-position: center;
   filter: none;                 /* 移除壓暗，背景圖清晰可見 */
 }
