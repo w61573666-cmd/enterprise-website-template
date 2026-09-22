@@ -1777,4 +1777,12 @@
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/terms.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/terms.html"/>
   </url>
+  <url>
+    <loc>https://www.hsst.hk/en/compare.html</loc>
+    <lastmod>2026-09-22T20:21:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.hsst.hk/compare.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hsst.hk/en/compare.html"/>
+  </url>
 </urlset>
