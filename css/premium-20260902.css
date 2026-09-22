@@ -4943,3 +4943,28 @@ body.premium .hero-content .hero-subtitle {
   text-justify: auto;
   text-wrap: pretty;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [INTRO FULL-WIDTH SWEEP · 2026-09-23] I) 同寬掃尾
+   ───────────────────────────────────────────────────────────────────────
+   全站 CSS 窄欄規則清單複查後，僅餘兩類未同寬：
+   1. 無語境散點 section-desc 7 處：index 客戶段（.client-logo-section）、
+      technology 諮詢段（.section-padding>.container）、solutions 區塊頭
+      （.section-header-center）×中英 —— 落在 A/E 選擇器之外。
+   2. product-hero-desc 210 處：產品系列/品種頁 hero 描述（原 700px 置中窄欄）。
+   product-hero-subtitle 為單行英文品種名標籤，不屬導言，不同寬。
+   CTA 標語區由 E-x（特異性 0,4,0）繼續保護窄欄；其置中文字以下列
+   text-align:center 補強，確保 justify 不滲入。
+   ═══════════════════════════════════════════════════════════════════════ */
+body.premium .client-logo-section .section-desc,
+body.premium .section-header-center p.section-desc,
+body.premium .section-padding > .container > p.section-desc,
+body.premium .product-hero .product-hero-desc {
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: justify;
+  text-justify: auto;
+  text-wrap: pretty;
+}
+body.premium .cta-section .section-desc { text-align: center; }
