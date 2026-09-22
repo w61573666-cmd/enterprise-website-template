@@ -4833,17 +4833,24 @@ body.premium .product-video-cap {
      B.   4 處  .product-content-section > .container > p.eng-var-desc（系列 landing 頁）
      C. 256 處  #variety-detail .eng-var-body > p.eng-var-desc（品種詳解頁導言）
         → 區塊 margin:0 auto 置中 + text-align:justify 兩端對齊。
-          行寬沿用各元素既有 token（section-desc 為 60ch、eng-var-desc 為 940px），
-          不改動任何既有 max-width，避免版面比例與其他區塊脫節。
      D. 例外 72 處：#variety-detail 內 h4.eng-var-subhead 之下的導言屬
         「左對齊小節」，維持左對齊（僅加兩端對齊）與其小標題同向。
         D 置於 C 之後並帶 #id，特異性（1,2,2）與 C 相同 → 靠後者勝出。
    實測（本機 BeautifulSoup select 全量比對，450 頁）：A 168 / B 4 / C 256 / D 72，
    與設計值一致，0 例外、0 溢出。
+
+   [2026-09-23 加寬] 應用戶要求：導言段由窄欄（60ch / 940px）改為「與內容區同寬」。
+   · 內容區內寬 = --max-width:1200px − 兩側 --gutter:48px = 1104px。
+     原行寬令導言左右各留 80px–300px+ 空白，與下方全寬內容（卡片網格 / 規格表）
+     左右緣不齊，視覺上「窄條懸浮」。放寬為 max-width:100% 後左右緣與內容區齊平。
+   · 全站 241 處 section-desc 實測均在 container 語境（product-section-title 168、
+     text-left 50、text-center 18、CTA 4、其餘 5），無窄欄誤傷。
+   · CTA 標語區（.cta-section，620px / 600px 窄欄設計）於 E 段末尾顯式保護。
    ═══════════════════════════════════════════════════════════════════════ */
 body.premium div.product-section-title > p.section-desc,
 body.premium .product-content-section > .container > p.eng-var-desc,
 body.premium #variety-detail .eng-var-body > p.eng-var-desc {
+  max-width: 100% !important;
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: justify;
@@ -4852,11 +4859,65 @@ body.premium #variety-detail .eng-var-body > p.eng-var-desc {
 }
 
 /* D) 左對齊小節（h4.eng-var-subhead）之下的導言：維持左對齊，只加兩端對齊。
-   置於 C 之後並帶 #id，特異性（1,2,2）與 C 相同 → 靠後者勝出。 */
+   置於 C 之後並帶 #id，特異性（1,2,2）與 C 相同 → 靠後者勝出。
+   寬度同樣跟隨 C 的 100%（同頁導言行寬一致，避免 940px / 1104px 混用）。 */
 body.premium #variety-detail .eng-var-subhead ~ p.eng-var-desc {
   margin-left: 0 !important;
   margin-right: 0 !important;
   text-align: left;
+  text-justify: auto;
+  text-wrap: pretty;
+}
+
+/* E) [2026-09-23 加寬] 其餘語境的導言段（.text-left / .text-center 組）
+   一律與內容區同寬；.text-left 組補兩端對齊（全寬後右緣齊平）。
+   .text-center 組維持置中對齊（尊重置中語境設計，僅放寬行寬）。 */
+body.premium .text-left .section-desc,
+body.premium .text-center .section-desc {
+  max-width: 100% !important;
+}
+body.premium .text-left .section-desc {
+  text-align: justify;
+  text-justify: auto;
+  text-wrap: pretty;
+}
+
+/* E-x) CTA 標語區保護：窄欄（620px / 600px）為原設計，不隨 E 放寬。
+   置於 E 之後，同 !important 靠後者勝出。 */
+body.premium .cta-section.cta-home .section-desc { max-width: 620px !important; }
+body.premium .cta-section.cta-sub .section-desc { max-width: 600px !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [INTRO TEXT TYPOGRAPHY · 2026-09-23 續]
+   F/G/H：其餘三類「標題下方介紹文字」同步與內容區同寬 + 兩端對齊
+   ───────────────────────────────────────────────────────────────────────
+   F. solutions 體系導言 p.sub（115 處，全在 .section-header-center 內）：
+      原基礎樣式僅 font-size:14px; color:#888（設計時是單行副標），
+      現已承載 2–3 行完整導言 → 升級為導言排版（15.5px / #5c5a66 / justify）。
+      已核實 faqv2-channels 頁面 0 處使用 p.sub，不影響其 640px 特例。
+   G. 案例頁區塊頭 .cs2-head（原 820px 置中）：放寬為與內容區同寬；
+      h2 維持置中，p.cs2-desc 兩端對齊（與 product-section-title 同構）。
+   H. 產品列表頁 .v2-series-lead（原 640px）：放寬為與內容區同寬 + 兩端對齊。
+   ═══════════════════════════════════════════════════════════════════════ */
+body.premium .section-header-center p.sub {
+  max-width: 100%;
+  margin: 12px auto 0;
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: #5c5a66;
+  text-align: justify;
+  text-justify: auto;
+  text-wrap: pretty;
+}
+body.premium .cs2-head { max-width: 100%; }
+body.premium .cs2-head p.cs2-desc {
+  text-align: justify;
+  text-justify: auto;
+  text-wrap: pretty;
+}
+body.premium .v2-series .v2-series-lead {
+  max-width: 100%;
+  text-align: justify;
   text-justify: auto;
   text-wrap: pretty;
 }
