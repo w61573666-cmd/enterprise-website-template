@@ -236,7 +236,7 @@
     return btn;
   }
 
-  // A. article.eng-var[id] 卡片（白雲石／花崗巖／人造石…）
+  // A. article.eng-var[id] 卡片（白雲石／花崗岩／人造石…）
   function injectToCards() {
     var cat = catFromPath();
     Array.prototype.forEach.call(document.querySelectorAll('article.eng-var[id]'), function (card) {
