@@ -5269,3 +5269,16 @@ body.premium .cta-section .section-desc { text-align: center; }
     opacity: .88;
   }
 }
+
+/* [MOBILE IMG 2-UP · ADD · 2026-09-23] 首頁「匠心工藝」圖片條
+   內聯 auto-fit minmax(260px) 於手機塌成單列；本規則 !important 勝內聯樣式 */
+@media (max-width: 768px) {
+  body.premium .home-tech-strip {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  body.premium .home-tech-strip > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  body.premium .home-tech-strip picture,
+  body.premium .home-tech-strip img { min-width: 0; max-width: 100%; }
+}
