@@ -4505,6 +4505,95 @@ body.premium .eng-faq-a p{
 }
 
 /* ============================================================
+   Module 60 — 全站網格孤兒卡清零 + 石材質感懸停 (2026-09-23)
+   ① eng-adv-grid 4 卡（22 處）桌面 3 列 3+1 → 4 卡 4 列
+      （末卡殘留跨欄由 Module 61 統一復原）；
+   ② cs2-gal-grid 14 張（32 個工程頁）由各頁內聯 6 虛擬欄系統補滿
+      （常規卡跨 2、末 2 卡各跨 3），本模組不再插手，詳見 Module 61 備註；
+   ③ eng-variety-grid 5 圖橫幅规则已收窄為 :has(5) 守衛，見 Module 61；
+   ④ sintered-stone 6 圖畫廊（中英 2 頁）5 列 5+1 → 3+3。
+   另補齊 pain-point / cs2-proc / cs2-gal / art-rel /
+   contact-process / contact-channel 卡片嘅高端懸停反饋。
+   ============================================================ */
+
+/* ① eng-adv-grid 四卡 → 桌面四列（≤900 由原斷點落 2+2，≤560 單列） */
+@media (min-width: 901px) {
+  body.premium .eng-adv-grid:has(> .eng-adv-card:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ④ sintered-stone 六圖畫廊：≥1201 原生 5 列會 5+1 → 強制 3 列 3+3
+      （901–1200 原生 4 列＋Module 59-ext 末 2 卡各跨 2 已補成 4+2；
+       ≤900 原生 3 列、≤560 2 列均整除。v1 誤用不存在嘅 .gal-count-6，
+       2026-09-23 改為 :has(6) 守衛，並收窄至 ≥1201） */
+@media (min-width: 1201px) {
+  body.premium .granite-variety-grid:has(> .granite-variety-card:nth-child(6):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ⑤ 卡片石材質感懸停（與全站金調 #C9A84C／深色陰影體系統一） */
+body.premium .pain-point-card {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+body.premium .pain-point-card:hover {
+  transform: translateY(-5px);
+  border-left-color: #B8860B;
+  box-shadow: 0 16px 36px rgba(20, 19, 15, .12);
+}
+body.premium .cs2-proc {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+body.premium .cs2-proc:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgba(26, 46, 46, .15);
+}
+body.premium .cs2-gal {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+body.premium .cs2-gal:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 38px rgba(21, 21, 43, .20);
+}
+body.premium .contact-process-step {
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
+}
+body.premium .contact-process-step:hover {
+  transform: translateY(-4px);
+  border-color: #C9A84C;
+  box-shadow: 0 14px 32px rgba(20, 19, 15, .10);
+}
+body.premium .contact-channel-card {
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
+}
+body.premium .contact-channel-card:hover {
+  transform: translateY(-4px);
+  border-color: #C9A84C;
+  box-shadow: 0 14px 32px rgba(20, 19, 15, .10);
+}
+body.premium .art-rel-card {
+  transition: transform .32s cubic-bezier(.2,.8,.2,1), box-shadow .32s ease, border-color .32s ease;
+}
+body.premium .art-rel-card:hover {
+  transform: translateY(-5px);
+  border-color: #C9A84C;
+  box-shadow: 0 16px 38px rgba(20, 19, 15, .13);
+}
+/* 觸控裝置以 :active 反饋取代 hover，避免滾動時卡懸浮態 */
+@media (hover: none) {
+  body.premium .pain-point-card:hover,
+  body.premium .cs2-proc:hover,
+  body.premium .cs2-gal:hover,
+  body.premium .contact-process-step:hover,
+  body.premium .contact-channel-card:hover,
+  body.premium .art-rel-card:hover { transform: none; box-shadow: none; }
+  body.premium .pain-point-card:active,
+  body.premium .cs2-proc:active,
+  body.premium .cs2-gal:active { transform: scale(.985); }
+}
+
+/* ============================================================
    Module 59 — 全站網格「滿鋪」收尾：末行補齊 + 跨裝置等高 (2026-09-15)
    Stone 指令：① 參照全站網格對齊規則修正；② 「石材鑒賞」補圖使上下對應；
    ③ 七品種改「上四下三滿鋪」；④ 優化平板／手機排版，減少大面積留白，
@@ -5337,4 +5426,426 @@ body.premium .cta-section .section-desc { text-align: center; }
     transition: transform .16s ease, opacity .16s ease;
   }
   body.premium .scenarios-grid-hs > :active { transform: scale(.97); opacity: .88; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Module 61 — 全站網格孤兒卡終局清零（中英所有頁面共用，2026-09-23）
+   ───────────────────────────────────────────────────────────────────────
+   全站 462 頁逐一普查（外部兩 CSS＋各頁內聯 <style> 交叉比對）後嘅收尾：
+   ① eng-adv-grid 4 卡：Module 60 已轉 4 欄，但 Module 59 末卡 1/-1 舊規則
+      仍會把第 4 卡壓成「上 3 下 1」→ 桌面明確復原為 auto，真正四連卡；
+   ② eng-adv-grid 5 卡（前瞻性保險）：6 虛擬欄＝常規卡跨 2（3 個/行）、
+      末 2 卡各跨 3 → 3+2 全寬等高；≤900 原生 2 欄由舊規則末卡鋪滿；
+   ③ eng-variety-grid 5 圖：首張「場景一覽」2:1 全寬橫幅＋餘 2×2
+      （:has(5) 守衛，絕不波及 4 圖／6 圖容器）；
+   ④ ft-matrix-grid 13 連結（products.html 中英頁腳）：6 欄 6+6+1
+      → 第 13 項居中跨 2；逐斷點改 4 欄居跨 2／3 欄居中／2 欄鋪滿；
+   ⑤ granite-variety-grid 10 圖（麻石／工程石材中英 4 頁）：平板 4 欄會
+      4+4+2、3 欄會 3+3+3+1 → 561–1200px 一律保 5 欄（5+5）；
+   ⑥ granite-variety-grid 30 圖（雲石傢俬中英 2 頁）：901–1200px
+      原生 4 欄 28+2 → 保 5 欄（6 行）；
+   ⑦ product-gallery-grid 20 圖（22 個品種總覽頁）：641–1024px
+      原生 3 欄 18+2 留空槽 → 4 欄（5 行齊口）；
+   ⑧ specs-dimensions-grid：auto-fill 改 auto-fit，2–3 張規格卡都會
+      自動拉伸補滿，不再留右側空軌；
+   ⑨ 補 cs2-tech／eng-process-step 兩類卡嘅石材質感懸停（至此全站卡片
+      懸停體驗統一）。
+   註：flex 引擎（main.js 注入 --c，4 卡 4 列／5 卡 3+2／6 卡 3+3／
+       7+ 自選無孤列數＋flex-grow 末行鋪滿）已覆蓋約 30 類其餘卡網格，
+       本模組只處理靜態 grid 嘅漏網情況。
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ① eng-adv 4 卡：解除 Module 59「末卡整行鋪滿」喺 4 欄佈局嘅殘留 */
+@media (min-width: 901px) {
+  body.premium .eng-adv-grid:has(> .eng-adv-card:nth-child(4):last-child) > .eng-adv-card:last-child {
+    grid-column: auto;
+  }
+}
+
+/* ② eng-adv 5 卡：6 虛擬欄 → 3+2 末行全寬等高（僅桌面；平板 2 欄末卡鋪滿已由舊規則處理） */
+@media (min-width: 901px) {
+  body.premium .eng-adv-grid:has(> .eng-adv-card:nth-child(5):last-child) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  body.premium .eng-adv-grid:has(> .eng-adv-card:nth-child(5):last-child) > .eng-adv-card {
+    grid-column: span 2;
+  }
+  body.premium .eng-adv-grid:has(> .eng-adv-card:nth-child(5):last-child) > .eng-adv-card:nth-last-child(-n + 2) {
+    grid-column: span 3;
+  }
+}
+
+/* ③ eng-variety 5 圖：首圖全寬 2:1 橫幅，其餘 2×2（全斷點網格均 2 欄，無須復原） */
+body.premium .eng-variety-grid:has(> .granite-variety-card:nth-child(5):last-child) > .granite-variety-card:first-child {
+  grid-column: 1 / -1;
+}
+body.premium .eng-variety-grid:has(> .granite-variety-card:nth-child(5):last-child) > .granite-variety-card:first-child .granite-variety-img {
+  aspect-ratio: 2 / 1;
+}
+
+/* ④ 頁腳 ft-matrix 13 連結：末項逐斷點居中／鋪滿，絕無單吊右下角 */
+body.premium .ft-v2 .ft-matrix-grid > li:last-child:nth-child(13) {
+  grid-column: 3 / span 2;
+}
+@media (max-width: 1180px) {
+  body.premium .ft-v2 .ft-matrix-grid > li:last-child:nth-child(13) {
+    grid-column: 2 / span 2;
+  }
+}
+@media (max-width: 700px) {
+  body.premium .ft-v2 .ft-matrix-grid > li:last-child:nth-child(13) {
+    grid-column: 2 / span 1;
+  }
+}
+@media (max-width: 560px) {
+  body.premium .ft-v2 .ft-matrix-grid > li:last-child:nth-child(13) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑤ 10 圖品種牆：561–1200px 維持 5 欄（桌面 5+5、手機原生 2 欄均整除） */
+@media (min-width: 561px) and (max-width: 1200px) {
+  body.premium .granite-variety-grid:has(> .granite-variety-card:nth-child(10):last-child) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ⑥ 30 圖品種牆：901–1200px 原生 4 欄會留 2 空槽 → 保 5 欄（6 行） */
+@media (min-width: 901px) and (max-width: 1200px) {
+  body.premium .granite-variety-grid:has(> .granite-variety-card:nth-child(30):last-child) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ⑦ 產品畫廊 20 圖：平板 641–1024px 改 4 欄（5 行齊口；桌面 5 欄、手機 2 欄已整除） */
+@media (min-width: 641px) and (max-width: 1024px) {
+  body.premium .product-gallery-grid:has(> .product-gallery-item:nth-child(20):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ⑧ 規格尺寸卡：auto-fill → auto-fit，任何卡數末行都拉伸補滿 */
+body.premium .specs-dimensions-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+
+/* ⑨ 補齊 cs2-tech／eng-process-step 石材質感懸停（金調邊框＋柔和石材陰影） */
+body.premium .cs2-tech {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+body.premium .cs2-tech:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 44px rgba(21, 21, 43, .16);
+}
+body.premium .eng-process-step {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+body.premium .eng-process-step:hover {
+  transform: translateY(-5px);
+  border-color: var(--pv-gold);
+  box-shadow: 0 18px 42px rgba(20, 19, 15, .12);
+}
+@media (hover: none) {
+  body.premium .cs2-tech:hover,
+  body.premium .eng-process-step:hover { transform: none; box-shadow: none; }
+  body.premium .cs2-tech:active,
+  body.premium .eng-process-step:active { transform: scale(.985); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Module 62 — 平板段孤兒卡補殺 + 按鈕位置理性化（中英所有頁面共用，2026-09-23）
+   ───────────────────────────────────────────────────────────────────────
+   瀏覽器 903px 實測＋全站靜態普查後搵出嘅三個真·漏網位：
+   ① cs2-mat-grid／cs2-rel-grid（中英 64 個工程頁，每格 3 卡）：原生 CSS
+      ≤1024 轉 2 欄，但「奇數末卡鋪滿」規則 Module 59 只寫到 ≤768，
+      令 769–1024px 平板段出現 2+1（第 3 卡半寬、右側空半行）→ 補上
+      ≤1024 奇數末卡 1/-1 鋪滿（cs2-proc 6 卡／cs2-gal 14 卡為偶數，
+      nth-child(odd) 自然唔會誤傷；≤640 單列時跨滿亦無副作用）；
+   ② ft-grid5（中英 404 頁共 2 頁，5 個專欄）：≤900 轉 2 欄後係 2+2+1，
+      第 5 欄半寬吊右下角；原有「首欄品牌區整行」規則只喺 ≤700 生效
+      → 701–900px 一併整行，變成 1+2+2 平衡三行（:has(5) 守衛）；
+   ③ sintered 6 圖畫廊 ≥1201 5+1 已喺 Module 60④ 改用 :has(6) 修正，
+      本模組只記錄，不重複落規則。
+   按鈕理性化（見本模組 B 段）：卡片內 CTA 統一貼底對齊、長按鈕优雅換行。
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ① 工程頁物料／相關推薦 3 卡：≤1024 平板段末卡鋪滿（2+1 → 2+整行） */
+@media (max-width: 1024px) {
+  body.premium .cs2-mat-grid > :last-child:nth-child(odd),
+  body.premium .cs2-rel-grid > :last-child:nth-child(odd),
+  body.premium .cs2-proc-grid > :last-child:nth-child(odd),
+  body.premium .cs2-inst-grid > :last-child:nth-child(odd),
+  body.premium .cs2-gal-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ② 404 頁腳五專欄：701–900px 品牌首欄整行 → 1+2+2（≤700 舊規則同理生效） */
+@media (min-width: 701px) and (max-width: 900px) {
+  body.premium .ft-grid5:has(> div:nth-child(5):last-child) > div:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ③ 按鈕位置理性化（全站普查核對後只留真實需要嘅規則）：
+   · 卡內鏈結貼底：.cs2-mat-card .cs2-mat-body 本身已 flex:1 縱排、.lk 已 margin-top:auto，
+     無需重複規則；其餘卡類（eng-adv／cs2-proc／cs2-inst／cs2-rel／art-rel）
+     經普查根本冇按鈕，唔加無用 flex；
+   · 頁腳 CTA 雙按鈕（.ft-cta-actions）喺窄屏允許換行，唔好擠壓變形；
+   · 所有按鈕 max-width:100% 兜底，38+ 字英文長按鈕喺手機優雅換行唔爆框。 */
+body.premium .ft-v2 .ft-cta-actions {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+@media (max-width: 700px) {
+  body.premium .ft-v2 .ft-cta-actions {
+    justify-content: center;
+  }
+}
+body.premium .btn,
+body.premium .btn-outline,
+body.premium .ft-cta-btn {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* ④⑤ 聯絡頁三卡格／新聞列表末卡：已由 Module 63 ⑥④ 以「實測欄數帶」
+   精確重寫並升級為奇偶守衛，舊嘅 ≤1000px／≤830px／≤960px 規則已移除，
+   避免同一效果兩處定義。 */
+
+/* ⑥ ft-v2 頁腳 4 欄結構（品牌＋3 專欄）：≤900 2 欄佈局下品牌已整行，
+      餘 3 欄會 2+1 單吊聯絡欄 → 末欄（聯絡資料）整行，1+2+1 平衡；
+      :nth-child(4) 守衛，其他欄數頁面唔受影響。 */
+@media (max-width: 900px) {
+  body.premium .ft-v2 .ft-cols:has(> .ft-col:last-child:nth-child(4)) > .ft-col:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑦ 技術中心 4 統計卡（中英 technology.html 內聯 auto-fit 180px）：
+      636–835px 剛好 3 軌會 3+1 → 強制 2 欄 2+2 對稱；
+      ≥836 4 卡齊排、≤635 1–2 欄原生均整除。 */
+@media (min-width: 636px) and (max-width: 835px) {
+  body.premium .tech-stats:has(> .ts-item:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Module 63 — 瀏覽器實測後嘅「真·孤兒卡」終局修復（中英全頁共用，2026-09-23）
+   ───────────────────────────────────────────────────────────────────────
+   方法：headless Chrome 逐頁逐寬度（1366／1024／903／768／375）量度每個
+   grid／flex 容器嘅實際列數、每個子元素嘅 L/R 座標、行分佈，再與 CSS 規則
+   原文交叉比對，把「設計意圖」同「真缺陷」分開。
+   ⚠ 以下經實測確認屬設計意圖，本模組刻意不動：
+     · .trust-items／.solutions-grid／.application-grid／.eng-vars-list：
+       5–7 卡由 flex 引擎排 3+2／4+3，末行由 flex-grow 鋪滿全寬（實測貼右）；
+     · .ft-matrix-grid 13 項（products 中英）：6 欄 6+6，第 13 項
+       grid-column:3/span 2 → 左右各空 341px 完全對稱（居中，非右側留白）；
+     · .client-logos-grid 9 標誌：justify-content:center，末行 4 枚
+       左右各空 44px 對稱居中；
+     · .cs2-mat／rel／proc／inst／gal-grid 奇數末卡：≤1024 已由 Module 62① 鋪滿；
+     · .v2-spot-in（products 中英）：2 欄左右並排、文字欄垂直居中，
+       探測器按 top 分行屬誤判；
+     · .hsst-wm（首頁主圖條水印）：position:absolute 覆蓋層，非網格項；
+     · 表單格／標籤串／metadata 行／按鈕組（hsst-form、inquiry-form、
+       surface-treatment-tags、hsst-spec-chips、cs2-chips、contact-eco-tags、
+       news-card-meta、contact-region-item、cta-buttons、hsst-filter-group 等）
+       本身唔屬卡片網格，唔應鋪滿。
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ① 首頁主圖條 .home-tech-strip（中英 index.html）
+      結構：4 張 <picture> ＋ 1 個絕對定位水印 .hsst-wm（唔佔網格軌）。
+      成因：頁內 inline style 用 repeat(auto-fit,minmax(min(260px,100%),1fr))，
+      桌面容器僅 1004px → 只夠 3 軌 → 4 張圖變「3+1」，第 4 張單吊、
+      右側空 675px（實測 L0 R329）。
+      修法：≥769px 強制 4 列四連卡（＝用戶要求嘅「四卡四列等寬」）；
+      ≤768px 原生已是 2 欄（2+2 齊口），無需改。 */
+@media (min-width: 769px) {
+  body.premium .home-tech-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ② 首頁里程碑時間軸 .hero-timeline（中英 index.html，7 個 .ht-item）
+      成因：原生 grid repeat(4,1fr) → 4+3，第二行右側空 231px（實測 R677／908）。
+      修法：改 flex 並按段拉伸，任何寬度都零留白：
+        ≥861px：前 4 項各 25%（第一行滿）＋後 3 項各 33.33%（第二行同樣滿寬）；
+        ≤860px：前 6 項各 50%（2×3）＋第 7 項（奇數末項）100% 鋪滿。
+      時間軸軌道線（容器 border-top）與每項金色圓點（.ht-item::before
+      絕對定位於項內）不受影響，因改動只涉及容器 display 與項嘅 flex 比例。
+      :has(7 項) 守衛，其他項數嘅時間軸不會被波及。 */
+body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) > .ht-item {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+@media (min-width: 861px) {
+  body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) > .ht-item:nth-child(n+5) {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+  }
+}
+@media (max-width: 860px) {
+  body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) > .ht-item {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) > .ht-item:last-child:nth-child(odd) {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* ③ 頁腳信任徽章 .ft-badges（中英全站頁腳，4 枚自動寬 span）
+      成因：容器窄（實測 293px），前 3 枚佔一行、第 4 枚單吊，右側空 227px
+      （英文頁因文案較長，原生已自行 2+2）。
+      修法：統一 2×2 等分填滿 —— flex:1 1 calc(50% - 3.5px) 配合容器 gap:7px；
+      同時 min-width:0／white-space:normal 令較長英文徽章於格內優雅換行
+      而不爆框，text-align:center 保持徽章內文居中。 */
+body.premium .ft-v2 .ft-badges > * {
+  flex: 1 1 calc(50% - 3.5px);
+  max-width: calc(50% - 3.5px);
+  min-width: 0;
+  white-space: normal;
+  text-align: center;
+}
+
+/* ④ 新聞列表 .news-list-grid（中英 news.html）
+      結構：第 1 項 .news-spotlight 獨佔首行，其後 45 張 .news-card，
+      總子項 46（偶數）。容器 1004px 恆為 2 欄 → 22 行齊排＋末張半寬單吊
+      （實測 L0 R487／容器 1004）。
+      修法：以 nth-child 奇偶守衛，總項數為偶時末項鋪滿；若日後新聞數變動
+      令總項數變奇（即卡片剛好整除），守衛自動失效 → 絕不誤傷整齊佈局。
+      ▸ 本條已取代 Module 62⑤（原規則僅 ≤960px 且無奇偶守衛）。 */
+body.premium .news-list-grid > :last-child:nth-child(even) {
+  grid-column: 1 / -1;
+}
+
+/* ⑤ 404 頁腳五專欄 .ft-grid5（中英 404.html）
+      成因：≤1180px 轉 3 欄後，5 個專欄變 3+2，第二行右側空 341px。
+      修法：用 6 虛擬欄重排 —— 前 3 欄各跨 2（第一行 3 欄齊滿）、
+      末 2 欄各跨 3（第二行 2 欄齊滿），兩行皆全寬等高。
+      :has(5 子項) 守衛；≤900px 已由「首欄品牌區整行」規則排成 1+2+2，
+      本段不插手；≥1181px 原生 5 欄一行齊排，亦不插手。 */
+@media (min-width: 901px) and (max-width: 1180px) {
+  body.premium .ft-grid5:has(> div:nth-child(5):last-child) {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+  body.premium .ft-grid5:has(> div:nth-child(5):last-child) > div {
+    grid-column: span 2;
+  }
+  body.premium .ft-grid5:has(> div:nth-child(5):last-child) > div:nth-last-child(2),
+  body.premium .ft-grid5:has(> div:nth-child(5):last-child) > div:last-child {
+    grid-column: span 3;
+  }
+}
+
+/* ⑥ 聯絡頁三卡格 —— 依「實測欄數帶」精確落規則（非估算）：
+      · .contact-complaint-grid（auto-fit minmax(min(300px,100%),1fr)、gap 24）：
+        實測 769–1199px 恆為 2 欄（容器 713–904px；3 欄需容器 ≥948px，
+        直到 vw≥1200 容器才跳到 1036px）→ 3 張卡成 2+1，末卡半寬單吊；
+      · .contact-compliance-grid（minmax(min(260px,100%),1fr)、gap 24）：
+        實測 769–883px 為 2 欄（3 欄需容器 ≥828px，vw=884 起達標）→ 同樣 2+1。
+      修法：帶內顯式宣告 2 欄＋末卡 1/-1 鋪滿 → 上行 2 張、末張整行全寬。
+      :has(3 卡) 守衛（6 卡 instance 不受影響）；≤768px 原生已強制 1 欄，
+      跨欄為 no-op；超出帶嘅寬度維持原生 3 欄齊排，絕不誤傷。 */
+@media (min-width: 769px) and (max-width: 1199px) {
+  body.premium .contact-complaint-grid:has(> .contact-complaint-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  body.premium .contact-complaint-grid:has(> .contact-complaint-card:nth-child(3):last-child) > .contact-complaint-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 769px) and (max-width: 883px) {
+  body.premium .contact-compliance-grid:has(> .contact-compliance-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  body.premium .contact-compliance-grid:has(> .contact-compliance-card:nth-child(3):last-child) > .contact-compliance-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑦ 30 圖品種畫廊（中英 marble-furniture：.granite-variety-grid.eng-gallery-grid）
+      成因：Module 61⑥ 已於 901–1200px 把原 4 欄改為 5 欄（30÷5＝6 行齊口），
+      但 .eng-gallery-grid 原有「倒數第 2 張與末張各跨 2」（≤1200px 生效）
+      未同步解除 → 實測第 26–28 張＋跨 2 嘅第 29 張佔第 6 行，
+      跨 2 嘅第 30 張獨佔第 7 行（L0 R350，右側空 554px）。
+      修法：針對 30 圖 instance 明確復原 grid-column:auto 與 1:1 圖片比例，
+      還原真正 5×6 齊口。:has(30 圖) 守衛，6 圖（巖板）／10 圖（麻石）不受影響。 */
+@media (min-width: 901px) and (max-width: 1200px) {
+  body.premium .granite-variety-grid.eng-gallery-grid:has(> .granite-variety-card:nth-child(30):last-child) > .granite-variety-card:nth-child(4n+1):nth-last-child(2),
+  body.premium .granite-variety-grid.eng-gallery-grid:has(> .granite-variety-card:nth-child(30):last-child) > .granite-variety-card:nth-child(4n+2):last-child {
+    grid-column: auto;
+  }
+  body.premium .granite-variety-grid.eng-gallery-grid:has(> .granite-variety-card:nth-child(30):last-child) > .granite-variety-card:nth-child(4n+1):nth-last-child(2) .granite-variety-img,
+  body.premium .granite-variety-grid.eng-gallery-grid:has(> .granite-variety-card:nth-child(30):last-child) > .granite-variety-card:nth-child(4n+2):last-child .granite-variety-img {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ⑧ 巖板頁優勢三卡 .eng-adv-grid（中英 sintered-stone.html）
+      成因：≤768px 原有「奇數末卡 1/-1」規則在 768px 實測生效
+      （末卡鋪滿 728px），但 375px 實測仍為 2+1（末卡僅 169px、右側空 178px），
+      即同權重規則競爭下失效。修法：提高一級特異性（選擇器帶上 .eng-adv-card）
+      重寫，確保任何窄屏都生效。4 卡（nth-child(4) 為偶）不匹配奇數守衛，
+      維持 2+2 不受影響；≤768px 之外不落規則。 */
+@media (max-width: 768px) {
+  body.premium .eng-adv-grid > .eng-adv-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Module 64 — 第二輪全站實測後僅存嘅兩處匿名容器（中英全頁，2026-09-23）
+   ───────────────────────────────────────────────────────────────────────
+   Module 63 後，中英各 11 頁 × 5 寬度（110 個場景）實測結果：
+     OK 53／ISSUE 2（中文）、OK 53／ISSUE 2（英文），零橫向爆框。
+   餘下 4 條異常全部指向兩個匿名 <div>（無 class，靠 inline style 佈局），
+   已於此模組一併收尾。
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ① 首頁「匠心工藝 · 科技賦能」三卡區（中英 index.html，僅此 2 頁有此結構）
+      結構：<section class="section-padding bg-off-white"> > .container >
+            <div>（匿名，inline grid repeat(auto-fit,minmax(min(260px,100%),1fr))、gap 24）
+            > 3 張技術卡（五軸 CNC／納米防護／智能質檢）。
+      成因：容器寬 = vw − 40（≤768px）／vw − 56（≥769px）；2 欄需容器 ≥544px、
+            3 欄需容器 ≥828px → 實測 2 欄帶落在 vw 584–883px（584→容器 544、
+            868→容器 812、883→容器 827；884 起容器 828 才成 3 欄）。
+            此帶內 3 張卡變「2+1」，末卡單吊、右側空最多 376px
+            （≤583px 為 1 欄、≥884px 為 3 欄，原生均齊口）。
+      修法：帶內顯式 2 欄＋末卡 1/-1 鋪滿 → 上行 2 張、末張整行。
+      HTML 端已為該容器加上 class="tech-craft-grid"，:has(3 卡) 為第二重守衛。 */
+@media (min-width: 584px) and (max-width: 883px) {
+  body.premium .tech-craft-grid:has(> div:nth-child(3):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  body.premium .tech-craft-grid:has(> div:nth-child(3):last-child) > div:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ② 新聞頁 hero 統計徽章串（中英 news.html）
+      結構：<div class="container news-hero-content"> > <div>（匿名，inline
+            flex + gap 26px + flex-wrap）> 4 個 <span>（30 篇深度報道／
+            4 大內容分類／1,000+ 地標項目／60+ 國家礦區直供；英文版 3 個）。
+      成因：窄屏放唔落一行就換行，中文 375px 變「2+1+1」、英文「2+1」，
+            末行貼左而右側留 217px／69px 空白。
+      修法：≤640px（即會換行嘅寬度）改為 2 欄 grid，4 枚＝2+2 齊口、
+            3 枚＝2＋末枚整行；≥641px 仍維持原生單行左對齊，外觀不變。
+            :has(> span) 確保只命中統計列，唔會波及 hero 內其他 div。 */
+@media (max-width: 640px) {
+  body.premium .news-hero-content > div:has(> span) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 24px;
+  }
+  body.premium .news-hero-content > div:has(> span) > span:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
