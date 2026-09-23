@@ -5205,11 +5205,13 @@ body.premium .cta-section .section-desc { text-align: center; }
     gap: 10px !important;
   }
 
-  /* 末行僅剩一個元素 → 佔滿整行 */
+  /* 末行僅剩一個元素 → 佔滿整行
+     ★ vtl-track 例外：容器首子元素是隱藏的 .vtl-line（手機 display:none 但仍佔
+     nth-child 計數位），卡片的可見奇偶與 DOM 奇偶相反 → 用 nth-child(even) */
   body.premium .arch-grid > :last-child:nth-child(odd),
   body.premium .equip-grid > :last-child:nth-child(odd),
   body.premium .rs-imgstrip > :last-child:nth-child(odd),
-  body.premium .vtl-track > :last-child:nth-child(odd) {
+  body.premium .vtl-track > :last-child:nth-child(even) {
     grid-column: 1 / -1;
   }
 
@@ -5281,4 +5283,23 @@ body.premium .cta-section .section-desc { text-align: center; }
   body.premium .home-tech-strip > :last-child:nth-child(odd) { grid-column: 1 / -1; }
   body.premium .home-tech-strip picture,
   body.premium .home-tech-strip img { min-width: 0; max-width: 100%; }
+}
+
+/* [MOBILE IMG 2-UP · ADD-2 · 2026-09-23] 首頁「應用場景」卡片網格
+   頁面內嵌樣式 ≤639px 塌單列；改 2 列、末行單卡鋪滿、縱橫比 4/3（同平板檔） */
+@media (max-width: 768px) {
+  body.premium .scenarios-grid-hs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  body.premium .scenarios-grid-hs > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  body.premium .scenarios-grid-hs .scenario-card { aspect-ratio: 4 / 3; }
+}
+@media (hover: none) {
+  body.premium .scenarios-grid-hs > * {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .16s ease, opacity .16s ease;
+  }
+  body.premium .scenarios-grid-hs > :active { transform: scale(.97); opacity: .88; }
 }
