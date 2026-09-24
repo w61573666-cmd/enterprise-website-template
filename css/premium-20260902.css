@@ -5849,3 +5849,153 @@ body.premium .news-list-grid > :last-child:nth-child(even) {
     grid-column: 1 / -1;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Module 65 — 手機端排版深度修復：里程碑＋全網格孤兒卡＋美觀優化（2026-09-23）
+   ───────────────────────────────────────────────────────────────────────
+   背景：Module 63/64 遺漏手機端 flex+margin 衝突導致嘅 1 列垂直排列問題，
+         以及若干 2 欄佈局下嘅孤兒卡留白。本模組全面修復手機端（≤768px）
+         所有卡片網格嘅末行留白問題，做到「上面兩個、下面一個就平鋪」。
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ① 首頁里程碑 .hero-timeline（7 項）手機端 flex + margin 衝突修復
+      問題：Module 64 ② 設 flex: 0 0 50%，但 .ht-item 有 margin: 0 5px，
+           每項實際佔 50% + 10px → 兩項超過容器 → 全部強制換行變 1 列垂直排列。
+      修法：以 calc() 扣減 margin 寬度，令 flex basis + margin = 50%／100%。
+           同時 gap 取代 row gap（原本由 margin 變相產生）。 */
+@media (max-width: 860px) {
+  body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) > .ht-item {
+    flex: 0 0 calc(50% - 10px) !important;
+    max-width: calc(50% - 10px) !important;
+  }
+  body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) > .ht-item:last-child:nth-child(odd) {
+    flex: 0 0 calc(100% - 10px) !important;
+    max-width: calc(100% - 10px) !important;
+  }
+  body.premium .hero-timeline:has(> .ht-item:nth-child(7):last-child) {
+    row-gap: 10px;
+  }
+}
+
+/* ② 產品系列卡 .series-cards（14 個系列）手機端 2 欄孤兒卡修復
+      14 項 = 7 行 × 2 欄（偶數，原生 OK），但要確保任何項目數變動都唔會出事。
+      補充：奇數末項鋪滿全寬守衛。 */
+@media (max-width: 768px) {
+  body.premium .series-cards > .series-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ③ 產品中心頁 .products-grid-v2（14 品類卡）手機端孤兒卡修復 */
+@media (max-width: 768px) {
+  body.premium .products-grid-v2 > div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ④ 工程案例列表 .projects-grid（18 個）手機端 2 欄孤兒卡修復
+      18 = 9 × 2（偶數，原生 OK），加奇數守衛防範未來項目增減 */
+@media (max-width: 768px) {
+  body.premium .projects-grid > .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑤ 解決方案列表 .solutions-grid（8 個）手機端 2 欄孤兒卡修復
+      8 = 4 × 2（偶數），加奇數守衛 */
+@media (max-width: 768px) {
+  body.premium .solutions-grid > .solution-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑥ 攻略 Hub 頁 .guides-grid（4 篇攻略＋ hub）手機端 2 欄孤兒卡修復 */
+@media (max-width: 768px) {
+  body.premium .guides-grid > .guide-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑦ 新聞卡片網格 .news-grid（新聞列表頁）手機端 2 欄孤兒卡修復
+      補充：Module 63 ④ 已修 .news-list-grid 末項平鋪，呢度補齊其他新聞 grid */
+@media (max-width: 768px) {
+  body.premium .news-grid > .news-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑧ 產品品種畫廊 .granite-variety-grid／.eng-gallery-grid 手機端孤兒卡
+      ≤768px 改為 2 欄，奇數末項鋪滿 */
+@media (max-width: 768px) {
+  body.premium .granite-variety-grid > .granite-variety-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑨ 工程石材 18 品種 .eng-vars-list 手機端 2 欄孤兒卡修復
+      18 = 9 × 2（偶數），加奇數守衛 */
+@media (max-width: 768px) {
+  body.premium .eng-vars-list > .eng-var-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑩ 頁腳產品矩陣 .ft-matrix-grid（13 項）手機端對稱性優化
+      ≤768px 改為 3 欄太逼，2 欄的話 13 = 6 行 + 末行 1 張 → 末張平鋪 */
+@media (max-width: 768px) {
+  body.premium .ft-matrix-grid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑪ 技術中心頁 .tech-grid／.tech-stats 手機端 2 欄孤兒卡 */
+@media (max-width: 768px) {
+  body.premium .tech-grid > .tech-card:last-child:nth-child(odd),
+  body.premium .tech-stats > .ts-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑫ 資源下載 .resources-grid 手機端 2 欄孤兒卡 */
+@media (max-width: 768px) {
+  body.premium .resources-grid > .resource-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑬ 關於頁里程碑 .vtl-track 手機端 2 欄優化補強
+      Module 62 ① 已改 2 欄 grid，呢度補奇數末項平鋪守衛
+      （about 頁里程碑係偶數項，但確保其他 vtl 場景都 OK） */
+@media (max-width: 768px) {
+  body.premium .vtl-track > .vtl-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑭ 比較頁 .compare-grid 手機端對稱優化 */
+@media (max-width: 768px) {
+  body.premium .compare-grid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑮ FAQ 手機端 2 欄 → 1 欄過渡帶嘅孤兒卡（如有 2 欄佈局） */
+@media (max-width: 768px) {
+  body.premium .faq-grid > .faq-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑯ 合作夥伴 .partner-logos 手機端對稱優化 */
+@media (max-width: 768px) {
+  body.premium .partner-logos > div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ⑰ 樣板請求 .sample-request-grid 手機端 2 欄孤兒卡 */
+@media (max-width: 768px) {
+  body.premium .sample-request-grid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
