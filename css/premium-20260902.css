@@ -6061,3 +6061,31 @@ body.premium .navbar .mega-panel-more:hover .mega-panel-text strong { color: #a8
   }
   body.premium .navbar .mega-panel-more .mega-panel-text { flex-direction: row; gap: 8px; }
 }
+
+/* 模块 66b · 「查看更多」原地展开/收起 (2026-09-24)
+   折叠条目默认隐藏，点击按钮 toggle .expanded 原地展开全部子菜单 */
+body.premium .navbar .mega-panel-grid.menu-3x3:not(.expanded) > .mega-panel-link.mp-extra {
+  display: none !important;
+}
+body.premium .navbar .mega-panel-grid.menu-3x3.expanded > .mega-panel-link.mp-extra {
+  display: block !important;
+}
+body.premium .navbar button.mega-panel-more {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-family: inherit;
+  text-align: center;
+}
+body.premium .navbar .mega-panel-more > strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-accent, #C9A84C) !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  transition: color 0.25s ease;
+}
+body.premium .navbar .mega-panel-more:hover > strong { color: #a8873a !important; }
