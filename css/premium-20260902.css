@@ -6089,3 +6089,25 @@ body.premium .navbar .mega-panel-more > strong {
   transition: color 0.25s ease;
 }
 body.premium .navbar .mega-panel-more:hover > strong { color: #a8873a !important; }
+
+/* ================================================================
+   模組67：欄目展示網格 .hsst-sc-*（產品中心 / 工程項目 頁統一組件）
+   首屏 9 條常顯，其餘 .sc-extra 折疊；「查看更多」toggle .expanded 原地展開
+   ================================================================ */
+.hsst-sc-wrap{margin-top:36px;}
+.hsst-sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.hsst-sc-grid:not(.expanded) .sc-extra{display:none;}
+@media(max-width:1280px){.hsst-sc-grid{grid-template-columns:repeat(3,1fr);gap:18px;}}
+@media(max-width:860px){.hsst-sc-grid{grid-template-columns:repeat(2,1fr);gap:14px;}}
+.hsst-sc-card{display:block;background:#fff;border:1px solid rgba(23,22,18,.08);border-radius:14px;overflow:hidden;text-decoration:none;color:#1c1b17;box-shadow:0 8px 26px rgba(17,16,15,.06);transition:transform .3s ease,box-shadow .3s ease;}
+.hsst-sc-card:hover{transform:translateY(-6px);box-shadow:0 22px 52px rgba(17,16,15,.15);}
+.hsst-sc-card:hover .hsst-sc-img img{transform:scale(1.05);}
+.hsst-sc-img{display:block;aspect-ratio:4/3;overflow:hidden;background:#efede8;}
+.hsst-sc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.hsst-sc-cap{display:block;padding:16px 18px 18px;}
+.hsst-sc-cap i{display:block;font-family:'Playfair Display',serif;font-style:italic;font-size:12px;letter-spacing:.06em;color:#8a8677;}
+.hsst-sc-cap b{display:block;font-size:17px;font-weight:600;margin-top:4px;line-height:1.4;}
+.hsst-sc-cap .sc-d{display:block;font-size:13px;color:#6d6a60;margin-top:6px;line-height:1.6;}
+.hsst-sc-cap em{display:inline-block;margin-top:10px;font-style:normal;font-size:13px;font-weight:600;color:#a8862f;}
+.hsst-sc-more{display:block;margin:36px auto 0;padding:12px 36px;background:transparent;border:1px solid #c9a84c;color:#8a6d1f;border-radius:999px;font:600 14px/1 'Inter',sans-serif;cursor:pointer;transition:background .3s ease,color .3s ease;}
+.hsst-sc-more:hover{background:#c9a84c;color:#fff;}
