@@ -6111,3 +6111,24 @@ body.premium .navbar .mega-panel-more:hover > strong { color: #a8873a !important
 .hsst-sc-cap em{display:inline-block;margin-top:10px;font-style:normal;font-size:13px;font-weight:600;color:#a8862f;}
 .hsst-sc-more{display:block;margin:36px auto 0;padding:12px 36px;background:transparent;border:1px solid #c9a84c;color:#8a6d1f;border-radius:999px;font:600 14px/1 'Inter',sans-serif;cursor:pointer;transition:background .3s ease,color .3s ease;}
 .hsst-sc-more:hover{background:#c9a84c;color:#fff;}
+
+/* ============================================================
+   Module 5x: 資訊動態下拉 2×2 對稱網格 + 攻略正文圖片完整顯示
+   (2026-09-24)
+   1) 資訊動態下拉 4 項原為 3+1（模組 41 三等分彈性佈局）。
+      對帶 menu-2x2 標記（恰好 4 項）的面板改為兩行兩列對稱網格，
+      其他菜單（5 項 / menu-3x3 9 項）不受影響；≤1160px 抽屜
+      本就雙列，規則一致。
+   2) 攻略文章頁正文圖此前誤用全域 .img-thumb(140px 縮略條)，
+      現於 .art-body 作用域內完整原比例顯示，無需點擊交互。
+   ============================================================ */
+body.premium .mega-panel-grid.menu-2x2 > .mega-panel-link {
+  flex-basis: calc((100% - 6px) / 2) !important;
+}
+.art-body img.img-thumb {
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  border-radius: 14px;
+  margin: 2px 0 26px;
+}
