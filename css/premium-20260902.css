@@ -5999,3 +5999,65 @@ body.premium .news-list-grid > :last-child:nth-child(even) {
     grid-column: 1 / -1;
   }
 }
+
+/* ============================================================
+   模块 66 · 導航下拉 3×3 網格 + 「查看更多」通欄入口 (2026-09-24)
+   工程項目 / 產品中心 面板統一：桌面前 9 項 3×3 網格（menu-3x3），
+   底部金色通欄「查看更多」入口跳轉列表頁；≤1160px 降 2 列，
+   ≤900px（移動端手風琴）單列，跟隨現有移動端規則。
+   ============================================================ */
+body.premium .navbar .mega-panel-grid.menu-3x3 {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 4px 12px !important;
+}
+body.premium .navbar .mega-panel-grid.menu-3x3 > .mega-panel-link {
+  flex: none !important;
+  width: auto !important;
+}
+body.premium .navbar .mega-panel-more {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px 8px 2px;
+  border-top: 1px solid rgba(212, 175, 55, 0.4);
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+body.premium .navbar .mega-panel-more .mega-panel-text {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+body.premium .navbar .mega-panel-more .mega-panel-text strong {
+  color: var(--color-accent, #C9A84C) !important;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  transition: color 0.25s ease;
+}
+body.premium .navbar .mega-panel-more .mega-panel-text span {
+  color: rgba(26, 26, 46, 0.55) !important;
+  font-size: 0.72rem;
+}
+body.premium .navbar .mega-panel-more:hover { background: rgba(212, 175, 55, 0.08); }
+body.premium .navbar .mega-panel-more:hover .mega-panel-text strong { color: #a8873a !important; }
+@media (max-width: 1160px) {
+  body.premium .navbar .mega-panel-grid.menu-3x3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  body.premium .navbar .mega-panel-more .mega-panel-text { flex-direction: column; gap: 2px; }
+}
+@media (max-width: 900px) {
+  body.premium .navbar .mega-panel-grid.menu-3x3 {
+    grid-template-columns: 1fr !important;
+  }
+  body.premium .navbar .mega-panel-more {
+    justify-content: flex-start;
+    margin-top: 6px;
+    padding: 12px 0 2px;
+  }
+  body.premium .navbar .mega-panel-more .mega-panel-text { flex-direction: row; gap: 8px; }
+}
