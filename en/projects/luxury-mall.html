@@ -160,13 +160,17 @@
 </style>
 <style>
 /* Placeholder blocks for sections without real photos: colour block + icon + label + note (construction process / installation details / materials / related products) */
-.cs2-proc .ph, .cs2-inst .ph, .cs2-mat-card .ph, .cs2-rel .ph{
+.cs2-proc .ph, .cs2-inst .ph{
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:10px; min-height:220px; padding:26px 20px; text-align:center; box-sizing:border-box;
+  gap:10px; padding:26px 20px; text-align:center; box-sizing:border-box;
   background:linear-gradient(135deg,#211f17 0%,#2e2b21 100%); color:#D4AF37;
 }
-.cs2-mat-card .ph{ min-height:260px; }
-.cs2-rel .ph{ min-height:200px; }
+.cs2-proc .ph{ aspect-ratio:auto; }
+.cs2-inst .ph{ height:100%; }
+@media (max-width:640px){
+  .cs2-inst{ grid-template-columns:1fr; }
+  .cs2-inst .ph{ height:auto; }
+}
 .ph-ic{ font-size:2.6rem; line-height:1; }
 .ph-lb{ font-size:1.1rem; font-weight:700; color:#fff; letter-spacing:.5px; }
 .ph-note{ font-size:.82rem; line-height:1.55; color:rgba(255,255,255,.62); max-width:34ch; margin:0; }
@@ -1057,21 +1061,21 @@
   <div class="cs2-head"><span class="cs2-kicker">Materials</span><h2 class="cs2-title">Stone Selection</h2><p class="cs2-desc">Three top-grade marbles with clearly divided roles, supplied direct from Spanish and Italian quarries: Crema Marfil laid across 18,000 sqm of flooring over five levels sets the warm keynote of the whole project; Calacatta Gold wraps the 24 atrium columns as the visual centrepiece; Nero Marquina clads the lift-lobby feature walls, dramatic under evening lighting. Every slab passed 68 quality-inspection steps before leaving the factory.</p></div>
   <div class="cs2-mat-grid">
 
-   <div class="cs2-mat-card"><div class="ph"><div class="ph-ic">🟡</div><div class="ph-lb">Crema Marfil</div><p class="ph-note">Spanish beige marble · 18,000 sqm of flooring over five levels</p><span class="badge">MATERIAL 01</span></div>
+   <div class="cs2-mat-card"><div class="ph"><picture><source srcset="../../images/products/beige-marble-gallery/01.webp" type="image/webp"/><img src="../../images/products/beige-marble-gallery/01.jpg" alt="Crema Marfil 米黃雲石大板" loading="lazy" width="1600" height="1475"></picture><span class="badge">MATERIAL 01</span></div>
     <div class="cs2-mat-body"><div class="nm">Crema Marfil</div><div class="og">🇪🇸 Spain · Crema quarries</div>
      <div class="cs2-mat-spec"><span class="k">Application</span><span class="v">Five-level flooring · 18,000 sqm</span><span class="k">Finish</span><span class="v">Warm beige tone · 20 mm</span><span class="k">Standard Sizes</span><span class="v">Slab supply</span></div>
      <div class="ds">Warm, uniform beige makes Spanish Crema Marfil the first choice for large commercial floors. Slabs from a single vein were factory pre-laid and blended so the 18,000 sqm of flooring across five levels reads as one continuous, colour-consistent surface with no visible banding.</div>
      <a class="lk" href="../products/beige-marble.html#gallery">View stone details →</a>
     </div></div>
 
-   <div class="cs2-mat-card"><div class="ph"><div class="ph-ic">✨</div><div class="ph-lb">Calacatta Gold</div><p class="ph-note">Italian gold veining · 24 atrium columns</p><span class="badge">MATERIAL 02</span></div>
+   <div class="cs2-mat-card"><div class="ph"><picture><source srcset="../../images/products/white-marble-varieties/calacatta-gold-A2.webp" type="image/webp"/><img src="../../images/products/white-marble-varieties/calacatta-gold-A2.jpg" alt="Calacatta Gold 雲石大板 金色紋理" loading="lazy" width="1536" height="1536"></picture><span class="badge">MATERIAL 02</span></div>
     <div class="cs2-mat-body"><div class="nm">Calacatta Gold</div><div class="og">🇮🇹 Italy · Carrara quarries</div>
      <div class="cs2-mat-spec"><span class="k">Application</span><span class="v">Atrium columns · 24 round columns</span><span class="k">Finish</span><span class="v">Curved panels · 20 mm</span><span class="k">Standard Sizes</span><span class="v">Slab supply</span></div>
      <div class="ds">Gold veining sweeps across a milky ground — among the rarest output of the Italian quarries. Five-axis CNC machined the slabs into curved panels wrapping all 24 atrium columns, so the veining runs continuously from the ground floor to the top level.</div>
      <a class="lk" href="../products/white-marble.html#gallery">View stone details →</a>
     </div></div>
 
-   <div class="cs2-mat-card"><div class="ph"><div class="ph-ic">⬛</div><div class="ph-lb">Nero Marquina</div><p class="ph-note">Spanish black-and-white veining · lift-lobby feature walls</p><span class="badge">MATERIAL 03</span></div>
+   <div class="cs2-mat-card"><div class="ph"><picture><source srcset="../../images/products/black-marble-varieties/nero-marquina-c.webp" type="image/webp"/><img src="../../images/products/black-marble-varieties/nero-marquina-c.jpg" alt="Nero Marquina 黑白閃電紋大板" loading="lazy" width="1536" height="1536"></picture><span class="badge">MATERIAL 03</span></div>
     <div class="cs2-mat-body"><div class="nm">Nero Marquina</div><div class="og">🇪🇸 Spain · Markina quarries</div>
      <div class="cs2-mat-spec"><span class="k">Application</span><span class="v">Lift-lobby feature walls</span><span class="k">Finish</span><span class="v">Polished · 20 mm</span><span class="k">Standard Sizes</span><span class="v">Slab supply</span></div>
      <div class="ds">White lightning across deep black carries real tension, and the contrast is dramatic under evening lighting. Every slab was numbered by veining direction, giving the lift-lobby feature walls 360° veining continuity — the most demanding single work package in the project.</div>
@@ -1082,11 +1086,11 @@
 </section>
 <section class="cs2-section" id="gallery">
  <div class="container">
-  <div class="cs2-head"><span class="cs2-kicker">Gallery</span><h2 class="cs2-title">Project Gallery</h2><p class="cs2-desc">All 3 photographs were taken after handover, in live operation — the five-level atrium, the ground-floor corridors and the full atrium view. Click any image to enlarge and inspect how the Crema Marfil flooring and Calacatta columns read under the lighting.</p></div>
+  <div class="cs2-head"><span class="cs2-kicker">Gallery</span><h2 class="cs2-title">Project Gallery</h2><p class="cs2-desc">All 5 photographs were taken after handover, in live operation — the five-level atrium, the ground-floor corridors, the full atrium view and the lift lobby. Click any image to enlarge and inspect how the Crema Marfil flooring and Calacatta columns read under the lighting.</p></div>
   <div class="cs2-gal-grid">
 <div class="cs2-gal" data-src="../../images/projects/mall-cover.jpg"><picture><source srcset="../../images/projects/mall-cover.webp" type="image/webp"/><img src="../../images/projects/mall-cover.jpg" alt="Full view of the five-level atrium marble works in the Central luxury mall" loading="lazy" width="2560" height="1440"></picture><div class="cap"><span class="no">01</span>Five-Level Atrium<span>Crema Marfil flooring and Calacatta columns</span></div></div>
 <div class="cs2-gal" data-src="../../images/projects/mall-g1-groundfloor.jpg"><picture><source srcset="../../images/projects/mall-g1-groundfloor.webp" type="image/webp"/><img src="../../images/projects/mall-g1-groundfloor.jpg" alt="Marble flooring in the ground-floor corridor of the Central luxury mall" loading="lazy" width="2240" height="1680"></picture><div class="cap"><span class="no">02</span>Ground-Floor Corridor<span>Crema Marfil beige marble flooring</span></div></div>
-<div class="cs2-gal" data-src="../../images/projects/mall-g2-atrium.jpg"><picture><source srcset="../../images/projects/mall-g2-atrium.webp" type="image/webp"/><img src="../../images/projects/mall-g2-atrium.jpg" alt="Looking up at the marble round columns of the Central mall atrium" loading="lazy" width="2240" height="1680"></picture><div class="cap"><span class="no">03</span>Atrium, Looking Up<span>24 Calacatta columns rising through five levels</span></div></div>
+<div class="cs2-gal" data-src="../../images/projects/mall-g2-atrium.jpg"><picture><source srcset="../../images/projects/mall-g2-atrium.webp" type="image/webp"/><img src="../../images/projects/mall-g2-atrium.jpg" alt="Looking up at the marble round columns of the Central mall atrium" loading="lazy" width="2240" height="1680"></picture><div class="cap"><span class="no">03</span>Atrium, Looking Up<span>24 Calacatta columns rising through five levels</span></div></div><div class="cs2-gal" data-src="../../images/projects/mall-g3-liftlobby.jpg"><picture><source srcset="../../images/projects/mall-g3-liftlobby.webp" type="image/webp"/><img src="../../images/projects/mall-g3-liftlobby.jpg" alt="Central luxury mall — Lift Lobby: Nero Marquina feature wall, veining aligned" loading="lazy" width="1536" height="940"></picture><div class="cap"><span class="no">04</span>Lift Lobby<span>Nero Marquina feature wall, veining aligned</span></div></div><div class="cs2-gal" data-src="../../images/projects/mall-g4-atrium.jpg"><picture><source srcset="../../images/projects/mall-g4-atrium.webp" type="image/webp"/><img src="../../images/projects/mall-g4-atrium.jpg" alt="Central luxury mall — Atrium Column Detail: Calacatta Gold curved cladding" loading="lazy" width="1536" height="940"></picture><div class="cap"><span class="no">05</span>Atrium Column Detail<span>Calacatta Gold curved cladding</span></div></div>
   </div>
  </div>
 </section>
@@ -1120,9 +1124,9 @@
  <div class="container">
   <div class="cs2-head"><span class="cs2-kicker">Related Products</span><h2 class="cs2-title">Related Products</h2><p class="cs2-desc">The project's three principal stones are kept on the regular supply list and can be matched vein-to-vein from the same quarries for mall and retail projects; click through for technical data, veining-match fabrication notes and stock availability.</p></div>
   <div class="cs2-rel-grid">
-<a class="cs2-rel" href="../products/beige-marble.html#gallery"><div class="ph"><div class="ph-ic">🟡</div><div class="ph-lb">Crema Marfil</div><p class="ph-note">Spanish beige marble</p></div><div class="tx"><div class="nm">Crema Marfil</div><div class="og">🇪🇸 Spain · Crema quarries</div><p>Warm beige tones — the first choice for large commercial floors, the same stone as this project's 18,000 sqm five-level flooring, available with same-vein matched supply.</p><span class="go">View details →</span></div></a>
-<a class="cs2-rel" href="../products/white-marble.html#gallery"><div class="ph"><div class="ph-ic">✨</div><div class="ph-lb">Calacatta Gold</div><p class="ph-note">Italian gold veining</p></div><div class="tx"><div class="nm">Calacatta Gold</div><div class="og">🇮🇹 Italy · Carrara quarries</div><p>Gold veining woven through a milky ground — the same stone as the 24 atrium column wraps in this project, available as curved-panel fabrication.</p><span class="go">View details →</span></div></a>
-<a class="cs2-rel" href="../products/black-marble.html#gallery"><div class="ph"><div class="ph-ic">⬛</div><div class="ph-lb">Nero Marquina</div><p class="ph-note">Spanish black-and-white veining</p></div><div class="tx"><div class="nm">Nero Marquina</div><div class="og">🇪🇸 Spain · Markina quarries</div><p>Black-and-white drama in stone — the same stone as this project's lift-lobby feature walls, striking in evening settings.</p><span class="go">View details →</span></div></a>
+<a class="cs2-rel" href="../products/beige-marble.html#gallery"><div class="ph"><picture><source srcset="../../images/products/beige-marble-gallery/03.webp" type="image/webp"/><img src="../../images/products/beige-marble-gallery/03.jpg" alt="Crema Marfil marble slab" loading="lazy" width="1600" height="1475"></picture></div><div class="tx"><div class="nm">Crema Marfil</div><div class="og">🇪🇸 Spain · Crema quarries</div><p>Warm beige tones — the first choice for large commercial floors, the same stone as this project's 18,000 sqm five-level flooring, available with same-vein matched supply.</p><span class="go">View details →</span></div></a>
+<a class="cs2-rel" href="../products/white-marble.html#gallery"><div class="ph"><picture><source srcset="../../images/products/white-marble-varieties/calacatta-gold-B2.webp" type="image/webp"/><img src="../../images/products/white-marble-varieties/calacatta-gold-B2.jpg" alt="Calacatta Gold marble slab" loading="lazy" width="1536" height="1536"></picture></div><div class="tx"><div class="nm">Calacatta Gold</div><div class="og">🇮🇹 Italy · Carrara quarries</div><p>Gold veining woven through a milky ground — the same stone as the 24 atrium column wraps in this project, available as curved-panel fabrication.</p><span class="go">View details →</span></div></a>
+<a class="cs2-rel" href="../products/black-marble.html#gallery"><div class="ph"><picture><source srcset="../../images/products/black-marble-varieties/nero-marquina-d.webp" type="image/webp"/><img src="../../images/products/black-marble-varieties/nero-marquina-d.jpg" alt="Nero Marquina marble slab" loading="lazy" width="1536" height="1536"></picture></div><div class="tx"><div class="nm">Nero Marquina</div><div class="og">🇪🇸 Spain · Markina quarries</div><p>Black-and-white drama in stone — the same stone as this project's lift-lobby feature walls, striking in evening settings.</p><span class="go">View details →</span></div></a>
   </div>
  </div>
 </section>
