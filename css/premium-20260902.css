@@ -6051,8 +6051,11 @@ body.premium .navbar .mega-panel-more:hover .mega-panel-text strong { color: #a8
   body.premium .navbar .mega-panel-more .mega-panel-text { flex-direction: column; gap: 2px; }
 }
 @media (max-width: 900px) {
+  /* 2026-09-26 更新：不再降為單列，與「關於我們 / 資訊動態」同為雙列網格
+     （統一後的度量基準見文末模組 68，此處同步 columns 與 gap 避免級聯衝突） */
   body.premium .navbar .mega-panel-grid.menu-3x3 {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 10px !important;
   }
   body.premium .navbar .mega-panel-more {
     justify-content: flex-start;
@@ -6131,4 +6134,69 @@ body.premium .mega-panel-grid.menu-2x2 > .mega-panel-link {
   object-fit: contain !important;
   border-radius: 14px;
   margin: 2px 0 26px;
+}
+
+/* ============================================================
+   模組 68 · 移動端導航下拉「全欄目統一雙列網格」(2026-09-26)
+   背景：模組 66 為「產品中心 / 工程項目（案例）」加入 menu-3x3 後，
+         ≤900px 曾被降為單列；而「關於我們 / 資訊動態」走的是模組 50
+         的雙列規則，兩者在手機端不同步（單列 vs 雙列）。
+   方案：≤1160px（含移動抽屜）對全部導航下拉面板套用同一套度量基準——
+         2 等寬列、10px 列間距、0 行間距、統一內邊距 / 字號 / 圖標，
+         四個欄目呈現完全一致的雙列網格；>1160px 桌面維持原樣。
+   不改：選單項目文案、連結、層級與展開／收起行為均保持原邏輯。
+   ============================================================ */
+@media (max-width: 1160px) {
+  /* 1) 統一 2 列網格（同時提升特異性，壓過基線 rules 的 flex 三等分） */
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid,
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid.menu-2x2,
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid.menu-3x3 {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 10px !important;
+    row-gap: 0 !important;
+    align-items: stretch !important;
+  }
+
+  /* 2) 統一首選單項寬度與內邊距 */
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid > .mega-panel-link {
+    flex: none !important;
+    flex-basis: auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 9px 10px !important;
+    box-sizing: border-box;
+  }
+
+  /* 3) 統一圖標尺寸（若該欄目帶圖標） */
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid > .mega-panel-link .mega-panel-icon,
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid > .mega-panel-link .mega-panel-icon img {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    border-radius: 8px;
+  }
+
+  /* 4) 統一字號行距 */
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid > .mega-panel-link .mega-panel-text {
+    gap: 2px;
+  }
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid > .mega-panel-link .mega-panel-text strong {
+    font-size: 0.82rem !important;
+  }
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid > .mega-panel-link .mega-panel-text span {
+    font-size: 0.6rem !important;
+  }
+
+  /* 5) 末行只剩一項時鋪滿整行（與模組 51 在其它欄目的行為一致） */
+  body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid > .mega-panel-link:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* 6) 摺疊狀態下，緊接「查看更多」之前的最後一項（第 9 項）同理鋪滿 */
+  @supports selector(:has(*)) {
+    body.premium .navbar .nav-links .nav-dropdown > .mega-panel > .mega-panel-grid:not(.expanded) > .mega-panel-link:nth-child(odd):has(+ .mega-panel-link.mp-extra) {
+      grid-column: 1 / -1;
+    }
+  }
 }
