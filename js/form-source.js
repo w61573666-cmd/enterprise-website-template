@@ -146,12 +146,91 @@
     } catch (e) { return ''; }
   }
 
+  /* ---------------- 來源頁覆寫（「索取樣板」等中轉頁場景）----------------
+     訪客從某個具體內容頁（工程案例 / 產品 / 攻略…）點擊「索取樣板」連結時，
+     連結會帶 ?from=<來源頁絕對路徑>&from_title=<來源頁麵包屑> 跳轉到
+     sample-request.html。此時表單「真實發生」在來源頁，郵件必須如實呈現來源頁，
+     而非中轉頁本身。若連結未帶參數，則以 document.referrer（同源）作為後備來源。 */
+  function getQuery(name) {
+    try {
+      var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
+      return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+    } catch (e) { return ''; }
+  }
+  function absUrl(u) {
+    try { var a = document.createElement('a'); a.href = u; return a.href; } catch (e) { return u; }
+  }
+  function sameOrigin(u) {
+    try { var a = document.createElement('a'); a.href = u; return a.hostname === window.location.hostname; }
+    catch (e) { return false; }
+  }
+  var ORIGIN_TRAIL = null;   /* 來源頁麵包屑（referrer 場景下非同步抓取後快取） */
+  function pathTrail(u) {
+    try {
+      var a = document.createElement('a'); a.href = u;
+      var seg = (a.pathname || '').replace(/\/index\.html?$/i, '/').replace(/\.html?$/i, '');
+      var parts = seg.replace(/^\/+/, '').replace(/\/+$/, '').split('/').filter(Boolean);
+      if (!parts.length) return LANG === 'en' ? 'Home' : '首頁';
+      return (LANG === 'en' ? 'Home' : '首頁') + ' / ' + parts[parts.length - 1].replace(/-/g, ' ');
+    } catch (e) { return LANG === 'en' ? 'Home' : '首頁'; }
+  }
+  function lastSegOf(trail) {
+    if (!trail) return LANG === 'en' ? 'Home' : '首頁';
+    var parts = trail.split('/');
+    var last = parts[parts.length - 1] || '';
+    var dash = last.split('-');
+    return (dash[dash.length - 1] || last || (LANG === 'en' ? 'Home' : '首頁')).trim();
+  }
+  function fetchOriginTrail(u) {
+    if (!u || ORIGIN_TRAIL) return;
+    try {
+      fetch(u, { credentials: 'omit' }).then(function (r) { return r.text(); }).then(function (html) {
+        var blocks = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) || [];
+        for (var i = 0; i < blocks.length; i++) {
+          var raw = blocks[i].replace(/<script type="application\/ld\+json">/, '').replace(/<\/script>/, '');
+          var data; try { data = JSON.parse(raw); } catch (e) { continue; }
+          var found = null;
+          (function walk(o) {
+            if (found) return;
+            if (Object.prototype.toString.call(o) === '[object Array]') { for (var k = 0; k < o.length; k++) walk(o[k]); return; }
+            if (!o || typeof o !== 'object') return;
+            var t = o['@type']; var types = (Object.prototype.toString.call(t) === '[object Array]') ? t : [t];
+            if (types.indexOf('BreadcrumbList') >= 0 && o.itemListElement) { found = o.itemListElement; return; }
+            for (var key in o) { if (o.hasOwnProperty(key)) walk(o[key]); }
+          })(data);
+          if (found) {
+            var arr = found.slice(0).sort(function (a, b) { return (a.position || 0) - (b.position || 0); });
+            var names = [];
+            for (var j = 0; j < arr.length; j++) { var n = stripBrand(arr[j] && arr[j].name); if (n) names.push(n); }
+            if (names.length) ORIGIN_TRAIL = buildTrail(names);
+            break;
+          }
+        }
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  function originOverride() {
+    var f = getQuery('from');
+    if (f) {
+      var fu = absUrl(f);
+      if (sameOrigin(fu)) return { url: fu, title: getQuery('from_title'), via: 'param' };
+    }
+    var ref = '';
+    try { ref = document.referrer || ''; } catch (e) {}
+    if (ref && sameOrigin(ref)) {
+      var cur = '';
+      try { cur = String(window.location.href).split('#')[0]; } catch (e) {}
+      if (ref.replace(/\/+$/, '') !== cur.replace(/\/+$/, '')) return { url: ref, title: '', via: 'referer' };
+    }
+    return null;
+  }
+
   /* ---------------- 表單實例標識（form_id）----------------
      每個表單一個穩定、唯一、ASCII 的實例 ID（如
      inquiry-granite-black-galaxy / products-brochure），用於在通知郵件
      與 splitforms 後台精準點名「具體是哪個表單」。靜態 HTML 已內建，
      此處確保其存在（動態插入的表單則兜底推算）。 */
-  function computeFormId(form) {
+  function computeFormId(form, urlOverride) {
     /* 1) 優先取靜態注入的 form_id */
     try {
       var ef = form.querySelector('input[type="hidden"][name="form_id"]');
@@ -159,7 +238,10 @@
     } catch (e) {}
     /* 2) 否則按「路徑 slug + _subject 用途」兜底推算 */
     var p = '/';
-    try { p = String(window.location.pathname || '/'); } catch (e) {}
+    try {
+      if (urlOverride) { var a = document.createElement('a'); a.href = urlOverride; p = a.pathname || '/'; }
+      else p = String(window.location.pathname || '/');
+    } catch (e) {}
     p = p.replace(/\/index\.html?$/i, '/').replace(/\.html?$/i, '');
     var seg = p.replace(/^\/+/, '').replace(/\/+$/, '').split('/').filter(Boolean);
     var slug = seg.join('-');
@@ -216,9 +298,30 @@
     if (!form || !form.action) return;
     if (String(form.action).indexOf('splitforms.com') < 0) return;
     try {
-      var to = subjectSuffix();
-      var url = currentUrl();
-      var fid = computeFormId(form);
+      var ov = originOverride();
+      var to, url, fid;
+      if (ov) {
+        /* 中轉頁（如 sample-request.html）場景：表單真實發生在「來源頁」 */
+        url = ov.url;
+        var trailStr = (ov.title && ov.title.trim()) ? ov.title.trim() : (ORIGIN_TRAIL || pathTrail(ov.url));
+        var leaf = lastSegOf(trailStr);
+        to = { trail: trailStr, leaf: leaf };
+        if (!ov.title && !ORIGIN_TRAIL) fetchOriginTrail(ov.url);  /* referrer 場景：非同步補抓麵包屑 */
+        /* form_id 帶上來源頁 slug，使後台/郵件可精準點名「來自哪個頁面的樣板索取」 */
+        try {
+          var oa = document.createElement('a'); oa.href = ov.url;
+          var oslug = (oa.pathname || '').replace(/\.html?$/i, '').replace(/^\/+/, '').replace(/\/+$/, '').replace(/\//g, '-') || 'home';
+          var okind = 'sample';
+          var osub = form.querySelector('input[type="hidden"][name="_subject"], input[type="hidden"][name="subject"]');
+          if (osub) { var ov2 = (osub.value || '').toLowerCase(); if (/brochure|畫冊|catalog/.test(ov2)) okind = 'brochure'; else if (/subscribe|訂閱/.test(ov2)) okind = 'subscribe'; }
+          fid = 'sample-request-' + oslug;
+          if (okind !== 'sample') fid = fid.replace(/^sample-request-/, okind + '-');
+        } catch (e) { fid = computeFormId(form, ov.url); }
+      } else {
+        to = subjectSuffix();
+        url = currentUrl();
+        fid = computeFormId(form);
+      }
       setField(form, 'source_page', to.trail);
       setField(form, 'page_url', url);
       setField(form, 'form_id', fid);
