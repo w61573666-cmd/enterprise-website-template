@@ -5,8 +5,9 @@
    PURPOSE : 每個提交到 splitforms 的通知郵件，自動帶上訪客當時瀏覽的
              ① 來源頁面（層級 / 麵包屑格式，如「首頁 / 產品中心 - 精品麻石」）
              ② 頁面連結（完整 https 網址，含路徑與參數）
-             ③ 來源摘要（自帶中/英文標籤的獨立區塊）
-             ④ 郵件主旨尾綴「來源：XXX」
+             ③ 表單實例標識 form_id（穩定唯一，精準點名「具體哪個表單」）
+             ④ 來源摘要（自帶中/英文標籤的獨立區塊，含上述三項）
+             ⑤ 郵件主旨尾綴「來源：XXX」
    HOW IT WORKS:
      · 頁面 HTML 內已靜態內建 source_page / page_url / source_details
        三個 hidden 欄位（伺服器端即可生效，禁用 JS 也能送出基本來源）
@@ -145,6 +146,48 @@
     } catch (e) { return ''; }
   }
 
+  /* ---------------- 表單實例標識（form_id）----------------
+     每個表單一個穩定、唯一、ASCII 的實例 ID（如
+     inquiry-granite-black-galaxy / products-brochure），用於在通知郵件
+     與 splitforms 後台精準點名「具體是哪個表單」。靜態 HTML 已內建，
+     此處確保其存在（動態插入的表單則兜底推算）。 */
+  function computeFormId(form) {
+    /* 1) 優先取靜態注入的 form_id */
+    try {
+      var ef = form.querySelector('input[type="hidden"][name="form_id"]');
+      if (ef && ef.value) return ef.value;
+    } catch (e) {}
+    /* 2) 否則按「路徑 slug + _subject 用途」兜底推算 */
+    var p = '/';
+    try { p = String(window.location.pathname || '/'); } catch (e) {}
+    p = p.replace(/\/index\.html?$/i, '/').replace(/\.html?$/i, '');
+    var seg = p.replace(/^\/+/, '').replace(/\/+$/, '').split('/').filter(Boolean);
+    var slug = seg.join('-');
+    if (slug === 'en') slug = 'en-home';
+    else if (slug === '' || slug === 'index') slug = 'home';
+    var subj = '';
+    try {
+      var s = form.querySelector('input[type="hidden"][name="_subject"], input[type="hidden"][name="subject"]');
+      if (s) subj = (s.value || '').toLowerCase();
+    } catch (e) {}
+    var kind = 'inquiry';
+    if (/brochure|畫冊|catalog/.test(subj)) kind = 'brochure';
+    else if (/sample|樣板/.test(subj)) kind = 'sample';
+    else if (/subscribe|訂閱|newsletter|subscription/.test(subj)) kind = 'subscribe';
+    else if (/apply|投遞|cv|簡歷|resume/.test(subj)) kind = 'apply';
+    else if (/contact|聯繫|聯絡/.test(subj)) kind = 'contact';
+    else {
+      var rl = p.toLowerCase();
+      if (/apply|careers/.test(rl)) kind = 'apply';
+      else if (/sample/.test(rl)) kind = 'sample';
+      else if (/contact/.test(rl)) kind = 'contact';
+      else if (/news/.test(rl)) kind = 'subscribe';
+      else if (/brochure/.test(rl)) kind = 'brochure';
+    }
+    if (slug === kind || slug.indexOf('-' + kind) >= 0 || slug.indexOf(kind + '-') === 0) return slug;
+    return slug + '-' + kind;
+  }
+
   /* ---------------- 寫入表單隱藏欄位 ---------------- */
   function setField(form, name, value) {
     var el = null;
@@ -175,10 +218,14 @@
     try {
       var to = subjectSuffix();
       var url = currentUrl();
+      var fid = computeFormId(form);
       setField(form, 'source_page', to.trail);
       setField(form, 'page_url', url);
+      setField(form, 'form_id', fid);
       setField(form, 'source_details',
-        T('Source Page: ', '來源頁面：') + to.trail + '\n' + T('Page URL: ', '頁面連結：') + url);
+        T('Source Page: ', '來源頁面：') + to.trail + '\n' +
+        T('Page URL: ', '頁面連結：') + url + '\n' +
+        T('Form ID: ', '表單標識：') + fid);
 
       /* 主旨尾綴（保留原 _subject 前置標籤，同一輪重複送出不會疊加） */
       var sub = form.querySelector('input[type="hidden"][name="_subject"], input[type="hidden"][name="subject"]');
